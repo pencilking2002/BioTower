@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BioTower.Units
 {
+[SelectionBase]
 public class BasicEnemy : Unit
 {
 

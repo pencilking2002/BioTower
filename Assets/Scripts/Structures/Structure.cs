@@ -8,8 +8,8 @@ namespace BioTower.Structures
 public class Structure : MonoBehaviour
 {   
     [SerializeField] private bool hasHealth;
-    [EnableIf("hasHealth")] [SerializeField] private int maxHealth;
-    [EnableIf("hasHealth")] [SerializeField] private int currHealth;
+    [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] protected int maxHealth;
+    [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
 
     public virtual void Awake()
     {

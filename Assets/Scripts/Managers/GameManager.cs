@@ -3,16 +3,18 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
 using BioTower.Units;
+using BioTower.Structures;
 
 namespace BioTower
 {
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public static Action onLevelLoaded;
-    [SerializeField] private List<BasicEnemy> enemyList = new List<BasicEnemy>();
+    public static Action onLevelLoaded_01;  // For registering the player base
+    public static Action onLevelLoaded_02;  // for registering enemies
 
-    [SerializeField] private int numLoads;
+    [SerializeField] private DNABase playerBase;
+    [SerializeField] private List<BasicEnemy> enemyList = new List<BasicEnemy>();
 
     private void Awake()
     {
@@ -30,6 +32,17 @@ public class GameManager : MonoBehaviour
     public void RegisterEnemy(BasicEnemy enemy)
     {
         enemyList.Add(enemy);
+        SetTarget(enemy);
+    }
+
+    public void RegisterPlayerBase(DNABase playerbase)
+    {
+        playerBase = playerbase;
+    }
+
+    private void SetTarget(BasicEnemy enemy)
+    {
+        enemy.SetTarget(playerBase.transform);
     }
 
     private void LoadLevel(int sceneIndex)
@@ -40,10 +53,10 @@ public class GameManager : MonoBehaviour
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        numLoads++;
-        Debug.Log($"Scene: {scene}. Mode: {mode}. Num Loads: {numLoads}");
+        //Debug.Log($"Scene: {scene}. Mode: {mode}");
         enemyList = new List<BasicEnemy>();
-        onLevelLoaded?.Invoke();
+        onLevelLoaded_01?.Invoke();
+        onLevelLoaded_02?.Invoke();
     }
     
     private void OnEnable()

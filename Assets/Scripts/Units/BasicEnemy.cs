@@ -13,7 +13,13 @@ public class BasicEnemy : Unit
 
     private void Awake()
     {
-        agent = GetComponent<PolyNavAgent>();
+    
+    }
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+        agent.SetDestination(target.position);
     }
 
     private void LevelLoaded()
@@ -23,12 +29,12 @@ public class BasicEnemy : Unit
 
     private void OnEnable()
     {
-        GameManager.onLevelLoaded += LevelLoaded;
+        GameManager.onLevelLoaded_02 += LevelLoaded;
     }
 
     private void OnDisable()
     {
-        GameManager.onLevelLoaded += LevelLoaded;
+        GameManager.onLevelLoaded_02 += LevelLoaded;
     }
 }
 }

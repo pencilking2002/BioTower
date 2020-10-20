@@ -15,5 +15,20 @@ public class BasicEnemy : Unit
     {
         agent = GetComponent<PolyNavAgent>();
     }
+
+    private void LevelLoaded()
+    {
+        GameManager.Instance.RegisterEnemy(this);
+    }
+
+    private void OnEnable()
+    {
+        GameManager.onLevelLoaded += LevelLoaded;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onLevelLoaded += LevelLoaded;
+    }
 }
 }

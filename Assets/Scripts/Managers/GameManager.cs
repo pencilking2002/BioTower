@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using System.Collections.Generic;
+using BioTower.Units;
 
 namespace BioTower
 {
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public static Action onLevelLoaded;
+    [SerializeField] private List<BasicEnemy> enemyList = new List<BasicEnemy>();
+
     [SerializeField] private int numLoads;
 
     private void Awake()
@@ -21,6 +27,11 @@ public class GameManager : MonoBehaviour
         }    
     }
 
+    public void RegisterEnemy(BasicEnemy enemy)
+    {
+        enemyList.Add(enemy);
+    }
+
     private void LoadLevel(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
@@ -31,6 +42,8 @@ public class GameManager : MonoBehaviour
     {
         numLoads++;
         Debug.Log($"Scene: {scene}. Mode: {mode}. Num Loads: {numLoads}");
+        enemyList = new List<BasicEnemy>();
+        onLevelLoaded?.Invoke();
     }
     
     private void OnEnable()

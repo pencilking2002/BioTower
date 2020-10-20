@@ -29,10 +29,21 @@ public class GameManager : MonoBehaviour
         }    
     }
 
+    /// <summary>
+    /// Registers enemy in list and 
+    /// sets player base as the target
+    /// </summary>
+    /// <param name="enemy"></param>
     public void RegisterEnemy(BasicEnemy enemy)
     {
         enemyList.Add(enemy);
         SetTarget(enemy);
+    }
+
+    public void UnregisterEnemy(BasicEnemy enemy)
+    {
+        enemy.StopMoving();
+        enemyList.Remove(enemy);
     }
 
     public void RegisterPlayerBase(DNABase playerbase)
@@ -40,6 +51,7 @@ public class GameManager : MonoBehaviour
         playerBase = playerbase;
     }
 
+   
     private void SetTarget(BasicEnemy enemy)
     {
         enemy.SetTarget(playerBase.transform);
@@ -47,6 +59,9 @@ public class GameManager : MonoBehaviour
 
     private void LoadLevel(int sceneIndex)
     {
+        for (int i=0; i<enemyList.Count; i++)
+            UnregisterEnemy(enemyList[i]);
+
         SceneManager.LoadScene(sceneIndex);
     }
 
@@ -55,6 +70,8 @@ public class GameManager : MonoBehaviour
     {
         //Debug.Log($"Scene: {scene}. Mode: {mode}");
         enemyList = new List<BasicEnemy>();
+        playerBase = null;
+    
         onLevelLoaded_01?.Invoke();
         onLevelLoaded_02?.Invoke();
     }

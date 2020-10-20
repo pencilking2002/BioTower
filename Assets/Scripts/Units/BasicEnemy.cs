@@ -22,6 +22,11 @@ public class BasicEnemy : Unit
         agent.SetDestination(target.position);
     }
 
+    public void StopMoving()
+    {
+        agent.Stop();
+    }
+
     private void LevelLoaded()
     {
         GameManager.Instance.RegisterEnemy(this);
@@ -34,7 +39,7 @@ public class BasicEnemy : Unit
 
     private void OnDisable()
     {
-        GameManager.onLevelLoaded_02 += LevelLoaded;
+        GameManager.onLevelLoaded_02 -= LevelLoaded;
     }
 }
 }

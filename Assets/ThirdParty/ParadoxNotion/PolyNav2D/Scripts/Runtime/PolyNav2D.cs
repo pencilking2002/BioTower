@@ -421,40 +421,101 @@ namespace PolyNav
             return points;
         }
 
-        ///Kind of scales a polygon based on it's vertices average normal.
+
+        // ///Kind of scales a polygon based on it's vertices average normal.
+        // ///This is the old (and non very correct way)
+        // public static Vector2[] InflatePolygon(ref Vector2[] points, float dist) {
+        //     for ( int i = 0; i < points.Length; i++ ) {
+        //         var a = points[i == 0 ? points.Length - 1 : i - 1];
+        //         var b = points[i];
+        //         var c = points[( i + 1 ) % points.Length];
+        //         var ab = ( a - b ).normalized;
+        //         var cb = ( c - b ).normalized;
+        //         // var mid = ( ab + cb ).normalized + ( ab + cb );
+        //         var mid = ( ab + cb );
+        //         mid *= ( !PointIsConcave(points, i) ? -dist : dist );
+        //         points[i] = ( points[i] + mid );
+        //     }
+        //     return points;
+        // }
+
+
+
+        // Return points representing an enlarged polygon.
         public static Vector2[] InflatePolygon(ref Vector2[] points, float dist) {
+            var enlarged_points = new Vector2[points.Length];
+            for ( var j = 0; j < points.Length; j++ ) {
+                // Find the new location for point j.
+                // Find the points before and after j.
+                var i = ( j - 1 );
+                if ( i < 0 ) { i += points.Length; }
+                var k = ( j + 1 ) % points.Length;
 
-            for ( int i = 0; i < points.Length; i++ ) {
-                var a = points[i == 0 ? points.Length - 1 : i - 1];
-                var b = points[i];
-                var c = points[( i + 1 ) % points.Length];
+                // Move the points by the offset.
+                var v1 = new Vector2(points[j].x - points[i].x, points[j].y - points[i].y).normalized;
+                v1 *= dist;
+                var n1 = new Vector2(-v1.y, v1.x);
 
-                var ab = ( a - b ).normalized;
-                var cb = ( c - b ).normalized;
-                //var mid = (ab+cb).normalized + (ab+cb);
-                var mid = ( ab + cb );
-                mid *= ( !PointIsConcave(points, i) ? -dist : dist );
+                var pij1 = new Vector2((float)( points[i].x + n1.x ), (float)( points[i].y + n1.y ));
+                var pij2 = new Vector2((float)( points[j].x + n1.x ), (float)( points[j].y + n1.y ));
 
-                points[i] = ( points[i] + mid );
+                var v2 = new Vector2(points[k].x - points[j].x, points[k].y - points[j].y).normalized;
+                v2 *= dist;
+                var n2 = new Vector2(-v2.y, v2.x);
+
+                var pjk1 = new Vector2((float)( points[j].x + n2.x ), (float)( points[j].y + n2.y ));
+                var pjk2 = new Vector2((float)( points[k].x + n2.x ), (float)( points[k].y + n2.y ));
+
+                // See where the shifted lines ij and jk intersect.
+                bool lines_intersect, segments_intersect;
+                Vector2 poi, close1, close2;
+                FindIntersection(pij1, pij2, pjk1, pjk2, out lines_intersect, out segments_intersect, out poi, out close1, out close2);
+                Debug.Assert(lines_intersect, "Edges " + i + "-->" + j + " and " + j + "-->" + k + " are parallel");
+                enlarged_points[j] = poi;
             }
 
-            return points;
+            return enlarged_points.ToArray();
         }
 
-        ///Check if or not a point is concave to the polygon points provided
-        public static bool PointIsConcave(Vector2[] points, int pointIndex) {
+        // Find the point of intersection between the lines p1 --> p2 and p3 --> p4.
+        public static void FindIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, out bool lines_intersect, out bool segments_intersect, out Vector2 intersection, out Vector2 close_p1, out Vector2 close_p2) {
+            // Get the segments' parameters.
+            var dx12 = p2.x - p1.x;
+            var dy12 = p2.y - p1.y;
+            var dx34 = p4.x - p3.x;
+            var dy34 = p4.y - p3.y;
 
-            Vector2 current = points[pointIndex];
-            Vector2 next = points[( pointIndex + 1 ) % points.Length];
-            Vector2 previous = points[pointIndex == 0 ? points.Length - 1 : pointIndex - 1];
+            // Solve for t1 and t2
+            var denominator = ( dy12 * dx34 - dx12 * dy34 );
 
-            Vector2 left = new Vector2(current.x - previous.x, current.y - previous.y);
-            Vector2 right = new Vector2(next.x - current.x, next.y - current.y);
+            var t1 = ( ( p1.x - p3.x ) * dy34 + ( p3.y - p1.y ) * dx34 ) / denominator;
+            if ( float.IsInfinity(t1) ) {
+                // The lines are parallel (or close enough to it).
+                lines_intersect = false;
+                segments_intersect = false;
+                intersection = new Vector2(float.NaN, float.NaN);
+                close_p1 = new Vector2(float.NaN, float.NaN);
+                close_p2 = new Vector2(float.NaN, float.NaN);
+                return;
+            }
+            lines_intersect = true;
 
-            float cross = ( left.x * right.y ) - ( left.y * right.x );
+            var t2 = ( ( p3.x - p1.x ) * dy12 + ( p1.y - p3.y ) * dx12 ) / -denominator;
 
-            return cross > 0;
+            // Find the point of intersection.
+            intersection = new Vector2(p1.x + dx12 * t1, p1.y + dy12 * t1);
+
+            // The segments intersect if t1 and t2 are between 0 and 1.
+            segments_intersect = ( ( t1 >= 0 ) && ( t1 <= 1 ) && ( t2 >= 0 ) && ( t2 <= 1 ) );
+
+            // Find the closest points on the segments.
+            if ( t1 < 0 ) { t1 = 0; } else if ( t1 > 1 ) { t1 = 1; }
+            if ( t2 < 0 ) { t2 = 0; } else if ( t2 > 1 ) { t2 = 1; }
+
+            close_p1 = new Vector2(p1.x + dx12 * t1, p1.y + dy12 * t1);
+            close_p2 = new Vector2(p3.x + dx34 * t2, p3.y + dy34 * t2);
         }
+
 
         ///Check intersection of two segments, each defined by two vectors.
         public static bool SegmentsCross(Vector2 a, Vector2 b, Vector2 c, Vector2 d) {
@@ -476,6 +537,21 @@ namespace PolyNav
             float s = numerator2 / denominator;
 
             return ( r >= 0 && r <= 1 ) && ( s >= 0 && s <= 1 );
+        }
+
+        ///Check if or not a point is concave to the polygon points provided
+        public static bool PointIsConcave(Vector2[] points, int pointIndex) {
+
+            Vector2 current = points[pointIndex];
+            Vector2 next = points[( pointIndex + 1 ) % points.Length];
+            Vector2 previous = points[pointIndex == 0 ? points.Length - 1 : pointIndex - 1];
+
+            Vector2 left = new Vector2(current.x - previous.x, current.y - previous.y);
+            Vector2 right = new Vector2(next.x - current.x, next.y - current.y);
+
+            float cross = ( left.x * right.y ) - ( left.y * right.x );
+
+            return cross > 0;
         }
 
         ///Is a point inside a polygon?

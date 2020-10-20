@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+using PolyNav;
 
-namespace BioTower.Structures
+namespace BioTower.Level
 {
+public class LevelMap : MonoBehaviour
+{
+    public PolyNav2D map;
 
-[SelectionBase]
-public class DNABase : Structure
-{   
     private void LevelLoaded()
     {
-        GameManager.Instance.RegisterPlayerBase(this);
-    }
+        GameManager.Instance.RegisterMap(this);
+    }   
 
     private void OnEnable()
     {
@@ -25,4 +25,3 @@ public class DNABase : Structure
     }
 }
 }
-

@@ -8,18 +8,24 @@ namespace BioTower.Units
 [SelectionBase]
 public class BasicEnemy : Unit
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private PolyNavAgent agent;
+    public PolyNavAgent agent;
+    private bool isRegistered;
 
-    private void Awake()
+    public override void Awake()
     {
-    
+        base.Awake();
+        GameManager.Instance.RegisterEnemy(this);
     }
 
-    public void SetTarget(Transform target)
+    // public void SetTarget(Transform target)
+    // {
+    //     this.target = target;
+    //     agent.SetDestination(target.position);
+    // }
+
+    public void SetMap(PolyNav2D map)
     {
-        this.target = target;
-        agent.SetDestination(target.position);
+        agent.map = map;
     }
 
     public void StopMoving()

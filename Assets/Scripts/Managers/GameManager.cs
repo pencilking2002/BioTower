@@ -48,10 +48,11 @@ public class GameManager : MonoBehaviour
         if (enemyList.Contains(enemy) || playerBase == null)
             return;
 
-        enemyList.Add(enemy);
-        enemy.SetMap(levelMap.map);
-        enemy.agent.SetDestination(playerBase.transform.position);
         enemy.transform.parent = enemyContainer.transform;
+        enemyList.Add(enemy);
+        enemy.agent.map = levelMap.map;
+        enemy.agent.SetDestination(playerBase.transform.position);
+        Debug.Log("Register enemy agent: " + enemy.gameObject.name);
     }
 
     public void UnregisterEnemy(BasicEnemy enemy)

@@ -23,14 +23,11 @@ public class BasicEnemy : Unit
     //     agent.SetDestination(target.position);
     // }
 
-    public void SetMap(PolyNav2D map)
-    {
-        agent.map = map;
-    }
 
     public void StopMoving()
     {
         agent.Stop();
+        Debug.Log("Stop Moving");
     }
 
     private void LevelLoaded()

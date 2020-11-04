@@ -13,6 +13,24 @@ MonoBehaviour:
   m_Name: Level_01
   m_EditorClassIdentifier: 
   waves:
-  - numEnemiesPerWave: 10
-  - numEnemiesPerWave: 5
-  - numEnemiesPerWave: 8
+  - state: 2
+    numEnemiesPerWave: 10
+    spawnInterval: 2
+    duration: 10
+    startDelay: 2
+    timeStarted: 0
+    lastSpawn: 0
+  - state: 0
+    numEnemiesPerWave: 10
+    spawnInterval: 2
+    duration: 10
+    startDelay: 2
+    timeStarted: 0
+    lastSpawn: 0
+  - state: 0
+    numEnemiesPerWave: 10
+    spawnInterval: 2
+    duration: 10
+    startDelay: 2
+    timeStarted: 0
+    lastSpawn: 0

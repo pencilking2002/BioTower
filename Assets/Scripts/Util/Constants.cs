@@ -10,5 +10,6 @@ public class Constants
     public static string enemyContainer = "EnemyContainer";
     public static string enemyTestSpawnSpot = "EnemyTestSpawnSpot";
     public static string playerBase = "PlayerBase";
+    public static string waveManager = "WaveManager";
 }
 }

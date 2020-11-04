@@ -21,7 +21,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelMap levelMap;
     [SerializeField] private DNABase playerBase;
     [SerializeField] private List<BasicEnemy> enemyList = new List<BasicEnemy>();
-    private GameObject enemyContainer;      
+    private GameObject enemyContainer;  
+
+    private WaveManager _waveMananger;
+    public WaveManager waveManager
+    {
+        get
+        {
+            if (!_waveMananger)
+                _waveMananger = GameObject.FindGameObjectWithTag(Constants.waveManager).GetComponent<WaveManager>();
+            
+            return _waveMananger;
+        }
+    }    
 
     private void Awake()
     {

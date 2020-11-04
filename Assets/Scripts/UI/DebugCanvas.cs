@@ -11,21 +11,22 @@ public class DebugCanvas : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private PolyNav2D map;
     [SerializeField] private Transform endPoint;
+    [SerializeField] private Text currWaveText;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
             SpawnEnemy();
         }
+
+        currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
     }
 
     public void SpawnEnemy()
     {
         var enemyGO = Instantiate(enemyPrefab);
         enemyGO.transform.position = GameObject.FindGameObjectWithTag(Constants.enemyTestSpawnSpot).transform.position;
-        // var agent = enemyGO.GetComponent<PolyNavAgent>();
-        // agent.map = map;
-        // agent.SetDestination(endPoint.position);
     }
 
     public void ReloadLevel()

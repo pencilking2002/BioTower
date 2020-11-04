@@ -109,17 +109,24 @@ public class GameManager : MonoBehaviour
     {
         onGameOver?.Invoke(false);
     }
+
+    private void OnWavesCompleted()
+    {
+        onGameOver?.Invoke(true);
+    }
     
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         DNABase.onBaseDestroyed += OnBaseDestroyed;
+        WaveManager.onWavesCompleted += OnWavesCompleted;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         DNABase.onBaseDestroyed -= OnBaseDestroyed;
+        WaveManager.onWavesCompleted -= OnWavesCompleted;
     }
 
     private void InitInstance()

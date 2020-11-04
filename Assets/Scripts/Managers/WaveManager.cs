@@ -8,9 +8,11 @@ namespace BioTower
 {
 public class WaveManager : MonoBehaviour
 {
+    public static Action onWavesCompleted;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private LevelSettings waveSettings; 
     public int currWave;
+    private bool wavesHaveCompleted;
 
     private Dictionary<WaveState, Action<Wave>> waveState = new Dictionary<WaveState, Action<Wave>>(); 
     private void Awake()
@@ -38,6 +40,9 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
+        if (wavesHaveCompleted)
+            return;
+
         var wave = waveSettings.waves[currWave];
         waveState[wave.state](wave);
     }
@@ -72,13 +77,14 @@ public class WaveManager : MonoBehaviour
 
     private void Ended(Wave wave)
     {
-        if (currWave < waveSettings.waves.Length)
+        if (currWave < waveSettings.waves.Length-1)
         {
             currWave++;
         }
         else
         {
-            Debug.Log("Waves ended");
+            wavesHaveCompleted = true;
+            onWavesCompleted?.Invoke();
         }
     }
 

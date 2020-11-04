@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using BioTower.Units;
 
 namespace BioTower.Structures
 {
@@ -14,14 +15,21 @@ public class DNABase : Structure
         GameManager.Instance.RegisterPlayerBase(this);
     }
 
+    private void OnBaseReached()
+    {
+        TakeDamage(1);
+    }
+
     private void OnEnable()
     {
         GameManager.onLevelLoaded_01 += LevelLoaded;
+        BasicEnemy.onBaseReached += OnBaseReached;
     }
 
     private void OnDisable()
     {
         GameManager.onLevelLoaded_01 -= LevelLoaded;
+        BasicEnemy.onBaseReached += OnBaseReached;
     }
 }
 }

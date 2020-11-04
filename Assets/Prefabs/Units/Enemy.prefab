@@ -132,7 +132,6 @@ MonoBehaviour:
   hasHealth: 0
   maxHealth: 0
   currHealth: 0
-  target: {fileID: 0}
   agent: {fileID: 663975515}
 --- !u!114 &663975515
 MonoBehaviour:
@@ -149,7 +148,7 @@ MonoBehaviour:
   _map: {fileID: 0}
   maxSpeed: 1.5
   mass: 20
-  stoppingDistance: 0.1
+  stoppingDistance: 1
   slowingDistance: 1
   accelerationRate: 2
   decelerationRate: 2

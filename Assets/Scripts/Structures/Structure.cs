@@ -35,6 +35,7 @@ public class Structure : MonoBehaviour
         if (hasHealth)
         {
             currHealth -= numDamage;
+            healthSlider.value = currHealth;
         }
     }
 }

@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9b81d7dfed863479c152b83452ad1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSettings: {fileID: 11400000, guid: fd76be76114cc874982908e631e71934, type: 2}
+  levelMap: {fileID: 0}
+  playerBase: {fileID: 0}
+  enemyList: []

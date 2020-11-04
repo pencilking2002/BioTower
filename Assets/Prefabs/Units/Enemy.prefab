@@ -144,12 +144,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 0}
-  maxSpeed: 1.5
+  maxSpeed: 2
   mass: 20
   stoppingDistance: 1
   slowingDistance: 1
-  accelerationRate: 2
-  decelerationRate: 2
+  accelerationRate: 100
+  decelerationRate: 100
   lookAheadDistance: 1
   avoidRadius: 0
   avoidanceConsiderStuckedTime: 3

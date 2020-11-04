@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public static Action onLevelLoaded_01;  // For registering the player base
     public static Action onLevelLoaded_02;  // for registering enemies
 
+    [SerializeField] private GameSettings gameSettings;
     [SerializeField] private LevelMap levelMap;
     [SerializeField] private DNABase playerBase;
     [SerializeField] private List<BasicEnemy> enemyList = new List<BasicEnemy>();
@@ -30,7 +31,9 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             LoadLevel(0);
-        }    
+        }  
+
+        Time.timeScale = gameSettings.timeScale;  
     }
 
     public void RegisterMap(LevelMap levelMap)

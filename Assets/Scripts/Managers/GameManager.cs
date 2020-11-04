@@ -12,6 +12,8 @@ namespace BioTower
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public static Action<bool> onGameOver;
     public static Action onLevelLoaded_01;  // For registering the player base
     public static Action onLevelLoaded_02;  // for registering enemies
 
@@ -90,15 +92,22 @@ public class GameManager : MonoBehaviour
         onLevelLoaded_01?.Invoke();
         onLevelLoaded_02?.Invoke();
     }
+
+    private void OnBaseDestroyed()
+    {
+        onGameOver?.Invoke(false);
+    }
     
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        DNABase.onBaseDestroyed += OnBaseDestroyed;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        DNABase.onBaseDestroyed -= OnBaseDestroyed;
     }
 
     private void InitInstance()

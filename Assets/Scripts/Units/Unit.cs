@@ -11,7 +11,7 @@ public class Unit : MonoBehaviour
     [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] private int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] private int currHealth;
 
-    public virtual void Awake()
+    public virtual void Start()
     {
         currHealth = maxHealth;
     }

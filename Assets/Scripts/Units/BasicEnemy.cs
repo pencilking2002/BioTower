@@ -13,26 +13,16 @@ public class BasicEnemy : Unit
     public PolyNavAgent agent;
     private bool isRegistered;
 
-    public override void Awake()
+    public override void Start()
     {
-        base.Awake();
+        base.Start();
         GameManager.Instance.RegisterEnemy(this);
     }
-
-    // public void SetTarget(Transform target)
-    // {
-    //     this.target = target;
-    //     agent.SetDestination(target.position);
-    // }
-
-    public void SetMap(PolyNav2D map)
-    {
-        agent.map = map;
-    }
-
+    
     public void StopMoving()
     {
         agent.Stop();
+        Debug.Log("Stop Moving");
     }
 
     private void LevelLoaded()

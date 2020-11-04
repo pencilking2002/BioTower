@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace PolyNav
@@ -283,11 +282,17 @@ namespace PolyNav
                 velocity *= accelerationValue;
             }
 
-            velocity = Truncate(velocity, maxSpeed);
+            velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
             //
 
             //slow down if wall ahead and avoid other agents
             LookAhead();
+
+            //move the agent
+            position += velocity * Time.deltaTime;
+
+
+            ///----------------------------------------------------------------------------------------------
 
 
             //check active avoidance elapsed time (= stuck)
@@ -298,10 +303,6 @@ namespace PolyNav
                     OnArrived();
                 }
             }
-
-
-            //move the agent
-            position += velocity * Time.deltaTime;
 
             //restrict just after movement
             Restrict();
@@ -329,7 +330,8 @@ namespace PolyNav
 
             //Check and remove if we reached a point. proximity distance depends
             if ( hasPath ) {
-                float proximity = ( activePath[activePath.Count - 1] == nextPoint ) ? stoppingDistance : 0.05f;
+                float proximity = ( activePath[activePath.Count - 1] == nextPoint ) ? stoppingDistance : 0.001f;
+                // float proximity = Mathf.Max(stoppingDistance, 0.001f);
                 if ( ( position - nextPoint ).sqrMagnitude <= proximity ) {
 
                     activePath.RemoveAt(0);
@@ -365,16 +367,81 @@ namespace PolyNav
         }
 
 
-        //recalculate path to prime goal if there is no pending requests
-        void Repath() {
+        ///----------------------------------------------------------------------------------------------
 
-            if ( requests > 0 ) {
+        //seeking a target
+        Vector2 Seek(Vector2 pos) {
+
+            Vector2 desiredVelocity = ( pos - position ).normalized * maxSpeed;
+            Vector2 steer = desiredVelocity - velocity;
+            steer = Vector2.ClampMagnitude(steer, maxForce);
+            return steer;
+        }
+
+        //slowing at target's arrival
+        Vector2 Arrive(Vector2 pos) {
+
+            var desiredVelocity = ( pos - position );
+            float dist = desiredVelocity.magnitude;
+
+            if ( dist > 0 ) {
+                var reqSpeed = dist / ( decelerationRate * 0.3f );
+                reqSpeed = Mathf.Min(reqSpeed, maxSpeed);
+                desiredVelocity *= reqSpeed / dist;
+            }
+
+            Vector2 steer = desiredVelocity - velocity;
+            steer = Vector2.ClampMagnitude(steer, maxForce);
+            return steer;
+        }
+
+        //slowing when there is an obstacle ahead.
+        void LookAhead() {
+
+            //if agent is outside dont LookAhead since that causes agent to constantely be slow.
+            if ( lookAheadDistance <= 0 || !map.PointIsValid(position) ) {
                 return;
             }
 
-            requests++;
-            map.FindPath(position, primeGoal, SetPath);
+            var currentLookAheadDistance = Mathf.Lerp(0, lookAheadDistance, velocity.magnitude / maxSpeed);
+            var lookAheadPos = position + ( velocity.normalized * currentLookAheadDistance );
+
+            Debug.DrawLine(position, lookAheadPos, Color.blue);
+
+            if ( !map.PointIsValid(lookAheadPos) ) {
+                velocity -= ( lookAheadPos - position );
+            }
+
+            //avoidance
+            if ( avoidRadius > 0 ) {
+
+                isAvoiding = false;
+                for ( var i = 0; i < allAgents.Count; i++ ) {
+                    var otherAgent = allAgents[i];
+                    if ( otherAgent == this || otherAgent.avoidRadius <= 0 ) {
+                        continue;
+                    }
+
+                    var mlt = otherAgent.avoidRadius + this.avoidRadius;
+                    var dist = ( lookAheadPos - otherAgent.position ).magnitude;
+                    var str = ( lookAheadPos - otherAgent.position ).normalized * mlt;
+                    var steer = Vector3.Lerp((Vector3)str, Vector3.zero, dist / mlt);
+                    if ( !isAvoiding ) { isAvoiding = steer.magnitude > 0; }
+                    velocity += ( (Vector2)steer ) * velocity.magnitude /** otherAgent.velocity.magnitude*/;
+
+                    Debug.DrawLine(otherAgent.position, otherAgent.position + str, new Color(1, 0, 0, 0.1f));
+                }
+
+                if ( isAvoiding ) {
+                    avoidingElapsedTime += Time.deltaTime;
+                } else {
+                    avoidingElapsedTime = 0;
+                }
+
+            }
         }
+
+        ///----------------------------------------------------------------------------------------------
 
         //stop the agent and callback + message
         void OnArrived() {
@@ -404,77 +471,15 @@ namespace PolyNav
             }
         }
 
+        //recalculate path to prime goal if there is no pending requests
+        void Repath() {
 
-        //seeking a target
-        Vector2 Seek(Vector2 pos) {
-
-            Vector2 desiredVelocity = ( pos - position ).normalized * maxSpeed;
-            Vector2 steer = desiredVelocity - velocity;
-            steer = Truncate(steer, maxForce);
-            return steer;
-        }
-
-        //slowing at target's arrival
-        Vector2 Arrive(Vector2 pos) {
-
-            var desiredVelocity = ( pos - position );
-            float dist = desiredVelocity.magnitude;
-
-            if ( dist > 0 ) {
-                var reqSpeed = dist / ( decelerationRate * 0.3f );
-                reqSpeed = Mathf.Min(reqSpeed, maxSpeed);
-                desiredVelocity *= reqSpeed / dist;
-            }
-
-            Vector2 steer = desiredVelocity - velocity;
-            steer = Truncate(steer, maxForce);
-            return steer;
-        }
-
-        //slowing when there is an obstacle ahead.
-        void LookAhead() {
-
-            //if agent is outside dont LookAhead since that causes agent to constantely be slow.
-            if ( lookAheadDistance <= 0 || !map.PointIsValid(position) ) {
+            if ( requests > 0 ) {
                 return;
             }
 
-            var currentLookAheadDistance = Mathf.Lerp(0, lookAheadDistance, velocity.magnitude / maxSpeed);
-            var lookAheadPos = position + velocity.normalized * currentLookAheadDistance;
-
-            Debug.DrawLine(position, lookAheadPos, Color.blue);
-
-            if ( !map.PointIsValid(lookAheadPos) ) {
-                velocity -= ( lookAheadPos - position );
-            }
-
-            //avoidance
-            if ( avoidRadius > 0 ) {
-
-                isAvoiding = false;
-                for ( var i = 0; i < allAgents.Count; i++ ) {
-                    var otherAgent = allAgents[i];
-                    if ( otherAgent == this || otherAgent.avoidRadius <= 0 ) {
-                        continue;
-                    }
-
-                    var mlt = otherAgent.avoidRadius + this.avoidRadius;
-                    var dist = ( lookAheadPos - otherAgent.position ).magnitude;
-                    var str = ( lookAheadPos - otherAgent.position ).normalized * mlt;
-                    var steer = Vector3.Lerp((Vector3)str, Vector3.zero, dist / mlt);
-                    if ( !isAvoiding ) { isAvoiding = steer.magnitude > 0; }
-                    velocity += ( (Vector2)steer ) * velocity.magnitude * otherAgent.velocity.magnitude;
-
-                    Debug.DrawLine(otherAgent.position, otherAgent.position + str, new Color(1, 0, 0, 0.1f));
-                }
-
-                if ( isAvoiding ) {
-                    avoidingElapsedTime += Time.deltaTime;
-                } else {
-                    avoidingElapsedTime = 0;
-                }
-
-            }
+            requests++;
+            map.FindPath(position, primeGoal, SetPath);
         }
 
         //keep agent within valid area
@@ -488,16 +493,6 @@ namespace PolyNav
                 position = map.GetCloserEdgePoint(position);
             }
         }
-
-        //limit the magnitude of a vector
-        Vector2 Truncate(Vector2 vec, float max) {
-            if ( vec.magnitude > max ) {
-                vec.Normalize();
-                vec *= max;
-            }
-            return vec;
-        }
-
 
         ///----------------------------------------------------------------------------------------------
         ///---------------------------------------UNITY EDITOR-------------------------------------------

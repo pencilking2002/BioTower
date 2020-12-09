@@ -17,13 +17,21 @@ public class LevelSettings : ScriptableObject
 public class Wave
 {
     public WaveMode state;
+    public float startDelay;
     public int numEnemiesPerWave;
     public int spawnInterval;
-    public float duration;
-    public float startDelay;
+
     [HideInInspector] public float timeStarted;
     [HideInInspector] public float lastSpawn;
+    [HideInInspector] public int numSpawns;
 
+    public void Init()
+    {
+        state = WaveMode.NOT_STARTED;
+        lastSpawn = 0;
+        timeStarted = 0;
+        numSpawns = 0;
+    }
 
 
 }

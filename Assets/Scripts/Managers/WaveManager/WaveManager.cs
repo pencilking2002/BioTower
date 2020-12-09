@@ -34,13 +34,10 @@ public class WaveManager : MonoBehaviour
         waveStateMap.Add(WaveMode.IN_PROGRESS, inProgressState); 
         waveStateMap.Add(WaveMode.ENDED, endedState); 
 
-        // Setup wave states
+        // Initialize waves
         foreach(var wave in waveSettings.waves)
-        {
-            wave.state = WaveMode.NOT_STARTED;
-            wave.lastSpawn = 0;
-            wave.timeStarted = 0;
-        }
+            wave.Init();
+        
     }
 
     public void SpawnEnemy()

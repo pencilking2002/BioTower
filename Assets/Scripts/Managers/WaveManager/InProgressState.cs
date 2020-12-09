@@ -12,9 +12,11 @@ public class InProgressState : WaveState
         {
             waveManager.SpawnEnemy();
             wave.lastSpawn = Time.time;
+            wave.numSpawns++;
         }
 
-        if (Time.time > wave.timeStarted + wave.startDelay + wave.duration)
+        //if (Time.time > wave.timeStarted + wave.startDelay + wave.duration)
+        if (wave.numSpawns >= wave.numEnemiesPerWave)
         {
             return WaveMode.ENDED;   
         }

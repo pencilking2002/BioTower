@@ -25,6 +25,9 @@ public class Wave
     [HideInInspector] public float lastSpawn;
     [HideInInspector] public int numSpawns;
 
+    // Not supported in naughty attributes yet
+    //[ShowNativeProperty] public float waveDuration => (float) (startDelay + (numEnemiesPerWave * spawnInterval));
+
     public void Init()
     {
         state = WaveMode.NOT_STARTED;

@@ -119,14 +119,14 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         DNABase.onBaseDestroyed += OnBaseDestroyed;
-        WaveManager.onWavesCompleted += OnWavesCompleted;
+        WaveState.onWavesCompleted += OnWavesCompleted;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         DNABase.onBaseDestroyed -= OnBaseDestroyed;
-        WaveManager.onWavesCompleted -= OnWavesCompleted;
+        WaveState.onWavesCompleted -= OnWavesCompleted;
     }
 
     private void InitInstance()

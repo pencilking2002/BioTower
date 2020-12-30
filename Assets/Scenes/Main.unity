@@ -1155,7 +1155,9 @@ MonoBehaviour:
   enemyPrefab: {fileID: 2780707828294620590, guid: f469209cfd1273840b4db49e40188b90,
     type: 3}
   waveSettings: {fileID: 11400000, guid: d8916687892fab046a2584d8e6af1418, type: 2}
+  waveMode: 0
   currWave: 0
+  wavesHaveCompleted: 0
 --- !u!114 &601950453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2696,17 +2698,17 @@ PrefabInstance:
     - target: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.7338355
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1138556
+      value: -4.08
       objectReference: {fileID: 0}
     - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
@@ -2761,12 +2763,12 @@ PrefabInstance:
     - target: {fileID: 5428439426898476185, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7573186155280570824, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82e3c5824f81e0347b982a994cecd0bf, type: 3}

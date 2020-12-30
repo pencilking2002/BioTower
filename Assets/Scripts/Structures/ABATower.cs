@@ -15,11 +15,13 @@ public class ABATower : Structure
     [SerializeField] private int numUnitsToSpawn = 4;
     [SerializeField] private List<Unit> abaUnits;
 
+    private Vector3[] targetPositions;
     public override void Awake()
     {
         base.Awake();
         var unitsContainer = transform.Find("Units");
         SpawnUnits();
+        targetPositions = new Vector3[numUnitsToSpawn];
     }
 
     private void SpawnUnits()
@@ -36,10 +38,8 @@ public class ABATower : Structure
 
     private Vector2 GetPointWithinInfluence()
     {
-        Vector2 center = minInfluenceAreaCollider.transform.position;
-        var randomDirection = (Random.insideUnitCircle * center).normalized;
-        var randomDistance = Random.Range(minInfluenceAreaCollider.radius, maxInfluenceAreaCollider.radius);
-        var point = center + randomDirection * randomDistance;
+        Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minInfluenceAreaCollider.radius, maxInfluenceAreaCollider.radius);
+        point += (Vector2) minInfluenceAreaCollider.transform.position;
         return point;
     }
 }

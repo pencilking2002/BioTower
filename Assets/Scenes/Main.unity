@@ -2695,11 +2695,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ABATower
       objectReference: {fileID: 0}
-    - target: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2756,16 +2751,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5428439426898476185, guid: 82e3c5824f81e0347b982a994cecd0bf,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5428439426898476185, guid: 82e3c5824f81e0347b982a994cecd0bf,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573186155280570824, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

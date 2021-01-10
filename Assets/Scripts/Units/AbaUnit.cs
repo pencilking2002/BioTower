@@ -29,5 +29,15 @@ public class AbaUnit : Unit
     {
         base.Start();
     }
+
+    public bool IsRoamingState()
+    {
+        return abaUnitState == AbaUnitState.ROAMING;
+    }
+
+    public bool IsCarryingEnemyState()
+    {
+        return abaUnitState == AbaUnitState.CARRYING_ENEMY;
+    }
 }
 }

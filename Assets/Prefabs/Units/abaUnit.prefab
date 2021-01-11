@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4166912649722964560}
   - component: {fileID: 7874169812317102155}
   - component: {fileID: 247953277834383653}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CircleCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,11 @@ MonoBehaviour:
   hasHealth: 0
   maxHealth: 0
   currHealth: 0
+  roamingSpeed: 2
   agent: {fileID: 6947603464991609268}
+  abaUnitState: 0
+  rb: {fileID: 0}
+  hasTargetRoamingPoint: 0
 --- !u!114 &6947603464991609268
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,5 +39,10 @@ public class AbaUnit : Unit
     {
         return abaUnitState == AbaUnitState.CARRYING_ENEMY;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+         
+    }
 }
 }

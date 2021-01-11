@@ -230,11 +230,14 @@ MonoBehaviour:
   hasHealth: 0
   maxHealth: 0
   currHealth: 0
-  roamingSpeed: 2
-  agent: {fileID: 6947603464991609268}
   abaUnitState: 0
-  rb: {fileID: 0}
+  roamingDuration: 2
   hasTargetRoamingPoint: 0
+  carriedEnemy: {fileID: 0}
+  moveSpeed: 1
+  abaTower: {fileID: 0}
+  rb: {fileID: 0}
+  agent: {fileID: 6947603464991609268}
 --- !u!114 &6947603464991609268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 0}
-  maxSpeed: 2
+  maxSpeed: 1
   mass: 20
   stoppingDistance: 1
   slowingDistance: 1

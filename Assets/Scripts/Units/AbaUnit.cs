@@ -16,12 +16,16 @@ public class AbaUnit : Unit
 {
     public AbaUnitState abaUnitState;
 
+
     [Header("Roaming Settings")]
-    public float roamingSpeed = 2.0f;
+    public float roamingDuration = 2.0f;
     [HideInInspector] public bool hasTargetRoamingPoint;
+
 
     [Header("Carrying enemy state")]
     [SerializeField] private BasicEnemy carriedEnemy;
+    [SerializeField] private float moveSpeed = 1.0f;
+
 
     [Header("References")]
     public ABATower abaTower;
@@ -46,7 +50,7 @@ public class AbaUnit : Unit
             var targetPoint = abaTower.GetPointWithinInfluence();
             hasTargetRoamingPoint = true;
             var seq = LeanTween.sequence();
-            var duration = UnityEngine.Random.Range(1.0f, 2.0f);
+            var duration = UnityEngine.Random.Range(1.0f, roamingDuration);
             seq.append(
                 LeanTween.move(gameObject, targetPoint, duration).setEaseInOutQuad()
             );
@@ -62,10 +66,15 @@ public class AbaUnit : Unit
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (!IsRoamingState())
+            return;
+
         SetCarryingEnemyState();
         carriedEnemy = other.transform.parent.GetComponent<BasicEnemy>();
         carriedEnemy.StopMoving();
+        carriedEnemy.transform.SetParent(transform);
         LeanTween.cancel(gameObject);
+        agent.SetDestination(GameManager.Instance.playerBase.transform.position);
         hasTargetRoamingPoint = false;
     }
 }

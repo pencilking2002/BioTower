@@ -10,6 +10,9 @@ namespace BioTower.Units
 public class BasicEnemy : Unit
 {
     public static Action onBaseReached;
+
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Color stoppedColor;
     public PolyNavAgent agent;
     private bool isRegistered;
 
@@ -23,6 +26,7 @@ public class BasicEnemy : Unit
     {
         agent.Stop();
         Debug.Log("Stop Moving");
+        sr.color = stoppedColor;
     }
 
     private void LevelLoaded()

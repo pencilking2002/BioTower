@@ -131,6 +131,8 @@ MonoBehaviour:
   hasHealth: 0
   maxHealth: 0
   currHealth: 0
+  sr: {fileID: 2780707826441001857}
+  stoppedColor: {r: 0.7075472, g: 0.1768868, b: 0.1768868, a: 1}
   agent: {fileID: 663975515}
 --- !u!114 &663975515
 MonoBehaviour:
@@ -145,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 0}
-  maxSpeed: 2
+  maxSpeed: 1.5
   mass: 20
   stoppingDistance: 1
   slowingDistance: 1

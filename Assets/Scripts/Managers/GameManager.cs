@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameSettings gameSettings;
     [SerializeField] private LevelMap levelMap;
-    [SerializeField] private DNABase playerBase;
+    public DNABase playerBase;
     [SerializeField] private List<BasicEnemy> enemyList = new List<BasicEnemy>();
     private GameObject enemyContainer;  
 

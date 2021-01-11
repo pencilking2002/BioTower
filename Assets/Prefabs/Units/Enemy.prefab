@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2780707826441001859}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.263, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: -0.19819, z: 0}
+  m_LocalScale: {x: 0.37293, y: 0.37293, z: 0.37293}
   m_Children: []
   m_Father: {fileID: 2780707828294620588}
   m_RootOrder: 0
@@ -172,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1046518658072041637}
   - component: {fileID: 5933956694322970941}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 5680027116238269499}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.001, z: 0}
-  m_LocalScale: {x: 0.5764575, y: 0.5764575, z: 0.5764575}
+  m_LocalScale: {x: 0.4852158, y: 0.4852158, z: 0.4852158}
   m_Children: []
   m_Father: {fileID: 2780707828294620588}
   m_RootOrder: 1

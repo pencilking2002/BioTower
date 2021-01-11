@@ -35,6 +35,7 @@ public class ABATower : Structure
             go.transform.position = GetPointWithinInfluence();
             go.transform.SetParent(unitsContainer);
             var unit = go.GetComponent<AbaUnit>();
+            unit.abaTower = this;
             abaUnits.Add(unit);
         }
     }
@@ -46,26 +47,12 @@ public class ABATower : Structure
             var unit = abaUnits[i];
             if (unit.IsRoamingState())
             {
-                //var direction = (targetPositions[i]-unit.transform.position).normalized;
-                //unit.rb.MovePosition(unit.transform.position + direction * unit.roamingSpeed);
-                if (!unit.hasTargetRoamingPoint)
-                {
-                    var targetPoint = GetPointWithinInfluence();
-                    unit.hasTargetRoamingPoint = true;
-                    var seq = LeanTween.sequence();
-                    var duration = UnityEngine.Random.Range(1.0f, 2.0f);
-                    seq.append(
-                        LeanTween.move(unit.gameObject, targetPoint, duration).setEaseInOutQuad()
-                    );
-                    seq.append(() => {
-                        unit.hasTargetRoamingPoint = false;
-                    });
-                }
+                unit.Patrol();
             }
         }
     }
 
-    private Vector2 GetPointWithinInfluence()
+    public Vector2 GetPointWithinInfluence()
     {
         Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minInfluenceAreaCollider.radius, maxInfluenceAreaCollider.radius);
         point += (Vector2) minInfluenceAreaCollider.transform.position;

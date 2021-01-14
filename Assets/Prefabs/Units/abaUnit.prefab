@@ -231,6 +231,7 @@ MonoBehaviour:
   maxHealth: 0
   currHealth: 0
   abaUnitState: 0
+  destinationPoint: {x: 0, y: 0}
   roamingDuration: 2
   hasTargetRoamingPoint: 0
   carriedEnemy: {fileID: 0}
@@ -238,6 +239,7 @@ MonoBehaviour:
   abaTower: {fileID: 0}
   rb: {fileID: 0}
   agent: {fileID: 6947603464991609268}
+  map: {fileID: 0}
 --- !u!114 &6947603464991609268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +260,7 @@ MonoBehaviour:
   accelerationRate: 100
   decelerationRate: 100
   lookAheadDistance: 1
-  avoidRadius: 0
+  avoidRadius: 0.5
   avoidanceConsiderStuckedTime: 3
   avoidanceConsiderReachedDistance: 1
   rotateTransform: 0

@@ -15,7 +15,6 @@ public enum AbaUnitState
 public class AbaUnit : Unit
 {
     public AbaUnitState abaUnitState;
-    public Vector2 destinationPoint;
 
     [Header("Roaming Settings")]
     public float roamingDuration = 2.0f;
@@ -35,30 +34,26 @@ public class AbaUnit : Unit
 
     private void Awake()
     {
-        //agent.enabled = false;
+        agent.enabled = false;
         abaUnitState = AbaUnitState.ROAMING;
     }
 
     public override void Start()
     {
         base.Start();
-        agent.map = abaTower.roamingMap;
-        var targetPoint = abaTower.GetPointWithinInfluence();
-        agent.SetDestination(targetPoint);
     }
     
     public void Patrol()
     {
-        // if (!hasTargetRoamingPoint)
-        // {
-        //     var targetPoint = abaTower.GetPointWithinInfluence();
-        //     agent.SetDestination(targetPoint);
-        //     hasTargetRoamingPoint = true;
-        //     var seq = LeanTween.sequence();
-        //     var duration = UnityEngine.Random.Range(1.0f, roamingDuration);
-        //     seq.append(duration);
-        //     seq.append(() => { hasTargetRoamingPoint = false; });
-        // }
+        if (!hasTargetRoamingPoint)
+        {
+            var targetPoint = abaTower.GetPointWithinInfluence();
+            hasTargetRoamingPoint = true;
+            var seq = LeanTween.sequence();
+            var duration = UnityEngine.Random.Range(1.0f, roamingDuration);
+            seq.append(LeanTween.move(gameObject, targetPoint, duration));
+            seq.append(() => { hasTargetRoamingPoint = false; });
+        }
     }
 
     public bool IsRoamingState() { return abaUnitState == AbaUnitState.ROAMING; }
@@ -67,40 +62,21 @@ public class AbaUnit : Unit
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // if (!IsRoamingState())
-        //     return;
+        if (!IsRoamingState())
+            return;
 
-        // if (other.gameObject.layer != 10)
-        //     return;
-
-        // SetCarryingEnemyState();
-        // carriedEnemy = other.transform.parent.GetComponent<BasicEnemy>();
-        // carriedEnemy.StopMoving();
-        // carriedEnemy.transform.SetParent(transform);
-        // LeanTween.cancel(gameObject);
-        // agent.SetDestination(GameManager.Instance.playerBase.transform.position);
-        // hasTargetRoamingPoint = false;
-    }
-    
-    private void OnDestinationReached()
-    {
-        if (IsRoamingState())
-        {
-            LeanTween.delayedCall(0.1f, () => {
-                var targetPoint = abaTower.GetPointWithinInfluence();
-                agent.SetDestination(targetPoint);
-            });
-        }
-    }
-
-    private void OnEnable()
-    {
-        agent.OnDestinationReached += OnDestinationReached;
-    }
-
-    private void OnDisable()
-    {
-        agent.OnDestinationReached -= OnDestinationReached;
+        if (other.gameObject.layer != 10)
+            return;
+        
+        SetCarryingEnemyState();
+        agent.enabled = true;
+        
+        carriedEnemy = other.transform.parent.GetComponent<BasicEnemy>();
+        carriedEnemy.StopMoving();
+        carriedEnemy.transform.SetParent(transform);
+        LeanTween.cancel(gameObject);
+        agent.SetDestination(GameManager.Instance.playerBase.transform.position);
+        hasTargetRoamingPoint = false;
     }
 }
 }

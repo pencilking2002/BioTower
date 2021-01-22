@@ -231,7 +231,6 @@ MonoBehaviour:
   maxHealth: 0
   currHealth: 0
   abaUnitState: 0
-  destinationPoint: {x: 0, y: 0}
   roamingDuration: 2
   hasTargetRoamingPoint: 0
   carriedEnemy: {fileID: 0}
@@ -255,12 +254,12 @@ MonoBehaviour:
   _map: {fileID: 0}
   maxSpeed: 1
   mass: 20
-  stoppingDistance: 1
-  slowingDistance: 1
+  stoppingDistance: 0.01
+  slowingDistance: 0.01
   accelerationRate: 100
   decelerationRate: 100
   lookAheadDistance: 1
-  avoidRadius: 0.01
+  avoidRadius: 0
   avoidanceConsiderStuckedTime: 0.2
   avoidanceConsiderReachedDistance: 2
   rotateTransform: 0

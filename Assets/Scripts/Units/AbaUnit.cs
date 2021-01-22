@@ -34,7 +34,7 @@ public class AbaUnit : Unit
 
     private void Awake()
     {
-        agent.enabled = false;
+        //agent.enabled = false;
         abaUnitState = AbaUnitState.ROAMING;
     }
 

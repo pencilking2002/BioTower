@@ -67,9 +67,14 @@ public class AbaUnit : Unit
         if (other.gameObject.layer != 10)
             return;
         
+        carriedEnemy = other.transform.parent.GetComponent<BasicEnemy>();
+
+        if (carriedEnemy.isBeingCarried)
+            return;
+            
         SetCarryingEnemyState();
         agent.map = GameManager.Instance.levelMap.map;
-        carriedEnemy = other.transform.parent.GetComponent<BasicEnemy>();
+
         carriedEnemy.StopMoving();
         carriedEnemy.transform.SetParent(transform);
         LeanTween.cancel(gameObject);

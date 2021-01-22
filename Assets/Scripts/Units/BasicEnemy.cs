@@ -15,6 +15,7 @@ public class BasicEnemy : Unit
     [SerializeField] private Color stoppedColor;
     public PolyNavAgent agent;
     private bool isRegistered;
+    [HideInInspector] public bool isBeingCarried;
 
     public override void Start()
     {
@@ -26,6 +27,7 @@ public class BasicEnemy : Unit
     {
         agent.Stop();
         Debug.Log("Stop Moving");
+        isBeingCarried = true;
         sr.color = stoppedColor;
     }
 

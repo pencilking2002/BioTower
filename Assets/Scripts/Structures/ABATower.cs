@@ -9,13 +9,13 @@ namespace BioTower.Structures
 [SelectionBase]
 public class ABATower : Structure
 {   
-
     [SerializeField] private int numUnitsToSpawn = 4;
     [SerializeField] private List<AbaUnit> abaUnits;
 
 
     [Header("References")]
     [SerializeField] private GameObject abaUnitPrefab;
+    public PolyNav2D map;
     [SerializeField] private Transform unitsContainer;
     [SerializeField] private CircleCollider2D maxInfluenceAreaCollider;
     [SerializeField] private CircleCollider2D minInfluenceAreaCollider;
@@ -39,9 +39,10 @@ public class ABATower : Structure
             go.transform.position = GetPointWithinInfluence();
             go.transform.SetParent(unitsContainer);
             var unit = go.GetComponent<AbaUnit>();
+            unit.agent.map = map; 
             unit.abaTower = this;
             abaUnits.Add(unit);
-           
+              
         }
     }
 

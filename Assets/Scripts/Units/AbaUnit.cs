@@ -18,7 +18,7 @@ public class AbaUnit : Unit
 
     [Header("Roaming Settings")]
     public float roamingDuration = 2.0f;
-    [HideInInspector] public bool hasTargetRoamingPoint;
+    //[HideInInspector] public bool hasTargetRoamingPoint;
 
 
     [Header("Carrying enemy state")]
@@ -30,30 +30,29 @@ public class AbaUnit : Unit
     public ABATower abaTower;
     public Rigidbody rb;
     public PolyNavAgent agent;
-    public PolyNav2D map;
 
     private void Awake()
     {
-        //agent.enabled = false;
         abaUnitState = AbaUnitState.ROAMING;
     }
 
     public override void Start()
     {
         base.Start();
+        SetNewDestination();
     }
     
     public void Patrol()
     {
-        if (!hasTargetRoamingPoint)
-        {
-            var targetPoint = abaTower.GetPointWithinInfluence();
-            hasTargetRoamingPoint = true;
-            var seq = LeanTween.sequence();
-            var duration = UnityEngine.Random.Range(1.0f, roamingDuration);
-            seq.append(LeanTween.move(gameObject, targetPoint, duration));
-            seq.append(() => { hasTargetRoamingPoint = false; });
-        }
+        // if (!hasTargetRoamingPoint)
+        // {
+        //     // var targetPoint = abaTower.GetPointWithinInfluence();
+        //     // hasTargetRoamingPoint = true;
+        //     // var seq = LeanTween.sequence();
+        //     // var duration = UnityEngine.Random.Range(1.0f, roamingDuration);
+        //     // seq.append(LeanTween.move(gameObject, targetPoint, duration));
+        //     // seq.append(() => { hasTargetRoamingPoint = false; });
+        // }
     }
 
     public bool IsRoamingState() { return abaUnitState == AbaUnitState.ROAMING; }
@@ -69,14 +68,38 @@ public class AbaUnit : Unit
             return;
         
         SetCarryingEnemyState();
-        agent.enabled = true;
-        
+        agent.map = GameManager.Instance.levelMap.map;
         carriedEnemy = other.transform.parent.GetComponent<BasicEnemy>();
         carriedEnemy.StopMoving();
         carriedEnemy.transform.SetParent(transform);
         LeanTween.cancel(gameObject);
         agent.SetDestination(GameManager.Instance.playerBase.transform.position);
-        hasTargetRoamingPoint = false;
+    }
+
+    private void SetNewDestination()
+    {
+        var newDestination = abaTower.GetPointWithinInfluence();
+        agent.SetDestination(newDestination);
+    }
+
+    private void OnDestinationReached()
+    {
+        if (IsRoamingState())
+        {
+            SetNewDestination();
+        }
+    }
+
+    private void OnEnable()
+    {
+        agent.OnDestinationReached += OnDestinationReached;
+        agent.OnDestinationInvalid += OnDestinationReached; // Used for whyen the destination is inside na obstacle
+    }
+
+    private void OnDisable()
+    {
+        agent.OnDestinationReached -= OnDestinationReached;
+        agent.OnDestinationInvalid -= OnDestinationReached;
     }
 }
 }

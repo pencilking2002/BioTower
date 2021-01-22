@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public static Action onLevelLoaded_02;  // for registering enemies
 
     [SerializeField] private GameSettings gameSettings;
-    [SerializeField] private LevelMap levelMap;
+    public LevelMap levelMap;
     public DNABase playerBase;
     [SerializeField] private List<BasicEnemy> enemyList = new List<BasicEnemy>();
     private GameObject enemyContainer;  

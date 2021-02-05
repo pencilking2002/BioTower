@@ -14,8 +14,15 @@ public enum StructureState
     DESTROYED
 }
 
+public enum StructureType
+{
+    ABA_TOWER,
+    DNA_BASE
+}
+
 public class Structure : MonoBehaviour
 {   
+    [SerializeField] protected StructureType structureType;
     [SerializeField] private bool hasHealth;
     [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] protected int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;

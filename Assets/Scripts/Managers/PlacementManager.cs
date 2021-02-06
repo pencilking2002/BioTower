@@ -15,8 +15,8 @@ public enum PlacementState
 public class PlacementManager : MonoBehaviour
 {
     [SerializeField] private Transform reticleTransform;
+    [SerializeField] private PlacementState placementState;
     private Vector3 offscreenPos = new Vector3(1000,1000,0);
-    private PlacementState placementState;
 
 
     private void Awake()

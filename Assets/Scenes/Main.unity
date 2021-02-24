@@ -1990,6 +1990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reticleTransform: {fileID: 1666757146}
+  placementState: 0
 --- !u!1 &886431091
 GameObject:
   m_ObjectHideFlags: 0
@@ -3712,7 +3713,7 @@ PrefabInstance:
     - target: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1985713824957409795, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
@@ -3777,12 +3778,12 @@ PrefabInstance:
     - target: {fileID: 5428439426898476185, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7573186155280570824, guid: 82e3c5824f81e0347b982a994cecd0bf,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82e3c5824f81e0347b982a994cecd0bf, type: 3}

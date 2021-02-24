@@ -15,7 +15,7 @@ public class BasicEnemy : Unit
     [SerializeField] private Color stoppedColor;
     public PolyNavAgent agent;
     private bool isRegistered;
-    [HideInInspector] public bool isBeingCarried;
+    [HideInInspector] public bool isEngagedInCombat;
 
     public override void Start()
     {
@@ -23,12 +23,20 @@ public class BasicEnemy : Unit
         GameManager.Instance.RegisterEnemy(this);
     }
     
-    public void StopMoving()
+    public override void StopMoving()
     {
         agent.Stop();
         Debug.Log("Stop Moving");
-        isBeingCarried = true;
+        isEngagedInCombat = true;
         sr.color = stoppedColor;
+    }
+
+    public override void StartMoving(float delay=0)
+    {
+        LeanTween.delayedCall(delay, () => {
+            agent.SetDestination(GameManager.Instance.playerBase.transform.position);
+            isEngagedInCombat = false;
+        });
     }
 
     private void LevelLoaded()

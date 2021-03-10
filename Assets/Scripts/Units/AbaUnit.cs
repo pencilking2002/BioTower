@@ -8,7 +8,9 @@ namespace BioTower.Units
 public enum AbaUnitState
 {
     ROAMING,
-    CARRYING_ENEMY
+    COMBAT,
+    CARRYING_ENEMY,
+    DESTROYED
 }
 
 [SelectionBase]
@@ -16,14 +18,10 @@ public class AbaUnit : Unit
 {
     public AbaUnitState abaUnitState;
 
-    [Header("Roaming Settings")]
-    public float roamingDuration = 2.0f;
-    //[HideInInspector] public bool hasTargetRoamingPoint;
-
-
-    [Header("Carrying enemy state")]
-    [SerializeField] private BasicEnemy carriedEnemy;
-    [SerializeField] private float moveSpeed = 1.0f;
+    [Header("Combat enemy state")]
+    [SerializeField] private BasicEnemy targetEnemy;
+    [SerializeField] private float combatDuration = 2.0f;
+    [Range(0, 100)][SerializeField] private float abaWinChance = 50;
 
 
     [Header("References")]
@@ -39,46 +37,78 @@ public class AbaUnit : Unit
     public override void Start()
     {
         base.Start();
+        SetRoamingState();
         SetNewDestination();
     }
     
-    public void Patrol()
+    public override void StopMoving()
     {
-        // if (!hasTargetRoamingPoint)
-        // {
-        //     // var targetPoint = abaTower.GetPointWithinInfluence();
-        //     // hasTargetRoamingPoint = true;
-        //     // var seq = LeanTween.sequence();
-        //     // var duration = UnityEngine.Random.Range(1.0f, roamingDuration);
-        //     // seq.append(LeanTween.move(gameObject, targetPoint, duration));
-        //     // seq.append(() => { hasTargetRoamingPoint = false; });
-        // }
+        agent.Stop();
+        //Debug.Log("Stop Moving");
+        //sr.color = stoppedColor;
     }
 
     public bool IsRoamingState() { return abaUnitState == AbaUnitState.ROAMING; }
     public bool IsCarryingEnemyState() { return abaUnitState == AbaUnitState.CARRYING_ENEMY; }
+    public bool IsCombatState() { return abaUnitState == AbaUnitState.COMBAT; }
+    public bool IsDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
+
+    public void SetRoamingState() { abaUnitState = AbaUnitState.ROAMING; }
     public void SetCarryingEnemyState() { abaUnitState = AbaUnitState.CARRYING_ENEMY; }
+    public void SetCombatState() { abaUnitState = AbaUnitState.COMBAT; } 
+    public bool SetDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!IsRoamingState())
-            return;
-
-        if (other.gameObject.layer != 10)
-            return;
-        
-        carriedEnemy = other.transform.parent.GetComponent<BasicEnemy>();
-
-        if (carriedEnemy.isBeingCarried)
-            return;
+        if (!IsCombatState() && other.gameObject.layer == 10) 
+        {
             
-        SetCarryingEnemyState();
-        agent.map = GameManager.Instance.levelMap.map;
+            targetEnemy = other.transform.parent.GetComponent<BasicEnemy>();
 
-        carriedEnemy.StopMoving();
-        carriedEnemy.transform.SetParent(transform);
-        LeanTween.cancel(gameObject);
-        agent.SetDestination(GameManager.Instance.playerBase.transform.position);
+            if (targetEnemy.isEngagedInCombat)
+                return;
+
+            SetCombatState();
+           
+            //targetEnemy.transform.SetParent(transform);
+            targetEnemy.StopMoving();
+            this.StopMoving();
+
+            // Perform combat
+            var unitScale = transform.localScale;
+            LeanTween.scale(gameObject, unitScale * 2, 0.25f).setLoopPingPong(6);
+            unitScale = targetEnemy.transform.localScale;
+
+            LeanTween.scale(targetEnemy.gameObject, unitScale * 2, 0.25f)
+                .setLoopPingPong(6)
+                .setDelay(0.25f)
+                .setOnComplete(ResolveCombat);
+        }
+    }
+
+    private void ResolveCombat()
+    {
+        float percentage = UnityEngine.Random.Range(0.0f,1.0f) * 100;
+        bool isWin = abaWinChance < percentage;
+
+        if (isWin)
+        {
+            GameManager.Instance.UnregisterEnemy(targetEnemy);
+            Destroy(targetEnemy.gameObject);
+            SetRoamingState();
+            SetNewDestination();
+            Debug.Log("Aba unit win");
+        }
+        else
+        {
+            SetDestroyedState();
+            LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {
+                targetEnemy.StartMoving(1.0f);
+                abaTower.RemoveUnit(this);
+                Destroy(gameObject);
+            });
+        }
     }
 
     private void SetNewDestination()
@@ -98,7 +128,7 @@ public class AbaUnit : Unit
     private void OnEnable()
     {
         agent.OnDestinationReached += OnDestinationReached;
-        agent.OnDestinationInvalid += OnDestinationReached; // Used for whyen the destination is inside na obstacle
+        agent.OnDestinationInvalid += OnDestinationReached; // Used for when the destination is inside am obstacle
     }
 
     private void OnDisable()

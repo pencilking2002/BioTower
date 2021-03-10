@@ -15,5 +15,8 @@ public class Unit : MonoBehaviour
     {
         currHealth = maxHealth;
     }
+
+    public virtual void StopMoving() { }
+    public virtual void StartMoving(float delay=0) { }
 }
 }

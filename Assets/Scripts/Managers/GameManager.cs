@@ -35,6 +35,18 @@ public class GameManager : MonoBehaviour
         }
     }    
 
+    private PlacementManager _placementManager;
+    public PlacementManager placementManager
+    {
+        get
+        {
+            if (!_placementManager)
+                _placementManager = GameObject.FindGameObjectWithTag(Constants.placementManager).GetComponent<PlacementManager>();
+            
+            return _placementManager;
+        }
+    }    
+
     private void Awake()
     {
         InitInstance();

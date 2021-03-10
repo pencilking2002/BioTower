@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
 using BioTower.UI;
+using System;
+using BioTower.Structures;
 
 namespace BioTower
 {
@@ -14,59 +16,92 @@ public enum PlacementState
 
 public class PlacementManager : MonoBehaviour
 {
-    [SerializeField] private Transform reticleTransform;
+    public static Action<StructureType> onStartPlacementState;
+    public static Action onSetNonePlacementState;
+
     [SerializeField] private PlacementState placementState;
-    private Vector3 offscreenPos = new Vector3(1000,1000,0);
+    private StructureType structureToPlace;
+
+
+    [Header("Structure prefabs")]
+    [SerializeField] private GameObject abaTowerPrefab;
 
 
     private void Awake()
     {
-        reticleTransform.position = offscreenPos;
+        structureToPlace = StructureType.NONE;
     }
 
-    private void Update()
+    public GameObject CreateStructure(StructureType structureType)
     {
-       
+        GameObject tower = null;
+        switch(structureType)
+        {
+            case StructureType.ABA_TOWER:
+                tower = Instantiate(abaTowerPrefab);
+                break;
+               
+        }
+        return tower;
     }
-
-
-    private void SetNoneState() { placementState = PlacementState.NONE; }
-    private void SetPlacingState() { placementState = PlacementState.PLACING; }
-
-    private bool IsNoneState() { return placementState == PlacementState.NONE; }
-    private bool IsPlacingState() { return placementState == PlacementState.PLACING; }
 
     private void OnPressTowerButton(StructureType structureType)
     {
-        if (structureType == StructureType.ABA_TOWER)
-        {
-            reticleTransform.position = Vector3.zero;
-            SetPlacingState();
-        }
+        SetPlacingState(structureType);   
     }
 
     private void OnTouchBegan(Vector3 screenPos)
     {
-        Ray ray = Camera.main.ScreenPointToRay(screenPos);
-        RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero);
-
-        if (hitInfo.collider != null && hitInfo.collider.gameObject.name == "SpawnReticle")
+        if (IsPlacingState())
         {
-            Debug.Log("Hit spawn reticle");
+            Ray ray = Camera.main.ScreenPointToRay(screenPos);
+            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero);
+
+            if (hitInfo.collider != null && hitInfo.collider.gameObject.layer == 12)
+            {
+                Debug.Log("Place tower");
+                var tower = CreateStructure(structureToPlace);
+                tower.transform.position = hitInfo.collider.transform.position;
+                
+                SetNoneState();
+                
+            }
         }
-               
     }
+
+    private void OnStartPlacementState(StructureType structureType)
+    {
+        var tower = CreateStructure(structureType);
+    }
+
+
+    private void SetNoneState() 
+    { 
+        placementState = PlacementState.NONE;
+        structureToPlace = StructureType.NONE; 
+        onSetNonePlacementState?.Invoke();
+    }
+    private void SetPlacingState(StructureType structureType) 
+    { 
+        placementState = PlacementState.PLACING;
+        structureToPlace = structureType;
+        onStartPlacementState?.Invoke(structureType); 
+    }
+
+    private bool IsNoneState() { return placementState == PlacementState.NONE; }
+    private bool IsPlacingState() { return placementState == PlacementState.PLACING; }
 
     private void OnEnable()
     {
         GameplayUI.onTowerButton += OnPressTowerButton;
         InputController.onTouchBegan += OnTouchBegan;
+
     }
 
     private void OnDisable()
     {
         GameplayUI.onTowerButton -= OnPressTowerButton;
-        InputController.onTouchBegan += OnTouchBegan;
+        InputController.onTouchBegan -= OnTouchBegan;
     }
 
 }

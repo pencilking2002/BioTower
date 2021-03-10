@@ -17,7 +17,8 @@ public enum StructureState
 public enum StructureType
 {
     ABA_TOWER,
-    DNA_BASE
+    DNA_BASE,
+    NONE,
 }
 
 public class Structure : MonoBehaviour

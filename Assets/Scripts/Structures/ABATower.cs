@@ -25,10 +25,16 @@ public class ABATower : Structure
 
     public override void Awake()
     {
-        base.Awake();
-        var unitsContainer = transform.Find("Units");
-        SpawnUnits();
-        targetPositions = new Vector3[numUnitsToSpawn];
+        // base.Awake();
+        // var unitsContainer = transform.Find("Units");
+        // SpawnUnits();
+        // targetPositions = new Vector3[numUnitsToSpawn];
+        // Debug.Log("ABA tower Awake");
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void SpawnUnits()

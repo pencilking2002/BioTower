@@ -25,16 +25,17 @@ public class ABATower : Structure
 
     public override void Awake()
     {
-        // base.Awake();
-        // var unitsContainer = transform.Find("Units");
-        // SpawnUnits();
-        // targetPositions = new Vector3[numUnitsToSpawn];
-        // Debug.Log("ABA tower Awake");
+        base.Awake();
+        
     }
 
     private void Start()
     {
-        
+        map.GenerateMap();      // NOTE: Seems like this needs to be called in order for the map to be initialized correctly after instantiation 
+        var unitsContainer = transform.Find("Units");
+        SpawnUnits();
+        targetPositions = new Vector3[numUnitsToSpawn];
+        Debug.Log("ABA tower Awake");
     }
 
     private void SpawnUnits()

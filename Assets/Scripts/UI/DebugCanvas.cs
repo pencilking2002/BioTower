@@ -18,6 +18,9 @@ public class DebugCanvas : MonoBehaviour
     [SerializeField] private Text currWaveText;
     [SerializeField] private Text placementStateText;
 
+    [SerializeField] private GameObject testMapPrefab;
+  
+
     private void Awake()
     {
         placementStateText.text = "Placement state: NONE";
@@ -31,6 +34,11 @@ public class DebugCanvas : MonoBehaviour
         }
 
         currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
+    }
+
+    public void SpawnTestMap()
+    {
+        Instantiate(testMapPrefab);
     }
 
     public void SpawnEnemy()

@@ -17,7 +17,7 @@ public enum AbaUnitState
 [SelectionBase]
 public class AbaUnit : Unit
 {
-    public Action<AbaUnit, BasicEnemy> onAbaInitCombat;
+    public static Action<AbaUnit, BasicEnemy> onStartCombat;
     public AbaUnitState abaUnitState;
 
     [Header("Combat enemy state")]
@@ -65,55 +65,16 @@ public class AbaUnit : Unit
     {
         if (!IsCombatState() && other.gameObject.layer == 10) 
         {
-            
             targetEnemy = other.transform.parent.GetComponent<BasicEnemy>();
 
             if (targetEnemy.isEngagedInCombat)
                 return;
 
-            SetCombatState();
-           
-            //targetEnemy.transform.SetParent(transform);
-            targetEnemy.StopMoving();
-            this.StopMoving();
-
-            // Perform combat
-            var unitScale = transform.localScale;
-            LeanTween.scale(gameObject, unitScale * 2, 0.25f).setLoopPingPong(6);
-            unitScale = targetEnemy.transform.localScale;
-
-            LeanTween.scale(targetEnemy.gameObject, unitScale * 2, 0.25f)
-                .setLoopPingPong(6)
-                .setDelay(0.25f)
-                .setOnComplete(ResolveCombat);
+            onStartCombat?.Invoke(this, targetEnemy);
         }
     }
 
-    private void ResolveCombat()
-    {
-        float percentage = UnityEngine.Random.Range(0.0f,1.0f) * 100;
-        bool isWin = abaWinChance < percentage;
-
-        if (isWin)
-        {
-            GameManager.Instance.UnregisterEnemy(targetEnemy);
-            targetEnemy.KillUnit();
-            SetRoamingState();
-            SetNewDestination();
-            Debug.Log("Aba unit win");
-        }
-        else
-        {
-            SetDestroyedState();
-            LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {
-                targetEnemy.StartMoving(1.0f);
-                abaTower.RemoveUnit(this);
-                KillUnit();
-            });
-        }
-    }
-
-    private void SetNewDestination()
+    public void SetNewDestination()
     {
         var newDestination = abaTower.GetPointWithinInfluence();
         agent.SetDestination(newDestination);

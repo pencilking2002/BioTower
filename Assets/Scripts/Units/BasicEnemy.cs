@@ -14,6 +14,7 @@ public class BasicEnemy : Unit
     [SerializeField] private GameObject crystalPrefab;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color stoppedColor;
+    public bool hasCrystal;
     public PolyNavAgent agent;
     private bool isRegistered;
     [HideInInspector] public bool isEngagedInCombat;
@@ -55,6 +56,10 @@ public class BasicEnemy : Unit
     {
         var crystalGO = Instantiate(crystalPrefab);
         crystalGO.transform.position = transform.position;
+
+        Vector3 defautlScale = crystalGO.transform.localScale;
+        crystalGO.transform.localScale = Vector3.zero;
+        LeanTween.scale(crystalGO, defautlScale, 0.1f);
     }
 
     public override void KillUnit()
@@ -71,7 +76,7 @@ public class BasicEnemy : Unit
             return;
 
         crystal.DestroyCrystal();
-
+        hasCrystal = true;
         // TODO: make enemy stronger after picking up crystal
     }
 

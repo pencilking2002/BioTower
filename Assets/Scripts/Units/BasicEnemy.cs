@@ -11,6 +11,7 @@ public class BasicEnemy : Unit
 {
     public static Action onBaseReached;
 
+    [SerializeField] private GameObject crystalPrefab;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color stoppedColor;
     public PolyNavAgent agent;
@@ -50,6 +51,12 @@ public class BasicEnemy : Unit
         onBaseReached?.Invoke();
     }
 
+    private void SpawnCrystal()
+    {
+        var crystalGO = Instantiate(crystalPrefab);
+        crystalGO.transform.position = transform.position;
+    }
+
     private void OnEnable()
     {
         GameManager.onLevelLoaded_02 += LevelLoaded;
@@ -60,6 +67,12 @@ public class BasicEnemy : Unit
     {
         GameManager.onLevelLoaded_02 -= LevelLoaded;
         agent.OnDestinationReached -= DestinationReached;
+    }
+
+    public override void KillUnit()
+    {
+        SpawnCrystal();
+        base.KillUnit();
     }
 }
 }

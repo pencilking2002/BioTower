@@ -95,7 +95,7 @@ public class AbaUnit : Unit
         if (isWin)
         {
             GameManager.Instance.UnregisterEnemy(targetEnemy);
-            Destroy(targetEnemy.gameObject);
+            targetEnemy.KillUnit();
             SetRoamingState();
             SetNewDestination();
             Debug.Log("Aba unit win");
@@ -106,7 +106,7 @@ public class AbaUnit : Unit
             LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {
                 targetEnemy.StartMoving(1.0f);
                 abaTower.RemoveUnit(this);
-                Destroy(gameObject);
+                KillUnit();
             });
         }
     }
@@ -123,6 +123,11 @@ public class AbaUnit : Unit
         {
             SetNewDestination();
         }
+    }
+
+    public override void KillUnit()
+    {
+        base.KillUnit();
     }
 
     private void OnEnable()

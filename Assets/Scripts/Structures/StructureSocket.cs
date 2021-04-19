@@ -5,6 +5,8 @@ using BioTower.Structures;
 
 namespace BioTower
 {
+    
+[SelectionBase]
 public class StructureSocket : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer glowingSprite;

@@ -21,6 +21,7 @@ public class PlacementManager : MonoBehaviour
 
     [SerializeField] private PlacementState placementState;
     private StructureType structureToPlace;
+    [SerializeField] private Vector3 placementOffset;
 
 
     [Header("Structure prefabs")]
@@ -61,7 +62,7 @@ public class PlacementManager : MonoBehaviour
             {
                 Debug.Log("Place tower");
                 var tower = CreateStructure(structureToPlace);
-                tower.transform.position = hitInfo.collider.transform.position;
+                tower.transform.position = hitInfo.collider.transform.position + placementOffset;
                 
                 SetNoneState();
                 

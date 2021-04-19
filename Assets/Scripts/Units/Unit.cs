@@ -18,5 +18,7 @@ public class Unit : MonoBehaviour
 
     public virtual void StopMoving() { }
     public virtual void StartMoving(float delay=0) { }
+
+    public virtual void KillUnit() { Destroy(gameObject); }
 }
 }

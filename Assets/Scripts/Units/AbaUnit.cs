@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using PolyNav;
 using BioTower.Structures;
+using System;
 
 namespace BioTower.Units
 {
@@ -16,6 +17,7 @@ public enum AbaUnitState
 [SelectionBase]
 public class AbaUnit : Unit
 {
+    public Action<AbaUnit, BasicEnemy> onAbaInitCombat;
     public AbaUnitState abaUnitState;
 
     [Header("Combat enemy state")]

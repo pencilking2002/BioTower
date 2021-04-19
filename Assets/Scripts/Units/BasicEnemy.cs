@@ -57,6 +57,32 @@ public class BasicEnemy : Unit
         crystalGO.transform.position = transform.position;
     }
 
+    public override void KillUnit()
+    {
+        SpawnCrystal();
+        base.KillUnit();
+    }
+
+    private void PickupCrystal(Collider2D col)
+    {
+        var crystal = col.transform.parent.GetComponent<EnemyCrystal>();
+
+        if (crystal.hasBeenPickedUp)
+            return;
+
+        crystal.DestroyCrystal();
+
+        // TODO: make enemy stronger after picking up crystal
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.layer != 13)
+            return;
+
+        PickupCrystal(col);
+    }
+
     private void OnEnable()
     {
         GameManager.onLevelLoaded_02 += LevelLoaded;
@@ -69,10 +95,5 @@ public class BasicEnemy : Unit
         agent.OnDestinationReached -= DestinationReached;
     }
 
-    public override void KillUnit()
-    {
-        SpawnCrystal();
-        base.KillUnit();
-    }
 }
 }

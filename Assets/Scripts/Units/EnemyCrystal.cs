@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class EnemyCrystal : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool hasBeenPickedUp;
 
-    // Update is called once per frame
-    void Update()
+    public void DestroyCrystal()
     {
-        
+        if (hasBeenPickedUp)
+            return;
+
+        hasBeenPickedUp = true;
+        LeanTween.scale(gameObject, Vector3.zero, 0.1f)
+            .setOnComplete(() => {
+                Destroy(gameObject);
+            });
     }
 }

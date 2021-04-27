@@ -123,17 +123,23 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.1604304, y: 0.358525}
-      - {x: 1.1428075, y: 2.0294714}
-      - {x: -1.1620936, y: 2.0373929}
-      - {x: -1.1561193, y: 0.3805031}
-      - {x: -1.0936036, y: 0.18235162}
+    - - {x: 0.9042897, y: 0.62198424}
+      - {x: 0.8994913, y: 1.4651324}
+      - {x: 0.3158388, y: 1.7294208}
+      - {x: 0.35382557, y: 2.9525495}
+      - {x: -0.5037503, y: 3.166562}
+      - {x: -0.8795266, y: 2.9957376}
+      - {x: -0.43758106, y: 1.9422549}
+      - {x: -0.46207476, y: 1.6300832}
+      - {x: -0.8842697, y: 1.5072767}
+      - {x: -0.7902045, y: 0.7098272}
+      - {x: -1.0643306, y: 0.6580416}
       - {x: -1.0861568, y: -0.3752942}
-      - {x: -0.70032257, y: -0.9290565}
-      - {x: -0.013680458, y: -1.1489642}
-      - {x: 0.72282994, y: -0.88404167}
-      - {x: 1.1066542, y: -0.31189594}
-      - {x: 1.1030478, y: 0.15984437}
+      - {x: -1.0465331, y: -0.7692672}
+      - {x: -0.24026346, y: -1.5621452}
+      - {x: 0.020341516, y: -1.5644673}
+      - {x: 1.1430902, y: -1.1232113}
+      - {x: 1.1286092, y: 0.4199349}
 --- !u!1 &730512957306746277
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +239,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.24
+  m_Radius: 1.55
 --- !u!1 &1707178362706958975
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +268,7 @@ Transform:
   m_GameObject: {fileID: 1707178362706958975}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2414325, y: 1.2414325, z: 1.2414325}
+  m_LocalScale: {x: 1.6686766, y: 1.6686766, z: 1.6686766}
   m_Children: []
   m_Father: {fileID: 1142563936127015806}
   m_RootOrder: 0
@@ -441,7 +447,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4e9e7b76d3aca3f4c9b1a02db7f43d75, type: 3}
-  m_Color: {r: 0.5392833, g: 0.9056604, b: 0.46564615, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -640,7 +646,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.85
+  m_Radius: 0.82
 --- !u!1001 &3764512881511060882
 PrefabInstance:
   m_ObjectHideFlags: 0

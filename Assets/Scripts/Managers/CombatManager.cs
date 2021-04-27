@@ -19,10 +19,10 @@ public class CombatManager : MonoBehaviour
 
         // Perform combat
         var unitScale = unit.transform.localScale;
-        LeanTween.scale(unit.gameObject, unitScale * 2, 0.25f).setLoopPingPong(6);
+        LeanTween.scale(unit.gameObject, unitScale * 1.2f, 0.25f).setLoopPingPong(6);
         unitScale = enemy.transform.localScale;
 
-        LeanTween.scale(enemy.gameObject, unitScale * 2, 0.25f)
+        LeanTween.scale(enemy.gameObject, unitScale * 1.2f, 0.25f)
             .setLoopPingPong(6)
             .setDelay(0.25f)
             .setOnComplete(() => {

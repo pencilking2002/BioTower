@@ -46,6 +46,11 @@ public class Structure : MonoBehaviour
             healthSlider.value = currHealth;
         }
     }
+
+    public virtual void OnTapStructure()
+    {
+
+    }
 }
 }
 

@@ -21,6 +21,7 @@ public class PlacementManager : MonoBehaviour
 
     [SerializeField] private PlacementState placementState;
     [SerializeField] private LayerMask socketLayerMask;
+    [SerializeField] private LayerMask structureLayerMask;
     private StructureType structureToPlace;
     [SerializeField] private Vector3 placementOffset;
 
@@ -58,15 +59,28 @@ public class PlacementManager : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(screenPos);
             RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, socketLayerMask);
-            Debug.Log(hitInfo.collider.gameObject.name);
+            //Debug.Log(hitInfo.collider.gameObject.name);
             if (hitInfo.collider != null)
             {
-                Debug.Log("Place tower");
-                var tower = CreateStructure(structureToPlace);
-                tower.transform.position = hitInfo.collider.transform.position + placementOffset;
-                
-                SetNoneState();
-                
+                var socket = hitInfo.collider.transform.parent.GetComponent<StructureSocket>();
+                if (!socket.HasStructure())
+                {
+                    socket.SetHasStructure(true);
+                    var tower = CreateStructure(structureToPlace);
+                    tower.transform.position = hitInfo.collider.transform.position + placementOffset;
+                    SetNoneState();
+                }
+            }
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(screenPos);
+            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
+
+            if (hitInfo.collider != null)
+            {
+                var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
+                structure?.OnTapStructure();
             }
         }
     }

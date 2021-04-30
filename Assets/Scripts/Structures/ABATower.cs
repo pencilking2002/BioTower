@@ -74,6 +74,13 @@ public class ABATower : Structure
         // }
     }
 
+    public override void OnTapStructure()
+    {
+        var oldScale = transform.localScale;
+        LeanTween.scale(gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
+        //Debug.Log("Create unit");
+    }
+
     public Vector2 GetPointWithinInfluence()
     {
         var minRadius = minInfluenceAreaCollider.radius * minInfluenceAreaCollider.transform.lossyScale.x;

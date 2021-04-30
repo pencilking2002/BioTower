@@ -288,6 +288,9 @@ MonoBehaviour:
   socketLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  structureLayerMask:
+    serializedVersion: 2
+    m_Bits: 16384
   placementOffset: {x: 0, y: -0.2, z: 0}
   abaTowerPrefab: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
     type: 3}

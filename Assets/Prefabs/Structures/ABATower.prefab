@@ -510,7 +510,7 @@ MonoBehaviour:
   currHealth: 0
   healthSlider: {fileID: 4120694177487789927}
   structureState: 0
-  numUnitsToSpawn: 4
+  numUnitsToSpawn: 0
   abaUnits: []
   abaUnitPrefab: {fileID: 5115481712711463489, guid: a0a488c102b113f4da28fe09666035ff,
     type: 3}

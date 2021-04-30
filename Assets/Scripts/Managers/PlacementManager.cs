@@ -20,6 +20,7 @@ public class PlacementManager : MonoBehaviour
     public static Action onSetNonePlacementState;
 
     [SerializeField] private PlacementState placementState;
+    [SerializeField] private LayerMask socketLayerMask;
     private StructureType structureToPlace;
     [SerializeField] private Vector3 placementOffset;
 
@@ -56,9 +57,9 @@ public class PlacementManager : MonoBehaviour
         if (IsPlacingState())
         {
             Ray ray = Camera.main.ScreenPointToRay(screenPos);
-            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero);
-
-            if (hitInfo.collider != null && hitInfo.collider.gameObject.layer == 12)
+            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, socketLayerMask);
+            Debug.Log(hitInfo.collider.gameObject.name);
+            if (hitInfo.collider != null)
             {
                 Debug.Log("Place tower");
                 var tower = CreateStructure(structureToPlace);

@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abaWinChance: 50
+  enemyCrystalWinChanceBoost: 10
 --- !u!1 &6493159299763837585
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +285,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementState: 0
+  socketLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
   placementOffset: {x: 0, y: -0.2, z: 0}
   abaTowerPrefab: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
     type: 3}

@@ -14,6 +14,9 @@ public class EventManager : MonoBehaviour
         public static Action onLevelLoaded_01;  // For registering the player base
         public static Action onLevelLoaded_02;  // for registering enemies
         public static Action onWavesCompleted;
+
+        public static Action<int, int> onSpendCurrency; // num spent, curr total
+        public static Action<int, int> onGainCurrency;  // num gained, curr total 
     }
 
     public class Structures

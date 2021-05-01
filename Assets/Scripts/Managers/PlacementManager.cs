@@ -59,7 +59,6 @@ public class PlacementManager : MonoBehaviour
             if (GameManager.Instance.econManager.CanBuyAbaTower())
             {
                 PlaceAbaTower(screenPos);
-                GameManager.Instance.econManager.BuyAbaTower();
             }
         }
         else
@@ -67,7 +66,6 @@ public class PlacementManager : MonoBehaviour
             if (GameManager.Instance.econManager.CanBuyAbaUnit())
             {
                 TapStructure(screenPos);
-                GameManager.Instance.econManager.BuyAbaUnit();
             }
         }
     }
@@ -85,6 +83,7 @@ public class PlacementManager : MonoBehaviour
                 socket.SetHasStructure(true);
                 var tower = CreateStructure(structureToPlace);
                 tower.transform.position = hitInfo.collider.transform.position + placementOffset;
+                GameManager.Instance.econManager.BuyAbaTower();
                 SetNoneState();
             }
         }
@@ -98,6 +97,7 @@ public class PlacementManager : MonoBehaviour
         if (hitInfo.collider != null)
         {
             var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
+            GameManager.Instance.econManager.BuyAbaUnit();
             structure?.OnTapStructure();
         }
     }

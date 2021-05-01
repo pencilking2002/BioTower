@@ -13,39 +13,20 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public static Action<bool> onGameOver;
-    public static Action onLevelLoaded_01;  // For registering the player base
-    public static Action onLevelLoaded_02;  // for registering enemies
-
     [SerializeField] private GameSettings gameSettings;
+
+
+    [Header("Scene References")]
     public LevelMap levelMap;
     public DNABase playerBase;
     [SerializeField] private List<BasicEnemy> enemyList = new List<BasicEnemy>();
     private GameObject enemyContainer;  
 
-    private WaveManager _waveMananger;
-    public WaveManager waveManager
-    {
-        get
-        {
-            if (!_waveMananger)
-                _waveMananger = GameObject.FindGameObjectWithTag(Constants.waveManager).GetComponent<WaveManager>();
-            
-            return _waveMananger;
-        }
-    }    
 
-    private PlacementManager _placementManager;
-    public PlacementManager placementManager
-    {
-        get
-        {
-            if (!_placementManager)
-                _placementManager = GameObject.FindGameObjectWithTag(Constants.placementManager).GetComponent<PlacementManager>();
-            
-            return _placementManager;
-        }
-    }    
+    [Header("References")]
+    public WaveManager waveManager;
+    public PlacementManager placementManager;
+    public EconomyManager econManager;
 
     private void Awake()
     {
@@ -113,32 +94,32 @@ public class GameManager : MonoBehaviour
         enemyContainer = GameObject.FindGameObjectWithTag(Constants.enemyContainer);
         enemyList = new List<BasicEnemy>();
        
-        onLevelLoaded_01?.Invoke();
-        onLevelLoaded_02?.Invoke();
+        EventManager.Game.onLevelLoaded_01?.Invoke();
+        EventManager.Game.onLevelLoaded_02?.Invoke();
     }
 
     private void OnBaseDestroyed()
     {
-        onGameOver?.Invoke(false);
+        EventManager.Game.onGameOver?.Invoke(false);
     }
 
     private void OnWavesCompleted()
     {
-        onGameOver?.Invoke(true);
+         EventManager.Game.onGameOver?.Invoke(true);
     }
     
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        DNABase.onBaseDestroyed += OnBaseDestroyed;
-        WaveState.onWavesCompleted += OnWavesCompleted;
+        EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
+        EventManager.Game.onWavesCompleted += OnWavesCompleted;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        DNABase.onBaseDestroyed -= OnBaseDestroyed;
-        WaveState.onWavesCompleted -= OnWavesCompleted;
+        EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
+        EventManager.Game.onWavesCompleted -= OnWavesCompleted;
     }
 
     private void InitInstance()

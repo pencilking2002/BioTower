@@ -64,15 +64,15 @@ public class DebugCanvas : MonoBehaviour
 
     private void OnEnable()
     {
-        PlacementManager.onSetNonePlacementState += OnSetNonePlacementState;
-        PlacementManager.onStartPlacementState += OnStartPlacementState;
+        EventManager.Structures.onSetNonePlacementState += OnSetNonePlacementState;
+        EventManager.Structures.onStartPlacementState += OnStartPlacementState;
 
     }
 
     private void OnDisable()
     {
-        PlacementManager.onSetNonePlacementState -= OnSetNonePlacementState;
-        PlacementManager.onStartPlacementState -= OnStartPlacementState;
+        EventManager.Structures.onSetNonePlacementState -= OnSetNonePlacementState;
+        EventManager.Structures.onStartPlacementState -= OnStartPlacementState;
     }
 }
 }

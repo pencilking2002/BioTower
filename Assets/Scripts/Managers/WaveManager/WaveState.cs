@@ -15,7 +15,6 @@ public enum WaveMode
 
 public class WaveState : MonoBehaviour
 {
-    public static Action onWavesCompleted;
     protected WaveManager waveManager => GameManager.Instance.waveManager;
 
     public virtual WaveMode OnUpdate(Wave wave)

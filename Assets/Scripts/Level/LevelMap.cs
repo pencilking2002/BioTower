@@ -16,12 +16,12 @@ public class LevelMap : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.onLevelLoaded_01 += LevelLoaded;
+        EventManager.Game.onLevelLoaded_01 += LevelLoaded;
     }
 
     private void OnDisable()
     {
-        GameManager.onLevelLoaded_01 -= LevelLoaded;
+        EventManager.Game.onLevelLoaded_01 -= LevelLoaded;
     }
 }
 }

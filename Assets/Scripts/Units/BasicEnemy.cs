@@ -9,8 +9,6 @@ namespace BioTower.Units
 [SelectionBase]
 public class BasicEnemy : Unit
 {
-    public static Action onBaseReached;
-
     [SerializeField] private GameObject crystalPrefab;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color stoppedColor;
@@ -49,7 +47,7 @@ public class BasicEnemy : Unit
     private void DestinationReached()
     {
         Debug.Log("Base reached");
-        onBaseReached?.Invoke();
+        EventManager.Units.onEnemyBaseReached?.Invoke();
     }
 
     private void SpawnCrystal()
@@ -90,13 +88,13 @@ public class BasicEnemy : Unit
 
     private void OnEnable()
     {
-        GameManager.onLevelLoaded_02 += LevelLoaded;
+        EventManager.Game.onLevelLoaded_02 += LevelLoaded;
         agent.OnDestinationReached += DestinationReached;
     }
 
     private void OnDisable()
     {
-        GameManager.onLevelLoaded_02 -= LevelLoaded;
+        EventManager.Game.onLevelLoaded_02 -= LevelLoaded;
         agent.OnDestinationReached -= DestinationReached;
     }
 

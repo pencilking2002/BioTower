@@ -15,7 +15,7 @@ public class EndedState : WaveState
         else
         {
             waveManager.wavesHaveCompleted = true;
-            onWavesCompleted?.Invoke();
+            EventManager.Game.onWavesCompleted?.Invoke();
         }
 
         return wave.state;

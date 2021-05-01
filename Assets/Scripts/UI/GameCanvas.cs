@@ -28,12 +28,12 @@ public class GameCanvas : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.onGameOver += OnGameOver;
+        EventManager.Game.onGameOver += OnGameOver;
     }
 
     private void OnDisable()
     {
-        GameManager.onGameOver -= OnGameOver;
+        EventManager.Game.onGameOver -= OnGameOver;
     }
 }
 }

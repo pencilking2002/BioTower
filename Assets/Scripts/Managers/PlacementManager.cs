@@ -16,8 +16,8 @@ public enum PlacementState
 
 public class PlacementManager : MonoBehaviour
 {
-    public static Action<StructureType> onStartPlacementState;
-    public static Action onSetNonePlacementState;
+    // public static Action<StructureType> onStartPlacementState;
+    // public static Action onSetNonePlacementState;
 
     [SerializeField] private PlacementState placementState;
     [SerializeField] private LayerMask socketLayerMask;
@@ -56,31 +56,49 @@ public class PlacementManager : MonoBehaviour
     {
         if (IsPlacingState())
         {
-            Ray ray = Camera.main.ScreenPointToRay(screenPos);
-            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, socketLayerMask);
-            //Debug.Log(hitInfo.collider.gameObject.name);
-            if (hitInfo.collider != null)
+            if (GameManager.Instance.econManager.CanBuyAbaTower())
             {
-                var socket = hitInfo.collider.transform.parent.GetComponent<StructureSocket>();
-                if (!socket.HasStructure())
-                {
-                    socket.SetHasStructure(true);
-                    var tower = CreateStructure(structureToPlace);
-                    tower.transform.position = hitInfo.collider.transform.position + placementOffset;
-                    SetNoneState();
-                }
+                PlaceAbaTower(screenPos);
+                GameManager.Instance.econManager.BuyAbaTower();
             }
         }
         else
         {
-            Ray ray = Camera.main.ScreenPointToRay(screenPos);
-            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
-
-            if (hitInfo.collider != null)
+            if (GameManager.Instance.econManager.CanBuyAbaUnit())
             {
-                var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
-                structure?.OnTapStructure();
+                TapStructure(screenPos);
+                GameManager.Instance.econManager.BuyAbaUnit();
             }
+        }
+    }
+
+    private void PlaceAbaTower(Vector3 screenPos)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(screenPos);
+        RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, socketLayerMask);
+        //Debug.Log(hitInfo.collider.gameObject.name);
+        if (hitInfo.collider != null)
+        {
+            var socket = hitInfo.collider.transform.parent.GetComponent<StructureSocket>();
+            if (!socket.HasStructure())
+            {
+                socket.SetHasStructure(true);
+                var tower = CreateStructure(structureToPlace);
+                tower.transform.position = hitInfo.collider.transform.position + placementOffset;
+                SetNoneState();
+            }
+        }
+    }
+
+    private void TapStructure(Vector3 screenPos)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(screenPos);
+        RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
+
+        if (hitInfo.collider != null)
+        {
+            var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
+            structure?.OnTapStructure();
         }
     }
 
@@ -94,13 +112,13 @@ public class PlacementManager : MonoBehaviour
     { 
         placementState = PlacementState.NONE;
         structureToPlace = StructureType.NONE; 
-        onSetNonePlacementState?.Invoke();
+        EventManager.Structures.onSetNonePlacementState?.Invoke();
     }
     private void SetPlacingState(StructureType structureType) 
     { 
         placementState = PlacementState.PLACING;
         structureToPlace = structureType;
-        onStartPlacementState?.Invoke(structureType); 
+        EventManager.Structures.onStartPlacementState?.Invoke(structureType); 
     }
 
     private bool IsNoneState() { return placementState == PlacementState.NONE; }
@@ -108,15 +126,15 @@ public class PlacementManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameplayUI.onTowerButton += OnPressTowerButton;
-        InputController.onTouchBegan += OnTouchBegan;
+        EventManager.UI.onPressTowerButton += OnPressTowerButton;
+        EventManager.Input.onTouchBegan += OnTouchBegan;
 
     }
 
     private void OnDisable()
     {
-        GameplayUI.onTowerButton -= OnPressTowerButton;
-        InputController.onTouchBegan -= OnTouchBegan;
+        EventManager.UI.onPressTowerButton -= OnPressTowerButton;
+        EventManager.Input.onTouchBegan -= OnTouchBegan;
     }
 
 }

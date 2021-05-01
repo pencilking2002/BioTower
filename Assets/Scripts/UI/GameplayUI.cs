@@ -9,13 +9,12 @@ namespace BioTower.UI
 {
 public class GameplayUI : MonoBehaviour
 {
-    public static Action<StructureType> onTowerButton;
     [SerializeField] private CanvasGroup gameUIPanel;
     [SerializeField] private Button spawnAbaTowerButton;
 
     public void OnPressAbaTowerButton()
     {
-        onTowerButton?.Invoke(StructureType.ABA_TOWER);
+        EventManager.UI.onPressTowerButton?.Invoke(StructureType.ABA_TOWER);
     }
 }
 }

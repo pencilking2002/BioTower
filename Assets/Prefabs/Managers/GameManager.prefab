@@ -43,6 +43,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb8a8bce23496c48a9f836ff7efe0be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2823003601814084876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2434582720136588130}
+  - component: {fileID: 8970047450298625561}
+  m_Layer: 0
+  m_Name: EventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2434582720136588130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823003601814084876}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3163904365036822119}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8970047450298625561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823003601814084876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dac41ca5b934424ea6279dd32990186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3163904365036822118
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,6 +118,8 @@ Transform:
   - {fileID: 1797068251928698900}
   - {fileID: 7848025078055929089}
   - {fileID: 1662805008771571638}
+  - {fileID: 2087827051863238404}
+  - {fileID: 2434582720136588130}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -94,6 +139,9 @@ MonoBehaviour:
   levelMap: {fileID: 0}
   playerBase: {fileID: 0}
   enemyList: []
+  waveManager: {fileID: 5526649151822771978}
+  placementManager: {fileID: 360581058528368861}
+  econManager: {fileID: 6757466083210450277}
 --- !u!1 &5463906776217022389
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +342,53 @@ MonoBehaviour:
   placementOffset: {x: 0, y: -0.2, z: 0}
   abaTowerPrefab: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
     type: 3}
+--- !u!1 &7102263763943850465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2087827051863238404}
+  - component: {fileID: 6757466083210450277}
+  m_Layer: 0
+  m_Name: EconomyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2087827051863238404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7102263763943850465}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3163904365036822119}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6757466083210450277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7102263763943850465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689c034253b150541a893977b3cb2632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingCurrency: 100
+  playerCurrency: 0
+  abaTowerCost: 10
+  abaUnitCost: 5
 --- !u!1 &7636528861552393377
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ namespace BioTower.Structures
 [SelectionBase]
 public class DNABase : Structure
 {   
-    public static Action onBaseDestroyed;
+    //public static Action onBaseDestroyed;
     private void LevelLoaded()
     {
         GameManager.Instance.RegisterPlayerBase(this);
@@ -26,19 +26,19 @@ public class DNABase : Structure
     private void BaseDestroyed()
     {
         if (currHealth <= 0)
-            onBaseDestroyed?.Invoke();
+            EventManager.Structures.onBaseDestroyed?.Invoke();
     }
 
     private void OnEnable()
     {
-        GameManager.onLevelLoaded_01 += LevelLoaded;
-        BasicEnemy.onBaseReached += OnBaseReached;
+        EventManager.Game.onLevelLoaded_01 += LevelLoaded;
+        EventManager.Units.onEnemyBaseReached += OnBaseReached;
     }
 
     private void OnDisable()
     {
-        GameManager.onLevelLoaded_01 -= LevelLoaded;
-        BasicEnemy.onBaseReached -= OnBaseReached;
+        EventManager.Game.onLevelLoaded_01 -= LevelLoaded;
+        EventManager.Units.onEnemyBaseReached -= OnBaseReached;
     }
 }
 }

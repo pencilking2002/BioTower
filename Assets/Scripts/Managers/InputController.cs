@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System;
 
+namespace BioTower
+{
 public class InputController : MonoBehaviour
 {
-    public static Action<Vector3> onTouchBegan;     // screen position of the touch
-
     private void Update()
     {
         #if UNITY_EDITOR
 
         if (Input.GetMouseButtonDown(0))
         {
-            onTouchBegan?.Invoke(Input.mousePosition);
+            EventManager.Input.onTouchBegan?.Invoke(Input.mousePosition);
         }
         
         #elif UNITY_ANDROID
@@ -20,12 +20,11 @@ public class InputController : MonoBehaviour
         {
             if (touch.phase == TouchPhase.Began)
             {
-                onTouchBegan?.Invoke(touch.position);
+                EventManager.Input.onTouchBegan?.Invoke(touch.position);
             }
         }
 
         #endif
     }
-    
-
+}
 }

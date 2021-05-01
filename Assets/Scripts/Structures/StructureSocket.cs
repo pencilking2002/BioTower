@@ -50,14 +50,14 @@ public class StructureSocket : MonoBehaviour
 
     private void OnEnable()
     {
-        PlacementManager.onStartPlacementState += OnStartPlacementState;
-        PlacementManager.onSetNonePlacementState += OnSetNonePlacementState;
+        EventManager.Structures.onStartPlacementState += OnStartPlacementState;
+        EventManager.Structures.onSetNonePlacementState += OnSetNonePlacementState;
     }
 
     private void OnDisable()
     {
-        PlacementManager.onStartPlacementState -= OnStartPlacementState;
-        PlacementManager.onSetNonePlacementState -= OnSetNonePlacementState;
+        EventManager.Structures.onStartPlacementState -= OnStartPlacementState;
+        EventManager.Structures.onSetNonePlacementState -= OnSetNonePlacementState;
     }
 }
 }

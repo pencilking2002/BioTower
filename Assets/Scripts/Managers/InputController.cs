@@ -7,7 +7,7 @@ public class InputController : MonoBehaviour
 {
     private void Update()
     {
-        #if UNITY_EDITOR
+        #if UNITY_EDITOR || UNITY_WEBGL
 
         if (Input.GetMouseButtonDown(0))
         {

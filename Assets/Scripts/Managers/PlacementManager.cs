@@ -59,6 +59,7 @@ public class PlacementManager : MonoBehaviour
             if (GameManager.Instance.econManager.CanBuyAbaTower())
             {
                 PlaceAbaTower(screenPos);
+                TapStructure(screenPos);
             }
         }
         else
@@ -99,6 +100,11 @@ public class PlacementManager : MonoBehaviour
             var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
             GameManager.Instance.econManager.BuyAbaUnit();
             structure?.OnTapStructure();
+            SetNoneState();
+        }
+        else
+        {
+            SetNoneState();
         }
     }
 

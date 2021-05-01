@@ -49,7 +49,7 @@ public class Structure : MonoBehaviour
 
     public virtual void OnTapStructure()
     {
-
+        
     }
 }
 }

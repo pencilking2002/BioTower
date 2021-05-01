@@ -43,7 +43,6 @@ public class PlacementManager : MonoBehaviour
             case StructureType.ABA_TOWER:
                 tower = Instantiate(abaTowerPrefab);
                 break;
-               
         }
         return tower;
     }

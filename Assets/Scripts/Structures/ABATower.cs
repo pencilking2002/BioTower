@@ -33,14 +33,14 @@ public class ABATower : Structure
     {
         map.GenerateMap();      // NOTE: Seems like this needs to be called in order for the map to be initialized correctly after instantiation 
         var unitsContainer = transform.Find("Units");
-        SpawnUnits();
+        //SpawnUnits();
         targetPositions = new Vector3[numUnitsToSpawn];
         Debug.Log("ABA tower Awake");
     }
 
-    private void SpawnUnits()
+    private void SpawnUnits(int numUnits)
     {
-        for(int i=0; i<numUnitsToSpawn; i++)
+        for(int i=0; i<numUnits; i++)
         {
             var go = Instantiate(abaUnitPrefab);
             go.transform.position = GetPointWithinInfluence();
@@ -78,6 +78,7 @@ public class ABATower : Structure
     {
         var oldScale = transform.localScale;
         LeanTween.scale(gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
+        SpawnUnits(1);
         //Debug.Log("Create unit");
     }
 

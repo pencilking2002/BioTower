@@ -34,7 +34,8 @@ public class BasicEnemy : Unit
     public override void StartMoving(float delay=0)
     {
         LeanTween.delayedCall(delay, () => {
-            agent.SetDestination(GameManager.Instance.playerBase.transform.position);
+            Vector3 targetPos = GameManager.Instance.playerBase.transform.position;
+            agent.SetDestination(targetPos);
             isEngagedInCombat = false;
         });
     }

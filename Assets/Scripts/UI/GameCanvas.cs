@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace BioTower.UI
 {
@@ -17,7 +18,8 @@ public class GameCanvas : MonoBehaviour
 
     public void OnPressRestart()
     {
-        Debug.Log("Retry");
+        //Debug.Log("Retry");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnGameOver(bool isWin)

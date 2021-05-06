@@ -3242,7 +3242,8 @@ MonoBehaviour:
   dynObstacles:
   - {fileID: 2888831344624354129}
   - {fileID: 1583202321}
-  minMaxToggleInterval: {x: 0.5, y: 1}
+  minMaxToggleInterval: {x: 5, y: 5}
+  currInterval: 0
 --- !u!4 &632587017 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3163904365036822119, guid: 1efa5580d925f4f41949a420af6456cf,
@@ -6214,8 +6215,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.29556906, y: -1.0055752}
-      - {x: 0.6752957, y: -1.2112479}
-      - {x: 1.0908967, y: 0.2462815}
+      - {x: 0.15429437, y: -1.1298609}
+      - {x: 0.53733313, y: 0.36022365}
       - {x: 0.095300674, y: 0.48037392}
 --- !u!1 &1587653077
 GameObject:
@@ -8571,8 +8572,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -0.86162436, y: -0.5261887}
       - {x: 1.2099031, y: -1.0619307}
-      - {x: 1.4368192, y: -0.10736406}
-      - {x: -0.4393077, y: 0.29176265}
+      - {x: 1.3391315, y: -0.6119652}
+      - {x: -0.6998081, y: -0.07447988}
 --- !u!114 &2888831344624354131
 MonoBehaviour:
   m_ObjectHideFlags: 0

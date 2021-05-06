@@ -16,7 +16,8 @@ public class EventManager : MonoBehaviour
         public static Action onWavesCompleted;
 
         public static Action<int, int> onSpendCurrency; // num spent, curr total
-        public static Action<int, int> onGainCurrency;  // num gained, curr total 
+        public static Action<int, int> onGainCurrency;  // num gained, curr total
+        public static Action onTogglePaths; 
     }
 
     public class Structures

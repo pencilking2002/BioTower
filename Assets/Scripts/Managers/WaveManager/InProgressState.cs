@@ -8,9 +8,9 @@ public class InProgressState : WaveState
 {
     public override WaveMode OnUpdate(Wave wave)
     {
-        if (Time.time > wave.lastSpawn + wave.spawnInterval)
+        if (Time.time > wave.lastSpawn + wave.spawnInterval || wave.numSpawns == 0)
         {
-            waveManager.SpawnEnemy();
+            waveManager.SpawnEnemy(wave.minMaxSpeed);
             wave.lastSpawn = Time.time;
             wave.numSpawns++;
         }

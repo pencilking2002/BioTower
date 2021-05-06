@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using NaughtyAttributes;
+using BioTower.Units;
 
 namespace BioTower
 {
@@ -11,7 +12,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     public LevelSettings waveSettings; 
     [SerializeField] private WaveMode waveMode;
-
     public int currWave;
     [HideInInspector] public bool wavesHaveCompleted;
 
@@ -35,16 +35,16 @@ public class WaveManager : MonoBehaviour
         waveStateMap.Add(WaveMode.ENDED, endedState); 
 
         // Initialize waves
-        foreach(var wave in waveSettings.waves)
-            wave.Init();
+        for (int i=0; i<waveSettings.waves.Length; i++)
+            waveSettings.waves[i].Init(i);
         
     }
 
-    public void SpawnEnemy()
+    public void SpawnEnemy(Vector2 minMaxSpeed)
     {
         var enemyGO = Instantiate(enemyPrefab);
         enemyGO.transform.position = GameObject.FindGameObjectWithTag(Constants.enemyTestSpawnSpot).transform.position;
-        Debug.Log("Spawn enemy");
+        enemyGO.GetComponent<BasicEnemy>().SetSpeed(minMaxSpeed);
     }
 
     private void Update()

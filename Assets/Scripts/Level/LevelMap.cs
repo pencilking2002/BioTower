@@ -14,14 +14,21 @@ public class LevelMap : MonoBehaviour
         GameManager.Instance.RegisterMap(this);
     }   
 
+    private void OnTogglePaths()
+    {
+        map.GenerateMap();
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onLevelLoaded_01 += LevelLoaded;
+        EventManager.Game.onTogglePaths += OnTogglePaths;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onLevelLoaded_01 -= LevelLoaded;
+        EventManager.Game.onTogglePaths -= OnTogglePaths;
     }
 }
 }

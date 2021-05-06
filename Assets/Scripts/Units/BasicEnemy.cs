@@ -9,18 +9,28 @@ namespace BioTower.Units
 [SelectionBase]
 public class BasicEnemy : Unit
 {
+    [Header("References")]
     [SerializeField] private GameObject crystalPrefab;
     [SerializeField] private SpriteRenderer sr;
+    public PolyNavAgent agent;
+
+    
+    [Header("Enemy state")]
     [SerializeField] private Color stoppedColor;
     public bool hasCrystal;
-    public PolyNavAgent agent;
     private bool isRegistered;
     [HideInInspector] public bool isEngagedInCombat;
+
 
     public override void Start()
     {
         base.Start();
         GameManager.Instance.RegisterEnemy(this);
+    }
+
+    public void SetSpeed(Vector2 minMaxSpeed)
+    {
+        agent.maxSpeed = UnityEngine.Random.Range(minMaxSpeed.x, minMaxSpeed.y);
     }
     
     public override void StopMoving()
@@ -87,16 +97,26 @@ public class BasicEnemy : Unit
         PickupCrystal(col);
     }
 
+    private void OnTogglePaths()
+    {
+        LeanTween.delayedCall(0.1f, () => {
+            Vector3 targetPos = GameManager.Instance.playerBase.transform.position;
+            agent.SetDestination(targetPos);
+        });
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onLevelLoaded_02 += LevelLoaded;
         agent.OnDestinationReached += DestinationReached;
+        EventManager.Game.onTogglePaths += OnTogglePaths;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onLevelLoaded_02 -= LevelLoaded;
         agent.OnDestinationReached -= DestinationReached;
+        EventManager.Game.onTogglePaths -= OnTogglePaths;
     }
 
 }

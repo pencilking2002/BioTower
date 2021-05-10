@@ -25,7 +25,7 @@ public class Waypoint : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = isFork ? Color.yellow : Color.red;
+        Gizmos.color = isFork ? Color.yellow : Color.white;
 
         if (nextWaypoint != null)
         {

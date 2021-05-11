@@ -12,7 +12,6 @@ public class BasicEnemy : Unit
 {
     [Header("References")]
     [SerializeField] private GameObject crystalPrefab;
-    [SerializeField] private SpriteRenderer sr;
     public PolyNavAgent agent;
 
     

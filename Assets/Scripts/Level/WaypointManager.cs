@@ -45,6 +45,7 @@ public class WaypointManager : MonoBehaviour
         return spawnPoints[randIndex];
     }
 
+    #if UNITY_EDITOR
 
     [MenuItem("Tools/Link Waypoints %l")]
     private static void LinkWaypoints()
@@ -93,6 +94,8 @@ public class WaypointManager : MonoBehaviour
             waypoint_02.prevWaypoint = waypoint_03;
         }
     }
+
+    #endif
 
 }
 }

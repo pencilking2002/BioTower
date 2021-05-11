@@ -26,11 +26,7 @@ public class ABATower : Structure
     public override void Awake()
     {
         base.Awake();
-        var oldScale = transform.localScale;
-        transform.localScale = Vector3.zero;
-        LeanTween.scale(gameObject, oldScale * 1.1f, 0.1f).setOnComplete(() => {
-             LeanTween.scale(gameObject, oldScale, 0.1f);
-        }); 
+        Util.ScaleUpSprite(sr, 1.1f);
     }
 
     private void Start()
@@ -80,8 +76,8 @@ public class ABATower : Structure
 
     public override void OnTapStructure()
     {
-        var oldScale = transform.localScale;
-        LeanTween.scale(gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
+        var oldScale = sr.transform.localScale;
+        LeanTween.scale(sr.gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
         SpawnUnits(1);
         //Debug.Log("tap structure");
     }

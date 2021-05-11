@@ -29,6 +29,7 @@ public class Structure : MonoBehaviour
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
     [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
     [SerializeField] StructureState structureState;
+    [SerializeField] protected SpriteRenderer sr;
 
     public virtual void Awake()
     {

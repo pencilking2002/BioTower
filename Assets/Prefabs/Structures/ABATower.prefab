@@ -519,6 +519,7 @@ MonoBehaviour:
   unitsContainer: {fileID: 193092808403144242}
   maxInfluenceAreaCollider: {fileID: 6145754031174247750}
   minInfluenceAreaCollider: {fileID: 7447611048054085524}
+  sr: {fileID: 1985713823300775996}
 --- !u!1 &4035202436947121833
 GameObject:
   m_ObjectHideFlags: 0

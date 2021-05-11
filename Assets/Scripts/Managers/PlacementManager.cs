@@ -4,7 +4,6 @@ using UnityEngine;
 using BioTower.Structures;
 using BioTower.UI;
 using System;
-using BioTower.Structures;
 
 namespace BioTower
 {

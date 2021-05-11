@@ -11,7 +11,8 @@ public class Unit : MonoBehaviour
     [SerializeField] private bool hasHealth;
     [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] private int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] private int currHealth;
-
+    [SerializeField] protected SpriteRenderer sr;
+    
     public virtual void Start()
     {
         currHealth = maxHealth;

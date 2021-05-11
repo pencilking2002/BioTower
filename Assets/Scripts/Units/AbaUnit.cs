@@ -39,6 +39,7 @@ public class AbaUnit : Unit
     public override void Start()
     {
         base.Start();
+        Util.ScaleUpSprite(sr, 1.1f);
         SetRoamingState();
         SetNewDestination();
     }
@@ -78,7 +79,7 @@ public class AbaUnit : Unit
     {
         var newDestination = abaTower.GetPointWithinInfluence();
         agent.SetDestination(newDestination);
-        Debug.Log("AbaUnit: Set New Destination: " + newDestination);
+        //Debug.Log("AbaUnit: Set New Destination: " + newDestination);
     }
 
     private void OnDestinationReached()

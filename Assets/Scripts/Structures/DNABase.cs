@@ -20,13 +20,20 @@ public class DNABase : Structure
     private void OnBaseReached()
     {
         TakeDamage(1);
-        BaseDestroyed();
+        if (currHealth > 0)
+        {
+            Util.ScaleBounceSprite(sr, 1.1f);
+        }
+        else
+        {
+            BaseDestroyed();
+        }
     }
 
     private void BaseDestroyed()
     {
-        if (currHealth <= 0)
-            EventManager.Structures.onBaseDestroyed?.Invoke();
+       
+        EventManager.Structures.onBaseDestroyed?.Invoke();
     }
 
     private void OnEnable()

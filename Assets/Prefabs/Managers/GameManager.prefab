@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689c034253b150541a893977b3cb2632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingCurrency: 100
+  startingCurrency: 200
   playerCurrency: 0
   abaTowerCost: 10
   abaUnitCost: 5

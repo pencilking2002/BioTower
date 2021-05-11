@@ -46,7 +46,7 @@ public class AbaUnit : Unit
     public override void StopMoving()
     {
         agent.Stop();
-        //Debug.Log("Stop Moving");
+        Debug.Log("AbaUnit: Stop Moving");
         //sr.color = stoppedColor;
     }
 
@@ -78,6 +78,7 @@ public class AbaUnit : Unit
     {
         var newDestination = abaTower.GetPointWithinInfluence();
         agent.SetDestination(newDestination);
+        Debug.Log("AbaUnit: Set New Destination: " + newDestination);
     }
 
     private void OnDestinationReached()

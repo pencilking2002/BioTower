@@ -56,3 +56,6 @@ TagManager:
   - name: AbaUnits
     uniqueID: 3904068609
     locked: 0
+  - name: Healthbars
+    uniqueID: 1578752529
+    locked: 0

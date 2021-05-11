@@ -23,6 +23,12 @@ public class Waypoint : MonoBehaviour
     public bool isSpawnPoint => waypointType == WaypointType.SPAWN_POINT;
     public bool isEndpoint => waypointType == WaypointType.END_POINT;
 
+    public Waypoint ChooseNextWaypoint()
+    {
+        int randIndex = UnityEngine.Random.Range(0,2);
+        return randIndex == 0 ? nextWaypoint : nextWaypoint_02;
+    }
+
     private Vector3 GetTangent(Vector3 normal)
     {
         Vector3 tangent;

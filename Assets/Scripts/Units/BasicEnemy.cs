@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PolyNav;
 using System;
+using BioTower.Level;
 
 namespace BioTower.Units
 {
@@ -21,12 +22,30 @@ public class BasicEnemy : Unit
     private bool isRegistered;
     [HideInInspector] public bool isEngagedInCombat;
 
+    [Header("Waypoint movement")]
+    [SerializeField] private Waypoint currWaypoint; 
+    [SerializeField] private Waypoint nextWaypoint;
+
 
     public override void Start()
     {
         base.Start();
         GameManager.Instance.RegisterEnemy(this);
     }
+
+    /// <summary>
+    /// Sets the current waypoint, its last waypoint the enemy encountered
+    /// </summary>
+    /// <param name="waypoint"></param>
+    public void SetCurrWaypoint(Waypoint waypoint) { currWaypoint = waypoint; }
+
+    /// <summary>
+    /// Sets the next waypoint, its where the enemy is going
+    /// </summary>
+    /// <param name="waypoint"></param>
+    public void SetNextWaypoint(Waypoint waypoint) { nextWaypoint = waypoint; }
+    public Waypoint GetCurrWaypoint() { return currWaypoint; }
+    public Waypoint GetNextWaypoint() { return nextWaypoint; }
 
     public void SetSpeed(Vector2 minMaxSpeed)
     {
@@ -41,24 +60,46 @@ public class BasicEnemy : Unit
         sr.color = stoppedColor;
     }
 
-    public override void StartMoving(float delay=0)
+    public void SetDestination(Waypoint waypoint)
+    {
+        agent.SetDestination(waypoint.transform.position);
+    }
+
+    public override void StartMoving(Waypoint waypoint, float delay=0)
     {
         LeanTween.delayedCall(delay, () => {
-            Vector3 targetPos = GameManager.Instance.playerBase.transform.position;
-            agent.SetDestination(targetPos);
+            SetDestination(waypoint);
             isEngagedInCombat = false;
         });
     }
 
-    private void LevelLoaded()
-    {
-        GameManager.Instance.RegisterEnemy(this);
-    }
+    // private void LevelLoaded()
+    // {
+    //     GameManager.Instance.RegisterEnemy(this);
+    // }
 
     private void DestinationReached()
     {
-        Debug.Log("Base reached");
-        EventManager.Units.onEnemyBaseReached?.Invoke();
+        SetCurrWaypoint(nextWaypoint);
+        
+        if (currWaypoint.isFork)
+        {
+            var nextPoint = currWaypoint.ChooseNextWaypoint();
+            SetNextWaypoint(nextPoint);
+            SetDestination(nextPoint);
+        }
+        else if (currWaypoint.isEndpoint)
+        {
+            Debug.Log("Base reached");
+            EventManager.Units.onEnemyBaseReached?.Invoke();
+            Destroy(gameObject);
+        }
+        else
+        {
+            var nextPoint = currWaypoint.nextWaypoint;
+            SetNextWaypoint(nextPoint);
+            SetDestination(nextPoint);
+        }
     }
 
     private void SpawnCrystal()
@@ -107,14 +148,14 @@ public class BasicEnemy : Unit
 
     private void OnEnable()
     {
-        EventManager.Game.onLevelLoaded_02 += LevelLoaded;
+        //EventManager.Game.onLevelLoaded_02 += LevelLoaded;
         agent.OnDestinationReached += DestinationReached;
         EventManager.Game.onTogglePaths += OnTogglePaths;
     }
 
     private void OnDisable()
     {
-        EventManager.Game.onLevelLoaded_02 -= LevelLoaded;
+        //EventManager.Game.onLevelLoaded_02 -= LevelLoaded;
         agent.OnDestinationReached -= DestinationReached;
         EventManager.Game.onTogglePaths -= OnTogglePaths;
     }

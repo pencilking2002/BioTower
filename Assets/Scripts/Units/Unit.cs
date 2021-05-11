@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using BioTower.Level;
 
 namespace BioTower.Units
 {
@@ -17,7 +18,7 @@ public class Unit : MonoBehaviour
     }
 
     public virtual void StopMoving() { }
-    public virtual void StartMoving(float delay=0) { }
+    public virtual void StartMoving(Waypoint waypoint, float delay=0) { }
 
     public virtual void KillUnit() { Destroy(gameObject); }
 }

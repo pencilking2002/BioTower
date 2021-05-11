@@ -51,7 +51,7 @@ public class CombatManager : MonoBehaviour
         {
             unit.SetDestroyedState();
             LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {
-                enemy.StartMoving(1.0f);
+                enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
                 unit.abaTower.RemoveUnit(unit);
                 unit.KillUnit();
             });

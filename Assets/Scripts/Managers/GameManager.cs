@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public PlacementManager placementManager;
     public EconomyManager econManager;
 
+    private WaypointManager waypointManager;
+
     private void Awake()
     {
         InitInstance();
@@ -41,6 +43,14 @@ public class GameManager : MonoBehaviour
         }  
 
         Time.timeScale = gameSettings.timeScale;  
+    }
+
+    public WaypointManager GetWaypointManager()
+    {
+        if (!waypointManager)
+            waypointManager = GameObject.FindGameObjectWithTag(Constants.waypointManager).GetComponent<WaypointManager>();
+        
+        return waypointManager;
     }
 
     public void RegisterMap(LevelMap levelMap)

@@ -5,13 +5,23 @@ using NaughtyAttributes;
 
 namespace BioTower.Level
 {
+public enum WaypointType
+{
+    DEFAULT,
+    FORK,
+    SPAWN_POINT,
+    END_POINT
+}
 public class Waypoint : MonoBehaviour
 {
+    public WaypointType waypointType;
     public Waypoint nextWaypoint;
     [ShowIf("isFork")]
     public Waypoint nextWaypoint_02;
     public Waypoint prevWaypoint;
-    public bool isFork;
+    public bool isFork => waypointType == WaypointType.FORK;
+    public bool isSpawnPoint => waypointType == WaypointType.SPAWN_POINT;
+    public bool isEndpoint => waypointType == WaypointType.END_POINT;
 
     private Vector3 GetTangent(Vector3 normal)
     {
@@ -49,8 +59,13 @@ public class Waypoint : MonoBehaviour
 
         }
         
-        
-        Gizmos.color = Color.red;
+        if (isSpawnPoint)
+            Gizmos.color = Color.blue;
+        else if (isEndpoint)
+            Gizmos.color = Color.green;
+        else
+            Gizmos.color = Color.red;
+
         Gizmos.DrawSphere(transform.position, 0.2f);
     }
 }

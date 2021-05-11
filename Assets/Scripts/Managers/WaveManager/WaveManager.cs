@@ -43,7 +43,6 @@ public class WaveManager : MonoBehaviour
     public void SpawnEnemy(Vector2 minMaxSpeed)
     {
         var enemyGO = Instantiate(enemyPrefab);
-        //enemyGO.transform.position = GameObject.FindGameObjectWithTag(Constants.enemyTestSpawnSpot).transform.position;
         enemyGO.transform.position = GameManager.Instance.GetWaypointManager().GetRandomSpawnPoint().transform.position;
         enemyGO.GetComponent<BasicEnemy>().SetSpeed(minMaxSpeed);
     }

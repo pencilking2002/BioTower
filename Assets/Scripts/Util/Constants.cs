@@ -13,7 +13,7 @@ public class Constants
     public static string waveManager = "WaveManager";
     public static string placementManager = "PlacementManager";
     public static string waypointManager = "WaypointManager";
-
+    public static string projectilesContainer = "ProjectilesContainer";
 
 }
 }

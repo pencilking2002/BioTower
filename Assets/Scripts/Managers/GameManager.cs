@@ -30,6 +30,17 @@ public class GameManager : MonoBehaviour
 
     private WaypointManager waypointManager;
 
+    private Transform _projectilesContainer;
+    public Transform projectilesContainer
+    {
+        get 
+        {
+            if (_projectilesContainer == null)
+                _projectilesContainer = GameObject.FindGameObjectWithTag(Constants.projectilesContainer).transform;
+            return _projectilesContainer;
+        }
+    }
+
     private void Awake()
     {
         InitInstance();

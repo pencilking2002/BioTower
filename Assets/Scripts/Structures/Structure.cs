@@ -19,6 +19,7 @@ public enum StructureType
     ABA_TOWER,
     DNA_BASE,
     NONE,
+    PPC2_TOWER
 }
 
 public class Structure : MonoBehaviour

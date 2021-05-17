@@ -36,8 +36,12 @@ public class Structure : MonoBehaviour
     {
         currHealth = maxHealth;
         structureState = StructureState.ACTIVE;
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = currHealth;
+
+        if (hasHealth)
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currHealth;
+        }
     }
 
     public virtual void TakeDamage(int numDamage)

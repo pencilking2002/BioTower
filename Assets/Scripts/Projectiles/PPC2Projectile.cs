@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PPC2Projectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject explosiionPrefab;
 
-    // Update is called once per frame
-    void Update()
+    public void Explode()
     {
-        
+        var explosion = Instantiate(explosiionPrefab);
+        explosion.transform.position = transform.position;
+        Destroy(gameObject);
     }
 }

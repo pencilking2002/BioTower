@@ -7,6 +7,7 @@ TagManager:
   - EnemyContainer
   - WaveManager
   - WaypointManager
+  - ProjectilesContainer
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Crystal
   - StructureHitBox
   - Waypoint
-  - 
+  - Structure
   - 
   - 
   - 
@@ -58,4 +59,7 @@ TagManager:
     locked: 0
   - name: Healthbars
     uniqueID: 1578752529
+    locked: 0
+  - name: VFX
+    uniqueID: 613188659
     locked: 0

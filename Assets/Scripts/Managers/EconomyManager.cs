@@ -19,10 +19,16 @@ public class EconomyManager : MonoBehaviour
     [Header("Unit Price List")]
     public int abaUnitCost;
     
-    private void Start()
+    private void Awake()
+    {
+       Init();
+    }
+
+    private void Init()
     {
         playerCurrency = startingCurrency;
         EventManager.Game.onGainCurrency?.Invoke(0, playerCurrency);
+        Debug.Log("Init economy");
     }
 
     public bool HasEnoughCurrency(int num)

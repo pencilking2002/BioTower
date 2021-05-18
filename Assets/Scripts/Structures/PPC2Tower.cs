@@ -15,6 +15,12 @@ public class PPC2Tower : Structure
     [SerializeField] private float shootInterval;
     private float lastShot;
 
+public override void Awake()
+    {
+        base.Awake();
+        Util.ScaleUpSprite(sr, 1.1f);
+    }
+
     private void Update()
     {
         if (Time.time > lastShot + shootInterval)
@@ -24,8 +30,13 @@ public class PPC2Tower : Structure
 
             if (enemy != null && enemy.gameObject.activeInHierarchy)
             {
-                ShootEnemy(enemy);
-                lastShot = Time.time;
+                var distance = Vector2.Distance(enemy.transform.position, maxInfluenceAreaCollider.transform.position);
+                if (distance <= maxInfluenceAreaCollider.radius)
+                {
+                    ShootEnemy(enemy);
+                    lastShot = Time.time;
+                    Debug.Log("Radius length: " + maxInfluenceAreaCollider.radius + ". Distance to enemy: " + distance.ToString());
+                }
             }
         }
     }

@@ -9778,6 +9778,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PPC2_Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 8803778833483685385, guid: 303cd9eb9c7840e45b7f2b8b34236980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8803778833483685399, guid: 303cd9eb9c7840e45b7f2b8b34236980,
         type: 3}
       propertyPath: m_RootOrder

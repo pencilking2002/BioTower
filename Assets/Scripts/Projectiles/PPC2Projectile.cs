@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BioTower.Units;
 
 namespace BioTower
 {
@@ -11,11 +12,12 @@ public class PPC2Projectile : MonoBehaviour
 
     public void Explode()
     {
-        var enemies = Physics2D.OverlapCircleAll(transform.position, influenceCollider.radius, GameManager.Instance.util.enemyLayerMask);
+        var enemyGO = Physics2D.OverlapCircle(transform.position, influenceCollider.radius, GameManager.Instance.util.enemyLayerMask);
 
-        foreach(Collider2D enemyCollider in enemies)
+        if (enemyGO != null)
         {
-            Debug.Log("Hit enemy");
+            var enemy = enemyGO.transform.parent.GetComponent<BasicEnemy>();
+            enemy.KillUnit();
         }
 
         var explosion = Instantiate(explosiionPrefab);

@@ -131,13 +131,16 @@ MonoBehaviour:
   hasHealth: 0
   maxHealth: 0
   currHealth: 0
+  sr: {fileID: 2780707826441001857}
   crystalPrefab: {fileID: 7511931919741912127, guid: 860a79906c90b98489d792877fb6902a,
     type: 3}
-  sr: {fileID: 2780707826441001857}
+  triggerCollider: {fileID: 5933956694322970941}
+  agent: {fileID: 663975515}
   stoppedColor: {r: 0.7075472, g: 0.1768868, b: 0.1768868, a: 1}
   hasCrystal: 0
-  agent: {fileID: 663975515}
   isEngagedInCombat: 0
+  currWaypoint: {fileID: 0}
+  nextWaypoint: {fileID: 0}
 --- !u!114 &663975515
 MonoBehaviour:
   m_ObjectHideFlags: 0

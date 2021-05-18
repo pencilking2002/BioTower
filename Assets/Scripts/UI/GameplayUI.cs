@@ -18,6 +18,11 @@ public class GameplayUI : MonoBehaviour
     {
         EventManager.UI.onPressTowerButton?.Invoke(StructureType.ABA_TOWER);
     }
+    
+    public void OnPressPPC2TowerButton()
+    {
+        EventManager.UI.onPressTowerButton?.Invoke(StructureType.PPC2_TOWER);
+    }
 
     private void OnSpendCurrency(int numSpent, int currTotal)
     {

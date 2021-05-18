@@ -390,6 +390,8 @@ MonoBehaviour:
   placementOffset: {x: 0, y: -0.2, z: 0}
   abaTowerPrefab: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
     type: 3}
+  ppc2TowerPrefab: {fileID: 2173016658119397913, guid: 2f64af76819d57f4b84c233558db1c17,
+    type: 3}
 --- !u!1 &7102263763943850465
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +438,7 @@ MonoBehaviour:
   startingCurrency: 200
   playerCurrency: 0
   abaTowerCost: 10
+  ppc2TowerCost: 10
   abaUnitCost: 5
 --- !u!1 &7636528861552393377
 GameObject:

@@ -27,6 +27,7 @@ public class PlacementManager : MonoBehaviour
 
     [Header("Structure prefabs")]
     [SerializeField] private GameObject abaTowerPrefab;
+    [SerializeField] private GameObject ppc2TowerPrefab;
 
 
     private void Awake()
@@ -42,6 +43,9 @@ public class PlacementManager : MonoBehaviour
             case StructureType.ABA_TOWER:
                 tower = Instantiate(abaTowerPrefab);
                 break;
+             case StructureType.PPC2_TOWER:
+                tower = Instantiate(ppc2TowerPrefab);
+                break;
         }
         return tower;
     }
@@ -55,9 +59,9 @@ public class PlacementManager : MonoBehaviour
     {
         if (IsPlacingState())
         {
-            if (GameManager.Instance.econManager.CanBuyAbaTower())
+            if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))
             {
-                PlaceAbaTower(screenPos);
+                PlaceTower(screenPos);
                 TapStructure(screenPos);
             }
         }
@@ -70,7 +74,7 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
-    private void PlaceAbaTower(Vector3 screenPos)
+    private void PlaceTower(Vector3 screenPos)
     {
         Ray ray = Camera.main.ScreenPointToRay(screenPos);
         RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, socketLayerMask);
@@ -83,7 +87,7 @@ public class PlacementManager : MonoBehaviour
                 socket.SetHasStructure(true);
                 var tower = CreateStructure(structureToPlace);
                 tower.transform.position = hitInfo.collider.transform.position + placementOffset;
-                GameManager.Instance.econManager.BuyAbaTower();
+                GameManager.Instance.econManager.BuyTower(structureToPlace);
                 SetNoneState();
             }
         }

@@ -12,6 +12,7 @@ public class BasicEnemy : Unit
 {
     [Header("References")]
     [SerializeField] private GameObject crystalPrefab;
+    [SerializeField] private Collider2D triggerCollider;
     public PolyNavAgent agent;
 
     
@@ -114,6 +115,8 @@ public class BasicEnemy : Unit
     public override void KillUnit()
     {
         SpawnCrystal();
+        triggerCollider.enabled = false;
+        //DestroyImmediate(gameObject);
         base.KillUnit();
     }
 

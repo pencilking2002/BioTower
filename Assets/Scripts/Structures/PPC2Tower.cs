@@ -8,10 +8,26 @@ namespace BioTower.Structures
 public class PPC2Tower : Structure
 {
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private LayerMask enemyLayerMask;
     [SerializeField] private CircleCollider2D maxInfluenceAreaCollider;
     [SerializeField] private float shootDuration = 1.0f;
     [SerializeField] private float shootDelay = 0.1f;
+    [SerializeField] private float shootInterval;
+    private float lastShot;
 
+    private void Update()
+    {
+        if (Time.time > lastShot + shootInterval)
+        {
+            var enemy = Physics2D.OverlapCircle(maxInfluenceAreaCollider.transform.position, maxInfluenceAreaCollider.radius, enemyLayerMask);
+
+            if (enemy != null)
+            {
+                ShootEnemy(enemy);
+                lastShot = Time.time;
+            }
+        }
+    }
 
     private PPC2Projectile CreateProjectile()
     {
@@ -27,27 +43,17 @@ public class PPC2Tower : Structure
         .setOnComplete(projectile.Explode);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void ShootEnemy(Collider2D col)
     {
-        Debug.Log("PPC2 twoerr overlap");
-        HandleEnemyOverlap(col);
-    }
-
-    private void HandleEnemyOverlap(Collider2D col)
-    {
-        if (col.gameObject.layer != 10)
-            return;
-
         LeanTween.delayedCall(gameObject, shootDelay, () => {
             var projectile = CreateProjectile();
             projectile.transform.position = transform.position;
             projectile.transform.right = (col.transform.position-transform.position).normalized;
-            
+
             Vector3 targetPos = col.transform.position;
             LeanTween.move(projectile.gameObject, targetPos, shootDuration)
             .setOnComplete(projectile.Explode);
         }); 
     }
-
 }
 }

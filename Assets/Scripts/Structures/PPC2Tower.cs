@@ -15,7 +15,7 @@ public class PPC2Tower : Structure
     [SerializeField] private float shootInterval;
     private float lastShot;
 
-public override void Awake()
+    public override void Awake()
     {
         base.Awake();
         Util.ScaleUpSprite(sr, 1.1f);

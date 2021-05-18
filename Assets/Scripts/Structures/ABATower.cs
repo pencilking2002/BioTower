@@ -62,18 +62,6 @@ public class ABATower : Structure
         abaUnits.Remove(unit);
     }
 
-    private void FixedUpdate()
-    {
-        // for (int i=0; i<numUnitsToSpawn; i++)
-        // {
-        //     var unit = abaUnits[i];
-        //     if (unit.IsRoamingState())
-        //     {
-        //         unit.Patrol();
-        //     }
-        // }
-    }
-
     public override void OnTapStructure()
     {
         var oldScale = sr.transform.localScale;

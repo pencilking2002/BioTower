@@ -18,7 +18,8 @@ public class PPC2Tower : Structure
     private void Update()
     {
         if (Time.time > lastShot + shootInterval)
-        {
+        {  
+            // TODO: Conver to OverlapAll
             var enemy = Physics2D.OverlapCircle(maxInfluenceAreaCollider.transform.position, maxInfluenceAreaCollider.radius, enemyLayerMask);
 
             if (enemy != null)

@@ -6387,7 +6387,7 @@ MonoBehaviour:
     m_Bits: 1024
   maxInfluenceAreaCollider: {fileID: 1226040475}
   shootDuration: 1
-  shootDelay: 0.1
+  shootDelay: 0
   shootInterval: 1
 --- !u!1 &1401731505
 GameObject:

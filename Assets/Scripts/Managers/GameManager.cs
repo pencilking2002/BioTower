@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("References")]
+    public Util util;
     public WaveManager waveManager;
     public PlacementManager placementManager;
     public EconomyManager econManager;

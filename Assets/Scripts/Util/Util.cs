@@ -7,6 +7,8 @@ namespace BioTower
 public class Util : MonoBehaviour
 {
 
+    public LayerMask enemyLayerMask;
+    
     public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)
     {
         var oldScale = sr.transform.localScale;

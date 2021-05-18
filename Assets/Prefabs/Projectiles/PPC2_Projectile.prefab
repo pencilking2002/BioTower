@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 8803778832070815750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5109242, y: 0.102521084, z: 1}
+  m_LocalScale: {x: 0.41699395, y: 0.07076999, z: 1}
   m_Children: []
   m_Father: {fileID: 8803778833483685399}
   m_RootOrder: 0
@@ -92,9 +92,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8803778832769658828}
   - component: {fileID: 8803778832769658826}
-  - component: {fileID: 8803778832769658827}
+  - component: {fileID: 8124604382756156425}
   m_Layer: 0
-  m_Name: Collider
+  m_Name: CircleCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8803778832769658829}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.022, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8803778833483685399}
@@ -164,8 +164,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8803778832769658827
-BoxCollider2D:
+--- !u!58 &8124604382756156425
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -174,22 +174,12 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.039569557}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.41233003, y: 0.11057466}
-  m_EdgeRadius: 0
+  m_Radius: 0.4
 --- !u!1 &8803778833483685385
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,8 +205,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8803778833483685385}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.8128633, y: -0.35757, z: -15.84931}
-  m_LocalScale: {x: 0.7125, y: 0.4725, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8803778832070815749}
   - {fileID: 8803778832769658828}
@@ -237,3 +227,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosiionPrefab: {fileID: 5068043869090755077, guid: 10df14dacdcf28e4188614e44981108e,
     type: 3}
+  influenceCollider: {fileID: 8124604382756156425}

@@ -9484,15 +9484,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 977686005, guid: 2f64af76819d57f4b84c233558db1c17, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2173016658119397913, guid: 2f64af76819d57f4b84c233558db1c17,
         type: 3}
       propertyPath: m_Name
       value: PPC2_Tower
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173016658119397913, guid: 2f64af76819d57f4b84c233558db1c17,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2173016658119397914, guid: 2f64af76819d57f4b84c233558db1c17,
         type: 3}
@@ -9548,11 +9547,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4832216204161601103, guid: 2f64af76819d57f4b84c233558db1c17,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7008611762636712734, guid: 2f64af76819d57f4b84c233558db1c17,
         type: 3}

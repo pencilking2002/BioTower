@@ -11,7 +11,7 @@ public class PPC2Tower : Structure
    // [SerializeField] private LayerMask enemyLayerMask;
     //[SerializeField] private CircleCollider2D maxInfluenceAreaCollider;
     [SerializeField] private float shootDuration = 1.0f;
-    [SerializeField] private float shootDelay = 0.1f;
+    [SerializeField] private float maxShootDelay = 0.1f;
     //[SerializeField] private float shootInterval;
     //private float lastShot;
 
@@ -57,7 +57,9 @@ public class PPC2Tower : Structure
 
     private void ShootEnemy(Collider2D col)
     {
-        LeanTween.delayedCall(gameObject, shootDelay, () => {
+        var delay = UnityEngine.Random.Range(0, maxShootDelay);
+
+        LeanTween.delayedCall(gameObject, delay, () => {
             var projectile = CreateProjectile();
             projectile.transform.position = transform.position + new Vector3(0,1,0);
             projectile.transform.right = (col.transform.position-projectile.transform.position).normalized;

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [SerializeField] private GameSettings gameSettings;
+    public GameSettings gameSettings;
 
 
     [Header("Scene References")]

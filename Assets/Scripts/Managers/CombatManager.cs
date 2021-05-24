@@ -43,17 +43,31 @@ public class CombatManager : MonoBehaviour
         if (isWin)
         {
             GameManager.Instance.UnregisterEnemy(enemy);
-            enemy.KillUnit();
+            bool isEnemyAlive = enemy.TakeDamage(GameManager.Instance.gameSettings.abaDamage);
+            
+            if (isEnemyAlive)
+                enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
+    
             unit.SetRoamingState();
             unit.SetNewDestination();
         }
         else
         {
-            unit.SetDestroyedState();
+           
             LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {
                 enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
                 unit.abaTower.RemoveUnit(unit);
-                unit.KillUnit();
+                bool isUnitAlive = unit.TakeDamage(GameManager.Instance.gameSettings.basicEnemyDamage);
+
+                if (isUnitAlive)
+                {
+                    unit.SetRoamingState();
+                    unit.SetNewDestination();
+                }
+                else
+                {
+                    unit.SetDestroyedState();
+                }
             });
         }
     }

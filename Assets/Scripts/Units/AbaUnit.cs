@@ -90,10 +90,10 @@ public class AbaUnit : Unit
         }
     }
 
-    public override void KillUnit()
-    {
-        base.KillUnit();
-    }
+    // public override void KillUnit()
+    // {
+    //     base.KillUnit();
+    // }
 
     private void OnEnable()
     {

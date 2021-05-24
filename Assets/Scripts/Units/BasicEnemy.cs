@@ -113,12 +113,20 @@ public class BasicEnemy : Unit
         LeanTween.scale(crystalGO, defautlScale, 0.1f);
     }
 
-    public override void KillUnit()
+    public override bool TakeDamage(int amount)
     {
-        SpawnCrystal();
-        triggerCollider.enabled = false;
-        //DestroyImmediate(gameObject);
-        base.KillUnit();
+        if (base.TakeDamage(amount))
+        {
+            return isAlive;
+        }
+        else
+        {
+            SpawnCrystal();
+            triggerCollider.enabled = false;
+            return isAlive;
+            //DestroyImmediate(gameObject);
+            //base.KillUnit();
+        }
     }
 
     private void PickupCrystal(Collider2D col)

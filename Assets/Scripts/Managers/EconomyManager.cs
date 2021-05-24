@@ -18,8 +18,11 @@ public class EconomyManager : MonoBehaviour
 
     [Header("Unit Price List")]
     public int abaUnitCost;
+
+    [Header("Gain Money List")]
+    public int crystalWorth;
     
-    private void Awake()
+    private void Start()
     {
        Init();
     }
@@ -42,10 +45,12 @@ public class EconomyManager : MonoBehaviour
         EventManager.Game.onSpendCurrency?.Invoke(num, playerCurrency);
     }
 
-    public void AddCurrency(int num)
+    private void GainCurrency(int num)
     {
+        Debug.Log($"Econ: GainCurrency. old player currency: {playerCurrency}. Amount: {num}. New player currency {playerCurrency + num}");
         playerCurrency += num;
         EventManager.Game.onGainCurrency?.Invoke(num, playerCurrency);
+        
     }
 
     private bool CanBuyAbaTower()
@@ -104,6 +109,12 @@ public class EconomyManager : MonoBehaviour
     public void BuyAbaUnit()
     {
         SpendCurrency(abaUnitCost);
+    }
+
+    public void GainCrystalMoney()
+    {
+        int amount = crystalWorth;
+        GainCurrency(amount);
     }
 
 }

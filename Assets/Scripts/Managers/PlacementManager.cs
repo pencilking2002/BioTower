@@ -62,7 +62,7 @@ public class PlacementManager : MonoBehaviour
             if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))
             {
                 PlaceTower(screenPos);
-                TapStructure(screenPos);
+                //TapStructure(screenPos);
             }
         }
         else

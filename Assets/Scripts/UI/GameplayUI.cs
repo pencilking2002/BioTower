@@ -14,6 +14,12 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private Button spawnAbaTowerButton;
     [SerializeField] private TextMeshProUGUI playerCurrencyText;
 
+    private void Update()
+    {
+        playerCurrencyText.text = GameManager.Instance.econManager.playerCurrency.ToString();
+    }
+    
+
     public void OnPressAbaTowerButton()
     {
         EventManager.UI.onPressTowerButton?.Invoke(StructureType.ABA_TOWER);
@@ -26,14 +32,14 @@ public class GameplayUI : MonoBehaviour
 
     private void OnSpendCurrency(int numSpent, int currTotal)
     {
-        playerCurrencyText.text = currTotal.ToString();
+        //playerCurrencyText.text = currTotal.ToString();
     }
 
     private void OnGainCurrency(int numGained, int currTotal)
     {
-        playerCurrencyText.text = currTotal.ToString();
+        //playerCurrencyText.text = currTotal.ToString();
+        Debug.Log($"Currency gained");
     }
-    
 
     private void OnEnable()
     {

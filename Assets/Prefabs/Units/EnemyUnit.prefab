@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 663975515}
   - component: {fileID: 3898865577080790811}
   m_Layer: 10
-  m_Name: Enemy
+  m_Name: EnemyUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,8 +136,9 @@ MonoBehaviour:
     type: 3}
   triggerCollider: {fileID: 5933956694322970941}
   agent: {fileID: 663975515}
-  stoppedColor: {r: 0.7075472, g: 0.1768868, b: 0.1768868, a: 1}
+  stoppedColor: {r: 0.8113208, g: 0.5778747, b: 0.5778747, a: 1}
   hasCrystal: 0
+  hasCrystalTintColor: {r: 0.8773585, g: 0.24417053, b: 0.28703246, a: 1}
   isEngagedInCombat: 0
   currWaypoint: {fileID: 0}
   nextWaypoint: {fileID: 0}

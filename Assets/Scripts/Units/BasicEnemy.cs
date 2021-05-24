@@ -19,6 +19,7 @@ public class BasicEnemy : Unit
     [Header("Enemy state")]
     [SerializeField] private Color stoppedColor;
     public bool hasCrystal;
+    public Color hasCrystalTintColor;
     private bool isRegistered;
     [HideInInspector] public bool isEngagedInCombat;
 
@@ -129,7 +130,11 @@ public class BasicEnemy : Unit
 
         crystal.DestroyCrystal();
         hasCrystal = true;
+        var oldScale = sr.transform.localScale;
+        LeanTween.scale(sr.gameObject, oldScale * 1.1f, 0.25f);
+        sr.color = hasCrystalTintColor;
         // TODO: make enemy stronger after picking up crystal
+
     }
 
     private void OnTriggerEnter2D(Collider2D col)

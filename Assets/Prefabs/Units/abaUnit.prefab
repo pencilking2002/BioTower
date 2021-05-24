@@ -253,11 +253,11 @@ MonoBehaviour:
   _map: {fileID: 0}
   maxSpeed: 0.5
   mass: 20
-  stoppingDistance: 0.01
+  stoppingDistance: 0.2
   slowingDistance: 0.01
   accelerationRate: 100
   decelerationRate: 100
-  lookAheadDistance: 1
+  lookAheadDistance: 0.5
   avoidRadius: 0
   avoidanceConsiderStuckedTime: 0.2
   avoidanceConsiderReachedDistance: 2

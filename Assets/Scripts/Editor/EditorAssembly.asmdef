@@ -2,7 +2,7 @@
     "name": "EditorAssembly",
     "references": [],
     "includePlatforms": [
-        "PS4"
+        "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -156,7 +156,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3163904365036822118}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -439,6 +439,7 @@ MonoBehaviour:
     type: 3}
   ppc2TowerPrefab: {fileID: 2173016658119397913, guid: 2f64af76819d57f4b84c233558db1c17,
     type: 3}
+  chloroplastTowerPrefab: {fileID: 0}
 --- !u!1 &7102263763943850465
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +486,8 @@ MonoBehaviour:
   startingCurrency: 200
   playerCurrency: 0
   abaTowerCost: 10
-  ppc2TowerCost: 10
+  ppc2TowerCost: 40
+  chloroplastTowerCost: 10
   abaUnitCost: 5
   crystalWorth: 5
 --- !u!1 &7636528861552393377

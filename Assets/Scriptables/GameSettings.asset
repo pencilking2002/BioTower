@@ -13,3 +13,11 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   timeScale: 1
+  ppc2Damage: 5
+  abaDamage: 5
+  basicEnemyDamage: 5
+  abaUnitMaxHealth: 10
+  enemyUnitMaxHealth: 10
+  abaTowerCost: 10
+  ppc2TowerCost: 40
+  chloroplastTowerCost: 20

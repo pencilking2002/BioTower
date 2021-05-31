@@ -10,7 +10,7 @@ public class GameSettings : ScriptableObject
 {
     [Range(1,10)]public float timeScale = 1.0f;
 
-    [Header("Damage")]
+    [Header("Unit Damage")]
     public int ppc2Damage = 5;
     public int abaDamage = 5;
     public int basicEnemyDamage = 5;
@@ -19,7 +19,13 @@ public class GameSettings : ScriptableObject
     [Header("Unit Health")]
     public int abaUnitMaxHealth = 10;
     public int enemyUnitMaxHealth = 10;
-    
+
+
+    [Header("Tower Cost")]
+    [Range(0,100)] public int abaTowerCost;
+    [Range(0,100)] public int ppc2TowerCost;
+    [Range(0,100)] public int chloroplastTowerCost;
+
     public int GetMaxUnitHealth(UnitType unitType)
     {
         switch(unitType)

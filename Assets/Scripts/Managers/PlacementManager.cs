@@ -28,6 +28,7 @@ public class PlacementManager : MonoBehaviour
     [Header("Structure prefabs")]
     [SerializeField] private GameObject abaTowerPrefab;
     [SerializeField] private GameObject ppc2TowerPrefab;
+    [SerializeField] private GameObject chloroplastTowerPrefab;
 
 
     private void Awake()
@@ -45,6 +46,9 @@ public class PlacementManager : MonoBehaviour
                 break;
              case StructureType.PPC2_TOWER:
                 tower = Instantiate(ppc2TowerPrefab);
+                break;
+            case StructureType.CHLOROPLAST:
+                tower = Instantiate(chloroplastTowerPrefab);
                 break;
         }
         return tower;

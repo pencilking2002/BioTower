@@ -9,11 +9,12 @@ public class EconomyManager : MonoBehaviour
 {
     public int startingCurrency = 100;
     public int playerCurrency;
-
     
-    [Header("Structure Price List")]
-    public int abaTowerCost;
-    public int ppc2TowerCost;
+    
+    // [Header("Structure Price List")]
+    // public int abaTowerCost;
+    // public int ppc2TowerCost;
+    // public int chloroplastTowerCost;
 
 
     [Header("Unit Price List")]
@@ -55,12 +56,17 @@ public class EconomyManager : MonoBehaviour
 
     private bool CanBuyAbaTower()
     {
-        return HasEnoughCurrency(abaTowerCost);
+        return HasEnoughCurrency(GameManager.Instance.gameSettings.abaTowerCost);
     }
 
     private bool CanBuyPPC2Tower()
     {
-        return HasEnoughCurrency(ppc2TowerCost);
+        return HasEnoughCurrency(GameManager.Instance.gameSettings.ppc2TowerCost);
+    }
+
+    private bool CanBuyChloroplastTower()
+    {
+        return HasEnoughCurrency(GameManager.Instance.gameSettings.chloroplastTowerCost);
     }
 
     public bool CanBuyTower(StructureType structureType)
@@ -71,6 +77,8 @@ public class EconomyManager : MonoBehaviour
                 return CanBuyAbaTower();
             case StructureType.PPC2_TOWER:
                 return CanBuyPPC2Tower();
+             case StructureType.CHLOROPLAST:
+                return CanBuyChloroplastTower();
             default:
                 Debug.Log("Structure Type not recognized: " + structureType.ToString());
                 break;
@@ -80,12 +88,12 @@ public class EconomyManager : MonoBehaviour
 
     public void BuyAbaTower()
     {
-        SpendCurrency(abaTowerCost);
+        SpendCurrency(GameManager.Instance.gameSettings.abaTowerCost);
     }
 
      public void BuyPPC2Tower()
     {
-        SpendCurrency(ppc2TowerCost);
+        SpendCurrency(GameManager.Instance.gameSettings.ppc2TowerCost);
     }
 
     public void BuyTower(StructureType structureType)

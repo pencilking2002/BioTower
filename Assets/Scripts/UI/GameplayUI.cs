@@ -30,6 +30,11 @@ public class GameplayUI : MonoBehaviour
         EventManager.UI.onPressTowerButton?.Invoke(StructureType.PPC2_TOWER);
     }
 
+    public void OnPressChloroplastButton()
+    {
+        EventManager.UI.onPressTowerButton?.Invoke(StructureType.CHLOROPLAST);
+    }
+
     private void OnSpendCurrency(int numSpent, int currTotal)
     {
         //playerCurrencyText.text = currTotal.ToString();

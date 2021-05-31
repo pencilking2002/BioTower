@@ -43,7 +43,9 @@ public class ABATower : Structure
         for(int i=0; i<numUnits; i++)
         {
             var go = Instantiate(abaUnitPrefab);
-            go.transform.position = GetPointWithinInfluence();
+            //go.transform.position = GetPointWithinInfluence();
+            go.transform.position = GetPointWithinInfluence(); 
+                
             go.transform.SetParent(unitsContainer);
             var unit = go.GetComponent<AbaUnit>();
             unit.agent.map = map; 
@@ -72,12 +74,21 @@ public class ABATower : Structure
 
     public Vector2 GetPointWithinInfluence()
     {
-        var minRadius = minInfluenceAreaCollider.radius * minInfluenceAreaCollider.transform.lossyScale.x;
-        var maxRadius = maxInfluenceAreaCollider.radius * maxInfluenceAreaCollider.transform.lossyScale.x;
-        Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minRadius, maxRadius);
-        point += (Vector2) minInfluenceAreaCollider.transform.position;
-        return point;
+        return Util.GetPointWithinInfluence(
+                minInfluenceAreaCollider.transform.position, 
+                minInfluenceAreaCollider.radius, 
+                maxInfluenceAreaCollider.radius
+            );
     }
+    
+    // public Vector2 GetPointWithinInfluence()
+    // {
+    //     var minRadius = minInfluenceAreaCollider.radius * minInfluenceAreaCollider.transform.lossyScale.x;
+    //     var maxRadius = maxInfluenceAreaCollider.radius * maxInfluenceAreaCollider.transform.lossyScale.x;
+    //     Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minRadius, maxRadius);
+    //     point += (Vector2) minInfluenceAreaCollider.transform.position;
+    //     return point;
+    // }
 
     private void OnDrawGizmosSelected()
     {

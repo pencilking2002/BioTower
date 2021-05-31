@@ -19,7 +19,8 @@ public enum StructureType
     ABA_TOWER,
     DNA_BASE,
     NONE,
-    PPC2_TOWER
+    PPC2_TOWER,
+    CHLOROPLAST
 }
 
 public class Structure : MonoBehaviour

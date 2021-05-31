@@ -4017,7 +4017,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 228501632}
-        m_MethodName: OnPressPPC2TowerButton
+        m_MethodName: OnPressChloroplastButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10479,6 +10479,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 843927630}
     m_Modifications:
+    - target: {fileID: 360581058528368861, guid: 1efa5580d925f4f41949a420af6456cf,
+        type: 3}
+      propertyPath: chloroplastTowerPrefab
+      value: 
+      objectReference: {fileID: 6556679146768111441, guid: fc5fd20b60860bf48aa895745a23fa0b,
+        type: 3}
     - target: {fileID: 3163904365036822118, guid: 1efa5580d925f4f41949a420af6456cf,
         type: 3}
       propertyPath: m_Name
@@ -10538,16 +10544,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6493159299763837585, guid: 1efa5580d925f4f41949a420af6456cf,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6757466083210450277, guid: 1efa5580d925f4f41949a420af6456cf,
-        type: 3}
-      propertyPath: ppc2TowerCost
-      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1efa5580d925f4f41949a420af6456cf, type: 3}

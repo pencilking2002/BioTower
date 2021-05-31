@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCrystal : MonoBehaviour
+namespace BioTower
+{
+public class LightFragment : MonoBehaviour
 {
     public bool hasBeenPickedUp;
 
@@ -17,4 +19,5 @@ public class EnemyCrystal : MonoBehaviour
                 Destroy(gameObject);
             });
     }
+}
 }

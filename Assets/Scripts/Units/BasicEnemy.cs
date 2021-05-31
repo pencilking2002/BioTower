@@ -136,7 +136,7 @@ public class BasicEnemy : Unit
         if (crystal.hasBeenPickedUp)
             return;
 
-        crystal.DestroyCrystal();
+        crystal.DestroyObject();
         hasCrystal = true;
         var oldScale = sr.transform.localScale;
         LeanTween.scale(sr.gameObject, oldScale * 1.1f, 0.25f);

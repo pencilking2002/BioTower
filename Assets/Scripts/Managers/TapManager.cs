@@ -13,12 +13,28 @@ public class TapManager : MonoBehaviour
         RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, tappableLayerMask);
         if (hitInfo.collider != null)
         {
-            EnemyCrystal crystal = hitInfo.collider.transform.parent.GetComponent<EnemyCrystal>();
-            if (crystal != null)
-            {
-                crystal.DestroyCrystal();
-                GameManager.Instance.econManager.GainCrystalMoney();
-            }
+            TapCrystal(hitInfo);
+            TapLightFragment(hitInfo);
+        }
+    }
+
+    private void TapCrystal(RaycastHit2D hitInfo)
+    {
+        EnemyCrystal crystal = hitInfo.collider.transform.parent.GetComponent<EnemyCrystal>();
+        if (crystal != null)
+        {
+            crystal.DestroyObject();
+            GameManager.Instance.econManager.GainCrystalMoney();
+        }
+    }
+
+    private void TapLightFragment(RaycastHit2D hitInfo)
+    {
+        LightFragment fragment = hitInfo.collider.transform.parent.GetComponent<LightFragment>();
+        if (fragment != null)
+        {
+            fragment.DestroyObject();
+            GameManager.Instance.econManager.GainCrystalMoney();
         }
     }
 

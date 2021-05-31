@@ -48,7 +48,7 @@ public class ChloroplastTower : Structure
             .setEaseInSine()
         );
 
-        seq.append(LeanTween.moveY(fragment, endPos.y + 0.05f, 0.1f));
+        seq.append(LeanTween.moveY(fragment, endPos.y + 0.06f, 0.1f));
         seq.append(LeanTween.moveY(fragment, endPos.y, 0.1f));
     }
 

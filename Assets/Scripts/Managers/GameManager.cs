@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public WaveManager waveManager;
     public PlacementManager placementManager;
     public EconomyManager econManager;
-
+    public CooldownManager cooldownManager;
     private WaypointManager waypointManager;
 
     private Transform _projectilesContainer;

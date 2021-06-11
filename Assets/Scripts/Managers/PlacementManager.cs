@@ -15,14 +15,12 @@ public enum PlacementState
 
 public class PlacementManager : MonoBehaviour
 {
-    // public static Action<StructureType> onStartPlacementState;
-    // public static Action onSetNonePlacementState;
-
     [SerializeField] private PlacementState placementState;
     [SerializeField] private LayerMask socketLayerMask;
     [SerializeField] private LayerMask structureLayerMask;
     private StructureType structureToPlace;
     [SerializeField] private Vector3 placementOffset;
+
 
 
     [Header("Structure prefabs")]
@@ -44,13 +42,16 @@ public class PlacementManager : MonoBehaviour
             case StructureType.ABA_TOWER:
                 tower = Instantiate(abaTowerPrefab);
                 break;
-             case StructureType.PPC2_TOWER:
+            case StructureType.PPC2_TOWER:
                 tower = Instantiate(ppc2TowerPrefab);
                 break;
             case StructureType.CHLOROPLAST:
                 tower = Instantiate(chloroplastTowerPrefab);
                 break;
         }
+
+        EventManager.Structures.onStructureCreated?.Invoke(structureType);
+        
         return tower;
     }
 

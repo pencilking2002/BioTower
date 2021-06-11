@@ -50,8 +50,8 @@ public class PlacementManager : MonoBehaviour
                 break;
         }
 
-        EventManager.Structures.onStructureCreated?.Invoke(structureType);
-        
+        var structure = tower.GetComponent<Structure>();
+        EventManager.Structures.onStructureCreated?.Invoke(structure);
         return tower;
     }
 

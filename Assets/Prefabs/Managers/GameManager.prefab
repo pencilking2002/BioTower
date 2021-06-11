@@ -169,6 +169,7 @@ Transform:
   - {fileID: 5281165817656056577}
   - {fileID: 3200432713435302571}
   - {fileID: 1851106164278671229}
+  - {fileID: 6146814799796588713}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -192,6 +193,50 @@ MonoBehaviour:
   waveManager: {fileID: 5526649151822771978}
   placementManager: {fileID: 360581058528368861}
   econManager: {fileID: 6757466083210450277}
+  cooldownManager: {fileID: 0}
+--- !u!1 &5216099166009064992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6146814799796588713}
+  - component: {fileID: 2616791129660120341}
+  m_Layer: 0
+  m_Name: StructureManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6146814799796588713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5216099166009064992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3163904365036822119}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2616791129660120341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5216099166009064992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8b0199844a0864c95add334cd8826b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5463906776217022389
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +481,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16384
   placementOffset: {x: 0, y: -0.2, z: 0}
-  structureSpawnCooldown: 5
   abaTowerPrefab: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
     type: 3}
   ppc2TowerPrefab: {fileID: 2173016658119397913, guid: 2f64af76819d57f4b84c233558db1c17,
@@ -630,3 +674,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c8135f87074a84b9df902f4a968939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  structureSpawnCooldown: 5

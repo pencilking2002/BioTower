@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Units;
+using Sirenix.OdinInspector;
 
 namespace BioTower
 {
@@ -11,20 +12,24 @@ public class GameSettings : ScriptableObject
     [Range(1,10)]public float timeScale = 1.0f;
 
     [Header("Unit Damage")]
-    public int ppc2Damage = 5;
-    public int abaDamage = 5;
-    public int basicEnemyDamage = 5;
+    [TabGroup("Units")] public int ppc2Damage = 5;
+    [TabGroup("Units")] public int abaDamage = 5;
+    [TabGroup("Units")] public int basicEnemyDamage = 5;
 
 
     [Header("Unit Health")]
-    public int abaUnitMaxHealth = 10;
-    public int enemyUnitMaxHealth = 10;
+    [TabGroup("Units")] public int abaUnitMaxHealth = 10;
+    [TabGroup("Units")] public int enemyUnitMaxHealth = 10;
+
+
+    [Header("Tower Health")]
+    [TabGroup("Towers")] public bool enableTowerHealthDecline;
 
 
     [Header("Tower Cost")]
-    [Range(0,100)] public int abaTowerCost;
-    [Range(0,100)] public int ppc2TowerCost;
-    [Range(0,100)] public int chloroplastTowerCost;
+    [TabGroup("Towers")] [Range(0,100)] public int abaTowerCost;
+    [TabGroup("Towers")] public int ppc2TowerCost;
+    [TabGroup("Towers")] public int chloroplastTowerCost;
 
     public int GetMaxUnitHealth(UnitType unitType)
     {

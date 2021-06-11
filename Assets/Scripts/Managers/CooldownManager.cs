@@ -25,12 +25,12 @@ public class CooldownManager : MonoBehaviour
         }
     }
 
-    private void OnStructureCreated(StructureType structureType)
+    private void OnStructureCreated(Structure structure)
     {
-        structureCooldownMap[structureType] = false;
-        EventManager.Structures.onStructureCooldownStarted?.Invoke(structureType, structureSpawnCooldown);
+        structureCooldownMap[structure.structureType] = false;
+        EventManager.Structures.onStructureCooldownStarted?.Invoke(structure.structureType, structureSpawnCooldown);
         LeanTween.delayedCall(structureSpawnCooldown, () => {
-            structureCooldownMap[structureType] = true;
+            structureCooldownMap[structure.structureType] = true;
         }); 
     }
 

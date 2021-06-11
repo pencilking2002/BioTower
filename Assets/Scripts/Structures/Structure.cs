@@ -25,14 +25,15 @@ public enum StructureType
 
 public class Structure : MonoBehaviour
 {   
-    [SerializeField] protected StructureType structureType;
+    public StructureType structureType;
     [SerializeField] private bool hasHealth;
+    [EnableIf("hasHealth")] [SerializeField] protected bool isAlive = true;
     [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] protected int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
     [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
     [SerializeField] StructureState structureState;
     [SerializeField] protected SpriteRenderer sr;
-
+    [HideInInspector] public float lastDeclineTime;    
     public virtual void Awake()
     {
         currHealth = maxHealth;
@@ -47,11 +48,20 @@ public class Structure : MonoBehaviour
 
     public virtual void TakeDamage(int numDamage)
     {
-        if (hasHealth)
+        if (hasHealth && isAlive)
         {
             currHealth -= numDamage;
             healthSlider.value = currHealth;
+
+            if (currHealth <= 0)
+                KillStructure();
         }
+    }
+
+    public virtual void KillStructure()
+    {
+        isAlive = false;
+        Destroy(gameObject);
     }
 
     public virtual void OnTapStructure()

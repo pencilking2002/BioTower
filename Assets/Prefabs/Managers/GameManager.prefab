@@ -237,6 +237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8b0199844a0864c95add334cd8826b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  structureList: []
+  declineDelay: 3
+  declineDamage: 1
 --- !u!1 &5463906776217022389
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,4 +677,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c8135f87074a84b9df902f4a968939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  structureSpawnCooldown: 5
+  structureSpawnCooldown: 7

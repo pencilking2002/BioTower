@@ -590,11 +590,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureType: 0
   hasHealth: 1
+  isAlive: 1
   maxHealth: 20
   currHealth: 0
   healthSlider: {fileID: 4120694177487789927}
   structureState: 0
   sr: {fileID: 1985713823300775996}
+  lastDeclineTime: 0
   numUnitsToSpawn: 0
   abaUnits: []
   abaUnitPrefab: {fileID: 5115481712711463489, guid: a0a488c102b113f4da28fe09666035ff,
@@ -930,6 +932,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042855057557580819, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 261943
       objectReference: {fileID: 0}
     - target: {fileID: 9181586613360879883, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}

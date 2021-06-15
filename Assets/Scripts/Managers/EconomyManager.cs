@@ -94,16 +94,6 @@ public class EconomyManager : MonoBehaviour
         return false;
     }
 
-    public void BuyAbaTower()
-    {
-        SpendCurrency(GameManager.Instance.gameSettings.abaTowerCost);
-    }
-
-     public void BuyPPC2Tower()
-    {
-        SpendCurrency(GameManager.Instance.gameSettings.ppc2TowerCost);
-    }
-
     public void BuyTower(StructureType structureType)
     {
         switch (structureType)
@@ -114,7 +104,25 @@ public class EconomyManager : MonoBehaviour
             case StructureType.PPC2_TOWER:
                 BuyPPC2Tower();
                 break;
+             case StructureType.CHLOROPLAST:
+                BuyChloroplastTower();
+                break;
         }
+    }
+
+    public void BuyAbaTower()
+    {
+        SpendCurrency(GameManager.Instance.gameSettings.abaTowerCost);
+    }
+
+    public void BuyPPC2Tower()
+    {
+        SpendCurrency(GameManager.Instance.gameSettings.ppc2TowerCost);
+    }
+
+    public void BuyChloroplastTower()
+    {
+        SpendCurrency(GameManager.Instance.gameSettings.chloroplastTowerCost);
     }
 
     public bool CanBuyAbaUnit()

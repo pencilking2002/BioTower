@@ -27,10 +27,10 @@ public class GameManager : MonoBehaviour
     public Util util;
     public WaveManager waveManager;
     public PlacementManager placementManager;
+    public TapManager tapManager;
     public EconomyManager econManager;
     public CooldownManager cooldownManager;
     private WaypointManager waypointManager;
-
     private Transform _projectilesContainer;
     public Transform projectilesContainer
     {

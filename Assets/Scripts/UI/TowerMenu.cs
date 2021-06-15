@@ -7,29 +7,15 @@ namespace BioTower
 {
 public class TowerMenu : MonoBehaviour
 {
-    private Canvas canvas;
+    [SerializeField] private RectTransform towerPanel;
     [SerializeField] private float scaleAnimDuration = 0.1f;
-    private Structure tower;
-    [SerializeField] private bool isOpen;
 
     private void Awake()
     {
-        canvas = GetComponent<Canvas>();
-        tower = GetComponentInParent<Structure>();
-        tower.towerMenu = this;
-        canvas.enabled = false;
-    }
-
-    public void OnTapStructure(StructureType structureType, Vector3 screenPoint)
-    {
-        if (isOpen)
-            return;
-
-        Debug.Log($"Tap {tower.structureType}");
-        canvas.enabled = true;
-        transform.localScale = Vector3.zero;
-        LeanTween.scale(gameObject, Vector3.one * 0.5f, scaleAnimDuration);
-        isOpen = true;
+        //canvas = GetComponent<Canvas>();
+        //tower = GetComponentInParent<Structure>();
+        //tower.towerMenu = this;
+        towerPanel.gameObject.SetActive(false);
     }
 
     public void OnPressSpawnUnitButton()
@@ -37,7 +23,7 @@ public class TowerMenu : MonoBehaviour
         if (GameManager.Instance.econManager.CanBuyAbaUnit())
         {
             GameManager.Instance.econManager.BuyAbaUnit();
-            tower.SpawnUnits(1);
+            GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
         }
     }
 
@@ -46,19 +32,36 @@ public class TowerMenu : MonoBehaviour
         if (GameManager.Instance.econManager.CanBuyTowerHeal())
         {
             var healAmount = GameManager.Instance.gameSettings.healTowerAmount;
-            tower.GainHealth(healAmount);
+            GameManager.Instance.tapManager.selectedStructure.GainHealth(healAmount);
         }
     }
 
-    public void OnPressCloseMenuButton()
+    public void OnStructureSelected(Structure structure)
     {
-        if (isOpen)
-        {
-            LeanTween.scale(gameObject, Vector3.zero, scaleAnimDuration).setOnComplete(() => {
-                canvas.enabled = false;
-                isOpen = false;
-            });
-        }
+        //Debug.Log($"Tap {tower.structureType}");
+        towerPanel.gameObject.SetActive(true);
+        transform.localScale = Vector3.zero;
+        LeanTween.scale(gameObject, Vector3.one * 0.5f, scaleAnimDuration);
+    }
+    
+    private void OnStructureCreated(Structure structure)
+    {
+        if (structure.structureType == StructureType.DNA_BASE)
+            return;
+            
+        OnStructureSelected(structure);
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Structures.onStructureSelected += OnStructureSelected;
+        EventManager.Structures.onStructureCreated += OnStructureCreated;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Structures.onStructureSelected -= OnStructureSelected;
+        EventManager.Structures.onStructureCreated += OnStructureCreated;
     }
 }
 }

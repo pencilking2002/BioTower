@@ -27,6 +27,7 @@ public class EventManager : MonoBehaviour
         public static Action onSetNonePlacementState;
         public static Action<Structure> onStructureCreated;
         public static Action<StructureType, float> onStructureCooldownStarted;
+        public static Action<Structure> onStructureSelected;
     }
 
     public class Units

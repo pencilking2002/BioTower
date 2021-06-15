@@ -9,22 +9,9 @@ public class TapManager : MonoBehaviour
 {
     [SerializeField] private LayerMask tappableLayerMask;
     [SerializeField] private LayerMask structureLayerMask;
+    public Structure selectedStructure;
+    public bool hasSelectedStructure;
 
-    private void TapStructure(Vector3 screenPos)
-    {
-        if (GameManager.Instance.placementManager.IsNoneState())
-        {
-            Ray ray = Camera.main.ScreenPointToRay(screenPos);
-            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
-
-            if (hitInfo.collider != null)
-            {
-                var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
-                //GameManager.Instance.econManager.BuyAbaUnit();
-                structure?.OnTapStructure(screenPos);
-            }
-        }
-    }
 
     private void OnTouchBegan(Vector3 screenPos)
     {
@@ -56,6 +43,25 @@ public class TapManager : MonoBehaviour
         {
             fragment.DestroyObject();
             GameManager.Instance.econManager.GainCrystalMoney();
+        }
+    }
+
+    private void TapStructure(Vector3 screenPos)
+    {
+        if (GameManager.Instance.placementManager.IsNoneState())
+        {
+            Ray ray = Camera.main.ScreenPointToRay(screenPos);
+            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
+
+            if (hitInfo.collider != null)
+            {
+                var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
+                hasSelectedStructure = true;
+                selectedStructure = structure;
+                EventManager.Structures.onStructureSelected?.Invoke(structure);
+                //GameManager.Instance.econManager.BuyAbaUnit();
+                //structure?.OnTapStructure(screenPos);
+            }
         }
     }
 

@@ -192,8 +192,9 @@ MonoBehaviour:
   util: {fileID: 6811510881634626579}
   waveManager: {fileID: 5526649151822771978}
   placementManager: {fileID: 360581058528368861}
+  tapManager: {fileID: 3218757458486301715}
   econManager: {fileID: 6757466083210450277}
-  cooldownManager: {fileID: 0}
+  cooldownManager: {fileID: 4293659511487582202}
 --- !u!1 &5216099166009064992
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,6 +332,11 @@ MonoBehaviour:
   tappableLayerMask:
     serializedVersion: 2
     m_Bits: 131072
+  structureLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  selectedStructure: {fileID: 0}
+  hasSelectedStructure: 0
 --- !u!1 &6493159299763837585
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,9 +486,6 @@ MonoBehaviour:
   socketLayerMask:
     serializedVersion: 2
     m_Bits: 4096
-  structureLayerMask:
-    serializedVersion: 2
-    m_Bits: 16384
   placementOffset: {x: 0, y: -0.2, z: 0}
   abaTowerPrefab: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
     type: 3}
@@ -534,8 +537,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingCurrency: 200
   playerCurrency: 0
-  abaUnitCost: 5
-  crystalWorth: 5
 --- !u!1 &7636528861552393377
 GameObject:
   m_ObjectHideFlags: 0

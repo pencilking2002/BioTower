@@ -97,7 +97,6 @@ public class PlacementManager : MonoBehaviour
     }
 
    
-
     private void OnStartPlacementState(StructureType structureType)
     {
         var tower = CreateStructure(structureType);

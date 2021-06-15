@@ -38,21 +38,37 @@ public class GameplayUI : MonoBehaviour
     {
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.ABA_TOWER];
         if (canBuildTower)
+        {
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.ABA_TOWER);
+        }
     }
     
     public void OnPressPPC2TowerButton()
     {
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.PPC2_TOWER];
         if (canBuildTower)
+        {
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.PPC2_TOWER);
+        }
     }
 
     public void OnPressChloroplastButton()
     {
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.PPC2_TOWER];
         if (canBuildTower)
+        {
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.CHLOROPLAST);
+        }
+    }
+
+    private void HandleButtonColor(Button button)
+    {
+        var image = button.transform.Find("Panel").GetComponent<Image>();
+        var oldColor = image.color;
+        image.color = Color.grey;
+        LeanTween.delayedCall(gameObject, GameManager.Instance.cooldownManager.structureSpawnCooldown, () => {
+            image.color = oldColor;
+        });
     }
 
     private void OnSpendCurrency(int numSpent, int currTotal)
@@ -81,6 +97,8 @@ public class GameplayUI : MonoBehaviour
         .setOnComplete(() => {
             button.interactable = true;
         });
+
+        HandleButtonColor(button);
     }   
 
     private void OnEnable()

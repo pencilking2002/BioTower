@@ -8,7 +8,7 @@ namespace BioTower
 {
 public class CooldownManager : MonoBehaviour
 {
-    [SerializeField] private float structureSpawnCooldown = 5.0f;
+    public float structureSpawnCooldown = 5.0f;
     private float lastStructureSpawnedTime;
     public static Dictionary<StructureType,bool> structureCooldownMap = new Dictionary<StructureType, bool>();
 

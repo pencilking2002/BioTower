@@ -31,6 +31,7 @@ public class Structure : MonoBehaviour
     [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] protected int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
     [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
+    [SerializeField] protected GameObject spriteOutline;
     [SerializeField] StructureState structureState;
     [SerializeField] protected SpriteRenderer sr;
     [HideInInspector] public float lastDeclineTime;
@@ -86,6 +87,30 @@ public class Structure : MonoBehaviour
     public virtual void SpawnUnits(int numUnits)
     {
 
+    }
+
+    public virtual void OnStructureSelected(Structure structure)
+    {
+        if (spriteOutline != null)
+            spriteOutline.SetActive(structure == this);
+    }
+
+    public virtual void OnStructureCreated(Structure structure)
+    {
+        OnStructureSelected(structure);
+    }
+    
+    private void OnEnable()
+    {
+        EventManager.Structures.onStructureSelected += OnStructureSelected;
+        EventManager.Structures.onStructureCreated += OnStructureCreated;
+
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Structures.onStructureSelected -= OnStructureSelected;
+        EventManager.Structures.onStructureCreated -= OnStructureCreated;
     }
 }
 }

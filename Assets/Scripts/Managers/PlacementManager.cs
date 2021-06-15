@@ -17,7 +17,6 @@ public class PlacementManager : MonoBehaviour
 {
     [SerializeField] private PlacementState placementState;
     [SerializeField] private LayerMask socketLayerMask;
-    [SerializeField] private LayerMask structureLayerMask;
     private StructureType structureToPlace;
     [SerializeField] private Vector3 placementOffset;
 
@@ -51,7 +50,6 @@ public class PlacementManager : MonoBehaviour
         }
 
         var structure = tower.GetComponent<Structure>();
-        EventManager.Structures.onStructureCreated?.Invoke(structure);
         return tower;
     }
 
@@ -70,13 +68,13 @@ public class PlacementManager : MonoBehaviour
                 //TapStructure(screenPos);
             }
         }
-        else
-        {
-            if (GameManager.Instance.econManager.CanBuyAbaUnit())
-            {
-                TapStructure(screenPos);
-            }
-        }
+        // else
+        // {
+        //     if (GameManager.Instance.econManager.CanBuyAbaUnit())
+        //     {
+        //         TapStructure(screenPos);
+        //     }
+        // }
     }
 
     private void PlaceTower(Vector3 screenPos)
@@ -98,23 +96,7 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
-    private void TapStructure(Vector3 screenPos)
-    {
-        Ray ray = Camera.main.ScreenPointToRay(screenPos);
-        RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
-
-        if (hitInfo.collider != null)
-        {
-            var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
-            GameManager.Instance.econManager.BuyAbaUnit();
-            structure?.OnTapStructure();
-            SetNoneState();
-        }
-        else
-        {
-            SetNoneState();
-        }
-    }
+   
 
     private void OnStartPlacementState(StructureType structureType)
     {
@@ -135,8 +117,8 @@ public class PlacementManager : MonoBehaviour
         EventManager.Structures.onStartPlacementState?.Invoke(structureType); 
     }
 
-    private bool IsNoneState() { return placementState == PlacementState.NONE; }
-    private bool IsPlacingState() { return placementState == PlacementState.PLACING; }
+    public bool IsNoneState() { return placementState == PlacementState.NONE; }
+    public bool IsPlacingState() { return placementState == PlacementState.PLACING; }
 
     private void OnEnable()
     {

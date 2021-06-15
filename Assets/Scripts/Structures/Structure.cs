@@ -33,7 +33,9 @@ public class Structure : MonoBehaviour
     [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
     [SerializeField] StructureState structureState;
     [SerializeField] protected SpriteRenderer sr;
-    [HideInInspector] public float lastDeclineTime;    
+    [HideInInspector] public float lastDeclineTime;
+    [HideInInspector] public TowerMenu towerMenu;
+
     public virtual void Awake()
     {
         currHealth = maxHealth;
@@ -44,6 +46,11 @@ public class Structure : MonoBehaviour
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currHealth;
         }
+    }
+
+    public virtual void Start()
+    {
+        EventManager.Structures.onStructureCreated?.Invoke(this);
     }
 
     public virtual void TakeDamage(int numDamage)
@@ -58,15 +65,26 @@ public class Structure : MonoBehaviour
         }
     }
 
+    public virtual void GainHealth(int numHealth)
+    {
+        currHealth += numHealth;
+        healthSlider.value = currHealth;
+    }
+
     public virtual void KillStructure()
     {
         isAlive = false;
         Destroy(gameObject);
     }
 
-    public virtual void OnTapStructure()
+    public virtual void OnTapStructure(Vector3 screenPoint)
     {
         
+    }
+
+    public virtual void SpawnUnits(int numUnits)
+    {
+
     }
 }
 }

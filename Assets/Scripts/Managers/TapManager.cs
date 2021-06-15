@@ -1,12 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BioTower.Structures;
 
 namespace BioTower
 {
 public class TapManager : MonoBehaviour
 {
     [SerializeField] private LayerMask tappableLayerMask;
+    [SerializeField] private LayerMask structureLayerMask;
+
+    private void TapStructure(Vector3 screenPos)
+    {
+        if (GameManager.Instance.placementManager.IsNoneState())
+        {
+            Ray ray = Camera.main.ScreenPointToRay(screenPos);
+            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
+
+            if (hitInfo.collider != null)
+            {
+                var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
+                //GameManager.Instance.econManager.BuyAbaUnit();
+                structure?.OnTapStructure(screenPos);
+            }
+        }
+    }
+
     private void OnTouchBegan(Vector3 screenPos)
     {
         Ray ray = Camera.main.ScreenPointToRay(screenPos);
@@ -15,7 +34,9 @@ public class TapManager : MonoBehaviour
         {
             TapCrystal(hitInfo);
             TapLightFragment(hitInfo);
+            
         }
+        TapStructure(screenPos);
     }
 
     private void TapCrystal(RaycastHit2D hitInfo)

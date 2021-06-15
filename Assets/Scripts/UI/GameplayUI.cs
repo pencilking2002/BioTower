@@ -30,6 +30,9 @@ public class GameplayUI : MonoBehaviour
     {
         playerCurrencyText.text = GameManager.Instance.econManager.playerCurrency.ToString();
     }
+
+
+    // BUTTON METHODS -------------------------------------------------------------------------------
     
     public void OnPressAbaTowerButton()
     {
@@ -65,6 +68,9 @@ public class GameplayUI : MonoBehaviour
 
     private void OnStructureCooldownStarted(StructureType structureType, float cooldown)
     {
+        if (!towerButtonMap.ContainsKey(structureType))
+            return;
+            
         var button = towerButtonMap[structureType];
 
         button.interactable = false;

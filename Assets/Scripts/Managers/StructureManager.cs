@@ -27,6 +27,9 @@ public class StructureManager : MonoBehaviour
 
     private void OnStructureCreated(Structure structure)
     {
+        if (structure.structureType == StructureType.DNA_BASE)
+            return;
+
         structureList.Add(structure);
     }
 

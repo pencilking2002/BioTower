@@ -18,7 +18,11 @@ MonoBehaviour:
   basicEnemyDamage: 5
   abaUnitMaxHealth: 10
   enemyUnitMaxHealth: 10
+  abaUnitCost: 5
   enableTowerHealthDecline: 1
   abaTowerCost: 10
   ppc2TowerCost: 40
   chloroplastTowerCost: 20
+  healTowerCost: 5
+  healTowerAmount: 3
+  crystalWorth: 5

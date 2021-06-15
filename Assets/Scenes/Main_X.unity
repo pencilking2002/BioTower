@@ -909,7 +909,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 261943
 --- !u!114 &228501629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4303,6 +4303,95 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &722835903
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1027640052769982385, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409794, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_Name
+      value: ABATower
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.4594727
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985713824957409796, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428439426898476185, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5954969772892071006, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000014305115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5954969772892071006, guid: 82e3c5824f81e0347b982a994cecd0bf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 82e3c5824f81e0347b982a994cecd0bf, type: 3}
 --- !u!1 &769315541
 GameObject:
   m_ObjectHideFlags: 0
@@ -10776,6 +10865,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218757458486301715, guid: 1efa5580d925f4f41949a420af6456cf,
+        type: 3}
+      propertyPath: structureLayerMask.m_Bits
+      value: 16384
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1efa5580d925f4f41949a420af6456cf, type: 3}

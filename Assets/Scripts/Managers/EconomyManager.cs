@@ -17,11 +17,14 @@ public class EconomyManager : MonoBehaviour
     // public int chloroplastTowerCost;
 
 
-    [Header("Unit Price List")]
-    public int abaUnitCost;
+    // [Header("Unit Price List")]
+    // public int abaUnitCost;
 
-    [Header("Gain Money List")]
-    public int crystalWorth;
+    // [Header("Gain Money List")]
+    // public int crystalWorth;
+
+    //[Header("Misc")]
+
     
     private void Start()
     {
@@ -69,6 +72,11 @@ public class EconomyManager : MonoBehaviour
         return HasEnoughCurrency(GameManager.Instance.gameSettings.chloroplastTowerCost);
     }
 
+    public bool CanBuyTowerHeal()
+    {
+        return HasEnoughCurrency(GameManager.Instance.gameSettings.healTowerCost);
+    }
+
     public bool CanBuyTower(StructureType structureType)
     {
         switch (structureType)
@@ -111,17 +119,17 @@ public class EconomyManager : MonoBehaviour
 
     public bool CanBuyAbaUnit()
     {
-        return HasEnoughCurrency(abaUnitCost);
+        return HasEnoughCurrency(GameManager.Instance.gameSettings.abaUnitCost);
     }
 
     public void BuyAbaUnit()
     {
-        SpendCurrency(abaUnitCost);
+        SpendCurrency(GameManager.Instance.gameSettings.abaUnitCost);
     }
 
     public void GainCrystalMoney()
     {
-        int amount = crystalWorth;
+        int amount = GameManager.Instance.gameSettings.crystalWorth;
         GainCurrency(amount);
     }
 

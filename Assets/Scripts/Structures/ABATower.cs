@@ -19,7 +19,6 @@ public class ABATower : Structure
     [SerializeField] private Transform unitsContainer;
     [SerializeField] private CircleCollider2D maxInfluenceAreaCollider;
     [SerializeField] private CircleCollider2D minInfluenceAreaCollider;
-
     private Vector3[] targetPositions;
  
 
@@ -29,8 +28,9 @@ public class ABATower : Structure
         Util.ScaleUpSprite(sr, 1.1f);
     }
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         map.GenerateMap();      // NOTE: Seems like this needs to be called in order for the map to be initialized correctly after instantiation 
         var unitsContainer = transform.Find("Units");
         //SpawnUnits();
@@ -38,7 +38,7 @@ public class ABATower : Structure
         Debug.Log("ABA tower Awake");
     }
 
-    private void SpawnUnits(int numUnits)
+    public override void SpawnUnits(int numUnits)
     {
         for(int i=0; i<numUnits; i++)
         {
@@ -64,12 +64,13 @@ public class ABATower : Structure
         abaUnits.Remove(unit);
     }
 
-    public override void OnTapStructure()
+    public override void OnTapStructure(Vector3 screenPos)
     {
-        var oldScale = sr.transform.localScale;
-        LeanTween.scale(sr.gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
-        SpawnUnits(1);
+        // var oldScale = sr.transform.localScale;
+        // LeanTween.scale(sr.gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
+        // SpawnUnits(1);
         //Debug.Log("tap structure");
+        towerMenu.OnTapStructure(structureType, screenPos);
     }
 
     public Vector2 GetPointWithinInfluence()
@@ -81,15 +82,6 @@ public class ABATower : Structure
             );
     }
     
-    // public Vector2 GetPointWithinInfluence()
-    // {
-    //     var minRadius = minInfluenceAreaCollider.radius * minInfluenceAreaCollider.transform.lossyScale.x;
-    //     var maxRadius = maxInfluenceAreaCollider.radius * maxInfluenceAreaCollider.transform.lossyScale.x;
-    //     Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minRadius, maxRadius);
-    //     point += (Vector2) minInfluenceAreaCollider.transform.position;
-    //     return point;
-    // }
-
     private void OnDrawGizmosSelected()
     {
         var minRadius = minInfluenceAreaCollider.radius * minInfluenceAreaCollider.transform.lossyScale.x;

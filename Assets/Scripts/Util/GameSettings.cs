@@ -20,6 +20,7 @@ public class GameSettings : ScriptableObject
     [Header("Unit Health")]
     [TabGroup("Units")] public int abaUnitMaxHealth = 10;
     [TabGroup("Units")] public int enemyUnitMaxHealth = 10;
+    [TabGroup("Units")] public int abaUnitCost;
 
 
     [Header("Tower Health")]
@@ -30,6 +31,13 @@ public class GameSettings : ScriptableObject
     [TabGroup("Towers")] [Range(0,100)] public int abaTowerCost;
     [TabGroup("Towers")] public int ppc2TowerCost;
     [TabGroup("Towers")] public int chloroplastTowerCost;
+    [TabGroup("Towers")] public int healTowerCost;
+    [TabGroup("Towers")] public int healTowerAmount;
+
+    [TabGroup("Misc")] public int crystalWorth;
+
+
+    
 
     public int GetMaxUnitHealth(UnitType unitType)
     {

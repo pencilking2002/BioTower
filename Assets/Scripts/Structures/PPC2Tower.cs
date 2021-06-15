@@ -21,6 +21,10 @@ public class PPC2Tower : Structure
         Util.ScaleUpSprite(sr, 1.1f);
     }
 
+    public override void Start()
+    {
+        base.Start();
+    }
     private void Update()
     {
         // if (Time.time > lastShot + shootInterval)

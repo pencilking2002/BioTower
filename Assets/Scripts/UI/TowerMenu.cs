@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
+using UnityEngine.UI;
 
 namespace BioTower
 {
 public class TowerMenu : MonoBehaviour
 {
     [SerializeField] private RectTransform towerPanel;
+    [SerializeField] private Button healTowerButton;
+    [SerializeField] private Button healTowerFullWidthButton;
+    [SerializeField] private Button spawnUnitButton;
     [SerializeField] private float scaleAnimDuration = 0.1f;
+    [SerializeField] private Text currTowerText;
 
     private void Awake()
     {
-        //canvas = GetComponent<Canvas>();
-        //tower = GetComponentInParent<Structure>();
-        //tower.towerMenu = this;
         towerPanel.gameObject.SetActive(false);
     }
 
@@ -39,9 +41,12 @@ public class TowerMenu : MonoBehaviour
     public void OnStructureSelected(Structure structure)
     {
         //Debug.Log($"Tap {tower.structureType}");
+        bool displaySpawnUnitButton = structure.structureType == StructureType.ABA_TOWER;
+        spawnUnitButton.gameObject.SetActive(displaySpawnUnitButton);
+        currTowerText.text = structure.structureType.ToString().Replace('_', ' ');
         towerPanel.gameObject.SetActive(true);
-        transform.localScale = Vector3.zero;
-        LeanTween.scale(gameObject, Vector3.one * 0.5f, scaleAnimDuration);
+        healTowerButton.gameObject.SetActive(displaySpawnUnitButton);
+        healTowerFullWidthButton.gameObject.SetActive(!displaySpawnUnitButton);
     }
     
     private void OnStructureCreated(Structure structure)
@@ -61,7 +66,7 @@ public class TowerMenu : MonoBehaviour
     private void OnDisable()
     {
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
-        EventManager.Structures.onStructureCreated += OnStructureCreated;
+        EventManager.Structures.onStructureCreated -= OnStructureCreated;
     }
 }
 }

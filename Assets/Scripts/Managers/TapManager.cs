@@ -59,8 +59,6 @@ public class TapManager : MonoBehaviour
                 hasSelectedStructure = true;
                 selectedStructure = structure;
                 EventManager.Structures.onStructureSelected?.Invoke(structure);
-                //GameManager.Instance.econManager.BuyAbaUnit();
-                //structure?.OnTapStructure(screenPos);
             }
         }
     }

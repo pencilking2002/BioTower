@@ -141,7 +141,7 @@ MonoBehaviour:
   agent: {fileID: 663975515}
   stoppedColor: {r: 0.8113208, g: 0.5778747, b: 0.5778747, a: 1}
   hasCrystal: 0
-  hasCrystalTintColor: {r: 0.8773585, g: 0.24417053, b: 0.28703246, a: 1}
+  hasCrystalTintColor: {r: 0.7470297, g: 0.48998755, b: 0.8584906, a: 1}
   isEngagedInCombat: 0
   currWaypoint: {fileID: 0}
   nextWaypoint: {fileID: 0}

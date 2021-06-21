@@ -139,7 +139,7 @@ public class BasicEnemy : Unit
         crystal.DestroyObject();
         hasCrystal = true;
         var oldScale = sr.transform.localScale;
-        LeanTween.scale(sr.gameObject, oldScale * 1.1f, 0.25f);
+        LeanTween.scale(sr.gameObject, oldScale * 1.2f, 0.25f);
         sr.color = hasCrystalTintColor;
         // TODO: make enemy stronger after picking up crystal
 

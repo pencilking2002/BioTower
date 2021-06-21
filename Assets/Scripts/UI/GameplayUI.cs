@@ -54,7 +54,7 @@ public class GameplayUI : MonoBehaviour
 
     public void OnPressChloroplastButton()
     {
-        bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.PPC2_TOWER];
+        bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.CHLOROPLAST];
         if (canBuildTower)
         {
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.CHLOROPLAST);

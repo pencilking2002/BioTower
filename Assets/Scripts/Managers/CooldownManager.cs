@@ -12,8 +12,9 @@ public class CooldownManager : MonoBehaviour
     private float lastStructureSpawnedTime;
     public static Dictionary<StructureType,bool> structureCooldownMap = new Dictionary<StructureType, bool>();
 
-    private void Awake()
+    private void Start()
     {
+        structureCooldownMap = new Dictionary<StructureType, bool>();
         CreateStructureCooldownMap();
     }
 

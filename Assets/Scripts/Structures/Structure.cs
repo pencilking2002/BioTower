@@ -76,6 +76,7 @@ public class Structure : MonoBehaviour
     public virtual void KillStructure()
     {
         isAlive = false;
+        GameManager.Instance.CreateTowerExplosion(transform.position);
         Destroy(gameObject);
     }
 

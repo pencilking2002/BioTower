@@ -6,6 +6,7 @@ using BioTower.Units;
 using BioTower.Structures;
 using PolyNav;
 using BioTower.Level;
+using Sirenix.OdinInspector;
 
 namespace BioTower
 {
@@ -42,6 +43,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [TabGroup("Particle Prefabs")] public GameObject towerDeathExplosionPrefab;
+
     private void Awake()
     {
         InitInstance();
@@ -55,6 +58,13 @@ public class GameManager : MonoBehaviour
         }  
 
         Time.timeScale = gameSettings.timeScale;  
+    }
+
+    public void CreateTowerExplosion(Vector3 pos)
+    {
+        GameObject explosion = Instantiate(towerDeathExplosionPrefab);
+        explosion.transform.position = pos;
+        Destroy(explosion, 2);
     }
 
     public WaypointManager GetWaypointManager()

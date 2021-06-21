@@ -195,6 +195,8 @@ MonoBehaviour:
   tapManager: {fileID: 3218757458486301715}
   econManager: {fileID: 6757466083210450277}
   cooldownManager: {fileID: 4293659511487582202}
+  towerDeathExplosionPrefab: {fileID: 8896142106390451839, guid: 27e7edfcfcea401458350f914ee2abfe,
+    type: 3}
 --- !u!1 &5216099166009064992
 GameObject:
   m_ObjectHideFlags: 0

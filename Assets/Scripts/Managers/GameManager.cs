@@ -75,6 +75,12 @@ public class GameManager : MonoBehaviour
         Destroy(explosion, 2);
     }
 
+    public void CreateLightExplosion(Vector3 pos)
+    {
+        GameObject explosion = Instantiate(crystalExplosionPrefab);
+        explosion.transform.position = pos;
+        Destroy(explosion, 2);
+    }
 
     public WaypointManager GetWaypointManager()
     {

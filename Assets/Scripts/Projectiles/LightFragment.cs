@@ -13,6 +13,7 @@ public class LightFragment : MonoBehaviour
         if (hasBeenPickedUp)
             return;
 
+        GameManager.Instance.CreateLightExplosion(transform.position);
         hasBeenPickedUp = true;
         LeanTween.scale(gameObject, Vector3.zero, 0.1f)
             .setOnComplete(() => {

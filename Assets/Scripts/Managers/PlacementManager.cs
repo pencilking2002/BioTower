@@ -85,7 +85,7 @@ public class PlacementManager : MonoBehaviour
         if (hitInfo.collider != null)
         {
             var socket = hitInfo.collider.transform.parent.GetComponent<StructureSocket>();
-            if (!socket.HasStructure())
+            if (!socket.HasStructure() && socket.CanAcceptStructure(structureToPlace))
             {
                 socket.SetHasStructure(true);
                 var tower = CreateStructure(structureToPlace);

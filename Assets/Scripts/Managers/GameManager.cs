@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     }
 
     [TabGroup("Particle Prefabs")] public GameObject towerDeathExplosionPrefab;
+    [TabGroup("Particle Prefabs")] public GameObject crystalExplosionPrefab;
 
     private void Awake()
     {
@@ -66,6 +67,14 @@ public class GameManager : MonoBehaviour
         explosion.transform.position = pos;
         Destroy(explosion, 2);
     }
+
+    public void CreateCrystalExplosion(Vector3 pos)
+    {
+        GameObject explosion = Instantiate(crystalExplosionPrefab);
+        explosion.transform.position = pos;
+        Destroy(explosion, 2);
+    }
+
 
     public WaypointManager GetWaypointManager()
     {

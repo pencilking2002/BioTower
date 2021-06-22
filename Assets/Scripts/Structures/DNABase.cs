@@ -12,9 +12,41 @@ namespace BioTower.Structures
 public class DNABase : Structure
 {   
     //public static Action onBaseDestroyed;
+    [SerializeField] private Sprite prestineStateSprite;
+    [SerializeField] private Sprite hurtStateSprite;
+    [SerializeField] private Sprite criticalStateSprite;
+    [MinMaxSlider(0,100)][SerializeField] private Vector2 hurtMinRange;
+    [MinMaxSlider(0,100)][SerializeField] private Vector2 criticalRange;
+
     private void LevelLoaded()
     {
         GameManager.Instance.RegisterPlayerBase(this);
+    }
+
+    public override void TakeDamage(int numDamage)
+    {
+        if (hasHealth && isAlive)
+        {
+            currHealth -= numDamage;
+            healthSlider.value = currHealth;
+
+            var healthPercentage = GetHealthPercentage();
+            Debug.Log("Health percentage: " + healthPercentage);
+            sr.sprite = prestineStateSprite;
+
+            if (healthPercentage < hurtMinRange.y && healthPercentage > hurtMinRange.x)
+                sr.sprite = hurtStateSprite;
+            else if (healthPercentage <= criticalRange.y)
+                sr.sprite = criticalStateSprite;
+
+            if (currHealth <= 0)
+                KillStructure();
+        }
+    }
+
+    private float GetHealthPercentage()
+    {
+        return ((float) currHealth/ (float) maxHealth) * 100;
     }
 
     private void OnBaseReached()

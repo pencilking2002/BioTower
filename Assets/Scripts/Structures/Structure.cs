@@ -26,7 +26,7 @@ public enum StructureType
 public class Structure : MonoBehaviour
 {   
     public StructureType structureType;
-    [SerializeField] private bool hasHealth;
+    [SerializeField] protected bool hasHealth;
     [EnableIf("hasHealth")] [SerializeField] protected bool isAlive = true;
     [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] protected int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;

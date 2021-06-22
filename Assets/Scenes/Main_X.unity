@@ -12208,6 +12208,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6049871321232111091, guid: eab750347f60720478005afd44282137,
+        type: 3}
+      propertyPath: hurtStateSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fb0eb0d85d754e34da31b5d37c925b1f,
+        type: 3}
+    - target: {fileID: 6049871321232111091, guid: eab750347f60720478005afd44282137,
+        type: 3}
+      propertyPath: criticalStateSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a3d37938c33201842adc1ad5e561d92f,
+        type: 3}
     - target: {fileID: 6049871321552222939, guid: eab750347f60720478005afd44282137,
         type: 3}
       propertyPath: m_SortingLayer

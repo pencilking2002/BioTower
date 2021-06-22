@@ -47,11 +47,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureType: 1
   hasHealth: 1
+  isAlive: 1
   maxHealth: 20
   currHealth: 0
   healthSlider: {fileID: 6456410995254488665}
+  spriteOutline: {fileID: 0}
   structureState: 0
   sr: {fileID: 6049871321552222939}
+  lastDeclineTime: 0
+  prestineStateSprite: {fileID: 21300000, guid: 8899f23812dc7a04981b737694ab4314,
+    type: 3}
+  hurtStateSprite: {fileID: 21300000, guid: 8899f23812dc7a04981b737694ab4314, type: 3}
+  criticalStateSprite: {fileID: 21300000, guid: 8899f23812dc7a04981b737694ab4314,
+    type: 3}
+  hurtMinRange: {x: 35, y: 75}
+  criticalRange: {x: 0, y: 35}
 --- !u!1 &6049871321552222937
 GameObject:
   m_ObjectHideFlags: 0

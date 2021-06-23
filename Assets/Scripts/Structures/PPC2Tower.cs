@@ -47,11 +47,11 @@ public class PPC2Tower : Structure
         //     }
         // }
 
-        if (Time.time > lastShotTime + shootInterval)
-        {
-            ShootProjectile();
-            lastShotTime = Time.time;
-        }
+        // if (Time.time > lastShotTime + shootInterval)
+        // {
+        //     ShootProjectile();
+        //     lastShotTime = Time.time;
+        // }
     }
 
     private PPC2Projectile CreateProjectile()
@@ -61,11 +61,11 @@ public class PPC2Tower : Structure
         return projectile.GetComponent<PPC2Projectile>();
     }
 
-    private void ShootProjectile()
+    private void ShootProjectile(Collider2D other)
     {
         var projectile = CreateProjectile();
-        Vector3 startPos = transform.position + Vector3.up * 0.5f;
-        Vector3 endPos = GetPointWithinInfluence();
+        Vector3 startPos = transform.position + Vector3.up * 0.6f;
+        Vector3 endPos = (Vector2) other.transform.position + Random.insideUnitCircle * 0.2f;
         Vector3 controlPoint = startPos + (endPos-startPos) * 0.5f + Vector3.up;
 
         var seq = LeanTween.sequence();
@@ -76,7 +76,7 @@ public class PPC2Tower : Structure
                 Vector2 targetPos = Util.Bezier2(startPos, controlPoint, endPos, val);
                 projectile.transform.right = (targetPos - (Vector2) projectile.transform.position).normalized;
                 projectile.transform.position = targetPos;
-                 
+                
             })
             .setEaseInSine()
         );
@@ -85,7 +85,6 @@ public class PPC2Tower : Structure
         seq.append(LeanTween.moveY(projectile.gameObject, endPos.y, 0.1f));
 
         seq.append(projectile.Explode);
-
     }
 
     // private void ShootEnemy(Collider2D col)
@@ -112,12 +111,16 @@ public class PPC2Tower : Structure
             );
     }
 
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.gameObject.layer != 10)
-    //         return;
-        
-    //     ShootEnemy(other);
-    // }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.layer != 10)
+            return;
+
+        if (Time.time > lastShotTime + shootInterval)
+        {   
+            ShootProjectile(other);
+            lastShotTime = Time.time;
+        }
+    }
 }
 }

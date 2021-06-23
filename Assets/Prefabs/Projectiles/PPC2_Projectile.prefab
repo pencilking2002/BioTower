@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -4251651073495446761, guid: 939762bc45baaa444b15f186414c9b5d,
     type: 3}
-  m_Color: {r: 1, g: 0.8966049, b: 0.3820755, a: 0.19215687}
+  m_Color: {r: 0.3803922, g: 1, b: 0.9137036, a: 0.19215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2235379842739457067}
   - component: {fileID: 1984335922001242765}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ Transform:
   m_Children:
   - {fileID: 6728809540294432137}
   m_Father: {fileID: 8803778833483685399}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1984335922001242765
 SpriteRenderer:
@@ -155,7 +155,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -4251651073495446761, guid: 939762bc45baaa444b15f186414c9b5d,
     type: 3}
-  m_Color: {r: 1, g: 0.8966049, b: 0.3820755, a: 0.12941177}
+  m_Color: {r: 0.3160377, g: 0.97115076, b: 1, a: 0.12941177}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -237,7 +237,7 @@ SpriteRenderer:
   m_SortingOrder: 10
   m_Sprite: {fileID: -8774662531060331203, guid: 939762bc45baaa444b15f186414c9b5d,
     type: 3}
-  m_Color: {r: 1, g: 0.86632824, b: 0.7028302, a: 1}
+  m_Color: {r: 0, g: 0.6898376, b: 0.735849, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -277,7 +277,7 @@ Transform:
   m_LocalScale: {x: 1.2712, y: 1.2712, z: 1.2712}
   m_Children: []
   m_Father: {fileID: 8803778833483685399}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8803778832769658826
 SpriteRenderer:
@@ -374,8 +374,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8803778832070815749}
-  - {fileID: 8803778832769658828}
   - {fileID: 2235379842739457067}
+  - {fileID: 8803778832769658828}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

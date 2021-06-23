@@ -8,12 +8,15 @@ namespace BioTower.Structures
 public class PPC2Tower : Structure
 {
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private CircleCollider2D maxInfluenceCollider;
+    [SerializeField] private CircleCollider2D minInfluenceCollider;
+
    // [SerializeField] private LayerMask enemyLayerMask;
     //[SerializeField] private CircleCollider2D maxInfluenceAreaCollider;
     [SerializeField] private float shootDuration = 1.0f;
-    [SerializeField] private float maxShootDelay = 0.1f;
-    //[SerializeField] private float shootInterval;
-    //private float lastShot;
+    //[SerializeField] private float maxShootDelay = 0.1f;
+    [SerializeField] private float shootInterval;
+    private float lastShotTime;
 
     public override void Awake()
     {
@@ -43,6 +46,12 @@ public class PPC2Tower : Structure
         //         }
         //     }
         // }
+
+        if (Time.time > lastShotTime + shootInterval)
+        {
+            ShootProjectile();
+            lastShotTime = Time.time;
+        }
     }
 
     private PPC2Projectile CreateProjectile()
@@ -52,34 +61,63 @@ public class PPC2Tower : Structure
         return projectile.GetComponent<PPC2Projectile>();
     }
 
-    private void ShootProjectile(GameObject projectileGO, Vector3 target)
+    private void ShootProjectile()
     {
-        var projectile = projectileGO.GetComponent<PPC2Projectile>();
-        LeanTween.move(projectileGO, target, 0.3f)
-        .setOnComplete(projectile.Explode);
+        var projectile = CreateProjectile();
+        Vector3 startPos = transform.position + Vector3.up * 0.5f;
+        Vector3 endPos = GetPointWithinInfluence();
+        Vector3 controlPoint = startPos + (endPos-startPos) * 0.5f + Vector3.up;
+
+        var seq = LeanTween.sequence();
+
+        seq.append(
+            LeanTween.value(gameObject, 0,1, shootDuration)
+            .setOnUpdate((float val) => {
+                Vector2 targetPos = Util.Bezier2(startPos, controlPoint, endPos, val);
+                projectile.transform.right = (targetPos - (Vector2) projectile.transform.position).normalized;
+                projectile.transform.position = targetPos;
+                 
+            })
+            .setEaseInSine()
+        );
+
+        seq.append(LeanTween.moveY(projectile.gameObject, endPos.y + 0.06f, 0.1f));
+        seq.append(LeanTween.moveY(projectile.gameObject, endPos.y, 0.1f));
+
+        seq.append(projectile.Explode);
+
     }
 
-    private void ShootEnemy(Collider2D col)
+    // private void ShootEnemy(Collider2D col)
+    // {
+    //     var delay = UnityEngine.Random.Range(0, maxShootDelay);
+
+    //     LeanTween.delayedCall(gameObject, delay, () => {
+    //         var projectile = CreateProjectile();
+    //         projectile.transform.position = transform.position + new Vector3(0,1,0);
+    //         projectile.transform.right = (col.transform.position-projectile.transform.position).normalized;
+
+    //         Vector3 targetPos = col.transform.position;
+    //         LeanTween.move(projectile.gameObject, targetPos, shootDuration)
+    //         .setOnComplete(projectile.Explode);
+    //     }); 
+    // }
+
+    public Vector2 GetPointWithinInfluence()
     {
-        var delay = UnityEngine.Random.Range(0, maxShootDelay);
-
-        LeanTween.delayedCall(gameObject, delay, () => {
-            var projectile = CreateProjectile();
-            projectile.transform.position = transform.position + new Vector3(0,1,0);
-            projectile.transform.right = (col.transform.position-projectile.transform.position).normalized;
-
-            Vector3 targetPos = col.transform.position;
-            LeanTween.move(projectile.gameObject, targetPos, shootDuration)
-            .setOnComplete(projectile.Explode);
-        }); 
+        return Util.GetPointWithinInfluence(
+                minInfluenceCollider.transform.position, 
+                minInfluenceCollider.radius, 
+                maxInfluenceCollider.radius
+            );
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer != 10)
-            return;
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.layer != 10)
+    //         return;
         
-        ShootEnemy(other);
-    }
+    //     ShootEnemy(other);
+    // }
 }
 }

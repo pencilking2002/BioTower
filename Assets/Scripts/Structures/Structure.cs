@@ -94,6 +94,12 @@ public class Structure : MonoBehaviour
     {
         if (spriteOutline != null)
             spriteOutline.SetActive(structure == this);
+        
+        if (structure == this)
+        {
+            var oldScale = transform.localScale;
+            LeanTween.scale(gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
+        }
     }
 
     public virtual void OnStructureCreated(Structure structure)

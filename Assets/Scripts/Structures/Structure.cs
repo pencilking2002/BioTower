@@ -33,7 +33,7 @@ public class Structure : MonoBehaviour
     [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
     [SerializeField] protected GameObject spriteOutline;
     [SerializeField] StructureState structureState;
-    [SerializeField] protected SpriteRenderer sr;
+    public SpriteRenderer sr;
     [HideInInspector] public float lastDeclineTime;
 
     public virtual void Awake()

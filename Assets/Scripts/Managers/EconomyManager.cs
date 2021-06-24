@@ -135,6 +135,11 @@ public class EconomyManager : MonoBehaviour
         SpendCurrency(GameManager.Instance.gameSettings.abaUnitCost);
     }
 
+    public void BuyTowerHeal()
+    {
+        SpendCurrency(GameManager.Instance.gameSettings.healTowerCost);
+    }
+
     public void GainCrystalMoney()
     {
         int amount = GameManager.Instance.gameSettings.crystalWorth;

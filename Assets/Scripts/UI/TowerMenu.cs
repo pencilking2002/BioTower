@@ -35,6 +35,15 @@ public class TowerMenu : MonoBehaviour
         {
             var healAmount = GameManager.Instance.gameSettings.healTowerAmount;
             GameManager.Instance.tapManager.selectedStructure.GainHealth(healAmount);
+            GameManager.Instance.econManager.BuyTowerHeal();
+            var selectedTower = GameManager.Instance.tapManager.selectedStructure;
+            Util.ScaleBounceSprite(selectedTower.sr, 1.1f);
+            var oldColor = selectedTower.sr.color;
+            selectedTower.sr.color = Color.green;
+            LeanTween.value(selectedTower.gameObject, selectedTower.sr.color, oldColor, 0.25f)
+            .setOnUpdate((Color col) => {
+                selectedTower.sr.color = col;
+            });
         }
     }
 

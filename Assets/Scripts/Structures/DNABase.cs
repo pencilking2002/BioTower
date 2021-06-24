@@ -40,7 +40,10 @@ public class DNABase : Structure
                 sr.sprite = criticalStateSprite;
 
             if (currHealth <= 0)
+            {
                 KillStructure();
+                EventManager.Structures.onBaseDestroyed?.Invoke();
+            }
         }
     }
 
@@ -51,21 +54,11 @@ public class DNABase : Structure
 
     private void OnBaseReached()
     {
-        TakeDamage(1);
         if (currHealth > 0)
         {
             Util.ScaleBounceSprite(sr, 1.1f);
         }
-        else
-        {
-            BaseDestroyed();
-        }
-    }
-
-    private void BaseDestroyed()
-    {
-       
-        EventManager.Structures.onBaseDestroyed?.Invoke();
+        TakeDamage(1);
     }
 
     private void OnEnable()

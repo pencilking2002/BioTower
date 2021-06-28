@@ -10,9 +10,11 @@ using Sirenix.OdinInspector;
 
 namespace BioTower
 {
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public GameStates gameStates;
 
     public GameSettings gameSettings;
 

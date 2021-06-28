@@ -51,8 +51,12 @@ public class Structure : MonoBehaviour
     public virtual void Start()
     {
         EventManager.Structures.onStructureCreated?.Invoke(this);
-        GameManager.Instance.tapManager.selectedStructure = this;
-        GameManager.Instance.tapManager.hasSelectedStructure = true;
+
+        //if (GameManager.Instance != null)
+        //{
+            GameManager.Instance.tapManager.selectedStructure = this;
+            GameManager.Instance.tapManager.hasSelectedStructure = true;
+        //}
     }
 
     public virtual void TakeDamage(int numDamage)

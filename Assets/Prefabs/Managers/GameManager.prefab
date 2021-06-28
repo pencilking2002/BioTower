@@ -142,6 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3163904365036822119}
   - component: {fileID: 3163904365036822116}
+  - component: {fileID: 3902137962693488694}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9b81d7dfed863479c152b83452ad1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStates: {fileID: 3902137962693488694}
   gameSettings: {fileID: 11400000, guid: fd76be76114cc874982908e631e71934, type: 2}
   levelMap: {fileID: 0}
   playerBase: {fileID: 0}
@@ -197,6 +199,20 @@ MonoBehaviour:
   cooldownManager: {fileID: 4293659511487582202}
   towerDeathExplosionPrefab: {fileID: 8896142106390451839, guid: 27e7edfcfcea401458350f914ee2abfe,
     type: 3}
+  crystalExplosionPrefab: {fileID: 0}
+--- !u!114 &3902137962693488694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3163904365036822118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e62d0687e93754ebe37b08e9686c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameState: 0
 --- !u!1 &5216099166009064992
 GameObject:
   m_ObjectHideFlags: 0

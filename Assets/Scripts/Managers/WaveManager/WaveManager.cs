@@ -63,6 +63,9 @@ public class WaveManager : MonoBehaviour
         if (wavesHaveCompleted)
             return;
 
+        if (!GameManager.Instance.gameStates.IsGameState())
+            return;
+            
         var wave = waveSettings.waves[currWave];
         wave.state = waveStateMap[wave.state].OnUpdate(wave);
         waveMode = wave.state;

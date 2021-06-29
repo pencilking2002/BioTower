@@ -18,6 +18,7 @@ public class EventManager : MonoBehaviour
         public static Action<int, int> onSpendCurrency; // num spent, curr total
         public static Action<int, int> onGainCurrency;  // num gained, curr total
         public static Action onTogglePaths; 
+        public static Action<GameState> onGameStateInit;
     }
 
     public class Structures
@@ -44,6 +45,7 @@ public class EventManager : MonoBehaviour
     public class Input
     {
         public static Action<Vector3> onTouchBegan;     // screen position of the touch
+        public static Action onTapStartMenu;
     }
 }
 }

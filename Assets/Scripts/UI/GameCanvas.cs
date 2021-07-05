@@ -8,6 +8,8 @@ namespace BioTower.UI
 {
 public class GameCanvas : MonoBehaviour
 {
+    public Canvas canvas;
+    public CanvasGroup canvasGroup;
     [SerializeField] private CanvasGroup gameOverPanel;
     [SerializeField] private TextMeshProUGUI gameOverText;
 

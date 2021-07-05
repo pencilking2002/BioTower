@@ -1,25 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace BioTower
 {
-public class GameMenuState : BootStateBase
+public class UpgradeMenuState : BootStateBase
 {
-    public override void Init(GameState gameState) 
+     public override void Init(GameState gameState) 
     {
         if (!isInitialized)
         {
             isInitialized = true;
-            var seq = LeanTween.sequence();
-            seq.append(2.0f);
-            seq.append(() => { 
-                controller.gameCanvas.canvas.enabled = true;
-                controller.gameCanvas.canvasGroup.alpha = 0; 
-            });
-            seq.append(LeanTween.alphaCanvas(controller.gameCanvas.canvasGroup, 1.0f, 1.0f));
-
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }
     }
@@ -45,7 +36,5 @@ public class GameMenuState : BootStateBase
     {
         EventManager.Game.onGameStateInit -= OnGameStateInit;
     }
-
-
-}   
+}
 }

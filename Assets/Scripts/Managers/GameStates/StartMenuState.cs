@@ -12,6 +12,7 @@ public class StartMenuState : BootStateBase
         if (!isInitialized)
         {
             isInitialized = true;
+            controller.gameCanvas.canvas.enabled = false;
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }
     }

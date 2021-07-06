@@ -20,6 +20,7 @@ public class BootController : MonoBehaviour
     
     [Header("References")]
     public GameCanvas gameCanvas;
+    public GameplayUI gameplayUI;
     public bool isBootOrMenuScene => SceneManager.GetActiveScene().name == Constants.boot;
     private Dictionary<GameState, BootStateBase> charStates = new Dictionary<GameState, BootStateBase>();
     [ReadOnly] public bool isLoading;

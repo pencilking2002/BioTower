@@ -55,10 +55,23 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log("YO");
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             LoadLevel(0);
         }  
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            playerBase.TakeDamage(100);
+            Debug.Log("Make player base take 100 DMG");
+        }
+
+        // if (Input.GetKeyDown(KeyCode.W))
+        // {
+        //     GameManager.Instance.gameStates.SetWinState();
+        // }
 
         Time.timeScale = gameSettings.timeScale;  
     }

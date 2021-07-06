@@ -10,7 +10,7 @@ public class GameCanvas : MonoBehaviour
 {
     public Canvas canvas;
     public CanvasGroup canvasGroup;
-    [SerializeField] private CanvasGroup gameOverPanel;
+    public CanvasGroup gameOverPanel;
     [SerializeField] private TextMeshProUGUI gameOverText;
 
     private void Awake()
@@ -20,8 +20,13 @@ public class GameCanvas : MonoBehaviour
 
     public void OnPressRestart()
     {
-        //Debug.Log("Retry");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void OnPressUpgrade()
+    {
+        Debug.Log("Upgrade");
+        EventManager.UI.onPressUpgradeButton?.Invoke();
     }
 
     private void OnGameOver(bool isWin)

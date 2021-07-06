@@ -11,6 +11,8 @@ public class UpgradeMenuState : BootStateBase
         if (!isInitialized)
         {
             isInitialized = true;
+            controller.upgradePanel.panel.gameObject.SetActive(true);
+            controller.upgradePanel.infoPanel.gameObject.SetActive(false);
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }
     }
@@ -27,14 +29,21 @@ public class UpgradeMenuState : BootStateBase
             isInitialized = false;
     }
 
+    private void OnPressUpgradeButton()
+    {
+        controller.gameState = GameState.UPGRADE_MENU;
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onGameStateInit += OnGameStateInit;
+        EventManager.UI.onPressUpgradeButton += OnPressUpgradeButton;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onGameStateInit -= OnGameStateInit;
+        EventManager.UI.onPressUpgradeButton -= OnPressUpgradeButton;
     }
 }
 }

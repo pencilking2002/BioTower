@@ -56,7 +56,7 @@ public class BasicEnemy : Unit
     public override void StopMoving()
     {
         agent.Stop();
-        Debug.Log("Stop Moving");
+        //Debug.Log("Stop Moving");
         isEngagedInCombat = true;
         sr.color = stoppedColor;
     }
@@ -161,11 +161,19 @@ public class BasicEnemy : Unit
         });
     }
 
+    private void OnGameStateInit(GameState gameState)
+    {
+        if (gameState == GameState.GAME_OVER_LOSE || gameState == GameState.GAME_OVER_WIN)
+            StopMoving();
+
+    }
+
     private void OnEnable()
     {
         //EventManager.Game.onLevelLoaded_02 += LevelLoaded;
         agent.OnDestinationReached += DestinationReached;
         EventManager.Game.onTogglePaths += OnTogglePaths;
+        EventManager.Game.onGameStateInit += OnGameStateInit;
     }
 
     private void OnDisable()
@@ -173,6 +181,7 @@ public class BasicEnemy : Unit
         //EventManager.Game.onLevelLoaded_02 -= LevelLoaded;
         agent.OnDestinationReached -= DestinationReached;
         EventManager.Game.onTogglePaths -= OnTogglePaths;
+        EventManager.Game.onGameStateInit -= OnGameStateInit;
     }
 
 }

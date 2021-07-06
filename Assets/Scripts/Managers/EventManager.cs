@@ -40,6 +40,7 @@ public class EventManager : MonoBehaviour
     public class UI
     {
         public static Action<StructureType> onPressTowerButton;
+        public static Action onPressUpgradeButton;
     }
 
     public class Input

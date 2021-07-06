@@ -13,6 +13,10 @@ public class StartMenuState : BootStateBase
         {
             isInitialized = true;
             controller.gameCanvas.canvas.enabled = false;
+            controller.gameCanvas.canvasGroup.alpha = 0;
+            controller.gameCanvas.gameOverPanel.gameObject.SetActive(false);
+            controller.upgradePanel.panel.gameObject.SetActive(false);
+            
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }
     }

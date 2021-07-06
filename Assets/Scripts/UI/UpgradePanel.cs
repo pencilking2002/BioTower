@@ -6,13 +6,37 @@ using TMPro;
 
 public class UpgradePanel : MonoBehaviour
 {
+    [SerializeField] private Color defaultButtonColor;
     public Image panel;
-    [SerializeField] private Button upgradeButton_01;
-    [SerializeField] private Button upgradeButton_02;
-    [SerializeField] private Button upgradeButton_03;
+    [SerializeField] private Image upgradeButton_01;
+    [SerializeField] private Image upgradeButton_02;
+    [SerializeField] private Image upgradeButton_03;
     public Image infoPanel;
     public Button chooseUpgradeButton;
     public Text upgradeDescription;
-    //public TextMeshProUGUI upgradeCostText;
 
+    public void OnPressUpgradeButton01()
+    {
+        infoPanel.gameObject.SetActive(true);
+        upgradeButton_01.color = Color.white;
+        upgradeButton_02.color = defaultButtonColor;
+        upgradeButton_03.color = defaultButtonColor;
+    }
+
+    public void OnPressUpgradeButton02()
+    {
+        infoPanel.gameObject.SetActive(true);
+        upgradeButton_01.color = defaultButtonColor;
+        upgradeButton_02.color = Color.white;
+        upgradeButton_03.color = defaultButtonColor;
+    }
+
+    public void OnPressUpgradeButton03()
+    {
+        infoPanel.gameObject.SetActive(true);
+        upgradeButton_01.color = defaultButtonColor;
+        upgradeButton_02.color = defaultButtonColor;
+        upgradeButton_03.color = Color.white;
+
+    }
 }

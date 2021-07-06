@@ -11,7 +11,13 @@ public class UpgradeMenuState : BootStateBase
         if (!isInitialized)
         {
             isInitialized = true;
-            controller.upgradePanel.panel.gameObject.SetActive(true);
+            var upgradePanelGo = controller.upgradePanel.panel.gameObject;
+            upgradePanelGo.SetActive(true);
+
+            float initLocalPosY = upgradePanelGo.transform.localPosition.y;
+            upgradePanelGo.transform.localPosition = new Vector3(0, -500, 0);
+            LeanTween.moveLocalY(upgradePanelGo, initLocalPosY, 0.25f).setEaseOutBack();
+
             controller.upgradePanel.infoPanel.gameObject.SetActive(false);
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }

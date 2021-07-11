@@ -71,5 +71,22 @@ public class WaveManager : MonoBehaviour
         waveMode = wave.state;
     }
 
+    private void OnEnemyReachedDestination(BasicEnemy enemy)
+    {
+        // Vary speed
+        var minMaxSpeed = waveSettings.waves[currWave].minMaxSpeed;
+        enemy.SetSpeed(minMaxSpeed, 0.5f);
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Units.onEnemyReachedDestination += OnEnemyReachedDestination;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Units.onEnemyReachedDestination -= OnEnemyReachedDestination;
+    }
+
 }
 }

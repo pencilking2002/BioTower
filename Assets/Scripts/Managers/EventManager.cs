@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using BioTower.Structures;
+using BioTower.Units;
 
 namespace BioTower
 {
@@ -35,6 +36,7 @@ public class EventManager : MonoBehaviour
     public class Units
     {
         public static Action onEnemyBaseReached;
+        public static Action<BasicEnemy> onEnemyReachedDestination;
     }
 
     public class UI

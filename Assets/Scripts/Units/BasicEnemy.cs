@@ -48,9 +48,19 @@ public class BasicEnemy : Unit
     public Waypoint GetCurrWaypoint() { return currWaypoint; }
     public Waypoint GetNextWaypoint() { return nextWaypoint; }
 
-    public void SetSpeed(Vector2 minMaxSpeed)
+    public void SetSpeed(Vector2 minMaxSpeed, float duration=0)
     {
-        agent.maxSpeed = UnityEngine.Random.Range(minMaxSpeed.x, minMaxSpeed.y);
+        float targetSpeed = UnityEngine.Random.Range(minMaxSpeed.x, minMaxSpeed.y);
+        if (Mathf.Approximately(duration, 0))
+        {
+            agent.maxSpeed = targetSpeed;
+        }
+        else
+        {
+            LeanTween.value(gameObject, agent.maxSpeed, targetSpeed, 0.5f).setOnUpdate((float val) => {
+                agent.maxSpeed = val;
+            });
+        }
     }
     
     public override void StopMoving()
@@ -101,6 +111,8 @@ public class BasicEnemy : Unit
             SetNextWaypoint(nextPoint);
             SetDestination(nextPoint);
         }
+        
+        EventManager.Units.onEnemyReachedDestination?.Invoke(this);
     }
 
     private void SpawnCrystal()

@@ -30,6 +30,7 @@ public class AbaUnit : Unit
     public ABATower abaTower;
     public Rigidbody rb;
     public PolyNavAgent agent;
+    [SerializeField] private Animator anim;
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class AbaUnit : Unit
     {
         agent.Stop();
         Debug.Log("AbaUnit: Stop Moving");
+        anim.SetBool("Walk", false);
         //sr.color = stoppedColor;
     }
 
@@ -79,6 +81,8 @@ public class AbaUnit : Unit
     {
         var newDestination = abaTower.GetPointWithinInfluence();
         agent.SetDestination(newDestination);
+        anim.SetBool("Walk", true);
+        Debug.Log("Set destination");
         //Debug.Log("AbaUnit: Set New Destination: " + newDestination);
     }
 

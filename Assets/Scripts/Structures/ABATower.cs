@@ -22,7 +22,7 @@ public class ABATower : Structure
     [SerializeField] private Transform unitsContainer;
     [SerializeField] private CircleCollider2D maxInfluenceAreaCollider;
     [SerializeField] private CircleCollider2D minInfluenceAreaCollider;
-    private Vector3[] targetPositions;
+    //private Vector3[] targetPositions;
  
 
     public override void Awake()
@@ -36,8 +36,10 @@ public class ABATower : Structure
         base.Start();
         map.GenerateMap();      // NOTE: Seems like this needs to be called in order for the map to be initialized correctly after instantiation 
         var unitsContainer = transform.Find("Units");
-        //SpawnUnits();
-        targetPositions = new Vector3[numUnitsToSpawn];
+        
+        //targetPositions = new Vector3[numUnitsToSpawn];
+        SpawnUnits(numUnitsToSpawn);
+
         Debug.Log("ABA tower Awake");
     }
 

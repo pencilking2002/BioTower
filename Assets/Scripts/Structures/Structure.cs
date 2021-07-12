@@ -26,7 +26,7 @@ public enum StructureType
 public class Structure : MonoBehaviour
 {   
     public StructureType structureType;
-    [SerializeField] protected bool hasHealth;
+    [SerializeField] public bool hasHealth;
     [EnableIf("hasHealth")] [SerializeField] protected bool isAlive = true;
     [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] protected int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
@@ -51,12 +51,8 @@ public class Structure : MonoBehaviour
     public virtual void Start()
     {
         EventManager.Structures.onStructureCreated?.Invoke(this);
-
-        //if (GameManager.Instance != null)
-        //{
-            GameManager.Instance.tapManager.selectedStructure = this;
-            GameManager.Instance.tapManager.hasSelectedStructure = true;
-        //}
+        GameManager.Instance.tapManager.selectedStructure = this;
+        GameManager.Instance.tapManager.hasSelectedStructure = true;
     }
 
     public virtual void OnUpdate()
@@ -69,7 +65,12 @@ public class Structure : MonoBehaviour
         if (hasHealth && isAlive)
         {
             currHealth -= numDamage;
-            healthSlider.value = currHealth;
+
+            LeanTween.value(gameObject, healthSlider.value, currHealth, 0.25f)
+            .setOnUpdate((float val) => {
+                healthSlider.value = val;
+            });
+            EventManager.Structures.onStructureLoseHealth?.Invoke(this);
 
             if (currHealth <= 0)
                 KillStructure();
@@ -80,7 +81,11 @@ public class Structure : MonoBehaviour
     {
         currHealth += numHealth;
         healthSlider.value = currHealth;
+        EventManager.Structures.onStructureGainHealth?.Invoke(this);
     }
+
+    public virtual int GetCurrHealth() { return currHealth; }
+    public virtual int GetMaxHealth() { return maxHealth; }
 
     public virtual void KillStructure()
     {

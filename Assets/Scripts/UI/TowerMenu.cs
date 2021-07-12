@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
 using UnityEngine.UI;
+using TMPro;
 
 namespace BioTower
 {
 public class TowerMenu : MonoBehaviour
 {
     [SerializeField] private RectTransform towerPanel;
+    [SerializeField] private Slider towerHealthbar;
+    [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Button healTowerButton;
     [SerializeField] private Button healTowerFullWidthButton;
     [SerializeField] private Button spawnUnitButton;
@@ -56,8 +59,24 @@ public class TowerMenu : MonoBehaviour
         towerPanel.gameObject.SetActive(true);
         healTowerButton.gameObject.SetActive(displaySpawnUnitButton);
         healTowerFullWidthButton.gameObject.SetActive(!displaySpawnUnitButton);
+        UpdateTowerHealthBar(structure);
+        
     }
     
+    private void UpdateTowerHealthBar(Structure structure, float duration=0)
+    {
+        if (structure == GameManager.Instance.tapManager.selectedStructure && structure.hasHealth)
+        {
+            towerHealthbar.maxValue = structure.GetMaxHealth();
+
+            LeanTween.value(gameObject, towerHealthbar.value, structure.GetCurrHealth(), duration)
+            .setOnUpdate((float val) => {
+                towerHealthbar.value = val;
+            });
+
+            healthText.text = $"{structure.GetCurrHealth()}/{structure.GetMaxHealth()}"; 
+        }
+    }
     private void OnStructureCreated(Structure structure)
     {
         if (structure.structureType == StructureType.DNA_BASE)
@@ -66,16 +85,30 @@ public class TowerMenu : MonoBehaviour
         OnStructureSelected(structure);
     }
 
+    private void OnStructureGainHealth(Structure structure)
+    {
+        UpdateTowerHealthBar(structure);
+    }
+
+    private void OnStructureLoseHealth(Structure structure)
+    {
+        UpdateTowerHealthBar(structure, 0.25f);
+    }
+
     private void OnEnable()
     {
         EventManager.Structures.onStructureSelected += OnStructureSelected;
         EventManager.Structures.onStructureCreated += OnStructureCreated;
+        EventManager.Structures.onStructureGainHealth += OnStructureGainHealth;
+        EventManager.Structures.onStructureLoseHealth += OnStructureLoseHealth;
     }
 
     private void OnDisable()
     {
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
+        EventManager.Structures.onStructureGainHealth -= OnStructureGainHealth;
+        EventManager.Structures.onStructureLoseHealth -= OnStructureLoseHealth;
     }
 }
 }

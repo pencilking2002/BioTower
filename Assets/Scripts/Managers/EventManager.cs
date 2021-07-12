@@ -31,6 +31,9 @@ public class EventManager : MonoBehaviour
         public static Action<Structure> onStructureDestroyed;
         public static Action<StructureType, float> onStructureCooldownStarted;
         public static Action<Structure> onStructureSelected;
+        public static Action<Structure> onStructureGainHealth;
+        public static Action<Structure> onStructureLoseHealth;
+
     }
 
     public class Units

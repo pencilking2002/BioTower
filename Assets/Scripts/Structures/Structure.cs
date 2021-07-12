@@ -91,6 +91,7 @@ public class Structure : MonoBehaviour
     {
         isAlive = false;
         GameManager.Instance.CreateTowerExplosion(transform.position);
+        EventManager.Structures.onStructureDestroyed?.Invoke(this);
         Destroy(gameObject);
     }
 

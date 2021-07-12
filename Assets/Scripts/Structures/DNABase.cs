@@ -17,6 +17,7 @@ public class DNABase : Structure
     [SerializeField] private Sprite criticalStateSprite;
     [MinMaxSlider(0,100)][SerializeField] private Vector2 hurtMinRange;
     [MinMaxSlider(0,100)][SerializeField] private Vector2 criticalRange;
+    [SerializeField] private Color hurtColor;
 
     private void LevelLoaded()
     {
@@ -57,6 +58,11 @@ public class DNABase : Structure
         if (currHealth > 0)
         {
             Util.ScaleBounceSprite(sr, 1.1f);
+            var oldColor = sr.color;
+            sr.color = hurtColor;
+            LeanTween.value(gameObject, sr.color, oldColor, 0.25f).setOnUpdate((Color col) => {
+                sr.color = col;
+            });
         }
         TakeDamage(1);
     }

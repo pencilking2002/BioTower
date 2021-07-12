@@ -12,8 +12,10 @@ public class StructureManager : MonoBehaviour
 
     private void Update()
     {
-        foreach(Structure structure in structureList)
+        //(Structure structure in structureList)
+        for(int i=0;i<structureList.Count; i++)
         {
+            Structure structure = structureList[i];
             DoHealthDecline(structure);
             structure.OnUpdate();
         }
@@ -39,14 +41,22 @@ public class StructureManager : MonoBehaviour
         structureList.Add(structure);
     }
 
+    private void OnStructureDestroyed(Structure structure)
+    {
+        structureList.Remove(structure);
+    }
+
     private void OnEnable()
     {
         EventManager.Structures.onStructureCreated += OnStructureCreated;
+        EventManager.Structures.onStructureDestroyed += OnStructureDestroyed;
+
     }
 
     private void OnDisable()
     {
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
+        EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
     }
 }
 }

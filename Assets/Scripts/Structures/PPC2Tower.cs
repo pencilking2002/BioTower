@@ -1,22 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Shapes;
+using BioTower.Units;
 
 namespace BioTower.Structures
 {
 [SelectionBase]
 public class PPC2Tower : Structure
 {
+    [SerializeField] private float discRotateSpeed = 2;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private CircleCollider2D maxInfluenceCollider;
-    [SerializeField] private CircleCollider2D minInfluenceCollider;
 
-   // [SerializeField] private LayerMask enemyLayerMask;
-    //[SerializeField] private CircleCollider2D maxInfluenceAreaCollider;
     [SerializeField] private float shootDuration = 1.0f;
-    //[SerializeField] private float maxShootDelay = 0.1f;
     [SerializeField] private float shootInterval;
     private float lastShotTime;
+
+    [Header("References")]
+    [SerializeField] private Disc influenceDisc;
+    [SerializeField] private CircleCollider2D maxInfluenceCollider;
+    [SerializeField] private CircleCollider2D minInfluenceCollider;
 
     public override void Awake()
     {
@@ -28,31 +31,12 @@ public class PPC2Tower : Structure
     {
         base.Start();
     }
-    private void Update()
+
+    public override void OnUpdate()
     {
-        // if (Time.time > lastShot + shootInterval)
-        // {  
-        //     // TODO: Conver to OverlapAll
-        //     var enemy = Physics2D.OverlapCircle(maxInfluenceAreaCollider.transform.position, maxInfluenceAreaCollider.radius, enemyLayerMask);
-
-        //     if (enemy != null && enemy.gameObject.activeInHierarchy)
-        //     {
-        //         var distance = Vector2.Distance(enemy.transform.position, maxInfluenceAreaCollider.transform.position);
-        //         if (distance <= maxInfluenceAreaCollider.radius)
-        //         {
-        //             ShootEnemy(enemy);
-        //             lastShot = Time.time;
-        //             Debug.Log("Radius length: " + maxInfluenceAreaCollider.radius + ". Distance to enemy: " + distance.ToString());
-        //         }
-        //     }
-        // }
-
-        // if (Time.time > lastShotTime + shootInterval)
-        // {
-        //     ShootProjectile();
-        //     lastShotTime = Time.time;
-        // }
+        influenceDisc.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
     }
+
 
     private PPC2Projectile CreateProjectile()
     {
@@ -63,10 +47,16 @@ public class PPC2Tower : Structure
 
     private void ShootProjectile(Collider2D other)
     {
+
         var projectile = CreateProjectile();
         Vector3 startPos = transform.position + Vector3.up * 0.6f;
         Vector3 endPos = (Vector2) other.transform.position + Random.insideUnitCircle * 0.2f;
         Vector3 controlPoint = startPos + (endPos-startPos) * 0.5f + Vector3.up;
+
+        // Get the enemy's move direction
+        BasicEnemy enemy = other.transform.parent.GetComponent<BasicEnemy>();
+        Vector2 enemyMoveDirection = enemy.agent.movingDirection.normalized;
+        endPos += (Vector3) enemyMoveDirection * UnityEngine.Random.Range(0.1f, 0.5f);
 
         var seq = LeanTween.sequence();
 

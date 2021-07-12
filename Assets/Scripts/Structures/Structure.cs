@@ -59,6 +59,11 @@ public class Structure : MonoBehaviour
         //}
     }
 
+    public virtual void OnUpdate()
+    {
+        
+    }
+
     public virtual void TakeDamage(int numDamage)
     {
         if (hasHealth && isAlive)

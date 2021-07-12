@@ -2,6 +2,7 @@
 using UnityEngine;
 using BioTower.Units;
 using PolyNav;
+using Shapes;
 
 namespace BioTower.Structures
 {
@@ -9,11 +10,13 @@ namespace BioTower.Structures
 [SelectionBase]
 public class ABATower : Structure
 {   
+    [SerializeField] private float discRotateSpeed = 2;
     [SerializeField] private int numUnitsToSpawn = 4;
     [SerializeField] private List<AbaUnit> abaUnits;
 
 
     [Header("References")]
+    [SerializeField] private Disc influenceDisc;
     [SerializeField] private GameObject abaUnitPrefab;
     public PolyNav2D map;
     [SerializeField] private Transform unitsContainer;
@@ -36,6 +39,11 @@ public class ABATower : Structure
         //SpawnUnits();
         targetPositions = new Vector3[numUnitsToSpawn];
         Debug.Log("ABA tower Awake");
+    }
+
+    public override void OnUpdate()
+    {
+        influenceDisc.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
     }
 
     public override void SpawnUnits(int numUnits)

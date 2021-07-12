@@ -12,10 +12,16 @@ public class StructureManager : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.gameSettings.enableTowerHealthDecline)
-            return;
-            
         foreach(Structure structure in structureList)
+        {
+            DoHealthDecline(structure);
+            structure.OnUpdate();
+        }
+    }
+
+    private void DoHealthDecline(Structure structure)
+    {
+        if (GameManager.Instance.gameSettings.enableTowerHealthDecline)
         {
             if (Time.time > structure.lastDeclineTime + declineDelay)
             {

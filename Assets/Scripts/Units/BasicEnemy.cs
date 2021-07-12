@@ -73,7 +73,9 @@ public class BasicEnemy : Unit
 
     public void SetDestination(Waypoint waypoint)
     {
-        agent.SetDestination(waypoint.transform.position);
+        var randomPoint = UnityEngine.Random.insideUnitSphere * 0.5f;
+        randomPoint.z = 0;
+        agent.SetDestination(waypoint.transform.position + randomPoint);
     }
 
     public override void StartMoving(Waypoint waypoint, float delay=0)

@@ -10,6 +10,7 @@ namespace BioTower
 public class TowerMenu : MonoBehaviour
 {
     [SerializeField] private RectTransform towerPanel;
+   
     [SerializeField] private Slider towerHealthbar;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Button healTowerButton;
@@ -18,9 +19,22 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] private float scaleAnimDuration = 0.1f;
     [SerializeField] private Text currTowerText;
 
+    
+    [Header("Tower Icons")]
+    [SerializeField] private Image towerIcon;
+    [SerializeField] private Sprite playerTower;
+    [SerializeField] private Sprite abaTower;
+    [SerializeField] private Sprite pp2cTower;
+    [SerializeField] private Sprite chloroplastTower;
+    private Dictionary<StructureType, Sprite> iconMap = new Dictionary<StructureType, Sprite>();
+
     private void Awake()
     {
         towerPanel.gameObject.SetActive(false);
+        iconMap.Add(StructureType.ABA_TOWER, abaTower);
+        iconMap.Add(StructureType.PPC2_TOWER, pp2cTower);
+        iconMap.Add(StructureType.CHLOROPLAST, chloroplastTower);
+        iconMap.Add(StructureType.DNA_BASE, playerTower);
     }
 
     public void OnPressSpawnUnitButton()
@@ -60,7 +74,7 @@ public class TowerMenu : MonoBehaviour
         healTowerButton.gameObject.SetActive(displaySpawnUnitButton);
         healTowerFullWidthButton.gameObject.SetActive(!displaySpawnUnitButton);
         UpdateTowerHealthBar(structure);
-        
+        towerIcon.sprite = iconMap[structure.structureType];
     }
     
     private void UpdateTowerHealthBar(Structure structure, float duration=0)
@@ -73,10 +87,10 @@ public class TowerMenu : MonoBehaviour
             .setOnUpdate((float val) => {
                 towerHealthbar.value = val;
             });
-
             healthText.text = $"{structure.GetCurrHealth()}/{structure.GetMaxHealth()}"; 
         }
     }
+
     private void OnStructureCreated(Structure structure)
     {
         if (structure.structureType == StructureType.DNA_BASE)

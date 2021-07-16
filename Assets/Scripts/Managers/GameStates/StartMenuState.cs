@@ -16,7 +16,8 @@ public class StartMenuState : BootStateBase
             controller.gameCanvas.canvasGroup.alpha = 0;
             controller.gameCanvas.gameOverPanel.gameObject.SetActive(false);
             controller.upgradePanel.panel.gameObject.SetActive(false);
-            
+            controller.levelSelectMenu.canvas.enabled = false;
+
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }
     }
@@ -37,8 +38,8 @@ public class StartMenuState : BootStateBase
     {
         if (isInitialized)
         {
-            controller.gameState = GameState.GAME;
-            controller.LoadFirstScene();
+            controller.gameState = GameState.LEVEL_SELECT;
+            //controller.LoadFirstScene();
         }
     }
 

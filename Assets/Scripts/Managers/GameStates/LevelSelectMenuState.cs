@@ -5,25 +5,19 @@ using UnityEngine.SceneManagement;
 
 namespace BioTower
 {
-public class GameMenuState : BootStateBase
+public class LevelSelectMenuState : BootStateBase
 {
     public override void Init(GameState gameState) 
     {
         if (!isInitialized)
         {
             isInitialized = true;
-            
-            controller.levelSelectMenu.canvas.enabled = false; 
-
-            var seq = LeanTween.sequence();
-            seq.append(2.0f);
-            seq.append(() => { 
-                controller.gameCanvas.canvas.enabled = true;
-                controller.gameCanvas.canvasGroup.alpha = 0;
-                controller.gameCanvas.gameOverPanel.gameObject.SetActive(false);
-                controller.upgradePanel.panel.gameObject.SetActive(false);
-            });
-            seq.append(LeanTween.alphaCanvas(controller.gameCanvas.canvasGroup, 1.0f, 0.5f));
+            BootController.isBootLoaded = true;
+            controller.gameCanvas.canvas.enabled = false;
+            controller.gameCanvas.canvasGroup.alpha = 0;
+            controller.gameCanvas.gameOverPanel.gameObject.SetActive(false);
+            controller.upgradePanel.panel.gameObject.SetActive(false);
+            controller.levelSelectMenu.canvas.enabled = true;
 
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }
@@ -41,14 +35,21 @@ public class GameMenuState : BootStateBase
             isInitialized = false;
     }
 
+    private void onTapLevelSelectButton()
+    {
+        controller.gameState = GameState.GAME;
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onGameStateInit += OnGameStateInit;
+        EventManager.UI.onTapLevelSelectButton += onTapLevelSelectButton;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onGameStateInit -= OnGameStateInit;
+        EventManager.UI.onTapLevelSelectButton -= onTapLevelSelectButton;
     }
 
 

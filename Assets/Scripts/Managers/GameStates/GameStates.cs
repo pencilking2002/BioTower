@@ -12,7 +12,8 @@ public enum GameState
     GAME_OVER_LOSE,
     LOADING,
     PAUSE,
-    UPGRADE_MENU
+    UPGRADE_MENU,
+    LEVEL_SELECT
 }
 public class GameStates : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GameStates : MonoBehaviour
     public void SetLoadingState() { gameState = GameState.LOADING; }
     public void SetPauseState() { gameState = GameState.PAUSE; }
     public void SetUpgradeMenuState() { gameState = GameState.UPGRADE_MENU; }
+    public void SetLevelSelectState() { gameState = GameState.LEVEL_SELECT; }
 
     public bool IsStartMenuState() { return gameState == GameState.START_MENU; }
     public bool IsGameState() { return gameState == GameState.GAME; }
@@ -33,5 +35,7 @@ public class GameStates : MonoBehaviour
     public bool IsLoadingState() { return gameState == GameState.LOADING; }
     public bool IsPauseState() { return gameState == GameState.PAUSE; }
     public bool IsUpgradeMenuState() { return gameState == GameState.UPGRADE_MENU; }
+    public bool IsLevelSelectState() { return gameState == GameState.LEVEL_SELECT; }
+
 }
 }

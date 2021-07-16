@@ -9,7 +9,7 @@ namespace BioTower
 {
 public class TowerMenu : MonoBehaviour
 {
-    [SerializeField] private RectTransform towerPanel;
+    public RectTransform towerPanel;
    
     [SerializeField] private Slider towerHealthbar;
     [SerializeField] private TextMeshProUGUI healthText;

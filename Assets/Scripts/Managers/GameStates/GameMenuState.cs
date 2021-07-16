@@ -21,7 +21,10 @@ public class GameMenuState : BootStateBase
                 controller.gameCanvas.canvas.enabled = true;
                 controller.gameCanvas.canvasGroup.alpha = 0;
                 controller.gameCanvas.gameOverPanel.gameObject.SetActive(false);
+
+                controller.gameplayUI.gameUIPanel.gameObject.SetActive(true);
                 controller.upgradePanel.panel.gameObject.SetActive(false);
+                //controller.towerMenu.towerPanel.gameObject.SetActive(true);
             });
             seq.append(LeanTween.alphaCanvas(controller.gameCanvas.canvasGroup, 1.0f, 0.5f));
 

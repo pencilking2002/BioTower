@@ -626,8 +626,8 @@ RectTransform:
   m_Father: {fileID: 1755247295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -686,7 +686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &240495435
 RectTransform:
   m_ObjectHideFlags: 0
@@ -984,7 +984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &289974585
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3465,18 +3465,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerPanel: {fileID: 289974585}
-  towerHealthbar: {fileID: 0}
-  healthText: {fileID: 0}
+  towerHealthbar: {fileID: 2120964381}
+  healthText: {fileID: 1862221594}
   healTowerButton: {fileID: 688368932}
   healTowerFullWidthButton: {fileID: 2050395146}
   spawnUnitButton: {fileID: 444732794}
   scaleAnimDuration: 0.1
   currTowerText: {fileID: 1938038589}
-  towerIcon: {fileID: 0}
-  playerTower: {fileID: 0}
-  abaTower: {fileID: 0}
-  pp2cTower: {fileID: 0}
-  chloroplastTower: {fileID: 0}
+  towerIcon: {fileID: 595866265}
+  playerTower: {fileID: 21300000, guid: 8899f23812dc7a04981b737694ab4314, type: 3}
+  abaTower: {fileID: 21300000, guid: 4e9e7b76d3aca3f4c9b1a02db7f43d75, type: 3}
+  pp2cTower: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
+  chloroplastTower: {fileID: 21300000, guid: 5edd2bafd1ad1dd4b8a49399b8f44046, type: 3}
 --- !u!114 &806458802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3734,6 +3734,7 @@ MonoBehaviour:
   gameCanvas: {fileID: 806458803}
   gameplayUI: {fileID: 806458802}
   upgradePanel: {fileID: 806458808}
+  towerMenu: {fileID: 806458801}
   levelSelectMenu: {fileID: 798997476}
   isLoading: 0
 --- !u!114 &841383666
@@ -4235,7 +4236,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4501,7 +4502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1116917686
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8849,7 +8850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2084900138
 RectTransform:
   m_ObjectHideFlags: 0

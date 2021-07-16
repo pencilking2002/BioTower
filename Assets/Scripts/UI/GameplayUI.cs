@@ -74,6 +74,8 @@ public class GameplayUI : MonoBehaviour
     private void OnSpendCurrency(int numSpent, int currTotal)
     {
         //playerCurrencyText.text = currTotal.ToString();
+        var oldScale = playerCurrencyText.transform.localScale;
+        LeanTween.scale(playerCurrencyText.gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
     }
 
     private void OnGainCurrency(int numGained, int currTotal)

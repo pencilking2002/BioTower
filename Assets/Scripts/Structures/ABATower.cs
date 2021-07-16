@@ -45,6 +45,9 @@ public class ABATower : Structure
 
     public override void OnUpdate()
     {
+        if (GameManager.Instance.gameStates.gameState != GameState.GAME)
+            return;
+            
         influenceDisc.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
     }
 

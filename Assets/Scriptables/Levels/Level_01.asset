@@ -19,12 +19,12 @@ MonoBehaviour:
     numEnemiesPerWave: 10
     spawnInterval: 4
     minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 0
-    lastSpawn: 12.1272135
-    numSpawns: 4
+    timeStarted: 11.672143
+    lastSpawn: 31.807007
+    numSpawns: 6
   - state: 0
     waveIndex: 1
-    startDelay: 2
+    startDelay: 4
     numEnemiesPerWave: 10
     spawnInterval: 4
     minMaxSpeed: {x: 0.4, y: 0.7}
@@ -33,7 +33,7 @@ MonoBehaviour:
     numSpawns: 0
   - state: 0
     waveIndex: 2
-    startDelay: 2
+    startDelay: 4
     numEnemiesPerWave: 10
     spawnInterval: 4
     minMaxSpeed: {x: 0.4, y: 0.7}

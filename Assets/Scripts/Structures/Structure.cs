@@ -35,9 +35,11 @@ public class Structure : MonoBehaviour
     [SerializeField] StructureState structureState;
     public SpriteRenderer sr;
     [HideInInspector] public float lastDeclineTime;
+    private Vector3 initScale;
 
     public virtual void Awake()
     {
+        initScale = transform.localScale;
         currHealth = maxHealth;
         structureState = StructureState.ACTIVE;
 
@@ -112,8 +114,10 @@ public class Structure : MonoBehaviour
         
         if (structure == this)
         {
-            var oldScale = transform.localScale;
-            LeanTween.scale(gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
+            LeanTween.cancel(gameObject);
+            transform.localScale = initScale;
+            //var oldScale = transform.localScale;
+            LeanTween.scale(gameObject, initScale * 1.1f, 0.1f).setLoopPingPong(1);
         }
     }
 

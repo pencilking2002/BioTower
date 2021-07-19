@@ -11,7 +11,6 @@ namespace BioTower.UI
 public class GameplayUI : MonoBehaviour
 {
     public CanvasGroup gameUIPanel;
-
     [SerializeField] private Button AbaTowerButton;
     [SerializeField] private Button Pp2cTowerButton;
     [SerializeField] private Button chloroplastTowerButton;

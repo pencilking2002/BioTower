@@ -18,7 +18,9 @@ public class BootController : MonoBehaviour
     public GameState gameState;
     [SerializeField] private int sceneToLoad;
     
+
     [Header("References")]
+    public WavePanel wavePanel;
     public GameCanvas gameCanvas;
     public GameplayUI gameplayUI;
     public UpgradePanel upgradePanel;

@@ -11,6 +11,7 @@ public class InProgressState : WaveState
         if (!isInitialized)
         {
             isInitialized = true;
+            GameManager.Instance.bootController.wavePanel.DisplayWaveTitle(waveManager.currWave);
             EventManager.Game.onWaveStateInit?.Invoke(waveState);
         }
     }
@@ -18,7 +19,7 @@ public class InProgressState : WaveState
     public override WaveMode OnUpdate(Wave wave)
     {
         Init();
-        
+
         if (Time.time > wave.lastSpawn + wave.spawnInterval || wave.numSpawns == 0)
         {
             waveManager.SpawnEnemy(wave.minMaxSpeed);

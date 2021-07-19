@@ -6,8 +6,19 @@ namespace BioTower
 {
 public class EndedState : WaveState
 {
+    public override void Init()
+    {
+        if (!isInitialized)
+        {
+            isInitialized = true;
+            EventManager.Game.onWaveStateInit?.Invoke(waveState);
+        }
+    }
+
     public override WaveMode OnUpdate(Wave wave)
     {
+        Init();
+        
         if (waveManager.currWave < waveManager.waveSettings.waves.Length-1)
         {
             waveManager.currWave++;
@@ -19,6 +30,22 @@ public class EndedState : WaveState
         }
 
         return wave.state;
+    }
+
+    private void OnWaveStateInit(WaveMode waveState)
+    {
+        if (this.waveState != waveState)
+            isInitialized = false;
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Game.onWaveStateInit += OnWaveStateInit;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Game.onWaveStateInit -= OnWaveStateInit;
     }
 }
 }

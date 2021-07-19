@@ -36,6 +36,7 @@ public class Structure : MonoBehaviour
     public SpriteRenderer sr;
     [HideInInspector] public float lastDeclineTime;
     private Vector3 initScale;
+    [SerializeField] protected GameObject influenceVisuals;
 
     public virtual void Awake()
     {
@@ -109,15 +110,24 @@ public class Structure : MonoBehaviour
 
     public virtual void OnStructureSelected(Structure structure)
     {
-        if (spriteOutline != null)
-            spriteOutline.SetActive(structure == this);
-        
         if (structure == this)
         {
+            spriteOutline?.SetActive(true);
+
+            if (influenceVisuals != null)
+                influenceVisuals.SetActive(true);
+
             LeanTween.cancel(gameObject);
             transform.localScale = initScale;
             //var oldScale = transform.localScale;
             LeanTween.scale(gameObject, initScale * 1.1f, 0.1f).setLoopPingPong(1);
+        }
+        else
+        {
+            spriteOutline?.SetActive(false);
+
+            if (influenceVisuals != null)
+                influenceVisuals?.SetActive(false);
         }
     }
 

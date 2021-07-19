@@ -22,7 +22,6 @@ public class ABATower : Structure
     [SerializeField] private Transform unitsContainer;
     [SerializeField] private CircleCollider2D maxInfluenceAreaCollider;
     [SerializeField] private CircleCollider2D minInfluenceAreaCollider;
-    //private Vector3[] targetPositions;
  
 
     public override void Awake()

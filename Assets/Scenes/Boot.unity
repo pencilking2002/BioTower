@@ -205,7 +205,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 806458802}
-        m_MethodName: OnPressChloroplastButton
+        m_MethodName: OnPressMitoButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4045,6 +4045,8 @@ MonoBehaviour:
   abaTower: {fileID: 21300000, guid: 4e9e7b76d3aca3f4c9b1a02db7f43d75, type: 3}
   pp2cTower: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
   chloroplastTower: {fileID: 21300000, guid: 5edd2bafd1ad1dd4b8a49399b8f44046, type: 3}
+  mitoTower: {fileID: 390241442674666848, guid: d1d5dd001f254cd4588797edf25463db,
+    type: 3}
 --- !u!114 &806458802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4412,6 +4414,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1404310606}
     m_Modifications:
+    - target: {fileID: 360581058528368861, guid: 1efa5580d925f4f41949a420af6456cf,
+        type: 3}
+      propertyPath: mitoTowerPrefab
+      value: 
+      objectReference: {fileID: 1729478695543941044, guid: 81ed3f6665b4b62459cc30997ae88516,
+        type: 3}
     - target: {fileID: 3163904365036822116, guid: 1efa5580d925f4f41949a420af6456cf,
         type: 3}
       propertyPath: bootController

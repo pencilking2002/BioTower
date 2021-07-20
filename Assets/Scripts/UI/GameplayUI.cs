@@ -14,6 +14,7 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private Button AbaTowerButton;
     [SerializeField] private Button Pp2cTowerButton;
     [SerializeField] private Button chloroplastTowerButton;
+    [SerializeField] private Button mitoTowerButton;
 
     [SerializeField] private TextMeshProUGUI playerCurrencyText;
     private Dictionary<StructureType,Button> towerButtonMap = new Dictionary<StructureType, Button>();
@@ -23,6 +24,25 @@ public class GameplayUI : MonoBehaviour
         towerButtonMap.Add(StructureType.ABA_TOWER, AbaTowerButton);
         towerButtonMap.Add(StructureType.PPC2_TOWER, Pp2cTowerButton);
         towerButtonMap.Add(StructureType.CHLOROPLAST, chloroplastTowerButton);
+        towerButtonMap.Add(StructureType.MITOCHONDRIA, mitoTowerButton);
+    }
+
+    private void Start()
+    {
+        SetTowerPrice(StructureType.ABA_TOWER);
+        SetTowerPrice(StructureType.PPC2_TOWER);
+        SetTowerPrice(StructureType.CHLOROPLAST);
+        SetTowerPrice(StructureType.MITOCHONDRIA);
+    }
+
+    ///<Summary>
+    /// Sets the tower price on the button
+    ///</Summary>
+    private void SetTowerPrice(StructureType structureType)
+    {
+        var text = towerButtonMap[structureType].transform.Find("Panel").Find("PriceText").GetComponent<Text>();
+        int cost = Util.gameSettings.GetTowerCost(structureType);
+        text.text = cost.ToString();
     }
 
     private void Update()

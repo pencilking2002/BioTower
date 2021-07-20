@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Units;
 using Sirenix.OdinInspector;
+using BioTower.Structures;
 
 namespace BioTower
 {
@@ -38,7 +39,29 @@ public class GameSettings : ScriptableObject
     [TabGroup("Misc")] public int crystalWorth;
 
 
-    
+    public int GetTowerCost(StructureType structureType)
+    {
+        int cost = 0;
+        switch(structureType)
+        {
+            case StructureType.ABA_TOWER:
+                cost = abaTowerCost;
+                break;
+            case StructureType.PPC2_TOWER:
+                cost = ppc2TowerCost;
+                break;
+            case StructureType.CHLOROPLAST:
+                cost = chloroplastTowerCost;
+                break;
+            case StructureType.MITOCHONDRIA:
+                cost = mitoTowerCost;
+                break;
+            default:
+                Debug.Log("Unable to find structure type:"  + structureType.ToString());
+                break;
+        }
+        return cost;
+    }
 
     public int GetMaxUnitHealth(UnitType unitType)
     {

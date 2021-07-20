@@ -6,7 +6,7 @@ namespace BioTower
 {
 public class Util : MonoBehaviour
 {
-
+    public static GameSettings gameSettings => GameManager.Instance.gameSettings;
     public LayerMask enemyLayerMask;
     
     public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)

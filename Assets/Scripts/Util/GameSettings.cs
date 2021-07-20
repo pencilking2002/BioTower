@@ -34,8 +34,8 @@ public class GameSettings : ScriptableObject
     [TabGroup("Towers")] public int chloroplastTowerCost;
     [TabGroup("Towers")] public int mitoTowerCost;
     [TabGroup("Towers")] public int healTowerCost;
+    [TabGroup("Towers")] public int spawnLightDropCost;
     [TabGroup("Towers")] public int healTowerAmount;
-
     [TabGroup("Misc")] public int crystalWorth;
 
 

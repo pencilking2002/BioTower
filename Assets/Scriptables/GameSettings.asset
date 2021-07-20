@@ -25,5 +25,6 @@ MonoBehaviour:
   chloroplastTowerCost: 20
   mitoTowerCost: 20
   healTowerCost: 5
+  spawnLightDropCost: 1
   healTowerAmount: 2
   crystalWorth: 5

@@ -38,7 +38,25 @@ public class TowerMenu : MonoBehaviour
         iconMap.Add(StructureType.CHLOROPLAST, chloroplastTower);
         iconMap.Add(StructureType.DNA_BASE, playerTower);
         iconMap.Add(StructureType.MITOCHONDRIA, mitoTower);
+    }
 
+    private void Start()
+    {
+        SetPrice(healTowerButton);
+        SetPrice(healTowerFullWidthButton);
+        SetPrice(spawnUnitButton);
+        SetPrice(spawnLightParticleButton);
+    }
+
+    private void SetPrice(Button button)
+    {
+        Text text = button.transform.Find("PriceText").GetComponent<Text>();
+        if (button == healTowerButton || button == healTowerFullWidthButton)
+            text.text = Util.gameSettings.healTowerCost.ToString();
+        else if (button == spawnUnitButton)
+            text.text = Util.gameSettings.abaUnitCost.ToString();
+         else if (button == spawnLightParticleButton)
+            text.text = Util.gameSettings.spawnLightDropCost.ToString();
     }
 
     public void OnPressSpawnUnitButton()

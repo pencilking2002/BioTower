@@ -72,6 +72,11 @@ public class EconomyManager : MonoBehaviour
         return HasEnoughCurrency(GameManager.Instance.gameSettings.chloroplastTowerCost);
     }
 
+    private bool CanBuyMitoTower()
+    {
+        return HasEnoughCurrency(GameManager.Instance.gameSettings.chloroplastTowerCost);
+    }
+
     public bool CanBuyTowerHeal()
     {
         return HasEnoughCurrency(GameManager.Instance.gameSettings.healTowerCost);
@@ -87,7 +92,10 @@ public class EconomyManager : MonoBehaviour
                 return CanBuyPPC2Tower();
              case StructureType.CHLOROPLAST:
                 return CanBuyChloroplastTower();
+            case StructureType.MITOCHONDRIA:
+                return CanBuyMitoTower();
             default:
+            
                 Debug.Log("Structure Type not recognized: " + structureType.ToString());
                 break;
         }

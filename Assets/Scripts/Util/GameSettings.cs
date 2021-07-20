@@ -31,6 +31,7 @@ public class GameSettings : ScriptableObject
     [TabGroup("Towers")] [Range(0,100)] public int abaTowerCost;
     [TabGroup("Towers")] public int ppc2TowerCost;
     [TabGroup("Towers")] public int chloroplastTowerCost;
+    [TabGroup("Towers")] public int mitoTowerCost;
     [TabGroup("Towers")] public int healTowerCost;
     [TabGroup("Towers")] public int healTowerAmount;
 

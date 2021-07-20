@@ -16,6 +16,7 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] private Button healTowerButton;
     [SerializeField] private Button healTowerFullWidthButton;
     [SerializeField] private Button spawnUnitButton;
+    [SerializeField] private Button spawnLightParticleButton;
     [SerializeField] private float scaleAnimDuration = 0.1f;
     [SerializeField] private Text currTowerText;
 
@@ -26,6 +27,7 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] private Sprite abaTower;
     [SerializeField] private Sprite pp2cTower;
     [SerializeField] private Sprite chloroplastTower;
+    [SerializeField] private Sprite mitoTower;
     private Dictionary<StructureType, Sprite> iconMap = new Dictionary<StructureType, Sprite>();
 
     private void Awake()
@@ -35,6 +37,8 @@ public class TowerMenu : MonoBehaviour
         iconMap.Add(StructureType.PPC2_TOWER, pp2cTower);
         iconMap.Add(StructureType.CHLOROPLAST, chloroplastTower);
         iconMap.Add(StructureType.DNA_BASE, playerTower);
+        iconMap.Add(StructureType.MITOCHONDRIA, mitoTower);
+
     }
 
     public void OnPressSpawnUnitButton()
@@ -64,15 +68,25 @@ public class TowerMenu : MonoBehaviour
         }
     }
 
+    public void OnPressLightDropButton()
+    {
+        var selectedTower = GameManager.Instance.tapManager.selectedStructure;
+        var mitoTower = (MitoTower) selectedTower;
+        mitoTower.ShootFragment();
+    }
+
     public void OnStructureSelected(Structure structure)
     {
         //Debug.Log($"Tap {tower.structureType}");
         bool displaySpawnUnitButton = structure.structureType == StructureType.ABA_TOWER;
+        bool displayLightDropButton = structure.structureType == StructureType.MITOCHONDRIA;
+
         spawnUnitButton.gameObject.SetActive(displaySpawnUnitButton);
+        spawnLightParticleButton.gameObject.SetActive(displayLightDropButton);
         currTowerText.text = structure.structureType.ToString().Replace('_', ' ');
         towerPanel.gameObject.SetActive(true);
-        healTowerButton.gameObject.SetActive(displaySpawnUnitButton);
-        healTowerFullWidthButton.gameObject.SetActive(!displaySpawnUnitButton);
+        healTowerButton.gameObject.SetActive(displaySpawnUnitButton || displayLightDropButton);
+        healTowerFullWidthButton.gameObject.SetActive(!displaySpawnUnitButton && !displayLightDropButton);
         UpdateTowerHealthBar(structure);
         towerIcon.sprite = iconMap[structure.structureType];
     }

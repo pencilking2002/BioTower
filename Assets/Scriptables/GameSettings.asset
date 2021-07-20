@@ -23,6 +23,7 @@ MonoBehaviour:
   abaTowerCost: 10
   ppc2TowerCost: 40
   chloroplastTowerCost: 20
+  mitoTowerCost: 20
   healTowerCost: 5
   healTowerAmount: 2
   crystalWorth: 5

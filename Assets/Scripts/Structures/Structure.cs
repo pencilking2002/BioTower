@@ -20,7 +20,8 @@ public enum StructureType
     DNA_BASE,
     NONE,
     PPC2_TOWER,
-    CHLOROPLAST
+    CHLOROPLAST,
+    MITOCHONDRIA
 }
 
 public class Structure : MonoBehaviour

@@ -26,6 +26,7 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private GameObject abaTowerPrefab;
     [SerializeField] private GameObject ppc2TowerPrefab;
     [SerializeField] private GameObject chloroplastTowerPrefab;
+    [SerializeField] private GameObject mitoTowerPrefab;
 
 
     private void Awake()
@@ -46,6 +47,9 @@ public class PlacementManager : MonoBehaviour
                 break;
             case StructureType.CHLOROPLAST:
                 tower = Instantiate(chloroplastTowerPrefab);
+                break;
+            case StructureType.MITOCHONDRIA:
+                tower = Instantiate(mitoTowerPrefab);
                 break;
         }
 
@@ -68,13 +72,6 @@ public class PlacementManager : MonoBehaviour
                 //TapStructure(screenPos);
             }
         }
-        // else
-        // {
-        //     if (GameManager.Instance.econManager.CanBuyAbaUnit())
-        //     {
-        //         TapStructure(screenPos);
-        //     }
-        // }
     }
 
     private void PlaceTower(Vector3 screenPos)

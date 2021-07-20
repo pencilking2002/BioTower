@@ -60,6 +60,15 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
+    public void OnPressMitoButton()
+    {
+        bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.MITOCHONDRIA];
+        if (canBuildTower)
+        {
+            EventManager.UI.onPressTowerButton?.Invoke(StructureType.MITOCHONDRIA);
+        }
+    }
+
     private void HandleButtonColor(Button button)
     {
         var image = button.transform.Find("Panel").GetComponent<Image>();

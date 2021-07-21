@@ -1360,8 +1360,9 @@ GameObject:
   - component: {fileID: 321511675}
   - component: {fileID: 321511677}
   - component: {fileID: 321511676}
+  - component: {fileID: 321511678}
   m_Layer: 0
-  m_Name: Text
+  m_Name: TapCTAText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1427,6 +1428,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321511674}
   m_CullTransparentMesh: 0
+--- !u!225 &321511678
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321511674}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &412561099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,14 +2565,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159863bd4de1139458b6b4594213a830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleAnimCompleted: 0
   menuPanel: {fileID: 733433440}
   innerMenuPanel: {fileID: 1824991743}
   targetYOffset: 1100
   animDuration: 1.5
-  objectShake: {fileID: 0}
   title_01: {fileID: 1946148744}
   title_02: {fileID: 1328992399}
+  tapCTA: {fileID: 321511678}
 --- !u!114 &562835644
 MonoBehaviour:
   m_ObjectHideFlags: 0

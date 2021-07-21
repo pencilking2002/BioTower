@@ -79,7 +79,7 @@ public class AbaUnit : Unit
 
     public void SetNewDestination()
     {
-        var newDestination = abaTower.GetPointWithinInfluence();
+        var newDestination = abaTower.GetEdgePointWithinInfluence();
         agent.SetDestination(newDestination);
         anim.SetBool("Walk", true);
         Debug.Log("Set destination");

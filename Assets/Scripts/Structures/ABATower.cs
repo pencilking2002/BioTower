@@ -56,7 +56,7 @@ public class ABATower : Structure
         {
             var go = Instantiate(abaUnitPrefab);
             //go.transform.position = GetPointWithinInfluence();
-            go.transform.position = GetPointWithinInfluence(); 
+            go.transform.position = GetEdgePointWithinInfluence(); 
                 
             go.transform.SetParent(unitsContainer);
             var unit = go.GetComponent<AbaUnit>();
@@ -85,13 +85,17 @@ public class ABATower : Structure
     //     //towerMenu.OnTapStructure(structureType, screenPos);
     // }
 
-    public Vector2 GetPointWithinInfluence()
+    public Vector2 GetEdgePointWithinInfluence()
     {
-        return Util.GetPointWithinInfluence(
+        var point = Util.GetPointWithinInfluence(
                 minInfluenceAreaCollider.transform.position, 
                 minInfluenceAreaCollider.radius, 
                 maxInfluenceAreaCollider.radius
             );
+        Vector2 center = minInfluenceAreaCollider.transform.position;
+        Vector2 direction = (point-center).normalized;
+        point = center + direction * maxInfluenceAreaCollider.radius;
+        return point;
     }
     
     private void OnDrawGizmosSelected()

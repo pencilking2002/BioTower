@@ -21,6 +21,7 @@ public class EventManager : MonoBehaviour
         public static Action onTogglePaths; 
         public static Action<GameState> onGameStateInit;
         public static Action<WaveMode> onWaveStateInit;
+        public static Action onTitleAnimCompleted;
     }
 
     public class Structures

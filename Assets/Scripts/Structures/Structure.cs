@@ -26,6 +26,7 @@ public enum StructureType
 
 public class Structure : MonoBehaviour
 {   
+    [SerializeField] private StructureSocket socket;
     public StructureType structureType;
     [SerializeField] public bool hasHealth;
     [EnableIf("hasHealth")] [SerializeField] protected bool isAlive = true;
@@ -39,7 +40,17 @@ public class Structure : MonoBehaviour
     private Vector3 initScale;
     [SerializeField] protected GameObject influenceVisuals;
 
-    public virtual void Awake()
+    // public virtual void Awake()
+    // {
+        
+    // }
+
+    // public virtual void Start()
+    // {
+        
+    // }
+
+    public virtual void Init(StructureSocket socket)
     {
         initScale = transform.localScale;
         currHealth = maxHealth;
@@ -50,13 +61,11 @@ public class Structure : MonoBehaviour
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currHealth;
         }
-    }
 
-    public virtual void Start()
-    {
         EventManager.Structures.onStructureCreated?.Invoke(this);
         GameManager.Instance.tapManager.selectedStructure = this;
         GameManager.Instance.tapManager.hasSelectedStructure = true;
+        this.socket = socket;
     }
 
     public virtual void OnUpdate()
@@ -148,6 +157,15 @@ public class Structure : MonoBehaviour
     {
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
+    }
+    
+    private void OnDestroy()
+    {
+        if (socket != null)
+        {
+            socket.SetHasStructure(false);
+            Debug.Log("Set has structure to false");
+        }
     }
 }
 }

@@ -30,7 +30,7 @@ public class StartMenuCanvas : MonoBehaviour
 
         LeanTween.delayedCall(2, () => {
             titleAnimCompleted = true;
-            tapCTA.alpha = 1;
+            LeanTween.alphaCanvas(tapCTA, 1, 1).setLoopPingPong(-1);
         });
     }
 
@@ -57,6 +57,9 @@ public class StartMenuCanvas : MonoBehaviour
                
         if (GameManager.Instance.gameStates.IsStartMenuState() && titleAnimCompleted)
         {
+            LeanTween.cancel(tapCTA.gameObject);
+            tapCTA.alpha = 0;
+            
             EventManager.Input.onTapStartMenu?.Invoke();
             Vector3 localPos = innerMenuPanel.localPosition;
 

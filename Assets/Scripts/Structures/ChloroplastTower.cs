@@ -14,10 +14,10 @@ public class ChloroplastTower : Structure
     [SerializeField] private float shootInterval = 5;
     private float lastShotTime;
 
-    public override void Start()
-    {
-        base.Start();
-    }
+    // public override void Start()
+    // {
+    //     base.Start();
+    // }
     private GameObject CreateFragment()
     {
         GameObject fragment = Instantiate(lightFragmentPrefab); 

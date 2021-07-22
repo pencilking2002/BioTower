@@ -24,15 +24,13 @@ public class ABATower : Structure
     [SerializeField] private CircleCollider2D minInfluenceAreaCollider;
  
 
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
         Util.ScaleUpSprite(sr, 1.1f);
     }
 
-    public override void Start()
+    private void Start()
     {
-        base.Start();
         map.GenerateMap();      // NOTE: Seems like this needs to be called in order for the map to be initialized correctly after instantiation 
         var unitsContainer = transform.Find("Units");
         

@@ -21,15 +21,9 @@ public class PPC2Tower : Structure
     [SerializeField] private CircleCollider2D maxInfluenceCollider;
     [SerializeField] private CircleCollider2D minInfluenceCollider;
 
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
         Util.ScaleUpSprite(sr, 1.1f);
-    }
-
-    public override void Start()
-    {
-        base.Start();
     }
 
     public override void OnUpdate()

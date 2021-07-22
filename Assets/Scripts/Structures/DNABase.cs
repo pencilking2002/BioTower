@@ -19,6 +19,11 @@ public class DNABase : Structure
     [MinMaxSlider(0,100)][SerializeField] private Vector2 criticalRange;
     [SerializeField] private Color hurtColor;
 
+    private void Start()
+    {
+        Init(null);
+    }
+
     private void LevelLoaded()
     {
         GameManager.Instance.RegisterPlayerBase(this);

@@ -87,6 +87,8 @@ public class PlacementManager : MonoBehaviour
                 socket.SetHasStructure(true);
                 var tower = CreateStructure(structureToPlace);
                 tower.transform.position = hitInfo.collider.transform.position + placementOffset;
+                var structure = tower.GetComponent<Structure>();
+                structure.Init(socket);
                 GameManager.Instance.econManager.BuyTower(structureToPlace);
                 SetNoneState();
             }

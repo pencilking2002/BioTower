@@ -4,6 +4,7 @@ using UnityEngine;
 using BioTower.Structures;
 using UnityEngine.UI;
 using TMPro;
+using BioTower.Units;
 
 namespace BioTower
 {
@@ -61,9 +62,17 @@ public class TowerMenu : MonoBehaviour
 
     public void OnPressSpawnUnitButton()
     {
-        if (GameManager.Instance.econManager.CanBuyAbaUnit())
+        var selectedStructure = GameManager.Instance.tapManager.selectedStructure;
+
+        UnitType unitType = UnitType.ABA;
+        if (selectedStructure.structureType == StructureType.PPC2_TOWER)
+            unitType = UnitType.ABA;
+        else if (selectedStructure.structureType == StructureType.PPC2_TOWER)
+            unitType = UnitType.SNRK2;
+        
+        if (GameManager.Instance.econManager.CanBuyUnit(unitType))
         {
-            GameManager.Instance.econManager.BuyAbaUnit();
+            GameManager.Instance.econManager.BuyUnit(unitType);
             GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
         }
     }
@@ -96,10 +105,17 @@ public class TowerMenu : MonoBehaviour
     public void OnStructureSelected(Structure structure)
     {
         //Debug.Log($"Tap {tower.structureType}");
-        bool displaySpawnUnitButton = structure.structureType == StructureType.ABA_TOWER;
+        bool displaySpawnUnitButton = structure.structureType == StructureType.ABA_TOWER || structure.structureType == StructureType.PPC2_TOWER;
         bool displayLightDropButton = structure.structureType == StructureType.MITOCHONDRIA;
 
         spawnUnitButton.gameObject.SetActive(displaySpawnUnitButton);
+        var spawnUnitText = spawnUnitButton.transform.Find("Text").GetComponent<Text>();
+
+        if (structure.structureType == StructureType.ABA_TOWER)
+            spawnUnitText.text = "Spawn ABA Unit";
+        else if (structure.structureType == StructureType.PPC2_TOWER)
+            spawnUnitText.text = "Spawn SNRK2 Unit";
+
         spawnLightParticleButton.gameObject.SetActive(displayLightDropButton);
         currTowerText.text = structure.structureType.ToString().Replace('_', ' ');
         towerPanel.gameObject.SetActive(true);

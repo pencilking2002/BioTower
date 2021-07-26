@@ -12,16 +12,14 @@ public class GameSettings : ScriptableObject
 {
     [Range(1,10)]public float timeScale = 1.0f;
 
-    [Header("Unit Damage")]
+    [Header("Units")]
     [TabGroup("Units")] public int ppc2Damage = 5;
     [TabGroup("Units")] public int abaDamage = 5;
     [TabGroup("Units")] public int basicEnemyDamage = 5;
-
-
-    [Header("Unit Health")]
     [TabGroup("Units")] public int abaUnitMaxHealth = 10;
     [TabGroup("Units")] public int enemyUnitMaxHealth = 10;
     [TabGroup("Units")] public int abaUnitCost;
+    [TabGroup("Units")] public int snark2UnitCost;
 
 
     [Header("Tower Health")]
@@ -58,6 +56,24 @@ public class GameSettings : ScriptableObject
                 break;
             default:
                 Debug.Log("Unable to find structure type:"  + structureType.ToString());
+                break;
+        }
+        return cost;
+    }
+
+    public int GetUnitCost(UnitType unitType)
+    {
+        int cost = 0;
+        switch (unitType)
+        {
+            case UnitType.ABA:
+                cost = abaUnitCost;
+                break;
+            case UnitType.SNRK2:
+                cost = snark2UnitCost;
+                break;
+            default:
+                Debug.Log("Unable to find cost for unit type: " + unitType);
                 break;
         }
         return cost;

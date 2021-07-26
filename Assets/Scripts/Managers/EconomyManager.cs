@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
+using BioTower.Units;
 
 namespace BioTower
 {
@@ -57,14 +58,16 @@ public class EconomyManager : MonoBehaviour
         SpendCurrency(cost);   
     }
 
-    public bool CanBuyAbaUnit()
+    public bool CanBuyUnit(UnitType unitType)
     {
-        return HasEnoughCurrency(Util.gameSettings.abaUnitCost);
+        var unitCost = Util.gameSettings.GetUnitCost(unitType);
+        return HasEnoughCurrency(unitCost);
     }
 
-    public void BuyAbaUnit()
+    public void BuyUnit(UnitType unitType)
     {
-        SpendCurrency(Util.gameSettings.abaUnitCost);
+        var unitCost = Util.gameSettings.GetUnitCost(unitType);
+        SpendCurrency(unitCost);
     }
 
     public void BuyTowerHeal()

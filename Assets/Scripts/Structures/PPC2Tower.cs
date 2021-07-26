@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Shapes;
 using BioTower.Units;
+using PolyNav;
 
 namespace BioTower.Structures
 {
@@ -11,15 +12,19 @@ public class PPC2Tower : Structure
 {
     [SerializeField] private float discRotateSpeed = 2;
     [SerializeField] private GameObject projectilePrefab;
-
     [SerializeField] private float shootDuration = 1.0f;
     [SerializeField] private float shootInterval;
     private float lastShotTime;
 
+
     [Header("References")]
+    [SerializeField] private List<Unit> units;
     [SerializeField] private Disc influenceDisc;
     [SerializeField] private CircleCollider2D maxInfluenceCollider;
     [SerializeField] private CircleCollider2D minInfluenceCollider;
+    [SerializeField] private GameObject unitPrefab;
+    [SerializeField] private Transform unitsContainer;
+    //public PolyNav2D map;
 
     private void Awake()
     {
@@ -71,21 +76,6 @@ public class PPC2Tower : Structure
         seq.append(projectile.Explode);
     }
 
-    // private void ShootEnemy(Collider2D col)
-    // {
-    //     var delay = UnityEngine.Random.Range(0, maxShootDelay);
-
-    //     LeanTween.delayedCall(gameObject, delay, () => {
-    //         var projectile = CreateProjectile();
-    //         projectile.transform.position = transform.position + new Vector3(0,1,0);
-    //         projectile.transform.right = (col.transform.position-projectile.transform.position).normalized;
-
-    //         Vector3 targetPos = col.transform.position;
-    //         LeanTween.move(projectile.gameObject, targetPos, shootDuration)
-    //         .setOnComplete(projectile.Explode);
-    //     }); 
-    // }
-
     public Vector2 GetPointWithinInfluence()
     {
         return Util.GetPointWithinInfluence(
@@ -93,6 +83,32 @@ public class PPC2Tower : Structure
                 minInfluenceCollider.radius, 
                 maxInfluenceCollider.radius
             );
+    }
+
+     public override void SpawnUnits(int numUnits)
+    {
+        for(int i=0; i<numUnits; i++)
+        {
+            var go = Instantiate(unitPrefab);
+            //go.transform.position = GetPointWithinInfluence();
+            go.transform.position = GetPointWithinInfluence(); 
+                
+            go.transform.SetParent(unitsContainer);
+            var unit = go.GetComponent<Snrk2Unit>();
+            unit.agent.map = GameManager.Instance.levelMap.map; 
+            unit.tower = this;
+            AddUnit(unit);
+        }
+    }
+
+    public void AddUnit(Unit unit)
+    {
+        units.Add(unit);
+    }
+
+    public void RemoveUnit(Unit unit)
+    {
+        units.Remove(unit);
     }
 
     private void OnTriggerStay2D(Collider2D other)

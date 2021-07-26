@@ -74,12 +74,12 @@ public class CombatManager : MonoBehaviour
 
     private void OnEnable()
     {
-        AbaUnit.onStartCombat += OnStartCombat;
+        EventManager.Units.onStartCombat += OnStartCombat;
     }
 
     private void OnDisable()
     {
-        AbaUnit.onStartCombat -= OnStartCombat;
+        EventManager.Units.onStartCombat -= OnStartCombat;
     }
 }
 }

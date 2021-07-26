@@ -17,7 +17,6 @@ public enum AbaUnitState
 [SelectionBase]
 public class AbaUnit : Unit
 {
-    public static Action<AbaUnit, BasicEnemy> onStartCombat;
     public AbaUnitState abaUnitState;
 
     [Header("Combat enemy state")]
@@ -73,7 +72,7 @@ public class AbaUnit : Unit
             if (targetEnemy.isEngagedInCombat)
                 return;
 
-            onStartCombat?.Invoke(this, targetEnemy);
+            EventManager.Units.onStartCombat?.Invoke(this, targetEnemy);
         }
     }
 

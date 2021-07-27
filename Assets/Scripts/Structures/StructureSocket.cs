@@ -9,7 +9,7 @@ namespace BioTower
 public enum SocketType
 {
     DEFAULT,
-    CHLOROPLAST
+    SPECIAL
 }
 
 [SelectionBase]
@@ -32,10 +32,10 @@ public class StructureSocket : MonoBehaviour
         if (hasStructure)
             return;
 
-        bool isChloroplast = socketType == SocketType.CHLOROPLAST && structureType == StructureType.CHLOROPLAST;
-        bool isDefault = socketType == SocketType.DEFAULT && structureType != StructureType.CHLOROPLAST;
+        bool isSpecial = socketType == SocketType.SPECIAL && (structureType == StructureType.CHLOROPLAST || structureType == StructureType.MITOCHONDRIA);
+        bool isDefault = socketType == SocketType.DEFAULT && (structureType != StructureType.CHLOROPLAST && structureType != StructureType.MITOCHONDRIA);
 
-        if (isChloroplast)
+        if (isSpecial)
         {
             var currColor = glowingSprite.color;
             LeanTween.cancel(gameObject);
@@ -55,9 +55,9 @@ public class StructureSocket : MonoBehaviour
 
     public bool CanAcceptStructure(StructureType structureType)
     {
-        bool isChloroplast = socketType == SocketType.CHLOROPLAST && structureType == StructureType.CHLOROPLAST;
-        bool isDefault = socketType == SocketType.DEFAULT && structureType != StructureType.CHLOROPLAST;
-        return isChloroplast || isDefault;
+        bool isSpecial = socketType == SocketType.SPECIAL && (structureType == StructureType.CHLOROPLAST || structureType == StructureType.MITOCHONDRIA);
+        bool isDefault = socketType == SocketType.DEFAULT && (structureType != StructureType.CHLOROPLAST && structureType != StructureType.MITOCHONDRIA);
+        return isSpecial || isDefault;
     }
 
     public void SetHasStructure(bool hasStructure)

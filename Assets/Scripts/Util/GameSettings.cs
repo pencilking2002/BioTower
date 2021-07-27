@@ -34,7 +34,10 @@ public class GameSettings : ScriptableObject
     [TabGroup("Towers")] public int healTowerCost;
     [TabGroup("Towers")] public int spawnLightDropCost;
     [TabGroup("Towers")] public int healTowerAmount;
+
+    [TabGroup("Misc")] public int lightFragmentWorth;
     [TabGroup("Misc")] public int crystalWorth;
+    [TabGroup("Misc")] public int crystalSnrk2Worth;
 
 
     public int GetTowerCost(StructureType structureType)

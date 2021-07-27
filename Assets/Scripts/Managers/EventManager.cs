@@ -22,6 +22,12 @@ public class EventManager : MonoBehaviour
         public static Action<GameState> onGameStateInit;
         public static Action<WaveMode> onWaveStateInit;
         public static Action onTitleAnimCompleted;
+
+        public static Action onLightFragmentTapped;
+        public static Action onCrystalTapped;
+        public static Action<EnemyCrystal> onCrystalCreated;
+        public static Action<EnemyCrystal> onCrystalDestroyed;
+        public static Action<Snrk2Unit> onSnrk2UnitReachedBase;
     }
 
     public class Structures

@@ -28,4 +28,6 @@ MonoBehaviour:
   healTowerCost: 5
   spawnLightDropCost: 1
   healTowerAmount: 2
+  lightFragmentWorth: 5
   crystalWorth: 5
+  crystalSnrk2Worth: 20

@@ -32,7 +32,8 @@ public class TapManager : MonoBehaviour
         if (crystal != null)
         {
             crystal.DestroyObject();
-            GameManager.Instance.econManager.GainCrystalMoney();
+            EventManager.Game.onCrystalTapped?.Invoke();
+            //GameManager.Instance.econManager.GainCrystalMoney();
         }
     }
 
@@ -42,7 +43,8 @@ public class TapManager : MonoBehaviour
         if (fragment != null)
         {
             fragment.DestroyObject();
-            GameManager.Instance.econManager.GainCrystalMoney();
+            EventManager.Game.onLightFragmentTapped?.Invoke();
+            //GameManager.Instance.econManager.GainCrystalMoney();
         }
     }
 

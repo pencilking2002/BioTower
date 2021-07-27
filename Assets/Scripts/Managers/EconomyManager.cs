@@ -75,10 +75,39 @@ public class EconomyManager : MonoBehaviour
         SpendCurrency(Util.gameSettings.healTowerCost);
     }
 
-    public void GainCrystalMoney()
+    // public void GainCrystalMoney()
+    // {
+    //     int amount = Util.gameSettings.crystalWorth;
+    //     GainCurrency(amount);
+    // }
+
+    private void OnSnrk2UnitReachedBase(Snrk2Unit unit)
     {
-        int amount = Util.gameSettings.crystalWorth;
-        GainCurrency(amount);
+        GainCurrency(Util.gameSettings.crystalSnrk2Worth);
+    }
+
+    private void OnCrystalTapped()
+    {
+        GainCurrency(Util.gameSettings.crystalWorth);
+    }
+
+    private void OnLightFragmentTapped()
+    {
+        GainCurrency(Util.gameSettings.lightFragmentWorth);
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Game.onSnrk2UnitReachedBase += OnSnrk2UnitReachedBase;
+        EventManager.Game.onCrystalTapped += OnCrystalTapped;
+        EventManager.Game.onLightFragmentTapped += OnLightFragmentTapped;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Game.onSnrk2UnitReachedBase -= OnSnrk2UnitReachedBase;
+        EventManager.Game.onCrystalTapped -= OnCrystalTapped;
+        EventManager.Game.onLightFragmentTapped -= OnLightFragmentTapped;
     }
 
 }

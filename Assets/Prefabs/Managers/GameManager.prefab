@@ -172,6 +172,7 @@ Transform:
   - {fileID: 1851106164278671229}
   - {fileID: 6146814799796588713}
   - {fileID: 3736267305404355}
+  - {fileID: 9033838630175444492}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -198,6 +199,7 @@ MonoBehaviour:
   tapManager: {fileID: 3218757458486301715}
   econManager: {fileID: 6757466083210450277}
   cooldownManager: {fileID: 4293659511487582202}
+  crystalManager: {fileID: 5849989401036884835}
   bootController: {fileID: 0}
   towerDeathExplosionPrefab: {fileID: 8896142106390451839, guid: 27e7edfcfcea401458350f914ee2abfe,
     type: 3}
@@ -565,6 +567,7 @@ MonoBehaviour:
     type: 3}
   chloroplastTowerPrefab: {fileID: 6556679146768111441, guid: fc5fd20b60860bf48aa895745a23fa0b,
     type: 3}
+  mitoTowerPrefab: {fileID: 0}
 --- !u!1 &7102263763943850465
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,6 +711,50 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.830689
+--- !u!1 &8251527256071331314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9033838630175444492}
+  - component: {fileID: 5849989401036884835}
+  m_Layer: 0
+  m_Name: CrystalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9033838630175444492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251527256071331314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3163904365036822119}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5849989401036884835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251527256071331314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46363155f8a63c40b2d6476eb98aae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystals: []
 --- !u!1 &8924050203794242663
 GameObject:
   m_ObjectHideFlags: 0

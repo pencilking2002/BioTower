@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public EconomyManager econManager;
     public CooldownManager cooldownManager;
     private WaypointManager waypointManager;
+    public CrystalManager crystalManager;
     private Transform _projectilesContainer;
     public Transform projectilesContainer
     {

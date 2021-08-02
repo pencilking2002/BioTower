@@ -14,6 +14,7 @@ public class GameData
     public AbaTowerData abaTowerData;
     public PPC2TowerData ppc2TowerData;
     public ChloroplastTowerData chloroplastTowerData;
+    public int currLevel;
 }
 
 public class DNATowerData

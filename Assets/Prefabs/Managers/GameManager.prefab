@@ -199,6 +199,7 @@ MonoBehaviour:
   tapManager: {fileID: 3218757458486301715}
   econManager: {fileID: 6757466083210450277}
   cooldownManager: {fileID: 4293659511487582202}
+  saveManager: {fileID: 6263495069701663949}
   crystalManager: {fileID: 5849989401036884835}
   bootController: {fileID: 0}
   towerDeathExplosionPrefab: {fileID: 8896142106390451839, guid: 27e7edfcfcea401458350f914ee2abfe,

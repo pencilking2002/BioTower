@@ -30,42 +30,43 @@ public class SaveSystem : MonoBehaviour
     }
 
     [Button("Save data")]
-    public void Save()
+    public void Save(GameData inputGameData)
     {
+        #if UNITY_EDITOR
+        if (!Application.isPlaying)
+            dataPath = "C:/Repos/BioTower/Assets/Data/gamedata.json";
+        #endif
+
         if (File.Exists(dataPath))
         {
-            // Get current data
-            string fileContents = File.ReadAllText(dataPath);
-            GameData gameData = JsonUtility.FromJson<GameData>(fileContents);
-
-            // Process the data
-            gameData = ProcessGameData(gameData);
-
-            // Write data back into the file
-            string jsonString = JsonUtility.ToJson(gameData);
+            string jsonString = JsonUtility.ToJson(inputGameData, true);
             File.WriteAllText(dataPath, jsonString);
-            Debug.Log($"<color=cyan>Save Data. File exists. Write {jsonString} into save file</color>");
-
-            #if UNITY_EDITOR
+            
+            #if UNITY_EDITOR            
             UnityEditor.AssetDatabase.Refresh();
             #endif
+
+            Debug.Log($"<color=cyan>Save data. Overwrite file</color>");
         }
         else
         {
-            if (!Directory.Exists(dataDirectory))
+            var dataDir = dataDirectory;
+            if (!Application.isPlaying)
+                dataDir = "C:/Repos/BioTower/Assets/Data/";
+        
+            if (!Directory.Exists(dataDir))
             {
-                Directory.CreateDirectory(dataDirectory);
+                Directory.CreateDirectory(dataDir);
             }
 
-            // Create a new file with with default data
-            GameData gameData = new GameData();
-            string jsonString = JsonUtility.ToJson(gameData);
+            string jsonString = JsonUtility.ToJson(inputGameData, true);
             File.WriteAllText(dataPath, jsonString);
-            Debug.Log($"<color=cyan>Save data. File doesn't exist. Create new file and fill it with default data</color>");
 
             #if UNITY_EDITOR
             UnityEditor.AssetDatabase.Refresh();
             #endif
+
+            Debug.Log($"<color=cyan>Save data. File doesn't exist. Create new file and fill it with default data</color>");
         }
     }
 
@@ -87,6 +88,8 @@ public class SaveSystem : MonoBehaviour
             }
 
             GameData gameData = new GameData();
+            gameData.currLevel = 0;
+
             string jsonString = JsonUtility.ToJson(gameData);
             File.WriteAllText(dataPath, jsonString);
             Debug.Log($"<color=cyan>Load Data. File doesn't exist. Create a new one with default data and read write it to the file</color>");
@@ -95,15 +98,23 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
-    [Button("Delete Data Directory")]
-    public void DeleteDataDirectory()
+    [Button("Reset Save")]
+    public void ResetQuests()
     {
-        Directory.Delete(dataDirectory);
+        var gameData = new GameData();
+        gameData.currLevel = 0;
+        Save(gameData); 
     }
 
-    private GameData ProcessGameData(GameData gameData)
-    {
-        return gameData;
-    }
+    // [Button("Delete Data Directory")]
+    // public void DeleteDataDirectory()
+    // {
+    //     Directory.Delete(dataDirectory);
+    // }
+
+    // private GameData ProcessGameData(GameData gameData)
+    // {
+    //     return gameData;
+    // }
 }
 }

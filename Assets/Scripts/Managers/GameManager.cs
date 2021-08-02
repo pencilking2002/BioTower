@@ -7,6 +7,7 @@ using BioTower.Structures;
 using PolyNav;
 using BioTower.Level;
 using Sirenix.OdinInspector;
+using BioTower.SaveData;
 
 namespace BioTower
 {
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     public TapManager tapManager;
     public EconomyManager econManager;
     public CooldownManager cooldownManager;
+    public SaveSystem saveManager;
     private WaypointManager waypointManager;
     public CrystalManager crystalManager;
     private Transform _projectilesContainer;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using BioTower.SaveData;
 
 namespace BioTower.UI
 {
@@ -33,6 +34,14 @@ public class GameCanvas : MonoBehaviour
     {
         gameOverPanel.gameObject.SetActive(true);
         gameOverText.text = isWin ? "YOU WIN!" : "GAME OVER";
+        
+        // Unlocks next level upon win
+        if (isWin)
+        {
+            var gameData = GameManager.Instance.saveManager.Load();
+            int currLevelIndex = LevelInfo.current.levelIndex;
+            gameData.currLevel = currLevelIndex++; 
+        }
     }
 
     private void OnEnable()

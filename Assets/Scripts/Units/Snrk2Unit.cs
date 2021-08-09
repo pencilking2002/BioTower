@@ -11,7 +11,9 @@ public enum SnrkUnitState
     IDLE,
     SEARCHING,
     CARRYING_CRYSTAL,
-    RETURNING
+    RETURNING,
+    COMBAT,
+    DESTROYED
 }
 
 public class Snrk2Unit : Unit
@@ -32,6 +34,19 @@ public class Snrk2Unit : Unit
         CheckForCrystals();
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!IsCombatState() && other.gameObject.layer == 10) 
+        {
+            var targetEnemy = other.transform.parent.GetComponent<BasicEnemy>();
+
+            if (targetEnemy.isEngagedInCombat)
+                return;
+
+            EventManager.Units.onStartCombat?.Invoke(this, targetEnemy);
+        }
+    }
+
     private void CheckForCrystals()
     {
         if (hasCrystalTarget)
@@ -43,6 +58,7 @@ public class Snrk2Unit : Unit
         }
     }
 
+
     private void SetupUnitToSearchForCrystal()
     {
         crystalTarget = Util.crystalManager.FindValidCrystal(transform);
@@ -52,6 +68,13 @@ public class Snrk2Unit : Unit
         SetSearchingState();
     }
 
+    public override void SetCombatState() { snrkUnitState = SnrkUnitState.COMBAT; } 
+    public override void SetRoamingState() { snrkUnitState = SnrkUnitState.SEARCHING; }
+    public override void SetDestroyedState() { snrkUnitState = SnrkUnitState.DESTROYED; }
+    public override void SetNewDestination() { }
+    public override void Deregister() { tower.RemoveUnit(this); }
+
+    private bool IsCombatState() { return snrkUnitState == SnrkUnitState.COMBAT; }
     public bool IsIdleState() { return snrkUnitState == SnrkUnitState.IDLE; }
     public bool IsCarryingCrystalState() { return snrkUnitState == SnrkUnitState.CARRYING_CRYSTAL; }
     public bool IsSearchingState() { return snrkUnitState == SnrkUnitState.SEARCHING; }

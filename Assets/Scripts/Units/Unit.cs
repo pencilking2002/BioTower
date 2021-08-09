@@ -70,10 +70,17 @@ public class Unit : MonoBehaviour
         return isAlive;
     }
 
+    public virtual void SetCombatState() {  } 
+    public virtual void SetRoamingState() {  }
+    public virtual void SetDestroyedState() { }
+    public virtual void SetNewDestination() { }
+    public virtual void Deregister() { }
+
     protected void KillUnit() 
     { 
         isAlive = false;
         Destroy(gameObject); 
     }
+    
 }
 }

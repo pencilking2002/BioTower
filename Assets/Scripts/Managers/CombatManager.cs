@@ -11,7 +11,7 @@ public class CombatManager : MonoBehaviour
     private AbaUnit abaUnit;
     private BasicEnemy enemy;
 
-    private void OnStartCombat(AbaUnit unit, BasicEnemy enemy)
+    private void OnStartCombat(Unit unit, BasicEnemy enemy)
     {
         unit.SetCombatState();
         enemy.StopMoving();
@@ -30,7 +30,7 @@ public class CombatManager : MonoBehaviour
             });
     }
 
-    private void ResolveCombat(AbaUnit unit, BasicEnemy enemy)
+    private void ResolveCombat(Unit unit, BasicEnemy enemy)
     {
         float percentage = UnityEngine.Random.Range(0.0f,1.0f) * 100;
         float winChance = abaWinChance;
@@ -56,7 +56,7 @@ public class CombatManager : MonoBehaviour
            
             LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {
                 enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
-                unit.abaTower.RemoveUnit(unit);
+                unit.Deregister();
                 bool isUnitAlive = unit.TakeDamage(GameManager.Instance.gameSettings.basicEnemyDamage);
 
                 if (isUnitAlive)

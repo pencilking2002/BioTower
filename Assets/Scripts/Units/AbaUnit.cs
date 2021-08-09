@@ -57,10 +57,10 @@ public class AbaUnit : Unit
     public bool IsCombatState() { return abaUnitState == AbaUnitState.COMBAT; }
     public bool IsDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
 
-    public void SetRoamingState() { abaUnitState = AbaUnitState.ROAMING; }
+    public override void SetRoamingState() { abaUnitState = AbaUnitState.ROAMING; }
     public void SetCarryingEnemyState() { abaUnitState = AbaUnitState.CARRYING_ENEMY; }
-    public void SetCombatState() { abaUnitState = AbaUnitState.COMBAT; } 
-    public bool SetDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
+    public override void SetCombatState() { abaUnitState = AbaUnitState.COMBAT; } 
+    public override void SetDestroyedState() { abaUnitState = AbaUnitState.DESTROYED; }
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -76,7 +76,7 @@ public class AbaUnit : Unit
         }
     }
 
-    public void SetNewDestination()
+    public override void SetNewDestination()
     {
         var newDestination = abaTower.GetEdgePointWithinInfluence();
         agent.SetDestination(newDestination);
@@ -93,6 +93,10 @@ public class AbaUnit : Unit
         }
     }
 
+    public override void Deregister()
+    {
+        abaTower.RemoveUnit(this);
+    }
     // public override void KillUnit()
     // {
     //     base.KillUnit();

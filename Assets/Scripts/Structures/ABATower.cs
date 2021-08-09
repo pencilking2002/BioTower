@@ -74,15 +74,6 @@ public class ABATower : Structure
         abaUnits.Remove(unit);
     }
 
-    // public override void OnTapStructure(Vector3 screenPos)
-    // {
-    //     // var oldScale = sr.transform.localScale;
-    //     // LeanTween.scale(sr.gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
-    //     // SpawnUnits(1);
-    //     //Debug.Log("tap structure");
-    //     //towerMenu.OnTapStructure(structureType, screenPos);
-    // }
-
     public Vector2 GetEdgePointWithinInfluence()
     {
         var point = Util.GetPointWithinInfluence(

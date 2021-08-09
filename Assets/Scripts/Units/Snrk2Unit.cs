@@ -19,7 +19,6 @@ public enum SnrkUnitState
 public class Snrk2Unit : Unit
 {
     public SnrkUnitState snrkUnitState;
-    [SerializeField] private List<AbaUnit> abaUnits;
     public bool hasCrystalTarget;
     [SerializeField] private EnemyCrystal crystalTarget;
 
@@ -59,7 +58,7 @@ public class Snrk2Unit : Unit
     }
 
 
-    private void SetupUnitToSearchForCrystal()
+     public void SetupUnitToSearchForCrystal()
     {
         crystalTarget = Util.crystalManager.FindValidCrystal(transform);
         crystalTarget.isTargeted = true;
@@ -138,7 +137,7 @@ public class Snrk2Unit : Unit
     private void OnEnable()
     {
         agent.OnDestinationReached += OnDestinationReached;
-        agent.OnDestinationInvalid += OnDestinationReached; // Used for when the destination is inside am obstacle
+        agent.OnDestinationInvalid += OnDestinationReached; // Used for when the destination is inside an obstacle
         EventManager.Game.onCrystalDestroyed += OnCrystalDestroyed;
         EventManager.Structures.onStructureDestroyed += OnStructureDestroyed;
     }

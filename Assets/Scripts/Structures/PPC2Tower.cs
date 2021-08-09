@@ -145,5 +145,32 @@ public class PPC2Tower : Structure
             lastShotTime = Time.time;
         }
     }
+
+    private void OnCrystalCreated(EnemyCrystal crystal)
+    {
+        foreach(Unit unit in units)
+        {
+            Snrk2Unit snrkUnit = (Snrk2Unit) unit;
+            if (snrkUnit.IsIdleState())
+            {
+               if (Util.crystalManager.HasValidCrystals())
+                {
+                    snrkUnit.SetupUnitToSearchForCrystal();
+                    return;
+                }
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Game.onCrystalCreated += OnCrystalCreated;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Game.onCrystalCreated -= OnCrystalCreated;
+    }
+    
 }
 }

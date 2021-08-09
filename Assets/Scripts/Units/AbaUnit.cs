@@ -80,7 +80,7 @@ public class AbaUnit : Unit
     {
         if (agent == null)
             return;
-            
+
         var newDestination = abaTower.GetEdgePointWithinInfluence();
         agent.SetDestination(newDestination);
         anim.SetBool("Walk", true);
@@ -115,6 +115,11 @@ public class AbaUnit : Unit
     {
         agent.OnDestinationReached -= OnDestinationReached;
         agent.OnDestinationInvalid -= OnDestinationReached;
+    }
+    
+    private void OnDestroy()
+    {
+        EventManager.Units.onUnitDestroyed?.Invoke(this);
     }
 }
 }

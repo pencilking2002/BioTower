@@ -153,5 +153,9 @@ public class Snrk2Unit : Unit
         EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
     }
 
+    private void OnDestroy()
+    {
+        EventManager.Units.onUnitDestroyed?.Invoke(this);
+    }
 }
 }

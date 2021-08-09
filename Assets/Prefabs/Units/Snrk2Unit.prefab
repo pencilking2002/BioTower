@@ -737,11 +737,12 @@ MonoBehaviour:
   sr: {fileID: 8646917852430403711}
   isAlive: 0
   snrkUnitState: 0
-  abaUnits: []
   hasCrystalTarget: 0
   crystalTarget: {fileID: 0}
   tower: {fileID: 0}
   agent: {fileID: 6815928587370128805}
+  explosionPrefab: {fileID: 3054088472958059921, guid: 5748f736f87dc234c96a8d816728ce6b,
+    type: 3}
 --- !u!114 &6815928587370128805
 MonoBehaviour:
   m_ObjectHideFlags: 0

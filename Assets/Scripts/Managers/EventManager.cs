@@ -49,6 +49,7 @@ public class EventManager : MonoBehaviour
         public static Action<Unit, BasicEnemy> onStartCombat;
         public static Action onEnemyBaseReached;
         public static Action<BasicEnemy> onEnemyReachedDestination;
+        public static Action<Unit> onUnitDestroyed;
     }
 
     public class UI

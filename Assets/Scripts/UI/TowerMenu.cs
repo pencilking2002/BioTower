@@ -65,15 +65,28 @@ public class TowerMenu : MonoBehaviour
         var selectedStructure = GameManager.Instance.tapManager.selectedStructure;
 
         UnitType unitType = UnitType.ABA;
-        if (selectedStructure.structureType == StructureType.PPC2_TOWER)
-            unitType = UnitType.ABA;
-        else if (selectedStructure.structureType == StructureType.PPC2_TOWER)
-            unitType = UnitType.SNRK2;
-        
-        if (GameManager.Instance.econManager.CanBuyUnit(unitType))
+        if (selectedStructure.structureType == StructureType.ABA_TOWER)
         {
-            GameManager.Instance.econManager.BuyUnit(unitType);
-            GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
+            unitType = UnitType.ABA;
+            if (GameManager.Instance.econManager.CanBuyUnit(unitType))
+            {
+                GameManager.Instance.econManager.BuyUnit(unitType);
+                GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
+            }
+        }
+        else if (selectedStructure.structureType == StructureType.PPC2_TOWER)
+        {
+            PPC2Tower ppc2Tower = (PPC2Tower) selectedStructure;
+
+            if (!ppc2Tower.HasUnitsWithinTowerInfluence())
+            { 
+                unitType = UnitType.SNRK2;
+                if (GameManager.Instance.econManager.CanBuyUnit(unitType))
+                {
+                    GameManager.Instance.econManager.BuyUnit(unitType);
+                    GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
+                }
+            }
         }
     }
 

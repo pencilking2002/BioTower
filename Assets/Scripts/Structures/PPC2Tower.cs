@@ -85,7 +85,7 @@ public class PPC2Tower : Structure
             );
     }
 
-     public override void SpawnUnits(int numUnits)
+    public override void SpawnUnits(int numUnits)
     {
         for(int i=0; i<numUnits; i++)
         {
@@ -99,6 +99,29 @@ public class PPC2Tower : Structure
             unit.tower = this;
             AddUnit(unit);
         }
+    }
+    
+    public bool HasUnitsWithinTowerInfluence()
+    {
+        if (units.Count <= 1)
+        {
+            return false;
+        }
+        else
+        {
+            foreach(Unit unit in units)
+            {
+                bool isWithinInfluence = IsUnitWithinTowerInfluence(unit);
+                if (isWithinInfluence)
+                    return true;
+            }
+        }
+        return false;
+    }
+    private bool IsUnitWithinTowerInfluence(Unit unit)
+    {
+        var distance = Vector2.Distance(maxInfluenceCollider.transform.position, unit.transform.position);
+        return distance <= maxInfluenceCollider.radius;
     }
 
     public void AddUnit(Unit unit)

@@ -738,7 +738,9 @@ MonoBehaviour:
   isAlive: 0
   snrkUnitState: 0
   abaUnits: []
-  abaTower: {fileID: 0}
+  hasCrystalTarget: 0
+  crystalTarget: {fileID: 0}
+  tower: {fileID: 0}
   agent: {fileID: 6815928587370128805}
 --- !u!114 &6815928587370128805
 MonoBehaviour:
@@ -753,7 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 0}
-  maxSpeed: 0.5
+  maxSpeed: 1
   mass: 20
   stoppingDistance: 0.2
   slowingDistance: 0.01

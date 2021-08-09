@@ -125,9 +125,9 @@ public class TowerMenu : MonoBehaviour
         var spawnUnitText = spawnUnitButton.transform.Find("Text").GetComponent<Text>();
 
         if (structure.structureType == StructureType.ABA_TOWER)
-            spawnUnitText.text = "Spawn ABA Unit";
+            spawnUnitText.text = "ABA\nUnit";
         else if (structure.structureType == StructureType.PPC2_TOWER)
-            spawnUnitText.text = "Spawn SNRK2 Unit";
+            spawnUnitText.text = "SNRK2\nUnit";
 
         spawnLightParticleButton.gameObject.SetActive(displayLightDropButton);
         currTowerText.text = structure.structureType.ToString().Replace('_', ' ');

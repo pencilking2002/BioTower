@@ -56,18 +56,28 @@ public class CombatManager : MonoBehaviour
 
         if (isWin)
         {
-            GameManager.Instance.UnregisterEnemy(enemy);
-            bool isEnemyAlive = enemy.TakeDamage(GameManager.Instance.gameSettings.abaDamage);
-            
-            if (isEnemyAlive)
-                enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
-    
+            // Enemy died before combat could be resolved
+            if (enemy != null)
+            {
+                GameManager.Instance.UnregisterEnemy(enemy);
+                bool isEnemyAlive = enemy.TakeDamage(GameManager.Instance.gameSettings.abaDamage);
+                
+                if (isEnemyAlive)
+                    enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
+            }
             unit.SetRoamingState();
             unit.SetNewDestination();
         }
         else
         {
-           
+            // Enemy won but died before combat was over
+            if (enemy == null)
+            {
+                unit.SetRoamingState();
+                unit.SetNewDestination();
+                return;
+            }
+
             LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {
                 enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
                 unit.Deregister();

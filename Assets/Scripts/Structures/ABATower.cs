@@ -76,6 +76,9 @@ public class ABATower : Structure
 
     public Vector2 GetEdgePointWithinInfluence()
     {
+        if (minInfluenceAreaCollider == null || maxInfluenceAreaCollider == null)
+            return Vector2.zero;
+            
         var point = Util.GetPointWithinInfluence(
                 minInfluenceAreaCollider.transform.position, 
                 minInfluenceAreaCollider.radius, 

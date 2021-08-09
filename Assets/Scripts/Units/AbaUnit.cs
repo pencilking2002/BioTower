@@ -78,6 +78,9 @@ public class AbaUnit : Unit
 
     public override void SetNewDestination()
     {
+        if (agent == null)
+            return;
+            
         var newDestination = abaTower.GetEdgePointWithinInfluence();
         agent.SetDestination(newDestination);
         anim.SetBool("Walk", true);

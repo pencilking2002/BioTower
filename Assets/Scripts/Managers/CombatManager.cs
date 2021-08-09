@@ -18,16 +18,26 @@ public class CombatManager : MonoBehaviour
         unit.StopMoving();
 
         // Perform combat
-        var unitScale = unit.transform.localScale;
-        LeanTween.scale(unit.gameObject, unitScale * 1.2f, 0.25f).setLoopPingPong(6);
-        unitScale = enemy.transform.localScale;
 
-        LeanTween.scale(enemy.gameObject, unitScale * 1.2f, 0.25f)
-            .setLoopPingPong(6)
-            .setDelay(0.25f)
-            .setOnComplete(() => {
+        if (unit.unitType == UnitType.ABA)
+        {
+            var unitScale = unit.transform.localScale;
+            LeanTween.scale(unit.gameObject, unitScale * 1.2f, 0.25f).setLoopPingPong(6);
+            unitScale = enemy.transform.localScale;
+
+            LeanTween.scale(enemy.gameObject, unitScale * 1.2f, 0.25f)
+                .setLoopPingPong(6)
+                .setDelay(0.25f)
+                .setOnComplete(() => {
+                    ResolveCombat(unit, enemy);
+                });
+        }
+        else if (unit.unitType == UnitType.SNRK2)
+        {
+            LeanTween.delayedCall(1.0f, () => {
                 ResolveCombat(unit, enemy);
             });
+        }
     }
 
     private void ResolveCombat(Unit unit, BasicEnemy enemy)
@@ -40,6 +50,10 @@ public class CombatManager : MonoBehaviour
         
         bool isWin = winChance < percentage;
         
+        // Make Snrk2 always lose to enemy
+        if (unit.unitType == UnitType.SNRK2)
+            isWin = false;
+
         if (isWin)
         {
             GameManager.Instance.UnregisterEnemy(enemy);

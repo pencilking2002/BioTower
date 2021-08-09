@@ -151,7 +151,7 @@ public class PPC2Tower : Structure
         foreach(Unit unit in units)
         {
             Snrk2Unit snrkUnit = (Snrk2Unit) unit;
-            if (snrkUnit.IsIdleState())
+            if (snrkUnit.IsIdleState() || snrkUnit.IsReturniningState())
             {
                if (Util.crystalManager.HasValidCrystals())
                 {

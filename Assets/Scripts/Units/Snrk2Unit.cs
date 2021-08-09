@@ -22,7 +22,6 @@ public class Snrk2Unit : Unit
     public bool hasCrystalTarget;
     [SerializeField] private EnemyCrystal crystalTarget;
 
-
     [Header("References")]
     public PPC2Tower tower;
     public PolyNavAgent agent;
@@ -86,19 +85,21 @@ public class Snrk2Unit : Unit
 
     private void OnDestinationReached()
     {
+        Debug.Log($"Snrk2 unit: Destination reached: hasCrystaltarget: {hasCrystalTarget}. state: {snrkUnitState}");
+
         if (!hasCrystalTarget)
             return;
 
         if (IsSearchingState())
         {
-            crystalTarget.DestroyObject();
             SetCarryingCrystalState();
+            crystalTarget.DestroyObject();
             agent.SetDestination(GameManager.Instance.playerBase.transform.position);   
         }
         else if (IsCarryingCrystalState())
         {
             EventManager.Game.onSnrk2UnitReachedBase?.Invoke(this);
-            tower.RemoveUnit(this);
+            Deregister();
             Destroy(gameObject);
         }
     }
@@ -107,6 +108,8 @@ public class Snrk2Unit : Unit
     {
         if (!hasCrystalTarget || IsCarryingCrystalState())
             return;
+        
+        //if (IsSearchingState() && hasCrystalTarget && crystalTarget == crystal)
         
         if (IsSearchingState())
         {

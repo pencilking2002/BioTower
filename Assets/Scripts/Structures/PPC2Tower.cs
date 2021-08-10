@@ -162,13 +162,15 @@ public class PPC2Tower : Structure
         }
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
         EventManager.Game.onCrystalCreated += OnCrystalCreated;
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
+        base.OnDisable();
         EventManager.Game.onCrystalCreated -= OnCrystalCreated;
     }
     

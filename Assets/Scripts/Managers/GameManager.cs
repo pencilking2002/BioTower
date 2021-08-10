@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
         enemy.transform.parent = enemyContainer.transform;
         enemyList.Add(enemy);
         enemy.agent.map = levelMap.map;
-        Debug.Log("Register enemy agent: " + enemy.gameObject.name + ". map: " + levelMap.map.gameObject.name + ". destination: " + playerBase.gameObject.name);
+//        Debug.Log("Register enemy agent: " + enemy.gameObject.name + ". map: " + levelMap.map.gameObject.name + ". destination: " + playerBase.gameObject.name);
     }
 
     public void UnregisterEnemy(BasicEnemy enemy)

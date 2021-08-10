@@ -61,7 +61,7 @@ public class Unit : MonoBehaviour
             currHealth = Mathf.Clamp(currHealth, 0, GameManager.Instance.gameSettings.GetMaxUnitHealth(unitType));
             healthSlider.value = currHealth;
 
-            Debug.Log("Enemy take damage. health: " + currHealth);
+//            Debug.Log("Enemy take damage. health: " + currHealth);
             if (currHealth == 0)
             {
                 KillUnit();

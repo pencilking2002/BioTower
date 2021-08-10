@@ -105,7 +105,7 @@ public class BasicEnemy : Unit
         }
         else if (currWaypoint.isEndpoint)
         {
-            Debug.Log("Base reached");
+//            Debug.Log("Base reached");
             EventManager.Units.onEnemyBaseReached?.Invoke();
             Destroy(gameObject);
         }

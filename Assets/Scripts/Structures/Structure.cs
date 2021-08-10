@@ -105,6 +105,10 @@ public class Structure : MonoBehaviour
         isAlive = false;
         GameManager.Instance.CreateTowerExplosion(transform.position);
         EventManager.Structures.onStructureDestroyed?.Invoke(this);
+
+        if (socket != null)
+            socket.SetHasStructure(false);
+        
         Destroy(gameObject);
     }
 
@@ -120,24 +124,25 @@ public class Structure : MonoBehaviour
 
     public virtual void OnStructureSelected(Structure structure)
     {
+        Debug.Log($"Select {structure.gameObject.name}. This structure: {gameObject.name}. Same structure: {structure == this}");
+
         if (structure == this)
         {
-            spriteOutline?.SetActive(true);
+            spriteOutline.SetActive(true);
 
             if (influenceVisuals != null)
                 influenceVisuals.SetActive(true);
 
             LeanTween.cancel(gameObject);
             transform.localScale = initScale;
-            //var oldScale = transform.localScale;
             LeanTween.scale(gameObject, initScale * 1.1f, 0.1f).setLoopPingPong(1);
         }
         else
         {
-            spriteOutline?.SetActive(false);
+            spriteOutline.SetActive(false);
 
             if (influenceVisuals != null)
-                influenceVisuals?.SetActive(false);
+                influenceVisuals.SetActive(false);
         }
     }
 
@@ -146,26 +151,16 @@ public class Structure : MonoBehaviour
         OnStructureSelected(structure);
     }
     
-    private void OnEnable()
+    public virtual void OnEnable()
     {
         EventManager.Structures.onStructureSelected += OnStructureSelected;
         EventManager.Structures.onStructureCreated += OnStructureCreated;
-
     }
 
-    private void OnDisable()
+    public virtual void OnDisable()
     {
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
-    }
-    
-    private void OnDestroy()
-    {
-        if (socket != null)
-        {
-            socket.SetHasStructure(false);
-            Debug.Log("Set has structure to false");
-        }
     }
 }
 }

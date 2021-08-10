@@ -705,6 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6028c1781f8bae6488b6ce8993aeae95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  socket: {fileID: 0}
   structureType: 0
   hasHealth: 1
   isAlive: 1

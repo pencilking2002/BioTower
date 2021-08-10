@@ -37,7 +37,7 @@ public class DNABase : Structure
             healthSlider.value = currHealth;
 
             var healthPercentage = GetHealthPercentage();
-            Debug.Log("Health percentage: " + healthPercentage);
+//            Debug.Log("Health percentage: " + healthPercentage);
             sr.sprite = prestineStateSprite;
 
             if (healthPercentage < hurtMinRange.y && healthPercentage > hurtMinRange.x)

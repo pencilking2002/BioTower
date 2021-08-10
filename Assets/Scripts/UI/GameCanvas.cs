@@ -26,7 +26,6 @@ public class GameCanvas : MonoBehaviour
 
     public void OnPressUpgrade()
     {
-        Debug.Log("Upgrade");
         EventManager.UI.onPressUpgradeButton?.Invoke();
     }
 

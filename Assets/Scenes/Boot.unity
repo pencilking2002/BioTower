@@ -9548,8 +9548,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 806458803}
-        m_MethodName: OnPressUpgrade
+      - m_Target: {fileID: 806458808}
+        m_MethodName: OnPressPurchaseUpgradeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

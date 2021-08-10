@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using BioTower.SaveData;
+using UnityEngine.SceneManagement;
 
+namespace BioTower
+{
 public class UpgradePanel : MonoBehaviour
 {
     [SerializeField] private Color defaultButtonColor;
@@ -18,25 +22,36 @@ public class UpgradePanel : MonoBehaviour
     public void OnPressUpgradeButton01()
     {
         infoPanel.gameObject.SetActive(true);
-        upgradeButton_01.color = Color.white;
-        upgradeButton_02.color = defaultButtonColor;
-        upgradeButton_03.color = defaultButtonColor;
+        // upgradeButton_01.color = Color.white;
+        // upgradeButton_02.color = defaultButtonColor;
+        // upgradeButton_03.color = defaultButtonColor;
     }
 
     public void OnPressUpgradeButton02()
     {
         infoPanel.gameObject.SetActive(true);
-        upgradeButton_01.color = defaultButtonColor;
-        upgradeButton_02.color = Color.white;
-        upgradeButton_03.color = defaultButtonColor;
+        // upgradeButton_01.color = defaultButtonColor;
+        // upgradeButton_02.color = Color.white;
+        // upgradeButton_03.color = defaultButtonColor;
     }
 
     public void OnPressUpgradeButton03()
     {
         infoPanel.gameObject.SetActive(true);
-        upgradeButton_01.color = defaultButtonColor;
-        upgradeButton_02.color = defaultButtonColor;
-        upgradeButton_03.color = Color.white;
-
+        // upgradeButton_01.color = defaultButtonColor;
+        // upgradeButton_02.color = defaultButtonColor;
+        // upgradeButton_03.color = Color.white;
     }
+
+    public void OnPressPurchaseUpgradeButton()
+    {
+        //Debug.Log("Purchase upgrade");
+        var gameData = GameManager.Instance.saveManager.Load();
+        int currLevel = LevelInfo.current.levelIndex;
+        gameData.currLevel = ++currLevel;
+        GameManager.Instance.saveManager.Save(gameData);
+        SceneManager.LoadScene(0);
+        Debug.Log("saved. curr level: " + currLevel + ". Next level: " + gameData.currLevel);
+    }
+}
 }

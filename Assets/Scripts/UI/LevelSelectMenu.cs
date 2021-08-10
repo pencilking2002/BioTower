@@ -26,7 +26,7 @@ public class LevelSelectMenu : MonoBehaviour
         for (int i=0; i<levelSelectButtons.Length; i++)
         {
             var btn = levelSelectButtons[i];
-            if (i <= 0)
+            if (i <= currLevel)
                 btn.Unlock();
             else
                 btn.Lock();

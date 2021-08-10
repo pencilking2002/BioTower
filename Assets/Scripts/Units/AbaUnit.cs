@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using PolyNav;
 using BioTower.Structures;
 using System;
 
@@ -28,7 +27,6 @@ public class AbaUnit : Unit
     [Header("References")]
     public ABATower abaTower;
     public Rigidbody rb;
-    public PolyNavAgent agent;
     [SerializeField] private Animator anim;
 
     private void Awake()
@@ -115,11 +113,6 @@ public class AbaUnit : Unit
     {
         agent.OnDestinationReached -= OnDestinationReached;
         agent.OnDestinationInvalid -= OnDestinationReached;
-    }
-    
-    private void OnDestroy()
-    {
-        EventManager.Units.onUnitDestroyed?.Invoke(this);
     }
 }
 }

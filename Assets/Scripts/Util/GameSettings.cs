@@ -17,6 +17,7 @@ public class GameSettings : ScriptableObject
     [TabGroup("Units")] public int abaDamage = 5;
     [TabGroup("Units")] public int basicEnemyDamage = 5;
     [TabGroup("Units")] public int abaUnitMaxHealth = 10;
+    [TabGroup("Units")] public int snrkUnitMaxHealth = 5;
     [TabGroup("Units")] public int enemyUnitMaxHealth = 10;
     [TabGroup("Units")] public int abaUnitCost;
     [TabGroup("Units")] public int snark2UnitCost;
@@ -90,6 +91,8 @@ public class GameSettings : ScriptableObject
                 return abaUnitMaxHealth;
             case UnitType.BASIC_ENEMY:
                 return enemyUnitMaxHealth;
+            case UnitType.SNRK2:
+                return snrkUnitMaxHealth;
         }
 
         Debug.Log("Unit type not recognized: " + unitType);

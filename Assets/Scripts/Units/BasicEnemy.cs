@@ -13,7 +13,6 @@ public class BasicEnemy : Unit
     [Header("References")]
     [SerializeField] private GameObject crystalPrefab;
     [SerializeField] private Collider2D triggerCollider;
-    public PolyNavAgent agent;
 
     
     [Header("Enemy state")]

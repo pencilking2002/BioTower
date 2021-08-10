@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("References")]
+    public UnitManager unitManager;
     public Util util;
     public WaveManager waveManager;
     public PlacementManager placementManager;
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
             return _bootController;
         }
     }
-    
+
     [TabGroup("Particle Prefabs")] public GameObject towerDeathExplosionPrefab;
     [TabGroup("Particle Prefabs")] public GameObject crystalExplosionPrefab;
 

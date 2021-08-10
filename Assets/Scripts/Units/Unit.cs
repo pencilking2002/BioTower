@@ -4,6 +4,7 @@ using UnityEngine;
 using NaughtyAttributes;
 using BioTower.Level;
 using UnityEngine.UI;
+using PolyNav;
 
 namespace BioTower.Units
 {
@@ -17,11 +18,12 @@ public enum UnitType
 public class Unit : MonoBehaviour
 {
     public UnitType unitType;
+    public PolyNavAgent agent;
     [SerializeField] private bool hasHealth;
     //[EnableIf("hasHealth")] [Range(0,100)] [SerializeField] private int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] private int currHealth;
     [EnableIf("hasHealth")] [SerializeField] private Slider healthSlider;
-    [SerializeField] protected SpriteRenderer sr;
+    public SpriteRenderer sr;
     public bool isAlive;
     
     public virtual void Start()
@@ -39,6 +41,8 @@ public class Unit : MonoBehaviour
                 healthSlider.gameObject.SetActive(false);
         }
         isAlive = true;
+
+        GameManager.Instance.unitManager.Register(this);
     }
 
     public virtual void StopMoving() { }
@@ -79,7 +83,9 @@ public class Unit : MonoBehaviour
     protected void KillUnit() 
     { 
         isAlive = false;
-        Destroy(gameObject); 
+        EventManager.Units.onUnitDestroyed?.Invoke(this);
+        GameManager.Instance.unitManager.Unregister(this); 
+        Destroy(gameObject);
     }
     
 }

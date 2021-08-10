@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PolyNav;
 using BioTower.Structures;
 
 namespace BioTower.Units
@@ -24,10 +23,10 @@ public class Snrk2Unit : Unit
 
     [Header("References")]
     public PPC2Tower tower;
-    public PolyNavAgent agent;
 
     public override void Start()
     {
+        base.Start();
         Util.ScaleUpSprite(sr, 1.1f);
         CheckForCrystals();
     }
@@ -100,7 +99,8 @@ public class Snrk2Unit : Unit
         {
             EventManager.Game.onSnrk2UnitReachedBase?.Invoke(this);
             Deregister();
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            KillUnit();
         }
     }
 
@@ -134,7 +134,7 @@ public class Snrk2Unit : Unit
     private void OnStructureDestroyed(Structure structure)
     {
         if (structure == tower)
-            Destroy(gameObject);
+            KillUnit();
     }
 
     private void OnEnable()
@@ -151,11 +151,6 @@ public class Snrk2Unit : Unit
         agent.OnDestinationInvalid -= OnDestinationReached;
         EventManager.Game.onCrystalDestroyed -= OnCrystalDestroyed;
         EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
-    }
-
-    private void OnDestroy()
-    {
-        EventManager.Units.onUnitDestroyed?.Invoke(this);
     }
 }
 }

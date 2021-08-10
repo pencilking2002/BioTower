@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2780707826441001859}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1113, z: 0}
-  m_LocalScale: {x: 0.04087264, y: 0.04087264, z: 0.04087264}
+  m_LocalScale: {x: -0.04087264, y: 0.04087264, z: 0.04087264}
   m_Children: []
   m_Father: {fileID: 2780707828294620588}
   m_RootOrder: 1
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitType: 1
+  agent: {fileID: 663975515}
   hasHealth: 1
   currHealth: 0
   healthSlider: {fileID: 5313867590096428429}
@@ -138,7 +139,6 @@ MonoBehaviour:
   crystalPrefab: {fileID: 7511931919741912127, guid: 860a79906c90b98489d792877fb6902a,
     type: 3}
   triggerCollider: {fileID: 5933956694322970941}
-  agent: {fileID: 663975515}
   stoppedColor: {r: 0.8113208, g: 0.5778747, b: 0.5778747, a: 1}
   hasCrystal: 0
   hasCrystalTintColor: {r: 0.7470297, g: 0.48998755, b: 0.8584906, a: 1}

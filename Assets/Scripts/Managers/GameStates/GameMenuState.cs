@@ -35,6 +35,13 @@ public class GameMenuState : BootStateBase
     public override GameState OnUpdate(GameState gameState)
     {
         Init(gameState);
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            gameState = GameState.GAME_OVER_WIN;
+            EventManager.Game.onGameOver?.Invoke(false);
+        }
+
         return gameState;
     }
 

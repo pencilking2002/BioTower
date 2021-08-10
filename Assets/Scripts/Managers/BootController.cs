@@ -10,7 +10,7 @@ using BioTower.UI;
 
 namespace BioTower
 {
-public class BootController : MonoBehaviour
+public class  BootController : MonoBehaviour
 {
         
     [Header("Game State")]
@@ -54,6 +54,7 @@ public class BootController : MonoBehaviour
 
     private void Update()
     {
+
         gameState = charStates[gameState].OnUpdate(gameState);
         GameManager.Instance.gameStates.gameState = gameState;
     }

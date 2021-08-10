@@ -29,6 +29,10 @@ public class WavePanel : MonoBehaviour
         seq.append(displayDuration);
         seq.append(LeanTween.alphaCanvas(waveTitleCG, 0, 1.0f));
         seq.append(() => { 
+
+            if (!GameManager.Instance.gameStates.IsGameState())
+                return;
+                
             panel.gameObject.SetActive(false);
             waveTitleCG.gameObject.SetActive(false); 
         });

@@ -9,6 +9,7 @@ TagManager:
   - WaypointManager
   - ProjectilesContainer
   - LevelInfo
+  - BootController
   layers:
   - Default
   - TransparentFX

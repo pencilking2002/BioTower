@@ -47,7 +47,18 @@ public class GameManager : MonoBehaviour
             return _projectilesContainer;
         }
     }
-    public BootController bootController;
+
+    private BootController _bootController;
+    public BootController bootController
+    {
+        get
+        {
+            if (_bootController == null)
+                _bootController = GameObject.FindGameObjectWithTag("BootController").GetComponent<BootController>();
+            return _bootController;
+        }
+    }
+    
     [TabGroup("Particle Prefabs")] public GameObject towerDeathExplosionPrefab;
     [TabGroup("Particle Prefabs")] public GameObject crystalExplosionPrefab;
 
@@ -69,11 +80,6 @@ public class GameManager : MonoBehaviour
         {
             playerBase.TakeDamage(100);
             Debug.Log("Make player base take 100 DMG");
-        }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            GameManager.Instance.gameStates.SetWinState();
         }
 
         Time.timeScale = gameSettings.timeScale;  

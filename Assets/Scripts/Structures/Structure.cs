@@ -128,7 +128,8 @@ public class Structure : MonoBehaviour
 
         if (structure == this)
         {
-            spriteOutline.SetActive(true);
+            if (spriteOutline != null)
+                spriteOutline.SetActive(true);
 
             if (influenceVisuals != null)
                 influenceVisuals.SetActive(true);
@@ -139,7 +140,8 @@ public class Structure : MonoBehaviour
         }
         else
         {
-            spriteOutline.SetActive(false);
+            if (spriteOutline != null)
+                spriteOutline.SetActive(false);
 
             if (influenceVisuals != null)
                 influenceVisuals.SetActive(false);

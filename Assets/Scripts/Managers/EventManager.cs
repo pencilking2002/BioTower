@@ -64,5 +64,11 @@ public class EventManager : MonoBehaviour
         public static Action<Vector3> onTouchBegan;     // screen position of the touch
         public static Action onTapStartMenu;
     }
+
+    public class Tutorials
+    {
+        public static Action<TutorialData> onTutorialStart;
+        public static Action<TutorialData> onTutorialEnd;
+    }
 }
 }

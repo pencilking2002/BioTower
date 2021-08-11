@@ -72,14 +72,16 @@ public class DNABase : Structure
         TakeDamage(1);
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
         EventManager.Game.onLevelLoaded_01 += LevelLoaded;
         EventManager.Units.onEnemyBaseReached += OnBaseReached;
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
+        base.OnDisable();
         EventManager.Game.onLevelLoaded_01 -= LevelLoaded;
         EventManager.Units.onEnemyBaseReached -= OnBaseReached;
     }

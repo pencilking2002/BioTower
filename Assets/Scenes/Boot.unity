@@ -9381,8 +9381,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad:
-    sceneAsset: {fileID: 102900000, guid: 89d7ce3e2b99fa844829ea8b83ccbea5, type: 3}
-    scenePath: Assets/Scenes/Main_X.unity
+    sceneAsset: {fileID: 102900000, guid: b79ab77184ff8bd468a162fd1e5bf8ba, type: 3}
+    scenePath: Assets/Scenes/Main_Intro.unity
   isUnlocked: 0
   button: {fileID: 0}
   btnText: {fileID: 0}

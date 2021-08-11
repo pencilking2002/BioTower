@@ -72,6 +72,7 @@ public class TowerMenu : MonoBehaviour
             {
                 GameManager.Instance.econManager.BuyUnit(unitType);
                 GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
+                EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
             }
         }
         else if (selectedStructure.structureType == StructureType.PPC2_TOWER)
@@ -85,6 +86,7 @@ public class TowerMenu : MonoBehaviour
                 {
                     GameManager.Instance.econManager.BuyUnit(unitType);
                     GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
+                    EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
                 }
             }
         }

@@ -4,52 +4,158 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using BioTower.Structures;
+using BioTower.Units;
 
 namespace BioTower
 {
 public class TutorialCanvas : MonoBehaviour
 {
+    public static bool tutorialInProgress;
 
     [Header("Tutorial Data")]
     [SerializeField] private TutorialData[] tutorials;
-    [SerializeField] private int currTutorial = -1;
+    [SerializeField] private int currTutorialIndex = -1;
     [SerializeField] private bool initTutorialOnStart;
+    private TutorialData currTutorial => tutorials[currTutorialIndex];
 
 
     [Header("Tutorial UI")]
     public Image tutPanel;
-    public TextMeshProUGUI tutText;
+    [SerializeField] private TextMeshProUGUI tutText;
+    [SerializeField] private CanvasGroup ctaText;
     [SerializeField] private int slideInOffset = 50;
     private Vector3 initTutPanelLocalPos;
 
-    private void Start()
+    private void Awake()
     {
         initTutPanelLocalPos = tutPanel.transform.localPosition;
 
         if (initTutorialOnStart)
             StartNextTutorial();
-    }
-
-    private void SetupPanel()
-    {
-       
+        
     }
 
     public void StartNextTutorial()
     {
-        currTutorial++;
-        var currTut = tutorials[currTutorial];
-        tutText.text = currTut.text;
-
-        if (currTut.transition == TransitionType.SLIDE_IN)
+        if (currTutorialIndex+1 >= tutorials.Length)
         {
-            tutPanel.transform.localPosition += new Vector3(0, slideInOffset, 0);
-            var seq = LeanTween.sequence();
-            seq.append(currTut.delay);
-            seq.append(LeanTween.moveLocalY(tutPanel.gameObject, initTutPanelLocalPos.y, 0.25f));
+            EndTutorial();
         }
-       
-        EventManager.Tutorials.onTutorialStart?.Invoke(tutorials[currTutorial]);
+        else
+        {
+            LeanTween.cancel(ctaText.gameObject);
+            ctaText.alpha = 0;
+            tutorialInProgress = true;
+            
+            currTutorialIndex++;
+            tutText.text = currTutorial.text;
+
+            if (currTutorial.transition == TransitionType.SLIDE_IN)
+            {
+                tutPanel.transform.localPosition += new Vector3(0, slideInOffset, 0);
+                var seq = LeanTween.sequence();
+                seq.append(currTutorial.delay);
+                seq.append(LeanTween.moveLocalY(tutPanel.gameObject, initTutPanelLocalPos.y, 0.25f).setEaseOutCubic());
+
+            }
+            else if (currTutorial.transition == TransitionType.BLINK)
+            {
+                LeanTween.scale(tutPanel.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1);
+            }
+
+            // Blink the conitnue button
+            if (currTutorial.requiredAction == RequiredAction.TAP_ANYWHERE)
+            {
+                if (currTutorialIndex == tutorials.Length-1)
+                    ctaText.GetComponent<TextMeshProUGUI>().text = "DONE";
+                else
+                    ctaText.GetComponent<TextMeshProUGUI>().text = "CONTINUE >";
+
+                LeanTween.delayedCall(ctaText.gameObject, 1.0f, () => {
+                    LeanTween.alphaCanvas(ctaText, 1, 0.5f).setLoopPingPong(-1);
+                });
+            }
+        
+            EventManager.Tutorials.onTutorialStart?.Invoke(tutorials[currTutorialIndex]);
+        }
+    }
+
+    private void EndTutorial()
+    {
+        tutorialInProgress = false;
+        var seq = LeanTween.sequence();
+        seq.append(LeanTween.moveLocalY(tutPanel.gameObject, initTutPanelLocalPos.y+slideInOffset, 0.25f).setEaseOutCubic());
+    }
+
+    private void OnTouchBegan(Vector3 pos)
+    {
+        if (tutorialInProgress && currTutorial.requiredAction == RequiredAction.TAP_ANYWHERE)
+        {
+            StartNextTutorial();
+        }
+    }
+
+    private void OnPressTowerButton(StructureType structureType)
+    {
+        if (tutorialInProgress && structureType == StructureType.ABA_TOWER)
+        {
+            if (currTutorial.requiredAction == RequiredAction.TAP_ABA_TOWER_BUTTON)
+            {
+                StartNextTutorial();
+            }
+        }
+    }
+
+    private void OnTapSpawnUnitButton(UnitType unitType)
+    {
+        if (tutorialInProgress && unitType == UnitType.ABA)
+        {
+            if (currTutorial.requiredAction == RequiredAction.SPAWN_ABA_UNIT)
+            {
+                StartNextTutorial();
+            }
+        }
+    }
+
+    private void OnStructureSelected(Structure structure)
+    {
+        // if (tutorialInProgress && structure.structureType == StructureType.ABA_TOWER)
+        // {
+        //     if (currTutorial.requiredAction == RequiredAction.TOWER_SELECTED)
+        //     {
+        //         StartNextTutorial();
+        //     }
+        // }
+    }
+
+    private void OnStructureCreated(Structure structure)
+    {
+        if (tutorialInProgress && structure.structureType == StructureType.ABA_TOWER)
+        {
+            if (currTutorial.requiredAction == RequiredAction.PLACE_ABA_TOWER)
+            {
+                StartNextTutorial();
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Structures.onStructureCreated += OnStructureCreated;
+        EventManager.Structures.onStructureSelected += OnStructureSelected;
+        EventManager.UI.onTapSpawnUnitButton += OnTapSpawnUnitButton;
+        EventManager.UI.onPressTowerButton += OnPressTowerButton;
+        EventManager.Input.onTouchBegan += OnTouchBegan;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Structures.onStructureCreated -= OnStructureCreated;
+        EventManager.Structures.onStructureSelected -= OnStructureSelected;
+        EventManager.UI.onTapSpawnUnitButton -= OnTapSpawnUnitButton;
+        EventManager.Input.onTouchBegan -= OnTouchBegan;
+        EventManager.UI.onPressTowerButton -= OnPressTowerButton;
     }
 
 }

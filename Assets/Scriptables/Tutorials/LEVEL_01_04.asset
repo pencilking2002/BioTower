@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
-  m_Name: LEVEL_01_02
+  m_Name: LEVEL_01_04
   m_EditorClassIdentifier: 
-  text: Let's create an ABA tower! Tap on the button below
-  requiredAction: 1
+  text: 'Tap the button to spawn an ABA unit. '
+  requiredAction: 4
   transition: 1
   delay: 0

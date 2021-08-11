@@ -28,6 +28,8 @@ public class EventManager : MonoBehaviour
         public static Action<EnemyCrystal> onCrystalCreated;
         public static Action<EnemyCrystal> onCrystalDestroyed;
         public static Action<Snrk2Unit> onSnrk2UnitReachedBase;
+
+        public static Action<int> onLevelAwake;
     }
 
     public class Structures
@@ -49,6 +51,7 @@ public class EventManager : MonoBehaviour
         public static Action<Unit, BasicEnemy> onStartCombat;
         public static Action onEnemyBaseReached;
         public static Action<BasicEnemy> onEnemyReachedDestination;
+        public static Action<Unit> onUnitSpawned;
         public static Action<Unit> onUnitDestroyed;
     }
 
@@ -57,6 +60,7 @@ public class EventManager : MonoBehaviour
         public static Action<StructureType> onPressTowerButton;
         public static Action onPressUpgradeButton;
         public static Action onTapLevelSelectButton;
+        public static Action<UnitType> onTapSpawnUnitButton;
     }
 
     public class Input

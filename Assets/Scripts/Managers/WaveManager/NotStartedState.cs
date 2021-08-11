@@ -18,7 +18,6 @@ public class NotStartedState : WaveState
     public override WaveMode OnUpdate(Wave wave)
     {
         Init();
-
         wave.timeStarted = Time.time;
         return WaveMode.DELAY;
     }

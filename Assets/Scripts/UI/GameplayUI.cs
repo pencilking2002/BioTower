@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using BioTower.Structures;
+using BioTower.SaveData;
 using TMPro;
 
 namespace BioTower.UI
@@ -131,8 +132,19 @@ public class GameplayUI : MonoBehaviour
         HandleButtonColor(button);
     }   
 
+    private void OnLevelAwake(int levelIndex)
+    {
+        if (levelIndex == 0)
+        {
+            Pp2cTowerButton.gameObject.SetActive(false);
+            chloroplastTowerButton.gameObject.SetActive(false);
+            mitoTowerButton.gameObject.SetActive(false);
+        }
+    }
+
     private void OnEnable()
     {
+        EventManager.Game.onLevelAwake += OnLevelAwake;
         EventManager.Game.onSpendCurrency += OnSpendCurrency;
         EventManager.Game.onGainCurrency += OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted += OnStructureCooldownStarted;
@@ -140,6 +152,7 @@ public class GameplayUI : MonoBehaviour
 
     private void OnDisable()
     {
+        EventManager.Game.onLevelAwake -= OnLevelAwake;
         EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         EventManager.Game.onGainCurrency -= OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted -= OnStructureCooldownStarted;

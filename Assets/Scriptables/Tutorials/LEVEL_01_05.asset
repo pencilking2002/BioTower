@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
-  m_Name: LEVEL_01_02
+  m_Name: LEVEL_01_05
   m_EditorClassIdentifier: 
-  text: Let's create an ABA tower! Tap on the button below
-  requiredAction: 1
+  text: Good! ABA units patrol the vicinity of ABA towers and look for enemies to
+    fight
+  requiredAction: 0
   transition: 1
   delay: 0

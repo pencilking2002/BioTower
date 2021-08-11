@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
     public LevelSettings waveSettings; 
     [SerializeField] private WaveMode waveMode;
     public int currWave;
+    [HideInInspector] public bool wavesInitialized;
     [HideInInspector] public bool wavesHaveCompleted;
 
     private NotStartedState notStartedState;
@@ -22,7 +23,7 @@ public class WaveManager : MonoBehaviour
 
     private Dictionary<WaveMode, WaveState> waveStateMap = new Dictionary<WaveMode, WaveState>(); 
 
-    private void Awake()
+    private void Start()
     {
         notStartedState = GetComponent<NotStartedState>();
         delayState = GetComponent<DelayState>();
@@ -33,11 +34,6 @@ public class WaveManager : MonoBehaviour
         waveStateMap.Add(WaveMode.DELAY, delayState); 
         waveStateMap.Add(WaveMode.IN_PROGRESS, inProgressState); 
         waveStateMap.Add(WaveMode.ENDED, endedState); 
-
-        // Initialize waves
-        for (int i=0; i<waveSettings.waves.Length; i++)
-            waveSettings.waves[i].Init(i);
-        
     }
 
     public void SpawnEnemy(Vector2 minMaxSpeed)
@@ -60,12 +56,15 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.gameStates.IsGameState())
+            return;
+
+        if (!wavesInitialized)
+            return;
+
         if (wavesHaveCompleted)
             return;
 
-        if (!GameManager.Instance.gameStates.IsGameState())
-            return;
-            
         var wave = waveSettings.waves[currWave];
         wave.state = waveStateMap[wave.state].OnUpdate(wave);
         waveMode = wave.state;
@@ -78,14 +77,31 @@ public class WaveManager : MonoBehaviour
         enemy.SetSpeed(minMaxSpeed, 0.5f);
     }
 
+    private void OnLevelStart(int levelIndex)
+    {
+        // Don't automatically start waves on the first level
+        // because there's a tutorial
+        if (levelIndex == 0)
+            return;
+
+        // Initialize waves
+        for (int i=0; i<waveSettings.waves.Length; i++)
+            waveSettings.waves[i].Init(i);
+        
+        wavesInitialized = true;
+        
+    }
+
     private void OnEnable()
     {
         EventManager.Units.onEnemyReachedDestination += OnEnemyReachedDestination;
+        EventManager.Game.onLevelAwake += OnLevelStart;
     }
 
     private void OnDisable()
     {
         EventManager.Units.onEnemyReachedDestination -= OnEnemyReachedDestination;
+        EventManager.Game.onLevelAwake -= OnLevelStart;
     }
 
 }

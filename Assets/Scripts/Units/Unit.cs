@@ -43,6 +43,7 @@ public class Unit : MonoBehaviour
         isAlive = true;
 
         GameManager.Instance.unitManager.Register(this);
+        EventManager.Units.onUnitSpawned?.Invoke(this);
     }
 
     public virtual void StopMoving() { }

@@ -3695,6 +3695,7 @@ MonoBehaviour:
   tutText: {fileID: 1956844845}
   ctaText: {fileID: 379996957}
   slideInOffset: 400
+  revealDuration: 0.02
 --- !u!114 &1091501341
 MonoBehaviour:
   m_ObjectHideFlags: 0

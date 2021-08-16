@@ -25,9 +25,10 @@ public class TutorialCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tutText;
     [SerializeField] private CanvasGroup ctaText;
     [SerializeField] private int slideInOffset = 50;
+    [SerializeField] private float revealDuration = 0.05f;
     private Vector3 initTutPanelLocalPos;
 
-    private void Awake()
+    private void Start()
     {
         initTutPanelLocalPos = tutPanel.transform.localPosition;
 
@@ -50,18 +51,23 @@ public class TutorialCanvas : MonoBehaviour
             
             currTutorialIndex++;
             tutText.text = currTutorial.text;
-
+            
             if (currTutorial.transition == TransitionType.SLIDE_IN)
             {
                 tutPanel.transform.localPosition += new Vector3(0, slideInOffset, 0);
                 var seq = LeanTween.sequence();
                 seq.append(currTutorial.delay);
                 seq.append(LeanTween.moveLocalY(tutPanel.gameObject, initTutPanelLocalPos.y, 0.25f).setEaseOutCubic());
+                seq.append(() => {
+                    GameManager.Instance.util.TextReveal(tutText, revealDuration);
+                });
 
             }
             else if (currTutorial.transition == TransitionType.BLINK)
             {
-                LeanTween.scale(tutPanel.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1);
+                LeanTween.scale(tutPanel.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1).setOnComplete(() => {
+                    GameManager.Instance.util.TextReveal(tutText, revealDuration);
+                });
             }
 
             // Blink the conitnue button

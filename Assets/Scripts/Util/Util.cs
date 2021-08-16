@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace BioTower
 {
@@ -45,6 +46,29 @@ public class Util : MonoBehaviour
         Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minRadius, maxRadius);
         point += centerPoint;
         return point;
+    }
+
+    public void TextReveal(TMP_Text text, float revealDuration)
+    {
+        StartCoroutine(RevealCharacters(text, revealDuration));
+    }
+
+    private IEnumerator RevealCharacters(TMP_Text textComponent, float revealDuration)
+    {
+        textComponent.ForceMeshUpdate();
+        TMP_TextInfo textInfo = textComponent.textInfo;
+        int totalVisibleCharacters = textInfo.characterCount; // Get # of Visible Character in text object
+        int visibleCount = 0;
+
+        while (visibleCount <= totalVisibleCharacters)
+        {
+            textComponent.maxVisibleCharacters = visibleCount; // How many characters should TextMeshPro display?
+            visibleCount += 1;
+            yield return new WaitForSeconds(revealDuration);
+        }
+
+        if (visibleCount >= totalVisibleCharacters)
+            yield return null;
     }
 
 }

@@ -22,6 +22,7 @@ public class TutorialCanvas : MonoBehaviour
 
     [Header("Tutorial UI")]
     public Image tutPanel;
+    [SerializeField] private ArrowController arrowController;
     [SerializeField] private TextMeshProUGUI tutText;
     [SerializeField] private CanvasGroup ctaText;
     [SerializeField] private int slideInOffset = 50;
@@ -50,23 +51,34 @@ public class TutorialCanvas : MonoBehaviour
             tutorialInProgress = true;
             
             currTutorialIndex++;
-            tutText.text = currTutorial.text;
             
+            
+            //if (!currTutorial.hasArrow)
+            arrowController.HideArrows();
+
             if (currTutorial.transition == TransitionType.SLIDE_IN)
             {
+              
                 tutPanel.transform.localPosition += new Vector3(0, slideInOffset, 0);
                 var seq = LeanTween.sequence();
                 seq.append(currTutorial.delay);
                 seq.append(LeanTween.moveLocalY(tutPanel.gameObject, initTutPanelLocalPos.y, 0.25f).setEaseOutCubic());
                 seq.append(() => {
+                    tutText.text = currTutorial.text;
                     GameManager.Instance.util.TextReveal(tutText, revealDuration);
+                    if (currTutorial.hasArrows)
+                        arrowController.DisplayArrows(currTutorial.arrowCoords);
                 });
 
             }
             else if (currTutorial.transition == TransitionType.BLINK)
             {
                 LeanTween.scale(tutPanel.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1).setOnComplete(() => {
+                    tutText.text = currTutorial.text;
                     GameManager.Instance.util.TextReveal(tutText, revealDuration);
+                    
+                    if (currTutorial.hasArrows)
+                        arrowController.DisplayArrows(currTutorial.arrowCoords);
                 });
             }
 
@@ -86,7 +98,6 @@ public class TutorialCanvas : MonoBehaviour
             EventManager.Tutorials.onTutorialStart?.Invoke(tutorials[currTutorialIndex]);
         }
     }
-
     private void EndTutorial()
     {
         tutorialInProgress = false;

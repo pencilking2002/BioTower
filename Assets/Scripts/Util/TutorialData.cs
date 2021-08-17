@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace BioTower
 {
@@ -26,5 +27,7 @@ public class TutorialData : ScriptableObject
     public RequiredAction requiredAction;
     public TransitionType transition;
     [Range(0,5)] public float delay;
+    public bool hasArrows;
+    [ShowIf("hasArrows")] public Vector2[] arrowCoords;
 }
 }

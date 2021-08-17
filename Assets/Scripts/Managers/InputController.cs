@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace BioTower
 {
 public class InputController : MonoBehaviour
 {
+    GameObject lastSelected;
+    
     private void Update()
     {
         #if UNITY_EDITOR || UNITY_WEBGL
@@ -25,6 +29,27 @@ public class InputController : MonoBehaviour
         }
 
         #endif
+
+        HandleButtonDeselect();
+
+    }
+
+    private void HandleButtonDeselect()
+    {
+        if (!GameManager.Instance.gameStates.IsGameState())
+            return;
+
+        if(EventSystem.current.currentSelectedGameObject == null)
+        {
+            if (lastSelected.gameObject.activeSelf && lastSelected.GetComponent<Button>() != null && lastSelected.GetComponent<Button>().interactable)
+            {
+                EventSystem.current.SetSelectedGameObject(lastSelected);
+            }            
+        }
+        else
+        {
+            lastSelected = EventSystem.current.currentSelectedGameObject;
+        }
     }
 }
 }

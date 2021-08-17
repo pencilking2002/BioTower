@@ -15,6 +15,7 @@ public class Constants
     public static string waypointManager = "WaypointManager";
     public static string projectilesContainer = "ProjectilesContainer";
     public static string levelInfo = "LevelInfo";
+    public static string tutorialCanvas = "TutorialCanvas";
     
     // Scenes
     public static string boot = "Boot";

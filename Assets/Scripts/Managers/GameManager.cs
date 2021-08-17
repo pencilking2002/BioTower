@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     public UnitManager unitManager;
+    public TutorialCanvas currTutCanvas => 
+        GameObject.FindGameObjectWithTag(Constants.tutorialCanvas).GetComponent<TutorialCanvas>();
     public Util util;
     public WaveManager waveManager;
     public PlacementManager placementManager;

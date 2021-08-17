@@ -17,7 +17,7 @@ public class TutorialCanvas : MonoBehaviour
     [SerializeField] private TutorialData[] tutorials;
     [SerializeField] private int currTutorialIndex = -1;
     [SerializeField] private bool initTutorialOnStart;
-    private TutorialData currTutorial => tutorials[currTutorialIndex];
+    public TutorialData currTutorial => tutorials[currTutorialIndex];
 
 
     [Header("Tutorial UI")]

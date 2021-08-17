@@ -4493,7 +4493,7 @@ GameObject:
   - component: {fileID: 1091501345}
   m_Layer: 0
   m_Name: TutorialCanvas
-  m_TagString: Untagged
+  m_TagString: TutorialCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

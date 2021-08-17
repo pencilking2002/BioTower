@@ -93,7 +93,8 @@ public class Snrk2Unit : Unit
         {
             SetCarryingCrystalState();
             crystalTarget.DestroyObject();
-            agent.SetDestination(GameManager.Instance.playerBase.transform.position);   
+            agent.SetDestination(GameManager.Instance.playerBase.transform.position);  
+            EventManager.Units.onCrystalPickedUp?.Invoke(this); 
         }
         else if (IsCarryingCrystalState())
         {

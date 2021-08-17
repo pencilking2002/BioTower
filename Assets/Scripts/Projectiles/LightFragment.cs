@@ -15,6 +15,7 @@ public class LightFragment : MonoBehaviour
 
         GameManager.Instance.CreateLightExplosion(transform.position);
         hasBeenPickedUp = true;
+        EventManager.Structures.onLightPickedUp?.Invoke();
         LeanTween.scale(gameObject, Vector3.zero, 0.1f)
             .setOnComplete(() => {
                 Destroy(gameObject);

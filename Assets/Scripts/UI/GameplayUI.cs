@@ -60,6 +60,7 @@ public class GameplayUI : MonoBehaviour
         if (canBuildTower)
         {
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.ABA_TOWER);
+            EventManager.UI.onTapButton?.Invoke();
         }
     }
     
@@ -69,6 +70,7 @@ public class GameplayUI : MonoBehaviour
         if (canBuildTower)
         {
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.PPC2_TOWER);
+            EventManager.UI.onTapButton?.Invoke();
         }
     }
 
@@ -78,6 +80,7 @@ public class GameplayUI : MonoBehaviour
         if (canBuildTower)
         {
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.CHLOROPLAST);
+            EventManager.UI.onTapButton?.Invoke();
         }
     }
 
@@ -87,6 +90,7 @@ public class GameplayUI : MonoBehaviour
         if (canBuildTower)
         {
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.MITOCHONDRIA);
+            EventManager.UI.onTapButton?.Invoke();
         }
     }
 

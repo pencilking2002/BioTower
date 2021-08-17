@@ -44,6 +44,8 @@ public class EventManager : MonoBehaviour
         public static Action<Structure> onStructureSelected;
         public static Action<Structure> onStructureGainHealth;
         public static Action<Structure> onStructureLoseHealth;
+        public static Action onLightDropped;
+        public static Action onLightPickedUp;
 
     }
 
@@ -54,6 +56,7 @@ public class EventManager : MonoBehaviour
         public static Action<BasicEnemy> onEnemyReachedDestination;
         public static Action<Unit> onUnitSpawned;
         public static Action<Unit> onUnitDestroyed;
+        public static Action<Snrk2Unit> onCrystalPickedUp;
     }
 
     public class UI
@@ -62,6 +65,8 @@ public class EventManager : MonoBehaviour
         public static Action onPressUpgradeButton;
         public static Action onTapLevelSelectButton;
         public static Action<UnitType> onTapSpawnUnitButton;
+        public static Action onTapButton;
+        public static Action onLetterReveal;
     }
 
     public class Input
@@ -74,6 +79,7 @@ public class EventManager : MonoBehaviour
     {
         public static Action<TutorialData> onTutorialStart;
         public static Action<TutorialData> onTutorialEnd;
+        public static Action onTutTextPopUp;
     }
 }
 }

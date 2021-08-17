@@ -17,3 +17,6 @@ MonoBehaviour:
   requiredAction: 4
   transition: 1
   delay: 0
+  hasArrows: 1
+  arrowCoords:
+  - {x: 570, y: -190}

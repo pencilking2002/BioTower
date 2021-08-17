@@ -40,12 +40,6 @@ public class AudioData : ScriptableObject
     [TabGroup("UI")] public AudioClip mitoBtnTapped;    
     [TabGroup("UI")] public AudioClip textPopUp;
     [TabGroup("UI")] public AudioClip btnSelected;
-
-   
-
-
-
-
-
+    [TabGroup("UI")] public AudioClip letterRevealed;
 }
 }

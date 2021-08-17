@@ -64,6 +64,7 @@ public class Util : MonoBehaviour
         {
             textComponent.maxVisibleCharacters = visibleCount; // How many characters should TextMeshPro display?
             visibleCount += 1;
+            EventManager.UI.onLetterReveal?.Invoke();
             yield return new WaitForSeconds(revealDuration);
         }
 

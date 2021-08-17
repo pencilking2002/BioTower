@@ -18,6 +18,6 @@ MonoBehaviour:
   delay: 0
   hasArrows: 1
   arrowCoords:
-  - {x: -510, y: -100}
-  - {x: -260, y: 120}
-  - {x: 20, y: -100}
+  - {x: -510, y: -40}
+  - {x: -260, y: 180}
+  - {x: 20, y: -40}

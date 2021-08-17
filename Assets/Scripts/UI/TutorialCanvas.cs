@@ -62,12 +62,16 @@ public class TutorialCanvas : MonoBehaviour
                 tutPanel.transform.localPosition += new Vector3(0, slideInOffset, 0);
                 var seq = LeanTween.sequence();
                 seq.append(currTutorial.delay);
+                seq.append(() => { EventManager.Tutorials.onTutorialStart?.Invoke(tutorials[currTutorialIndex]); });
                 seq.append(LeanTween.moveLocalY(tutPanel.gameObject, initTutPanelLocalPos.y, 0.25f).setEaseOutCubic());
                 seq.append(() => {
                     tutText.text = currTutorial.text;
                     GameManager.Instance.util.TextReveal(tutText, revealDuration);
+
                     if (currTutorial.hasArrows)
                         arrowController.DisplayArrows(currTutorial.arrowCoords);
+                    
+                    
                 });
 
             }
@@ -80,6 +84,7 @@ public class TutorialCanvas : MonoBehaviour
                     if (currTutorial.hasArrows)
                         arrowController.DisplayArrows(currTutorial.arrowCoords);
                 });
+                EventManager.Tutorials.onTutorialStart?.Invoke(tutorials[currTutorialIndex]);
             }
 
             // Blink the conitnue button
@@ -95,7 +100,7 @@ public class TutorialCanvas : MonoBehaviour
                 });
             }
         
-            EventManager.Tutorials.onTutorialStart?.Invoke(tutorials[currTutorialIndex]);
+            
         }
     }
     private void EndTutorial()

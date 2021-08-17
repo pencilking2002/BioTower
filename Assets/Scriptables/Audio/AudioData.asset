@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791d40c9c342c4448b89a3a04de48b18, type: 3}
+  m_Name: AudioData
+  m_EditorClassIdentifier: 
+  levelTrack: {fileID: 0}
+  gameOverLose: {fileID: 0}
+  gameOverWin: {fileID: 0}
+  enemyBaseAttacked: {fileID: 0}
+  abaSpawned: {fileID: 0}
+  crystalDeposited: {fileID: 0}
+  crystalPickedUp: {fileID: 0}
+  towerPlaced: {fileID: 0}
+  towerHealed: {fileID: 0}
+  towerSelected: {fileID: 0}
+  towerDeath: {fileID: 0}
+  lightDropped: {fileID: 0}
+  lightPickedUp: {fileID: 0}
+  mitoBtnTapped: {fileID: 0}
+  textPopUp: {fileID: 0}
+  btnSelected: {fileID: 0}

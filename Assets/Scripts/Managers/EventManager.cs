@@ -34,6 +34,7 @@ public class EventManager : MonoBehaviour
 
     public class Structures
     {
+        public static Action onBaseTakeDamage;
         public static Action onBaseDestroyed;
         public static Action<StructureType> onStartPlacementState;
         public static Action onSetNonePlacementState;

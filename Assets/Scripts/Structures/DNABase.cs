@@ -50,6 +50,10 @@ public class DNABase : Structure
                 KillStructure();
                 EventManager.Structures.onBaseDestroyed?.Invoke();
             }
+            else
+            {
+                EventManager.Structures.onBaseTakeDamage?.Invoke();
+            }
         }
     }
 

@@ -72,7 +72,8 @@ public class AudioManager : MonoBehaviour
 
     private void OnStructureCreated(Structure tower)
     {
-        PlaySound(data.towerPlaced);
+        if (tower.structureType != StructureType.DNA_BASE)
+            PlaySound(data.towerPlaced);
     }
 
     private void OnStructureGainHealth(Structure tower)

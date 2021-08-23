@@ -23,6 +23,7 @@ public class Snrk2Unit : Unit
 
     [Header("References")]
     public PPC2Tower tower;
+    [SerializeField] private GameObject crystalSprite;
 
     public override void Start()
     {
@@ -94,7 +95,8 @@ public class Snrk2Unit : Unit
             SetCarryingCrystalState();
             crystalTarget.DestroyObject();
             agent.SetDestination(GameManager.Instance.playerBase.transform.position);  
-            EventManager.Units.onCrystalPickedUp?.Invoke(this); 
+            crystalSprite.SetActive(true);
+            EventManager.Units.onCrystalPickedUp?.Invoke(this);
         }
         else if (IsCarryingCrystalState())
         {

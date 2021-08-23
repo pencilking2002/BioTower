@@ -4,13 +4,14 @@ using UnityEngine;
 using System;
 using NaughtyAttributes;
 using BioTower.Units;
+using BioTower.SaveData;
 
 namespace BioTower
 {
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
-    public LevelSettings waveSettings; 
+    public LevelSettings waveSettings => LevelInfo.current.waveSettings;
     [SerializeField] private WaveMode waveMode;
     public int currWave;
     [HideInInspector] public bool wavesInitialized;

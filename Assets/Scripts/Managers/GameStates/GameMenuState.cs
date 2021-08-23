@@ -32,15 +32,24 @@ public class GameMenuState : BootStateBase
             seq.append(() => {
                 // Don't display the menu at the beginning of the level if we're in the beginning of the level
                 // and doing a tutorial
-                var requiredAction = GameManager.Instance.currTutCanvas.currTutorial.requiredAction;
-                if (TutorialCanvas.tutorialInProgress && requiredAction != RequiredAction.TAP_ABA_TOWER_BUTTON)
+                var tutCanvas = GameManager.Instance.currTutCanvas;
+                if (tutCanvas.hasTutorials)
                 {
+                    var requiredAction = tutCanvas.currTutorial.requiredAction;
+                    if ((TutorialCanvas.tutorialInProgress && requiredAction != RequiredAction.TAP_ABA_TOWER_BUTTON))
+                    {
 
+                    }
+                    else
+                    {
+                        LeanTween.alphaCanvas(controller.gameplayUI.gameUIPanel, 1.0f, 0.5f);
+                    }
                 }
                 else
                 {
                     LeanTween.alphaCanvas(controller.gameplayUI.gameUIPanel, 1.0f, 0.5f);
                 }
+                
             });
 
             EventManager.Game.onGameStateInit?.Invoke(gameState);

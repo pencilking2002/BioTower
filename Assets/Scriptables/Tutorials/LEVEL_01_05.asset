@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_05
   m_EditorClassIdentifier: 
-  text: Good! ABA units patrol the vicinity of ABA towers and look for enemies to
+  text: Good! ABA units patrol the vicinity of ABA towers, looking for enemies to
     fight
   requiredAction: 0
   transition: 1
   delay: 0
+  hasArrows: 0
+  arrowCoords: []

@@ -41,7 +41,7 @@ public class InputController : MonoBehaviour
 
         if(EventSystem.current.currentSelectedGameObject == null)
         {
-            if (lastSelected.gameObject.activeSelf && lastSelected.GetComponent<Button>() != null && lastSelected.GetComponent<Button>().interactable)
+            if (lastSelected != null && lastSelected.activeSelf && lastSelected.GetComponent<Button>() != null && lastSelected.GetComponent<Button>().interactable)
             {
                 EventSystem.current.SetSelectedGameObject(lastSelected);
             }            

@@ -14,6 +14,7 @@ public class TutorialCanvas : MonoBehaviour
     public static bool tutorialInProgress;
 
     [Header("Tutorial Data")]
+    public bool hasTutorials;
     [SerializeField] private TutorialData[] tutorials;
     [SerializeField] private int currTutorialIndex = -1;
     [SerializeField] private bool initTutorialOnStart;
@@ -29,8 +30,20 @@ public class TutorialCanvas : MonoBehaviour
     [SerializeField] private float revealDuration = 0.05f;
     private Vector3 initTutPanelLocalPos;
 
+    // private void Awake()
+    // {
+    //     // if(!hasTutorials)
+    //     //     gameObject.SetActive(false);
+    // }
+
     private void Start()
     {
+        if (!hasTutorials)
+        {
+            GetComponent<Canvas>().enabled = false;
+            return;
+        }
+
         initTutPanelLocalPos = tutPanel.transform.localPosition;
 
         if (initTutorialOnStart)
@@ -75,8 +88,7 @@ public class TutorialCanvas : MonoBehaviour
             else if (currTutorial.transition == TransitionType.BLINK)
             {
                 EventManager.Tutorials.onTutTextPopUp?.Invoke();
-                
-                LeanTween.scale(tutPanel.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1).setOnComplete(() => {
+                LeanTween.scale(tutText.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1).setOnComplete(() => {
                     tutText.text = currTutorial.text;
                     GameManager.Instance.util.TextReveal(tutText, revealDuration);
                     
@@ -91,7 +103,7 @@ public class TutorialCanvas : MonoBehaviour
                 if (currTutorialIndex == tutorials.Length-1)
                     ctaText.GetComponent<TextMeshProUGUI>().text = "DONE";
                 else
-                    ctaText.GetComponent<TextMeshProUGUI>().text = "CONTINUE >";
+                    ctaText.GetComponent<TextMeshProUGUI>().text = ">>";
 
                 LeanTween.delayedCall(ctaText.gameObject, 1.0f, () => {
                     LeanTween.alphaCanvas(ctaText, 1, 0.5f).setLoopPingPong(-1);
@@ -106,6 +118,9 @@ public class TutorialCanvas : MonoBehaviour
         tutorialInProgress = false;
         var seq = LeanTween.sequence();
         seq.append(LeanTween.moveLocalY(tutPanel.gameObject, initTutPanelLocalPos.y+slideInOffset, 0.25f).setEaseOutCubic());
+        seq.append(() => {
+            EventManager.Tutorials.onTutorialEnd?.Invoke(currTutorial);
+        });
     }
 
     private void OnTouchBegan(Vector3 pos)

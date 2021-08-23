@@ -361,7 +361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2107419379559870999
 Transform:
   m_ObjectHideFlags: 0
@@ -823,6 +823,7 @@ MonoBehaviour:
   hasCrystalTarget: 0
   crystalTarget: {fileID: 0}
   tower: {fileID: 0}
+  crystalSprite: {fileID: 3241203847065816394}
 --- !u!114 &6815928587370128805
 MonoBehaviour:
   m_ObjectHideFlags: 0

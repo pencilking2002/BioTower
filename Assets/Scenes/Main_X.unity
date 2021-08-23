@@ -6881,7 +6881,7 @@ GameObject:
   - component: {fileID: 1891371707}
   m_Layer: 0
   m_Name: TutorialCanvas
-  m_TagString: Untagged
+  m_TagString: TutorialCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6898,10 +6898,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28153817a94023c428da1e98dc7df254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTutorials: 0
   tutorials: []
-  currTutorial: -1
+  currTutorialIndex: -1
+  initTutorialOnStart: 0
   tutPanel: {fileID: 269947104}
+  arrowController: {fileID: 0}
   tutText: {fileID: 559224847}
+  ctaText: {fileID: 0}
+  slideInOffset: 50
+  revealDuration: 0.05
 --- !u!114 &1891371708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8028,6 +8034,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1883603324033374402, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
+        type: 3}
+      propertyPath: levelIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883603324033374402, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
+        type: 3}
+      propertyPath: waveSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 74750246e7c16c44eb95e4ae47610f60,
+        type: 2}
     - target: {fileID: 1883603324033374403, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
         type: 3}
       propertyPath: m_Name

@@ -14,6 +14,7 @@ public class LevelSelectButton : MonoBehaviour
     [HideInInspector] public Button button;
     [HideInInspector] public TextMeshProUGUI btnText;
     [HideInInspector] public Image lockIcon;
+    private bool wasPressed;
 
     private void Awake()
     {
@@ -24,12 +25,17 @@ public class LevelSelectButton : MonoBehaviour
 
     public void LoadLevel()
     {
-        if (!isUnlocked)
+        if (!isUnlocked || wasPressed)
             return;
-            
-        Debug.Log("Press Button");
-        SceneManager.LoadScene(sceneToLoad.ScenePath, LoadSceneMode.Additive);
-        EventManager.UI.onTapLevelSelectButton?.Invoke();
+
+        wasPressed = true;
+        LeanTween.delayedCall(gameObject, 1, () => {
+            SceneManager.LoadScene(sceneToLoad.ScenePath, LoadSceneMode.Additive);
+            EventManager.UI.onTapLevelSelectButton?.Invoke();
+            wasPressed = false;
+        });
+        
+        EventManager.UI.onTapButton?.Invoke();
     }
 
     public void Lock()

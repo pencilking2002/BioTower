@@ -33,7 +33,8 @@ public class PPC2Tower : Structure
 
     public override void OnUpdate()
     {
-        influenceDisc.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
+        if (influenceDisc != null)
+            influenceDisc.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
     }
 
 

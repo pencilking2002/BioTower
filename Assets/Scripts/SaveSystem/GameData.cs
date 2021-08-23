@@ -15,6 +15,7 @@ public class GameData
     public PPC2TowerData ppc2TowerData;
     public ChloroplastTowerData chloroplastTowerData;
     public int currLevel;
+    public bool enabledTowerHealthDecline;
 }
 
 public class DNATowerData

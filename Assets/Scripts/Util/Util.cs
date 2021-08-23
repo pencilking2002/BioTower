@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 namespace BioTower
 {
@@ -43,17 +44,17 @@ public class Util : MonoBehaviour
 
     public static Vector2 GetPointWithinInfluence(Vector2 centerPoint, float minRadius, float maxRadius)
     {
-        Vector2 point = Random.insideUnitCircle.normalized * Random.Range(minRadius, maxRadius);
+        Vector2 point = UnityEngine.Random.insideUnitCircle.normalized * UnityEngine.Random.Range(minRadius, maxRadius);
         point += centerPoint;
         return point;
     }
 
-    public void TextReveal(TMP_Text text, float revealDuration)
+    public void TextReveal(TMP_Text text, float revealDuration, Action onComplete=null)
     {
-        StartCoroutine(RevealCharacters(text, revealDuration));
+        StartCoroutine(RevealCharacters(text, revealDuration, onComplete));
     }
 
-    private IEnumerator RevealCharacters(TMP_Text textComponent, float revealDuration)
+    private IEnumerator RevealCharacters(TMP_Text textComponent, float revealDuration, Action onComplete=null)
     {
         textComponent.ForceMeshUpdate();
         TMP_TextInfo textInfo = textComponent.textInfo;
@@ -69,7 +70,10 @@ public class Util : MonoBehaviour
         }
 
         if (visibleCount >= totalVisibleCharacters)
+        {
+            onComplete?.Invoke();
             yield return null;
+        }
     }
 
 }

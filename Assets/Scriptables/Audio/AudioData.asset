@@ -28,4 +28,4 @@ MonoBehaviour:
   mitoBtnTapped: {fileID: 8300000, guid: e1f9a9fdfd82772428a7e37417d2bff2, type: 3}
   textPopUp: {fileID: 8300000, guid: 4ee4a1a0c7bea3c469d32a64971af265, type: 3}
   btnSelected: {fileID: 8300000, guid: 82a2298801b46b642ac9e2698ab5f1d5, type: 3}
-  letterRevealed: {fileID: 8300000, guid: d84cb90c7fe60c54297629fa51c88d32, type: 3}
+  letterRevealed: {fileID: 8300000, guid: 8722206a5aaf6a94fa4cc6d6da7259cb, type: 3}

@@ -14,7 +14,7 @@ public class LevelSelectButton : MonoBehaviour
     [HideInInspector] public Button button;
     [HideInInspector] public TextMeshProUGUI btnText;
     [HideInInspector] public Image lockIcon;
-    private bool wasPressed;
+    private static bool wasPressed;
 
     private void Awake()
     {

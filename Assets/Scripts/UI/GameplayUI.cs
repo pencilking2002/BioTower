@@ -56,6 +56,14 @@ public class GameplayUI : MonoBehaviour
     
     public void OnPressAbaTowerButton()
     {
+        // Make sure you can't press the button if there's currently a tutorial displayed that's
+        // not relevant to the button
+        if (TutorialCanvas.tutorialInProgress)
+        {
+            var requiredAction = GameManager.Instance.currTutCanvas.currTutorial.requiredAction;
+            if (requiredAction != RequiredAction.TAP_ABA_TOWER_BUTTON)
+                return;
+        }
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.ABA_TOWER];
         if (canBuildTower)
         {

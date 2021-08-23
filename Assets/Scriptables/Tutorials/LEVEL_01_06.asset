@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_06
   m_EditorClassIdentifier: 
-  text: Creating towers and units costs energy. Creating that ABA tower cost 10 energy.
-    Did you think it was FREE!?
+  text: Creating towers and units costs <b><color=#406109>energy</color></b>. Creating
+    that ABA tower cost 10 energy. Did you think it was FREE!?
   requiredAction: 0
   transition: 1
   delay: 0
   hasArrows: 1
   arrowCoords:
-  - {x: -150, y: -170}
+  - {x: -220, y: -210}

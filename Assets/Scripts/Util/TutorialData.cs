@@ -23,7 +23,7 @@ public enum TransitionType
 [CreateAssetMenu(menuName ="BioTower/TutorialData", fileName ="TutorialData")]
 public class TutorialData : ScriptableObject
 {
-    [Multiline] public string text;
+    [Multiline(10)] public string text;
     public RequiredAction requiredAction;
     public TransitionType transition;
     [Range(0,5)] public float delay;

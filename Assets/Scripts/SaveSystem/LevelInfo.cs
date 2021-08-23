@@ -24,6 +24,7 @@ public class LevelInfo : MonoBehaviour
             saveData.enabledTowerHealthDecline = true;
         
         GameManager.Instance.saveManager.Save(saveData);
+        GameManager.Instance.gameSettings.enableTowerHealthDecline = saveData.enabledTowerHealthDecline;
     }
 }
 }

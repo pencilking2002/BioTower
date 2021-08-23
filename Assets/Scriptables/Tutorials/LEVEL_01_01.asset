@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_01
   m_EditorClassIdentifier: 
-  text: Hello! Welcome to Drought Defense!
+  text: Hello! Welcome to <b><color=#406109>Drought Defense</color></b>!
   requiredAction: 0
   transition: 0
   delay: 2
+  hasArrows: 0
+  arrowCoords: []

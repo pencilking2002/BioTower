@@ -19,6 +19,7 @@ public class TutorialCanvas : MonoBehaviour
     [SerializeField] private int currTutorialIndex = -1;
     [SerializeField] private bool initTutorialOnStart;
     public TutorialData currTutorial => tutorials[currTutorialIndex];
+    [SerializeField] private bool canGoToNextTut;        // Used to block the user from spamming the tutorials
 
 
     [Header("Tutorial UI")]
@@ -53,8 +54,10 @@ public class TutorialCanvas : MonoBehaviour
 
     public void StartNextTutorial()
     {
+        canGoToNextTut = false;
         if (currTutorialIndex+1 >= tutorials.Length)
         {
+            arrowController.HideArrows();
             EndTutorial();
         }
         else
@@ -78,7 +81,9 @@ public class TutorialCanvas : MonoBehaviour
                 seq.append(LeanTween.moveLocalY(tutPanel.gameObject, initTutPanelLocalPos.y, 0.25f).setEaseOutCubic());
                 seq.append(() => {
                     tutText.text = currTutorial.text;
-                    GameManager.Instance.util.TextReveal(tutText, revealDuration);
+                    GameManager.Instance.util.TextReveal(tutText, revealDuration, () => { 
+                        canGoToNextTut = true; 
+                    });
 
                     if (currTutorial.hasArrows)
                         arrowController.DisplayArrows(currTutorial.arrowCoords);
@@ -90,10 +95,12 @@ public class TutorialCanvas : MonoBehaviour
                 EventManager.Tutorials.onTutTextPopUp?.Invoke();
                 LeanTween.scale(tutText.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1).setOnComplete(() => {
                     tutText.text = currTutorial.text;
-                    GameManager.Instance.util.TextReveal(tutText, revealDuration);
+                    GameManager.Instance.util.TextReveal(tutText, revealDuration, () => { 
+                        canGoToNextTut = true; 
+                    });
                     
                     if (currTutorial.hasArrows)
-                        arrowController.DisplayArrows(currTutorial.arrowCoords);
+                        arrowController.DisplayArrows(currTutorial.arrowCoords);                    
                 });
             }
 
@@ -103,7 +110,7 @@ public class TutorialCanvas : MonoBehaviour
                 if (currTutorialIndex == tutorials.Length-1)
                     ctaText.GetComponent<TextMeshProUGUI>().text = "DONE";
                 else
-                    ctaText.GetComponent<TextMeshProUGUI>().text = ">>";
+                    ctaText.GetComponent<TextMeshProUGUI>().text = "NEXT";
 
                 LeanTween.delayedCall(ctaText.gameObject, 1.0f, () => {
                     LeanTween.alphaCanvas(ctaText, 1, 0.5f).setLoopPingPong(-1);
@@ -119,13 +126,14 @@ public class TutorialCanvas : MonoBehaviour
         var seq = LeanTween.sequence();
         seq.append(LeanTween.moveLocalY(tutPanel.gameObject, initTutPanelLocalPos.y+slideInOffset, 0.25f).setEaseOutCubic());
         seq.append(() => {
+            canGoToNextTut = false;
             EventManager.Tutorials.onTutorialEnd?.Invoke(currTutorial);
         });
     }
 
     private void OnTouchBegan(Vector3 pos)
     {
-        if (tutorialInProgress && currTutorial.requiredAction == RequiredAction.TAP_ANYWHERE)
+        if (tutorialInProgress && currTutorial.requiredAction == RequiredAction.TAP_ANYWHERE && canGoToNextTut)
         {
             StartNextTutorial();
         }

@@ -13,6 +13,7 @@ public class ABATower : Structure
     [SerializeField] private float discRotateSpeed = 2;
     [SerializeField] private int numUnitsToSpawn = 4;
     [SerializeField] private List<AbaUnit> abaUnits;
+    [SerializeField] private List<BasicEnemy> enemiesWithinInfluence;
 
 
     [Header("References")]
@@ -22,7 +23,7 @@ public class ABATower : Structure
     [SerializeField] private Transform unitsContainer;
     [SerializeField] private CircleCollider2D maxInfluenceAreaCollider;
     [SerializeField] private CircleCollider2D minInfluenceAreaCollider;
- 
+
 
     private void Awake()
     {
@@ -104,6 +105,18 @@ public class ABATower : Structure
         color.a = 0.2f;
         Gizmos.color = color;
         Gizmos.DrawSphere(maxInfluenceAreaCollider.transform.position, maxRadius);
+    }
+
+    public void RegisterEnemy(BasicEnemy enemy)
+    {
+        if (!enemiesWithinInfluence.Contains(enemy))
+            enemiesWithinInfluence.Add(enemy);
+    }
+
+    public void UnregisterEnemy(BasicEnemy enemy)
+    {
+        if (enemiesWithinInfluence.Contains(enemy))
+            enemiesWithinInfluence.Remove(enemy);
     }
 }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using PolyNav;
 using System;
 using BioTower.Level;
+using BioTower.Structures;
 
 namespace BioTower.Units
 {
@@ -161,12 +162,39 @@ public class BasicEnemy : Unit
 
     }
 
+    private void RegisterWithTower(Collider2D col)
+    {
+        var tower = col.transform.parent.GetComponent<Structure>();
+        if (tower.structureType == StructureType.ABA_TOWER)
+        {
+            var abaTower = (ABATower) tower;
+            abaTower.RegisterEnemy(this);
+        }
+    }
+
+    private void UnregisterWithTower(Collider2D col)
+    {
+        var tower = col.transform.parent.GetComponent<Structure>();
+        if (tower.structureType == StructureType.ABA_TOWER)
+        {
+            var abaTower = (ABATower) tower;
+            abaTower.UnregisterEnemy(this);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.layer != 13)
-            return;
+        if (col.gameObject.layer == 13)
+            PickupCrystal(col);
+        
+        if (col.gameObject.layer == 19)
+            RegisterWithTower(col);
+    }
 
-        PickupCrystal(col);
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.layer == 19)
+            UnregisterWithTower(col);
     }
 
     private void OnTogglePaths()

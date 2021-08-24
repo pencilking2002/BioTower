@@ -17,10 +17,11 @@ MonoBehaviour:
   abaDamage: 5
   basicEnemyDamage: 5
   abaUnitMaxHealth: 10
+  snrkUnitMaxHealth: 5
   enemyUnitMaxHealth: 10
-  abaUnitCost: 1
+  abaUnitCost: 5
   snark2UnitCost: 1
-  enableTowerHealthDecline: 1
+  enableTowerHealthDecline: 0
   abaTowerCost: 10
   ppc2TowerCost: 40
   chloroplastTowerCost: 20

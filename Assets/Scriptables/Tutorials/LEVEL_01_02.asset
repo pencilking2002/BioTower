@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Let's create an <b><color=#406109>ABA tower</color></b>. Tap on the button
     below...
+  portraitIndex: 1
   requiredAction: 1
   transition: 1
   delay: 0

@@ -24,6 +24,7 @@ public class TutorialCanvas : MonoBehaviour
 
     [Header("Tutorial UI")]
     public Image tutPanel;
+    [SerializeField] private PortraitController portraitController;
     [SerializeField] private ArrowController arrowController;
     [SerializeField] private TextMeshProUGUI tutText;
     [SerializeField] private CanvasGroup ctaText;
@@ -68,6 +69,8 @@ public class TutorialCanvas : MonoBehaviour
             
             currTutorialIndex++;
             
+            portraitController.SetPortrait(currTutorial.portraitIndex);
+
             //if (!currTutorial.hasArrow)
             arrowController.HideArrows();
 

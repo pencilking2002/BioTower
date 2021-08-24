@@ -7,7 +7,7 @@ namespace BioTower
 {
 public class InputController : MonoBehaviour
 {
-    GameObject lastSelected;
+    public GameObject lastSelected;
     
     private void Update()
     {

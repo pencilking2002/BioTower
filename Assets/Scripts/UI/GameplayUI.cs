@@ -16,9 +16,10 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private Button Pp2cTowerButton;
     [SerializeField] private Button chloroplastTowerButton;
     [SerializeField] private Button mitoTowerButton;
-
+    [SerializeField] private Button currSelectedBtn;
     [SerializeField] private TextMeshProUGUI playerCurrencyText;
     private Dictionary<StructureType,Button> towerButtonMap = new Dictionary<StructureType, Button>();
+
 
     private void Awake()
     {
@@ -67,6 +68,8 @@ public class GameplayUI : MonoBehaviour
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.ABA_TOWER];
         if (canBuildTower)
         {
+            AnimateButton(AbaTowerButton);
+            currSelectedBtn = AbaTowerButton;
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.ABA_TOWER);
             EventManager.UI.onTapButton?.Invoke();
         }
@@ -77,6 +80,8 @@ public class GameplayUI : MonoBehaviour
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.PPC2_TOWER];
         if (canBuildTower)
         {
+            AnimateButton(Pp2cTowerButton);
+            currSelectedBtn = Pp2cTowerButton;
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.PPC2_TOWER);
             EventManager.UI.onTapButton?.Invoke();
         }
@@ -87,6 +92,8 @@ public class GameplayUI : MonoBehaviour
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.CHLOROPLAST];
         if (canBuildTower)
         {
+            AnimateButton(chloroplastTowerButton);
+            currSelectedBtn = chloroplastTowerButton;
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.CHLOROPLAST);
             EventManager.UI.onTapButton?.Invoke();
         }
@@ -97,6 +104,8 @@ public class GameplayUI : MonoBehaviour
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.MITOCHONDRIA];
         if (canBuildTower)
         {
+            AnimateButton(mitoTowerButton);
+            currSelectedBtn = mitoTowerButton;
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.MITOCHONDRIA);
             EventManager.UI.onTapButton?.Invoke();
         }
@@ -129,7 +138,9 @@ public class GameplayUI : MonoBehaviour
     {
         if (!towerButtonMap.ContainsKey(structureType))
             return;
-            
+        
+        DeselectCurrentButton();
+
         var button = towerButtonMap[structureType];
 
         button.interactable = false;
@@ -143,6 +154,25 @@ public class GameplayUI : MonoBehaviour
 
         HandleButtonColor(button);
     }   
+
+    private void AnimateButton(Button button)
+    {
+        var initPos = button.transform.localPosition;
+        if (currSelectedBtn != null)
+            LeanTween.moveLocalY(currSelectedBtn.gameObject, initPos.y, 0.1f);
+
+        LeanTween.moveLocalY(button.gameObject, initPos.y + 20, 0.1f);
+    }
+
+    private void DeselectCurrentButton()
+    {
+         // Deselect current button
+        if (currSelectedBtn != null)
+        {
+            LeanTween.moveLocalY(currSelectedBtn.gameObject, currSelectedBtn.transform.localPosition.y-20, 0.1f);
+            currSelectedBtn = null;
+        }
+    }
 
     private void OnLevelAwake(int levelIndex)
     {

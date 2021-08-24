@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Good! ABA units patrol the vicinity of ABA towers, looking for <b><color=#912B0F>enemies</color></b>
     to fight
+  portraitIndex: 3
   requiredAction: 0
   transition: 1
   delay: 0

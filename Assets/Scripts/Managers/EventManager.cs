@@ -46,6 +46,8 @@ public class EventManager : MonoBehaviour
         public static Action<Structure> onStructureLoseHealth;
         public static Action onLightDropped;
         public static Action onLightPickedUp;
+        public static Action<BasicEnemy, Structure> onEnemyEnterTowerInfluence;
+        public static Action<BasicEnemy, Structure> onEnemyExitTowerInfluence;
 
     }
 

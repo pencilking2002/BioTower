@@ -47,6 +47,29 @@ public class ABATower : Structure
             return;
             
         influenceDisc.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
+
+        ChaseEnemies();
+    }
+
+    private void ChaseEnemies()
+    {
+        for(int i=0; i<abaUnits.Count; i++)
+        {
+            AbaUnit unit = abaUnits[i];
+            if (unit.IsChasingState())
+            {
+                if (unit.targetEnemy.isEngagedInCombat)
+                {
+                    unit.SetRoamingState();
+                    unit.SetNewDestination();
+                    unit.targetEnemy = null;
+                }
+                else
+                {
+                    unit.agent.SetDestination(unit.targetEnemy.transform.position);
+                }
+            }
+        }
     }
 
     public override void SpawnUnits(int numUnits)
@@ -110,13 +133,46 @@ public class ABATower : Structure
     public void RegisterEnemy(BasicEnemy enemy)
     {
         if (!enemiesWithinInfluence.Contains(enemy))
+        {
             enemiesWithinInfluence.Add(enemy);
+
+            if (!enemy.isEngagedInCombat)
+            {
+                // Find a random aba Unit
+                var randIndex = UnityEngine.Random.Range(0, abaUnits.Count);
+                var unit = abaUnits[randIndex];
+
+                // Set them to follow the enemy
+                unit.SetChasingState();
+                unit.targetEnemy = enemy;
+            }
+
+            //unit.SetNewDestination()
+            EventManager.Structures.onEnemyEnterTowerInfluence(enemy, this);
+        }
     }
 
     public void UnregisterEnemy(BasicEnemy enemy)
     {
         if (enemiesWithinInfluence.Contains(enemy))
+        {
+            // Check if any units are following an enemy
+
+            for (int i=0; i<abaUnits.Count; i++)
+            {
+                AbaUnit unit = abaUnits[i];
+                if (unit.IsChasingState())
+                {
+                    unit.SetRoamingState();
+                    unit.SetNewDestination();
+                    unit.targetEnemy = null;
+                }
+            }
+
+            // Set them back to roaming
             enemiesWithinInfluence.Remove(enemy);
+            EventManager.Structures.onEnemyExitTowerInfluence(enemy, this);
+        }
     }
 }
 }

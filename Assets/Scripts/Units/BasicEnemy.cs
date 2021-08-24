@@ -21,7 +21,7 @@ public class BasicEnemy : Unit
     public bool hasCrystal;
     public Color hasCrystalTintColor;
     private bool isRegistered;
-    [HideInInspector] public bool isEngagedInCombat;
+    public bool isEngagedInCombat;
 
     [Header("Waypoint movement")]
     [SerializeField] private Waypoint currWaypoint; 

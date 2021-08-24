@@ -10,7 +10,8 @@ public enum AbaUnitState
     ROAMING,
     COMBAT,
     CARRYING_ENEMY,
-    DESTROYED
+    DESTROYED,
+    CHASING_ENEMY
 }
 
 [SelectionBase]
@@ -19,7 +20,7 @@ public class AbaUnit : Unit
     public AbaUnitState abaUnitState;
 
     [Header("Combat enemy state")]
-    [SerializeField] private BasicEnemy targetEnemy;
+    public BasicEnemy targetEnemy;
     [SerializeField] private float combatDuration = 2.0f;
     [Range(0, 100)][SerializeField] private float abaWinChance = 50;
 
@@ -54,11 +55,13 @@ public class AbaUnit : Unit
     public bool IsCarryingEnemyState() { return abaUnitState == AbaUnitState.CARRYING_ENEMY; }
     public bool IsCombatState() { return abaUnitState == AbaUnitState.COMBAT; }
     public bool IsDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
+    public bool IsChasingState() { return abaUnitState == AbaUnitState.CHASING_ENEMY; }
 
     public override void SetRoamingState() { abaUnitState = AbaUnitState.ROAMING; }
     public void SetCarryingEnemyState() { abaUnitState = AbaUnitState.CARRYING_ENEMY; }
     public override void SetCombatState() { abaUnitState = AbaUnitState.COMBAT; } 
     public override void SetDestroyedState() { abaUnitState = AbaUnitState.DESTROYED; }
+    public void SetChasingState() { abaUnitState = AbaUnitState.CHASING_ENEMY; }
 
 
     private void OnTriggerEnter2D(Collider2D other)

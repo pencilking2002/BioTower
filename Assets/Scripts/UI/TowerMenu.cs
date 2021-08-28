@@ -5,6 +5,7 @@ using BioTower.Structures;
 using UnityEngine.UI;
 using TMPro;
 using BioTower.Units;
+using BioTower.Structures;
 
 namespace BioTower
 {
@@ -70,10 +71,14 @@ public class TowerMenu : MonoBehaviour
             unitType = UnitType.ABA;
             if (GameManager.Instance.econManager.CanBuyUnit(unitType))
             {
-                GameManager.Instance.econManager.BuyUnit(unitType);
-                GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
-                EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
-                EventManager.UI.onTapButton?.Invoke();
+                var abaTower = (ABATower) selectedStructure;
+                if (abaTower.IsBelowSpawnLimit())
+                {
+                    GameManager.Instance.econManager.BuyUnit(unitType);
+                    GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
+                    EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
+                    EventManager.UI.onTapButton?.Invoke();
+                }
             }
         }
         else if (selectedStructure.structureType == StructureType.PPC2_TOWER)

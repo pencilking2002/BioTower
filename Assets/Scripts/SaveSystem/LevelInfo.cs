@@ -19,12 +19,18 @@ public class LevelInfo : MonoBehaviour
     {
         var saveData = GameManager.Instance.saveManager.Load();
         if (levelIndex == 0)
+        {
             saveData.enabledTowerHealthDecline = false;
+            GameManager.Instance.gameSettings.startingEnergy = saveData.startingEnergy;
+        }
         else
             saveData.enabledTowerHealthDecline = true;
         
         GameManager.Instance.saveManager.Save(saveData);
         GameManager.Instance.gameSettings.enableTowerHealthDecline = saveData.enabledTowerHealthDecline;
+        GameManager.Instance.gameSettings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
+
+        GameManager.Instance.econManager.Init(levelIndex);
     }
 }
 }

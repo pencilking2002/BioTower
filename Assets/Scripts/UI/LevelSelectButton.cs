@@ -43,6 +43,7 @@ public class LevelSelectButton : MonoBehaviour
         btnText.gameObject.SetActive(false);
         lockIcon.gameObject.SetActive(true);
         isUnlocked = false;
+        btnText.text = "";
     }
 
     public void Unlock()
@@ -50,6 +51,7 @@ public class LevelSelectButton : MonoBehaviour
         btnText.gameObject.SetActive(true);
         lockIcon.gameObject.SetActive(false);
         isUnlocked = true;
+        btnText.text = (transform.GetSiblingIndex() + 1).ToString("D2");
     }
 }
 }

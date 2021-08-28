@@ -8,17 +8,21 @@ namespace BioTower
 {
 public class EconomyManager : MonoBehaviour
 {
-    public int startingCurrency = 100;
+    //public int startingCurrency = 100;
     public int playerCurrency;
     
     private void Start()
     {
-       Init();
+       //Init();
     }
 
-    private void Init()
+    public void Init(int levelIndex)
     {
-        playerCurrency = startingCurrency;
+        if (levelIndex == 0)
+            playerCurrency = GameManager.Instance.gameSettings.startingEnergy;
+        else
+            playerCurrency = GameManager.Instance.gameSettings.energy;
+
         EventManager.Game.onGainCurrency?.Invoke(0, playerCurrency);
         Debug.Log("Init economy");
     }

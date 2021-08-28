@@ -90,9 +90,13 @@ public class SaveSystem : MonoBehaviour
             GameData gameData = new GameData();
             gameData.currLevel = 0;
 
-            string jsonString = JsonUtility.ToJson(gameData);
+            string jsonString = JsonUtility.ToJson(gameData, true);
             File.WriteAllText(dataPath, jsonString);
             Debug.Log($"<color=cyan>Load Data. File doesn't exist. Create a new one with default data and read write it to the file</color>");
+
+            #if UNITY_EDITOR
+            UnityEditor.AssetDatabase.Refresh();
+            #endif
 
             return gameData;
         }
@@ -102,7 +106,7 @@ public class SaveSystem : MonoBehaviour
     public void ResetQuests()
     {
         var gameData = new GameData();
-        gameData.currLevel = 0;
+        //gameData.currLevel = 0;
         Save(gameData); 
     }
 

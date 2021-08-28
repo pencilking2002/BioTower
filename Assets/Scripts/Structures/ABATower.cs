@@ -77,7 +77,6 @@ public class ABATower : Structure
         for(int i=0; i<numUnits; i++)
         {
             var go = Instantiate(abaUnitPrefab);
-            //go.transform.position = GetPointWithinInfluence();
             go.transform.position = GetEdgePointWithinInfluence(); 
                 
             go.transform.SetParent(unitsContainer);
@@ -150,6 +149,11 @@ public class ABATower : Structure
             //unit.SetNewDestination()
             EventManager.Structures.onEnemyEnterTowerInfluence(enemy, this);
         }
+    }
+
+    public bool IsBelowSpawnLimit()
+    {
+        return abaUnits.Count < GameManager.Instance.gameSettings.abaUnitSpawnLimit;
     }
 
     public void UnregisterEnemy(BasicEnemy enemy)

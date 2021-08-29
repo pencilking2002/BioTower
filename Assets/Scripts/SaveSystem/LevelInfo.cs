@@ -9,6 +9,8 @@ public class LevelInfo : MonoBehaviour
     public static LevelInfo current => GameObject.FindGameObjectWithTag(Constants.levelInfo).GetComponent<LevelInfo>();
     public LevelSettings waveSettings;
     public int levelIndex;
+    public WinCondition winCondition;
+    public LoseCondition loseCondition;
 
     private void Awake()
     {

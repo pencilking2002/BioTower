@@ -171,28 +171,14 @@ public class GameManager : MonoBehaviour
         EventManager.Game.onLevelLoaded_02?.Invoke();
     }
 
-    private void OnBaseDestroyed()
-    {
-        EventManager.Game.onGameOver?.Invoke(false);
-    }
-
-    private void OnWavesCompleted()
-    {
-         EventManager.Game.onGameOver?.Invoke(true);
-    }
-    
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
-        EventManager.Game.onWavesCompleted += OnWavesCompleted;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
-        EventManager.Game.onWavesCompleted -= OnWavesCompleted;
     }
 
     private void InitInstance()

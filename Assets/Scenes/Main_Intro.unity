@@ -8017,6 +8017,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d8916687892fab046a2584d8e6af1418,
         type: 2}
+    - target: {fileID: 1883603324033374402, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
+        type: 3}
+      propertyPath: winCondition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1883603324033374403, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
         type: 3}
       propertyPath: m_Name

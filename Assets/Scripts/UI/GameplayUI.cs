@@ -68,7 +68,9 @@ public class GameplayUI : MonoBehaviour
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.ABA_TOWER];
         if (canBuildTower)
         {
-            AnimateButton(AbaTowerButton);
+            if (currSelectedBtn != AbaTowerButton.GetComponent<Button>())
+                AnimateButton(AbaTowerButton);
+
             currSelectedBtn = AbaTowerButton;
             EventManager.UI.onPressTowerButton?.Invoke(StructureType.ABA_TOWER);
             EventManager.UI.onTapButton?.Invoke();

@@ -76,6 +76,13 @@ public class TowerMenu : MonoBehaviour
                 {
                     GameManager.Instance.econManager.BuyUnit(unitType);
                     GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
+
+                    // Inform user that you can't spawn any more aba units on this tower
+                    if (!abaTower.IsBelowSpawnLimit())
+                    {
+                        SetButtonMaxText(spawnUnitButton);
+                    }
+
                     EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
                     EventManager.UI.onTapButton?.Invoke();
                 }
@@ -135,9 +142,19 @@ public class TowerMenu : MonoBehaviour
         var spawnUnitText = spawnUnitButton.transform.Find("Text").GetComponent<Text>();
 
         if (structure.structureType == StructureType.ABA_TOWER)
-            spawnUnitText.text = "ABA\nUnit";
+        {
+            //spawnUnitText.text = "ABA\nUnit";
+            var abaTower = (ABATower) structure;
+            if (abaTower.IsBelowSpawnLimit())
+                SetButtonTextDefault(spawnUnitButton, "ABA\nUnit");
+            else
+                SetButtonMaxText(spawnUnitButton);
+        }
         else if (structure.structureType == StructureType.PPC2_TOWER)
+        {
             spawnUnitText.text = "SNRK2\nUnit";
+            // TODO: Create spawn limit logic for ppc2
+        }
 
         spawnLightParticleButton.gameObject.SetActive(displayLightDropButton);
         currTowerText.text = structure.structureType.ToString().Replace('_', ' ');
@@ -148,6 +165,22 @@ public class TowerMenu : MonoBehaviour
         towerIcon.sprite = iconMap[structure.structureType];
     }
     
+    private void SetButtonMaxText(Button btn)
+    {
+        var text = btn.transform.Find("Text").GetComponent<Text>();
+        text.text = "MAX";
+        text.color = Color.red;
+        btn.transform.Find("PriceText").gameObject.SetActive(false);
+    }
+
+    private void SetButtonTextDefault(Button btn, string text)
+    {
+        var textComponent = btn.transform.Find("Text").GetComponent<Text>();
+        textComponent.text = text;
+        textComponent.color = Color.black;
+        btn.transform.Find("PriceText").gameObject.SetActive(true);
+    }
+
     private void UpdateTowerHealthBar(Structure structure, float duration=0)
     {
         if (structure == GameManager.Instance.tapManager.selectedStructure && structure.hasHealth)

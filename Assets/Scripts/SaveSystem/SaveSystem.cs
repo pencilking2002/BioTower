@@ -110,15 +110,30 @@ public class SaveSystem : MonoBehaviour
         Save(gameData); 
     }
 
-    // [Button("Delete Data Directory")]
-    // public void DeleteDataDirectory()
-    // {
-    //     Directory.Delete(dataDirectory);
-    // }
+    private void OnSpendCurrency(int numSpent, int currentCurrency)
+    {
+        var saveData = GameManager.Instance.saveManager.Load();
+        saveData.energy = currentCurrency;
+        GameManager.Instance.saveManager.Save(saveData);
+    }
 
-    // private GameData ProcessGameData(GameData gameData)
-    // {
-    //     return gameData;
-    // }
+    private void OnGainCurrency(int numGained, int currentCurrency)
+    {
+        var saveData = GameManager.Instance.saveManager.Load();
+        saveData.energy = currentCurrency;
+        GameManager.Instance.saveManager.Save(saveData);
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Game.onSpendCurrency += OnSpendCurrency;
+        EventManager.Game.onGainCurrency += OnGainCurrency;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Game.onSpendCurrency -= OnSpendCurrency;
+        EventManager.Game.onGainCurrency -= OnGainCurrency;
+    }
 }
 }

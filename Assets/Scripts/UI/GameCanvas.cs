@@ -36,12 +36,12 @@ public class GameCanvas : MonoBehaviour
         gameOverText.text = isWin ? "YOU WIN!" : "GAME OVER";
         
         // Unlocks next level upon win
-        if (isWin)
-        {
-            var gameData = GameManager.Instance.saveManager.Load();
-            int currLevelIndex = LevelInfo.current.levelIndex;
-            gameData.currLevel = currLevelIndex++; 
-        }
+        // if (isWin)
+        // {
+        //     var gameData = GameManager.Instance.saveManager.Load();
+        //     int currLevelIndex = (int) LevelInfo.current.levelType;
+        //     gameData.currLevel = currLevelIndex++; 
+        // }
     }
 
     private void OnEnable()

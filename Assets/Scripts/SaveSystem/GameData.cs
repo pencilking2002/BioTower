@@ -26,7 +26,7 @@ public class GameData
         enabledTowerHealthDecline = false;
         currLevel = 0;
         startingEnergy = 80;
-        energy = 0;
+        energy = 80;
     }
 }
 

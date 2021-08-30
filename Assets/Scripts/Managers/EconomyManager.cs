@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
 using BioTower.Units;
+using BioTower.SaveData;
 
 namespace BioTower
 {
@@ -16,13 +17,9 @@ public class EconomyManager : MonoBehaviour
        //Init();
     }
 
-    public void Init(int levelIndex)
+    public void Init(LevelType levelType)
     {
-        if (levelIndex == 0)
-            playerCurrency = GameManager.Instance.gameSettings.startingEnergy;
-        else
-            playerCurrency = GameManager.Instance.gameSettings.energy;
-
+        playerCurrency = GameManager.Instance.gameSettings.energy;
         EventManager.Game.onGainCurrency?.Invoke(0, playerCurrency);
         Debug.Log("Init economy");
     }

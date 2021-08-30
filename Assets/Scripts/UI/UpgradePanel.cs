@@ -47,11 +47,11 @@ public class UpgradePanel : MonoBehaviour
     {
         //Debug.Log("Purchase upgrade");
         var gameData = GameManager.Instance.saveManager.Load();
-        int currLevel = LevelInfo.current.levelIndex;
+        var currLevel = (int) LevelInfo.current.levelType;
         gameData.currLevel = ++currLevel;
         GameManager.Instance.saveManager.Save(gameData);
         SceneManager.LoadScene(0);
-        Debug.Log("saved. curr level: " + currLevel + ". Next level: " + gameData.currLevel);
+        //Debug.Log("saved. curr level: " + currLevel + ". Next level: " + gameData.currLevel);
     }
 }
 }

@@ -78,11 +78,11 @@ public class WaveManager : MonoBehaviour
         enemy.SetSpeed(minMaxSpeed, 0.5f);
     }
 
-    private void OnLevelStart(int levelIndex)
+    private void OnLevelStart(LevelType levelType)
     {
         // Don't automatically start waves on the first level
         // because there's a tutorial
-        if (levelIndex == 0)
+        if (levelType == LevelType.LEVEL_00)
             return;
 
         // Initialize waves
@@ -90,7 +90,6 @@ public class WaveManager : MonoBehaviour
             waveSettings.waves[i].Init(i);
         
         wavesInitialized = true;
-        
     }
 
     private void OnEnable()

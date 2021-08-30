@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using BioTower.Structures;
 using BioTower.Units;
+using BioTower.SaveData;
 
 namespace BioTower
 {
@@ -29,7 +30,7 @@ public class EventManager : MonoBehaviour
         public static Action<EnemyCrystal> onCrystalDestroyed;
         public static Action<Snrk2Unit> onSnrk2UnitReachedBase;
 
-        public static Action<int> onLevelAwake;
+        public static Action<LevelType> onLevelAwake;
     }
 
     public class Structures

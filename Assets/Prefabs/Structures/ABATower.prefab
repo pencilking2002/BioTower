@@ -720,6 +720,7 @@ MonoBehaviour:
   discRotateSpeed: 2
   numUnitsToSpawn: 1
   abaUnits: []
+  enemiesWithinInfluence: []
   influenceDisc: {fileID: 5376619156377604704}
   abaUnitPrefab: {fileID: 5115481712711463489, guid: a0a488c102b113f4da28fe09666035ff,
     type: 3}
@@ -727,7 +728,6 @@ MonoBehaviour:
   unitsContainer: {fileID: 193092808403144242}
   maxInfluenceAreaCollider: {fileID: 6145754031174247750}
   minInfluenceAreaCollider: {fileID: 7447611048054085524}
-  enemiesWithinInfluence: []
 --- !u!1 &3944687842057217494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1286,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1985713824957409796}
     m_Modifications:
+    - target: {fileID: 941702024992869109, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2362424358013007125, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}
       propertyPath: m_Name

@@ -164,6 +164,12 @@ public class TutorialCanvas : MonoBehaviour
         }
     }
 
+    public bool IsLastTutorial(TutorialData data)
+    {
+        int index = Array.IndexOf(tutorials, data);
+        return index == (tutorials.Length-1);
+    }
+
     private void OnStructureSelected(Structure structure)
     {
         // if (tutorialInProgress && structure.structureType == StructureType.ABA_TOWER)

@@ -92,16 +92,27 @@ public class WaveManager : MonoBehaviour
         wavesInitialized = true;
     }
 
+    private void OnTutorialEnd(TutorialData data)
+    {
+        if (LevelInfo.current.levelType == LevelType.LEVEL_00 && 
+            GameManager.Instance.currTutCanvas.IsLastTutorial(data))
+        {
+            wavesInitialized = true;    
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.Units.onEnemyReachedDestination += OnEnemyReachedDestination;
         EventManager.Game.onLevelAwake += OnLevelStart;
+        EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
     }
 
     private void OnDisable()
     {
         EventManager.Units.onEnemyReachedDestination -= OnEnemyReachedDestination;
         EventManager.Game.onLevelAwake -= OnLevelStart;
+        EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
     }
 
 }

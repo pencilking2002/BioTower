@@ -30,18 +30,19 @@ public class LevelInfo : MonoBehaviour
         var saveData = GameManager.Instance.saveManager.Load();
         if (levelType == LevelType.LEVEL_00)
         {
+            saveData.enabledTowerHealthDecline = false;
+            GameManager.Instance.gameSettings.enableTowerHealthDecline = saveData.enabledTowerHealthDecline;
+            GameManager.Instance.gameSettings.energy = saveData.startingEnergy;
         }
         else
         {
             saveData.enabledTowerHealthDecline = true;
+            GameManager.Instance.gameSettings.enableTowerHealthDecline = saveData.enabledTowerHealthDecline;
             GameManager.Instance.gameSettings.energy = saveData.energy;
         }
 
-        GameManager.Instance.gameSettings.startingEnergy = saveData.startingEnergy;
-        GameManager.Instance.gameSettings.enableTowerHealthDecline = saveData.enabledTowerHealthDecline;
         GameManager.Instance.gameSettings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
         GameManager.Instance.saveManager.Save(saveData);
-        
         GameManager.Instance.econManager.Init(levelType);
     }
 }

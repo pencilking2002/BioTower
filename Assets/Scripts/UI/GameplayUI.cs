@@ -159,6 +159,9 @@ public class GameplayUI : MonoBehaviour
 
     private void AnimateButton(Button button)
     {
+        if (button == currSelectedBtn)
+            return;
+            
         var initPos = button.transform.localPosition;
         if (currSelectedBtn != null)
             LeanTween.moveLocalY(currSelectedBtn.gameObject, initPos.y, 0.1f);

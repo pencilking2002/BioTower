@@ -114,6 +114,12 @@ public class TowerMenu : MonoBehaviour
             GameManager.Instance.tapManager.selectedStructure.GainHealth(healAmount);
             GameManager.Instance.econManager.BuyTowerHeal();
             var selectedTower = GameManager.Instance.tapManager.selectedStructure;
+
+            // Reset tower before applying tweens to it
+            LeanTween.cancel(selectedTower.gameObject);
+            selectedTower.transform.localScale = Vector3.one;
+            selectedTower.sr.color = Color.white;
+
             Util.ScaleBounceSprite(selectedTower.sr, 1.1f);
             var oldColor = selectedTower.sr.color;
             selectedTower.sr.color = Color.green;

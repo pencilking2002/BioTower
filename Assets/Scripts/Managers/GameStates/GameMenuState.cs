@@ -59,13 +59,6 @@ public class GameMenuState : BootStateBase
     public override GameState OnUpdate(GameState gameState)
     {
         Init(gameState);
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            gameState = GameState.GAME_OVER_WIN;
-            EventManager.Game.onGameOver?.Invoke(false);
-        }
-
         return gameState;
     }
 
@@ -83,16 +76,29 @@ public class GameMenuState : BootStateBase
         }
     }
 
+    private void OnGameOver(bool isWin)
+    {
+        if (!isInitialized)
+            return;
+            
+        if (isWin)
+            controller.gameState = GameState.GAME_OVER_WIN;
+        else
+            controller.gameState = GameState.GAME_OVER_LOSE;    
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onGameStateInit += OnGameStateInit;
         EventManager.Tutorials.onTutorialStart += OnTutorialStart;
+        EventManager.Game.onGameOver += OnGameOver;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onGameStateInit -= OnGameStateInit;
         EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
+        EventManager.Game.onGameOver -= OnGameOver;
     }
 }   
 }

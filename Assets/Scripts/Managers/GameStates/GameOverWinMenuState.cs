@@ -29,27 +29,14 @@ public class GameOverWinMenuState : BootStateBase
             isInitialized = false;
     }
 
-    private void OnGameOver(bool isWin)
-    {
-        if (isInitialized)
-            return;
-
-        if (!isWin)
-            return;
-        
-       controller.gameState = GameState.GAME_OVER_WIN;
-    }
-
     private void OnEnable()
     {
         EventManager.Game.onGameStateInit += OnGameStateInit;
-        EventManager.Game.onGameOver += OnGameOver;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onGameStateInit -= OnGameStateInit;
-        EventManager.Game.onGameOver -= OnGameOver;
     }
 }
 }

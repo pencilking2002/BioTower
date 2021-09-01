@@ -35,7 +35,7 @@ public class EconomyManager : MonoBehaviour
         EventManager.Game.onSpendCurrency?.Invoke(num, playerCurrency);
     }
 
-    private void GainCurrency(int num)
+    public void GainCurrency(int num)
     {
         Debug.Log($"Econ: GainCurrency. old player currency: {playerCurrency}. Amount: {num}. New player currency {playerCurrency + num}");
         playerCurrency += num;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace BioTower.SaveData
 {
@@ -18,6 +19,8 @@ public class LevelInfo : MonoBehaviour
     //public int levelIndex;
     public LevelType levelType;
     public WinCondition winCondition;
+    public int numEnemiesToDestroy;
+    public int numEnemiesDestroyed;
     public LoseCondition loseCondition;
 
     private void Awake()

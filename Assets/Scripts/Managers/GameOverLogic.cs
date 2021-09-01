@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using BioTower.Units;
 using BioTower.SaveData;
 
 namespace BioTower
@@ -75,6 +76,25 @@ public class GameOverLogic : MonoBehaviour
         }
     }
 
+    private void OnUnitDestroyed(Unit unit)
+    {
+        if (unit.unitType != UnitType.BASIC_ENEMY)
+            return;
+            
+        var levelInfo = LevelInfo.current;
+        if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
+        {
+            if (levelInfo.numEnemiesDestroyed < levelInfo.numEnemiesToDestroy)
+            {
+                levelInfo.numEnemiesDestroyed++;
+            }
+            else
+            {
+                EventManager.Game.onGameOver(true);
+            }
+        }
+    }
+
     private void OnWavesCompleted()
     {
         if (LevelInfo.current.winCondition == WinCondition.SURVIVE_WAVES)
@@ -87,12 +107,14 @@ public class GameOverLogic : MonoBehaviour
     {
         EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
         EventManager.Game.onWavesCompleted += OnWavesCompleted;
+        EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
     }
 
     private void OnDisable()
     {
         EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
         EventManager.Game.onWavesCompleted -= OnWavesCompleted;
+        EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
     }
     
 }

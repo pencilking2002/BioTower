@@ -146,8 +146,9 @@ public class ABATower : Structure
                 unit.targetEnemy = enemy;
             }
 
+            Debug.Log(enemy.name);
             //unit.SetNewDestination()
-            EventManager.Structures.onEnemyEnterTowerInfluence(enemy, this);
+            EventManager.Structures.onEnemyEnterTowerInfluence?.Invoke(enemy, this);
         }
     }
 
@@ -175,7 +176,7 @@ public class ABATower : Structure
 
             // Set them back to roaming
             enemiesWithinInfluence.Remove(enemy);
-            EventManager.Structures.onEnemyExitTowerInfluence(enemy, this);
+            EventManager.Structures.onEnemyExitTowerInfluence?.Invoke(enemy, this);
         }
     }
 }

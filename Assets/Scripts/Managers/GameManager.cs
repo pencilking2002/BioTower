@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            playerBase.TakeDamage(100);
+            playerBase.TakeDamage(1);
             Debug.Log("Make player base take 100 DMG");
         }
 
@@ -91,7 +91,16 @@ public class GameManager : MonoBehaviour
                 EventManager.Game.onGameOver?.Invoke(true);
             else if (Input.GetKeyDown(KeyCode.L))
                 EventManager.Game.onGameOver?.Invoke(false);
+            
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GameManager.Instance.econManager.GainCurrency(10);
+            }
 
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                GameManager.Instance.econManager.SpendCurrency(10);
+            }
         }
 
         Time.timeScale = gameSettings.timeScale;  

@@ -21,79 +21,104 @@ public class CombatManager : MonoBehaviour
 
         if (unit.unitType == UnitType.ABA)
         {
-            var unitScale = unit.transform.localScale;
-            LeanTween.scale(unit.gameObject, unitScale * 1.2f, 0.25f).setLoopPingPong(6);
-            unitScale = enemy.transform.localScale;
+           
+            // var unitScale = unit.transform.localScale;
+            // LeanTween.scale(unit.gameObject, unitScale * 1.2f, 0.25f).setLoopPingPong(6);
+            // unitScale = enemy.transform.localScale;
 
-            LeanTween.scale(enemy.gameObject, unitScale * 1.2f, 0.25f)
-                .setLoopPingPong(6)
-                .setDelay(0.25f)
-                .setOnComplete(() => {
-                    ResolveCombat(unit, enemy);
-                });
+            // LeanTween.scale(enemy.gameObject, unitScale * 1.2f, 0.25f)
+            //     .setLoopPingPong(6)
+            //     .setDelay(0.25f)
+            //     .setOnComplete(() => {
+            //         ResolveCombat(unit, enemy);
+            //     });
         }
         else if (unit.unitType == UnitType.SNRK2)
         {
-            LeanTween.delayedCall(1.0f, () => {
-                ResolveCombat(unit, enemy);
-            });
+            // LeanTween.delayedCall(1.0f, () => {
+            //     ResolveCombat(unit, enemy);
+            // });
         }
+        DoCombatRound(unit, enemy, 1);
     }
 
-    private void ResolveCombat(Unit unit, BasicEnemy enemy)
+    private void DoCombatRound(Unit unit, BasicEnemy enemy, float delay=0)
     {
-        float percentage = UnityEngine.Random.Range(0.0f,1.0f) * 100;
-        float winChance = abaWinChance;
+        LeanTween.delayedCall(delay, () => {
+            float percentage = UnityEngine.Random.Range(0.0f,1.0f) * 100;
+            float winChance = abaWinChance;
 
-        if (enemy.hasCrystal)
-            winChance -= 10;
-        
-        bool isWin = winChance < percentage;
-        
-        // Make Snrk2 always lose to enemy
-        if (unit.unitType == UnitType.SNRK2)
-            isWin = false;
+            if (enemy.hasCrystal)
+                winChance -= 10;
+            
+            bool isWin = winChance < percentage;
+            
+            // Make Snrk2 always lose to enemy
+            if (unit.unitType == UnitType.SNRK2)
+                isWin = false;
 
-        if (isWin)
-        {
-            // Enemy died before combat could be resolved
-            if (enemy != null)
+            if (isWin)
             {
+                // Enemy died before combat could be resolved
+                if (enemy == null)
+                    return;
+
                 GameManager.Instance.UnregisterEnemy(enemy);
                 bool isEnemyAlive = enemy.TakeDamage(GameManager.Instance.gameSettings.abaDamage);
-                
+                LeanTween.scale(enemy.gameObject, Vector3.one * 1.1f, 0.15f).setLoopPingPong(1);
+
                 if (isEnemyAlive)
-                    enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
-            }
-            unit.SetRoamingState();
-            unit.SetNewDestination();
-        }
-        else
-        {
-            // Enemy won but died before combat was over
-            if (enemy == null)
-            {
-                unit.SetRoamingState();
-                unit.SetNewDestination();
-                return;
-            }
-
-            LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {
-                enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
-                unit.Deregister();
-                bool isUnitAlive = unit.TakeDamage(GameManager.Instance.gameSettings.basicEnemyDamage);
-
-                if (isUnitAlive)
+                {
+                    DoCombatRound(unit, enemy, 1); //enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
+                }
+                else
                 {
                     unit.SetRoamingState();
                     unit.SetNewDestination();
                 }
+            }
+
+            // If enemy won
+            else
+            {
+                // Enemy won but died before combat was over
+                if (enemy == null)
+                {
+                    unit.SetRoamingState();
+                    unit.SetNewDestination();
+                    return;
+                }
+
+                if (!unit.isAlive)
+                {
+                    enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
+                    unit.Deregister();
+                    unit.SetDestroyedState();
+
+                    return;
+                }
+            
+                bool isUnitAlive = unit.TakeDamage(GameManager.Instance.gameSettings.basicEnemyDamage);
+                LeanTween.scale(unit.gameObject, Vector3.one * 1.1f, 0.15f).setLoopPingPong(1);
+                
+                if (isUnitAlive)
+                {
+                    DoCombatRound(unit, enemy, 1);
+                    // unit.SetRoamingState();
+                    // unit.SetNewDestination();
+                }
                 else
                 {
+                    enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
+                    unit.Deregister();
                     unit.SetDestroyedState();
                 }
-            });
-        }
+                
+                //LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {
+                    
+                //});
+            }
+        });
     }
 
     private void OnEnable()

@@ -23,6 +23,12 @@ public class UnitManager : MonoBehaviour
         if (!GameManager.Instance.gameStates.IsGameState())
             return;
         
+        HandleUnitFacingDirections();
+        HandleSnrk2CrystalChecking();
+    }
+
+    private void HandleUnitFacingDirections()
+    {
         for (int i=0; i<units.Count; i++)
         {
             Unit unit = units[i];
@@ -30,13 +36,27 @@ public class UnitManager : MonoBehaviour
 
             if (moveDir.sqrMagnitude > 0.1f)
             {
-                if (unit != null && unit.sr != null)
+                if (!ReferenceEquals(unit, null) && !ReferenceEquals(unit.sr, null))
                 {
                     float dot = Vector2.Dot(moveDir.normalized, Vector2.right) * 0.5f + 0.5f;
                     bool faceRight = dot > 0.5f;
                     unit.sr.flipX = faceRight;
                 }
             }
+        }
+    }
+
+    private void HandleSnrk2CrystalChecking()
+    {
+        for (int i=0; i<units.Count; i++)
+        {
+            Unit unit = units[i];
+            if (unit.unitType != UnitType.SNRK2)
+                continue;
+            
+            var snrk2 = (Snrk2Unit) unit;
+            snrk2.CheckForCrystals();
+
         }
     }
 

@@ -29,7 +29,6 @@ public class Snrk2Unit : Unit
     {
         base.Start();
         Util.ScaleUpSprite(sr, 1.1f);
-        CheckForCrystals();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -45,7 +44,7 @@ public class Snrk2Unit : Unit
         }
     }
 
-    private void CheckForCrystals()
+    public void CheckForCrystals()
     {
         if (hasCrystalTarget)
             return;

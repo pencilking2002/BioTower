@@ -26,8 +26,9 @@ public class PPC2Tower : Structure
     [SerializeField] private Transform unitsContainer;
     //public PolyNav2D map;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         Util.ScaleUpSprite(sr, 1.1f);
     }
 

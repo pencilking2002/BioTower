@@ -38,12 +38,13 @@ public class Structure : MonoBehaviour
     public SpriteRenderer sr;
     [HideInInspector] public float lastDeclineTime;
     private Vector3 initScale;
+    public Vector3 initSpriteScale;
     [SerializeField] protected GameObject influenceVisuals;
 
-    // public virtual void Awake()
-    // {
-        
-    // }
+    public virtual void Awake()
+    {
+        initSpriteScale = sr.transform.localScale;
+    }
 
     // public virtual void Start()
     // {
@@ -53,6 +54,7 @@ public class Structure : MonoBehaviour
     public virtual void Init(StructureSocket socket)
     {
         initScale = transform.localScale;
+       
         currHealth = maxHealth;
         structureState = StructureState.ACTIVE;
 
@@ -66,6 +68,7 @@ public class Structure : MonoBehaviour
         GameManager.Instance.tapManager.selectedStructure = this;
         GameManager.Instance.tapManager.hasSelectedStructure = true;
         this.socket = socket;
+        Debug.Log("Init tower: " + structureType);
     }
 
     public virtual void OnUpdate()
@@ -77,6 +80,9 @@ public class Structure : MonoBehaviour
     {
         if (GameManager.Instance.gameStates.IsGameState() && hasHealth && isAlive)
         {
+            if (ReferenceEquals(gameObject, null))
+                return;
+
             currHealth -= numDamage;
 
             LeanTween.value(gameObject, healthSlider.value, currHealth, 0.25f)

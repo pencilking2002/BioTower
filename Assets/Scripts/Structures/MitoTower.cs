@@ -14,6 +14,10 @@ public class MitoTower : Structure
     [SerializeField] private float shootInterval = 5;
     private float lastShotTime;
 
+    public override void Awake()
+    {
+        base.Awake();
+    }
     private GameObject CreateFragment()
     {
         GameObject fragment = Instantiate(lightFragmentPrefab); 

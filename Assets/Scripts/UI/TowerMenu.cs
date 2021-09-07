@@ -116,14 +116,14 @@ public class TowerMenu : MonoBehaviour
             var selectedTower = GameManager.Instance.tapManager.selectedStructure;
 
             // Reset tower before applying tweens to it
-            LeanTween.cancel(selectedTower.gameObject);
-            selectedTower.transform.localScale = Vector3.one;
+            LeanTween.cancel(selectedTower.sr.gameObject);
+            selectedTower.sr.transform.localScale = selectedTower.initSpriteScale;
             selectedTower.sr.color = Color.white;
 
             Util.ScaleBounceSprite(selectedTower.sr, 1.1f);
             var oldColor = selectedTower.sr.color;
             selectedTower.sr.color = Color.green;
-            LeanTween.value(selectedTower.gameObject, selectedTower.sr.color, oldColor, 0.25f)
+            LeanTween.value(selectedTower.sr.gameObject, selectedTower.sr.color, oldColor, 0.25f)
             .setOnUpdate((Color col) => {
                 selectedTower.sr.color = col;
             });

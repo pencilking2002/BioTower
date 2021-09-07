@@ -25,8 +25,9 @@ public class ABATower : Structure
     [SerializeField] private CircleCollider2D minInfluenceAreaCollider;
 
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         Util.ScaleUpSprite(sr, 1.1f);
     }
 

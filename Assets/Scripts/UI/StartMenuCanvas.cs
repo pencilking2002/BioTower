@@ -7,7 +7,7 @@ namespace BioTower
 public class StartMenuCanvas : MonoBehaviour
 {
     
-    [SerializeField] private CanvasGroup menuPanel;
+    public CanvasGroup menuPanel;
     [SerializeField] private RectTransform innerMenuPanel;
     [SerializeField] private float targetYOffset = 50;
     [SerializeField] private float animDuration = 1.0f;
@@ -36,6 +36,9 @@ public class StartMenuCanvas : MonoBehaviour
 
     private void AnimateTitle(CanvasGroup title, float duration, float delay=0)
     {
+        if (title == null)
+            return;
+
         Vector3 oldScale = title.transform.localScale;
         title.transform.localScale = oldScale * 5;
         title.alpha = 0;

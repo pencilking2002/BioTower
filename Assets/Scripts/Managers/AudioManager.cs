@@ -15,9 +15,10 @@ public class AudioManager : MonoBehaviour
 
     private void PlaySound(AudioClip clip) { sfxSource.PlayOneShot(clip); }
 
-    private void PlayMusic(AudioClip clip) 
+    private void PlayMusic(AudioClip clip, bool loop=true) 
     { 
         musicSource.clip = clip;
+        musicSource.loop = loop;
         musicSource.Play(); 
     }
 
@@ -34,10 +35,10 @@ public class AudioManager : MonoBehaviour
                 PlayMusic(data.levelTrack);
                 break;
             case GameState.GAME_OVER_LOSE:
-                PlayMusic(data.gameOverLose);
+                PlayMusic(data.gameOverLose, false);
                 break;
             case GameState.GAME_OVER_WIN:
-                PlayMusic(data.gameOverWin);
+                PlayMusic(data.gameOverWin, false);
                 break;
         }
     }

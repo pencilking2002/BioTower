@@ -12,6 +12,9 @@ public class StructureManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.gameStates.gameState != GameState.GAME)
+            return;
+            
         //(Structure structure in structureList)
         for(int i=0;i<structureList.Count; i++)
         {

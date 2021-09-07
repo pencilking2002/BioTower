@@ -18,6 +18,7 @@ public class LevelSelectMenuState : BootStateBase
             controller.gameCanvas.gameOverPanel.gameObject.SetActive(false);
             controller.upgradePanel.panel.gameObject.SetActive(false);
             controller.levelSelectMenu.canvas.enabled = true;
+            controller.startMenuCanvas.menuPanel.gameObject.SetActive(false);
 
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }

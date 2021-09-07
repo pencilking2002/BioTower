@@ -12,7 +12,8 @@ namespace BioTower
 {
 public class  BootController : MonoBehaviour
 {
-        
+    public static int levelToLoadInstantly = -1;
+
     [Header("Game State")]
     [ShowInInspector] public static bool isBootLoaded;
     public GameState gameState;
@@ -22,6 +23,7 @@ public class  BootController : MonoBehaviour
     [Header("References")]
     public WavePanel wavePanel;
     public GameCanvas gameCanvas;
+    public StartMenuCanvas startMenuCanvas;
     public GameplayUI gameplayUI;
     public UpgradePanel upgradePanel;
     public TowerMenu towerMenu;
@@ -32,7 +34,15 @@ public class  BootController : MonoBehaviour
 
     private void Awake()
     {
+
         CacheStates();
+        if (levelToLoadInstantly != -1)
+        {
+            //SceneManager.LoadScene(levelToLoadInstantly, LoadSceneMode.Additive);
+            //Debug.Log("Load level: " + levelToLoadInstantly);
+            levelToLoadInstantly = -1;
+            gameState = GameState.LEVEL_SELECT;
+        }
 
         // if (!isBootLoaded)
         // {

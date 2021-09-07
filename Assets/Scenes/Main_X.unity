@@ -7962,7 +7962,7 @@ MonoBehaviour:
   hasTutorials: 0
   tutorials: []
   currTutorialIndex: -1
-  initTutorialOnStart: 1
+  initTutorialOnStart: 0
   canGoToNextTut: 0
   tutPanel: {fileID: 1337404259}
   portraitController: {fileID: 1861303881}

@@ -50,7 +50,9 @@ public class UpgradePanel : MonoBehaviour
         var currLevel = (int) LevelInfo.current.levelType;
         gameData.currLevel = ++currLevel;
         GameManager.Instance.saveManager.Save(gameData);
+        BootController.levelToLoadInstantly = gameData.currLevel;
         SceneManager.LoadScene(0);
+
         //Debug.Log("saved. curr level: " + currLevel + ". Next level: " + gameData.currLevel);
     }
 }

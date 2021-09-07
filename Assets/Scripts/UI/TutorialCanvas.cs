@@ -40,6 +40,7 @@ public class TutorialCanvas : MonoBehaviour
 
     private void Start()
     {
+        tutorialInProgress = false;
         if (!hasTutorials)
         {
             GetComponent<Canvas>().enabled = false;

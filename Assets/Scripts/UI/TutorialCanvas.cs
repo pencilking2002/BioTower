@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using BioTower.Structures;
 using BioTower.Units;
+using Sirenix.OdinInspector;
 
 namespace BioTower
 {
@@ -15,11 +16,11 @@ public class TutorialCanvas : MonoBehaviour
 
     [Header("Tutorial Data")]
     public bool hasTutorials;
-    [SerializeField] private TutorialData[] tutorials;
-    [SerializeField] private int currTutorialIndex = -1;
-    [SerializeField] private bool initTutorialOnStart;
+    [ShowIf("hasTutorials")][SerializeField] private TutorialData[] tutorials;
+    [ShowIf("hasTutorials")][SerializeField] private int currTutorialIndex = -1;
+    [ShowIf("hasTutorials")][SerializeField] private bool initTutorialOnStart;
     public TutorialData currTutorial => tutorials[currTutorialIndex];
-    [SerializeField] private bool canGoToNextTut;        // Used to block the user from spamming the tutorials
+    [ShowIf("hasTutorials")][SerializeField] private bool canGoToNextTut;        // Used to block the user from spamming the tutorials
 
 
     [Header("Tutorial UI")]

@@ -66,51 +66,88 @@ public class GameplayUI : MonoBehaviour
                 return;
         }
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.ABA_TOWER];
-        if (canBuildTower)
+        if (!canBuildTower)
+            return;
+        
+        if (GameManager.Instance.econManager.CanBuyTower(StructureType.ABA_TOWER))
         {
-            if (currSelectedBtn != AbaTowerButton.GetComponent<Button>())
-                AnimateButton(AbaTowerButton);
-
-            currSelectedBtn = AbaTowerButton;
-            EventManager.UI.onPressTowerButton?.Invoke(StructureType.ABA_TOWER);
-            EventManager.UI.onTapButton?.Invoke();
+            HandleButtonPress(AbaTowerButton, StructureType.ABA_TOWER);
         }
+        else
+        {
+            HandleInvalidButtonPress(AbaTowerButton);
+        }
+        
     }
-    
+
     public void OnPressPPC2TowerButton()
     {
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.PPC2_TOWER];
-        if (canBuildTower)
+        if (!canBuildTower)
+            return;
+
+        if (GameManager.Instance.econManager.CanBuyTower(StructureType.PPC2_TOWER))
         {
-            AnimateButton(Pp2cTowerButton);
-            currSelectedBtn = Pp2cTowerButton;
-            EventManager.UI.onPressTowerButton?.Invoke(StructureType.PPC2_TOWER);
-            EventManager.UI.onTapButton?.Invoke();
+            HandleButtonPress(Pp2cTowerButton, StructureType.PPC2_TOWER);
+        }
+        else
+        {
+            HandleInvalidButtonPress(Pp2cTowerButton);
         }
     }
 
     public void OnPressChloroplastButton()
     {
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.CHLOROPLAST];
-        if (canBuildTower)
+        if (!canBuildTower)
+            return;
+
+        if (GameManager.Instance.econManager.CanBuyTower(StructureType.PPC2_TOWER))
         {
-            AnimateButton(chloroplastTowerButton);
-            currSelectedBtn = chloroplastTowerButton;
-            EventManager.UI.onPressTowerButton?.Invoke(StructureType.CHLOROPLAST);
-            EventManager.UI.onTapButton?.Invoke();
+            HandleButtonPress(chloroplastTowerButton, StructureType.CHLOROPLAST);
+        }
+        else
+        {
+            HandleInvalidButtonPress(chloroplastTowerButton);
         }
     }
 
     public void OnPressMitoButton()
     {
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.MITOCHONDRIA];
-        if (canBuildTower)
+        if (!canBuildTower)
+            return;
+
+        if (GameManager.Instance.econManager.CanBuyTower(StructureType.MITOCHONDRIA))
         {
-            AnimateButton(mitoTowerButton);
-            currSelectedBtn = mitoTowerButton;
-            EventManager.UI.onPressTowerButton?.Invoke(StructureType.MITOCHONDRIA);
-            EventManager.UI.onTapButton?.Invoke();
+            HandleButtonPress(chloroplastTowerButton, StructureType.MITOCHONDRIA);
         }
+        else
+        {
+            HandleInvalidButtonPress(mitoTowerButton);
+        }
+    }
+
+    private void HandleButtonPress(Button button, StructureType structureType)
+    {
+        AnimateButton(button);
+        currSelectedBtn = AbaTowerButton;
+        EventManager.UI.onPressTowerButton?.Invoke(structureType);
+        EventManager.UI.onTapButton?.Invoke(true);
+    }
+
+    private void HandleInvalidButtonPress(Button button)
+    {
+        var colors = button.colors;
+        colors.selectedColor = Color.red;
+        button.colors = colors;
+        currSelectedBtn = button;
+        LeanTween.delayedCall(0.25f, () => {
+            colors.selectedColor = Color.green;
+            button.colors = colors;
+        });
+        PingPongScaleCurrencyUI();
+        EventManager.UI.onTapButton?.Invoke(false);
     }
 
     private void HandleButtonColor(Button button)
@@ -123,17 +160,20 @@ public class GameplayUI : MonoBehaviour
         });
     }
 
-    private void OnSpendCurrency(int numSpent, int currTotal)
+    private void PingPongScaleCurrencyUI()
     {
-        //playerCurrencyText.text = currTotal.ToString();
         var oldScale = playerCurrencyText.transform.localScale;
         LeanTween.scale(playerCurrencyText.gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
     }
 
+    private void OnSpendCurrency(int numSpent, int currTotal)
+    {
+        PingPongScaleCurrencyUI();
+    }
+
     private void OnGainCurrency(int numGained, int currTotal)
     {
-        //playerCurrencyText.text = currTotal.ToString();
-        Debug.Log($"Currency gained");
+        //Debug.Log($"Currency gained");
     }
 
     private void OnStructureCooldownStarted(StructureType structureType, float cooldown)
@@ -167,6 +207,13 @@ public class GameplayUI : MonoBehaviour
             LeanTween.moveLocalY(currSelectedBtn.gameObject, initPos.y, 0.1f);
 
         LeanTween.moveLocalY(button.gameObject, initPos.y + 20, 0.1f);
+    }
+    private void AnimateButtonDown(Button button, float delay)
+    {
+        LeanTween.delayedCall(delay, () => {
+            var buttonLocPosY = button.transform.localPosition.y;
+            LeanTween.moveLocalY(button.gameObject, buttonLocPosY - 20, 0.1f);
+        });
     }
 
     private void DeselectCurrentButton()

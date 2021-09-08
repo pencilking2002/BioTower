@@ -68,7 +68,7 @@ public class BasicEnemy : Unit
         agent.Stop();
         //Debug.Log("Stop Moving");
         isEngagedInCombat = true;
-        sr.color = stoppedColor;
+        //sr.color = stoppedColor;
     }
 
     public void SetDestination(Waypoint waypoint)

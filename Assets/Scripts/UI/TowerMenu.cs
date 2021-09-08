@@ -84,7 +84,7 @@ public class TowerMenu : MonoBehaviour
                     }
 
                     EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
-                    EventManager.UI.onTapButton?.Invoke();
+                    EventManager.UI.onTapButton?.Invoke(true);
                 }
             }
         }
@@ -100,7 +100,7 @@ public class TowerMenu : MonoBehaviour
                     GameManager.Instance.econManager.BuyUnit(unitType);
                     GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
                     EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
-                    EventManager.UI.onTapButton?.Invoke();
+                    EventManager.UI.onTapButton?.Invoke(true);
                 }
             }
         }
@@ -127,7 +127,7 @@ public class TowerMenu : MonoBehaviour
             .setOnUpdate((Color col) => {
                 selectedTower.sr.color = col;
             });
-            EventManager.UI.onTapButton?.Invoke();
+            EventManager.UI.onTapButton?.Invoke(true);
         }
     }
 

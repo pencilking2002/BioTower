@@ -101,7 +101,7 @@ public class AudioManager : MonoBehaviour
         PlaySound(data.lightPickedUp);
     }
 
-    private void OnTapButton()
+    private void OnTapButton(bool isValid)
     {
         PlaySound(data.btnSelected);
     }

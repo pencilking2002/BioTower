@@ -68,7 +68,7 @@ public class EventManager : MonoBehaviour
         public static Action onPressUpgradeButton;
         public static Action onTapLevelSelectButton;
         public static Action<UnitType> onTapSpawnUnitButton;
-        public static Action onTapButton;
+        public static Action<bool> onTapButton;     // Is button press valid
         public static Action onLetterReveal;
     }
 

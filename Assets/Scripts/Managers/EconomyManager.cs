@@ -32,6 +32,9 @@ public class EconomyManager : MonoBehaviour
     public void SpendCurrency(int num)
     {
         playerCurrency -= num;
+        if (playerCurrency < 0)
+            playerCurrency = 0;
+            
         EventManager.Game.onSpendCurrency?.Invoke(num, playerCurrency);
     }
 

@@ -27,7 +27,7 @@ public class GameCanvas : MonoBehaviour
     public void OnPressUpgrade()
     {
         EventManager.UI.onPressUpgradeButton?.Invoke();
-        EventManager.UI.onTapButton?.Invoke();
+        EventManager.UI.onTapButton?.Invoke(true);
     }
 
     private void OnGameOver(bool isWin)

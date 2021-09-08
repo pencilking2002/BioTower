@@ -35,7 +35,7 @@ public class LevelSelectButton : MonoBehaviour
             wasPressed = false;
         });
         
-        EventManager.UI.onTapButton?.Invoke();
+        EventManager.UI.onTapButton?.Invoke(true);
     }
 
     public void Lock()

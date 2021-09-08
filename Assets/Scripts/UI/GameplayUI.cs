@@ -17,6 +17,7 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private Button chloroplastTowerButton;
     [SerializeField] private Button mitoTowerButton;
     [SerializeField] private Button currSelectedBtn;
+    [SerializeField] private ObjectShake currencyContainer;
     [SerializeField] private TextMeshProUGUI playerCurrencyText;
     private Dictionary<StructureType,Button> towerButtonMap = new Dictionary<StructureType, Button>();
 
@@ -146,7 +147,8 @@ public class GameplayUI : MonoBehaviour
             colors.selectedColor = Color.green;
             button.colors = colors;
         });
-        PingPongScaleCurrencyUI();
+        //PingPongScaleCurrencyUI(1.5f);
+        currencyContainer.ShakeHorizontal(0.4f, 5.0f);
         EventManager.UI.onTapButton?.Invoke(false);
     }
 
@@ -160,15 +162,15 @@ public class GameplayUI : MonoBehaviour
         });
     }
 
-    private void PingPongScaleCurrencyUI()
+    private void PingPongScaleCurrencyUI(float targetScale)
     {
         var oldScale = playerCurrencyText.transform.localScale;
-        LeanTween.scale(playerCurrencyText.gameObject, oldScale * 1.1f, 0.1f).setLoopPingPong(1);
+        LeanTween.scale(playerCurrencyText.gameObject, oldScale * targetScale, 0.1f).setLoopPingPong(1);
     }
 
     private void OnSpendCurrency(int numSpent, int currTotal)
     {
-        PingPongScaleCurrencyUI();
+        PingPongScaleCurrencyUI(1.2f);
     }
 
     private void OnGainCurrency(int numGained, int currTotal)

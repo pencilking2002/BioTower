@@ -33,6 +33,7 @@ public class LevelInfo : MonoBehaviour
         var saveData = GameManager.Instance.saveManager.Load();
         if (levelType == LevelType.LEVEL_00)
         {
+            saveData = new GameData();
             saveData.enabledTowerHealthDecline = false;
             GameManager.Instance.gameSettings.enableTowerHealthDecline = saveData.enabledTowerHealthDecline;
             GameManager.Instance.gameSettings.energy = saveData.startingEnergy;

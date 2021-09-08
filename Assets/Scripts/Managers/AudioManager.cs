@@ -103,7 +103,8 @@ public class AudioManager : MonoBehaviour
 
     private void OnTapButton(bool isValid)
     {
-        PlaySound(data.btnSelected);
+        var clip = isValid ? data.btnSelected : data.invalidBtnSelected;
+        PlaySound(clip);
     }
 
     private void OnLetterRevealed()

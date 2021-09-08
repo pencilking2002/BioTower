@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 namespace BioTower
 {
@@ -47,6 +48,37 @@ public class Util : MonoBehaviour
         Vector2 point = UnityEngine.Random.insideUnitCircle.normalized * UnityEngine.Random.Range(minRadius, maxRadius);
         point += centerPoint;
         return point;
+    }
+
+    public enum ButtonColorMode
+    {
+        DEFAULT,
+        SELECTED
+    }
+
+    public static void HandleInvalidButtonPress(Button button, ButtonColorMode colorMode=ButtonColorMode.SELECTED)
+    {
+        if (colorMode == ButtonColorMode.SELECTED)
+        {
+            var colors = button.colors;
+            Color oldColor = colors.selectedColor;
+            colors.selectedColor = Color.red;
+            button.colors = colors;
+            LeanTween.delayedCall(0.15f, () => {
+                colors.selectedColor = oldColor;
+                button.colors = colors;
+            });
+        }
+        else
+        {
+            var image = button.GetComponent<Image>();
+            Color oldColor = image.color;
+            image.color = Color.red;
+            LeanTween.delayedCall(0.15f, () => {
+                image.color = oldColor;
+            });
+        }
+        EventManager.UI.onTapButton?.Invoke(false);
     }
 
     public void TextReveal(TMP_Text text, float revealDuration, Action onComplete=null)

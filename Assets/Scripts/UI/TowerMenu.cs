@@ -87,6 +87,12 @@ public class TowerMenu : MonoBehaviour
                     EventManager.UI.onTapButton?.Invoke(true);
                 }
             }
+            else
+            {
+                Util.HandleInvalidButtonPress(spawnUnitButton, Util.ButtonColorMode.DEFAULT);
+                var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
+                GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
+            }
         }
         else if (selectedStructure.structureType == StructureType.PPC2_TOWER)
         {
@@ -101,6 +107,12 @@ public class TowerMenu : MonoBehaviour
                     GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
                     EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
                     EventManager.UI.onTapButton?.Invoke(true);
+                }
+                else
+                {
+                    Util.HandleInvalidButtonPress(spawnUnitButton, Util.ButtonColorMode.DEFAULT);
+                    var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
+                    GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
                 }
             }
         }
@@ -128,6 +140,12 @@ public class TowerMenu : MonoBehaviour
                 selectedTower.sr.color = col;
             });
             EventManager.UI.onTapButton?.Invoke(true);
+        }
+        else
+        {
+            Util.HandleInvalidButtonPress(healTowerButton, Util.ButtonColorMode.DEFAULT);
+            var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
+            GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
         }
     }
 

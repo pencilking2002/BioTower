@@ -4995,7 +4995,7 @@ MonoBehaviour:
   chloroplastTowerButton: {fileID: 412561101}
   mitoTowerButton: {fileID: 18853572}
   currSelectedBtn: {fileID: 0}
-  currencyContainer: {fileID: 1615208679}
+  currencyContainer: {fileID: 1615208673}
   playerCurrencyText: {fileID: 1432127226}
 --- !u!114 &806458803
 MonoBehaviour:

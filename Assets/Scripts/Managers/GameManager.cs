@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("References")]
+    public ObjectShake objectShake;
     public UnitManager unitManager;
     public TutorialCanvas currTutCanvas => 
         GameObject.FindGameObjectWithTag(Constants.tutorialCanvas).GetComponent<TutorialCanvas>();

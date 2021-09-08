@@ -17,7 +17,7 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private Button chloroplastTowerButton;
     [SerializeField] private Button mitoTowerButton;
     [SerializeField] private Button currSelectedBtn;
-    [SerializeField] private ObjectShake currencyContainer;
+    public GameObject currencyContainer;
     [SerializeField] private TextMeshProUGUI playerCurrencyText;
     private Dictionary<StructureType,Button> towerButtonMap = new Dictionary<StructureType, Button>();
 
@@ -76,9 +76,9 @@ public class GameplayUI : MonoBehaviour
         }
         else
         {
-            HandleInvalidButtonPress(AbaTowerButton);
+            Util.HandleInvalidButtonPress(AbaTowerButton);
+            GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
         }
-        
     }
 
     public void OnPressPPC2TowerButton()
@@ -93,7 +93,8 @@ public class GameplayUI : MonoBehaviour
         }
         else
         {
-            HandleInvalidButtonPress(Pp2cTowerButton);
+            Util.HandleInvalidButtonPress(Pp2cTowerButton);
+            GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
         }
     }
 
@@ -109,7 +110,8 @@ public class GameplayUI : MonoBehaviour
         }
         else
         {
-            HandleInvalidButtonPress(chloroplastTowerButton);
+            Util.HandleInvalidButtonPress(chloroplastTowerButton);
+            GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
         }
     }
 
@@ -125,7 +127,8 @@ public class GameplayUI : MonoBehaviour
         }
         else
         {
-            HandleInvalidButtonPress(mitoTowerButton);
+            Util.HandleInvalidButtonPress(mitoTowerButton);
+            GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
         }
     }
 
@@ -135,21 +138,6 @@ public class GameplayUI : MonoBehaviour
         currSelectedBtn = AbaTowerButton;
         EventManager.UI.onPressTowerButton?.Invoke(structureType);
         EventManager.UI.onTapButton?.Invoke(true);
-    }
-
-    private void HandleInvalidButtonPress(Button button)
-    {
-        var colors = button.colors;
-        colors.selectedColor = Color.red;
-        button.colors = colors;
-        currSelectedBtn = button;
-        LeanTween.delayedCall(0.25f, () => {
-            colors.selectedColor = Color.green;
-            button.colors = colors;
-        });
-        //PingPongScaleCurrencyUI(1.5f);
-        currencyContainer.ShakeHorizontal(0.4f, 5.0f);
-        EventManager.UI.onTapButton?.Invoke(false);
     }
 
     private void HandleButtonColor(Button button)
@@ -209,13 +197,6 @@ public class GameplayUI : MonoBehaviour
             LeanTween.moveLocalY(currSelectedBtn.gameObject, initPos.y, 0.1f);
 
         LeanTween.moveLocalY(button.gameObject, initPos.y + 20, 0.1f);
-    }
-    private void AnimateButtonDown(Button button, float delay)
-    {
-        LeanTween.delayedCall(delay, () => {
-            var buttonLocPosY = button.transform.localPosition.y;
-            LeanTween.moveLocalY(button.gameObject, buttonLocPosY - 20, 0.1f);
-        });
     }
 
     private void DeselectCurrentButton()

@@ -28,14 +28,19 @@ public class GameSettings : ScriptableObject
 
 
     [Header("Tower Cost")]
-    [TabGroup("Towers")] [Range(0,100)] public int abaTowerCost;
     [TabGroup("Towers")] public int ppc2TowerCost;
     [TabGroup("Towers")] public int chloroplastTowerCost;
     [TabGroup("Towers")] public int mitoTowerCost;
     [TabGroup("Towers")] public int healTowerCost;
     [TabGroup("Towers")] public int spawnLightDropCost;
     [TabGroup("Towers")] public int healTowerAmount;
+
+    [Header("ABA Tower")]
+    [TabGroup("Towers")] [Range(0,100)] public int abaTowerCost;
     [TabGroup("Towers")] public int abaUnitSpawnLimit;
+    [TabGroup("Towers")] public float abaMaxInfluenceRadius;
+    [TabGroup("Towers")] public float abaMapScale;
+    [TabGroup("Towers")] public float abaInfluenceShapeRadius;
 
 
     [TabGroup("Misc")] public int lightFragmentWorth;

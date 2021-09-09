@@ -28,8 +28,15 @@ public class GameData
         startingEnergy = 80;
         energy = 80;
 
-        // ABA Influence
-        abaTowerSettings = new AbaTowerSettings(2.31f, 2.31f, 2.3f);
+        abaTowerSettings = new AbaTowerSettings();
+    
+        abaTowerSettings.SetAbaTowerInfluence(
+            Util.gameSettings.abaMaxInfluenceRadius, 
+            Util.gameSettings.abaMapScale, 
+            Util.gameSettings.abaInfluenceShapeRadius
+        );
+        abaTowerSettings.SetAbaUnitCost(Util.gameSettings.abaUnitCost);
+        abaTowerSettings.SetAbaUnitSpawnLimit(Util.gameSettings.abaUnitSpawnLimit);
     }
 }
 }

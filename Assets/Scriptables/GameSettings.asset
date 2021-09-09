@@ -22,13 +22,19 @@ MonoBehaviour:
   abaUnitCost: 5
   snark2UnitCost: 1
   enableTowerHealthDecline: 0
-  abaTowerCost: 10
   ppc2TowerCost: 40
   chloroplastTowerCost: 20
   mitoTowerCost: 20
   healTowerCost: 5
   spawnLightDropCost: 1
   healTowerAmount: 2
+  abaTowerCost: 10
+  abaUnitSpawnLimit: 3
+  abaMaxInfluenceRadius: 2.31
+  abaMapScale: 2.31
+  abaInfluenceShapeRadius: 2.3
   lightFragmentWorth: 5
   crystalWorth: 5
   crystalSnrk2Worth: 20
+  startingEnergy: 80
+  energy: 80

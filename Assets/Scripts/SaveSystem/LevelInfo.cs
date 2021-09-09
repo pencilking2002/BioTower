@@ -33,21 +33,44 @@ public class LevelInfo : MonoBehaviour
         var saveData = GameManager.Instance.saveManager.Load();
         if (levelType == LevelType.LEVEL_00)
         {
-            saveData = new GameData();
-            saveData.enabledTowerHealthDecline = false;
-            GameManager.Instance.gameSettings.enableTowerHealthDecline = saveData.enabledTowerHealthDecline;
-            GameManager.Instance.gameSettings.energy = saveData.startingEnergy;
+            saveData = InitializeFirstLevel(saveData);
         }
         else
         {
-            saveData.enabledTowerHealthDecline = true;
-            GameManager.Instance.gameSettings.enableTowerHealthDecline = saveData.enabledTowerHealthDecline;
-            GameManager.Instance.gameSettings.energy = saveData.energy;
+           saveData = InitializeLevel(saveData);
         }
 
-        GameManager.Instance.gameSettings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
         GameManager.Instance.saveManager.Save(saveData);
         GameManager.Instance.econManager.Init(levelType);
+    }
+
+    /// <summary>
+    /// Established defaults for tower health decline and starting energy
+    /// </summary>
+    /// <param name="saveData"></param>
+    /// <returns></returns>
+    private GameData InitializeFirstLevel(GameData saveData)
+    {
+        saveData = new GameData();
+        GameManager.Instance.gameSettings.enableTowerHealthDecline = false;
+        saveData.enabledTowerHealthDecline = false;
+        GameManager.Instance.gameSettings.energy = GameManager.Instance.gameSettings.startingEnergy;
+        return saveData;
+    }
+
+    /// <summary>
+    /// Loads data for any level that's not the intro level.
+    /// Enables tower health decline, user's energy, aba unit spawn limit 
+    /// </summary>
+    /// <param name="saveData"></param>
+    /// <returns></returns>
+    private GameData InitializeLevel(GameData saveData)
+    {
+        saveData.enabledTowerHealthDecline = true;
+        GameManager.Instance.gameSettings.enableTowerHealthDecline = true;
+        GameManager.Instance.gameSettings.energy = saveData.energy;
+        GameManager.Instance.gameSettings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
+        return saveData;
     }
 }
 }

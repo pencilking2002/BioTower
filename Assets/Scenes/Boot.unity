@@ -562,6 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb1579c5f893324a85601f9bf0fc35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeType: 28
   icon: {fileID: 438377395}
   text: {fileID: 1445616543}
 --- !u!1 &82998930
@@ -5112,6 +5113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69806d3e8d130a1458217f8b4fefc056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedButton: {fileID: 0}
   unlockUpgradeButton: {fileID: 1594093150}
   upgradeButtons:
   - {fileID: 77128806}
@@ -9055,6 +9057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb1579c5f893324a85601f9bf0fc35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeType: 28
   icon: {fileID: 1153138062}
   text: {fileID: 1416185900}
 --- !u!114 &1594093151
@@ -9513,6 +9516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb1579c5f893324a85601f9bf0fc35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeType: 28
   icon: {fileID: 800272255}
   text: {fileID: 1066946981}
 --- !u!1 &1689617678
@@ -11238,6 +11242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb1579c5f893324a85601f9bf0fc35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeType: 28
   icon: {fileID: 281379741}
   text: {fileID: 623181245}
 --- !u!1 &1952403054
@@ -12079,7 +12084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2084900138
 RectTransform:
   m_ObjectHideFlags: 0

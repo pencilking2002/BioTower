@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameStates gameStates;
     public UpgradeTree upgradeTree;
-
+    public UpgradeTextData upgradeTextData;
     public GameSettings gameSettings;
 
 

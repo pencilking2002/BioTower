@@ -3468,7 +3468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 12.5, y: 0}
+  m_AnchoredPosition: {x: 12.5000305, y: 0}
   m_SizeDelta: {x: -25.004272, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &623181245
@@ -4562,7 +4562,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: UPGRADE
+  m_text: CHOOSE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8651344de57c548408bbb1b3f1b3fcf3, type: 2}
   m_sharedMaterial: {fileID: 4097646070853392654, guid: 8651344de57c548408bbb1b3f1b3fcf3,
@@ -5122,6 +5122,7 @@ MonoBehaviour:
   defaultButtonColor: {r: 0.9647059, g: 1, b: 0.56078434, a: 1}
   panel: {fileID: 2084900139}
   infoPanel: {fileID: 698304573}
+  itemImage: {fileID: 1231328138}
   chooseUpgradeButton: {fileID: 1828777244}
   upgradeDescription: {fileID: 1689617680}
 --- !u!114 &806458809
@@ -7100,7 +7101,7 @@ GameObject:
   - component: {fileID: 1231328139}
   - component: {fileID: 1231328138}
   m_Layer: 0
-  m_Name: Image
+  m_Name: ItemImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8348,7 +8349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 12.5, y: 0}
+  m_AnchoredPosition: {x: 12.5000305, y: 0}
   m_SizeDelta: {x: -25.004272, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1432127225
@@ -8649,7 +8650,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 12.5, y: 0}
+  m_AnchoredPosition: {x: 12.5000305, y: 0}
   m_SizeDelta: {x: -25.004272, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1445616543

@@ -36,19 +36,19 @@ public class InputController : MonoBehaviour
 
     private void HandleButtonDeselect()
     {
-        if (!GameManager.Instance.gameStates.IsGameState())
-            return;
-
-        if(EventSystem.current.currentSelectedGameObject == null)
+        if (GameManager.Instance.gameStates.IsGameState() || GameManager.Instance.gameStates.IsUpgradeMenuState())
         {
-            if (lastSelected != null && lastSelected.activeSelf && lastSelected.GetComponent<Button>() != null && lastSelected.GetComponent<Button>().interactable)
+            if(EventSystem.current.currentSelectedGameObject == null)
             {
-                EventSystem.current.SetSelectedGameObject(lastSelected);
-            }            
-        }
-        else
-        {
-            lastSelected = EventSystem.current.currentSelectedGameObject;
+                if (lastSelected != null && lastSelected.activeSelf && lastSelected.GetComponent<Button>() != null && lastSelected.GetComponent<Button>().interactable)
+                {
+                    EventSystem.current.SetSelectedGameObject(lastSelected);
+                }            
+            }
+            else
+            {
+                lastSelected = EventSystem.current.currentSelectedGameObject;
+            }
         }
     }
 }

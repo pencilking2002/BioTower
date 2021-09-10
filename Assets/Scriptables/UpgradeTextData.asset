@@ -14,35 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abaTowerDataArr:
   - upgradeType: 0
-    buttonText: Tower AOE
-    descrptionText: Tower AOE
+    buttonText: AOE
+    descrptionText: Increase ABA Tower Area of Effect
     sprite: {fileID: 21300000, guid: 4e9e7b76d3aca3f4c9b1a02db7f43d75, type: 3}
   - upgradeType: 1
     buttonText: Unit Cost
-    descrptionText: Unit Cost
+    descrptionText: Decrease the amount of energy it takes to create an ABA unit
     sprite: {fileID: 21300000, guid: 4e9e7b76d3aca3f4c9b1a02db7f43d75, type: 3}
   - upgradeType: 2
-    buttonText: Tower Healing
-    descrptionText: Tower Healing
+    buttonText: Healing
+    descrptionText: Aba towers randomly gain health instead of losing it
     sprite: {fileID: 21300000, guid: 4e9e7b76d3aca3f4c9b1a02db7f43d75, type: 3}
   - upgradeType: 3
-    buttonText: Unit Health
-    descrptionText: Unit Health
+    buttonText: Max Health
+    descrptionText: Increase ABA unit's max health
     sprite: {fileID: -1464615953666773152, guid: d904c9b71eb1e974a83a1ec210dd57d7,
       type: 3}
   - upgradeType: 4
-    buttonText: Unit Damage
-    descrptionText: Unit Damage
+    buttonText: Damage
+    descrptionText: Increase the amount of damage an ABA unit does in combat
     sprite: {fileID: -1464615953666773152, guid: d904c9b71eb1e974a83a1ec210dd57d7,
       type: 3}
   - upgradeType: 5
-    buttonText: Unit Speed
-    descrptionText: Unit Speed
+    buttonText: Speed
+    descrptionText: Increase ABA unit  movement speed
     sprite: {fileID: -1464615953666773152, guid: d904c9b71eb1e974a83a1ec210dd57d7,
       type: 3}
   - upgradeType: 6
-    buttonText: Unit Spawn Limit
-    descrptionText: Unit Spawn Limit
+    buttonText: Max Units
+    descrptionText: Increase the maximum number of ABA units that can be created
+      for each ABA tower by 2
     sprite: {fileID: 21300000, guid: 4e9e7b76d3aca3f4c9b1a02db7f43d75, type: 3}
   ppc2TowerDataArr:
   - upgradeType: 7
@@ -50,24 +51,24 @@ MonoBehaviour:
     descrptionText: New Tower Unlocked!
     sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
   - upgradeType: 8
-    buttonText: Tower AOE
+    buttonText: AOE
     descrptionText: Tower AOE
     sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
   - upgradeType: 9
-    buttonText: Tower Fire Rate
+    buttonText: Fire Rate
     descrptionText: Tower Fire Rate
     sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
   - upgradeType: 10
-    buttonText: Tower Explosion Radius
+    buttonText: Explosion Radius
     descrptionText: Tower Explosion Radius
     sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
   - upgradeType: 11
-    buttonText: Tower Damage
-    descrptionText: Tower Damage
+    buttonText: Damage
+    descrptionText: Damage
     sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
   - upgradeType: 12
-    buttonText: Tower Healing
-    descrptionText: Tower Healing
+    buttonText: Healing
+    descrptionText: Healing
     sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
   - upgradeType: 22
     buttonText: New Unit Unlocked!
@@ -75,17 +76,17 @@ MonoBehaviour:
     sprite: {fileID: -5098619694111100164, guid: 376631fb1eb416b4cb41a68fbac1c687,
       type: 3}
   - upgradeType: 23
-    buttonText: Unit Speed
+    buttonText: Speed
     descrptionText: Unit Speed
     sprite: {fileID: -5098619694111100164, guid: 376631fb1eb416b4cb41a68fbac1c687,
       type: 3}
   - upgradeType: 24
-    buttonText: Unit Damage Resistance
+    buttonText: Damage Resist
     descrptionText: Unit Damage Resistance
     sprite: {fileID: -5098619694111100164, guid: 376631fb1eb416b4cb41a68fbac1c687,
       type: 3}
   - upgradeType: 25
-    buttonText: Crystal Value
+    buttonText: Energy Value
     descrptionText: Crystal Value
     sprite: {fileID: 21300000, guid: 7722699db5392d44e9bb324c0ac09bf7, type: 3}
   mitoTowerDataArr:
@@ -94,7 +95,7 @@ MonoBehaviour:
     descrptionText: New Tower Unlocked!
     sprite: {fileID: 390241442674666848, guid: d1d5dd001f254cd4588797edf25463db, type: 3}
   - upgradeType: 14
-    buttonText: More Energy
+    buttonText: Energy Amount
     descrptionText: More Energy
     sprite: {fileID: 390241442674666848, guid: d1d5dd001f254cd4588797edf25463db, type: 3}
   - upgradeType: 15
@@ -102,8 +103,8 @@ MonoBehaviour:
     descrptionText: Energy Rate
     sprite: {fileID: 390241442674666848, guid: d1d5dd001f254cd4588797edf25463db, type: 3}
   - upgradeType: 16
-    buttonText: Tower Health
-    descrptionText: Tower Health
+    buttonText: Max Health
+    descrptionText: Health
     sprite: {fileID: 390241442674666848, guid: d1d5dd001f254cd4588797edf25463db, type: 3}
   chloroTowerDataArr:
   - upgradeType: 17
@@ -111,7 +112,7 @@ MonoBehaviour:
     descrptionText: Tower Upgraded!
     sprite: {fileID: 21300000, guid: 5edd2bafd1ad1dd4b8a49399b8f44046, type: 3}
   - upgradeType: 18
-    buttonText: More Energy
+    buttonText: Energy Amount
     descrptionText: More Energy
     sprite: {fileID: 21300000, guid: 5edd2bafd1ad1dd4b8a49399b8f44046, type: 3}
   - upgradeType: 19
@@ -123,16 +124,16 @@ MonoBehaviour:
     descrptionText: Energy Pickup
     sprite: {fileID: 21300000, guid: 5edd2bafd1ad1dd4b8a49399b8f44046, type: 3}
   - upgradeType: 21
-    buttonText: Tower Healing
-    descrptionText: Tower Healing
+    buttonText: Healing
+    descrptionText: Healing
     sprite: {fileID: 21300000, guid: 5edd2bafd1ad1dd4b8a49399b8f44046, type: 3}
   playerTowerDataArr:
   - upgradeType: 26
-    buttonText: Tower Health
-    descrptionText: Tower Health
+    buttonText: Max Health
+    descrptionText: Max Health
     sprite: {fileID: 21300000, guid: 8899f23812dc7a04981b737694ab4314, type: 3}
   - upgradeType: 27
-    buttonText: Tower Healing
+    buttonText: Healing
     descrptionText: Tower Healing
     sprite: {fileID: 21300000, guid: 8899f23812dc7a04981b737694ab4314, type: 3}
   - upgradeType: 28

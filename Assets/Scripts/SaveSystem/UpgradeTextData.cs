@@ -49,7 +49,7 @@ public class UpgradeData
 {
     public UpgradeType upgradeType;
     public string buttonText;
-    public string descrptionText;
+    [Multiline] public string descrptionText;
     public Sprite sprite;
 }
 }

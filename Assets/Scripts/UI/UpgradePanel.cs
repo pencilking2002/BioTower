@@ -6,17 +6,19 @@ using TMPro;
 using BioTower.SaveData;
 using UnityEngine.SceneManagement;
 using System;
+using Sirenix.OdinInspector;
 
 namespace BioTower
 {
 public class UpgradePanel : MonoBehaviour
 {
-    [SerializeField] private UpgradeButton selectedButton;
+    [ReadOnly][SerializeField] private UpgradeButton selectedButton;
     [SerializeField] private UpgradeButton unlockUpgradeButton;
     [SerializeField] private UpgradeButton[] upgradeButtons;
     [SerializeField] private Color defaultButtonColor;
     public Image panel;
     public Image infoPanel;
+    public Image itemImage;
     public Button chooseUpgradeButton;
     public Text upgradeDescription;
 
@@ -68,17 +70,19 @@ public class UpgradePanel : MonoBehaviour
         
         // Get the upgrades for this level
         var upgradeTree = GameManager.Instance.upgradeTree;
+        var upgradeTextData = GameManager.Instance.upgradeTextData;
         var upgrades = upgradeTree.GetUpgradesForLevel(currLevel);
+        UpgradeData data = null;
 
         if (upgrades.isUnlock)
         {
+            data = upgradeTextData.GetUpgradeTextData(upgrades.unlockUpgrade);
             unlockUpgradeButton.gameObject.SetActive(true);
-            unlockUpgradeButton.SetText(upgrades.unlockUpgrade.ToString());
+            unlockUpgradeButton.SetText(data.buttonText);
             unlockUpgradeButton.SetUpgradeType(upgrades.unlockUpgrade);
 
             foreach(var btn in upgradeButtons)
                 btn.gameObject.SetActive(false);
-
         }
         else
         {
@@ -87,14 +91,20 @@ public class UpgradePanel : MonoBehaviour
             {
                 btn.gameObject.SetActive(true);
             }
-            upgradeButtons[0].SetText(upgrades.upgrade_01.ToString());
+            data = upgradeTextData.GetUpgradeTextData(upgrades.upgrade_01);
+            upgradeButtons[0].SetText(data.buttonText);
             upgradeButtons[0].SetUpgradeType(upgrades.upgrade_01);
+            upgradeButtons[0].SetIcon(data.sprite);
 
-            upgradeButtons[1].SetText(upgrades.upgrade_02.ToString());
+            data = upgradeTextData.GetUpgradeTextData(upgrades.upgrade_02);
+            upgradeButtons[1].SetText(data.buttonText);
             upgradeButtons[1].SetUpgradeType(upgrades.upgrade_02);
+            upgradeButtons[1].SetIcon(data.sprite);
 
-            upgradeButtons[2].SetText(upgrades.upgrade_03.ToString());
+            data = upgradeTextData.GetUpgradeTextData(upgrades.upgrade_03);
+            upgradeButtons[2].SetText(data.buttonText);
             upgradeButtons[2].SetUpgradeType(upgrades.upgrade_03);
+            upgradeButtons[2].SetIcon(data.sprite);
         }
     }
 
@@ -102,18 +112,36 @@ public class UpgradePanel : MonoBehaviour
     {
         infoPanel.gameObject.SetActive(true);
         selectedButton = upgradeButtons[0];
+
+        var upgradeType = selectedButton.GetUpgradeType();
+        var upgradeData = GameManager.Instance.upgradeTextData;
+        var data = upgradeData.GetUpgradeTextData(upgradeType);
+        upgradeDescription.text = data.descrptionText;
+        itemImage.sprite = data.sprite;
     }
 
     public void OnPressUpgradeButton02()
     {
         infoPanel.gameObject.SetActive(true);
         selectedButton = upgradeButtons[1];
+
+        var upgradeType = selectedButton.GetUpgradeType();
+        var upgradeData = GameManager.Instance.upgradeTextData;
+        var data = upgradeData.GetUpgradeTextData(upgradeType);
+        upgradeDescription.text = data.descrptionText;
+        itemImage.sprite = data.sprite;
     }
 
     public void OnPressUpgradeButton03()
     {
         infoPanel.gameObject.SetActive(true);
         selectedButton = upgradeButtons[2];
+
+        var upgradeType = selectedButton.GetUpgradeType();
+        var upgradeData = GameManager.Instance.upgradeTextData;
+        var data = upgradeData.GetUpgradeTextData(upgradeType);
+        upgradeDescription.text = data.descrptionText;
+        itemImage.sprite = data.sprite;
     }
 
     public void OnPressPurchaseUpgradeButton()

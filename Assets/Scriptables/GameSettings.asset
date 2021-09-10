@@ -36,6 +36,6 @@ MonoBehaviour:
   currLevel: 0
   lightFragmentValue: 5
   crystalValue: 5
-  crystalSnrk2Worth: 20
+  crystalSnrk2Value: 20
   startingEnergy: 80
   energy: 80

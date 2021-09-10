@@ -12,7 +12,6 @@ public class GameData
     public int currLevel;
     public bool enabledTowerHealthDecline;
     public int abaUnitSpawnLimit;
-    public int startingEnergy;
     public int energy;
 
     // ABA Influence
@@ -22,12 +21,14 @@ public class GameData
     // Set Default settings in the constructor
     public GameData()
     {
-        abaUnitSpawnLimit = 3;
-        enabledTowerHealthDecline = false;
-        currLevel = 0;
-        startingEnergy = 80;
-        energy = 80;
+        var settings = Util.gameSettings;
 
+        enabledTowerHealthDecline = settings.enableTowerHealthDecline;
+        currLevel = settings.currLevel;
+        energy = settings.startingEnergy;
+
+
+        // ABA defaults
         abaTowerSettings = new AbaTowerSettings();
     
         abaTowerSettings.SetAbaTowerInfluence(
@@ -37,6 +38,7 @@ public class GameData
         );
         abaTowerSettings.SetAbaUnitCost(Util.gameSettings.abaUnitCost);
         abaTowerSettings.SetAbaUnitSpawnLimit(Util.gameSettings.abaUnitSpawnLimit);
+        abaTowerSettings.SetAbaUnitHealth(Util.gameSettings.abaUnitMaxHealth);
     }
 }
 }

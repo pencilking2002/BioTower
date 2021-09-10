@@ -8,9 +8,8 @@ public class AbaTowerSettings
     public int abaMaxInfluenceRadius;
     public int abaMapScale;
     public int abaInfluenceShapeRadius;
-    
+    public int abaUnitMaxHealth;
     public int abaUnitCost;
-    
     public int abaUnitSpawnLimit;
 
 
@@ -24,6 +23,11 @@ public class AbaTowerSettings
     public void SetAbaUnitCost(int unitCost)
     {
         this.abaUnitCost = unitCost;
+    }
+
+    public void SetAbaUnitHealth(int health)
+    {
+        this.abaUnitMaxHealth = health;
     }
 
     public void SetAbaUnitSpawnLimit(int spawnLimit)

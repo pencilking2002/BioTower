@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStates: {fileID: 3902137962693488694}
+  upgradeTree: {fileID: 11400000, guid: 8ada8920ce8dd2948b173bfe53158e53, type: 2}
   gameSettings: {fileID: 11400000, guid: fd76be76114cc874982908e631e71934, type: 2}
   levelMap: {fileID: 0}
   playerBase: {fileID: 0}

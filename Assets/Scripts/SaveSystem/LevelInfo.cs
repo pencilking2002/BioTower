@@ -33,11 +33,11 @@ public class LevelInfo : MonoBehaviour
         var saveData = GameManager.Instance.saveManager.Load();
         if (levelType == LevelType.LEVEL_00)
         {
-            saveData = InitializeFirstLevel(saveData);
+            InitializeFirstLevel(ref saveData);
         }
         else
         {
-           saveData = InitializeLevel(saveData);
+           InitializeLevel(ref saveData);
         }
 
         GameManager.Instance.saveManager.Save(saveData);
@@ -49,13 +49,11 @@ public class LevelInfo : MonoBehaviour
     /// </summary>
     /// <param name="saveData"></param>
     /// <returns></returns>
-    private GameData InitializeFirstLevel(GameData saveData)
+    private void InitializeFirstLevel(ref GameData saveData)
     {
+        var settings = GameManager.Instance.gameSettings;
+        settings.Reset();
         saveData = new GameData();
-        GameManager.Instance.gameSettings.enableTowerHealthDecline = false;
-        saveData.enabledTowerHealthDecline = false;
-        GameManager.Instance.gameSettings.energy = GameManager.Instance.gameSettings.startingEnergy;
-        return saveData;
     }
 
     /// <summary>
@@ -64,13 +62,15 @@ public class LevelInfo : MonoBehaviour
     /// </summary>
     /// <param name="saveData"></param>
     /// <returns></returns>
-    private GameData InitializeLevel(GameData saveData)
+    private void InitializeLevel(ref GameData saveData)
     {
         saveData.enabledTowerHealthDecline = true;
-        GameManager.Instance.gameSettings.enableTowerHealthDecline = true;
-        GameManager.Instance.gameSettings.energy = saveData.energy;
-        GameManager.Instance.gameSettings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
-        return saveData;
+        
+        var settings = GameManager.Instance.gameSettings;
+        settings.enableTowerHealthDecline = true;
+        settings.energy = saveData.energy;
+        settings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
+        settings.abaUnitMaxHealth = saveData.abaTowerSettings.abaUnitMaxHealth;
     }
 }
 }

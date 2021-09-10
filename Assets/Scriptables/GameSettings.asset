@@ -33,8 +33,9 @@ MonoBehaviour:
   abaMaxInfluenceRadius: 2.31
   abaMapScale: 2.31
   abaInfluenceShapeRadius: 2.3
-  lightFragmentWorth: 5
-  crystalWorth: 5
+  currLevel: 0
+  lightFragmentValue: 5
+  crystalValue: 5
   crystalSnrk2Worth: 20
   startingEnergy: 80
   energy: 80

@@ -9,13 +9,8 @@ namespace BioTower
 {
 public class EconomyManager : MonoBehaviour
 {
-    //public int startingCurrency = 100;
     public int playerCurrency;
     
-    private void Start()
-    {
-       //Init();
-    }
 
     public void Init(LevelType levelType)
     {
@@ -87,17 +82,17 @@ public class EconomyManager : MonoBehaviour
 
     private void OnSnrk2UnitReachedBase(Snrk2Unit unit)
     {
-        GainCurrency(Util.gameSettings.crystalSnrk2Worth);
+        GainCurrency(Util.gameSettings.crystalSnrk2Value);
     }
 
     private void OnCrystalTapped()
     {
-        GainCurrency(Util.gameSettings.crystalWorth);
+        GainCurrency(Util.gameSettings.crystalValue);
     }
 
     private void OnLightFragmentTapped()
     {
-        GainCurrency(Util.gameSettings.lightFragmentWorth);
+        GainCurrency(Util.gameSettings.lightFragmentValue);
     }
 
     private void OnEnable()

@@ -177,7 +177,7 @@ public class GameplayUI : MonoBehaviour
 
         button.interactable = false;
         var cooldownImage = button.transform.Find("Cooldown").GetComponent<Image>();
-        LeanTween.value(1, 0, cooldown).setOnUpdate((float val) => {
+        LeanTween.value(gameObject, 1, 0, cooldown).setOnUpdate((float val) => {
             cooldownImage.fillAmount = val;
         })
         .setOnComplete(() => {

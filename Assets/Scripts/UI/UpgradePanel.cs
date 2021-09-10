@@ -5,12 +5,15 @@ using UnityEngine.UI;
 using TMPro;
 using BioTower.SaveData;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace BioTower
 {
 public class UpgradePanel : MonoBehaviour
 {
-    [SerializeField] private Image[] upgradeButtons;
+    [SerializeField] private UpgradeButton selectedButton;
+    [SerializeField] private UpgradeButton unlockUpgradeButton;
+    [SerializeField] private UpgradeButton[] upgradeButtons;
     [SerializeField] private Color defaultButtonColor;
     public Image panel;
     public Image infoPanel;
@@ -18,42 +21,99 @@ public class UpgradePanel : MonoBehaviour
     public Text upgradeDescription;
 
 
+    private void AnimateUpgradePanel(bool slideIn, Action onComplete=null)
+    {
+        if (slideIn)
+        {
+            float initLocalPosY = panel.transform.localPosition.y;
+            panel.transform.localPosition = new Vector3(0, -500, 0);
+            LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f)
+            .setEaseOutBack()
+            .setOnComplete(onComplete);
+            infoPanel.gameObject.SetActive(false);
+        }
+        else
+        {
+            float targetLocalPosY = -500;
+            LeanTween.moveLocalY(panel.gameObject, targetLocalPosY, 0.25f)
+            .setEaseOutBack()
+            .setOnComplete(onComplete);
+        }
+    }
+
     public void Display(bool isAnimated=false)
     {
         panel.gameObject.SetActive(true);
+        SetupUpdgradeButtons();
 
         if (isAnimated)
         {
-            var upgradePanelGo = panel.gameObject;
-            upgradePanelGo.SetActive(true);
-
-            float initLocalPosY = upgradePanelGo.transform.localPosition.y;
-            upgradePanelGo.transform.localPosition = new Vector3(0, -500, 0);
-            LeanTween.moveLocalY(upgradePanelGo, initLocalPosY, 0.25f).setEaseOutBack();
-
-            infoPanel.gameObject.SetActive(false);
+            AnimateUpgradePanel(true);
         }
     }
 
     public void Hide(bool isAnimated=false)
     {
-        panel.gameObject.SetActive(false);
+        if (isAnimated)
+        {
+            AnimateUpgradePanel(false, () => {
+                panel.gameObject.SetActive(false);
+            });
+        }
+    }
+
+    private void SetupUpdgradeButtons()
+    {
+        var currLevel = LevelInfo.current.levelType;
+        
+        // Get the upgrades for this level
+        var upgradeTree = GameManager.Instance.upgradeTree;
+        var upgrades = upgradeTree.GetUpgradesForLevel(currLevel);
+
+        if (upgrades.isUnlock)
+        {
+            unlockUpgradeButton.gameObject.SetActive(true);
+            unlockUpgradeButton.SetText(upgrades.unlockUpgrade.ToString());
+            unlockUpgradeButton.SetUpgradeType(upgrades.unlockUpgrade);
+
+            foreach(var btn in upgradeButtons)
+                btn.gameObject.SetActive(false);
+
+        }
+        else
+        {
+            unlockUpgradeButton.gameObject.SetActive(false);
+            foreach(var btn in upgradeButtons)
+            {
+                btn.gameObject.SetActive(true);
+            }
+            upgradeButtons[0].SetText(upgrades.upgrade_01.ToString());
+            upgradeButtons[0].SetUpgradeType(upgrades.upgrade_01);
+
+            upgradeButtons[1].SetText(upgrades.upgrade_02.ToString());
+            upgradeButtons[1].SetUpgradeType(upgrades.upgrade_02);
+
+            upgradeButtons[2].SetText(upgrades.upgrade_03.ToString());
+            upgradeButtons[2].SetUpgradeType(upgrades.upgrade_03);
+        }
     }
 
     public void OnPressUpgradeButton01()
     {
         infoPanel.gameObject.SetActive(true);
+        selectedButton = upgradeButtons[0];
     }
 
     public void OnPressUpgradeButton02()
     {
         infoPanel.gameObject.SetActive(true);
+        selectedButton = upgradeButtons[1];
     }
 
     public void OnPressUpgradeButton03()
     {
         infoPanel.gameObject.SetActive(true);
-
+        selectedButton = upgradeButtons[2];
     }
 
     public void OnPressPurchaseUpgradeButton()

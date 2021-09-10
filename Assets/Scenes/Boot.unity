@@ -5097,11 +5097,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69806d3e8d130a1458217f8b4fefc056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeButtons:
+  - {fileID: 77128804}
+  - {fileID: 1657221018}
+  - {fileID: 1948958842}
   defaultButtonColor: {r: 0.9647059, g: 1, b: 0.56078434, a: 1}
   panel: {fileID: 2084900139}
-  upgradeButton_01: {fileID: 77128804}
-  upgradeButton_02: {fileID: 1657221018}
-  upgradeButton_03: {fileID: 1948958842}
   infoPanel: {fileID: 698304573}
   chooseUpgradeButton: {fileID: 1828777244}
   upgradeDescription: {fileID: 1689617680}

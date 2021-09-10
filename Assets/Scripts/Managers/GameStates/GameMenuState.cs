@@ -25,7 +25,7 @@ public class GameMenuState : BootStateBase
                 controller.gameplayUI.gameUIPanel.alpha = 0;
                 controller.gameplayUI.gameUIPanel.gameObject.SetActive(true);
 
-                controller.upgradePanel.panel.gameObject.SetActive(false);
+                controller.upgradePanel.Hide();
                 //controller.towerMenu.towerPanel.gameObject.SetActive(true);
             });
 

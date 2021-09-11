@@ -7,9 +7,14 @@ namespace BioTower.SaveData
 {
 public enum LevelType
 {
-    LEVEL_00, LEVEL_01, LEVEL_02, LEVEL_03, LEVEL_04, LEVEL_05,
-    LEVEL_06, LEVEL_07, LEVEL_08, LEVEL_09, LEVEL_10, LEVEL_11,
-    LEVEL_12, LEVEL_13, LEVEL_14, LEVEL_15
+    NONE, LEVEL_01, 
+    LEVEL_02, LEVEL_03, 
+    LEVEL_04, LEVEL_05, 
+    LEVEL_06, LEVEL_07, 
+    LEVEL_08, LEVEL_09, 
+    LEVEL_10, LEVEL_11,
+    LEVEL_12, LEVEL_13, 
+    LEVEL_14, LEVEL_15
 }   
 
 public class LevelInfo : MonoBehaviour
@@ -31,7 +36,7 @@ public class LevelInfo : MonoBehaviour
     private void Start()
     {
         var saveData = GameManager.Instance.saveManager.Load();
-        if (levelType == LevelType.LEVEL_00)
+        if (levelType == LevelType.LEVEL_01)
         {
             InitializeFirstLevel(ref saveData);
         }

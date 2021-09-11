@@ -74,6 +74,8 @@ public class UpgradePanel : MonoBehaviour
         var upgrades = upgradeTree.GetUpgradesForLevel(currLevel);
         UpgradeData data = null;
 
+        unlockUpgradeButton.gameObject.SetActive(upgrades.isUnlock);
+
         if (upgrades.isUnlock)
         {
             data = upgradeTextData.GetUpgradeTextData(upgrades.unlockUpgrade);
@@ -81,30 +83,26 @@ public class UpgradePanel : MonoBehaviour
             unlockUpgradeButton.SetText(data.buttonText);
             unlockUpgradeButton.SetUpgradeType(upgrades.unlockUpgrade);
 
-            foreach(var btn in upgradeButtons)
-                btn.gameObject.SetActive(false);
+            for (int i=0; i<upgradeButtons.Length; i++)
+                upgradeButtons[i].gameObject.SetActive(false);
         }
         else
         {
-            unlockUpgradeButton.gameObject.SetActive(false);
-            foreach(var btn in upgradeButtons)
+            for (int i=0; i<upgradeButtons.Length; i++)
             {
+                UpgradeButton btn = upgradeButtons[i];
+                UpgradeType upgradeType = UpgradeType.NONE;
+
+                if (i==0) upgradeType = upgrades.upgrade_01;
+                else if (i==1) upgradeType = upgrades.upgrade_02;
+                else if (i==2) upgradeType = upgrades.upgrade_03;    
+                
+                data = upgradeTextData.GetUpgradeTextData(upgradeType);
+                btn.SetUpgradeType(upgradeType);
+                btn.SetText(data.buttonText);
+                btn.SetIcon(data.sprite);
                 btn.gameObject.SetActive(true);
             }
-            data = upgradeTextData.GetUpgradeTextData(upgrades.upgrade_01);
-            upgradeButtons[0].SetText(data.buttonText);
-            upgradeButtons[0].SetUpgradeType(upgrades.upgrade_01);
-            upgradeButtons[0].SetIcon(data.sprite);
-
-            data = upgradeTextData.GetUpgradeTextData(upgrades.upgrade_02);
-            upgradeButtons[1].SetText(data.buttonText);
-            upgradeButtons[1].SetUpgradeType(upgrades.upgrade_02);
-            upgradeButtons[1].SetIcon(data.sprite);
-
-            data = upgradeTextData.GetUpgradeTextData(upgrades.upgrade_03);
-            upgradeButtons[2].SetText(data.buttonText);
-            upgradeButtons[2].SetUpgradeType(upgrades.upgrade_03);
-            upgradeButtons[2].SetIcon(data.sprite);
         }
     }
 
@@ -146,8 +144,15 @@ public class UpgradePanel : MonoBehaviour
 
     public void OnPressPurchaseUpgradeButton()
     {
+        var upgradeType = selectedButton.GetUpgradeType();
+        var levelType = LevelInfo.current.levelType;
+        var levelUpgrades = GameManager.Instance.upgradeTree.GetUpgradesForLevel(levelType);
+        var upgradeVarIndex = GameManager.Instance.upgradeTree.GetUpgradeVarName(levelUpgrades, upgradeType);
         var gameData = GameManager.Instance.saveManager.Load();
-        var currLevel = (int) LevelInfo.current.levelType;
+        var currLevel = (int) levelType;
+        var chosenUpgrade = new ChosenUpgrade(currLevel, upgradeVarIndex);
+
+        gameData.chosenUpgrades.Add(chosenUpgrade);
         gameData.currLevel = ++currLevel;
         GameManager.Instance.saveManager.Save(gameData);
         BootController.levelToLoadInstantly = gameData.currLevel;

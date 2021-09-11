@@ -52,6 +52,20 @@ public class UpgradeTree : ScriptableObject
         }
         return null;
     }
+
+    public int GetUpgradeVarName(Upgrade upgrade, UpgradeType upgradeType)
+    {
+        if (upgrade.isUnlock)
+            return 0;
+        if (upgrade.upgrade_01 == upgradeType)
+            return 1;
+        else if (upgrade.upgrade_02 == upgradeType)
+            return 2;
+        else if (upgrade.upgrade_03 == upgradeType)
+            return 3;
+        
+        return -1;
+    }
 }
 
 [Serializable]

@@ -38,17 +38,9 @@ public class  BootController : MonoBehaviour
         CacheStates();
         if (levelToLoadInstantly != -1)
         {
-            //SceneManager.LoadScene(levelToLoadInstantly, LoadSceneMode.Additive);
-            //Debug.Log("Load level: " + levelToLoadInstantly);
             levelToLoadInstantly = -1;
             gameState = GameState.LEVEL_SELECT;
         }
-
-        // if (!isBootLoaded)
-        // {
-        //     isBootLoaded = true;
-        //     SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
-        // }
     }
 
     public void LoadFirstScene()

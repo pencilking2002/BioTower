@@ -211,7 +211,7 @@ public class GameplayUI : MonoBehaviour
 
     private void OnLevelAwake(LevelType levelType)
     {
-        if (levelType == LevelType.LEVEL_00)
+        if (levelType == LevelType.LEVEL_01)
         {
             Pp2cTowerButton.gameObject.SetActive(false);
             chloroplastTowerButton.gameObject.SetActive(false);

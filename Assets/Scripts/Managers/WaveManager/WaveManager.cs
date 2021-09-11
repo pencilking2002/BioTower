@@ -82,7 +82,7 @@ public class WaveManager : MonoBehaviour
     {
         // Don't automatically start waves on the first level
         // because there's a tutorial
-        if (levelType == LevelType.LEVEL_00)
+        if (levelType == LevelType.LEVEL_01)
             return;
 
         // Initialize waves
@@ -94,7 +94,7 @@ public class WaveManager : MonoBehaviour
 
     private void OnTutorialEnd(TutorialData data)
     {
-        if (LevelInfo.current.levelType == LevelType.LEVEL_00 && 
+        if (LevelInfo.current.levelType == LevelType.LEVEL_01 && 
             GameManager.Instance.currTutCanvas.IsLastTutorial(data))
         {
             wavesInitialized = true;    

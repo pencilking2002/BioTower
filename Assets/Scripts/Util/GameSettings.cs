@@ -76,7 +76,7 @@ public class GameSettings : ScriptableObject
         abaMapScale = 2.31f;
         abaInfluenceShapeRadius = 2.3f;
 
-        currLevel = 0;
+        currLevel = 1;
         lightFragmentValue = 5;
         crystalValue = 5;
         crystalSnrk2Value = 20;

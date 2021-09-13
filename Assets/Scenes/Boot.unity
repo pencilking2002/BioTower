@@ -5453,6 +5453,12 @@ PrefabInstance:
       propertyPath: bootController
       value: 
       objectReference: {fileID: 841383665}
+    - target: {fileID: 3163904365036822116, guid: 1efa5580d925f4f41949a420af6456cf,
+        type: 3}
+      propertyPath: upgradeSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 041e8614ac66ff04589933703e4eda48,
+        type: 2}
     - target: {fileID: 3163904365036822118, guid: 1efa5580d925f4f41949a420af6456cf,
         type: 3}
       propertyPath: m_Name

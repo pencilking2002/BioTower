@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab39c3707b2e0fa469593c5d61774ddc, type: 3}
-  m_Name: GameSettings
+  m_Name: DefaultGameSettings
   m_EditorClassIdentifier: 
   timeScale: 1
   ppc2Damage: 5
@@ -33,7 +33,7 @@ MonoBehaviour:
   abaMaxInfluenceRadius: 2.31
   abaMapScale: 2.31
   abaInfluenceShapeRadius: 2.3
-  currLevel: 0
+  currLevel: 1
   lightFragmentValue: 5
   crystalValue: 5
   crystalSnrk2Value: 20

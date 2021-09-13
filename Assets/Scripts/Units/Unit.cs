@@ -30,7 +30,7 @@ public class Unit : MonoBehaviour
     {
         if (hasHealth)
         {
-            currHealth = GameManager.Instance.gameSettings.GetMaxUnitHealth(unitType);
+            currHealth = Util.upgradeSettings.GetMaxUnitHealth(unitType);
             healthSlider.maxValue = currHealth;
             healthSlider.value = currHealth;
             healthSlider.gameObject.SetActive(true);
@@ -59,7 +59,7 @@ public class Unit : MonoBehaviour
         if (hasHealth)
         {
             currHealth -= amount;
-            currHealth = Mathf.Clamp(currHealth, 0, GameManager.Instance.gameSettings.GetMaxUnitHealth(unitType));
+            currHealth = Mathf.Clamp(currHealth, 0, Util.upgradeSettings.GetMaxUnitHealth(unitType));
             healthSlider.value = currHealth;
 
 //            Debug.Log("Enemy take damage. health: " + currHealth);

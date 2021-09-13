@@ -155,7 +155,7 @@ public class ABATower : Structure
 
     public bool IsBelowSpawnLimit()
     {
-        return abaUnits.Count < GameManager.Instance.gameSettings.abaUnitSpawnLimit;
+        return abaUnits.Count < GameManager.Instance.upgradeSettings.abaUnitSpawnLimit;
     }
 
     public void UnregisterEnemy(BasicEnemy enemy)

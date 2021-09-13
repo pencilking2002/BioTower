@@ -14,7 +14,7 @@ public class EconomyManager : MonoBehaviour
 
     public void Init(LevelType levelType)
     {
-        playerCurrency = GameManager.Instance.gameSettings.energy;
+        playerCurrency = Util.upgradeSettings.energy;
         EventManager.Game.onGainCurrency?.Invoke(0, playerCurrency);
         Debug.Log("Init economy");
     }
@@ -42,36 +42,36 @@ public class EconomyManager : MonoBehaviour
 
     public bool CanBuyTowerHeal()
     {
-        return HasEnoughCurrency(GameManager.Instance.gameSettings.healTowerCost);
+        return HasEnoughCurrency(GameSettings.healTowerCost);
     }
 
     public bool CanBuyTower(StructureType structureType)
     {
-        var cost = Util.gameSettings.GetTowerCost(structureType);
+        var cost = Util.upgradeSettings.GetTowerCost(structureType);
         return HasEnoughCurrency(cost);
     }
 
     public void BuyTower(StructureType structureType)
     {
-        int cost = Util.gameSettings.GetTowerCost(structureType);
+        int cost = Util.upgradeSettings.GetTowerCost(structureType);
         SpendCurrency(cost);   
     }
 
     public bool CanBuyUnit(UnitType unitType)
     {
-        var unitCost = Util.gameSettings.GetUnitCost(unitType);
+        var unitCost = Util.upgradeSettings.GetUnitCost(unitType);
         return HasEnoughCurrency(unitCost);
     }
 
     public void BuyUnit(UnitType unitType)
     {
-        var unitCost = Util.gameSettings.GetUnitCost(unitType);
+        var unitCost = Util.upgradeSettings.GetUnitCost(unitType);
         SpendCurrency(unitCost);
     }
 
     public void BuyTowerHeal()
     {
-        SpendCurrency(Util.gameSettings.healTowerCost);
+        SpendCurrency(GameSettings.healTowerCost);
     }
 
     // public void GainCrystalMoney()
@@ -82,17 +82,17 @@ public class EconomyManager : MonoBehaviour
 
     private void OnSnrk2UnitReachedBase(Snrk2Unit unit)
     {
-        GainCurrency(Util.gameSettings.crystalSnrk2Value);
+        GainCurrency(GameSettings.crystalSnrk2Value);
     }
 
     private void OnCrystalTapped()
     {
-        GainCurrency(Util.gameSettings.crystalValue);
+        GainCurrency(GameSettings.crystalValue);
     }
 
     private void OnLightFragmentTapped()
     {
-        GainCurrency(Util.gameSettings.lightFragmentValue);
+        GainCurrency(GameSettings.lightFragmentValue);
     }
 
     private void OnEnable()

@@ -39,6 +39,7 @@ public enum UpgradeType
 }
 
 [CreateAssetMenu(fileName="UpgradeTree", menuName="UpgradeTree")]
+[TypeInfoBox("Defines which 3 upgrades are available on gameover win for each level")]
 public class UpgradeTree : ScriptableObject
 {
     public Upgrade[] upgradeTree;

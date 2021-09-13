@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 
 namespace BioTower
 {
+[TypeInfoBox("Defines text and sprite data associated with each upgrade so it can be properly displayed in the Upgrade Panel")]
 
 [CreateAssetMenu(fileName="UpgradeTextData", menuName="UpgradeTextData")]
 public class UpgradeTextData : ScriptableObject

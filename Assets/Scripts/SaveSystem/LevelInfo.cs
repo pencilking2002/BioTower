@@ -57,7 +57,6 @@ public class LevelInfo : MonoBehaviour
     private void InitializeFirstLevel(ref GameData saveData)
     {
         var settings = GameManager.Instance.gameSettings;
-        settings.Reset();
         saveData = new GameData();
     }
 
@@ -70,12 +69,14 @@ public class LevelInfo : MonoBehaviour
     private void InitializeLevel(ref GameData saveData)
     {
         saveData.enabledTowerHealthDecline = true;
-        
-        var settings = GameManager.Instance.gameSettings;
-        settings.enableTowerHealthDecline = true;
-        settings.energy = saveData.energy;
-        settings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
-        settings.abaUnitMaxHealth = saveData.abaTowerSettings.abaUnitMaxHealth;
+        var gameData = GameManager.Instance.saveManager.Load();
+        Util.upgradeSettings.SetData(gameData);
+
+        //var settings = GameManager.Instance.gameSettings;
+        //settings.enableTowerHealthDecline = true;
+        //settings.energy = saveData.energy;
+        //settings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
+        //settings.abaUnitMaxHealth = saveData.abaTowerSettings.abaUnitMaxHealth;
     }
 }
 }

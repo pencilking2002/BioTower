@@ -26,7 +26,7 @@ public class StructureManager : MonoBehaviour
 
     private void DoHealthDecline(Structure structure)
     {
-        if (GameManager.Instance.gameSettings.enableTowerHealthDecline)
+        if (GameSettings.enableTowerHealthDecline)
         {
             if (Time.time > structure.lastDeclineTime + declineDelay)
             {

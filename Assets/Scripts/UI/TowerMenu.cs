@@ -54,11 +54,11 @@ public class TowerMenu : MonoBehaviour
     {
         Text text = button.transform.Find("PriceText").GetComponent<Text>();
         if (button == healTowerButton || button == healTowerFullWidthButton)
-            text.text = Util.gameSettings.healTowerCost.ToString();
+            text.text = Util.upgradeSettings.healTowerCost.ToString();
         else if (button == spawnUnitButton)
-            text.text = Util.gameSettings.abaUnitCost.ToString();
+            text.text = Util.upgradeSettings.abaUnitCost.ToString();
          else if (button == spawnLightParticleButton)
-            text.text = Util.gameSettings.spawnLightDropCost.ToString();
+            text.text = Util.upgradeSettings.spawnLightDropCost.ToString();
     }
 
     public void OnPressSpawnUnitButton()
@@ -122,7 +122,7 @@ public class TowerMenu : MonoBehaviour
     {
         if (GameManager.Instance.econManager.CanBuyTowerHeal())
         {
-            var healAmount = GameManager.Instance.gameSettings.healTowerAmount;
+            var healAmount = Util.upgradeSettings.healTowerAmount;
             GameManager.Instance.tapManager.selectedStructure.GainHealth(healAmount);
             GameManager.Instance.econManager.BuyTowerHeal();
             var selectedTower = GameManager.Instance.tapManager.selectedStructure;

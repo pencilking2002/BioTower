@@ -328,6 +328,7 @@ MonoBehaviour:
   gameStates: {fileID: 3902137962693488694}
   upgradeTree: {fileID: 11400000, guid: 8ada8920ce8dd2948b173bfe53158e53, type: 2}
   upgradeTextData: {fileID: 11400000, guid: a2e1c7afa0b0e344592dcd502c5639ca, type: 2}
+  upgradeSettings: {fileID: 11400000, guid: 041e8614ac66ff04589933703e4eda48, type: 2}
   gameSettings: {fileID: 11400000, guid: fd76be76114cc874982908e631e71934, type: 2}
   levelMap: {fileID: 0}
   playerBase: {fileID: 0}
@@ -1010,7 +1011,8 @@ MonoBehaviour:
     type: 3}
   chloroplastTowerPrefab: {fileID: 6556679146768111441, guid: fc5fd20b60860bf48aa895745a23fa0b,
     type: 3}
-  mitoTowerPrefab: {fileID: 0}
+  mitoTowerPrefab: {fileID: 1729478695543941044, guid: 81ed3f6665b4b62459cc30997ae88516,
+    type: 3}
 --- !u!1 &7102263763943850465
 GameObject:
   m_ObjectHideFlags: 0

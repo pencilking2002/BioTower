@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameStates gameStates;
     public UpgradeTree upgradeTree;
     public UpgradeTextData upgradeTextData;
+    public UpgradeSettings upgradeSettings;
     public GameSettings gameSettings;
 
 

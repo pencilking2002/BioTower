@@ -11,7 +11,7 @@ public class GameData
 {
     public int currLevel;
     public bool enabledTowerHealthDecline;
-    public int abaUnitSpawnLimit;
+    //public int abaUnitSpawnLimit;
     public int energy;
 
     // ABA Influence
@@ -25,23 +25,21 @@ public class GameData
     // Set Default settings in the constructor
     public GameData()
     {
-        var settings = Util.gameSettings;
-
-        enabledTowerHealthDecline = settings.enableTowerHealthDecline;
-        currLevel = settings.currLevel;
-        energy = settings.startingEnergy;
+        currLevel = GameSettings.startingLevel;
+        enabledTowerHealthDecline = GameSettings.enableTowerHealthDecline;
+        energy = GameSettings.startingEnergy;
 
         // ABA defaults
         abaTowerSettings = new AbaTowerSettings();
     
         abaTowerSettings.SetAbaTowerInfluence(
-            Util.gameSettings.abaMaxInfluenceRadius, 
-            Util.gameSettings.abaMapScale, 
-            Util.gameSettings.abaInfluenceShapeRadius
+            GameSettings.abaMaxInfluenceRadius, 
+            GameSettings.abaMapScale, 
+            GameSettings.abaInfluenceShapeRadius
         );
-        abaTowerSettings.SetAbaUnitCost(Util.gameSettings.abaUnitCost);
-        abaTowerSettings.SetAbaUnitSpawnLimit(Util.gameSettings.abaUnitSpawnLimit);
-        abaTowerSettings.SetAbaUnitHealth(Util.gameSettings.abaUnitMaxHealth);
+        abaTowerSettings.SetAbaUnitCost(GameSettings.abaUnitCost);
+        abaTowerSettings.SetAbaUnitSpawnLimit(GameSettings.abaUnitSpawnLimit);
+        abaTowerSettings.SetAbaUnitHealth(GameSettings.abaUnitMaxHealth);
 
         chosenUpgrades = new List<ChosenUpgrade>();
     }

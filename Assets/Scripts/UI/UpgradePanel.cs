@@ -153,9 +153,9 @@ public class UpgradePanel : MonoBehaviour
         var chosenUpgrade = new ChosenUpgrade(currLevel, upgradeVarIndex);
 
         gameData.chosenUpgrades.Add(chosenUpgrade);
-        gameData.currLevel = ++currLevel;
+        gameData.settings.currLevel = ++currLevel;
         GameManager.Instance.saveManager.Save(gameData);
-        BootController.levelToLoadInstantly = gameData.currLevel;
+        BootController.levelToLoadInstantly = gameData.settings.currLevel;
         SceneManager.LoadScene(0);
     }
 }

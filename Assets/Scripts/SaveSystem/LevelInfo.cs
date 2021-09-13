@@ -56,8 +56,9 @@ public class LevelInfo : MonoBehaviour
     /// <returns></returns>
     private void InitializeFirstLevel(ref GameData saveData)
     {
-        var settings = GameManager.Instance.gameSettings;
         saveData = new GameData();
+        var defaultSettings = GameManager.Instance.gameSettings.defaultSettings;
+        saveData.SetDefaultSettings(defaultSettings);
     }
 
     /// <summary>
@@ -68,9 +69,8 @@ public class LevelInfo : MonoBehaviour
     /// <returns></returns>
     private void InitializeLevel(ref GameData saveData)
     {
-        saveData.enabledTowerHealthDecline = true;
-        var gameData = GameManager.Instance.saveManager.Load();
-        Util.gameSettings.UpdateUpgradeSettings(gameData);
+        saveData.settings.enableTowerHealthDecline = true;
+        Util.gameSettings.UpdateUpgradeSettings(saveData);
 
         //var settings = GameManager.Instance.gameSettings;
         //settings.enableTowerHealthDecline = true;

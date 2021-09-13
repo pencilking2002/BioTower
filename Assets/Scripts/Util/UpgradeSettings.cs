@@ -44,6 +44,7 @@ public class Params
 
     
     [TabGroup("Misc")] public int startingLevel = 1;
+    [TabGroup("Misc")] public int currLevel = 1;
     [TabGroup("Misc")] public int lightFragmentValue = 5;
     [TabGroup("Misc")] public int crystalSnrk2Value = 20;
     [TabGroup("Misc")] public int startingEnergy = 80;

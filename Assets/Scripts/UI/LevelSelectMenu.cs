@@ -21,7 +21,7 @@ public class LevelSelectMenu : MonoBehaviour
     private void SetupButtons()
     {
         var gameData = GameManager.Instance.saveManager.Load();
-        int currLevel = gameData.currLevel;
+        int currLevel = gameData.settings.currLevel;
 
         for (int i=0; i<levelSelectButtons.Length; i++)
         {

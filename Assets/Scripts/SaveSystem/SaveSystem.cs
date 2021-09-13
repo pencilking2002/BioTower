@@ -88,7 +88,7 @@ public class SaveSystem : MonoBehaviour
             }
 
             GameData gameData = new GameData();
-            gameData.currLevel = 0;
+            gameData.settings.currLevel = 1;
 
             string jsonString = JsonUtility.ToJson(gameData, true);
             File.WriteAllText(dataPath, jsonString);
@@ -113,14 +113,14 @@ public class SaveSystem : MonoBehaviour
     private void OnSpendCurrency(int numSpent, int currentCurrency)
     {
         var saveData = GameManager.Instance.saveManager.Load();
-        saveData.energy = currentCurrency;
+        saveData.settings.energy = currentCurrency;
         GameManager.Instance.saveManager.Save(saveData);
     }
 
     private void OnGainCurrency(int numGained, int currentCurrency)
     {
         var saveData = GameManager.Instance.saveManager.Load();
-        saveData.energy = currentCurrency;
+        saveData.settings.energy = currentCurrency;
         GameManager.Instance.saveManager.Save(saveData);
     }
 

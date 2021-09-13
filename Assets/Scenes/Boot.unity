@@ -5442,23 +5442,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1404310606}
     m_Modifications:
-    - target: {fileID: 360581058528368861, guid: 1efa5580d925f4f41949a420af6456cf,
-        type: 3}
-      propertyPath: mitoTowerPrefab
-      value: 
-      objectReference: {fileID: 1729478695543941044, guid: 81ed3f6665b4b62459cc30997ae88516,
-        type: 3}
-    - target: {fileID: 3163904365036822116, guid: 1efa5580d925f4f41949a420af6456cf,
-        type: 3}
-      propertyPath: bootController
-      value: 
-      objectReference: {fileID: 841383665}
-    - target: {fileID: 3163904365036822116, guid: 1efa5580d925f4f41949a420af6456cf,
-        type: 3}
-      propertyPath: upgradeSettings
-      value: 
-      objectReference: {fileID: 11400000, guid: 041e8614ac66ff04589933703e4eda48,
-        type: 2}
     - target: {fileID: 3163904365036822118, guid: 1efa5580d925f4f41949a420af6456cf,
         type: 3}
       propertyPath: m_Name

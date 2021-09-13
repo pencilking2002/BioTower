@@ -17,7 +17,7 @@ public class PPC2Projectile : MonoBehaviour
         if (enemyGO != null)
         {
             var enemy = enemyGO.transform.parent.GetComponent<BasicEnemy>();
-            enemy.TakeDamage(GameSettings.ppc2Damage);
+            enemy.TakeDamage(Util.gameSettings.upgradeSettings.ppc2Damage);
         }
 
         var explosion = Instantiate(explosiionPrefab);

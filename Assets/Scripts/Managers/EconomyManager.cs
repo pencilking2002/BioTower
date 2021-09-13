@@ -14,7 +14,7 @@ public class EconomyManager : MonoBehaviour
 
     public void Init(LevelType levelType)
     {
-        playerCurrency = Util.upgradeSettings.energy;
+        playerCurrency = Util.gameSettings.upgradeSettings.energy;
         EventManager.Game.onGainCurrency?.Invoke(0, playerCurrency);
         Debug.Log("Init economy");
     }
@@ -42,36 +42,36 @@ public class EconomyManager : MonoBehaviour
 
     public bool CanBuyTowerHeal()
     {
-        return HasEnoughCurrency(GameSettings.healTowerCost);
+        return HasEnoughCurrency(Util.gameSettings.upgradeSettings.healTowerCost);
     }
 
     public bool CanBuyTower(StructureType structureType)
     {
-        var cost = Util.upgradeSettings.GetTowerCost(structureType);
+        var cost = Util.gameSettings.upgradeSettings.GetTowerCost(structureType);
         return HasEnoughCurrency(cost);
     }
 
     public void BuyTower(StructureType structureType)
     {
-        int cost = Util.upgradeSettings.GetTowerCost(structureType);
+        int cost = Util.gameSettings.upgradeSettings.GetTowerCost(structureType);
         SpendCurrency(cost);   
     }
 
     public bool CanBuyUnit(UnitType unitType)
     {
-        var unitCost = Util.upgradeSettings.GetUnitCost(unitType);
+        var unitCost = Util.gameSettings.upgradeSettings.GetUnitCost(unitType);
         return HasEnoughCurrency(unitCost);
     }
 
     public void BuyUnit(UnitType unitType)
     {
-        var unitCost = Util.upgradeSettings.GetUnitCost(unitType);
+        var unitCost = Util.gameSettings.upgradeSettings.GetUnitCost(unitType);
         SpendCurrency(unitCost);
     }
 
     public void BuyTowerHeal()
     {
-        SpendCurrency(GameSettings.healTowerCost);
+        SpendCurrency(Util.gameSettings.upgradeSettings.healTowerCost);
     }
 
     // public void GainCrystalMoney()
@@ -82,30 +82,30 @@ public class EconomyManager : MonoBehaviour
 
     private void OnSnrk2UnitReachedBase(Snrk2Unit unit)
     {
-        GainCurrency(GameSettings.crystalSnrk2Value);
+        GainCurrency(Util.gameSettings.upgradeSettings.crystalSnrk2Value);
     }
 
-    private void OnCrystalTapped()
-    {
-        GainCurrency(GameSettings.crystalValue);
-    }
+    // private void OnCrystalTapped()
+    // {
+    //     GainCurrency(Util.gameSettings.upgradeSettings.crystalValue);
+    // }
 
     private void OnLightFragmentTapped()
     {
-        GainCurrency(GameSettings.lightFragmentValue);
+        GainCurrency(Util.gameSettings.upgradeSettings.lightFragmentValue);
     }
 
     private void OnEnable()
     {
         EventManager.Game.onSnrk2UnitReachedBase += OnSnrk2UnitReachedBase;
-        EventManager.Game.onCrystalTapped += OnCrystalTapped;
+        //EventManager.Game.onCrystalTapped += OnCrystalTapped;
         EventManager.Game.onLightFragmentTapped += OnLightFragmentTapped;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onSnrk2UnitReachedBase -= OnSnrk2UnitReachedBase;
-        EventManager.Game.onCrystalTapped -= OnCrystalTapped;
+        //EventManager.Game.onCrystalTapped -= OnCrystalTapped;
         EventManager.Game.onLightFragmentTapped -= OnLightFragmentTapped;
     }
 

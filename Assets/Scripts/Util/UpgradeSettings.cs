@@ -5,12 +5,13 @@ using Sirenix.OdinInspector;
 using BioTower.SaveData;
 using BioTower.Structures;
 using BioTower.Units;
+using System;
 
 namespace BioTower
 {
 [CreateAssetMenu(fileName="UpgradeSettings", menuName="UpgradeSettings")]
-[TypeInfoBox("Gets updated at the beginning of every level by the Save System and used by Towers and units to get data about how to behave based on the current upgrades")]
-public class UpgradeSettings : ScriptableObject
+[Serializable]
+public class Params
 {
 
     [Header("Units")]
@@ -20,37 +21,34 @@ public class UpgradeSettings : ScriptableObject
     [TabGroup("Units")] public int abaUnitMaxHealth = 10;
     [TabGroup("Units")] public int snrkUnitMaxHealth = 5;
     [TabGroup("Units")] public int enemyUnitMaxHealth = 10;
-    [TabGroup("Units")] public int abaUnitCost;
-    [TabGroup("Units")] public int snark2UnitCost;
+    [TabGroup("Units")] public int abaUnitCost = 5;
+    [TabGroup("Units")] public int snark2UnitCost = 1;
+
+
+    [Header("Towers")]
+    [TabGroup("Towers")] public int ppc2TowerCost = 40;
+    [TabGroup("Towers")] public int chloroplastTowerCost = 20;
+    [TabGroup("Towers")] public int mitoTowerCost = 20;
+    [TabGroup("Towers")] public int healTowerCost = 5;
+    [TabGroup("Towers")] public int spawnLightDropCost = 1;
+    [TabGroup("Towers")] public int healTowerAmount = 2;
+    [TabGroup("Towers")] public bool enableTowerHealthDecline = false;
 
 
     [Header("ABA Tower")]
-    [TabGroup("Towers")][Range(0,100)] public int abaTowerCost;
-    [TabGroup("Towers")] public int abaUnitSpawnLimit;
-    [TabGroup("Towers")] public float abaMaxInfluenceRadius;
-    [TabGroup("Towers")] public float abaMapScale;
-    [TabGroup("Towers")] public float abaInfluenceShapeRadius;
+    [TabGroup("Towers")][Range(0,100)] public int abaTowerCost = 10;
+    [TabGroup("Towers")] public int abaUnitSpawnLimit = 3;
+    [TabGroup("Towers")] public float abaMaxInfluenceRadius = 2.31f;
+    [TabGroup("Towers")] public float abaMapScale = 2.31f;
+    [TabGroup("Towers")] public float abaInfluenceShapeRadius = 2.3f;
 
     
-    [Header("Tower Cost")]
-    [TabGroup("Towers")] public int ppc2TowerCost;
-    [TabGroup("Towers")] public int chloroplastTowerCost;
-    [TabGroup("Towers")] public int mitoTowerCost;
-    [TabGroup("Towers")] public int healTowerCost;
-    [TabGroup("Towers")] public int spawnLightDropCost;
-    [TabGroup("Towers")] public int healTowerAmount;
-
+    [TabGroup("Misc")] public int startingLevel = 1;
+    [TabGroup("Misc")] public int lightFragmentValue = 5;
+    [TabGroup("Misc")] public int crystalSnrk2Value = 20;
+    [TabGroup("Misc")] public int startingEnergy = 80;
     [TabGroup("Misc")] public int energy = 80;
 
-    public void SetData(GameData gameData)
-    {
-        // ABA tower influence
-        abaUnitSpawnLimit = gameData.abaTowerSettings.abaUnitSpawnLimit;
-        abaMaxInfluenceRadius = gameData.abaTowerSettings.abaMaxInfluenceRadius / 1000;
-        abaMapScale = gameData.abaTowerSettings.abaMapScale / 1000;
-        abaInfluenceShapeRadius = gameData.abaTowerSettings.abaInfluenceShapeRadius / 1000;
-
-    }
 
     public int GetUnitCost(UnitType unitType)
     {
@@ -70,7 +68,6 @@ public class UpgradeSettings : ScriptableObject
         return cost;
     }
 
-    
     public int GetMaxUnitHealth(UnitType unitType)
     {
         switch(unitType)
@@ -82,8 +79,6 @@ public class UpgradeSettings : ScriptableObject
             case UnitType.SNRK2:
                 return snrkUnitMaxHealth;
         }
-
-        //Debug.Log("Unit type not recognized: " + unitType);
         return 0;
     }
 
@@ -111,6 +106,16 @@ public class UpgradeSettings : ScriptableObject
         return cost;
     }
 
+    public void UpdateUpgradeSettings(GameData gameData)
+    {
+        // ABA tower influence
+        abaUnitSpawnLimit = gameData.abaTowerSettings.abaUnitSpawnLimit;
+        abaMaxInfluenceRadius = gameData.abaTowerSettings.abaMaxInfluenceRadius / 1000;
+        abaMapScale = gameData.abaTowerSettings.abaMapScale / 1000;
+        abaInfluenceShapeRadius = gameData.abaTowerSettings.abaInfluenceShapeRadius / 1000;
+
+        // more...
+    }
     
 }
 }

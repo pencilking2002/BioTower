@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public GameStates gameStates;
     public UpgradeTree upgradeTree;
     public UpgradeTextData upgradeTextData;
-    public UpgradeSettings upgradeSettings;
+    public Params upgradeSettings;
     public GameSettings gameSettings;
 
 
@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        Time.timeScale = gameSettings.timeScale;  
+        //Time.timeScale = gameSettings.timeScale;  
     }
 
     public void CreateTowerExplosion(Vector3 pos)

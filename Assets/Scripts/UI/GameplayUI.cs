@@ -44,7 +44,7 @@ public class GameplayUI : MonoBehaviour
     private void SetTowerPrice(StructureType structureType)
     {
         var text = towerButtonMap[structureType].transform.Find("Panel").Find("PriceText").GetComponent<Text>();
-        int cost = Util.upgradeSettings.GetTowerCost(structureType);
+        int cost = Util.gameSettings.upgradeSettings.GetTowerCost(structureType);
         text.text = cost.ToString();
     }
 

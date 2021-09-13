@@ -15,7 +15,7 @@ public class GameData
     public int energy;
 
     // ABA Influence
-    public AbaTowerSettings abaTowerSettings;
+    public Params settings;
     
 
     // Keeps track of what upgrades the player has
@@ -30,17 +30,17 @@ public class GameData
         energy = Util.gameSettings.defaultSettings.startingEnergy;
 
         // ABA defaults
-        abaTowerSettings = new AbaTowerSettings();
+        // abaTowerSettings = new AbaTowerSettings();
     
-        abaTowerSettings.SetAbaTowerInfluence(
-            Util.gameSettings.defaultSettings.abaMaxInfluenceRadius, 
-            Util.gameSettings.defaultSettings.abaMapScale, 
-            Util.gameSettings.defaultSettings.abaInfluenceShapeRadius
-        );
-        abaTowerSettings.SetAbaUnitCost(Util.gameSettings.defaultSettings.abaUnitCost);
-        abaTowerSettings.SetAbaUnitSpawnLimit(Util.gameSettings.defaultSettings.abaUnitSpawnLimit);
-        abaTowerSettings.SetAbaUnitHealth(Util.gameSettings.defaultSettings.abaUnitMaxHealth);
-
+        // abaTowerSettings.SetAbaTowerInfluence(
+        //     Util.gameSettings.defaultSettings.abaMaxInfluenceRadius, 
+        //     Util.gameSettings.defaultSettings.abaMapScale, 
+        //     Util.gameSettings.defaultSettings.abaInfluenceShapeRadius
+        // );
+        // abaTowerSettings.SetAbaUnitCost(Util.gameSettings.defaultSettings.abaUnitCost);
+        // abaTowerSettings.SetAbaUnitSpawnLimit(Util.gameSettings.defaultSettings.abaUnitSpawnLimit);
+        // abaTowerSettings.SetAbaUnitHealth(Util.gameSettings.defaultSettings.abaUnitMaxHealth);
+        settings = Util.gameSettings.defaultSettings;
         chosenUpgrades = new List<ChosenUpgrade>();
     }
 }

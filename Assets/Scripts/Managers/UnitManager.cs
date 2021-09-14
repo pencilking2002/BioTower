@@ -32,6 +32,9 @@ public class UnitManager : MonoBehaviour
         for (int i=0; i<units.Count; i++)
         {
             Unit unit = units[i];
+            if (unit == null)
+                continue;
+                
             Vector2 moveDir = unit.agent.movingDirection;
 
             if (moveDir.sqrMagnitude > 0.1f)

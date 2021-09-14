@@ -18,6 +18,9 @@ public class StructureManager : MonoBehaviour
         //(Structure structure in structureList)
         for(int i=0;i<structureList.Count; i++)
         {
+            if (structureList[i] == null)
+                continue;
+
             Structure structure = structureList[i];
             DoHealthDecline(structure);
             structure.OnUpdate();

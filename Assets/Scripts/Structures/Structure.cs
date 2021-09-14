@@ -80,7 +80,7 @@ public class Structure : MonoBehaviour
     {
         if (GameManager.Instance.gameStates.IsGameState() && hasHealth && isAlive)
         {
-            if (ReferenceEquals(gameObject, null))
+            if (this == null)
                 return;
 
             currHealth -= numDamage;
@@ -169,6 +169,11 @@ public class Structure : MonoBehaviour
     {
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
+    }
+
+    private void OnDestroy()
+    {
+        isAlive = false;
     }
 }
 }

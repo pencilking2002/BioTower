@@ -14,6 +14,7 @@ public class UpgradeMenuState : BootStateBase
             
             EventManager.Game.onGameStateInit?.Invoke(gameState);
             controller.upgradePanel.Display(true);
+            GameManager.Instance.econManager.GainCurrency(40);
         }
     }
 

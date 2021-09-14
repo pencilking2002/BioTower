@@ -28,7 +28,7 @@ MonoBehaviour:
   abaSpawned: {fileID: 8300000, guid: dfde925c8fc75bb40bfb4a205d631ae5, type: 3}
   crystalDeposited: {fileID: 8300000, guid: 346fbd0557f353d4a8877788258e6400, type: 3}
   crystalPickedUp: {fileID: 8300000, guid: 0f6e6e87c26547e49880f117e4d9fd94, type: 3}
-  explode: {fileID: 0}
+  explode: {fileID: 8300000, guid: 51bb44de8f3e9ed4396bd217cd53e40c, type: 3}
   towerPlaced: {fileID: 8300000, guid: 2cadee08fd58a124288c8dfdfa54a64f, type: 3}
   towerHealed: {fileID: 8300000, guid: 59d17424640b90c4897ff2c021d129d2, type: 3}
   towerSelected: {fileID: 8300000, guid: 7da2fc96ece5c9a41a81426eef6001ab, type: 3}
@@ -40,8 +40,8 @@ MonoBehaviour:
   btnSelected: {fileID: 8300000, guid: 82a2298801b46b642ac9e2698ab5f1d5, type: 3}
   invalidBtnSelected: {fileID: 0}
   letterRevealed: {fileID: 8300000, guid: 8722206a5aaf6a94fa4cc6d6da7259cb, type: 3}
-  levelSelect: {fileID: 0}
-  tutChat: {fileID: 0}
-  titleDrop: {fileID: 0}
-  tapAnywhere: {fileID: 0}
-  energyGone: {fileID: 0}
+  levelSelect: {fileID: 8300000, guid: f28b62cf2404f46469729dcd42232986, type: 3}
+  tutChat: {fileID: 8300000, guid: 915de7ff3f562134a82ae6ea5b969b9d, type: 3}
+  titleDrop: {fileID: 8300000, guid: 676e2025b52ff5048b37c97718fc3438, type: 3}
+  tapAnywhere: {fileID: 8300000, guid: 59c9dfbccfba4d746a3ca5e580290420, type: 3}
+  energyGone: {fileID: 8300000, guid: 92db01ffa105f0c4aae35e3d3f495f1e, type: 3}

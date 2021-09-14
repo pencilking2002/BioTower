@@ -48,6 +48,11 @@ public class GameSettings : ScriptableObject
     {
         upgradeSettings = gameData.settings;
     }
+
+    public void SetUpgradeSettingsToDefault()
+    {
+        upgradeSettings = new Params();
+    }
     
     public void UpgradeAbaTowerInfluence()
     {

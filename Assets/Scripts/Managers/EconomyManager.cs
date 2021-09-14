@@ -12,10 +12,12 @@ public class EconomyManager : MonoBehaviour
     public int playerCurrency;
     
 
-    public void Init(LevelType levelType)
+    public void Init(int currency)
     {
-        playerCurrency = Util.gameSettings.upgradeSettings.energy;
-        EventManager.Game.onGainCurrency?.Invoke(0, playerCurrency);
+        //GainCurrency(currency);
+        playerCurrency = currency;
+        //playerCurrency = Util.gameSettings.upgradeSettings.energy;
+        EventManager.Game.onGainCurrency?.Invoke(currency, playerCurrency);
         Debug.Log("Init economy");
     }
 

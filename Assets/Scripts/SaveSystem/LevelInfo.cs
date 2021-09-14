@@ -46,7 +46,7 @@ public class LevelInfo : MonoBehaviour
         }
 
         GameManager.Instance.saveManager.Save(saveData);
-        GameManager.Instance.econManager.Init(levelType);
+       
     }
 
     /// <summary>
@@ -56,9 +56,13 @@ public class LevelInfo : MonoBehaviour
     /// <returns></returns>
     private void InitializeFirstLevel(ref GameData saveData)
     {
-        saveData = new GameData();
-        var defaultSettings = GameManager.Instance.gameSettings.defaultSettings;
+        //saveData = new GameData();
+        var defaultSettings = Util.gameSettings.defaultSettings;
+        var upgradeSettings = Util.gameSettings.upgradeSettings;
+        Util.gameSettings.SetUpgradeSettingsToDefault();
         saveData.SetDefaultSettings(defaultSettings);
+        Debug.Log("Init first lvl. energy: " + upgradeSettings.energy);
+        GameManager.Instance.econManager.Init(defaultSettings.startingEnergy);
     }
 
     /// <summary>
@@ -71,6 +75,7 @@ public class LevelInfo : MonoBehaviour
     {
         saveData.settings.enableTowerHealthDecline = true;
         Util.gameSettings.SetUpgradeSettingsBasedOnGameData(saveData);
+        GameManager.Instance.econManager.Init(Util.gameSettings.upgradeSettings.energy);
 
         //var settings = GameManager.Instance.gameSettings;
         //settings.enableTowerHealthDecline = true;

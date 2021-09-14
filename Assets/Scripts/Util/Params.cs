@@ -6,7 +6,6 @@ using System;
 
 namespace BioTower
 {
-[CreateAssetMenu(fileName="UpgradeSettings", menuName="UpgradeSettings")]
 [Serializable]
 public class Params
 {

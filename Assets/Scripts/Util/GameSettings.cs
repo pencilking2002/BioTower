@@ -33,7 +33,11 @@ public class GameSettings : ScriptableObject
                 _upgradeLogicMap.Add(UpgradeType.PP2C_TOWER_FIRE_RATE, UpgradePpc2FireRate);
                 _upgradeLogicMap.Add(UpgradeType.PP2C_EXPLOSION_RADIUS, UpgradePpc2ExplosionRadius);
                 _upgradeLogicMap.Add(UpgradeType.PP2C_TOWER_DAMAGE, UpgradePpc2TowerDamage);
-
+                _upgradeLogicMap.Add(UpgradeType.PP2C_TOWER_RANDOM_HEAL, UpgradePpc2TowerRandomHeal);
+                _upgradeLogicMap.Add(UpgradeType.MITO_TOWER_UNLOCK, UnlockMitoTower);
+                _upgradeLogicMap.Add(UpgradeType.MITO_TOWER_ENERGY, UpgradeMitoEnergy);
+                _upgradeLogicMap.Add(UpgradeType.MITO_TOWER_COOLDOWN, UpgradeMitoTowerCooldown);
+                _upgradeLogicMap.Add(UpgradeType.MITO_TOWER_HEALTH, UpgradeMitoHealth);
 
             }
             return _upgradeLogicMap;
@@ -77,9 +81,13 @@ public class GameSettings : ScriptableObject
         upgradeSettings.ppc2ExplosionSpriteRadius_float = 800; 
     }
 
-    public void UpgradePpc2TowerDamage()
-    {
-        upgradeSettings.ppc2TowerDamage = 10;
-    }
+    public void UpgradePpc2TowerDamage() { upgradeSettings.ppc2TowerDamage = 10; }
+    public void UpgradePpc2TowerRandomHeal() { upgradeSettings.ppc2TowerDamage = 10; }
+
+    // Mito Tower upgrades -----------------------------------------------
+    public void UnlockMitoTower() { upgradeSettings.mitoTowerUnlocked = true; }
+    public void UpgradeMitoEnergy() { upgradeSettings.lightFragmentValue = 10; }
+    public void UpgradeMitoTowerCooldown() { upgradeSettings.mitoShootInterval_float = 1000; }
+    public void UpgradeMitoHealth() { upgradeSettings.mitoTowerMaxHealth = 15; }
 }   
 }

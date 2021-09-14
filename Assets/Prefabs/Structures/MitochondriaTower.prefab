@@ -90,13 +90,14 @@ MonoBehaviour:
   structureState: 0
   sr: {fileID: 3191618410889031728}
   lastDeclineTime: 0
+  initSpriteScale: {x: 0, y: 0, z: 0}
   influenceVisuals: {fileID: 0}
   lightFragmentPrefab: {fileID: 9002743542284561929, guid: ef222ad8ffbc2a643be8db11000ab260,
     type: 3}
   maxInfluenceCollider: {fileID: 6431307152528647529}
   minInfluenceCollider: {fileID: 8744015754264807960}
   shootDuration: 0.5
-  shootInterval: 5
+  shootInterval: 2
 --- !u!1 &1819904929342562089
 GameObject:
   m_ObjectHideFlags: 0

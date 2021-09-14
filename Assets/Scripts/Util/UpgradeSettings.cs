@@ -51,7 +51,9 @@ public class Params
     [TabGroup("Towers")] public int spawnLightDropCost = 1;
     [TabGroup("Towers")] public int healTowerAmount = 2;
     [TabGroup("Towers")] public bool enableTowerHealthDecline = false;
-
+    [TabGroup("Towers")] public bool mitoTowerUnlocked = false;
+    [TabGroup("Towers")] public int mitoShootInterval_float = 2000; 
+    [TabGroup("Towers")] public int mitoTowerMaxHealth = 10;
 
     [TabGroup("Misc")] public int startingLevel = 1;
     [TabGroup("Misc")] public int currLevel = 1;

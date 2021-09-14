@@ -36,6 +36,9 @@ public class MitoTower : Structure
     [Button("Shoot Fragment")]
     public void ShootFragment()
     {
+        if (Time.time < lastShotTime + shootInterval)
+            return;
+            
         var fragment = CreateFragment();
         Vector3 startPos = transform.position;
         Vector3 endPos = GetPointWithinInfluence();
@@ -54,6 +57,7 @@ public class MitoTower : Structure
 
         seq.append(LeanTween.moveY(fragment, endPos.y + 0.06f, 0.1f));
         seq.append(LeanTween.moveY(fragment, endPos.y, 0.1f));
+        lastShotTime = Time.time;
         EventManager.Structures.onLightDropped?.Invoke();
     }
 

@@ -25,7 +25,15 @@ public class GameSettings : ScriptableObject
                 _upgradeLogicMap.Add(UpgradeType.ABA_TOWER_RANDOM_HEAL, UpgradeAbaTowerRandomHeal);
                 _upgradeLogicMap.Add(UpgradeType.ABA_UNIT_HEALTH, UpgradeAbaUnitHealth);
                 _upgradeLogicMap.Add(UpgradeType.ABA_UNIT_DAMAGE, UpgradeAbaUnitDamage);
-                
+                _upgradeLogicMap.Add(UpgradeType.ABA_UNIT_SPEED, UpgradeAbaUnitSpeed);
+                _upgradeLogicMap.Add(UpgradeType.ABA_UNIT_SPAWN_LIMIT, UpgradeAbaSpawnLimit);
+
+                _upgradeLogicMap.Add(UpgradeType.PP2C_TOWER_UNLOCK, UnlockPPC2Tower);
+                _upgradeLogicMap.Add(UpgradeType.PP2C_TOWER_INFLUENCE, UpgradePPC2TowerInfluence);
+                _upgradeLogicMap.Add(UpgradeType.PP2C_TOWER_FIRE_RATE, UpgradePpc2FireRate);
+                _upgradeLogicMap.Add(UpgradeType.PP2C_EXPLOSION_RADIUS, UpgradePpc2ExplosionRadius);
+
+
             }
             return _upgradeLogicMap;
         }
@@ -38,31 +46,35 @@ public class GameSettings : ScriptableObject
     
     public void UpgradeAbaTowerInfluence()
     {
-        upgradeSettings.abaMaxInfluenceRadius = 3000;
-        upgradeSettings.abaMapScale = 3000;
-        upgradeSettings.abaInfluenceShapeRadius = 3000;
+        upgradeSettings.abaMaxInfluenceRadius_float = 3000;
+        upgradeSettings.abaMapScale_float = 3000;
+        upgradeSettings.abaInfluenceShapeRadius_float = 3000;
     }
 
-    public void UpgradeAbaTowerUnitCost()
-    {
-        upgradeSettings.abaUnitCost = 3;
-    } 
+    // ABA Tower upgrades -----------------------------------------------
+    public void UpgradeAbaTowerUnitCost() { upgradeSettings.abaUnitCost = 3; } 
+    public void UpgradeAbaTowerRandomHeal() { upgradeSettings.enableAbaTowerRandomHeal = true; }  
+    public void UpgradeAbaUnitHealth() { upgradeSettings.abaUnitMaxHealth = 15; }
+    public void UpgradeAbaUnitDamage() { upgradeSettings.abaDamage = 10; }
+    public void UpgradeAbaUnitSpeed() { upgradeSettings.abaUnitMaxSpeed_float = 700; }
+    public void UpgradeAbaSpawnLimit() { upgradeSettings.abaUnitSpawnLimit = 5; }
 
-    public void UpgradeAbaTowerRandomHeal()
-    {
-        upgradeSettings.enableAbaTowerRandomHeal = true;
-    }  
 
-    public void UpgradeAbaUnitHealth()
+    // PPC2 Tower upgrades -----------------------------------------------
+    public void UnlockPPC2Tower() { upgradeSettings.ppc2TowerUnlocked = true; }
+    public void UpgradePPC2TowerInfluence()
     {
-        upgradeSettings.abaUnitMaxHealth = 15;
+        upgradeSettings.ppc2MaxInfluenceRadius_float = 3000;
+        upgradeSettings.ppc2MapScale_float = 3000;
+        upgradeSettings.ppc2InfluenceShapeRadius_float = 3000;
     }
-
-    public void UpgradeAbaUnitDamage()
-    {
-        upgradeSettings.abaDamage = 10;
+    
+    public void UpgradePpc2FireRate() { upgradeSettings.ppc2shootInterval_float = 700; }
+    public void UpgradePpc2ExplosionRadius() 
+    { 
+        upgradeSettings.ppc2ExplosionColliderRadius_float = 1400; 
+        upgradeSettings.ppc2ExplosionSpriteRadius_float = 800; 
     }
-
 
 }   
 }

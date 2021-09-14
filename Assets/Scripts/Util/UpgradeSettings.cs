@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using BioTower.SaveData;
 using BioTower.Structures;
 using BioTower.Units;
 using System;
@@ -14,19 +11,40 @@ namespace BioTower
 public class Params
 {
 
+    [Header("ABA Units")]
+    [TabGroup("Units")] public int abaDamage = 5;
+    [TabGroup("Units")] public int abaUnitMaxSpeed_float = 500;
+    [TabGroup("Units")] public int abaUnitCost = 5;
+    [TabGroup("Units")] public int abaUnitMaxHealth = 10;
+
+
     [Header("Units")]
     [TabGroup("Units")] public int ppc2Damage = 5;
-    [TabGroup("Units")] public int abaDamage = 5;
     [TabGroup("Units")] public int basicEnemyDamage = 5;
-    [TabGroup("Units")] public int abaUnitMaxHealth = 10;
     [TabGroup("Units")] public int snrkUnitMaxHealth = 5;
     [TabGroup("Units")] public int enemyUnitMaxHealth = 10;
-    [TabGroup("Units")] public int abaUnitCost = 5;
     [TabGroup("Units")] public int snark2UnitCost = 1;
 
 
-    [Header("Towers")]
+    [Header("ABA Tower")]
+    [TabGroup("Towers")][Range(0,100)] public int abaTowerCost = 10;
+    [TabGroup("Towers")] public int abaUnitSpawnLimit = 3;
+    [TabGroup("Towers")] public int abaMaxInfluenceRadius_float = 2310;
+    [TabGroup("Towers")] public int abaMapScale_float = 2310;
+    [TabGroup("Towers")] public int abaInfluenceShapeRadius_float = 2300;
+    [TabGroup("Towers")] public bool enableAbaTowerRandomHeal = false;
+
+
+    [Header("PPC2 Tower")]
+    [TabGroup("Towers")] public bool ppc2TowerUnlocked = false;
     [TabGroup("Towers")] public int ppc2TowerCost = 40;
+    [TabGroup("Towers")] public int ppc2MaxInfluenceRadius_float = 2280;
+    [TabGroup("Towers")] public int ppc2InfluenceShapeRadius_float = 2300;
+    [TabGroup("Towers")] public int ppc2MapScale_float = 2310;
+    [TabGroup("Towers")] public int ppc2shootInterval_float = 1000;
+    [TabGroup("Towers")] public int ppc2ExplosionColliderRadius_float = 1271;
+    [TabGroup("Towers")] public int ppc2ExplosionSpriteRadius_float = 622;
+
     [TabGroup("Towers")] public int chloroplastTowerCost = 20;
     [TabGroup("Towers")] public int mitoTowerCost = 20;
     [TabGroup("Towers")] public int healTowerCost = 5;
@@ -35,15 +53,6 @@ public class Params
     [TabGroup("Towers")] public bool enableTowerHealthDecline = false;
 
 
-    [Header("ABA Tower")]
-    [TabGroup("Towers")][Range(0,100)] public int abaTowerCost = 10;
-    [TabGroup("Towers")] public int abaUnitSpawnLimit = 3;
-    [TabGroup("Towers")] public int abaMaxInfluenceRadius = 2310;
-    [TabGroup("Towers")] public int abaMapScale = 2310;
-    [TabGroup("Towers")] public int abaInfluenceShapeRadius = 2300;
-    [TabGroup("Towers")] public bool enableAbaTowerRandomHeal = false;
-
-    
     [TabGroup("Misc")] public int startingLevel = 1;
     [TabGroup("Misc")] public int currLevel = 1;
     [TabGroup("Misc")] public int lightFragmentValue = 5;

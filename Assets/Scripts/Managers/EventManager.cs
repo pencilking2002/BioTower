@@ -22,8 +22,6 @@ public class EventManager : MonoBehaviour
         public static Action onTogglePaths; 
         public static Action<GameState> onGameStateInit;
         public static Action<WaveMode> onWaveStateInit;
-        public static Action onTitleAnimCompleted;
-
         public static Action onLightFragmentTapped;
         public static Action onCrystalTapped;
         public static Action<EnemyCrystal> onCrystalCreated;
@@ -73,12 +71,15 @@ public class EventManager : MonoBehaviour
         public static Action<bool> onTapButton;     // Is button press valid
         public static Action onPressLevelSelectButton;
         public static Action onLetterReveal;
+        public static Action<int> onTitleAnimCompleted;
+
     }
 
     public class Input
     {
         public static Action<Vector3> onTouchBegan;     // screen position of the touch
         public static Action onTapStartMenu;
+        public static Action onTap;
     }
 
     public class Tutorials
@@ -86,6 +87,7 @@ public class EventManager : MonoBehaviour
         public static Action<TutorialData> onTutorialStart;
         public static Action<TutorialData> onTutorialEnd;
         public static Action onTutTextPopUp;
+        public static Action onTutChatStart;
     }
 }
 }

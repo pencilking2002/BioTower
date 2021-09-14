@@ -2,6 +2,7 @@
 using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace BioTower
 {
@@ -16,6 +17,13 @@ public class InputController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             EventManager.Input.onTouchBegan?.Invoke(Input.mousePosition);
+
+            // var evData = new PointerEventData(EventSystem.current);
+            // evData.position = Input.mousePosition;
+            // List<RaycastResult> results = new List<RaycastResult>();
+            // GameManager.Instance.bootController.gameCanvas.GetComponent<GraphicRaycaster>().Raycast(evData, results);
+            // if (results.Count == 0)
+            //     EventManager.Input.onTap?.Invoke();
         }
         
         #elif UNITY_ANDROID
@@ -25,6 +33,7 @@ public class InputController : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 EventManager.Input.onTouchBegan?.Invoke(touch.position);
+                EventManager.Input.onTap?.Invoke();
             }
         }
 

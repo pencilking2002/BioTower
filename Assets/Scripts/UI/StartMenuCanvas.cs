@@ -20,6 +20,7 @@ public class StartMenuCanvas : MonoBehaviour
     [SerializeField] private CanvasGroup tapCTA;
     public static bool titleAnimCompleted = false;
 
+    private int numTimesTitleDropped;
 
     private void Awake()
     {
@@ -39,6 +40,9 @@ public class StartMenuCanvas : MonoBehaviour
         if (title == null)
             return;
 
+        
+ 
+
         Vector3 oldScale = title.transform.localScale;
         title.transform.localScale = oldScale * 5;
         title.alpha = 0;
@@ -51,7 +55,8 @@ public class StartMenuCanvas : MonoBehaviour
         seq.append(duration);
 
         seq.append(() => {
-            EventManager.Game.onTitleAnimCompleted?.Invoke();
+            numTimesTitleDropped++;
+            EventManager.UI.onTitleAnimCompleted?.Invoke(numTimesTitleDropped);
         });
     }
 
@@ -83,7 +88,7 @@ public class StartMenuCanvas : MonoBehaviour
     }
 
 
-    private void OnTitleAnimCompleted()
+    private void OnTitleAnimCompleted(int numTimes)
     {
         var shake = menuPanel.GetComponent<ObjectShake>();
         shake.Shake(menuPanel.gameObject, 0.2f, 3.0f);
@@ -92,13 +97,13 @@ public class StartMenuCanvas : MonoBehaviour
     private void OnEnable()
     {
         EventManager.Input.onTouchBegan += OnTouchBegan;
-        EventManager.Game.onTitleAnimCompleted += OnTitleAnimCompleted;
+        EventManager.UI.onTitleAnimCompleted += OnTitleAnimCompleted;
     }
 
     private void OnDisable()
     {
         EventManager.Input.onTouchBegan -= OnTouchBegan;
-        EventManager.Game.onTitleAnimCompleted -= OnTitleAnimCompleted;
+        EventManager.UI.onTitleAnimCompleted -= OnTitleAnimCompleted;
     }
 }
 }

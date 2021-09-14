@@ -85,6 +85,7 @@ public class Util : MonoBehaviour
     public void TextReveal(TMP_Text text, float revealDuration, Action onComplete=null)
     {
         StartCoroutine(RevealCharacters(text, revealDuration, onComplete));
+        EventManager.Tutorials.onTutChatStart?.Invoke();
     }
 
     private IEnumerator RevealCharacters(TMP_Text textComponent, float revealDuration, Action onComplete=null)

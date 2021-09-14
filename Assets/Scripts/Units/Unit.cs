@@ -67,6 +67,10 @@ public class Unit : MonoBehaviour
             {
                 KillUnit();
             }
+            else
+            {
+                EventManager.Units.onUnitTakeDamage?.Invoke(unitType);
+            }
         }
         else
         {

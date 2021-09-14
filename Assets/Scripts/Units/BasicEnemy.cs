@@ -158,6 +158,7 @@ public class BasicEnemy : Unit
         var oldScale = sr.transform.localScale;
         LeanTween.scale(sr.gameObject, oldScale * 1.2f, 0.25f);
         sr.color = hasCrystalTintColor;
+        EventManager.Units.onEnemyPickedUpCrystal?.Invoke();
         // TODO: make enemy stronger after picking up crystal
 
     }

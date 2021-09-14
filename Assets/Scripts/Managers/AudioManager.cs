@@ -55,7 +55,7 @@ public class AudioManager : MonoBehaviour
 
     private void OnUnitSpawned(Unit unit)
     {
-        if (unit.unitType == UnitType.ABA)
+        if (unit.unitType == UnitType.ABA || unit.unitType == UnitType.SNRK2)
         {
             PlaySound(data.abaSpawned);
         }
@@ -69,6 +69,11 @@ public class AudioManager : MonoBehaviour
     private void OnCrystalPickedUp(Snrk2Unit unit)
     {
         PlaySound(data.crystalPickedUp);
+    }
+
+    private void OnEnemyPickupCrystal()
+    {
+        PlaySound(data.enemyCrystalPickedUp);
     }
 
     private void OnStructureCreated(Structure tower)
@@ -112,6 +117,21 @@ public class AudioManager : MonoBehaviour
         PlaySound(data.letterRevealed);
     }
 
+    private void OnPressLevelSelectButton()
+    {
+        PlaySound(data.levelSelect);
+    }
+
+    private void OnUnitTakeDamage(UnitType unitType)
+    {
+        if (unitType == UnitType.ABA || unitType == UnitType.SNRK2)
+        {
+            var randIndex = UnityEngine.Random.Range(0, data.takeDamage.Length);
+            PlaySound(data.takeDamage[randIndex]);
+        }
+    }
+
+
     private void OnEnable()
     {
         EventManager.Game.onGameStateInit += OnGameStateInit;
@@ -120,6 +140,8 @@ public class AudioManager : MonoBehaviour
         EventManager.Units.onUnitSpawned += OnUnitSpawned;
         EventManager.Game.onSnrk2UnitReachedBase += OnSnrk2UnitReachedBase;
         EventManager.Units.onCrystalPickedUp += OnCrystalPickedUp;
+        EventManager.Units.onEnemyPickedUpCrystal += OnEnemyPickupCrystal;
+        EventManager.Units.onUnitTakeDamage += OnUnitTakeDamage;
         EventManager.Structures.onStructureCreated += OnStructureCreated;
         EventManager.Structures.onStructureGainHealth += OnStructureGainHealth;
         EventManager.Structures.onStructureSelected += OnStructureSelected;
@@ -127,6 +149,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Structures.onLightDropped += OnLightDropped;
         EventManager.Structures.onLightPickedUp += OnLightPickedUp;
         EventManager.UI.onTapButton += OnTapButton;
+        EventManager.UI.onPressLevelSelectButton += OnPressLevelSelectButton;
         EventManager.UI.onLetterReveal += OnLetterRevealed;
     }
 
@@ -138,12 +161,15 @@ public class AudioManager : MonoBehaviour
         EventManager.Units.onUnitSpawned -= OnUnitSpawned;
         EventManager.Game.onSnrk2UnitReachedBase -= OnSnrk2UnitReachedBase;
         EventManager.Units.onCrystalPickedUp -= OnCrystalPickedUp;
+        EventManager.Units.onEnemyPickedUpCrystal -= OnEnemyPickupCrystal;
+        EventManager.Units.onUnitTakeDamage += OnUnitTakeDamage;
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
         EventManager.Structures.onStructureGainHealth -= OnStructureGainHealth;
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
         EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
         EventManager.Structures.onLightDropped -= OnLightDropped;
         EventManager.UI.onTapButton -= OnTapButton;
+        EventManager.UI.onPressLevelSelectButton -= OnPressLevelSelectButton;
         EventManager.UI.onLetterReveal -= OnLetterRevealed;
     }
 }

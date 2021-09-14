@@ -60,6 +60,8 @@ public class EventManager : MonoBehaviour
         public static Action<Unit> onUnitSpawned;
         public static Action<Unit> onUnitDestroyed;
         public static Action<Snrk2Unit> onCrystalPickedUp;
+        public static Action onEnemyPickedUpCrystal;
+        public static Action<UnitType> onUnitTakeDamage;
     }
 
     public class UI
@@ -69,6 +71,7 @@ public class EventManager : MonoBehaviour
         public static Action onTapLevelSelectButton;
         public static Action<UnitType> onTapSpawnUnitButton;
         public static Action<bool> onTapButton;     // Is button press valid
+        public static Action onPressLevelSelectButton;
         public static Action onLetterReveal;
     }
 

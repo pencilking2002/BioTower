@@ -15,10 +15,20 @@ MonoBehaviour:
   levelTrack: {fileID: 8300000, guid: 21cbd9c39755a7a40827d724383644bb, type: 3}
   gameOverLose: {fileID: 8300000, guid: 871c967790cfd004f80c64e6d08c215a, type: 3}
   gameOverWin: {fileID: 8300000, guid: 1ba169fbe8ef44546a2728b59e7f7d36, type: 3}
+  snrk2Spawned: {fileID: 8300000, guid: dfde925c8fc75bb40bfb4a205d631ae5, type: 3}
+  enemyCrystalPickedUp: {fileID: 8300000, guid: 844682b347f46fb40b676dc9333d3b44,
+    type: 3}
+  takeDamage:
+  - {fileID: 8300000, guid: 0a9df0ce8f8ecb6429bf1f82e2b47078, type: 3}
+  - {fileID: 8300000, guid: 18182eb8ceb9aa243ab8b92d9eee9c46, type: 3}
+  - {fileID: 8300000, guid: 4deb65951904ad643aac93627c086ce3, type: 3}
+  - {fileID: 8300000, guid: ced1331d8e4083048aba2e28ff076b0c, type: 3}
+  - {fileID: 8300000, guid: 9e705e5381c32c3448efba3c142076c7, type: 3}
   enemyBaseAttacked: {fileID: 8300000, guid: f94c73c9863c7e64ba811eccbe4f2e2f, type: 3}
   abaSpawned: {fileID: 8300000, guid: dfde925c8fc75bb40bfb4a205d631ae5, type: 3}
   crystalDeposited: {fileID: 8300000, guid: 346fbd0557f353d4a8877788258e6400, type: 3}
   crystalPickedUp: {fileID: 8300000, guid: 0f6e6e87c26547e49880f117e4d9fd94, type: 3}
+  explode: {fileID: 0}
   towerPlaced: {fileID: 8300000, guid: 2cadee08fd58a124288c8dfdfa54a64f, type: 3}
   towerHealed: {fileID: 8300000, guid: 59d17424640b90c4897ff2c021d129d2, type: 3}
   towerSelected: {fileID: 8300000, guid: 7da2fc96ece5c9a41a81426eef6001ab, type: 3}
@@ -28,4 +38,10 @@ MonoBehaviour:
   mitoBtnTapped: {fileID: 8300000, guid: e1f9a9fdfd82772428a7e37417d2bff2, type: 3}
   textPopUp: {fileID: 8300000, guid: 4ee4a1a0c7bea3c469d32a64971af265, type: 3}
   btnSelected: {fileID: 8300000, guid: 82a2298801b46b642ac9e2698ab5f1d5, type: 3}
+  invalidBtnSelected: {fileID: 0}
   letterRevealed: {fileID: 8300000, guid: 8722206a5aaf6a94fa4cc6d6da7259cb, type: 3}
+  levelSelect: {fileID: 0}
+  tutChat: {fileID: 0}
+  titleDrop: {fileID: 0}
+  tapAnywhere: {fileID: 0}
+  energyGone: {fileID: 0}

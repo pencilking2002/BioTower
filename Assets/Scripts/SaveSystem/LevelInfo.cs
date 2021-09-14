@@ -70,7 +70,7 @@ public class LevelInfo : MonoBehaviour
     private void InitializeLevel(ref GameData saveData)
     {
         saveData.settings.enableTowerHealthDecline = true;
-        Util.gameSettings.UpdateUpgradeSettings(saveData);
+        Util.gameSettings.SetUpgradeSettingsBasedOnGameData(saveData);
 
         //var settings = GameManager.Instance.gameSettings;
         //settings.enableTowerHealthDecline = true;

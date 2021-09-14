@@ -41,6 +41,7 @@ public class Params
     [TabGroup("Towers")] public int abaMaxInfluenceRadius = 2310;
     [TabGroup("Towers")] public int abaMapScale = 2310;
     [TabGroup("Towers")] public int abaInfluenceShapeRadius = 2300;
+    [TabGroup("Towers")] public bool enableAbaTowerRandomHeal = false;
 
     
     [TabGroup("Misc")] public int startingLevel = 1;
@@ -106,17 +107,5 @@ public class Params
         }
         return cost;
     }
-
-    // public void UpdateUpgradeSettings(GameData gameData)
-    // {
-    //     // ABA tower influence
-    //     abaUnitSpawnLimit = gameData.abaTowerSettings.abaUnitSpawnLimit;
-    //     abaMaxInfluenceRadius = gameData.abaTowerSettings.abaMaxInfluenceRadius / 1000;
-    //     abaMapScale = gameData.abaTowerSettings.abaMapScale / 1000;
-    //     abaInfluenceShapeRadius = gameData.abaTowerSettings.abaInfluenceShapeRadius / 1000;
-
-    //     // more...
-    // }
-    
 }
 }

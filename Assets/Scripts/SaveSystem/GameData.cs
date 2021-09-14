@@ -9,11 +9,6 @@ namespace BioTower.SaveData
 [Serializable]
 public class GameData
 {
-    //public int currLevel;
-    //public bool enabledTowerHealthDecline;
-    //public int abaUnitSpawnLimit;
-    //public int energy;
-
     // ABA Influence
     public Params settings;
     
@@ -25,22 +20,6 @@ public class GameData
     // Set Default settings in the constructor
     public GameData()
     {
-        // currLevel = Util.gameSettings.defaultSettings.startingLevel;
-        // enabledTowerHealthDecline = Util.gameSettings.defaultSettings.enableTowerHealthDecline;
-        // energy = Util.gameSettings.defaultSettings.startingEnergy;
-
-        // ABA defaults
-        // abaTowerSettings = new AbaTowerSettings();
-    
-        // abaTowerSettings.SetAbaTowerInfluence(
-        //     Util.gameSettings.defaultSettings.abaMaxInfluenceRadius, 
-        //     Util.gameSettings.defaultSettings.abaMapScale, 
-        //     Util.gameSettings.defaultSettings.abaInfluenceShapeRadius
-        // );
-        // abaTowerSettings.SetAbaUnitCost(Util.gameSettings.defaultSettings.abaUnitCost);
-        // abaTowerSettings.SetAbaUnitSpawnLimit(Util.gameSettings.defaultSettings.abaUnitSpawnLimit);
-        // abaTowerSettings.SetAbaUnitHealth(Util.gameSettings.defaultSettings.abaUnitMaxHealth);
-        //settings = Util.gameSettings.defaultSettings;
         chosenUpgrades = new List<ChosenUpgrade>();
     }
 

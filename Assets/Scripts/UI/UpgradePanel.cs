@@ -156,6 +156,8 @@ public class UpgradePanel : MonoBehaviour
         gameData.settings.currLevel = ++currLevel;
         GameManager.Instance.saveManager.Save(gameData);
         BootController.levelToLoadInstantly = gameData.settings.currLevel;
+
+        
         SceneManager.LoadScene(0);
     }
 }

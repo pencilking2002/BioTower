@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using BioTower.SaveData;
+using System.Collections.Generic;
+using System;
 
 namespace BioTower
 {
@@ -9,17 +11,58 @@ public class GameSettings : ScriptableObject
     public Params defaultSettings;
     public Params upgradeSettings;
 
-    public void UpdateUpgradeSettings(GameData gameData)
+    private Dictionary<UpgradeType, Action> _upgradeLogicMap;
+
+    public Dictionary<UpgradeType, Action> upgradeLogicMap
+    {
+        get 
+        {
+            if (_upgradeLogicMap == null)
+            {
+                _upgradeLogicMap = new Dictionary<UpgradeType, Action>();
+                _upgradeLogicMap.Add(UpgradeType.ABA_TOWER_INFLUENCE, UpgradeAbaTowerInfluence);
+                _upgradeLogicMap.Add(UpgradeType.ABA_TOWER_UNIT_COST, UpgradeAbaTowerUnitCost);
+                _upgradeLogicMap.Add(UpgradeType.ABA_TOWER_RANDOM_HEAL, UpgradeAbaTowerRandomHeal);
+                _upgradeLogicMap.Add(UpgradeType.ABA_UNIT_HEALTH, UpgradeAbaUnitHealth);
+                _upgradeLogicMap.Add(UpgradeType.ABA_UNIT_DAMAGE, UpgradeAbaUnitDamage);
+                
+            }
+            return _upgradeLogicMap;
+        }
+    }
+
+    public void SetUpgradeSettingsBasedOnGameData(GameData gameData)
     {
         upgradeSettings = gameData.settings;
-        
-        // ABA tower influence
-        // abaUnitSpawnLimit = gameData.abaTowerSettings.abaUnitSpawnLimit;
-        // abaMaxInfluenceRadius = gameData.abaTowerSettings.abaMaxInfluenceRadius / 1000;
-        // abaMapScale = gameData.abaTowerSettings.abaMapScale / 1000;
-        // abaInfluenceShapeRadius = gameData.abaTowerSettings.abaInfluenceShapeRadius / 1000;
-
-        // more...
     }
+    
+    public void UpgradeAbaTowerInfluence()
+    {
+        upgradeSettings.abaMaxInfluenceRadius = 3000;
+        upgradeSettings.abaMapScale = 3000;
+        upgradeSettings.abaInfluenceShapeRadius = 3000;
+    }
+
+    public void UpgradeAbaTowerUnitCost()
+    {
+        upgradeSettings.abaUnitCost = 3;
+    } 
+
+    public void UpgradeAbaTowerRandomHeal()
+    {
+        upgradeSettings.enableAbaTowerRandomHeal = true;
+    }  
+
+    public void UpgradeAbaUnitHealth()
+    {
+        upgradeSettings.abaUnitMaxHealth = 15;
+    }
+
+    public void UpgradeAbaUnitDamage()
+    {
+        upgradeSettings.abaDamage = 10;
+    }
+
+
 }   
 }

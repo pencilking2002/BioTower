@@ -64,7 +64,7 @@ public class CombatManager : MonoBehaviour
                     return;
 
                 GameManager.Instance.UnregisterEnemy(enemy);
-                bool isEnemyAlive = enemy.TakeDamage(Util.gameSettings.upgradeSettings.abaDamage);
+                bool isEnemyAlive = enemy.TakeDamage(Util.gameSettings.upgradeSettings.abaUnitDamage);
                 LeanTween.scale(enemy.gameObject, Vector3.one * 1.1f, 0.15f).setLoopPingPong(1);
 
                 if (isEnemyAlive)

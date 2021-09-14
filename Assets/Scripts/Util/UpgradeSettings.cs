@@ -12,14 +12,14 @@ public class Params
 {
 
     [Header("ABA Units")]
-    [TabGroup("Units")] public int abaDamage = 5;
+    [TabGroup("Units")] public int abaUnitDamage = 5;
     [TabGroup("Units")] public int abaUnitMaxSpeed_float = 500;
     [TabGroup("Units")] public int abaUnitCost = 5;
     [TabGroup("Units")] public int abaUnitMaxHealth = 10;
 
 
     [Header("Units")]
-    [TabGroup("Units")] public int ppc2Damage = 5;
+    [TabGroup("Units")] public int ppc2TowerDamage = 5;
     [TabGroup("Units")] public int basicEnemyDamage = 5;
     [TabGroup("Units")] public int snrkUnitMaxHealth = 5;
     [TabGroup("Units")] public int enemyUnitMaxHealth = 10;

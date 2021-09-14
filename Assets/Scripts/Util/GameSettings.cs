@@ -32,6 +32,7 @@ public class GameSettings : ScriptableObject
                 _upgradeLogicMap.Add(UpgradeType.PP2C_TOWER_INFLUENCE, UpgradePPC2TowerInfluence);
                 _upgradeLogicMap.Add(UpgradeType.PP2C_TOWER_FIRE_RATE, UpgradePpc2FireRate);
                 _upgradeLogicMap.Add(UpgradeType.PP2C_EXPLOSION_RADIUS, UpgradePpc2ExplosionRadius);
+                _upgradeLogicMap.Add(UpgradeType.PP2C_TOWER_DAMAGE, UpgradePpc2TowerDamage);
 
 
             }
@@ -55,7 +56,7 @@ public class GameSettings : ScriptableObject
     public void UpgradeAbaTowerUnitCost() { upgradeSettings.abaUnitCost = 3; } 
     public void UpgradeAbaTowerRandomHeal() { upgradeSettings.enableAbaTowerRandomHeal = true; }  
     public void UpgradeAbaUnitHealth() { upgradeSettings.abaUnitMaxHealth = 15; }
-    public void UpgradeAbaUnitDamage() { upgradeSettings.abaDamage = 10; }
+    public void UpgradeAbaUnitDamage() { upgradeSettings.abaUnitDamage = 10; }
     public void UpgradeAbaUnitSpeed() { upgradeSettings.abaUnitMaxSpeed_float = 700; }
     public void UpgradeAbaSpawnLimit() { upgradeSettings.abaUnitSpawnLimit = 5; }
 
@@ -76,5 +77,9 @@ public class GameSettings : ScriptableObject
         upgradeSettings.ppc2ExplosionSpriteRadius_float = 800; 
     }
 
+    public void UpgradePpc2TowerDamage()
+    {
+        upgradeSettings.ppc2TowerDamage = 10;
+    }
 }   
 }

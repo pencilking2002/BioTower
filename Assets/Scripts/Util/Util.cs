@@ -10,7 +10,7 @@ namespace BioTower
 public class Util : MonoBehaviour
 {
     public static GameSettings gameSettings => GameManager.Instance.gameSettings;
-    //public static UpgradeSettings upgradeSettings => GameManager.Instance.upgradeSettings;
+    public static Params upgradeSettings => GameManager.Instance.gameSettings.upgradeSettings;
     public static CrystalManager crystalManager => GameManager.Instance.crystalManager;
     public LayerMask enemyLayerMask;
     

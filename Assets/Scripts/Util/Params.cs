@@ -11,8 +11,8 @@ public class Params
 {
 
     [Header("ABA Units")]
-    [TabGroup("Units")] public int abaUnitDamage = 5;
-    [TabGroup("Units")] public int abaUnitMaxSpeed_float = 500;
+    [TabGroup("Units")] public int abaUnitDamage = 5;           // Done
+    [TabGroup("Units")] public int abaUnitMaxSpeed_float = 500; // Done
     [TabGroup("Units")] public int abaUnitCost = 5;
     [TabGroup("Units")] public int abaUnitMaxHealth = 10;
 
@@ -125,6 +125,14 @@ public class Params
                 break;
         }
         return cost;
+    }
+}
+
+public static class ExtensionMethods
+{
+    public static float GetFloat(this int inputInt)
+    {
+        return (float) inputInt / 1000.0f;
     }
 }
 }

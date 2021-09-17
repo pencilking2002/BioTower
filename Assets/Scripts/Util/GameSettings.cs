@@ -51,7 +51,7 @@ public class GameSettings : ScriptableObject
                 _upgradeLogicMap.Add(UpgradeType.SNRK2_CRYSTAL_VALUE, UpgradeSnrk2CrystalValue);
 
                 _upgradeLogicMap.Add(UpgradeType.PLAYER_TOWER_HEALTH, UpgradePlayerTowerHealth);
-                _upgradeLogicMap.Add(UpgradeType.PLAYER_TOWER_HEALTH, UpgradePlayerTowerHealing);
+                _upgradeLogicMap.Add(UpgradeType.PLAYER_TOWER_HEAL, UpgradePlayerTowerHealing);
 
 
             }

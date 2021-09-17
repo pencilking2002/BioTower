@@ -43,6 +43,7 @@ public class AbaUnit : Unit
         SetNewDestination();
 
         agent.maxSpeed = Util.upgradeSettings.abaUnitMaxSpeed_float.GetFloat();
+        
     }
     
     public override void StopMoving()

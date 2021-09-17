@@ -29,6 +29,7 @@ public class Snrk2Unit : Unit
     {
         base.Start();
         Util.ScaleUpSprite(sr, 1.1f);
+        agent.maxSpeed = Util.upgradeSettings.snrk2UnitSpeed_float.GetFloat();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

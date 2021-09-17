@@ -159,7 +159,9 @@ public class TowerMenu : MonoBehaviour
     public void OnStructureSelected(Structure structure)
     {
         //Debug.Log($"Tap {tower.structureType}");
-        bool displaySpawnUnitButton = structure.structureType == StructureType.ABA_TOWER || structure.structureType == StructureType.PPC2_TOWER;
+        bool displaySpawnUnitButton = structure.structureType == StructureType.ABA_TOWER || 
+                                    (structure.structureType == StructureType.PPC2_TOWER && Util.upgradeSettings.snrk2UnitUnlocked);
+                                    
         bool displayLightDropButton = structure.structureType == StructureType.MITOCHONDRIA;
 
         spawnUnitButton.gameObject.SetActive(displaySpawnUnitButton);

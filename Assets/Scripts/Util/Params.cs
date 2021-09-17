@@ -13,18 +13,18 @@ public class Params
     [Header("ABA Units")]
     [TabGroup("Units")] public int abaUnitDamage = 5;           // Done
     [TabGroup("Units")] public int abaUnitMaxSpeed_float = 500; // Done
-    [TabGroup("Units")] public int abaUnitCost = 5;
-    [TabGroup("Units")] public int abaUnitMaxHealth = 10;
+    [TabGroup("Units")] public int abaUnitCost = 5;             // Done
+    [TabGroup("Units")] public int abaUnitMaxHealth = 10;       // Done
 
 
     [Header("Units")]
-    [TabGroup("Units")] public int ppc2TowerDamage = 5;
-    [TabGroup("Units")] public int basicEnemyDamage = 5;
-    [TabGroup("Units")] public int snrkUnitMaxHealth = 5;
-    [TabGroup("Units")] public int enemyUnitMaxHealth = 10;
-    [TabGroup("Units")] public int snark2UnitCost = 1;
-    [TabGroup("Units")] public bool snrk2UnitUnlocked = false;
-    [TabGroup("Units")] public int snrk2UnitSpeed_float = 1000;
+    [TabGroup("Units")] public int ppc2TowerDamage = 5;         // Done
+    [TabGroup("Units")] public int basicEnemyDamage = 5;        // N/A
+    [TabGroup("Units")] public int snrkUnitMaxHealth = 5;       // Done
+    [TabGroup("Units")] public int enemyUnitMaxHealth = 10;     // N/A
+    [TabGroup("Units")] public int snark2UnitCost = 3;          // N/A
+    [TabGroup("Units")] public bool snrk2UnitUnlocked = false;  // Done
+    [TabGroup("Units")] public int snrk2UnitSpeed_float = 1000; // Done
     [TabGroup("Units")] public bool snrk2HasDamageResistance = false;
 
 

@@ -23,6 +23,9 @@ public class Params
     [TabGroup("Units")] public int snrkUnitMaxHealth = 5;
     [TabGroup("Units")] public int enemyUnitMaxHealth = 10;
     [TabGroup("Units")] public int snark2UnitCost = 1;
+    [TabGroup("Units")] public bool snrk2UnitUnlocked = false;
+    [TabGroup("Units")] public int snrk2UnitSpeed_float = 1000;
+    [TabGroup("Units")] public bool snrk2HasDamageResistance = false;
 
 
     [Header("ABA Tower")]
@@ -44,6 +47,7 @@ public class Params
     [TabGroup("Towers")] public int ppc2ExplosionColliderRadius_float = 1271;
     [TabGroup("Towers")] public int ppc2ExplosionSpriteRadius_float = 622;
 
+    [TabGroup("Towers")] public bool chloroTowerUnlocked = false;
     [TabGroup("Towers")] public int chloroplastTowerCost = 20;
     [TabGroup("Towers")] public int mitoTowerCost = 20;
     [TabGroup("Towers")] public int healTowerCost = 5;
@@ -53,6 +57,11 @@ public class Params
     [TabGroup("Towers")] public bool mitoTowerUnlocked = false;
     [TabGroup("Towers")] public int mitoShootInterval_float = 2000; 
     [TabGroup("Towers")] public int mitoTowerMaxHealth = 10;
+    [TabGroup("Towers")] public int chloroShootInterval_float = 5000;
+    [TabGroup("Towers")] public int numFragmentsPickedUpOnTap = 1;
+    [TabGroup("Towers")] public bool enableChloroTowerRandomHeal = false;
+    [TabGroup("Towers")] public int playerTowerMaxhealth = 20;
+    [TabGroup("Towers")] public bool enablePlayerTowerHealing = false;
 
     [TabGroup("Misc")] public int startingLevel = 1;
     [TabGroup("Misc")] public int currLevel = 1;

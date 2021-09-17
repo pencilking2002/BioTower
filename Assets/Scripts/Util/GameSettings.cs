@@ -39,6 +39,21 @@ public class GameSettings : ScriptableObject
                 _upgradeLogicMap.Add(UpgradeType.MITO_TOWER_COOLDOWN, UpgradeMitoTowerCooldown);
                 _upgradeLogicMap.Add(UpgradeType.MITO_TOWER_HEALTH, UpgradeMitoHealth);
 
+                _upgradeLogicMap.Add(UpgradeType.CHLORO_TOWER_UNLOCK, UnlockChloroTower);
+                _upgradeLogicMap.Add(UpgradeType.CHLORO_TOWER_ENERGY, UpgradeChloroTowerEnergy);
+                _upgradeLogicMap.Add(UpgradeType.CHLORO_TOWER_ENERGY_RATE, UpgradeChloroTowerEnergyRate);
+                _upgradeLogicMap.Add(UpgradeType.CHLORO_TOWER_LIGHT_CLICK, UpgradeChloroLightTap);
+                _upgradeLogicMap.Add(UpgradeType.CHLORO_TOWER_RANDOM_HEAL, UpgradeChloroTowerRandomHeal);
+
+                _upgradeLogicMap.Add(UpgradeType.SNRK2_UNIT_UNLOCK, UnlockSnrk2Unit);
+                _upgradeLogicMap.Add(UpgradeType.SNRK2_SPEED, UpgradeSnrk2UnitSpeed);
+                _upgradeLogicMap.Add(UpgradeType.SNRK2_DAMAGE_RESISTANCE, UpgradeSnk2UnitDamageResist);
+                _upgradeLogicMap.Add(UpgradeType.SNRK2_CRYSTAL_VALUE, UpgradeSnrk2CrystalValue);
+
+                _upgradeLogicMap.Add(UpgradeType.PLAYER_TOWER_HEALTH, UpgradePlayerTowerHealth);
+                _upgradeLogicMap.Add(UpgradeType.PLAYER_TOWER_HEALTH, UpgradePlayerTowerHealing);
+
+
             }
             return _upgradeLogicMap;
         }
@@ -94,5 +109,24 @@ public class GameSettings : ScriptableObject
     public void UpgradeMitoEnergy() { upgradeSettings.lightFragmentValue = 10; }
     public void UpgradeMitoTowerCooldown() { upgradeSettings.mitoShootInterval_float = 1000; }
     public void UpgradeMitoHealth() { upgradeSettings.mitoTowerMaxHealth = 15; }
+
+
+    // Chloro Tower upgrade
+    public void UnlockChloroTower() { upgradeSettings.chloroTowerUnlocked = true; }
+    public void UpgradeChloroTowerEnergy() { upgradeSettings.lightFragmentValue = 15; }
+    public void UpgradeChloroTowerEnergyRate() { upgradeSettings.chloroShootInterval_float = 3500; }
+    public void UpgradeChloroLightTap() { upgradeSettings.numFragmentsPickedUpOnTap = 3; }
+    public void UpgradeChloroTowerRandomHeal() { upgradeSettings.enableChloroTowerRandomHeal = true; }
+
+    // Snrk2 
+    public void UnlockSnrk2Unit() { upgradeSettings.snrk2UnitUnlocked = true; }
+    public void UpgradeSnrk2UnitSpeed() { upgradeSettings.snrk2UnitSpeed_float = 1500; }
+    public void UpgradeSnk2UnitDamageResist() { upgradeSettings.snrk2HasDamageResistance = true; }
+    public void UpgradeSnrk2CrystalValue() { upgradeSettings.crystalSnrk2Value = 30; }
+
+    // Player tower
+    public void UpgradePlayerTowerHealth() { upgradeSettings.playerTowerMaxhealth = 30; }
+    public void UpgradePlayerTowerHeal() { upgradeSettings.playerTowerMaxhealth = 30; }
+    public void UpgradePlayerTowerHealing() { upgradeSettings.enablePlayerTowerHealing = true; }
 }   
 }

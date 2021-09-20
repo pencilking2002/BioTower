@@ -8,7 +8,6 @@ public class StructureManager : MonoBehaviour
 {
     [SerializeField] private List<Structure> structureList = new List<Structure>();
     [SerializeField] private float declineDelay = 3;
-    [SerializeField] private int declineDamage = 1;
 
     private void Update()
     {
@@ -22,21 +21,41 @@ public class StructureManager : MonoBehaviour
                 continue;
 
             Structure structure = structureList[i];
-            DoHealthDecline(structure);
+            DoHealthDeclineOrHeal(structure);
             structure.OnUpdate();
         }
     }
 
-    private void DoHealthDecline(Structure structure)
+    private void DoHealthDeclineOrHeal(Structure structure)
     {
+        bool healEnabled = (structure.IsAbaTower() && Util.upgradeSettings.enableAbaTowerRandomHeal) ||
+                           (structure.IsChloroTower() && Util.upgradeSettings.enableChloroTowerRandomHeal);
+
         if (Util.gameSettings.upgradeSettings.enableTowerHealthDecline)
         {
             if (Time.time > structure.lastDeclineTime + declineDelay)
             {
-                structure.TakeDamage(declineDamage);
                 structure.lastDeclineTime = Time.time;
+                float healChance = GetRandomFloat();
+                bool isHeal = healChance > 1-Util.gameSettings.randomHealChance && healEnabled;
+
+                if (isHeal)
+                    structure.GainHealth(Util.gameSettings.randomHealAmount);
+                else
+                    structure.TakeDamage(Util.gameSettings.declineDamage);
             }
         }
+    }
+
+    private float GetRandomFloat()
+    {
+        float healChance = 0;
+        if (!Util.upgradeSettings.enableAbaTowerRandomHeal)
+            return healChance;
+        
+        healChance = UnityEngine.Random.Range(0.0f,1.0f);
+        return healChance; 
+
     }
 
     private void OnStructureCreated(Structure structure)

@@ -86,6 +86,7 @@ public class Structure : MonoBehaviour
                 return;
 
             currHealth -= numDamage;
+            currHealth = Mathf.Clamp(currHealth, 0, maxHealth);
 
             LeanTween.value(gameObject, healthSlider.value, currHealth, 0.25f)
             .setOnUpdate((float val) => {
@@ -93,16 +94,39 @@ public class Structure : MonoBehaviour
             });
             EventManager.Structures.onStructureLoseHealth?.Invoke(this);
 
-            if (currHealth <= 0)
+            if (currHealth == 0)
                 KillStructure();
+            else
+                DoHealthVisual(new Color(1, 0.5f, 0.5f, 1));
         }
     }
 
     public virtual void GainHealth(int numHealth)
     {
         currHealth += numHealth;
+        currHealth = Mathf.Clamp(currHealth, 0, maxHealth);
         healthSlider.value = currHealth;
+        DoHealthVisual(Color.green);
         EventManager.Structures.onStructureGainHealth?.Invoke(this);
+    }
+
+    private void DoHealthVisual(Color targetColor)
+    {
+        if (this == null)
+            return;
+
+        // Reset tower before applying tweens to it
+        LeanTween.cancel(sr.gameObject);
+        sr.transform.localScale = initSpriteScale;
+        sr.color = Color.white;
+
+        Util.ScaleBounceSprite(sr, 1.1f);
+        var oldColor = sr.color;
+        sr.color = targetColor;
+        LeanTween.value(sr.gameObject, sr.color, oldColor, 0.25f)
+        .setOnUpdate((Color col) => {
+            sr.color = col;
+        });
     }
 
     public virtual int GetCurrHealth() { return currHealth; }
@@ -165,6 +189,12 @@ public class Structure : MonoBehaviour
     {
         return structureType == StructureType.PPC2_TOWER;
     }
+    
+    public bool IsChloroTower()
+    {
+        return structureType == StructureType.CHLOROPLAST;
+    }
+
 
     public int GetNumUnits()
     {

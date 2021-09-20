@@ -33,6 +33,11 @@ public class ABATower : Structure
 
     private void Start()
     {
+        // Set upgrade settings
+        maxInfluenceAreaCollider.radius = Util.upgradeSettings.abaMaxInfluenceRadius_float.GetFloat();
+        map.transform.localScale = Vector3.one * Util.upgradeSettings.abaMapScale_float.GetFloat();
+        influenceDisc.Radius = Util.upgradeSettings.abaInfluenceShapeRadius_float.GetFloat();
+
         map.GenerateMap();      // NOTE: Seems like this needs to be called in order for the map to be initialized correctly after instantiation 
         var unitsContainer = transform.Find("Units");
         

@@ -13,7 +13,11 @@ public class GameSettings : ScriptableObject
     public int basicEnemyDamage = 5;        // N/A
     public int enemyUnitMaxHealth = 10;     // N/A
     public int snark2UnitCost = 3;          // N/A
+    [Range(0,1)] public float randomHealChance = 0.1f;
+    public int declineDamage = 1;
+    public int randomHealAmount = 2;
 
+    [Space(10)]
     public Params defaultSettings;
     public Params upgradeSettings;
 

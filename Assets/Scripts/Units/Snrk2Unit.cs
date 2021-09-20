@@ -22,7 +22,7 @@ public class Snrk2Unit : Unit
     [SerializeField] private EnemyCrystal crystalTarget;
 
     [Header("References")]
-    public PPC2Tower tower;
+    //public PPC2Tower tower;
     [SerializeField] private GameObject crystalSprite;
 
     public override void Start()
@@ -70,7 +70,7 @@ public class Snrk2Unit : Unit
     public override void SetRoamingState() { snrkUnitState = SnrkUnitState.SEARCHING; }
     public override void SetDestroyedState() { snrkUnitState = SnrkUnitState.DESTROYED; }
     public override void SetNewDestination() { }
-    public override void Deregister() { tower.RemoveUnit(this); }
+    public override void Deregister() { GetPPC2Tower().RemoveUnit(this); }
 
     public bool IsCombatState() { return snrkUnitState == SnrkUnitState.COMBAT; }
     public bool IsRoamingState() { return snrkUnitState == SnrkUnitState.SEARCHING; }

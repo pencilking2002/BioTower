@@ -12,7 +12,7 @@ public class ABATower : Structure
 {   
     [SerializeField] private float discRotateSpeed = 2;
     [SerializeField] private int numUnitsToSpawn = 4;
-    [SerializeField] private List<AbaUnit> abaUnits;
+    //[SerializeField] private List<AbaUnit> abaUnits;
     [SerializeField] private List<BasicEnemy> enemiesWithinInfluence;
 
 
@@ -54,9 +54,9 @@ public class ABATower : Structure
 
     private void ChaseEnemies()
     {
-        for(int i=0; i<abaUnits.Count; i++)
+        for(int i=0; i<units.Count; i++)
         {
-            AbaUnit unit = abaUnits[i];
+            AbaUnit unit = (AbaUnit) units[i];
             if (unit.IsChasingState())
             {
                 if (unit.targetEnemy.isEngagedInCombat)
@@ -90,17 +90,12 @@ public class ABATower : Structure
 
     public void AddUnit(AbaUnit unit)
     {
-        abaUnits.Add(unit);
+        units.Add(unit);
     }
 
     public void RemoveUnit(AbaUnit unit)
     {
-        abaUnits.Remove(unit);
-    }
-
-    public int GetNumUnits()
-    {
-        return abaUnits.Count;
+        units.Remove(unit);
     }
 
     public Vector2 GetEdgePointWithinInfluence()
@@ -144,15 +139,15 @@ public class ABATower : Structure
             if (!enemy.isEngagedInCombat)
             {
                 // Find a random aba Unit
-                var randIndex = UnityEngine.Random.Range(0, abaUnits.Count);
-                var unit = abaUnits[randIndex];
+                var randIndex = UnityEngine.Random.Range(0, units.Count);
+                var unit = (AbaUnit) units[randIndex];
 
                 // Set them to follow the enemy
                 unit.SetChasingState();
                 unit.targetEnemy = enemy;
             }
 
-            Debug.Log(enemy.name);
+            //Debug.Log(enemy.name);
             //unit.SetNewDestination()
             EventManager.Structures.onEnemyEnterTowerInfluence?.Invoke(enemy, this);
         }
@@ -160,7 +155,7 @@ public class ABATower : Structure
 
     public bool IsBelowSpawnLimit()
     {
-        return abaUnits.Count < GameManager.Instance.upgradeSettings.abaUnitSpawnLimit;
+        return units.Count < GameManager.Instance.upgradeSettings.abaUnitSpawnLimit;
     }
 
     public void UnregisterEnemy(BasicEnemy enemy)
@@ -169,9 +164,9 @@ public class ABATower : Structure
         {
             // Check if any units are following an enemy
 
-            for (int i=0; i<abaUnits.Count; i++)
+            for (int i=0; i<units.Count; i++)
             {
-                AbaUnit unit = abaUnits[i];
+                AbaUnit unit = (AbaUnit) units[i];
                 if (unit.IsChasingState())
                 {
                     unit.SetRoamingState();

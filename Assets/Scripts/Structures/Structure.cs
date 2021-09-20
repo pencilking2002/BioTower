@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using UnityEngine.UI;
+using BioTower.Units;
 
 namespace BioTower.Structures
 {
@@ -40,6 +41,7 @@ public class Structure : MonoBehaviour
     private Vector3 initScale;
     public Vector3 initSpriteScale;
     [SerializeField] protected GameObject influenceVisuals;
+    public List<Unit> units;
 
     public virtual void Awake()
     {
@@ -153,6 +155,22 @@ public class Structure : MonoBehaviour
                 influenceVisuals.SetActive(false);
         }
     }
+
+    public bool IsAbaTower()
+    {
+        return structureType == StructureType.ABA_TOWER;
+    }
+
+    public bool IsPPC2Tower()
+    {
+        return structureType == StructureType.PPC2_TOWER;
+    }
+
+    public int GetNumUnits()
+    {
+        return units.Count;
+    }
+
 
     public virtual void OnStructureCreated(Structure structure)
     {

@@ -18,7 +18,7 @@ public class PPC2Tower : Structure
 
 
     [Header("References")]
-    public List<Unit> units;
+    //public List<Unit> units;
     [SerializeField] private Disc influenceDisc;
     [SerializeField] private CircleCollider2D maxInfluenceCollider;
     [SerializeField] private CircleCollider2D minInfluenceCollider;

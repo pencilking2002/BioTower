@@ -146,13 +146,27 @@ public class UpgradePanel : MonoBehaviour
     {
         var upgradeType = selectedButton.GetUpgradeType();
         var levelType = LevelInfo.current.levelType;
-        var levelUpgrades = GameManager.Instance.upgradeTree.GetUpgradesForLevel(levelType);
-        var upgradeVarIndex = GameManager.Instance.upgradeTree.GetUpgradeVarName(levelUpgrades, upgradeType);
+        var levelUpgrades = Util.upgradeTree.GetUpgradesForLevel(levelType);
+        var upgradeVarIndex = Util.upgradeTree.GetUpgradeVarName(levelUpgrades, upgradeType);
         var gameData = GameManager.Instance.saveManager.Load();
         var currLevel = (int) levelType;
         var chosenUpgrade = new ChosenUpgrade(currLevel, upgradeVarIndex);
+        bool hasUpgrade = false;
 
-        gameData.chosenUpgrades.Add(chosenUpgrade);
+        // Check if an upgrade the current level already exists, overwrite if it does
+        foreach(ChosenUpgrade upgrade in gameData.chosenUpgrades)
+        {
+            if (upgrade.level == currLevel)
+            {
+                hasUpgrade = true;
+                upgrade.varIndex = upgradeVarIndex;
+            }
+        }
+
+        // Otherwise if it doesn't add it to the list
+        if (!hasUpgrade)
+            gameData.chosenUpgrades.Add(chosenUpgrade);
+
         gameData.settings.currLevel = ++currLevel;
         GameManager.Instance.saveManager.Save(gameData);
         BootController.levelToLoadInstantly = gameData.settings.currLevel;

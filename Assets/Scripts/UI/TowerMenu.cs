@@ -178,7 +178,14 @@ public class TowerMenu : MonoBehaviour
         }
         else if (structure.structureType == StructureType.PPC2_TOWER)
         {
-            spawnUnitText.text = "SNRK2\nUnit";
+            var ppc2Tower = (PPC2Tower) structure;
+            if (!ppc2Tower.HasUnitsWithinTowerInfluence())
+             SetButtonTextDefault(spawnUnitButton, "SNRK2\nUnit");
+            else
+                SetButtonMaxText(spawnUnitButton);
+
+            //spawnUnitText.text = "SNRK2\nUnit";
+
             // TODO: Create spawn limit logic for ppc2
         }
 
@@ -244,19 +251,17 @@ public class TowerMenu : MonoBehaviour
         if (!spawnUnitButton.gameObject.activeInHierarchy)
             return;
 
-        Debug.Log("Unit destroyed");
         var selectedStructure = GameManager.Instance.tapManager.selectedStructure;
-        if (selectedStructure.structureType == StructureType.ABA_TOWER)
+        if (unit.tower == selectedStructure)
         {
-            if (unit.unitType == UnitType.ABA && unit.tower == selectedStructure)
-            {
-                var abaTower = unit.GetAbaTower();
-                var numUnits = abaTower.GetNumUnits()-1;
-                if (numUnits < Util.upgradeSettings.abaUnitSpawnLimit)
-                    SetButtonTextDefault(spawnUnitButton, "ABA\nUnit");
-                else
-                    SetButtonMaxText(spawnUnitButton);
+            if (selectedStructure.IsAbaTower())
+            {   
+                SetButtonTextDefault(spawnUnitButton, "ABA\nUnit");
             }
+            else if (selectedStructure.IsPPC2Tower())
+            {   
+                SetButtonTextDefault(spawnUnitButton, "SNRK2\nUnit");
+            }     
         }
     }
 

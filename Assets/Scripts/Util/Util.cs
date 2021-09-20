@@ -11,6 +11,7 @@ public class Util : MonoBehaviour
 {
     public static GameSettings gameSettings => GameManager.Instance.gameSettings;
     public static Params upgradeSettings => GameManager.Instance.gameSettings.upgradeSettings;
+    public static UpgradeTree upgradeTree => GameManager.Instance.upgradeTree;
     public static CrystalManager crystalManager => GameManager.Instance.crystalManager;
     public LayerMask enemyLayerMask;
     

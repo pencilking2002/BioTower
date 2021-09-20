@@ -29,16 +29,16 @@ public class GameData
     }
 }
 
- [Serializable]
-    public class ChosenUpgrade
-    {
-        public int level;
-        public int varIndex;
+[Serializable]
+public class ChosenUpgrade
+{
+    public int level;
+    public int varIndex;
 
-        public ChosenUpgrade(int level, int varIndex)
-        {
-            this.level = level;
-            this.varIndex = varIndex;
-        }
+    public ChosenUpgrade(int level, int varIndex)
+    {
+        this.level = level;
+        this.varIndex = varIndex;
     }
+}
 }

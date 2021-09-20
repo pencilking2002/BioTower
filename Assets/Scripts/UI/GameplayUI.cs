@@ -19,7 +19,7 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private Button currSelectedBtn;
     public GameObject currencyContainer;
     [SerializeField] private TextMeshProUGUI playerCurrencyText;
-    private Dictionary<StructureType,Button> towerButtonMap = new Dictionary<StructureType, Button>();
+    public Dictionary<StructureType,Button> towerButtonMap = new Dictionary<StructureType, Button>();
 
 
     private void Awake()
@@ -36,6 +36,16 @@ public class GameplayUI : MonoBehaviour
         SetTowerPrice(StructureType.PPC2_TOWER);
         SetTowerPrice(StructureType.CHLOROPLAST);
         SetTowerPrice(StructureType.MITOCHONDRIA);
+    }
+
+    public StructureType GetSelectedButtonType()
+    {
+        foreach(KeyValuePair<StructureType, Button> btn in towerButtonMap)
+        {
+            if (btn.Value == currSelectedBtn)
+                return btn.Key;
+        }
+        return StructureType.NONE;
     }
 
     ///<Summary>

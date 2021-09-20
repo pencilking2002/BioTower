@@ -239,12 +239,34 @@ public class TowerMenu : MonoBehaviour
         UpdateTowerHealthBar(structure, 0.25f);
     }
 
+    private void OnUnitDestroyed(Unit unit)
+    {
+        if (!spawnUnitButton.gameObject.activeInHierarchy)
+            return;
+
+        Debug.Log("Unit destroyed");
+        var selectedStructure = GameManager.Instance.tapManager.selectedStructure;
+        if (selectedStructure.structureType == StructureType.ABA_TOWER)
+        {
+            if (unit.unitType == UnitType.ABA && unit.tower == selectedStructure)
+            {
+                var abaTower = unit.GetAbaTower();
+                var numUnits = abaTower.GetNumUnits()-1;
+                if (numUnits < Util.upgradeSettings.abaUnitSpawnLimit)
+                    SetButtonTextDefault(spawnUnitButton, "ABA\nUnit");
+                else
+                    SetButtonMaxText(spawnUnitButton);
+            }
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.Structures.onStructureSelected += OnStructureSelected;
         EventManager.Structures.onStructureCreated += OnStructureCreated;
         EventManager.Structures.onStructureGainHealth += OnStructureGainHealth;
         EventManager.Structures.onStructureLoseHealth += OnStructureLoseHealth;
+        EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
     }
 
     private void OnDisable()
@@ -253,6 +275,7 @@ public class TowerMenu : MonoBehaviour
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
         EventManager.Structures.onStructureGainHealth -= OnStructureGainHealth;
         EventManager.Structures.onStructureLoseHealth -= OnStructureLoseHealth;
+        EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
     }
 }
 }

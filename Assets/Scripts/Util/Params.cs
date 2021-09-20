@@ -19,17 +19,13 @@ public class Params
 
     [Header("Units")]
     [TabGroup("Units")] public int ppc2TowerDamage = 5;         // Done
-    [TabGroup("Units")] public int basicEnemyDamage = 5;        // N/A
     [TabGroup("Units")] public int snrkUnitMaxHealth = 5;       // Done
-    [TabGroup("Units")] public int enemyUnitMaxHealth = 10;     // N/A
-    [TabGroup("Units")] public int snark2UnitCost = 3;          // N/A
     [TabGroup("Units")] public bool snrk2UnitUnlocked = false;  // Done
     [TabGroup("Units")] public int snrk2UnitSpeed_float = 1000; // Done
-    [TabGroup("Units")] public bool snrk2HasDamageResistance = false;
 
 
     [Header("ABA Tower")]
-    [TabGroup("Towers")][Range(0,100)] public int abaTowerCost = 10;
+    [TabGroup("Towers")][Range(0,100)] public int abaTowerCost = 10;  // Done
     [TabGroup("Towers")] public int abaUnitSpawnLimit = 3;
     [TabGroup("Towers")] public int abaMaxInfluenceRadius_float = 2310;
     [TabGroup("Towers")] public int abaMapScale_float = 2310;
@@ -71,37 +67,8 @@ public class Params
     [TabGroup("Misc")] public int energy = 80;
 
 
-    public int GetUnitCost(UnitType unitType)
-    {
-        int cost = 0;
-        switch (unitType)
-        {
-            case UnitType.ABA:
-                cost = abaUnitCost;
-                break;
-            case UnitType.SNRK2:
-                cost = snark2UnitCost;
-                break;
-            default:
-                Debug.Log("Unable to find cost for unit type: " + unitType);
-                break;
-        }
-        return cost;
-    }
+    
 
-    public int GetMaxUnitHealth(UnitType unitType)
-    {
-        switch(unitType)
-        {
-            case UnitType.ABA:
-                return abaUnitMaxHealth;
-            case UnitType.BASIC_ENEMY:
-                return enemyUnitMaxHealth;
-            case UnitType.SNRK2:
-                return snrkUnitMaxHealth;
-        }
-        return 0;
-    }
 
     public int GetTowerCost(StructureType structureType)
     {

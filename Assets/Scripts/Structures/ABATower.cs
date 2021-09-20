@@ -83,7 +83,7 @@ public class ABATower : Structure
             go.transform.SetParent(unitsContainer);
             var unit = go.GetComponent<AbaUnit>();
             unit.agent.map = map; 
-            unit.abaTower = this;
+            unit.tower = this;
             AddUnit(unit);
         }
     }
@@ -96,6 +96,11 @@ public class ABATower : Structure
     public void RemoveUnit(AbaUnit unit)
     {
         abaUnits.Remove(unit);
+    }
+
+    public int GetNumUnits()
+    {
+        return abaUnits.Count;
     }
 
     public Vector2 GetEdgePointWithinInfluence()

@@ -26,7 +26,7 @@ public class AbaUnit : Unit
 
 
     [Header("References")]
-    public ABATower abaTower;
+    //public ABATower abaTower;
     public Rigidbody rb;
     [SerializeField] private Animator anim;
 
@@ -85,7 +85,7 @@ public class AbaUnit : Unit
         if (agent == null)
             return;
 
-        var newDestination = abaTower.GetEdgePointWithinInfluence();
+        var newDestination = GetAbaTower().GetEdgePointWithinInfluence();
         agent.SetDestination(newDestination);
         anim.SetBool("Walk", true);
 //        Debug.Log("Set destination");
@@ -102,7 +102,7 @@ public class AbaUnit : Unit
 
     public override void Deregister()
     {
-        abaTower.RemoveUnit(this);
+        GetAbaTower().RemoveUnit(this);
     }
     // public override void KillUnit()
     // {

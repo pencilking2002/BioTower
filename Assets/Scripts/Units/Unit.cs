@@ -5,6 +5,7 @@ using NaughtyAttributes;
 using BioTower.Level;
 using UnityEngine.UI;
 using PolyNav;
+using BioTower.Structures;
 
 namespace BioTower.Units
 {
@@ -19,6 +20,7 @@ public class Unit : MonoBehaviour
 {
     public UnitType unitType;
     public PolyNavAgent agent;
+    public Structure tower;
     [SerializeField] private bool hasHealth;
     //[EnableIf("hasHealth")] [Range(0,100)] [SerializeField] private int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] private int currHealth;
@@ -30,7 +32,7 @@ public class Unit : MonoBehaviour
     {
         if (hasHealth)
         {
-            currHealth = Util.gameSettings.upgradeSettings.GetMaxUnitHealth(unitType);
+            currHealth = Util.gameSettings.GetMaxUnitHealth(unitType);
             healthSlider.maxValue = currHealth;
             healthSlider.value = currHealth;
             healthSlider.gameObject.SetActive(true);
@@ -46,6 +48,16 @@ public class Unit : MonoBehaviour
         EventManager.Units.onUnitSpawned?.Invoke(this);
     }
 
+    public ABATower GetAbaTower()
+    {
+        return (ABATower) tower;
+    }
+
+    public PPC2Tower GetPPC2Tower()
+    {
+        return (PPC2Tower) tower;
+    }
+
     public virtual void StopMoving() { }
     public virtual void StartMoving(Waypoint waypoint, float delay=0) { }
 
@@ -59,7 +71,7 @@ public class Unit : MonoBehaviour
         if (hasHealth)
         {
             currHealth -= amount;
-            currHealth = Mathf.Clamp(currHealth, 0, Util.gameSettings.upgradeSettings.GetMaxUnitHealth(unitType));
+            currHealth = Mathf.Clamp(currHealth, 0, Util.gameSettings.GetMaxUnitHealth(unitType));
             healthSlider.value = currHealth;
 
 //            Debug.Log("Enemy take damage. health: " + currHealth);

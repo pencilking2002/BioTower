@@ -72,7 +72,8 @@ public class Snrk2Unit : Unit
     public override void SetNewDestination() { }
     public override void Deregister() { tower.RemoveUnit(this); }
 
-    private bool IsCombatState() { return snrkUnitState == SnrkUnitState.COMBAT; }
+    public bool IsCombatState() { return snrkUnitState == SnrkUnitState.COMBAT; }
+    public bool IsRoamingState() { return snrkUnitState == SnrkUnitState.SEARCHING; }
     public bool IsIdleState() { return snrkUnitState == SnrkUnitState.IDLE; }
     public bool IsCarryingCrystalState() { return snrkUnitState == SnrkUnitState.CARRYING_CRYSTAL; }
     public bool IsSearchingState() { return snrkUnitState == SnrkUnitState.SEARCHING; }

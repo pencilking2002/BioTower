@@ -2,14 +2,23 @@
 using BioTower.SaveData;
 using System.Collections.Generic;
 using System;
+using BioTower.Units;
+using System.Reflection;
 
 namespace BioTower
 {
 [CreateAssetMenu(fileName="GameSettings", menuName="GameSettings")]
 public class GameSettings : ScriptableObject
 {
+    public int basicEnemyDamage = 5;        // N/A
+    public int enemyUnitMaxHealth = 10;     // N/A
+    public int snark2UnitCost = 3;          // N/A
+
     public Params defaultSettings;
     public Params upgradeSettings;
+
+   
+
 
     private Dictionary<UpgradeType, Action> _upgradeLogicMap;
 
@@ -47,7 +56,7 @@ public class GameSettings : ScriptableObject
 
                 _upgradeLogicMap.Add(UpgradeType.SNRK2_UNIT_UNLOCK, UnlockSnrk2Unit);
                 _upgradeLogicMap.Add(UpgradeType.SNRK2_SPEED, UpgradeSnrk2UnitSpeed);
-                _upgradeLogicMap.Add(UpgradeType.SNRK2_DAMAGE_RESISTANCE, UpgradeSnk2UnitDamageResist);
+                _upgradeLogicMap.Add(UpgradeType.SNRK2_UNIT_HEALTH, UpgradeSnk2UnitHealth);
                 _upgradeLogicMap.Add(UpgradeType.SNRK2_CRYSTAL_VALUE, UpgradeSnrk2CrystalValue);
 
                 _upgradeLogicMap.Add(UpgradeType.PLAYER_TOWER_HEALTH, UpgradePlayerTowerHealth);
@@ -58,6 +67,37 @@ public class GameSettings : ScriptableObject
             return _upgradeLogicMap;
         }
     }
+    public int GetMaxUnitHealth(UnitType unitType)
+    {
+        switch(unitType)
+        {
+            case UnitType.ABA:
+                return upgradeSettings.abaUnitMaxHealth;
+            case UnitType.BASIC_ENEMY:
+                return enemyUnitMaxHealth;
+            case UnitType.SNRK2:
+                return upgradeSettings.snrkUnitMaxHealth;
+        }
+        return 0;
+    }
+
+    public int GetUnitCost(UnitType unitType)
+    {
+        int cost = 0;
+        switch (unitType)
+        {
+            case UnitType.ABA:
+                cost = upgradeSettings.abaUnitCost;
+                break;
+            case UnitType.SNRK2:
+                cost = snark2UnitCost;
+                break;
+            default:
+                Debug.Log("Unable to find cost for unit type: " + unitType);
+                break;
+        }
+        return cost;
+    }
 
     public void SetUpgradeSettingsBasedOnGameData(GameData gameData)
     {
@@ -66,7 +106,23 @@ public class GameSettings : ScriptableObject
 
     public void SetUpgradeSettingsToDefault()
     {
-        upgradeSettings = new Params();
+        object defaultSerializedObject = defaultSettings;
+        Type serializedObjectType = defaultSettings.GetType();
+        FieldInfo[] defaultFields = serializedObjectType.GetFields();
+
+        object upgradeSerializedObject = upgradeSettings;
+        FieldInfo[] upgradeFields = serializedObjectType.GetFields();
+        
+        for(int i=0; i<defaultFields.Length; i++)
+        {
+            object _fieldValue = defaultFields[i].GetValue(defaultSettings);
+            string _fieldName = defaultFields[i].Name;
+
+            if (_fieldValue != null)
+            {
+                upgradeFields[i].SetValue(upgradeSerializedObject, _fieldValue);
+            }
+        }
     }
     
     public void UpgradeAbaTowerInfluence()
@@ -121,7 +177,7 @@ public class GameSettings : ScriptableObject
     // Snrk2 
     public void UnlockSnrk2Unit() { upgradeSettings.snrk2UnitUnlocked = true; }
     public void UpgradeSnrk2UnitSpeed() { upgradeSettings.snrk2UnitSpeed_float = 1500; }
-    public void UpgradeSnk2UnitDamageResist() { upgradeSettings.snrk2HasDamageResistance = true; }
+    public void UpgradeSnk2UnitHealth() { upgradeSettings.snrkUnitMaxHealth = 10; }
     public void UpgradeSnrk2CrystalValue() { upgradeSettings.crystalSnrk2Value = 30; }
 
     // Player tower

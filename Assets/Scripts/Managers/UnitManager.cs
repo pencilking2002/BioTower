@@ -54,12 +54,12 @@ public class UnitManager : MonoBehaviour
         for (int i=0; i<units.Count; i++)
         {
             Unit unit = units[i];
-            if (unit.unitType != UnitType.SNRK2)
-                continue;
-            
-            var snrk2 = (Snrk2Unit) unit;
-            snrk2.CheckForCrystals();
-
+            if (unit.unitType == UnitType.SNRK2)
+            {
+                var snrk2 = (Snrk2Unit) unit;
+                if (snrk2.IsRoamingState())
+                    snrk2.CheckForCrystals();
+            }
         }
     }
 

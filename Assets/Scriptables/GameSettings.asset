@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab39c3707b2e0fa469593c5d61774ddc, type: 3}
-  m_Name: DefaultGameSettings
+  m_Name: GameSettings
   m_EditorClassIdentifier: 
+  basicEnemyDamage: 5
+  enemyUnitMaxHealth: 10
+  snark2UnitCost: 3
   defaultSettings:
     abaUnitDamage: 5
     abaUnitMaxSpeed_float: 500
     abaUnitCost: 5
     abaUnitMaxHealth: 10
     ppc2TowerDamage: 5
-    basicEnemyDamage: 5
     snrkUnitMaxHealth: 5
-    enemyUnitMaxHealth: 10
-    snark2UnitCost: 3
     snrk2UnitUnlocked: 0
     snrk2UnitSpeed_float: 1000
-    snrk2HasDamageResistance: 0
     abaTowerCost: 10
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2310
@@ -62,17 +61,13 @@ MonoBehaviour:
     energy: 80
   upgradeSettings:
     abaUnitDamage: 5
-    abaUnitMaxSpeed_float: 600
+    abaUnitMaxSpeed_float: 500
     abaUnitCost: 5
     abaUnitMaxHealth: 10
     ppc2TowerDamage: 5
-    basicEnemyDamage: 5
     snrkUnitMaxHealth: 5
-    enemyUnitMaxHealth: 10
-    snark2UnitCost: 3
     snrk2UnitUnlocked: 0
     snrk2UnitSpeed_float: 1000
-    snrk2HasDamageResistance: 0
     abaTowerCost: 10
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2310
@@ -93,7 +88,7 @@ MonoBehaviour:
     healTowerCost: 5
     spawnLightDropCost: 1
     healTowerAmount: 2
-    enableTowerHealthDecline: 0
+    enableTowerHealthDecline: 1
     mitoTowerUnlocked: 0
     mitoShootInterval_float: 2000
     mitoTowerMaxHealth: 10
@@ -103,8 +98,8 @@ MonoBehaviour:
     playerTowerMaxhealth: 20
     enablePlayerTowerHealing: 0
     startingLevel: 1
-    currLevel: 1
+    currLevel: 2
     lightFragmentValue: 5
     crystalSnrk2Value: 20
     startingEnergy: 80
-    energy: 80
+    energy: 11

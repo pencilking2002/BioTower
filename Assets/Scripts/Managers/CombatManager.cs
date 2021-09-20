@@ -98,14 +98,20 @@ public class CombatManager : MonoBehaviour
                     return;
                 }
             
-                bool isUnitAlive = unit.TakeDamage(Util.gameSettings.upgradeSettings.basicEnemyDamage);
+                bool isUnitAlive = unit.TakeDamage(Util.gameSettings.basicEnemyDamage);
                 LeanTween.scale(unit.gameObject, Vector3.one * 1.1f, 0.15f).setLoopPingPong(1);
-                
+
                 if (isUnitAlive)
                 {
-                    DoCombatRound(unit, enemy, 1);
-                    // unit.SetRoamingState();
-                    // unit.SetNewDestination();
+                    if (unit.unitType == UnitType.SNRK2)
+                    {
+                        enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
+                        unit.SetRoamingState();
+                    }
+                    else
+                    {
+                        DoCombatRound(unit, enemy, 1);
+                    }
                 }
                 else
                 {

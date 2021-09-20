@@ -61,13 +61,13 @@ public class EconomyManager : MonoBehaviour
 
     public bool CanBuyUnit(UnitType unitType)
     {
-        var unitCost = Util.gameSettings.upgradeSettings.GetUnitCost(unitType);
+        var unitCost = Util.gameSettings.GetUnitCost(unitType);
         return HasEnoughCurrency(unitCost);
     }
 
     public void BuyUnit(UnitType unitType)
     {
-        var unitCost = Util.gameSettings.upgradeSettings.GetUnitCost(unitType);
+        var unitCost = Util.gameSettings.GetUnitCost(unitType);
         SpendCurrency(unitCost);
     }
 

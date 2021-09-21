@@ -178,6 +178,10 @@ public class UpgradePanel : MonoBehaviour
         // Otherwise if it doesn't add it to the list
         if (!hasUpgrade)
             gameData.chosenUpgrades.Add(chosenUpgrade);
+        
+        Util.gameSettings.upgradeSettings = gameData.settings;
+        Util.gameSettings.upgradeLogicMap[upgradeType]();
+        gameData.settings = Util.gameSettings.upgradeSettings;
 
         gameData.settings.currLevel = ++currLevel;
         GameManager.Instance.saveManager.Save(gameData);

@@ -49,12 +49,17 @@ public class AbaUnit : Unit
     public override void StopMoving()
     {
         agent.Stop();
-        Debug.Log("AbaUnit: Stop Moving");
+        agent.enabled = false;
+        //Debug.Log("AbaUnit: Stop Moving");
         anim.SetBool("Walk", false);
         //sr.color = stoppedColor;
     }
 
-    public bool IsRoamingState() { return abaUnitState == AbaUnitState.ROAMING; }
+    public bool IsRoamingState() 
+    {
+        agent.enabled = true; 
+        return abaUnitState == AbaUnitState.ROAMING; 
+    }
     public bool IsCarryingEnemyState() { return abaUnitState == AbaUnitState.CARRYING_ENEMY; }
     public override bool IsCombatState() { return abaUnitState == AbaUnitState.COMBAT; }
     public bool IsDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
@@ -74,6 +79,7 @@ public class AbaUnit : Unit
     public override void SetDestroyedState() 
     { 
         abaUnitState = AbaUnitState.DESTROYED;
+        StopMoving();
         isAlive = false;
         anim.SetBool("Dead", true);
         anim.SetBool("Attack", false); 
@@ -106,6 +112,7 @@ public class AbaUnit : Unit
 
     public override void SetNewDestination()
     {
+        agent.enabled = true;
         if (agent == null)
             return;
 

@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitType: 1
   agent: {fileID: 663975515}
+  tower: {fileID: 0}
   hasHealth: 1
   currHealth: 0
   healthSlider: {fileID: 5313867590096428429}
@@ -143,6 +144,7 @@ MonoBehaviour:
   hasCrystal: 0
   hasCrystalTintColor: {r: 0.7470297, g: 0.48998755, b: 0.8584906, a: 1}
   isEngagedInCombat: 0
+  combatFoe: {fileID: 0}
   currWaypoint: {fileID: 0}
   nextWaypoint: {fileID: 0}
 --- !u!114 &663975515
@@ -309,6 +311,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1.0890045
+      objectReference: {fileID: 0}
+    - target: {fileID: 4356111071650216374, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -390898687
       objectReference: {fileID: 0}
     - target: {fileID: 6712439504025603162, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}

@@ -13,38 +13,29 @@ public class CombatManager : MonoBehaviour
 
     private void OnStartCombat(Unit unit, BasicEnemy enemy)
     {
-        unit.SetCombatState();
+        if (enemy.isEngagedInCombat || enemy.combatFoe != null)
+            return;
+
         enemy.StopMoving();
+        enemy.combatFoe = unit;
+        enemy.isEngagedInCombat = true;
         unit.StopMoving();
-
-        // Perform combat
-
-        if (unit.unitType == UnitType.ABA)
-        {
-           
-            // var unitScale = unit.transform.localScale;
-            // LeanTween.scale(unit.gameObject, unitScale * 1.2f, 0.25f).setLoopPingPong(6);
-            // unitScale = enemy.transform.localScale;
-
-            // LeanTween.scale(enemy.gameObject, unitScale * 1.2f, 0.25f)
-            //     .setLoopPingPong(6)
-            //     .setDelay(0.25f)
-            //     .setOnComplete(() => {
-            //         ResolveCombat(unit, enemy);
-            //     });
-        }
-        else if (unit.unitType == UnitType.SNRK2)
-        {
-            // LeanTween.delayedCall(1.0f, () => {
-            //     ResolveCombat(unit, enemy);
-            // });
-        }
+        unit.SetCombatState();
         DoCombatRound(unit, enemy, 1);
     }
 
     private void DoCombatRound(Unit unit, BasicEnemy enemy, float delay=0)
     {
         LeanTween.delayedCall(delay, () => {
+            
+            // Make sure that the enemy is only fighting one aba at a time
+            if (enemy.combatFoe != unit)
+            {
+                unit.SetRoamingState();
+                unit.SetNewDestination();
+                return;
+            }
+
             float percentage = UnityEngine.Random.Range(0.0f,1.0f) * 100;
             float winChance = abaWinChance;
 

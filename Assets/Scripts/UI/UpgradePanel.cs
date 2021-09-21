@@ -106,6 +106,18 @@ public class UpgradePanel : MonoBehaviour
         }
     }
 
+    public void OnPressUnlockUpgradeButton()
+    {
+        infoPanel.gameObject.SetActive(true);
+        selectedButton = unlockUpgradeButton;
+
+        var upgradeType = selectedButton.GetUpgradeType();
+        var upgradeData = GameManager.Instance.upgradeTextData;
+        var data = upgradeData.GetUpgradeTextData(upgradeType);
+        upgradeDescription.text = data.descrptionText;
+        itemImage.sprite = data.sprite;
+    }
+
     public void OnPressUpgradeButton01()
     {
         infoPanel.gameObject.SetActive(true);

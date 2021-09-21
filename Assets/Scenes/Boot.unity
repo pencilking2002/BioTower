@@ -9094,7 +9094,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 806458808}
-        m_MethodName: OnPressUpgradeButton01
+        m_MethodName: OnPressUnlockUpgradeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

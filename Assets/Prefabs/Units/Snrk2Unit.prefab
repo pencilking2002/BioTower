@@ -752,7 +752,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8646917852430403709}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9e11a684f7505384dabeb94b9ddd29a6, type: 2}
   m_CullingMode: 0
@@ -814,6 +814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitType: 2
   agent: {fileID: 6815928587370128805}
+  tower: {fileID: 0}
   hasHealth: 0
   currHealth: 0
   healthSlider: {fileID: 430178959657939368}
@@ -822,7 +823,6 @@ MonoBehaviour:
   snrkUnitState: 0
   hasCrystalTarget: 0
   crystalTarget: {fileID: 0}
-  tower: {fileID: 0}
   crystalSprite: {fileID: 3241203847065816394}
 --- !u!114 &6815928587370128805
 MonoBehaviour:

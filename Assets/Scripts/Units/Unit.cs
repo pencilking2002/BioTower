@@ -98,6 +98,7 @@ public class Unit : MonoBehaviour
     public virtual void SetNewDestination() { }
     public virtual void Deregister() { }
 
+    public virtual bool IsCombatState() { return false; }
     public virtual void KillUnit() 
     { 
         isAlive = false;

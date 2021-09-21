@@ -78,6 +78,23 @@ public class Structure : MonoBehaviour
         
     }
 
+    protected Unit GetClosestUnit(BasicEnemy enemy)
+    {
+        float furthestDistance = Mathf.Infinity;
+        Unit closestUnit = null;
+
+        foreach(var unit in units)
+        {
+            var distance = Vector2.Distance(unit.transform.position, enemy.transform.position);
+            if (distance < furthestDistance)
+            {
+                furthestDistance = distance;
+                closestUnit = unit;
+            }
+        }
+        return closestUnit;
+    }
+
     public virtual void TakeDamage(int numDamage)
     {
         if (GameManager.Instance.gameStates.IsGameState() && hasHealth && isAlive)
@@ -97,7 +114,7 @@ public class Structure : MonoBehaviour
             if (currHealth == 0)
                 KillStructure();
             else
-                DoHealthVisual(new Color(1, 0.5f, 0.5f, 1));
+                DoHealthVisual(new Color(1, 0.5f, 0.5f, 1), 1.01f);
         }
     }
 
@@ -110,7 +127,7 @@ public class Structure : MonoBehaviour
         EventManager.Structures.onStructureGainHealth?.Invoke(this);
     }
 
-    private void DoHealthVisual(Color targetColor)
+    private void DoHealthVisual(Color targetColor, float scaleUpFactor=1.1f)
     {
         if (this == null)
             return;
@@ -120,7 +137,7 @@ public class Structure : MonoBehaviour
         sr.transform.localScale = initSpriteScale;
         sr.color = Color.white;
 
-        Util.ScaleBounceSprite(sr, 1.1f);
+        Util.ScaleBounceSprite(sr, scaleUpFactor);
         var oldColor = sr.color;
         sr.color = targetColor;
         LeanTween.value(sr.gameObject, sr.color, oldColor, 0.25f)

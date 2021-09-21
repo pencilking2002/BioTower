@@ -137,25 +137,31 @@ public class ABATower : Structure
 
     public void RegisterEnemy(BasicEnemy enemy)
     {
-        if (!enemiesWithinInfluence.Contains(enemy))
+        if (!HasEnemy(enemy))
         {
             enemiesWithinInfluence.Add(enemy);
 
             if (!enemy.isEngagedInCombat)
             {
                 // Find a random aba Unit
-                var randIndex = UnityEngine.Random.Range(0, units.Count);
-                var unit = (AbaUnit) units[randIndex];
-
+                // var randIndex = UnityEngine.Random.Range(0, units.Count);
+                // var unit = (AbaUnit) units[randIndex];
+                var unit = GetClosestUnit(enemy);
+                var abaUnit = (AbaUnit) unit;
                 // Set them to follow the enemy
-                unit.SetChasingState();
-                unit.targetEnemy = enemy;
+                abaUnit.SetChasingState();
+                abaUnit.targetEnemy = enemy;
             }
 
             //Debug.Log(enemy.name);
             //unit.SetNewDestination()
             EventManager.Structures.onEnemyEnterTowerInfluence?.Invoke(enemy, this);
         }
+    }
+
+    public bool HasEnemy(BasicEnemy enemy)
+    {
+        return enemiesWithinInfluence.Contains(enemy);
     }
 
     public bool IsBelowSpawnLimit()

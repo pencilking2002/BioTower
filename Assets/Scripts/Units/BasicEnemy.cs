@@ -22,6 +22,7 @@ public class BasicEnemy : Unit
     public Color hasCrystalTintColor;
     private bool isRegistered;
     public bool isEngagedInCombat;
+    public Unit combatFoe;
 
     [Header("Waypoint movement")]
     [SerializeField] private Waypoint currWaypoint; 
@@ -83,6 +84,7 @@ public class BasicEnemy : Unit
 
     public override void StartMoving(Waypoint waypoint, float delay=0)
     {
+        combatFoe = null;
         LeanTween.delayedCall(delay, () => {
             SetDestination(waypoint);
             isEngagedInCombat = false;

@@ -47,29 +47,29 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 4e9e7b76d3aca3f4c9b1a02db7f43d75, type: 3}
   ppc2TowerDataArr:
   - upgradeType: 7
-    buttonText: New Tower Unlocked!
-    descrptionText: New Tower Unlocked!
-    sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
+    buttonText: PPC2 Tower Unlocked!
+    descrptionText: Shoots projectiles at nearby enemies
+    sprite: {fileID: 21300000, guid: 12ca3f1e700eb474b822f77ec863b451, type: 3}
   - upgradeType: 8
     buttonText: AOE
     descrptionText: Tower AOE
-    sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
+    sprite: {fileID: 21300000, guid: 12ca3f1e700eb474b822f77ec863b451, type: 3}
   - upgradeType: 9
     buttonText: Fire Rate
     descrptionText: Tower Fire Rate
-    sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
+    sprite: {fileID: 21300000, guid: 12ca3f1e700eb474b822f77ec863b451, type: 3}
   - upgradeType: 10
     buttonText: Explosion Radius
     descrptionText: Tower Explosion Radius
-    sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
+    sprite: {fileID: 21300000, guid: 12ca3f1e700eb474b822f77ec863b451, type: 3}
   - upgradeType: 11
     buttonText: Damage
     descrptionText: Damage
-    sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
+    sprite: {fileID: 21300000, guid: 12ca3f1e700eb474b822f77ec863b451, type: 3}
   - upgradeType: 12
     buttonText: Healing
     descrptionText: Healing
-    sprite: {fileID: 21300000, guid: 05cff6324e4785e41ad887a5da4be118, type: 3}
+    sprite: {fileID: 21300000, guid: 12ca3f1e700eb474b822f77ec863b451, type: 3}
   - upgradeType: 22
     buttonText: New Unit Unlocked!
     descrptionText: New Unit Unlocked!

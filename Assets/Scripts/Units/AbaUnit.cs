@@ -56,7 +56,7 @@ public class AbaUnit : Unit
 
     public bool IsRoamingState() { return abaUnitState == AbaUnitState.ROAMING; }
     public bool IsCarryingEnemyState() { return abaUnitState == AbaUnitState.CARRYING_ENEMY; }
-    public bool IsCombatState() { return abaUnitState == AbaUnitState.COMBAT; }
+    public override bool IsCombatState() { return abaUnitState == AbaUnitState.COMBAT; }
     public bool IsDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
     public bool IsChasingState() { return abaUnitState == AbaUnitState.CHASING_ENEMY; }
 
@@ -80,6 +80,13 @@ public class AbaUnit : Unit
         GameManager.Instance.unitManager.Unregister(this);
         Deregister();
         healthSlider.gameObject.SetActive(false);
+
+        // after 5 sec, make unit scale down and destroy it
+        LeanTween.delayedCall(gameObject, 5, () => {
+            LeanTween.scale(gameObject, Vector3.zero, 0.5f).setOnComplete(() => {
+                Destroy(gameObject);
+            });
+        });
     }
     public void SetChasingState() { abaUnitState = AbaUnitState.CHASING_ENEMY; }
 

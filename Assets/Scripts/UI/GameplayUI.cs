@@ -145,9 +145,21 @@ public class GameplayUI : MonoBehaviour
     private void HandleButtonPress(Button button, StructureType structureType)
     {
         AnimateButton(button);
-        currSelectedBtn = AbaTowerButton;
+        currSelectedBtn = button;
         EventManager.UI.onPressTowerButton?.Invoke(structureType);
         EventManager.UI.onTapButton?.Invoke(true);
+    }
+
+    private void AnimateButton(Button button)
+    {
+        if (button == currSelectedBtn)
+            return;
+            
+        var initPos = button.transform.localPosition;
+        if (currSelectedBtn != null)
+            LeanTween.moveLocalY(currSelectedBtn.gameObject, initPos.y, 0.1f);
+
+        LeanTween.moveLocalY(button.gameObject, initPos.y + 20, 0.1f);
     }
 
     private void HandleButtonColor(Button button)
@@ -197,17 +209,6 @@ public class GameplayUI : MonoBehaviour
         HandleButtonColor(button);
     }   
 
-    private void AnimateButton(Button button)
-    {
-        if (button == currSelectedBtn)
-            return;
-            
-        var initPos = button.transform.localPosition;
-        if (currSelectedBtn != null)
-            LeanTween.moveLocalY(currSelectedBtn.gameObject, initPos.y, 0.1f);
-
-        LeanTween.moveLocalY(button.gameObject, initPos.y + 20, 0.1f);
-    }
 
     private void DeselectCurrentButton()
     {

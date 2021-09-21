@@ -18,13 +18,11 @@ public class PPC2Tower : Structure
 
 
     [Header("References")]
-    //public List<Unit> units;
     [SerializeField] private Disc influenceDisc;
     [SerializeField] private CircleCollider2D maxInfluenceCollider;
     [SerializeField] private CircleCollider2D minInfluenceCollider;
     [SerializeField] private GameObject unitPrefab;
     [SerializeField] private Transform unitsContainer;
-    //public PolyNav2D map;
 
     public override void Awake()
     {
@@ -105,7 +103,7 @@ public class PPC2Tower : Structure
     
     public bool HasUnitsWithinTowerInfluence()
     {
-        if (units.Count <= 1)
+        if (units.Count == 0)
         {
             return false;
         }
@@ -113,6 +111,9 @@ public class PPC2Tower : Structure
         {
             foreach(Unit unit in units)
             {
+                if (unit == null)
+                    continue;
+                    
                 bool isWithinInfluence = IsUnitWithinTowerInfluence(unit);
                 if (isWithinInfluence)
                     return true;

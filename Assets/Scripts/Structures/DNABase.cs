@@ -71,8 +71,10 @@ public class DNABase : Structure
     {
         if (currHealth > 0)
         {
+            LeanTween.cancel(gameObject);
+            LeanTween.cancel(sr.gameObject);
             Util.ScaleBounceSprite(sr, 1.1f);
-            var oldColor = sr.color;
+            var oldColor = Color.white;
             sr.color = hurtColor;
             LeanTween.value(gameObject, sr.color, oldColor, 0.25f).setOnUpdate((Color col) => {
                 sr.color = col;

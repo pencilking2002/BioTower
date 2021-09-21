@@ -32,7 +32,7 @@ public class UnitManager : MonoBehaviour
         for (int i=0; i<units.Count; i++)
         {
             Unit unit = units[i];
-            if (unit == null)
+            if (unit == null || !unit.isAlive)
                 continue;
                 
             Vector2 moveDir = unit.agent.movingDirection;

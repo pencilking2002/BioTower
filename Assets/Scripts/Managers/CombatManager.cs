@@ -92,8 +92,7 @@ public class CombatManager : MonoBehaviour
                 if (!unit.isAlive)
                 {
                     enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
-                    unit.Deregister();
-                    unit.SetDestroyedState();
+                    unit.KillUnit();
 
                     return;
                 }
@@ -116,8 +115,7 @@ public class CombatManager : MonoBehaviour
                 else
                 {
                     enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
-                    unit.Deregister();
-                    unit.SetDestroyedState();
+                    unit.KillUnit();
                 }
                 
                 //LeanTween.scale(gameObject, Vector3.zero, 0.2f).setOnComplete(() => {

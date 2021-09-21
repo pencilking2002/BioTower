@@ -169,8 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: -390898687
   m_SortingLayer: 2
   m_SortingOrder: 10
-  m_Sprite: {fileID: -8870724278450368238, guid: 5440c8a6d67fe9c44b2f3525c1b54c47,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1b37b4ffd10a34142a6ec5425f5acbeb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -249,18 +248,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitType: 0
+  agent: {fileID: 6947603464991609268}
+  tower: {fileID: 0}
   hasHealth: 1
   currHealth: 0
   healthSlider: {fileID: 4252980273722639801}
   sr: {fileID: 5115481712484187246}
+  deadSprite: {fileID: 21300000, guid: 1b37b4ffd10a34142a6ec5425f5acbeb, type: 3}
   isAlive: 0
   abaUnitState: 0
   targetEnemy: {fileID: 0}
   combatDuration: 2
   abaWinChance: 50
-  abaTower: {fileID: 0}
   rb: {fileID: 0}
-  agent: {fileID: 6947603464991609268}
   anim: {fileID: 8631358351254125852}
 --- !u!114 &6947603464991609268
 MonoBehaviour:

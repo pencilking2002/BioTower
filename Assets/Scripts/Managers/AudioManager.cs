@@ -135,11 +135,11 @@ public class AudioManager : MonoBehaviour
 
     private void OnUnitTakeDamage(UnitType unitType)
     {
-        if (unitType == UnitType.ABA || unitType == UnitType.SNRK2)
-        {
+        //if (unitType == UnitType.ABA || unitType == UnitType.SNRK2)
+        //{
             var randIndex = UnityEngine.Random.Range(0, data.takeDamage.Length);
             PlaySound(data.takeDamage[randIndex]);
-        }
+        //}
     }
 
     private void OnTutChatStart()

@@ -23,9 +23,10 @@ public class Unit : MonoBehaviour
     public Structure tower;
     [SerializeField] private bool hasHealth;
     //[EnableIf("hasHealth")] [Range(0,100)] [SerializeField] private int maxHealth;
-    [EnableIf("hasHealth")] [SerializeField] private int currHealth;
-    [EnableIf("hasHealth")] [SerializeField] private Slider healthSlider;
+    [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
+    [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
     public SpriteRenderer sr;
+    //public Sprite deadSprite;
     public bool isAlive;
     
     public virtual void Start()
@@ -97,7 +98,7 @@ public class Unit : MonoBehaviour
     public virtual void SetNewDestination() { }
     public virtual void Deregister() { }
 
-    protected void KillUnit() 
+    public virtual void KillUnit() 
     { 
         isAlive = false;
         EventManager.Units.onUnitDestroyed?.Invoke(this);

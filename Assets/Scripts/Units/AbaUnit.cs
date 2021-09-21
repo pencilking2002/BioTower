@@ -109,6 +109,19 @@ public class AbaUnit : Unit
     //     base.KillUnit();
     // }
 
+    public override void KillUnit() 
+    { 
+        isAlive = false;
+        EventManager.Units.onUnitDestroyed?.Invoke(this);
+        GameManager.Instance.unitManager.Unregister(this);
+        GetAbaTower().RemoveUnit(this);
+        anim.SetBool("Dead", true);
+        healthSlider.gameObject.SetActive(false);
+        //Debug.Log("KILL ABA");
+        //Destroy(gameObject);
+    }
+    
+
     private void OnEnable()
     {
         agent.OnDestinationReached += OnDestinationReached;

@@ -184,7 +184,8 @@ public class ABATower : Structure
             enemiesWithinInfluence.Remove(enemy);
             EventManager.Structures.onEnemyExitTowerInfluence?.Invoke(enemy, this);
         }
-    }
+    } 
+
 }
 }
 

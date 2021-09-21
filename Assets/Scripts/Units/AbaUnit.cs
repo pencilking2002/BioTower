@@ -60,16 +60,33 @@ public class AbaUnit : Unit
     public bool IsDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
     public bool IsChasingState() { return abaUnitState == AbaUnitState.CHASING_ENEMY; }
 
-    public override void SetRoamingState() { abaUnitState = AbaUnitState.ROAMING; }
+    public override void SetRoamingState() 
+    { 
+        abaUnitState = AbaUnitState.ROAMING; 
+    }
+
     public void SetCarryingEnemyState() { abaUnitState = AbaUnitState.CARRYING_ENEMY; }
-    public override void SetCombatState() { abaUnitState = AbaUnitState.COMBAT; } 
-    public override void SetDestroyedState() { abaUnitState = AbaUnitState.DESTROYED; }
+    public override void SetCombatState() 
+    { 
+        abaUnitState = AbaUnitState.COMBAT;
+        anim.SetBool("Attack", true);
+    } 
+    public override void SetDestroyedState() 
+    { 
+        abaUnitState = AbaUnitState.DESTROYED;
+        isAlive = false;
+        anim.SetBool("Dead", true);
+        anim.SetBool("Attack", false); 
+        GameManager.Instance.unitManager.Unregister(this);
+        Deregister();
+        healthSlider.gameObject.SetActive(false);
+    }
     public void SetChasingState() { abaUnitState = AbaUnitState.CHASING_ENEMY; }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!IsCombatState() && other.gameObject.layer == 10) 
+        if (!IsCombatState() && other.gameObject.layer == 10 && isAlive) 
         {
             targetEnemy = other.transform.parent.GetComponent<BasicEnemy>();
 
@@ -88,6 +105,7 @@ public class AbaUnit : Unit
         var newDestination = GetAbaTower().GetEdgePointWithinInfluence();
         agent.SetDestination(newDestination);
         anim.SetBool("Walk", true);
+        anim.SetBool("Attack", false);
 //        Debug.Log("Set destination");
         //Debug.Log("AbaUnit: Set New Destination: " + newDestination);
     }
@@ -104,24 +122,13 @@ public class AbaUnit : Unit
     {
         GetAbaTower().RemoveUnit(this);
     }
-    // public override void KillUnit()
-    // {
-    //     base.KillUnit();
-    // }
 
     public override void KillUnit() 
     { 
-        isAlive = false;
+        SetDestroyedState();
         EventManager.Units.onUnitDestroyed?.Invoke(this);
-        GameManager.Instance.unitManager.Unregister(this);
-        GetAbaTower().RemoveUnit(this);
-        anim.SetBool("Dead", true);
-        healthSlider.gameObject.SetActive(false);
-        //Debug.Log("KILL ABA");
-        //Destroy(gameObject);
     }
     
-
     private void OnEnable()
     {
         agent.OnDestinationReached += OnDestinationReached;

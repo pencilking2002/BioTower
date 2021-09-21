@@ -254,7 +254,6 @@ MonoBehaviour:
   currHealth: 0
   healthSlider: {fileID: 4252980273722639801}
   sr: {fileID: 5115481712484187246}
-  deadSprite: {fileID: 21300000, guid: 1b37b4ffd10a34142a6ec5425f5acbeb, type: 3}
   isAlive: 0
   abaUnitState: 0
   targetEnemy: {fileID: 0}

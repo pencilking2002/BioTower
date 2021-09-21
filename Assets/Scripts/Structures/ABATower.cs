@@ -147,10 +147,13 @@ public class ABATower : Structure
                 // var randIndex = UnityEngine.Random.Range(0, units.Count);
                 // var unit = (AbaUnit) units[randIndex];
                 var unit = GetClosestUnit(enemy);
-                var abaUnit = (AbaUnit) unit;
-                // Set them to follow the enemy
-                abaUnit.SetChasingState();
-                abaUnit.targetEnemy = enemy;
+                if (unit != null)
+                {
+                    var abaUnit = (AbaUnit) unit;
+                    // Set them to follow the enemy
+                    abaUnit.SetChasingState();
+                    abaUnit.targetEnemy = enemy;
+                }
             }
 
             //Debug.Log(enemy.name);

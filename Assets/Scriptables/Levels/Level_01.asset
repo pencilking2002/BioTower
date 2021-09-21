@@ -16,27 +16,9 @@ MonoBehaviour:
   - state: 2
     waveIndex: 0
     startDelay: 0
-    numEnemiesPerWave: 2
+    numEnemiesPerWave: 2000
     spawnInterval: 4
     minMaxSpeed: {x: 0.4, y: 0.7}
     timeStarted: 3.2020845
     lastSpawn: 3.316719
     numSpawns: 1
-  - state: 0
-    waveIndex: 1
-    startDelay: 4
-    numEnemiesPerWave: 2
-    spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 0
-    lastSpawn: 0
-    numSpawns: 0
-  - state: 0
-    waveIndex: 2
-    startDelay: 4
-    numEnemiesPerWave: 2
-    spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 0
-    lastSpawn: 0
-    numSpawns: 0

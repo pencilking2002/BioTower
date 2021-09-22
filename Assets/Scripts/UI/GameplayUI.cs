@@ -160,6 +160,7 @@ public class GameplayUI : MonoBehaviour
             LeanTween.moveLocalY(currSelectedBtn.gameObject, initPos.y, 0.1f);
 
         LeanTween.moveLocalY(button.gameObject, initPos.y + 20, 0.1f);
+
     }
 
     private void HandleButtonColor(Button button)
@@ -220,19 +221,28 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
-    private void OnLevelAwake(LevelType levelType)
+    private void OnLevelStart(LevelType levelType)
     {
-        if (levelType == LevelType.LEVEL_01)
-        {
-            Pp2cTowerButton.gameObject.SetActive(false);
-            chloroplastTowerButton.gameObject.SetActive(false);
-            mitoTowerButton.gameObject.SetActive(false);
-        }
+        // if (levelType == LevelType.LEVEL_01)
+        // {
+        //     Pp2cTowerButton.gameObject.SetActive(false);
+        //     chloroplastTowerButton.gameObject.SetActive(false);
+        //     mitoTowerButton.gameObject.SetActive(false);
+        //     //Debug.Log("Level Awake")
+        // }
+        bool ppc2TowerUnlocked = Util.upgradeSettings.ppc2TowerUnlocked;
+        Pp2cTowerButton.gameObject.SetActive(ppc2TowerUnlocked);
+
+        bool chloroTowerUnlocked = Util.upgradeSettings.chloroTowerUnlocked;
+        chloroplastTowerButton.gameObject.SetActive(chloroTowerUnlocked);
+
+        bool mitoTowerUnlocked = Util.upgradeSettings.mitoTowerUnlocked;
+        mitoTowerButton.gameObject.SetActive(mitoTowerUnlocked);
     }
 
     private void OnEnable()
     {
-        EventManager.Game.onLevelAwake += OnLevelAwake;
+        EventManager.Game.onLevelStart += OnLevelStart;
         EventManager.Game.onSpendCurrency += OnSpendCurrency;
         EventManager.Game.onGainCurrency += OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted += OnStructureCooldownStarted;
@@ -240,7 +250,7 @@ public class GameplayUI : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.Game.onLevelAwake -= OnLevelAwake;
+        EventManager.Game.onLevelStart -= OnLevelStart;
         EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         EventManager.Game.onGainCurrency -= OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted -= OnStructureCooldownStarted;

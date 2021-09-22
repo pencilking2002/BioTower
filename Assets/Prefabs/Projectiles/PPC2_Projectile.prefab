@@ -394,3 +394,4 @@ MonoBehaviour:
   explosiionPrefab: {fileID: 5068043869090755077, guid: 10df14dacdcf28e4188614e44981108e,
     type: 3}
   influenceCollider: {fileID: 8124604382756156425}
+  glow: {fileID: 1984335922001242765}

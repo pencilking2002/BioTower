@@ -46,6 +46,7 @@ public class Structure : MonoBehaviour
     public virtual void Awake()
     {
         initSpriteScale = sr.transform.localScale;
+        lastDeclineTime = Time.time;
     }
 
     // public virtual void Start()

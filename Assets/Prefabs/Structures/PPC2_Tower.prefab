@@ -448,6 +448,7 @@ MonoBehaviour:
   unitPrefab: {fileID: 8646917852740519504, guid: 7a297f7c9c2c15a4aa896e34dfc88309,
     type: 3}
   unitsContainer: {fileID: 8300922970326931745}
+  map: {fileID: 2558750125707411119}
 --- !u!50 &2173016658119397915
 Rigidbody2D:
   serializedVersion: 4

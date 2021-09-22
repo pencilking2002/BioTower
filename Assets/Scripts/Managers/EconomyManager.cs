@@ -76,21 +76,22 @@ public class EconomyManager : MonoBehaviour
         SpendCurrency(Util.gameSettings.upgradeSettings.healTowerCost);
     }
 
-    // public void GainCrystalMoney()
-    // {
-    //     int amount = Util.gameSettings.crystalWorth;
-    //     GainCurrency(amount);
-    // }
+    public bool CanBuyLightFragment()
+    {
+        var cost = Util.gameSettings.spawnLightDropCost;
+        return HasEnoughCurrency(cost);
+    }
+
+    public void BuyLightFragment()
+    {
+        var cost = Util.gameSettings.spawnLightDropCost;
+        SpendCurrency(cost);
+    }
 
     private void OnSnrk2UnitReachedBase(Snrk2Unit unit)
     {
         GainCurrency(Util.gameSettings.upgradeSettings.crystalSnrk2Value);
     }
-
-    // private void OnCrystalTapped()
-    // {
-    //     GainCurrency(Util.gameSettings.upgradeSettings.crystalValue);
-    // }
 
     private void OnLightFragmentTapped()
     {

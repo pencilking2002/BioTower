@@ -16,6 +16,8 @@ public class GameSettings : ScriptableObject
     [Range(0,1)] public float randomHealChance = 0.1f;
     public int declineDamage = 1;
     public int randomHealAmount = 2;
+    public int spawnLightDropCost = 1;         
+    public int healTowerAmount = 2;
 
     [Space(10)]
     public Params defaultSettings;
@@ -157,8 +159,8 @@ public class GameSettings : ScriptableObject
     public void UpgradePpc2FireRate() { upgradeSettings.ppc2shootInterval_float = 700; }
     public void UpgradePpc2ExplosionRadius() 
     { 
-        upgradeSettings.ppc2ExplosionColliderRadius_float = 1400; 
-        upgradeSettings.ppc2ExplosionSpriteRadius_float = 800; 
+        upgradeSettings.ppc2ExplosionColliderScale_float = 1400; 
+        upgradeSettings.ppc2ExplosionSpriteScale_float = 800; 
     }
 
     public void UpgradePpc2TowerDamage() { upgradeSettings.ppc2TowerDamage = 10; }

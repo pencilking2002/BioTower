@@ -58,7 +58,7 @@ public class TowerMenu : MonoBehaviour
         else if (button == spawnUnitButton)
             text.text = Util.gameSettings.upgradeSettings.abaUnitCost.ToString();
          else if (button == spawnLightParticleButton)
-            text.text = Util.gameSettings.upgradeSettings.spawnLightDropCost.ToString();
+            text.text = Util.gameSettings.spawnLightDropCost.ToString();
     }
 
     public void OnPressSpawnUnitButton()
@@ -122,23 +122,10 @@ public class TowerMenu : MonoBehaviour
     {
         if (GameManager.Instance.econManager.CanBuyTowerHeal())
         {
-            var healAmount = Util.gameSettings.upgradeSettings.healTowerAmount;
+            var healAmount = Util.gameSettings.healTowerAmount;
             GameManager.Instance.tapManager.selectedStructure.GainHealth(healAmount);
             GameManager.Instance.econManager.BuyTowerHeal();
             var selectedTower = GameManager.Instance.tapManager.selectedStructure;
-
-            // // Reset tower before applying tweens to it
-            // LeanTween.cancel(selectedTower.sr.gameObject);
-            // selectedTower.sr.transform.localScale = selectedTower.initSpriteScale;
-            // selectedTower.sr.color = Color.white;
-
-            // Util.ScaleBounceSprite(selectedTower.sr, 1.1f);
-            // var oldColor = selectedTower.sr.color;
-            // selectedTower.sr.color = Color.green;
-            // LeanTween.value(selectedTower.sr.gameObject, selectedTower.sr.color, oldColor, 0.25f)
-            // .setOnUpdate((Color col) => {
-            //     selectedTower.sr.color = col;
-            // });
             EventManager.UI.onTapButton?.Invoke(true);
         }
         else
@@ -151,9 +138,19 @@ public class TowerMenu : MonoBehaviour
 
     public void OnPressLightDropButton()
     {
-        var selectedTower = GameManager.Instance.tapManager.selectedStructure;
-        var mitoTower = (MitoTower) selectedTower;
-        mitoTower.ShootFragment();
+        if (Util.econManager.CanBuyLightFragment())
+        {
+            var selectedTower = GameManager.Instance.tapManager.selectedStructure;
+            var mitoTower = (MitoTower) selectedTower;
+            mitoTower.ShootFragment();
+            Util.econManager.BuyLightFragment();
+        }
+        else
+        {
+            Util.HandleInvalidButtonPress(spawnLightParticleButton, Util.ButtonColorMode.DEFAULT);
+            var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
+            GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
+        }
     }
 
     public void OnStructureSelected(Structure structure)

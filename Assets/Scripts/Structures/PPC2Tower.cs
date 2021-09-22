@@ -23,11 +23,21 @@ public class PPC2Tower : Structure
     [SerializeField] private CircleCollider2D minInfluenceCollider;
     [SerializeField] private GameObject unitPrefab;
     [SerializeField] private Transform unitsContainer;
+    public PolyNav2D map;
 
     public override void Awake()
     {
         base.Awake();
         Util.ScaleUpSprite(sr, 1.1f);
+    }
+
+    private void Start()
+    {
+        // Setup upgrade settings
+        maxInfluenceCollider.radius = Util.upgradeSettings.ppc2MaxInfluenceRadius_float.GetFloat();
+        map.transform.localScale = Vector3.one * Util.upgradeSettings.ppc2MapScale_float.GetFloat();
+        influenceDisc.Radius = Util.upgradeSettings.ppc2InfluenceShapeRadius_float.GetFloat();
+        shootInterval = Util.upgradeSettings.ppc2shootInterval_float.GetFloat();
     }
 
     public override void OnUpdate()

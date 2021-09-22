@@ -29,6 +29,7 @@ public class EventManager : MonoBehaviour
         public static Action<Snrk2Unit> onSnrk2UnitReachedBase;
 
         public static Action<LevelType> onLevelAwake;
+        public static Action<LevelType> onLevelStart;
     }
 
     public class Structures

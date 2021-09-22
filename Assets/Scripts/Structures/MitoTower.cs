@@ -17,7 +17,11 @@ public class MitoTower : Structure
     public override void Awake()
     {
         base.Awake();
+        shootInterval = Util.upgradeSettings.mitoShootInterval_float.GetFloat();
+        maxHealth = Util.upgradeSettings.mitoTowerMaxHealth;
+        currHealth = maxHealth; 
     }
+
     private GameObject CreateFragment()
     {
         GameObject fragment = Instantiate(lightFragmentPrefab); 

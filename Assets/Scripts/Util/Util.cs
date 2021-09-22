@@ -13,6 +13,7 @@ public class Util : MonoBehaviour
     public static Params upgradeSettings => GameManager.Instance.gameSettings.upgradeSettings;
     public static UpgradeTree upgradeTree => GameManager.Instance.upgradeTree;
     public static CrystalManager crystalManager => GameManager.Instance.crystalManager;
+    public static EconomyManager econManager => GameManager.Instance.econManager;
     public LayerMask enemyLayerMask;
     
     public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)

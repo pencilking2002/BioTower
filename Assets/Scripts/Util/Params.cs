@@ -34,25 +34,24 @@ public class Params
 
 
     [Header("PPC2 Tower")]
-    [TabGroup("Towers")] public bool ppc2TowerUnlocked = false;
-    [TabGroup("Towers")] public int ppc2TowerCost = 40;
-    [TabGroup("Towers")] public int ppc2MaxInfluenceRadius_float = 2280;
-    [TabGroup("Towers")] public int ppc2InfluenceShapeRadius_float = 2300;
-    [TabGroup("Towers")] public int ppc2MapScale_float = 2310;
-    [TabGroup("Towers")] public int ppc2shootInterval_float = 1000;
-    [TabGroup("Towers")] public int ppc2ExplosionColliderRadius_float = 1271;
-    [TabGroup("Towers")] public int ppc2ExplosionSpriteRadius_float = 622;
+    [TabGroup("Towers")] public bool ppc2TowerUnlocked = false;             // Done
+    [TabGroup("Towers")] public int ppc2TowerCost = 40;                     // Done
+    [TabGroup("Towers")] public int ppc2MaxInfluenceRadius_float = 2280;    // Done
+    [TabGroup("Towers")] public int ppc2InfluenceShapeRadius_float = 2300;  // Done
+    [TabGroup("Towers")] public int ppc2MapScale_float = 2310;              // Done
+    [TabGroup("Towers")] public int ppc2shootInterval_float = 1000;             // Done
+    [TabGroup("Towers")] public int ppc2ExplosionColliderScale_float = 1271;   // Done
+    [TabGroup("Towers")] public int ppc2ExplosionSpriteScale_float = 622;       // Done
 
-    [TabGroup("Towers")] public bool chloroTowerUnlocked = false;
-    [TabGroup("Towers")] public int chloroplastTowerCost = 20;
-    [TabGroup("Towers")] public int mitoTowerCost = 20;
-    [TabGroup("Towers")] public int healTowerCost = 5;
-    [TabGroup("Towers")] public int spawnLightDropCost = 1;
-    [TabGroup("Towers")] public int healTowerAmount = 2;
-    [TabGroup("Towers")] public bool enableTowerHealthDecline = false;
-    [TabGroup("Towers")] public bool mitoTowerUnlocked = false;
-    [TabGroup("Towers")] public int mitoShootInterval_float = 2000; 
-    [TabGroup("Towers")] public int mitoTowerMaxHealth = 10;
+    [TabGroup("Towers")] public bool chloroTowerUnlocked = false;           // Done
+    [TabGroup("Towers")] public int chloroplastTowerCost = 20;              // Done
+    
+    [TabGroup("Towers")] public int mitoTowerCost = 20;                     // Done
+    [TabGroup("Towers")] public int healTowerCost = 5;                      // Done
+    [TabGroup("Towers")] public bool enableTowerHealthDecline = false;      // Done
+    [TabGroup("Towers")] public bool mitoTowerUnlocked = false;             // Done
+    [TabGroup("Towers")] public int mitoShootInterval_float = 2000;         // Done
+    [TabGroup("Towers")] public int mitoTowerMaxHealth = 10;                
     [TabGroup("Towers")] public int chloroShootInterval_float = 5000;
     [TabGroup("Towers")] public int numFragmentsPickedUpOnTap = 1;
     [TabGroup("Towers")] public bool enableChloroTowerRandomHeal = false;

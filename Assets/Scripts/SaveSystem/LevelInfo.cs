@@ -46,7 +46,7 @@ public class LevelInfo : MonoBehaviour
         }
 
         GameManager.Instance.saveManager.Save(saveData);
-       
+        EventManager.Game.onLevelStart?.Invoke(levelType);
     }
 
     /// <summary>

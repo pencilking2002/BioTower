@@ -17,6 +17,7 @@ public class ChloroplastTower : Structure
     public override void Awake()
     {
         base.Awake();
+        shootInterval = Util.upgradeSettings.chloroShootInterval_float.GetFloat();
     }
 
     private GameObject CreateFragment()

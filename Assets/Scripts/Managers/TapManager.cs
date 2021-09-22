@@ -19,32 +19,54 @@ public class TapManager : MonoBehaviour
         RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, tappableLayerMask);
         if (hitInfo.collider != null)
         {
-            TapCrystal(hitInfo);
+            //TapCrystal(hitInfo);
             TapLightFragment(hitInfo);
             
         }
         TapStructure(screenPos);
     }
 
-    private void TapCrystal(RaycastHit2D hitInfo)
-    {
-        EnemyCrystal crystal = hitInfo.collider.transform.parent.GetComponent<EnemyCrystal>();
-        if (crystal != null)
-        {
-            crystal.DestroyObject();
-            EventManager.Game.onCrystalTapped?.Invoke();
-            //GameManager.Instance.econManager.GainCrystalMoney();
-        }
-    }
+    // private void TapCrystal(RaycastHit2D hitInfo)
+    // {
+    //     EnemyCrystal crystal = hitInfo.collider.transform.parent.GetComponent<EnemyCrystal>();
+    //     if (crystal != null)
+    //     {
+    //         crystal.DestroyObject();
+    //         EventManager.Game.onCrystalTapped?.Invoke();
+    //         //GameManager.Instance.econManager.GainCrystalMoney();
+    //     }
+    // }
 
     private void TapLightFragment(RaycastHit2D hitInfo)
     {
-        LightFragment fragment = hitInfo.collider.transform.parent.GetComponent<LightFragment>();
-        if (fragment != null)
+        if (Util.upgradeSettings.numFragmentsPickedUpOnTap == 1)
         {
-            fragment.DestroyObject();
-            EventManager.Game.onLightFragmentTapped?.Invoke();
-            //GameManager.Instance.econManager.GainCrystalMoney();
+            LightFragment fragment = hitInfo.collider.transform.parent.GetComponent<LightFragment>();
+            if (fragment != null)
+            {
+                fragment.DestroyObject();
+                EventManager.Game.onLightFragmentTapped?.Invoke();
+            }
+        }
+        else if (Util.upgradeSettings.numFragmentsPickedUpOnTap > 1)
+        {
+            var radius = Util.gameSettings.multipleLightFragmentPickupRadius;
+            Collider2D [] colliders = Physics2D.OverlapCircleAll(hitInfo.point, radius, tappableLayerMask);
+            if(colliders.Length > 0)
+            {
+                for (int i=0; i<colliders.Length; i++)
+                {
+                    if (i > Util.upgradeSettings.numFragmentsPickedUpOnTap)
+                        continue;
+                    
+                    LightFragment fragment = colliders[i].transform.parent.GetComponent<LightFragment>();
+                    LeanTween.move(fragment.gameObject, hitInfo.point, 0.25f)
+                        .setOnComplete(() => {
+                            fragment.DestroyObject();
+                            EventManager.Game.onLightFragmentTapped?.Invoke();
+                        });
+                }
+            }
         }
     }
 

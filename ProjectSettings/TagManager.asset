@@ -11,6 +11,7 @@ TagManager:
   - LevelInfo
   - BootController
   - TutorialCanvas
+  - LightFragment
   layers:
   - Default
   - TransparentFX

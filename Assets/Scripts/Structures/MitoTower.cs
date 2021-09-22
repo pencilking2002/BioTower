@@ -19,7 +19,9 @@ public class MitoTower : Structure
         base.Awake();
         shootInterval = Util.upgradeSettings.mitoShootInterval_float.GetFloat();
         maxHealth = Util.upgradeSettings.mitoTowerMaxHealth;
-        currHealth = maxHealth; 
+        currHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = maxHealth; 
     }
 
     private GameObject CreateFragment()

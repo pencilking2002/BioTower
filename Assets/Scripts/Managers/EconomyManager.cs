@@ -44,18 +44,18 @@ public class EconomyManager : MonoBehaviour
 
     public bool CanBuyTowerHeal()
     {
-        return HasEnoughCurrency(Util.gameSettings.upgradeSettings.healTowerCost);
+        return HasEnoughCurrency(Util.upgradeSettings.healTowerCost);
     }
 
     public bool CanBuyTower(StructureType structureType)
     {
-        var cost = Util.gameSettings.upgradeSettings.GetTowerCost(structureType);
+        var cost = Util.upgradeSettings.GetTowerCost(structureType);
         return HasEnoughCurrency(cost);
     }
 
     public void BuyTower(StructureType structureType)
     {
-        int cost = Util.gameSettings.upgradeSettings.GetTowerCost(structureType);
+        int cost = Util.upgradeSettings.GetTowerCost(structureType);
         SpendCurrency(cost);   
     }
 
@@ -73,7 +73,7 @@ public class EconomyManager : MonoBehaviour
 
     public void BuyTowerHeal()
     {
-        SpendCurrency(Util.gameSettings.upgradeSettings.healTowerCost);
+        SpendCurrency(Util.upgradeSettings.healTowerCost);
     }
 
     public bool CanBuyLightFragment()
@@ -90,12 +90,12 @@ public class EconomyManager : MonoBehaviour
 
     private void OnSnrk2UnitReachedBase(Snrk2Unit unit)
     {
-        GainCurrency(Util.gameSettings.upgradeSettings.crystalSnrk2Value);
+        GainCurrency(Util.upgradeSettings.crystalSnrk2Value);
     }
 
     private void OnLightFragmentTapped()
     {
-        GainCurrency(Util.gameSettings.upgradeSettings.lightFragmentValue);
+        GainCurrency(Util.upgradeSettings.lightFragmentValue);
     }
 
     private void OnEnable()

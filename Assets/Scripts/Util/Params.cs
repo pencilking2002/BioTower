@@ -51,22 +51,17 @@ public class Params
     [TabGroup("Towers")] public bool enableTowerHealthDecline = false;      // Done
     [TabGroup("Towers")] public bool mitoTowerUnlocked = false;             // Done
     [TabGroup("Towers")] public int mitoShootInterval_float = 2000;         // Done
-    [TabGroup("Towers")] public int mitoTowerMaxHealth = 10;                
-    [TabGroup("Towers")] public int chloroShootInterval_float = 5000;
-    [TabGroup("Towers")] public int numFragmentsPickedUpOnTap = 1;
-    [TabGroup("Towers")] public bool enableChloroTowerRandomHeal = false;
-    [TabGroup("Towers")] public int playerTowerMaxhealth = 20;
-    [TabGroup("Towers")] public bool enablePlayerTowerHealing = false;
+    [TabGroup("Towers")] public int mitoTowerMaxHealth = 10;                // Done 
+    [TabGroup("Towers")] public int chloroShootInterval_float = 5000;       // Done
+    [TabGroup("Towers")] public int numFragmentsPickedUpOnTap = 1;          // Done
+    [TabGroup("Towers")] public bool enableChloroTowerRandomHeal = false;   // Done
+    [TabGroup("Towers")] public int playerTowerMaxhealth = 20;              // Done
+    [TabGroup("Towers")] public bool enablePlayerTowerHealing = false;      // Done
 
-    [TabGroup("Misc")] public int startingLevel = 1;
     [TabGroup("Misc")] public int currLevel = 1;
     [TabGroup("Misc")] public int lightFragmentValue = 5;
     [TabGroup("Misc")] public int crystalSnrk2Value = 20;
-    [TabGroup("Misc")] public int startingEnergy = 80;
     [TabGroup("Misc")] public int energy = 80;
-
-
-    
 
 
     public int GetTowerCost(StructureType structureType)

@@ -62,7 +62,7 @@ public class LevelInfo : MonoBehaviour
         Util.gameSettings.SetUpgradeSettingsToDefault();
         saveData.SetDefaultSettings(defaultSettings);
         Debug.Log("Init first lvl. energy: " + upgradeSettings.energy);
-        GameManager.Instance.econManager.Init(defaultSettings.startingEnergy);
+        GameManager.Instance.econManager.Init(Util.gameSettings.startingEnergy);
     }
 
     /// <summary>

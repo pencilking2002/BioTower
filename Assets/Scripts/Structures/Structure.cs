@@ -174,6 +174,10 @@ public class Structure : MonoBehaviour
 
     public virtual void OnStructureSelected(Structure structure)
     {
+
+        if (structureType == StructureType.DNA_BASE && !Util.upgradeSettings.enablePlayerTowerHealing)
+            return;
+
         Debug.Log($"Select {structure.gameObject.name}. This structure: {gameObject.name}. Same structure: {structure == this}");
 
         if (structure == this)

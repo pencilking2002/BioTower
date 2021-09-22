@@ -27,6 +27,11 @@ public class DNABase : Structure
     private void Start()
     {
         Init(null);
+        
+        maxHealth = Util.upgradeSettings.playerTowerMaxhealth;
+        currHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = maxHealth;
     }
 
     private void LevelLoaded()

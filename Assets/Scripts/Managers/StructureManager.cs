@@ -28,8 +28,7 @@ public class StructureManager : MonoBehaviour
 
     private void DoHealthDeclineOrHeal(Structure structure)
     {
-        bool healEnabled = (structure.IsAbaTower() && Util.upgradeSettings.enableAbaTowerRandomHeal) ||
-                           (structure.IsChloroTower() && Util.upgradeSettings.enableChloroTowerRandomHeal);
+        bool healEnabled = RandomHealEnabled(structure.structureType);
 
         if (Util.gameSettings.upgradeSettings.enableTowerHealthDecline)
         {
@@ -39,14 +38,24 @@ public class StructureManager : MonoBehaviour
                 float healChance = GetRandomFloat();
                 bool isHeal = healChance > 1-Util.gameSettings.randomHealChance && healEnabled;
 
-                if (isHeal)
+                if (isHeal && healEnabled)
                     structure.GainHealth(Util.gameSettings.randomHealAmount);
                 else
                     structure.TakeDamage(Util.gameSettings.declineDamage);
             }
         }
     }
-
+    
+    private bool RandomHealEnabled(StructureType structureType)
+    {
+        if (structureType == StructureType.ABA_TOWER && Util.upgradeSettings.enableAbaTowerRandomHeal)
+            return true;
+        else if (structureType == StructureType.CHLOROPLAST && Util.upgradeSettings.enableChloroTowerRandomHeal)
+            return true;
+        else
+            return false;
+    }
+    
     private float GetRandomFloat()
     {
         float healChance = 0;

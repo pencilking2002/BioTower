@@ -9,15 +9,16 @@ namespace BioTower.UI
 {
 public class DebugCanvas : MonoBehaviour
 {
+    [SerializeField] private RectTransform panel;
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private PolyNav2D map;
-    [SerializeField] private Transform endPoint;
+
+    // [SerializeField] private PolyNav2D map;
+    // [SerializeField] private Transform endPoint;
 
 
     [Header("Text")]
     [SerializeField] private Text currWaveText;
     [SerializeField] private Text placementStateText;
-
     [SerializeField] private GameObject testMapPrefab;
   
 
@@ -28,9 +29,13 @@ public class DebugCanvas : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        // if (Input.GetKeyDown(KeyCode.P))
+        // {
+        //     SpawnEnemy();
+        // }
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            SpawnEnemy();
+            panel.gameObject.SetActive(!panel.gameObject.activeInHierarchy);
         }
 
         currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
@@ -62,11 +67,41 @@ public class DebugCanvas : MonoBehaviour
         placementStateText.text = "Placement state: NONE";
     }
 
+    public void UnlockAllTowers()
+    {
+        var gameData = Util.saveManager.Load();
+        gameData.settings.mitoTowerUnlocked = true;
+        gameData.settings.ppc2TowerUnlocked = true;
+        gameData.settings.chloroTowerUnlocked = true;
+        Util.saveManager.Save(gameData);
+        GameManager.Instance.upgradeSettings = gameData.settings;
+        GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.PPC2_TOWER].gameObject.SetActive(true);
+        GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.CHLOROPLAST].gameObject.SetActive(true);
+        GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.MITOCHONDRIA].gameObject.SetActive(true);
+    }
+
+    public void ResetTowers()
+    {
+        var gameData = Util.saveManager.Load();
+        gameData.settings.mitoTowerUnlocked = false;
+        gameData.settings.ppc2TowerUnlocked = false;
+        gameData.settings.chloroTowerUnlocked = false;
+        Util.saveManager.Save(gameData);
+        GameManager.Instance.upgradeSettings = gameData.settings;
+        GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.PPC2_TOWER].gameObject.SetActive(false);
+        GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.CHLOROPLAST].gameObject.SetActive(false);
+        GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.MITOCHONDRIA].gameObject.SetActive(false);
+    }
+
+    public void UpgradeAll()
+    {
+
+    }
+
     private void OnEnable()
     {
         EventManager.Structures.onSetNonePlacementState += OnSetNonePlacementState;
         EventManager.Structures.onStartPlacementState += OnStartPlacementState;
-
     }
 
     private void OnDisable()

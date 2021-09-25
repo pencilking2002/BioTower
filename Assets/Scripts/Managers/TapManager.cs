@@ -60,7 +60,7 @@ public class TapManager : MonoBehaviour
                         continue;
                     
                     LightFragment fragment = colliders[i].transform.parent.GetComponent<LightFragment>();
-                    LeanTween.move(fragment.gameObject, hitInfo.point, 0.25f)
+                    LeanTween.move(fragment.gameObject, hitInfo.point, 0.15f)
                         .setOnComplete(() => {
                             fragment.DestroyObject();
                             EventManager.Game.onLightFragmentTapped?.Invoke();

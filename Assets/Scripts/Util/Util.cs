@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.UI;
+using BioTower.SaveData;
 
 namespace BioTower
 {
@@ -14,6 +15,7 @@ public class Util : MonoBehaviour
     public static UpgradeTree upgradeTree => GameManager.Instance.upgradeTree;
     public static CrystalManager crystalManager => GameManager.Instance.crystalManager;
     public static EconomyManager econManager => GameManager.Instance.econManager;
+    public static SaveSystem saveManager => GameManager.Instance.saveManager;
     public LayerMask enemyLayerMask;
     
     public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)

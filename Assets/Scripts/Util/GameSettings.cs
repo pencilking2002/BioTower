@@ -138,7 +138,7 @@ public class GameSettings : ScriptableObject
     {
         upgradeSettings.abaMaxInfluenceRadius_float = 3000;
         upgradeSettings.abaMapScale_float = 3000;
-        upgradeSettings.abaInfluenceShapeRadius_float = 3000;
+        upgradeSettings.abaInfluenceShapeScale_float = 1500;
     }
 
     // ABA Tower upgrades -----------------------------------------------
@@ -156,7 +156,7 @@ public class GameSettings : ScriptableObject
     {
         upgradeSettings.ppc2MaxInfluenceRadius_float = 3000;
         upgradeSettings.ppc2MapScale_float = 3000;
-        upgradeSettings.ppc2InfluenceShapeRadius_float = 3000;
+        upgradeSettings.ppc2InfluenceShapeScale_float = 1500;
     }
     
     public void UpgradePpc2FireRate() { upgradeSettings.ppc2shootInterval_float = 700; }

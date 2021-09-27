@@ -82,7 +82,8 @@ public class StartMenuCanvas : MonoBehaviour
             seq.append(LeanTween.alphaCanvas(menuPanel, 0, animDuration));
 
             seq.append(() => {
-                canvas.enabled = false;
+                if (canvas != null)
+                    canvas.enabled = false;
             });
         }
     }

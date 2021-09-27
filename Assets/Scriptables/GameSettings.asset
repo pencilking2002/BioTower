@@ -12,12 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab39c3707b2e0fa469593c5d61774ddc, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
+  startingLevel: 1
+  startingEnergy: 80
   basicEnemyDamage: 5
   enemyUnitMaxHealth: 10
   snark2UnitCost: 3
+  randomHealChance: 0.1
+  randomHealAmount: 2
+  healTowerAmount: 2
+  declineDamage: 1
+  spawnLightDropCost: 1
+  multipleLightFragmentPickupRadius: 2
   defaultSettings:
     abaUnitDamage: 5
-    abaUnitMaxSpeed_float: 500
+    abaUnitMaxSpeed_float: 550
     abaUnitCost: 5
     abaUnitMaxHealth: 10
     ppc2TowerDamage: 5
@@ -29,21 +37,19 @@ MonoBehaviour:
     abaMaxInfluenceRadius_float: 2310
     abaMapScale_float: 2310
     abaInfluenceShapeRadius_float: 2300
-    enableAbaTowerRandomHeal: 0
+    enableAbaTowerRandomHeal: 1
     ppc2TowerUnlocked: 0
     ppc2TowerCost: 40
     ppc2MaxInfluenceRadius_float: 2280
     ppc2InfluenceShapeRadius_float: 2300
     ppc2MapScale_float: 2310
     ppc2shootInterval_float: 1000
-    ppc2ExplosionColliderRadius_float: 1271
-    ppc2ExplosionSpriteRadius_float: 622
+    ppc2ExplosionColliderScale_float: 1271
+    ppc2ExplosionSpriteScale_float: 622
     chloroTowerUnlocked: 0
     chloroplastTowerCost: 20
     mitoTowerCost: 20
     healTowerCost: 5
-    spawnLightDropCost: 1
-    healTowerAmount: 2
     enableTowerHealthDecline: 0
     mitoTowerUnlocked: 0
     mitoShootInterval_float: 2000
@@ -52,17 +58,15 @@ MonoBehaviour:
     numFragmentsPickedUpOnTap: 1
     enableChloroTowerRandomHeal: 0
     playerTowerMaxhealth: 20
-    enablePlayerTowerHealing: 0
-    startingLevel: 1
+    enablePlayerTowerHealing: 1
     currLevel: 1
     lightFragmentValue: 5
     crystalSnrk2Value: 20
-    startingEnergy: 80
     energy: 80
   upgradeSettings:
     abaUnitDamage: 5
-    abaUnitMaxSpeed_float: 500
-    abaUnitCost: 5
+    abaUnitMaxSpeed_float: 550
+    abaUnitCost: 3
     abaUnitMaxHealth: 10
     ppc2TowerDamage: 5
     snrkUnitMaxHealth: 5
@@ -73,22 +77,20 @@ MonoBehaviour:
     abaMaxInfluenceRadius_float: 2310
     abaMapScale_float: 2310
     abaInfluenceShapeRadius_float: 2300
-    enableAbaTowerRandomHeal: 0
+    enableAbaTowerRandomHeal: 1
     ppc2TowerUnlocked: 0
     ppc2TowerCost: 40
     ppc2MaxInfluenceRadius_float: 2280
     ppc2InfluenceShapeRadius_float: 2300
     ppc2MapScale_float: 2310
     ppc2shootInterval_float: 1000
-    ppc2ExplosionColliderRadius_float: 1271
-    ppc2ExplosionSpriteRadius_float: 622
+    ppc2ExplosionColliderScale_float: 1271
+    ppc2ExplosionSpriteScale_float: 622
     chloroTowerUnlocked: 0
     chloroplastTowerCost: 20
     mitoTowerCost: 20
     healTowerCost: 5
-    spawnLightDropCost: 1
-    healTowerAmount: 2
-    enableTowerHealthDecline: 0
+    enableTowerHealthDecline: 1
     mitoTowerUnlocked: 0
     mitoShootInterval_float: 2000
     mitoTowerMaxHealth: 10
@@ -97,9 +99,7 @@ MonoBehaviour:
     enableChloroTowerRandomHeal: 0
     playerTowerMaxhealth: 20
     enablePlayerTowerHealing: 0
-    startingLevel: 1
-    currLevel: 1
+    currLevel: 2
     lightFragmentValue: 5
     crystalSnrk2Value: 20
-    startingEnergy: 80
-    energy: 80
+    energy: 34

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using PolyNav;
 using BioTower.Structures;
+using System;
 
 namespace BioTower.UI
 {
@@ -19,7 +20,7 @@ public class DebugCanvas : MonoBehaviour
     [Header("Text")]
     [SerializeField] private Text currWaveText;
     [SerializeField] private Text placementStateText;
-    [SerializeField] private GameObject testMapPrefab;
+    //[SerializeField] private GameObject testMapPrefab;
   
 
     private void Awake()
@@ -41,10 +42,10 @@ public class DebugCanvas : MonoBehaviour
         currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
     }
 
-    public void SpawnTestMap()
-    {
-        Instantiate(testMapPrefab);
-    }
+    // public void SpawnTestMap()
+    // {
+    //     Instantiate(testMapPrefab);
+    // }
 
     public void SpawnEnemy()
     {
@@ -95,7 +96,28 @@ public class DebugCanvas : MonoBehaviour
 
     public void UpgradeAll()
     {
+        foreach(KeyValuePair<UpgradeType, Action> item in Util.gameSettings.upgradeLogicMap)
+            item.Value();
+        
+        GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.PPC2_TOWER].gameObject.SetActive(true);
+        GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.CHLOROPLAST].gameObject.SetActive(true);
+        GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.MITOCHONDRIA].gameObject.SetActive(true);
+        Debug.Log("Unlock all");
+    }
 
+    public void Gain100Energy()
+    {
+        Util.econManager.GainCurrency(100);
+    }
+
+    public void Gain1000Energy()
+    {
+        Util.econManager.GainCurrency(1000);
+    }
+
+    public void SetEnergyToZero()
+    {
+        Util.econManager.SpendCurrency(100000000);
     }
 
     private void OnEnable()

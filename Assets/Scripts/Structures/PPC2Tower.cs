@@ -18,7 +18,7 @@ public class PPC2Tower : Structure
 
 
     [Header("References")]
-    [SerializeField] private Disc influenceDisc;
+    //[SerializeField] private Disc influenceDisc;
     [SerializeField] private CircleCollider2D maxInfluenceCollider;
     [SerializeField] private CircleCollider2D minInfluenceCollider;
     [SerializeField] private GameObject unitPrefab;
@@ -33,17 +33,22 @@ public class PPC2Tower : Structure
 
     private void Start()
     {
+        influenceVisuals.gameObject.SetActive(true);
+
         // Setup upgrade settings
         maxInfluenceCollider.radius = Util.upgradeSettings.ppc2MaxInfluenceRadius_float.GetFloat();
         map.transform.localScale = Vector3.one * Util.upgradeSettings.ppc2MapScale_float.GetFloat();
-        influenceDisc.Radius = Util.upgradeSettings.ppc2InfluenceShapeRadius_float.GetFloat();
+        influenceVisuals.transform.localScale = Vector3.one * Util.upgradeSettings.ppc2InfluenceShapeScale_float.GetFloat();
         shootInterval = Util.upgradeSettings.ppc2shootInterval_float.GetFloat();
     }
 
     public override void OnUpdate()
     {
-        if (influenceDisc != null)
-            influenceDisc.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
+        if (!isAlive || GameManager.Instance.gameStates.gameState != GameState.GAME)
+            return;
+
+        if (influenceVisuals != null)
+            influenceVisuals.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
     }
 
 

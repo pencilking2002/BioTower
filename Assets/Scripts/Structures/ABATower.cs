@@ -17,7 +17,7 @@ public class ABATower : Structure
 
 
     [Header("References")]
-    [SerializeField] private Disc influenceDisc;
+    //[SerializeField] private Disc influenceDisc;
     [SerializeField] private GameObject abaUnitPrefab;
     public PolyNav2D map;
     [SerializeField] private Transform unitsContainer;
@@ -33,10 +33,11 @@ public class ABATower : Structure
 
     private void Start()
     {
+        influenceVisuals.gameObject.SetActive(true);
         // Set upgrade settings
         maxInfluenceAreaCollider.radius = Util.upgradeSettings.abaMaxInfluenceRadius_float.GetFloat();
         map.transform.localScale = Vector3.one * Util.upgradeSettings.abaMapScale_float.GetFloat();
-        influenceDisc.Radius = Util.upgradeSettings.abaInfluenceShapeRadius_float.GetFloat();
+        influenceVisuals.transform.localScale = Vector3.one * Util.upgradeSettings.abaInfluenceShapeScale_float.GetFloat();
 
         map.GenerateMap();      // NOTE: Seems like this needs to be called in order for the map to be initialized correctly after instantiation 
         var unitsContainer = transform.Find("Units");
@@ -51,8 +52,9 @@ public class ABATower : Structure
     {
         if (!isAlive || GameManager.Instance.gameStates.gameState != GameState.GAME)
             return;
-            
-        influenceDisc.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
+        
+        if (influenceVisuals != null)
+            influenceVisuals.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
 
         ChaseEnemies();
     }

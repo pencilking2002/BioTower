@@ -29,7 +29,7 @@ public class Params
     [TabGroup("Towers")] public int abaUnitSpawnLimit = 3;                 // Done
     [TabGroup("Towers")] public int abaMaxInfluenceRadius_float = 2310;    // Done
     [TabGroup("Towers")] public int abaMapScale_float = 2310;              // Done
-    [TabGroup("Towers")] public int abaInfluenceShapeRadius_float = 2300;  // Done
+    [TabGroup("Towers")] public int abaInfluenceShapeScale_float = 1000;  // Done
     [TabGroup("Towers")] public bool enableAbaTowerRandomHeal = false;     // Done
 
 
@@ -37,7 +37,7 @@ public class Params
     [TabGroup("Towers")] public bool ppc2TowerUnlocked = false;             // Done
     [TabGroup("Towers")] public int ppc2TowerCost = 40;                     // Done
     [TabGroup("Towers")] public int ppc2MaxInfluenceRadius_float = 2280;    // Done
-    [TabGroup("Towers")] public int ppc2InfluenceShapeRadius_float = 2300;  // Done
+    [TabGroup("Towers")] public int ppc2InfluenceShapeScale_float = 1000;  // Done
     [TabGroup("Towers")] public int ppc2MapScale_float = 2310;              // Done
     [TabGroup("Towers")] public int ppc2shootInterval_float = 1000;             // Done
     [TabGroup("Towers")] public int ppc2ExplosionColliderScale_float = 1271;   // Done

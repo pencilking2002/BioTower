@@ -718,9 +718,9 @@ MonoBehaviour:
   lastDeclineTime: 0
   initSpriteScale: {x: 0, y: 0, z: 0}
   influenceVisuals: {fileID: 6705408563354422389}
+  units: []
   discRotateSpeed: 2
   numUnitsToSpawn: 1
-  abaUnits: []
   enemiesWithinInfluence: []
   influenceDisc: {fileID: 5376619156377604704}
   abaUnitPrefab: {fileID: 5115481712711463489, guid: a0a488c102b113f4da28fe09666035ff,

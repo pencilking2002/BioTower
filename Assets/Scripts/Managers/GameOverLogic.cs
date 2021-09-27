@@ -103,11 +103,20 @@ public class GameOverLogic : MonoBehaviour
         }
     }
 
+    private void OnSpendCurrency(int numSpent, int currPlayerCurrency)
+    {
+        if (currPlayerCurrency == 0)
+        {
+            EventManager.Game.onGameOver?.Invoke(false);
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
         EventManager.Game.onWavesCompleted += OnWavesCompleted;
         EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
+        EventManager.Game.onSpendCurrency += OnSpendCurrency;
     }
 
     private void OnDisable()
@@ -115,6 +124,7 @@ public class GameOverLogic : MonoBehaviour
         EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
         EventManager.Game.onWavesCompleted -= OnWavesCompleted;
         EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
+        EventManager.Game.onSpendCurrency -= OnSpendCurrency;
     }
     
 }

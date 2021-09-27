@@ -22,7 +22,8 @@ public enum StructureType
     NONE,
     PPC2_TOWER,
     CHLOROPLAST,
-    MITOCHONDRIA
+    MITOCHONDRIA,
+    ROAD_BARRIER
 }
 
 public class Structure : MonoBehaviour
@@ -68,10 +69,14 @@ public class Structure : MonoBehaviour
         }
 
         EventManager.Structures.onStructureCreated?.Invoke(this);
-        GameManager.Instance.tapManager.selectedStructure = this;
-        GameManager.Instance.tapManager.hasSelectedStructure = true;
-        this.socket = socket;
-        Debug.Log("Init tower: " + structureType);
+
+        if (structureType != StructureType.ROAD_BARRIER)
+        {
+            GameManager.Instance.tapManager.selectedStructure = this;
+            GameManager.Instance.tapManager.hasSelectedStructure = true;
+            this.socket = socket;
+        }
+        //Debug.Log("Init tower: " + structureType);
     }
 
     public virtual void OnUpdate()

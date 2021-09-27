@@ -10,6 +10,7 @@ namespace BioTower.UI
 {
 public class DebugCanvas : MonoBehaviour
 {
+    [SerializeField] private bool enableOnAwake;
     [SerializeField] private RectTransform panel;
     [SerializeField] private GameObject enemyPrefab;
 
@@ -25,6 +26,7 @@ public class DebugCanvas : MonoBehaviour
 
     private void Awake()
     {
+        panel.gameObject.SetActive(enableOnAwake);
         placementStateText.text = "Placement state: NONE";
     }
     

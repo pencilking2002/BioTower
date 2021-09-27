@@ -155,6 +155,9 @@ public class TowerMenu : MonoBehaviour
 
     public void OnStructureSelected(Structure structure)
     {
+        if (structure.structureType == StructureType.ROAD_BARRIER)
+            return;
+            
         //Debug.Log($"Tap {tower.structureType}");
         bool displaySpawnUnitButton = structure.structureType == StructureType.ABA_TOWER || 
                                     (structure.structureType == StructureType.PPC2_TOWER && Util.upgradeSettings.snrk2UnitUnlocked);

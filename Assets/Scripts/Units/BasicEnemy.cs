@@ -185,6 +185,13 @@ public class BasicEnemy : Unit
         }
     }
 
+    private void HandleBarrierCollision(Collider2D col)
+    {
+        int instanceID = col.transform.parent.gameObject.GetInstanceID();
+        EventManager.Units.onEnemyBarrierCollision?.Invoke(instanceID);
+        TakeDamage(1000);
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.layer == 13)
@@ -192,6 +199,9 @@ public class BasicEnemy : Unit
         
         if (col.gameObject.layer == 19)
             RegisterWithTower(col);
+        
+        if (col.gameObject.layer == 20)
+            HandleBarrierCollision(col);
     }
 
     private void OnTriggerExit2D(Collider2D col)

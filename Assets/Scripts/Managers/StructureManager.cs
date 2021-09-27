@@ -28,6 +28,9 @@ public class StructureManager : MonoBehaviour
 
     private void DoHealthDeclineOrHeal(Structure structure)
     {
+        if (structure.structureType == StructureType.ROAD_BARRIER)
+            return;
+            
         bool healEnabled = RandomHealEnabled(structure.structureType);
 
         if (Util.gameSettings.upgradeSettings.enableTowerHealthDecline)

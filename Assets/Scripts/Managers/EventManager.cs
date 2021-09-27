@@ -61,6 +61,7 @@ public class EventManager : MonoBehaviour
         public static Action<Snrk2Unit> onCrystalPickedUp;
         public static Action onEnemyPickedUpCrystal;
         public static Action<UnitType> onUnitTakeDamage;
+        public static Action<int> onEnemyBarrierCollision;
     }
 
     public class UI

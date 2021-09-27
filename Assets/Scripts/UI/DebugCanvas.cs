@@ -105,6 +105,16 @@ public class DebugCanvas : MonoBehaviour
         Debug.Log("Unlock all");
     }
 
+    public void UnlockAllLevels()
+    {
+        var buttons = Util.bootController.levelSelectMenu.GetButtons();
+        Util.upgradeSettings.currLevel = buttons.Length;
+        foreach(var btn in buttons)
+        {
+            btn.Unlock();
+        }
+    }
+
     public void Gain100Energy()
     {
         Util.econManager.GainCurrency(100);

@@ -18,6 +18,11 @@ public class LevelSelectMenu : MonoBehaviour
         SetupButtons();
     }
 
+    public LevelSelectButton[] GetButtons()
+    {
+        return levelSelectButtons;
+    }
+    
     private void SetupButtons()
     {
         var gameData = GameManager.Instance.saveManager.Load();

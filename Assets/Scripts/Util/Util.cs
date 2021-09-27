@@ -16,6 +16,7 @@ public class Util : MonoBehaviour
     public static CrystalManager crystalManager => GameManager.Instance.crystalManager;
     public static EconomyManager econManager => GameManager.Instance.econManager;
     public static SaveSystem saveManager => GameManager.Instance.saveManager;
+    public static BootController bootController => GameManager.Instance.bootController;
     public LayerMask enemyLayerMask;
     
     public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)

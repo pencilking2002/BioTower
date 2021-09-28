@@ -51,6 +51,9 @@ public class AudioManager : MonoBehaviour
             case GameState.GAME_OVER_WIN:
                 PlayMusic(data.gameOverWin, false);
                 break;
+            case GameState.START_MENU:
+                PlayMusic(data.mainMenuTrack);
+                break;
         }
     }
 

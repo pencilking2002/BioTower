@@ -20,5 +20,8 @@ public class Constants
     // Scenes
     public static string boot = "Boot";
 
+    // Animation
+    public static string isAnimating = "IsAnimating";
+
 }
 }

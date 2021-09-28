@@ -43,6 +43,7 @@ public class Structure : MonoBehaviour
     public Vector3 initSpriteScale;
     [SerializeField] protected GameObject influenceVisuals;
     public List<Unit> units;
+    public TowerAlert towerAlert;
 
     public virtual void Awake()
     {

@@ -56,6 +56,7 @@ public class ABATower : Structure
         if (influenceVisuals != null)
             influenceVisuals.transform.eulerAngles += new Vector3(0,0,discRotateSpeed * Time.deltaTime);
 
+        towerAlert.OnUpdate(this);
         ChaseEnemies();
     }
 

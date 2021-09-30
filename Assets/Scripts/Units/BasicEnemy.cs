@@ -69,6 +69,8 @@ public class BasicEnemy : Unit
         agent.Stop();
         //Debug.Log("Stop Moving");
         isEngagedInCombat = true;
+        anim.SetBool("Walk", false);
+        anim.SetBool("Attack", true);
         //sr.color = stoppedColor;
     }
 
@@ -84,6 +86,8 @@ public class BasicEnemy : Unit
 
     public override void StartMoving(Waypoint waypoint, float delay=0)
     {
+        anim.SetBool("Walk", true);
+        anim.SetBool("Attack", false);
         combatFoe = null;
         LeanTween.delayedCall(delay, () => {
             SetDestination(waypoint);

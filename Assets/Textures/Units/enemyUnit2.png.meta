@@ -4,19 +4,19 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -1382563884113541277
-    second: enemyUnit2_0
+    second: enemyWalk_01
   - first:
       213: -4153660026032006458
-    second: enemyUnit2_1
+    second: enemyWalk_02
   - first:
       213: 1179819150658250679
-    second: enemyUnit2_2
+    second: enemyAttack_01
   - first:
       213: -1527926174299516342
-    second: enemyUnit2_3
+    second: enemyAttack_02
   - first:
       213: 5619301524641923696
-    second: enemyUnit2_4
+    second: enemyAttack_03
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -38,7 +38,6 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
-  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -70,12 +69,9 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
-  flipbookRows: 1
-  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -130,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: enemyUnit2_0
+      name: enemyWalk_01
       rect:
         serializedVersion: 2
         x: 0
@@ -138,7 +134,7 @@ TextureImporter:
         width: 1026
         height: 1026
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -151,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemyUnit2_1
+      name: enemyWalk_02
       rect:
         serializedVersion: 2
         x: 1026
@@ -159,7 +155,7 @@ TextureImporter:
         width: 1026
         height: 1026
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -172,7 +168,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemyUnit2_2
+      name: enemyAttack_01
       rect:
         serializedVersion: 2
         x: 2052
@@ -180,7 +176,7 @@ TextureImporter:
         width: 1026
         height: 1026
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -193,7 +189,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemyUnit2_3
+      name: enemyAttack_02
       rect:
         serializedVersion: 2
         x: 0
@@ -201,7 +197,7 @@ TextureImporter:
         width: 1026
         height: 1026
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -214,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemyUnit2_4
+      name: enemyAttack_03
       rect:
         serializedVersion: 2
         x: 1026
@@ -222,7 +218,7 @@ TextureImporter:
         width: 1026
         height: 1026
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

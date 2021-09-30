@@ -28,7 +28,6 @@ public class AbaUnit : Unit
     [Header("References")]
     //public ABATower abaTower;
     public Rigidbody rb;
-    [SerializeField] private Animator anim;
 
     private void Awake()
     {

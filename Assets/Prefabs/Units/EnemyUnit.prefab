@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2780707826441001858}
   - component: {fileID: 2780707826441001857}
+  - component: {fileID: 4677648049402175243}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -46,7 +47,6 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 1053425993
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4153660026032006458, guid: 7d8226cf261dc9c4480f195ce9d73dba,
+  m_Sprite: {fileID: 1179819150658250679, guid: 7d8226cf261dc9c4480f195ce9d73dba,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -83,6 +83,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!95 &4677648049402175243
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2780707826441001859}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae387ba2c371974428ac98766def8ae6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2780707828294620590
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +156,7 @@ MonoBehaviour:
   hasHealth: 1
   currHealth: 0
   healthSlider: {fileID: 5313867590096428429}
+  anim: {fileID: 4677648049402175243}
   sr: {fileID: 2780707826441001857}
   isAlive: 0
   crystalPrefab: {fileID: 7511931919741912127, guid: 860a79906c90b98489d792877fb6902a,

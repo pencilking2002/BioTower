@@ -25,6 +25,8 @@ public class Unit : MonoBehaviour
     //[EnableIf("hasHealth")] [Range(0,100)] [SerializeField] private int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
     [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
+    [SerializeField] protected Animator anim;
+
     public SpriteRenderer sr;
     //public Sprite deadSprite;
     public bool isAlive;

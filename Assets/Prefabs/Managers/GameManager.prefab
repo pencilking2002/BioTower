@@ -87,6 +87,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastSelected: {fileID: 0}
+--- !u!1 &387480790224733159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6190707065191142992}
+  - component: {fileID: 7383120475885022137}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6190707065191142992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387480790224733159}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3163904365036822119}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7383120475885022137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387480790224733159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9875a4dde3018ae4783d5ee37369166e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  lightFragPrefab: {fileID: 9002743542284561929, guid: ef222ad8ffbc2a643be8db11000ab260,
+    type: 3}
+  offscreenLocation: {x: 10000, y: 10000}
 --- !u!1 &523966223168948012
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +357,7 @@ Transform:
   - {fileID: 1872265985628074436}
   - {fileID: 7391443638528692507}
   - {fileID: 2678158839111895258}
+  - {fileID: 6190707065191142992}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -328,7 +376,46 @@ MonoBehaviour:
   gameStates: {fileID: 3902137962693488694}
   upgradeTree: {fileID: 11400000, guid: 8ada8920ce8dd2948b173bfe53158e53, type: 2}
   upgradeTextData: {fileID: 11400000, guid: a2e1c7afa0b0e344592dcd502c5639ca, type: 2}
-  upgradeSettings: {fileID: 11400000, guid: 041e8614ac66ff04589933703e4eda48, type: 2}
+  upgradeSettings:
+    abaUnitDamage: 5
+    abaUnitMaxSpeed_float: 500
+    abaUnitCost: 5
+    abaUnitMaxHealth: 10
+    ppc2TowerDamage: 5
+    snrkUnitMaxHealth: 5
+    snrk2UnitUnlocked: 0
+    snrk2UnitSpeed_float: 1000
+    abaTowerCost: 10
+    abaUnitSpawnLimit: 3
+    abaMaxInfluenceRadius_float: 2310
+    abaMapScale_float: 2310
+    abaInfluenceShapeScale_float: 1000
+    enableAbaTowerRandomHeal: 0
+    ppc2TowerUnlocked: 0
+    ppc2TowerCost: 40
+    ppc2MaxInfluenceRadius_float: 2280
+    ppc2InfluenceShapeScale_float: 1000
+    ppc2MapScale_float: 2310
+    ppc2shootInterval_float: 1000
+    ppc2ExplosionColliderScale_float: 1271
+    ppc2ExplosionSpriteScale_float: 622
+    chloroTowerUnlocked: 0
+    chloroplastTowerCost: 20
+    mitoTowerCost: 20
+    healTowerCost: 5
+    enableTowerHealthDecline: 0
+    mitoTowerUnlocked: 0
+    mitoShootInterval_float: 2000
+    mitoTowerMaxHealth: 10
+    chloroShootInterval_float: 5000
+    numFragmentsPickedUpOnTap: 1
+    enableChloroTowerRandomHeal: 0
+    playerTowerMaxhealth: 20
+    enablePlayerTowerHealing: 0
+    currLevel: 1
+    lightFragmentValue: 5
+    crystalSnrk2Value: 20
+    energy: 80
   gameSettings: {fileID: 11400000, guid: fd76be76114cc874982908e631e71934, type: 2}
   levelMap: {fileID: 0}
   playerBase: {fileID: 0}
@@ -750,7 +837,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureList: []
   declineDelay: 5
-  declineDamage: 1
 --- !u!1 &5463906776217022389
 GameObject:
   m_ObjectHideFlags: 0

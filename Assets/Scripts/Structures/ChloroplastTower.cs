@@ -19,15 +19,17 @@ public class ChloroplastTower : Structure
     {
         base.Awake();
         shootInterval = Util.upgradeSettings.chloroShootInterval_float.GetFloat();
+        lastShotTime = Time.time;
     }
 
     private GameObject CreateFragment()
     {
-        GameObject fragment = Instantiate(lightFragmentPrefab); 
-        return fragment;
+        //GameObject fragment = Instantiate(lightFragmentPrefab); 
+        PooledObject obj = Util.poolManager.GetPooledObject(PoolObjectType.LIGHT_FRAGMENT);
+        return obj.gameObject;
     }
 
-    public override void OnUpdate()
+    public void Update()
     {
         if (Time.time > lastShotTime + shootInterval)
         {
@@ -43,6 +45,7 @@ public class ChloroplastTower : Structure
         Vector3 startPos = transform.position;
         Vector3 endPos = GetPointWithinInfluence(avoidFragmentCollider);
         Vector3 controlPoint = startPos + (endPos-startPos) * 0.5f + Vector3.up;
+        fragment.transform.position = startPos;
 
         var seq = LeanTween.sequence();
 

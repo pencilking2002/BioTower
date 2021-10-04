@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public SaveSystem saveManager;
     private WaypointManager waypointManager;
     public CrystalManager crystalManager;
+    public PoolManager poolManager;
     private Transform _projectilesContainer;
     public Transform projectilesContainer
     {

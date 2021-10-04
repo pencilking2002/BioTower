@@ -7,7 +7,12 @@ namespace BioTower
 public class PooledObject : MonoBehaviour
 {
     public PoolObjectType objectType;
-    public bool isActive = true;
+    //public bool isActive = true;
+
+    public void SendToPool()
+    {
+        Util.poolManager.AddPooledObject(this);
+    }
 
     public bool IsLightFragment()
     {

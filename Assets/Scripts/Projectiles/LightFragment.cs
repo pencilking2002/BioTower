@@ -18,7 +18,8 @@ public class LightFragment : MonoBehaviour
         EventManager.Structures.onLightPickedUp?.Invoke();
         LeanTween.scale(gameObject, Vector3.zero, 0.1f)
             .setOnComplete(() => {
-                Destroy(gameObject);
+                GetComponent<PooledObject>().SendToPool();
+                hasBeenPickedUp = false;
             });
     }
 }

@@ -130,10 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9875a4dde3018ae4783d5ee37369166e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObjects: []
   lightFragPrefab: {fileID: 9002743542284561929, guid: ef222ad8ffbc2a643be8db11000ab260,
     type: 3}
   offscreenLocation: {x: 10000, y: 10000}
+  numObjectsToCreateOnAwake: 10
+  pooledObjects: []
 --- !u!1 &523966223168948012
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +431,7 @@ MonoBehaviour:
   cooldownManager: {fileID: 4293659511487582202}
   saveManager: {fileID: 6263495069701663949}
   crystalManager: {fileID: 5849989401036884835}
+  poolManager: {fileID: 7383120475885022137}
   towerDeathExplosionPrefab: {fileID: 8896142106390451839, guid: 27e7edfcfcea401458350f914ee2abfe,
     type: 3}
   crystalExplosionPrefab: {fileID: 3054088472958059921, guid: 6ae32121c1f5db24794267c8c85e4ad7,

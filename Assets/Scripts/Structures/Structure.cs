@@ -28,10 +28,10 @@ public enum StructureType
 
 public class Structure : MonoBehaviour
 {   
-    [SerializeField] private StructureSocket socket;
+    [SerializeField] protected StructureSocket socket;
     public StructureType structureType;
     [SerializeField] public bool hasHealth;
-    [EnableIf("hasHealth")] [SerializeField] protected bool isAlive = true;
+    [EnableIf("hasHealth")] public bool isAlive = true;
     [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] protected int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
     [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;

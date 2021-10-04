@@ -21,6 +21,10 @@ public class StructureManager : MonoBehaviour
                 continue;
 
             Structure structure = structureList[i];
+
+            if (!structure.isAlive)
+                continue;
+                
             DoHealthDeclineOrHeal(structure);
             structure.OnUpdate();
         }

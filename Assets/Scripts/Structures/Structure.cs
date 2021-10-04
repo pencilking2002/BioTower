@@ -70,6 +70,7 @@ public class Structure : MonoBehaviour
         }
 
         EventManager.Structures.onStructureCreated?.Invoke(this);
+        Debug.Log("Init tower: " + structureType);
 
         if (structureType != StructureType.ROAD_BARRIER)
         {
@@ -77,7 +78,7 @@ public class Structure : MonoBehaviour
             GameManager.Instance.tapManager.hasSelectedStructure = true;
             this.socket = socket;
         }
-        //Debug.Log("Init tower: " + structureType);
+        
     }
 
     public virtual void OnUpdate()

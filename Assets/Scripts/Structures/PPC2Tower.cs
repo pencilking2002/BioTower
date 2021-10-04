@@ -42,6 +42,11 @@ public class PPC2Tower : Structure
         shootInterval = Util.upgradeSettings.ppc2shootInterval_float.GetFloat();
     }
 
+    public override void Init(StructureSocket socket)
+    {
+        base.Init(socket);
+    }
+
     public override void OnUpdate()
     {
         if (!isAlive || GameManager.Instance.gameStates.gameState != GameState.GAME)
@@ -116,31 +121,37 @@ public class PPC2Tower : Structure
         }
     }
     
-    public bool HasUnitsWithinTowerInfluence()
-    {
-        if (units.Count == 0)
-        {
-            return false;
-        }
-        else
-        {
-            foreach(Unit unit in units)
-            {
-                if (unit == null)
-                    continue;
+    // public bool HasUnitsWithinTowerInfluence()
+    // {
+    //     if (units.Count == 0)
+    //     {
+    //         return false;
+    //     }
+    //     else
+    //     {
+    //         foreach(Unit unit in units)
+    //         {
+    //             if (unit == null)
+    //                 continue;
                     
-                bool isWithinInfluence = IsUnitWithinTowerInfluence(unit);
-                if (isWithinInfluence)
-                    return true;
-            }
-        }
-        return false;
-    }
-    private bool IsUnitWithinTowerInfluence(Unit unit)
+    //             bool isWithinInfluence = IsUnitWithinTowerInfluence(unit);
+    //             if (isWithinInfluence)
+    //                 return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    // private bool IsUnitWithinTowerInfluence(Unit unit)
+    // {
+    //     var distance = Vector2.Distance(maxInfluenceCollider.transform.position, unit.transform.position);
+    //     return distance <= maxInfluenceCollider.radius;
+    // }
+
+    public bool IsBelowSpawnLimit()
     {
-        var distance = Vector2.Distance(maxInfluenceCollider.transform.position, unit.transform.position);
-        return distance <= maxInfluenceCollider.radius;
+        return units.Count < GameManager.Instance.upgradeSettings.ppc2UnitSpawnLimit;
     }
+
 
     public void AddUnit(Unit unit)
     {

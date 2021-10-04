@@ -7,6 +7,7 @@ using BioTower.Units;
 
 namespace BioTower.UI
 {
+// TODO: Move this script to the GameCanvas GO os that it recieves events properly
 public class NumUnitsController : MonoBehaviour
 {
     [SerializeField] private Image[] unitCircles;
@@ -24,20 +25,37 @@ public class NumUnitsController : MonoBehaviour
 
     private void OnUnitSpawned(Unit unit)
     {
-        if (unit.tower == null || !unit.tower.IsAbaTower())
+        if (unit.tower == null)
             return;
 
         var structure = unit.tower;
+
         if (structure.IsAbaTower())
             SetCircles(structure.units.Count, Util.upgradeSettings.abaUnitSpawnLimit);
+        else if (structure.IsPPC2Tower())
+            SetCircles(structure.units.Count, Util.upgradeSettings.ppc2UnitSpawnLimit);
+
         else
             SetCircles(0, 0);
+        
     }
 
     private void OnStructureSelected(Structure structure)
     {
         if (structure.IsAbaTower())
             SetCircles(structure.units.Count, Util.upgradeSettings.abaUnitSpawnLimit);
+        else if (structure.IsPPC2Tower())
+            SetCircles(structure.units.Count, Util.upgradeSettings.ppc2UnitSpawnLimit);
+        else
+            SetCircles(0, 0);
+    }
+
+    private void OnStructureCreated(Structure structure)
+    {
+        Debug.Log("Created");
+        
+        if (structure.IsPPC2Tower())
+            SetCircles(structure.units.Count, Util.upgradeSettings.ppc2UnitSpawnLimit);
         else
             SetCircles(0, 0);
     }
@@ -46,12 +64,14 @@ public class NumUnitsController : MonoBehaviour
     {
         EventManager.Units.onUnitSpawned += OnUnitSpawned;
         EventManager.Structures.onStructureSelected += OnStructureSelected;
+        EventManager.Structures.onStructureCreated += OnStructureCreated;
     }
 
     private void OnDisable()
     {
         EventManager.Units.onUnitSpawned -= OnUnitSpawned;
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
+        EventManager.Structures.onStructureCreated -= OnStructureCreated;
     }
 }
 }

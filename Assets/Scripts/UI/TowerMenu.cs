@@ -98,7 +98,7 @@ public class TowerMenu : MonoBehaviour
         {
             PPC2Tower ppc2Tower = (PPC2Tower) selectedStructure;
 
-            if (!ppc2Tower.HasUnitsWithinTowerInfluence())
+            if (ppc2Tower.IsBelowSpawnLimit())
             { 
                 unitType = UnitType.SNRK2;
                 if (GameManager.Instance.econManager.CanBuyUnit(unitType))
@@ -179,7 +179,7 @@ public class TowerMenu : MonoBehaviour
         else if (structure.structureType == StructureType.PPC2_TOWER)
         {
             var ppc2Tower = (PPC2Tower) structure;
-            if (!ppc2Tower.HasUnitsWithinTowerInfluence())
+            if (ppc2Tower.IsBelowSpawnLimit())
              SetButtonTextDefault(spawnUnitButton, "SNRK2\nUnit");
             else
                 SetButtonMaxText(spawnUnitButton);

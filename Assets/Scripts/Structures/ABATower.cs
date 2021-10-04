@@ -45,7 +45,11 @@ public class ABATower : Structure
         //targetPositions = new Vector3[numUnitsToSpawn];
         SpawnUnits(numUnitsToSpawn);
 
-        Debug.Log("ABA tower Awake");
+    }
+
+    public override void Init(StructureSocket socket)
+    {
+        base.Init(socket);
     }
 
     public override void OnUpdate()

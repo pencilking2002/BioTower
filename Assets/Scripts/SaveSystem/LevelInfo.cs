@@ -20,13 +20,12 @@ public enum LevelType
 public class LevelInfo : MonoBehaviour
 {    
     public static LevelInfo current => GameObject.FindGameObjectWithTag(Constants.levelInfo).GetComponent<LevelInfo>();
-    public LevelSettings waveSettings;
-    //public int levelIndex;
-    public LevelType levelType;
+    public LevelSettings waveSettings;    
     public WinCondition winCondition;
+    public LoseCondition loseCondition;
+    public LevelType levelType;
     public int numEnemiesToDestroy;
     public int numEnemiesDestroyed;
-    public LoseCondition loseCondition;
 
     private void Awake()
     {

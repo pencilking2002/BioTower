@@ -102,13 +102,13 @@ public class PlacementManager : MonoBehaviour
     }
 
 
-    private void SetNoneState() 
+    public void SetNoneState() 
     { 
         placementState = PlacementState.NONE;
         structureToPlace = StructureType.NONE; 
         EventManager.Structures.onSetNonePlacementState?.Invoke();
     }
-    private void SetPlacingState(StructureType structureType) 
+    public void SetPlacingState(StructureType structureType) 
     { 
         placementState = PlacementState.PLACING;
         structureToPlace = structureType;

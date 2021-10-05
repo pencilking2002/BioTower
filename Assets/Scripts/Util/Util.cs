@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using UnityEngine.UI;
 using BioTower.SaveData;
+using BioTower.Structures;
 
 namespace BioTower
 {
@@ -18,6 +19,7 @@ public class Util : MonoBehaviour
     public static SaveSystem saveManager => GameManager.Instance.saveManager;
     public static BootController bootController => GameManager.Instance.bootController;
     public static PoolManager poolManager => GameManager.Instance.poolManager;
+    public static StructureManager towerManager => GameManager.Instance.structureManager;
     public LayerMask enemyLayerMask;
     
     public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)

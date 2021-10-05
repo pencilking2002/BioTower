@@ -85,6 +85,20 @@ public class TapManager : MonoBehaviour
                 EventManager.Structures.onStructureSelected?.Invoke(structure);
             }
         }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(screenPos);
+            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
+
+            if (hitInfo.collider != null)
+            {
+                var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
+                hasSelectedStructure = true;
+                selectedStructure = structure;
+                EventManager.Structures.onStructureSelected?.Invoke(structure);
+                 GameManager.Instance.placementManager.SetPlacingState(selectedStructure.structureType);
+            }
+        }
     }
 
     private void OnEnable()

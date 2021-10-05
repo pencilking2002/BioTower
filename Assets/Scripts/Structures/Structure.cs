@@ -36,7 +36,7 @@ public class Structure : MonoBehaviour
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
     [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
     [SerializeField] protected GameObject spriteOutline;
-    [SerializeField] StructureState structureState;
+    //[SerializeField] StructureState structureState;
     public SpriteRenderer sr;
     [HideInInspector] public float lastDeclineTime;
     private Vector3 initScale;
@@ -61,7 +61,7 @@ public class Structure : MonoBehaviour
         initScale = transform.localScale;
        
         currHealth = maxHealth;
-        structureState = StructureState.ACTIVE;
+        //structureState = StructureState.ACTIVE;
 
         if (hasHealth)
         {

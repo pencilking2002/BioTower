@@ -21,8 +21,8 @@ public class AbaUnit : Unit
 
     [Header("Combat enemy state")]
     public BasicEnemy targetEnemy;
-    [SerializeField] private float combatDuration = 2.0f;
-    [Range(0, 100)][SerializeField] private float abaWinChance = 50;
+    //[SerializeField] private float combatDuration = 2.0f;
+    //[Range(0, 100)][SerializeField] private float abaWinChance = 50;
 
 
     [Header("References")]

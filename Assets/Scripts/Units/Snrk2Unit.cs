@@ -72,7 +72,7 @@ public class Snrk2Unit : Unit
     public override void SetNewDestination() { }
     public override void Deregister() { GetPPC2Tower().RemoveUnit(this); }
 
-    public bool IsCombatState() { return snrkUnitState == SnrkUnitState.COMBAT; }
+    public override bool IsCombatState() { return snrkUnitState == SnrkUnitState.COMBAT; }
     public bool IsRoamingState() { return snrkUnitState == SnrkUnitState.SEARCHING; }
     public bool IsIdleState() { return snrkUnitState == SnrkUnitState.IDLE; }
     public bool IsCarryingCrystalState() { return snrkUnitState == SnrkUnitState.CARRYING_CRYSTAL; }

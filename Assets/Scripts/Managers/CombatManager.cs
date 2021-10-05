@@ -7,9 +7,9 @@ namespace BioTower.Units
 public class CombatManager : MonoBehaviour
 {
     [Range(0, 100)][SerializeField] private float abaWinChance = 50;
-    [Range(0, 100)][SerializeField] private float enemyCrystalWinChanceBoost = 10;
-    private AbaUnit abaUnit;
-    private BasicEnemy enemy;
+    //[Range(0, 100)][SerializeField] private float enemyCrystalWinChanceBoost = 10;
+    //private AbaUnit abaUnit;
+    //private BasicEnemy enemy;
 
     private void OnStartCombat(Unit unit, BasicEnemy enemy)
     {

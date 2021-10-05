@@ -5,7 +5,6 @@ using BioTower.Structures;
 using UnityEngine.UI;
 using TMPro;
 using BioTower.Units;
-using BioTower.Structures;
 
 namespace BioTower
 {
@@ -19,7 +18,7 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] private Button healTowerFullWidthButton;
     [SerializeField] private Button spawnUnitButton;
     [SerializeField] private Button spawnLightParticleButton;
-    [SerializeField] private float scaleAnimDuration = 0.1f;
+    //[SerializeField] private float scaleAnimDuration = 0.1f;
     [SerializeField] private Text currTowerText;
 
     

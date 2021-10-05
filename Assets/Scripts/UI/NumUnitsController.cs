@@ -51,9 +51,7 @@ public class NumUnitsController : MonoBehaviour
     }
 
     private void OnStructureCreated(Structure structure)
-    {
-        Debug.Log("Created");
-        
+    {        
         if (structure.IsPPC2Tower())
             SetCircles(structure.units.Count, Util.upgradeSettings.ppc2UnitSpawnLimit);
         else

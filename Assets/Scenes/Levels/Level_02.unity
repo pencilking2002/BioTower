@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -118,6 +118,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -247,6 +249,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -328,6 +331,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -409,6 +413,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -476,6 +481,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -557,6 +563,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -638,6 +645,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -719,6 +727,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -814,6 +823,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -878,7 +888,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &292137091
 MonoBehaviour:
@@ -938,6 +948,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1031,6 +1042,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1098,6 +1110,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1341,6 +1354,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1436,6 +1450,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1611,6 +1626,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1772,6 +1788,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2031,6 +2048,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: -2.1728277, y: -1.1835117, z: 0}
       leftTangent: {x: -0.7698283, y: 0.060857296, z: 0}
       rightTangent: {x: 0.8160628, y: -0.06322861, z: 0}
@@ -2040,6 +2058,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: 0.29815578, y: -1.7541096, z: 0}
       leftTangent: {x: -0.9687798, y: 0.52998793, z: 0}
       rightTangent: {x: 2.3941245, y: -1.3097501, z: 0}
@@ -2049,6 +2068,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: 08d63c0e8748c4053b97be0431aed306, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: -0.8
@@ -2064,6 +2084,7 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 1
   m_GeometryCached: 0
+  m_UTess2D: 0
 --- !u!1971053207 &545622742
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -2079,6 +2100,7 @@ SpriteShapeRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2119,8 +2141,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: -1.9898396, y: -1.3311114, z: -0.00005}
-    m_Extent: {x: 3.5893126, y: 2.510293, z: 0.00005}
+    m_Center: {x: -1.9898396, y: -1.3311114, z: 0}
+    m_Extent: {x: 3.5893126, y: 2.510293, z: 0}
 --- !u!1 &573574330
 GameObject:
   m_ObjectHideFlags: 0
@@ -2167,6 +2189,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2287,6 +2310,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2382,6 +2406,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2443,7 +2468,7 @@ PrefabInstance:
     - target: {fileID: 7979799145711278665, guid: e802ef285f00cfa4faa2c57ebe4460ab,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7979799145711278665, guid: e802ef285f00cfa4faa2c57ebe4460ab,
         type: 3}
@@ -2595,6 +2620,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2770,6 +2796,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2871,6 +2898,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3002,6 +3030,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3083,6 +3112,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3444,6 +3474,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3650,6 +3681,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: 1.5038567, y: 2.1219516, z: 0}
       leftTangent: {x: -1.1280196, y: -0.8989905, z: 0}
       rightTangent: {x: 1.6738193, y: 1.3339732, z: 0}
@@ -3659,6 +3691,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: 4.8785086, y: 3.7210083, z: 0}
       leftTangent: {x: -0.711606, y: -1.1012182, z: 0}
       rightTangent: {x: 0.4124117, y: 0.6382117, z: 0}
@@ -3668,6 +3701,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: 7.0894527, y: 4.5349197, z: 0}
       leftTangent: {x: -0.9318485, y: -0.2647767, z: 0}
       rightTangent: {x: 0.7696638, y: 0.22134924, z: 0}
@@ -3677,6 +3711,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: 9.458178, y: 5.4125576, z: 0}
       leftTangent: {x: -0.8055496, y: -0.030788422, z: 0}
       rightTangent: {x: 2.7269783, y: 0.10422611, z: 0}
@@ -3686,6 +3721,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: 08d63c0e8748c4053b97be0431aed306, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: -0.8
@@ -3701,6 +3737,7 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 1
   m_GeometryCached: 0
+  m_UTess2D: 0
 --- !u!1971053207 &1030627856
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -3716,6 +3753,7 @@ SpriteShapeRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3756,8 +3794,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 3.1824427, y: 2.6391869, z: -0.00005}
-    m_Extent: {x: 6.741411, y: 3.6546922, z: 0.00005}
+    m_Center: {x: 3.1824427, y: 2.6391869, z: 0}
+    m_Extent: {x: 6.741411, y: 3.6546922, z: 0}
 --- !u!4 &1030627857
 Transform:
   m_ObjectHideFlags: 0
@@ -3818,6 +3856,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3909,6 +3948,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: 1.4545357, y: -2.0662684, z: 0}
       leftTangent: {x: -2.0016088, y: 1.3849291, z: 0}
       rightTangent: {x: 0.58957195, y: -0.40792918, z: 0}
@@ -3918,6 +3958,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: 3.6706116, y: -3.157637, z: 0}
       leftTangent: {x: -0.67558813, y: 0.464741, z: 0}
       rightTangent: {x: 0.8094795, y: -0.55812407, z: 0}
@@ -3927,6 +3968,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: 5.8705387, y: -4.7781653, z: 0}
       leftTangent: {x: -0.8437147, y: 0.27125263, z: 0}
       rightTangent: {x: 2.6935797, y: -0.8659797, z: 0}
@@ -3936,6 +3978,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: 11.526039, y: -6.13598, z: 0}
       leftTangent: {x: -2.7895555, y: -0.13240671, z: 0}
       rightTangent: {x: 2.7259026, y: 0.12938547, z: 0}
@@ -3945,6 +3988,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: 08d63c0e8748c4053b97be0431aed306, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: -0.8
@@ -3960,6 +4004,7 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 1
   m_GeometryCached: 0
+  m_UTess2D: 0
 --- !u!1971053207 &1092740520
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -3975,6 +4020,7 @@ SpriteShapeRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4015,8 +4061,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 4.3874907, y: -3.7648802, z: -0.00005}
-    m_Extent: {x: 7.737794, y: 5.838176, z: 0.00005}
+    m_Center: {x: 4.3874907, y: -3.7648797, z: 0}
+    m_Extent: {x: 7.737794, y: 5.8381763, z: 0}
 --- !u!1 &1102808128
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,6 +4156,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4201,6 +4248,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: -12.323722, y: 5.029006, z: 0}
       leftTangent: {x: -0.71928406, y: 0.6725526, z: 0}
       rightTangent: {x: 0.9578543, y: -0.8956232, z: 0}
@@ -4210,6 +4258,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: -8.393552, y: 3.3197236, z: 0}
       leftTangent: {x: -0.79893875, y: 0.7813735, z: 0}
       rightTangent: {x: 0.8751688, y: -0.85592747, z: 0}
@@ -4219,6 +4268,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: -5.982518, y: 1.8337177, z: 0}
       leftTangent: {x: -1.2173843, y: 0.65925324, z: 0}
       rightTangent: {x: 1.0928159, y: -0.5917953, z: 0}
@@ -4228,6 +4278,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: -1.7598839, y: 1.0350955, z: 0}
       leftTangent: {x: -1.279067, y: 0.10997164, z: 0}
       rightTangent: {x: 2.7189422, y: -0.23376942, z: 0}
@@ -4237,6 +4288,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: 08d63c0e8748c4053b97be0431aed306, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: -0.8
@@ -4252,6 +4304,7 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 1
   m_GeometryCached: 0
+  m_UTess2D: 0
 --- !u!1971053207 &1147842022
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -4267,6 +4320,7 @@ SpriteShapeRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4307,8 +4361,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: -7.767779, y: 2.7957635, z: -0.00005}
-    m_Extent: {x: 7.767779, y: 4.0924053, z: 0.00005}
+    m_Center: {x: -8.332293, y: 2.7957635, z: 0}
+    m_Extent: {x: 7.2032647, y: 4.0924053, z: 0}
 --- !u!1 &1157090424
 GameObject:
   m_ObjectHideFlags: 0
@@ -4396,6 +4450,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4774,6 +4829,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4869,6 +4925,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5368,6 +5425,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5463,6 +5521,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5544,6 +5603,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5699,6 +5759,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5840,6 +5901,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5921,6 +5983,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6022,6 +6085,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6185,6 +6249,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6346,6 +6411,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6437,6 +6503,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: -9.7758255, y: -4.570185, z: 0}
       leftTangent: {x: -0.9210663, y: -1.2112775, z: 0}
       rightTangent: {x: 0.38848972, y: 0.51089525, z: 0}
@@ -6446,6 +6513,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: -7.3506527, y: -3.0630245, z: 0}
       leftTangent: {x: -0.82101536, y: -0.5053282, z: 0}
       rightTangent: {x: 0.74393654, y: 0.45950484, z: 0}
@@ -6455,6 +6523,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: -5.4435234, y: -1.6102122, z: 0}
       leftTangent: {x: -0.5869255, y: -0.2987095, z: 0}
       rightTangent: {x: 1.1214714, y: 0.57076097, z: 0}
@@ -6464,6 +6533,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
     - position: {x: -5.182822, y: 1.5053341, z: 0}
       leftTangent: {x: 0.9903574, y: -0.817369, z: 0}
       rightTangent: {x: -2.1047106, y: 1.7370772, z: 0}
@@ -6473,6 +6543,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
+      m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: 08d63c0e8748c4053b97be0431aed306, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: -0.8
@@ -6488,6 +6559,7 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 1
   m_GeometryCached: 0
+  m_UTess2D: 0
 --- !u!1971053207 &1801592804
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -6503,6 +6575,7 @@ SpriteShapeRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6543,8 +6616,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: -8.087103, y: -3.5062647, z: -0.00005}
-    m_Extent: {x: 8.087103, y: 6.6349325, z: 0.00005}
+    m_Center: {x: -9.39963, y: -3.5062647, z: 0}
+    m_Extent: {x: 6.7745767, y: 6.6349325, z: 0}
 --- !u!1 &1847354360
 GameObject:
   m_ObjectHideFlags: 0
@@ -6591,6 +6664,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6658,6 +6732,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6753,6 +6828,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6942,6 +7018,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7103,6 +7180,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7190,6 +7268,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7285,6 +7364,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7378,72 +7458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e7dc254b1017c40a0b6f98405530a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2061139264
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2061139267}
-  - component: {fileID: 2061139266}
-  - component: {fileID: 2061139265}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2061139265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061139264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &2061139266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061139264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &2061139267
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061139264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2062420544
 GameObject:
   m_ObjectHideFlags: 0
@@ -7537,6 +7551,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7712,6 +7727,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7937,7 +7953,7 @@ PrefabInstance:
     - target: {fileID: 1883603324033374405, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1883603324033374405, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
         type: 3}

@@ -14,14 +14,10 @@ public class DebugCanvas : MonoBehaviour
     [SerializeField] private RectTransform panel;
     [SerializeField] private GameObject enemyPrefab;
 
-    // [SerializeField] private PolyNav2D map;
-    // [SerializeField] private Transform endPoint;
-
 
     [Header("Text")]
     [SerializeField] private Text currWaveText;
     [SerializeField] private Text placementStateText;
-    //[SerializeField] private GameObject testMapPrefab;
   
 
     private void Awake()
@@ -32,10 +28,7 @@ public class DebugCanvas : MonoBehaviour
     
     private void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.P))
-        // {
-        //     SpawnEnemy();
-        // }
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             panel.gameObject.SetActive(!panel.gameObject.activeInHierarchy);
@@ -43,11 +36,6 @@ public class DebugCanvas : MonoBehaviour
 
         currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
     }
-
-    // public void SpawnTestMap()
-    // {
-    //     Instantiate(testMapPrefab);
-    // }
 
     public void SpawnEnemy()
     {
@@ -104,32 +92,64 @@ public class DebugCanvas : MonoBehaviour
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.PPC2_TOWER].gameObject.SetActive(true);
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.CHLOROPLAST].gameObject.SetActive(true);
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.MITOCHONDRIA].gameObject.SetActive(true);
-        Debug.Log("Unlock all");
+
+        var gameData = Util.saveManager.Load();
+        gameData.settings = Util.upgradeSettings;
+        Util.saveManager.Save(gameData);
+
     }
 
     public void UnlockAllLevels()
     {
         var buttons = Util.bootController.levelSelectMenu.GetButtons();
         Util.upgradeSettings.currLevel = buttons.Length;
+        var gameData = Util.saveManager.Load();
+        gameData.settings = Util.upgradeSettings;
+        Util.saveManager.Save(gameData);
+
         foreach(var btn in buttons)
-        {
             btn.Unlock();
+    }
+
+    public void ResetAllLevels()
+    {
+        var buttons = Util.bootController.levelSelectMenu.GetButtons();
+        Util.upgradeSettings.currLevel = 1;
+        var gameData = Util.saveManager.Load();
+        gameData.settings = Util.upgradeSettings;
+        Util.saveManager.Save(gameData);
+
+        for (int i=0; i<buttons.Length; i++)
+        {
+            if (i == 0)
+                buttons[i].Unlock();
+            else
+                buttons[i].Lock();
         }
     }
 
     public void Gain100Energy()
     {
         Util.econManager.GainCurrency(100);
+        var gameData = Util.saveManager.Load();
+        gameData.settings = Util.upgradeSettings;
+        Util.saveManager.Save(gameData);
     }
 
     public void Gain1000Energy()
     {
         Util.econManager.GainCurrency(1000);
+        var gameData = Util.saveManager.Load();
+        gameData.settings = Util.upgradeSettings;
+        Util.saveManager.Save(gameData);
     }
 
     public void SetEnergyToZero()
     {
         Util.econManager.SpendCurrency(100000000);
+        var gameData = Util.saveManager.Load();
+        gameData.settings = Util.upgradeSettings;
+        Util.saveManager.Save(gameData);
     }
 
     private void OnEnable()

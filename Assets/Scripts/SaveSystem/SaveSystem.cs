@@ -112,16 +112,12 @@ public class SaveSystem : MonoBehaviour
 
     private void OnSpendCurrency(int numSpent, int currentCurrency)
     {
-        var saveData = GameManager.Instance.saveManager.Load();
-        saveData.settings.energy = currentCurrency;
-        GameManager.Instance.saveManager.Save(saveData);
+        Util.upgradeSettings.energy = currentCurrency;
     }
 
     private void OnGainCurrency(int numGained, int currentCurrency)
     {
-        var saveData = GameManager.Instance.saveManager.Load();
-        saveData.settings.energy = currentCurrency;
-        GameManager.Instance.saveManager.Save(saveData);
+        Util.upgradeSettings.energy = currentCurrency;
     }
 
     private void OnEnable()

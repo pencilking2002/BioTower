@@ -13,6 +13,11 @@ public class GameOverLoseMenuState : BootStateBase
         {
             isInitialized = true;
             controller.gameplayUI.gameUIPanel.gameObject.SetActive(false);
+
+            var saveData = GameManager.Instance.saveManager.Load();
+            saveData.settings = Util.upgradeSettings;
+            GameManager.Instance.saveManager.Save(saveData);
+
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }
     }

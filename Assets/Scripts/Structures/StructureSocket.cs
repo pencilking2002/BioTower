@@ -27,6 +27,11 @@ public class StructureSocket : MonoBehaviour
         defaultColor = glowingSprite.color;
     }
 
+    private void Start()
+    {
+        EventManager.Structures.onSocketStart?.Invoke(this);
+    }
+
     private void OnStartPlacementState(StructureType structureType)
     {
         if (hasStructure)

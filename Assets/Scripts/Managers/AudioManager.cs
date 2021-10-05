@@ -13,7 +13,11 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;
     public AudioSource sfxSource;
 
-    private void PlaySound(AudioClip clip) { sfxSource.PlayOneShot(clip); }
+    private void PlaySound(AudioClip clip) 
+    {
+        if (clip != null) 
+            sfxSource.PlayOneShot(clip); 
+    }
 
     private void PlayMusic(AudioClip clip, bool loop=true) 
     { 
@@ -126,11 +130,6 @@ public class AudioManager : MonoBehaviour
         PlaySound(clip);
     }
 
-    // private void OnLetterRevealed()
-    // {
-    //     PlaySound(data.letterRevealed);
-    // }
-
     private void OnPressLevelSelectButton()
     {
         PlaySound(data.levelSelect);
@@ -138,11 +137,8 @@ public class AudioManager : MonoBehaviour
 
     private void OnUnitTakeDamage(UnitType unitType)
     {
-        //if (unitType == UnitType.ABA || unitType == UnitType.SNRK2)
-        //{
-            var randIndex = UnityEngine.Random.Range(0, data.takeDamage.Length);
-            PlaySound(data.takeDamage[randIndex]);
-        //}
+        var randIndex = UnityEngine.Random.Range(0, data.takeDamage.Length);
+        PlaySound(data.takeDamage[randIndex]);
     }
 
     private void OnTutChatStart()
@@ -157,12 +153,6 @@ public class AudioManager : MonoBehaviour
         else
             PlaySoundWithPitch(data.titleDrop, 0.7f);
     }
-
-
-    // private void OnTap()
-    // {
-    //     PlaySound(data.tapAnywhere);
-    // }
 
     private void OnUnitDestroyed(Unit unit)
     {
@@ -195,10 +185,8 @@ public class AudioManager : MonoBehaviour
         EventManager.UI.onPressLevelSelectButton += OnPressLevelSelectButton;
         EventManager.Tutorials.onTutChatStart += OnTutChatStart;
         EventManager.UI.onTitleAnimCompleted += OnTitleAnimCompleted;
-        //EventManager.Input.onTap += OnTap;
         EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
         EventManager.Game.onSpendCurrency += OnSpendCurrency;
-        //EventManager.UI.onLetterReveal += OnLetterRevealed;
     }
 
     private void OnDisable()
@@ -220,10 +208,8 @@ public class AudioManager : MonoBehaviour
         EventManager.UI.onPressLevelSelectButton -= OnPressLevelSelectButton;
         EventManager.Tutorials.onTutChatStart -= OnTutChatStart;
         EventManager.UI.onTitleAnimCompleted -= OnTitleAnimCompleted;
-        //EventManager.Input.onTap -= OnTap;
         EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
         EventManager.Game.onSpendCurrency -= OnSpendCurrency;
-        //EventManager.UI.onLetterReveal -= OnLetterRevealed;
     }
 }
 }

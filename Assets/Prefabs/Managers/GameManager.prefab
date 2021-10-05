@@ -378,6 +378,9 @@ MonoBehaviour:
   upgradeTree: {fileID: 11400000, guid: 8ada8920ce8dd2948b173bfe53158e53, type: 2}
   upgradeTextData: {fileID: 11400000, guid: a2e1c7afa0b0e344592dcd502c5639ca, type: 2}
   upgradeSettings:
+    currLevel: 1
+    lightFragmentValue: 5
+    energy: 80
     abaUnitDamage: 5
     abaUnitMaxSpeed_float: 500
     abaUnitCost: 5
@@ -386,6 +389,11 @@ MonoBehaviour:
     snrkUnitMaxHealth: 5
     snrk2UnitUnlocked: 0
     snrk2UnitSpeed_float: 1000
+    crystalSnrk2Value: 20
+    healTowerCost: 5
+    enableTowerHealthDecline: 0
+    playerTowerMaxhealth: 20
+    enablePlayerTowerHealing: 0
     abaTowerCost: 10
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2310
@@ -400,23 +408,16 @@ MonoBehaviour:
     ppc2shootInterval_float: 1000
     ppc2ExplosionColliderScale_float: 1271
     ppc2ExplosionSpriteScale_float: 622
+    ppc2UnitSpawnLimit: 2
     chloroTowerUnlocked: 0
     chloroplastTowerCost: 20
+    chloroShootInterval_float: 5000
+    enableChloroTowerRandomHeal: 0
     mitoTowerCost: 20
-    healTowerCost: 5
-    enableTowerHealthDecline: 0
     mitoTowerUnlocked: 0
     mitoShootInterval_float: 2000
     mitoTowerMaxHealth: 10
-    chloroShootInterval_float: 5000
     numFragmentsPickedUpOnTap: 1
-    enableChloroTowerRandomHeal: 0
-    playerTowerMaxhealth: 20
-    enablePlayerTowerHealing: 0
-    currLevel: 1
-    lightFragmentValue: 5
-    crystalSnrk2Value: 20
-    energy: 80
   gameSettings: {fileID: 11400000, guid: fd76be76114cc874982908e631e71934, type: 2}
   levelMap: {fileID: 0}
   playerBase: {fileID: 0}
@@ -432,6 +433,7 @@ MonoBehaviour:
   saveManager: {fileID: 6263495069701663949}
   crystalManager: {fileID: 5849989401036884835}
   poolManager: {fileID: 7383120475885022137}
+  structureManager: {fileID: 2616791129660120341}
   towerDeathExplosionPrefab: {fileID: 8896142106390451839, guid: 27e7edfcfcea401458350f914ee2abfe,
     type: 3}
   crystalExplosionPrefab: {fileID: 3054088472958059921, guid: 6ae32121c1f5db24794267c8c85e4ad7,
@@ -838,6 +840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   structureList: []
+  socketList: []
   declineDelay: 5
 --- !u!1 &5463906776217022389
 GameObject:
@@ -883,7 +886,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abaWinChance: 50
-  enemyCrystalWinChanceBoost: 10
 --- !u!1 &5581267419933132214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,6 +1194,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     private WaypointManager waypointManager;
     public CrystalManager crystalManager;
     public PoolManager poolManager;
+    public StructureManager structureManager;
     private Transform _projectilesContainer;
     public Transform projectilesContainer
     {

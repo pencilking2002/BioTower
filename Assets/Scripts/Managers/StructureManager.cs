@@ -7,6 +7,7 @@ namespace BioTower.Structures
 public class StructureManager : MonoBehaviour
 {
     [SerializeField] private List<Structure> structureList = new List<Structure>();
+    [SerializeField] private List<StructureSocket> socketList = new List<StructureSocket>();
     [SerializeField] private float declineDelay = 3;
 
     private void Update()
@@ -28,6 +29,20 @@ public class StructureManager : MonoBehaviour
             DoHealthDeclineOrHeal(structure);
             structure.OnUpdate();
         }
+    }
+
+    public bool HasAvailableSockets()
+    {
+        bool hasFreesockets = false;
+        for (int i=0; i<socketList.Count; i++)
+        {
+            if (!socketList[i].HasStructure())
+            {
+                hasFreesockets = true;
+                break;
+            }
+        }
+        return hasFreesockets;
     }
 
     private void DoHealthDeclineOrHeal(Structure structure)
@@ -88,17 +103,32 @@ public class StructureManager : MonoBehaviour
         structureList.Remove(structure);
     }
 
+    private void OnSocketStart(StructureSocket socket)
+    {
+        if (!socketList.Contains(socket))
+            socketList.Add(socket);
+    }
+
+    private void OnGameOver(bool isWin)
+    {
+        structureList.Clear();
+        socketList.Clear();
+    }
+
     private void OnEnable()
     {
         EventManager.Structures.onStructureCreated += OnStructureCreated;
         EventManager.Structures.onStructureDestroyed += OnStructureDestroyed;
-
+        EventManager.Structures.onSocketStart += OnSocketStart;
+        EventManager.Game.onGameOver += OnGameOver;
     }
 
     private void OnDisable()
     {
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
         EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
+        EventManager.Structures.onSocketStart -= OnSocketStart;
+        EventManager.Game.onGameOver -= OnGameOver;
     }
 }
 }

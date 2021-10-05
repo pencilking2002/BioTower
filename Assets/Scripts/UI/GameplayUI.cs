@@ -68,6 +68,12 @@ public class GameplayUI : MonoBehaviour
     
     public void OnPressAbaTowerButton()
     {
+        if (!Util.towerManager.HasAvailableSockets())
+        {
+            Util.HandleInvalidButtonPress(AbaTowerButton);
+            return;
+        }   
+
         // Make sure you can't press the button if there's currently a tutorial displayed that's
         // not relevant to the button
         if (TutorialCanvas.tutorialInProgress)
@@ -93,6 +99,12 @@ public class GameplayUI : MonoBehaviour
 
     public void OnPressPPC2TowerButton()
     {
+        if (!Util.towerManager.HasAvailableSockets())
+        {
+            Util.HandleInvalidButtonPress(AbaTowerButton);
+            return;
+        }   
+
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.PPC2_TOWER];
         if (!canBuildTower)
             return;
@@ -110,6 +122,12 @@ public class GameplayUI : MonoBehaviour
 
     public void OnPressChloroplastButton()
     {
+        if (!Util.towerManager.HasAvailableSockets())
+        {
+            Util.HandleInvalidButtonPress(AbaTowerButton);
+            return;
+        }   
+
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.CHLOROPLAST];
         if (!canBuildTower)
             return;
@@ -127,6 +145,12 @@ public class GameplayUI : MonoBehaviour
 
     public void OnPressMitoButton()
     {
+        if (!Util.towerManager.HasAvailableSockets())
+        {
+            Util.HandleInvalidButtonPress(AbaTowerButton);
+            return;
+        }   
+        
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.MITOCHONDRIA];
         if (!canBuildTower)
             return;

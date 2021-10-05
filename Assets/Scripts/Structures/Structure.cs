@@ -70,7 +70,6 @@ public class Structure : MonoBehaviour
         }
 
         EventManager.Structures.onStructureCreated?.Invoke(this);
-        Debug.Log("Init tower: " + structureType);
 
         if (structureType != StructureType.ROAD_BARRIER)
         {
@@ -181,11 +180,13 @@ public class Structure : MonoBehaviour
 
     public virtual void OnStructureSelected(Structure structure)
     {
-
+        if (structure == null || GameManager.Instance == null)
+            return;
+    
         if (structureType == StructureType.DNA_BASE && !Util.upgradeSettings.enablePlayerTowerHealing)
             return;
 
-        Debug.Log($"Select {structure.gameObject.name}. This structure: {gameObject.name}. Same structure: {structure == this}");
+ //       Debug.Log($"Select {structure.gameObject.name}. This structure: {gameObject.name}. Same structure: {structure == this}");
 
         if (structure == this)
         {

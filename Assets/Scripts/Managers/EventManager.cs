@@ -48,6 +48,7 @@ public class EventManager : MonoBehaviour
         public static Action onLightPickedUp;
         public static Action<BasicEnemy, Structure> onEnemyEnterTowerInfluence;
         public static Action<BasicEnemy, Structure> onEnemyExitTowerInfluence;
+        public static Action<StructureSocket> onSocketStart;
 
     }
 

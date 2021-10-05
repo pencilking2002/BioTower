@@ -6,6 +6,8 @@ namespace BioTower
 {
 public class InProgressState : WaveState
 {
+    private bool isWaveCancelled;
+
     public override void Init()
     {
         if (!isInitialized)
@@ -29,14 +31,20 @@ public class InProgressState : WaveState
         }
 
         //if (Time.time > wave.timeStarted + wave.startDelay + wave.duration)
-        if (wave.numSpawns >= wave.numEnemiesPerWave)
+        if ((wave.numSpawns >= wave.numEnemiesPerWave && !wave.isEndless) || isWaveCancelled)
         {
+            isWaveCancelled = false;
             return WaveMode.ENDED;   
         }
         else
         {
             return wave.state;
         }
+    }
+
+    private void OnGameOver(bool isWin)
+    {
+        isWaveCancelled = true;
     }
 
     private void OnWaveStateInit(WaveMode waveState)
@@ -48,11 +56,13 @@ public class InProgressState : WaveState
     private void OnEnable()
     {
         EventManager.Game.onWaveStateInit += OnWaveStateInit;
+        EventManager.Game.onGameOver += OnGameOver;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+        EventManager.Game.onGameOver -= OnGameOver;
     }
 }
 }

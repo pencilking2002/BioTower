@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using NaughtyAttributes;
-
+using Sirenix.OdinInspector;
 namespace BioTower
 {
 [CreateAssetMenu(fileName="WaveSettings", menuName="WaveSettings")]
 public class LevelSettings : ScriptableObject
 {
-   [ReorderableList] public Wave[] waves;
+   public Wave[] waves;
 }
 
 
@@ -19,7 +18,8 @@ public class Wave
     public WaveMode state;
     public int waveIndex;
     public float startDelay;
-    public int numEnemiesPerWave;
+    public bool isEndless;
+    [HideIf("isEndless")]public int numEnemiesPerWave;
     public int spawnInterval;
     [MinMaxSlider(0, 1)]
     public Vector2 minMaxSpeed = new Vector2(0.4f, 0.7f);

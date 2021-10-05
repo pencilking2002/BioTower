@@ -21,12 +21,8 @@ public class AbaUnit : Unit
 
     [Header("Combat enemy state")]
     public BasicEnemy targetEnemy;
-    //[SerializeField] private float combatDuration = 2.0f;
-    //[Range(0, 100)][SerializeField] private float abaWinChance = 50;
-
 
     [Header("References")]
-    //public ABATower abaTower;
     public Rigidbody rb;
 
     private void Awake()
@@ -49,9 +45,7 @@ public class AbaUnit : Unit
     {
         agent.Stop();
         agent.enabled = false;
-        //Debug.Log("AbaUnit: Stop Moving");
         anim.SetBool("Walk", false);
-        //sr.color = stoppedColor;
     }
 
     public bool IsRoamingState() 
@@ -63,18 +57,14 @@ public class AbaUnit : Unit
     public override bool IsCombatState() { return abaUnitState == AbaUnitState.COMBAT; }
     public bool IsDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
     public bool IsChasingState() { return abaUnitState == AbaUnitState.CHASING_ENEMY; }
-
-    public override void SetRoamingState() 
-    { 
-        abaUnitState = AbaUnitState.ROAMING; 
-    }
-
+    public override void SetRoamingState() { abaUnitState = AbaUnitState.ROAMING; }
     public void SetCarryingEnemyState() { abaUnitState = AbaUnitState.CARRYING_ENEMY; }
     public override void SetCombatState() 
     { 
         abaUnitState = AbaUnitState.COMBAT;
         anim.SetBool("Attack", true);
     } 
+    
     public override void SetDestroyedState() 
     { 
         abaUnitState = AbaUnitState.DESTROYED;

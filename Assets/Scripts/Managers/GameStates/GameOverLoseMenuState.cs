@@ -14,7 +14,6 @@ public class GameOverLoseMenuState : BootStateBase
             isInitialized = true;
             controller.gameplayUI.gameUIPanel.gameObject.SetActive(false);
             Util.saveManager.LoadAndSave();
-
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }
     }

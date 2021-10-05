@@ -16,6 +16,7 @@ MonoBehaviour:
   - state: 2
     waveIndex: 0
     startDelay: 0
+    isEndless: 1
     numEnemiesPerWave: 2000
     spawnInterval: 4
     minMaxSpeed: {x: 0.4, y: 0.7}

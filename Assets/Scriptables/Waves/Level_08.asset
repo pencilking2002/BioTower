@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c11e21d6d6e2f4e9b4addd8d13c61e, type: 3}
+  m_Name: Level_08
+  m_EditorClassIdentifier: 
+  waves:
+  - state: 2
+    waveIndex: 0
+    startDelay: 0
+    isEndless: 0
+    numEnemiesPerWave: 10
+    spawnInterval: 4
+    minMaxSpeed: {x: 0.4, y: 0.7}
+    timeStarted: 11.672143
+    lastSpawn: 31.807007
+    numSpawns: 6
+  - state: 0
+    waveIndex: 1
+    startDelay: 4
+    isEndless: 0
+    numEnemiesPerWave: 10
+    spawnInterval: 4
+    minMaxSpeed: {x: 0.4, y: 0.7}
+    timeStarted: 0
+    lastSpawn: 0
+    numSpawns: 0
+  - state: 0
+    waveIndex: 2
+    startDelay: 4
+    isEndless: 0
+    numEnemiesPerWave: 10
+    spawnInterval: 4
+    minMaxSpeed: {x: 0.4, y: 0.7}
+    timeStarted: 0
+    lastSpawn: 0
+    numSpawns: 0

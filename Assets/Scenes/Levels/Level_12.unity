@@ -7846,7 +7846,7 @@ PrefabInstance:
     - target: {fileID: 1883603324033374402, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
         type: 3}
       propertyPath: levelType
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1883603324033374402, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
         type: 3}
@@ -7857,7 +7857,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waveSettings
       value: 
-      objectReference: {fileID: 11400000, guid: 74750246e7c16c44eb95e4ae47610f60,
+      objectReference: {fileID: 11400000, guid: 2f921cd896901d5449f30caff44a8e9c,
         type: 2}
     - target: {fileID: 1883603324033374402, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
         type: 3}

@@ -7857,7 +7857,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waveSettings
       value: 
-      objectReference: {fileID: 11400000, guid: 74750246e7c16c44eb95e4ae47610f60,
+      objectReference: {fileID: 11400000, guid: f965288b2a66a52479d4d7a653e78a75,
         type: 2}
     - target: {fileID: 1883603324033374402, guid: 0970f26ea8d688f40804b3a9b3f18dc5,
         type: 3}

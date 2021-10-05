@@ -70,6 +70,13 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
+    public void LoadAndSave()
+    {
+        var gameData = Load();
+        gameData.settings = Util.upgradeSettings;
+        Save(gameData);
+    }
+
     [Button("Load data")]
     public GameData Load()
     {

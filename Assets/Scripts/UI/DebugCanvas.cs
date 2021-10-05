@@ -60,28 +60,29 @@ public class DebugCanvas : MonoBehaviour
 
     public void UnlockAllTowers()
     {
-        var gameData = Util.saveManager.Load();
-        gameData.settings.mitoTowerUnlocked = true;
-        gameData.settings.ppc2TowerUnlocked = true;
-        gameData.settings.chloroTowerUnlocked = true;
-        Util.saveManager.Save(gameData);
-        GameManager.Instance.upgradeSettings = gameData.settings;
+        Util.upgradeSettings.mitoTowerUnlocked = true;
+        Util.upgradeSettings.ppc2TowerUnlocked = true;
+        Util.upgradeSettings.chloroTowerUnlocked = true;
+     
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.PPC2_TOWER].gameObject.SetActive(true);
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.CHLOROPLAST].gameObject.SetActive(true);
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.MITOCHONDRIA].gameObject.SetActive(true);
+        
+        Util.saveManager.LoadAndSave();
+
     }
 
     public void ResetTowers()
     {
-        var gameData = Util.saveManager.Load();
-        gameData.settings.mitoTowerUnlocked = false;
-        gameData.settings.ppc2TowerUnlocked = false;
-        gameData.settings.chloroTowerUnlocked = false;
-        Util.saveManager.Save(gameData);
-        GameManager.Instance.upgradeSettings = gameData.settings;
+        Util.upgradeSettings.mitoTowerUnlocked = false;
+        Util.upgradeSettings.ppc2TowerUnlocked = false;
+        Util.upgradeSettings.chloroTowerUnlocked = false;
+
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.PPC2_TOWER].gameObject.SetActive(false);
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.CHLOROPLAST].gameObject.SetActive(false);
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.MITOCHONDRIA].gameObject.SetActive(false);
+        
+        Util.saveManager.LoadAndSave();
     }
 
     public void UpgradeAll()
@@ -92,20 +93,15 @@ public class DebugCanvas : MonoBehaviour
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.PPC2_TOWER].gameObject.SetActive(true);
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.CHLOROPLAST].gameObject.SetActive(true);
         GameManager.Instance.bootController.gameplayUI.towerButtonMap[StructureType.MITOCHONDRIA].gameObject.SetActive(true);
-
-        var gameData = Util.saveManager.Load();
-        gameData.settings = Util.upgradeSettings;
-        Util.saveManager.Save(gameData);
-
+        
+        Util.saveManager.LoadAndSave();
     }
 
     public void UnlockAllLevels()
     {
         var buttons = Util.bootController.levelSelectMenu.GetButtons();
         Util.upgradeSettings.currLevel = buttons.Length;
-        var gameData = Util.saveManager.Load();
-        gameData.settings = Util.upgradeSettings;
-        Util.saveManager.Save(gameData);
+        Util.saveManager.LoadAndSave();;
 
         foreach(var btn in buttons)
             btn.Unlock();
@@ -115,9 +111,7 @@ public class DebugCanvas : MonoBehaviour
     {
         var buttons = Util.bootController.levelSelectMenu.GetButtons();
         Util.upgradeSettings.currLevel = 1;
-        var gameData = Util.saveManager.Load();
-        gameData.settings = Util.upgradeSettings;
-        Util.saveManager.Save(gameData);
+        Util.saveManager.LoadAndSave();
 
         for (int i=0; i<buttons.Length; i++)
         {
@@ -131,25 +125,19 @@ public class DebugCanvas : MonoBehaviour
     public void Gain100Energy()
     {
         Util.econManager.GainCurrency(100);
-        var gameData = Util.saveManager.Load();
-        gameData.settings = Util.upgradeSettings;
-        Util.saveManager.Save(gameData);
+        Util.saveManager.LoadAndSave();
     }
 
     public void Gain1000Energy()
     {
         Util.econManager.GainCurrency(1000);
-        var gameData = Util.saveManager.Load();
-        gameData.settings = Util.upgradeSettings;
-        Util.saveManager.Save(gameData);
+        Util.saveManager.LoadAndSave();
     }
 
     public void SetEnergyToZero()
     {
         Util.econManager.SpendCurrency(100000000);
-        var gameData = Util.saveManager.Load();
-        gameData.settings = Util.upgradeSettings;
-        Util.saveManager.Save(gameData);
+        Util.saveManager.LoadAndSave();
     }
 
     private void OnEnable()

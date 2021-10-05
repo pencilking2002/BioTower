@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using NaughtyAttributes;
 using BioTower.Units;
-using BioTower.SaveData;
 
 namespace BioTower
 {
@@ -67,8 +65,18 @@ public class WaveManager : MonoBehaviour
             return;
 
         var wave = waveSettings.waves[currWave];
-        wave.state = waveStateMap[wave.state].OnUpdate(wave);
-        waveMode = wave.state;
+        waveMode = waveStateMap[waveMode].OnUpdate(wave);
+        wave.state = waveMode;
+    }
+
+    public void SetEndedState()
+    {
+        waveMode = WaveMode.ENDED;
+    }
+
+    public void SetNotStartedState()
+    {
+        waveMode = WaveMode.NOT_STARTED;
     }
 
     private void OnEnemyReachedDestination(BasicEnemy enemy)

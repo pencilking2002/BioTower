@@ -18,7 +18,7 @@ public class EndedState : WaveState
     public override WaveMode OnUpdate(Wave wave)
     {
         Init();
-        
+
         if (waveManager.currWave < waveManager.waveSettings.waves.Length-1)
         {
             waveManager.currWave++;
@@ -38,14 +38,22 @@ public class EndedState : WaveState
             isInitialized = false;
     }
 
+    private void OnLevelStart(LevelType levelType)
+    {
+        if (levelType != LevelType.NONE)
+            waveManager.SetNotStartedState();
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onWaveStateInit += OnWaveStateInit;
+        EventManager.Game.onLevelStart += OnLevelStart;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+        EventManager.Game.onLevelStart -= OnLevelStart;
     }
 }
 }

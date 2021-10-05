@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BioTower
 {
 public class InProgressState : WaveState
 {
-    private bool isWaveCancelled;
-
     public override void Init()
     {
         if (!isInitialized)
@@ -30,10 +26,8 @@ public class InProgressState : WaveState
             wave.numSpawns++;
         }
 
-        //if (Time.time > wave.timeStarted + wave.startDelay + wave.duration)
-        if ((wave.numSpawns >= wave.numEnemiesPerWave && !wave.isEndless) || isWaveCancelled)
+        if ((wave.numSpawns >= wave.numEnemiesPerWave && !wave.isEndless))
         {
-            isWaveCancelled = false;
             return WaveMode.ENDED;   
         }
         else
@@ -44,7 +38,7 @@ public class InProgressState : WaveState
 
     private void OnGameOver(bool isWin)
     {
-        isWaveCancelled = true;
+        waveManager.SetEndedState();
     }
 
     private void OnWaveStateInit(WaveMode waveState)

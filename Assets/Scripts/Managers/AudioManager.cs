@@ -137,7 +137,8 @@ public class AudioManager : MonoBehaviour
 
     private void OnUnitTakeDamage(UnitType unitType)
     {
-        var randIndex = UnityEngine.Random.Range(0, data.takeDamage.Length);
+        var randIndex = UnityEngine.Random.Range(0, data.takeDamage.Length-1);
+        Debug.Log($"randIndex: {randIndex}. arr length: {data.takeDamage.Length}");
         PlaySound(data.takeDamage[randIndex]);
     }
 

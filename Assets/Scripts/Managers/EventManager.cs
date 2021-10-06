@@ -87,6 +87,7 @@ public class EventManager : MonoBehaviour
 
     public class Tutorials
     {
+        public static Action<TutState> onTutStateInit;
         public static Action<TutorialData> onTutorialStart;
         public static Action<TutorialData> onTutorialEnd;
         public static Action onTutTextPopUp;

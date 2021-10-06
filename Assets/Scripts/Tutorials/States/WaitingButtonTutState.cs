@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BioTower
 {
-public class NoneTutState : TutStateBase
+public class WaitingButtonTutState : TutStateBase
 {
     public override void Init (TutState tutState)
     {
@@ -18,19 +18,6 @@ public class NoneTutState : TutStateBase
     public override TutState OnUpdate(TutState tutState)
     {
         Init(tutState);
-
-        if (tutCanvas.hasTutorials)
-        {
-            tutCanvas.initTutPanelLocalPos = tutCanvas.tutPanel.localPosition;
-            tutCanvas.tutPanel.localPosition += new Vector3(0, tutCanvas.slideInOffset, 0);
-
-            tutState = TutState.LETTER_REVEAL;
-        }
-        else if (tutCanvas.canvas.enabled)
-        {
-            tutCanvas.canvas.enabled = false;
-        }
-
         return tutState;
     }
 

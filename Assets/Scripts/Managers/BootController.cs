@@ -56,7 +56,6 @@ public class  BootController : MonoBehaviour
 
     private void Update()
     {
-
         gameState = charStates[gameState].OnUpdate(gameState);
         GameManager.Instance.gameStates.gameState = gameState;
     }

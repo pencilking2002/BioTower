@@ -13,16 +13,35 @@ namespace BioTower
 public class TutorialCanvas : MonoBehaviour
 {
     public static bool tutorialInProgress;
+    
+
+    [Header("Tut UI")]
+    public Transform tutPanel;
+    public PortraitController portraitController;
+    public TextMeshProUGUI tutText;
+    
+
+    [Header("Tut State")]
+    public bool hasTutorials;
+    [ShowIf("hasTutorials")] public TutState tutState;
+    [ShowIf("hasTutorials")]public int currTutorialIndex = -1;
+    [ShowIf("hasTutorials")][SerializeField] private TutorialData[] tutorials;
+    
+
+    [Header("Tut Animation")]
+    public int slideInOffset = 50;
+    public float revealDuration = 0.05f;
+
+    public TutorialData currTutorial => tutorials[currTutorialIndex];
+    [HideInInspector] public Canvas canvas;
+    [HideInInspector] public Vector3 initTutPanelLocalPos;
     private Dictionary<TutState, TutStateBase> charStates = new Dictionary<TutState, TutStateBase>();
 
-    public TutState tutState;
-
-    [Header("Tutorial Data")]
-    public bool hasTutorials;
-    [ShowIf("hasTutorials")][SerializeField] private TutorialData[] tutorials;
-    [ShowIf("hasTutorials")][SerializeField] private int currTutorialIndex = -1;
-    public TutorialData currTutorial => tutorials[currTutorialIndex];
-
+    private void Awake()
+    {
+        canvas = GetComponent<Canvas>();
+        CacheStates();
+    }
 
     public bool IsLastTutorial(TutorialData data)
     {
@@ -30,10 +49,7 @@ public class TutorialCanvas : MonoBehaviour
         return index == (tutorials.Length-1);
     }
 
-    private void Awake()
-    {
-        CacheStates();
-    }
+    
 
     private void CacheStates()
     {

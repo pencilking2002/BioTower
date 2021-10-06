@@ -45,7 +45,6 @@ public class TutorialCanvas : MonoBehaviour
 
     public bool IsLastTutorial(TutorialData data)
     {
-        Debug.Log(data);
         int index = Array.IndexOf(tutorials, data);
         return index == (tutorials.Length-1);
     }
@@ -79,6 +78,7 @@ public class TutorialCanvas : MonoBehaviour
     public bool IsLetterRevealState() { return tutState == TutState.LETTER_REVEAL; }
     public bool IsWaitingTapState() { return tutState == TutState.WAITING_TAP; }
     public bool IsWaitingButtonTapState() { return tutState == TutState.WAITING_BUTTON_TAP; }
+    public bool IsEndTutState() { return tutState == TutState.END; }
 
 }
 }

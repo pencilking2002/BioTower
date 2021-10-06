@@ -96,7 +96,7 @@ public class TapManager : MonoBehaviour
                 hasSelectedStructure = true;
                 selectedStructure = structure;
                 EventManager.Structures.onStructureSelected?.Invoke(structure);
-                 GameManager.Instance.placementManager.SetPlacingState(selectedStructure.structureType);
+                GameManager.Instance.placementManager.SetPlacingState(selectedStructure.structureType);
             }
         }
     }

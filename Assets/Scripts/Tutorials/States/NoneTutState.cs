@@ -11,6 +11,10 @@ public class NoneTutState : TutStateBase
         if (!isInitialized)
         {
             isInitialized = true;
+            
+            InputController.canPressButtons = true;
+            InputController.canSpawnTowers = true;
+
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
         }
     }

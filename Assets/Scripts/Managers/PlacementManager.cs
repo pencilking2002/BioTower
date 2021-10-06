@@ -64,6 +64,9 @@ public class PlacementManager : MonoBehaviour
 
     private void OnTouchBegan(Vector3 screenPos)
     {
+        if (!InputController.canSpawnTowers)
+            return;
+
         if (IsPlacingState())
         {
             if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))

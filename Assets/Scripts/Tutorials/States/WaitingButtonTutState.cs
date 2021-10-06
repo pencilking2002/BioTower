@@ -13,6 +13,10 @@ public class WaitingButtonTutState : TutStateBase
         if (!isInitialized)
         {
             isInitialized = true;
+            
+            InputController.canPressButtons = true;
+            InputController.canSpawnTowers = false;
+
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
         }
     }

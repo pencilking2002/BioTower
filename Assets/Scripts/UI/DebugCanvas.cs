@@ -19,6 +19,7 @@ public class DebugCanvas : MonoBehaviour
     [SerializeField] private Text currWaveText;
     [SerializeField] private Text placementStateText;
     [SerializeField] private Text tutorialText;
+    [SerializeField] private Text tutIndexText;
   
 
     private void Awake()
@@ -38,7 +39,10 @@ public class DebugCanvas : MonoBehaviour
         currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
 
         if (GameManager.Instance.gameStates.IsGameState() && GameManager.Instance.currTutCanvas != null)
-            tutorialText.text = $"Tutorial State: {GameManager.Instance.currTutCanvas.tutState}";
+        {
+            tutorialText.text = $"Tut State: {GameManager.Instance.currTutCanvas.tutState}";
+            tutIndexText.text = $"Tut Index: {GameManager.Instance.currTutCanvas.currTutorialIndex}";
+        }
     }
 
     public void SpawnEnemy()

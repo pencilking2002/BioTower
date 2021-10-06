@@ -3,12 +3,21 @@ using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 namespace BioTower
 {
 public class InputController : MonoBehaviour
 {
     public GameObject lastSelected;
+    [ShowInInspector][ReadOnly] public static bool canPressButtons = true;
+    [ShowInInspector][ReadOnly] public static bool canSpawnTowers = true;
+
+    private void Awake()
+    {
+        canPressButtons = true;
+        canSpawnTowers = true;
+    }
     
     private void Update()
     {

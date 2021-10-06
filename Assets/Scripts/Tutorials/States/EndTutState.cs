@@ -5,13 +5,19 @@ using BioTower.Structures;
 
 namespace BioTower
 {
-public class WaitingTutState : TutStateBase
+public class EndTutState : TutStateBase
 {
     public override void Init (TutState tutState)
     {
         if (!isInitialized)
         {
             isInitialized = true;
+            var seq = LeanTween.sequence();
+            seq.append(LeanTween.moveLocalY(tutCanvas.tutPanel.gameObject, tutCanvas.initTutPanelLocalPos.y+tutCanvas.slideInOffset, 0.25f).setEaseOutCubic());
+            seq.append(() => {
+                EventManager.Tutorials.onTutorialEnd?.Invoke(tutCanvas.currTutorial);
+            });
+
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
         }
     }
@@ -26,25 +32,6 @@ public class WaitingTutState : TutStateBase
     {
         if (!isInitialized)
             return;
-
-        if (tutCanvas.currTutorial.IsTapAnywhereRequiredAction())
-        {
-            tutCanvas.SetLetterRevealState();
-        }
-    }
-
-    private void OnStructureCreated(Structure structure)
-    {
-        if (!isInitialized)
-            return;
-
-        if (structure.IsAbaTower())
-        {
-            if (tutCanvas.currTutorial.IsPlaceAbaTowerRequiredAction())
-            {
-                tutCanvas.SetLetterRevealState();
-            }
-        }
     }
 
     public override void OnTutStateInit(TutState tutState)
@@ -56,16 +43,12 @@ public class WaitingTutState : TutStateBase
     
     private void OnEnable()
     {
-        EventManager.Structures.onStructureCreated += OnStructureCreated;
         EventManager.Tutorials.onTutStateInit += OnTutStateInit;
-        EventManager.Input.onTouchBegan += OnTouchBegan;
     }
 
     private void OnDisable()
     {
-        EventManager.Structures.onStructureCreated -= OnStructureCreated;
         EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
-        EventManager.Input.onTouchBegan -= OnTouchBegan;
     }
 }
 }

@@ -10,7 +10,8 @@ public enum TutState
     NONE,
     LETTER_REVEAL,
     WAITING_TAP,
-    WAITING_BUTTON_TAP
+    WAITING_BUTTON_TAP,
+    END
 }
 
 public abstract class TutStateBase : MonoBehaviour

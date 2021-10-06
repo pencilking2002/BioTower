@@ -14,8 +14,20 @@ public class LetterRevealState : TutStateBase
         {
             isInitialized = true;
             tutCanvas.currTutorialIndex++;
+       
+            if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+            {
+                tutCanvas.SetEndTutState();
+                return;
+            }
+
             tutCanvas.portraitController.SetPortrait(tutCanvas.currTutorial.portraitIndex);
-            SlideIn();
+            
+            if (tutCanvas.currTutorial.transition == TransitionType.SLIDE_IN)
+                SlideIn();
+            else if (tutCanvas.currTutorial.transition == TransitionType.BLINK)
+                Blink();
+
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
         }
     }
@@ -28,6 +40,7 @@ public class LetterRevealState : TutStateBase
 
     private void SlideIn()
     {
+        tutCanvas.tutText.text = "";
         var seq = LeanTween.sequence();
         seq.append(tutCanvas.currTutorial.delay);
         seq.append(() => { EventManager.Tutorials.onTutTextPopUp?.Invoke(); });
@@ -41,15 +54,40 @@ public class LetterRevealState : TutStateBase
         });
     }
 
+    private void Blink()
+    {
+        EventManager.Tutorials.onTutTextPopUp?.Invoke();
+        LeanTween.scale(tutCanvas.tutText.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1).setOnComplete(() => {
+            tutCanvas.tutText.text = tutCanvas.currTutorial.text;
+            GameManager.Instance.util.TextReveal(tutCanvas.tutText, tutCanvas.revealDuration, SetWaitingState);
+            
+            // if (currTutorial.hasArrows)
+            //     arrowController.DisplayArrows(currTutorial.arrowCoords);                    
+        });
+    }
+
     private void SetWaitingState()
     {
         if (!isInitialized)
             return;
 
-        if (tutCanvas.currTutorial.requiredAction == RequiredAction.TAP_ANYWHERE)
+        bool gotoWaitState = 
+            tutCanvas.currTutorial.IsTapAnywhereRequiredAction() ||
+            tutCanvas.currTutorial.IsPlaceAbaTowerRequiredAction() ||
+            tutCanvas.currTutorial.IsTowerSelectedRequiredAction();
+        
+        bool gotoWaitButtonState = 
+            tutCanvas.currTutorial.IsTapAbaButtonRequiredAction() ||
+            tutCanvas.currTutorial.IsSpawnAbaUnitRequiredAction();
+
+        if (gotoWaitState)
+        {
             tutCanvas.SetWaitingTapState();
-        else if (tutCanvas.currTutorial.requiredAction == RequiredAction.TAP_ABA_TOWER_BUTTON)
+        }
+        else if (gotoWaitButtonState)
+        {
             tutCanvas.SetWaitingButtonTapState();
+        }
     }
 
     public override void OnTutStateInit(TutState tutState)
@@ -76,8 +114,7 @@ public class LetterRevealState : TutStateBase
     private void OnDisable()
     {
         EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
-                EventManager.Input.onTouchBegan -= OnTouchBegan;
-
+        EventManager.Input.onTouchBegan -= OnTouchBegan;
     }
 }
 }

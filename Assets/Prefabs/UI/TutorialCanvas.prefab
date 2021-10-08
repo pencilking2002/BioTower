@@ -1536,6 +1536,7 @@ MonoBehaviour:
   tutPanel: {fileID: 7979799144854511358}
   portraitController: {fileID: 7979799145711278667}
   tutText: {fileID: 7979799146040914500}
+  ctaText: {fileID: 7979799144396926068}
   hasTutorials: 1
   tutState: 0
   currTutorialIndex: -1

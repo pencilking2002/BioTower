@@ -32,6 +32,12 @@ public class WaitingButtonTutState : TutStateBase
         if (!isInitialized)
             return;
 
+        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+        {
+            tutCanvas.SetEndTutState();
+            return;
+        }
+                
         if (structureType == StructureType.ABA_TOWER)
         {
             if (tutCanvas.currTutorial.requiredAction == RequiredAction.TAP_ABA_TOWER_BUTTON)
@@ -45,6 +51,12 @@ public class WaitingButtonTutState : TutStateBase
     {
         if (!isInitialized)
             return;
+
+        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+        {
+            tutCanvas.SetEndTutState();
+            return;
+        }
 
         if (unitType == UnitType.ABA)
         {

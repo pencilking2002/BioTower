@@ -19,7 +19,8 @@ public class TutorialCanvas : MonoBehaviour
     public Transform tutPanel;
     public PortraitController portraitController;
     public TextMeshProUGUI tutText;
-    
+    public CanvasGroup ctaText;
+
 
     [Header("Tut State")]
     public bool hasTutorials;
@@ -46,10 +47,9 @@ public class TutorialCanvas : MonoBehaviour
     public bool IsLastTutorial(TutorialData data)
     {
         int index = Array.IndexOf(tutorials, data);
-        return index == (tutorials.Length-1);
+        return index >= tutorials.Length-1;
     }
 
-    
 
     private void CacheStates()
     {

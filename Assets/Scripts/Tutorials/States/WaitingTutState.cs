@@ -22,7 +22,7 @@ public class WaitingTutState : TutStateBase
 
     public override TutState OnUpdate(TutState tutState)
     {
-        Init(tutState);
+        Init(tutState); 
         return tutState;
     }
 
@@ -30,11 +30,15 @@ public class WaitingTutState : TutStateBase
     {
         if (!isInitialized)
             return;
+        
+        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+        {
+            tutCanvas.SetEndTutState();
+            return;
+        }
 
         if (tutCanvas.currTutorial.IsTapAnywhereRequiredAction())
-        {
             tutCanvas.SetLetterRevealState();
-        }
     }
 
     private void OnStructureCreated(Structure structure)
@@ -42,6 +46,12 @@ public class WaitingTutState : TutStateBase
         if (!isInitialized)
             return;
 
+        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+        {
+            tutCanvas.SetEndTutState();
+            return;
+        }
+        
         if (structure.IsAbaTower())
         {
             if (tutCanvas.currTutorial.IsPlaceAbaTowerRequiredAction())

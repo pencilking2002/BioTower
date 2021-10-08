@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace BioTower
 {
@@ -14,16 +15,16 @@ public class LetterRevealState : TutStateBase
         if (!isInitialized)
         {
             isInitialized = true;
+
             InputController.canPressButtons = false;
             InputController.canSpawnTowers = false;
 
-            tutCanvas.currTutorialIndex++;
-       
-            if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
-                return;
-        
+            tutCanvas.currTutorialIndex++;    
+            SetupCtaText();
+
             tutCanvas.portraitController.SetPortrait(tutCanvas.currTutorial.portraitIndex);
             
+            // Animate the tutorial panel
             if (tutCanvas.currTutorial.transition == TransitionType.SLIDE_IN)
                 SlideIn();
             else if (tutCanvas.currTutorial.transition == TransitionType.BLINK)
@@ -37,10 +38,29 @@ public class LetterRevealState : TutStateBase
     {
         Init(tutState);
 
-        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
-            tutState = TutState.END;
+        // if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+        //     tutState = TutState.END;
     
         return tutState;
+    }
+
+    private void SetupCtaText()
+    {
+        LeanTween.cancel(tutCanvas.ctaText.gameObject);
+        tutCanvas.ctaText.alpha = 0;
+
+        if (tutCanvas.currTutorial.requiredAction == RequiredAction.TAP_ANYWHERE)
+        {
+            var text = tutCanvas.ctaText.GetComponent<TextMeshProUGUI>();
+            if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+                text.text = "DONE";
+            else
+                text.text = "NEXT";
+
+            LeanTween.delayedCall(tutCanvas.ctaText.gameObject, 1.0f, () => {
+                LeanTween.alphaCanvas(tutCanvas.ctaText, 1, 0.5f).setLoopPingPong(-1);
+            });
+        }
     }
 
     private void SlideIn()

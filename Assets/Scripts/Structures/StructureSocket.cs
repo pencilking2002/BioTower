@@ -81,16 +81,24 @@ public class StructureSocket : MonoBehaviour
         glowingSprite.color = defaultColor;
     }
 
+    private void OnHighlightItem(HighlightedItem item)
+    {
+        if (item == HighlightedItem.NONE || item != HighlightedItem.SOCKET)
+            return;
+    }
+
     private void OnEnable()
     {
         EventManager.Structures.onStartPlacementState += OnStartPlacementState;
         EventManager.Structures.onSetNonePlacementState += OnSetNonePlacementState;
+        EventManager.Tutorials.onHighlightItem += OnHighlightItem;
     }
 
     private void OnDisable()
     {
         EventManager.Structures.onStartPlacementState -= OnStartPlacementState;
         EventManager.Structures.onSetNonePlacementState -= OnSetNonePlacementState;
+        EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
     }
 }
 }

@@ -17,6 +17,7 @@ public class TutorialCanvas : MonoBehaviour
 
     [Header("Tut UI")]
     public Transform tutPanel;
+    public Transform itemHighlightPanel;
     public PortraitController portraitController;
     public TextMeshProUGUI tutText;
     public CanvasGroup ctaText;

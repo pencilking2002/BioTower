@@ -19,7 +19,8 @@ public class LetterRevealState : TutStateBase
             InputController.canPressButtons = false;
             InputController.canSpawnTowers = false;
 
-            tutCanvas.currTutorialIndex++;    
+            tutCanvas.currTutorialIndex++;
+                
             SetupCtaText();
 
             tutCanvas.portraitController.SetPortrait(tutCanvas.currTutorial.portraitIndex);

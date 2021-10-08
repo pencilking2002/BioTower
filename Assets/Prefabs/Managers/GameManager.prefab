@@ -132,6 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightFragPrefab: {fileID: 9002743542284561929, guid: ef222ad8ffbc2a643be8db11000ab260,
     type: 3}
+  itemHighlightPrefab: {fileID: 5307764098546666582, guid: b1e95b5c585453e41a205c9293a5ed22,
+    type: 3}
   offscreenLocation: {x: 10000, y: 10000}
   numObjectsToCreateOnAwake: 10
   pooledObjects: []

@@ -14,6 +14,7 @@ public enum PoolObjectType
 public class PoolManager : MonoBehaviour
 {
     [SerializeField] private GameObject lightFragPrefab;
+    [SerializeField] private GameObject itemHighlightPrefab;
     [SerializeField] private Vector2 offscreenLocation;
     [SerializeField] private int numObjectsToCreateOnAwake = 10;
     public List<PooledObject> pooledObjects;

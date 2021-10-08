@@ -92,6 +92,7 @@ public class EventManager : MonoBehaviour
         public static Action<TutorialData> onTutorialEnd;
         public static Action onTutTextPopUp;
         public static Action onTutChatStart;
+        public static Action<HighlightedItem> onHighlightItem;
     }
 }
 }

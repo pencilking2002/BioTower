@@ -8,7 +8,8 @@ namespace BioTower
 public enum PoolObjectType
 {
     NONE,
-    LIGHT_FRAGMENT
+    LIGHT_FRAGMENT,
+    ITEM_HIGHLIGHT
 }
 
 public class PoolManager : MonoBehaviour
@@ -21,14 +22,15 @@ public class PoolManager : MonoBehaviour
 
     private void Awake()
     {
-        CreateObjectsOnAwake(numObjectsToCreateOnAwake);
+        CreateObjectsOnAwake(PoolObjectType.LIGHT_FRAGMENT, numObjectsToCreateOnAwake);
+        CreateObjectsOnAwake(PoolObjectType.ITEM_HIGHLIGHT, 4);
     }
 
-    private void CreateObjectsOnAwake(int numObjects)
+    private void CreateObjectsOnAwake(PoolObjectType objectType, int numObjects)
     {
         for (int i=0; i<numObjects; i++)
         {
-            var obj = CreatePrefab(PoolObjectType.LIGHT_FRAGMENT);
+            var obj = CreatePrefab(objectType);
             AddPooledObject(obj);
         }
     }
@@ -87,8 +89,20 @@ public class PoolManager : MonoBehaviour
             case PoolObjectType.LIGHT_FRAGMENT:
                 obj = Instantiate(lightFragPrefab).GetComponent<PooledObject>();
                 break;
+            case PoolObjectType.ITEM_HIGHLIGHT:
+                obj = Instantiate(itemHighlightPrefab).GetComponent<PooledObject>();
+                break;
         }
         return obj;
+    }
+
+    public void SpawnItemHighlight(Vector3 worldPos)
+    {
+        var item = GetPooledObject(PoolObjectType.ITEM_HIGHLIGHT);
+        var rt = item.GetComponent<RectTransform>();
+        rt.SetParent(GameManager.Instance.currTutCanvas.itemHighlightPanel, false);
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPos);
+        rt.anchoredPosition = screenPoint - GameManager.Instance.currTutCanvas.GetComponent<RectTransform>().sizeDelta / 2f; 
     }
 }
 }

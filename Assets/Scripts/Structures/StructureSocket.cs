@@ -85,6 +85,7 @@ public class StructureSocket : MonoBehaviour
     {
         if (item == HighlightedItem.NONE || item != HighlightedItem.SOCKET)
             return;
+        Util.poolManager.SpawnItemHighlight(this.transform.position);
     }
 
     private void OnEnable()

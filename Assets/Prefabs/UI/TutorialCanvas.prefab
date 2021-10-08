@@ -592,7 +592,6 @@ GameObject:
   - component: {fileID: 7979799145711278711}
   - component: {fileID: 7979799145711278708}
   - component: {fileID: 7979799145711278709}
-  - component: {fileID: 7979799145711278664}
   - component: {fileID: 7979799145711278667}
   m_Layer: 0
   m_Name: TutorialCanvas
@@ -716,23 +715,6 @@ MonoBehaviour:
   revealDuration: 0.01
   canvas: {fileID: 7979799145711278710}
   initTutPanelLocalPos: {x: 0, y: 0, z: 0}
---- !u!114 &7979799145711278664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7979799145711278706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e1c0b4064fb45349be5601ee2131f20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrows:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &7979799145711278667
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -110,7 +110,9 @@ public class PoolManager : MonoBehaviour
 
     public void DespawnItemHighlight(PooledObject pooledObject)
     {
-        AddPooledObject(pooledObject);
+        pooledObject.GetComponent<ItemHighlight>().Stop(() => {
+            AddPooledObject(pooledObject);
+        });
     }
 }
 }

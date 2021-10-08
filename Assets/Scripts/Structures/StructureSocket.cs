@@ -21,6 +21,7 @@ public class StructureSocket : MonoBehaviour
     [SerializeField] private Color glowColor;
     [SerializeField] private float glowAnimDuration = 0.5f;
     private Color defaultColor;
+    private PooledObject itemHighlight;
 
     private void Awake()
     {
@@ -84,8 +85,13 @@ public class StructureSocket : MonoBehaviour
     private void OnHighlightItem(HighlightedItem item)
     {
         if (item == HighlightedItem.NONE || item != HighlightedItem.SOCKET)
+        {
+            if (itemHighlight != null)
+                Util.poolManager.DespawnItemHighlight(itemHighlight);
+
             return;
-        Util.poolManager.SpawnItemHighlight(this.transform.position);
+        }
+        itemHighlight = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
     }
 
     private void OnEnable()

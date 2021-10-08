@@ -96,13 +96,21 @@ public class PoolManager : MonoBehaviour
         return obj;
     }
 
-    public void SpawnItemHighlight(Vector3 worldPos)
+    public PooledObject SpawnItemHighlight(Vector3 worldPos, Vector2 offset)
     {
         var item = GetPooledObject(PoolObjectType.ITEM_HIGHLIGHT);
         var rt = item.GetComponent<RectTransform>();
         rt.SetParent(GameManager.Instance.currTutCanvas.itemHighlightPanel, false);
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPos);
         rt.anchoredPosition = screenPoint - GameManager.Instance.currTutCanvas.GetComponent<RectTransform>().sizeDelta / 2f; 
+        rt.anchoredPosition += offset;
+        rt.GetComponent<ItemHighlight>().Oscillate();
+        return item;
+    }
+
+    public void DespawnItemHighlight(PooledObject pooledObject)
+    {
+        AddPooledObject(pooledObject);
     }
 }
 }

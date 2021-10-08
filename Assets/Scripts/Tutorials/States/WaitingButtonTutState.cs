@@ -18,7 +18,6 @@ public class WaitingButtonTutState : TutStateBase
             InputController.canSpawnTowers = false;
 
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
-            EventManager.Tutorials.onHighlightItem?.Invoke(tutCanvas.currTutorial.highlightedItem);
         }
     }
 

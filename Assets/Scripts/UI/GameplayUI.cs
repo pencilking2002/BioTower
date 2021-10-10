@@ -264,12 +264,23 @@ public class GameplayUI : MonoBehaviour
         mitoTowerButton.gameObject.SetActive(mitoTowerUnlocked);
     }
 
+    private void OnHighlightItem(HighlightedItem item)
+    {
+        if (item == HighlightedItem.ABA_TOWER_BTN)
+        {
+            var rt = AbaTowerButton.GetComponent<RectTransform>();
+            Vector2 localPos = new Vector2(rt.localPosition.x, rt.localPosition.y);
+            Util.poolManager.SpawnItemHighlight(localPos, new Vector2(0,150));
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onLevelStart += OnLevelStart;
         EventManager.Game.onSpendCurrency += OnSpendCurrency;
         EventManager.Game.onGainCurrency += OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted += OnStructureCooldownStarted;
+        EventManager.Tutorials.onHighlightItem += OnHighlightItem;
     }
 
     private void OnDisable()
@@ -278,6 +289,7 @@ public class GameplayUI : MonoBehaviour
         EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         EventManager.Game.onGainCurrency -= OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted -= OnStructureCooldownStarted;
+        EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
     }
 }
 }

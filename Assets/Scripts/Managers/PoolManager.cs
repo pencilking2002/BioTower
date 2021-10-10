@@ -96,6 +96,20 @@ public class PoolManager : MonoBehaviour
         return obj;
     }
 
+    private PooledObject[] GetCurrentItemHighlights()
+    {
+        var panel = GameManager.Instance.currTutCanvas.itemHighlightPanel;
+        var itemHighlights = panel.GetComponentsInChildren<PooledObject>();
+        return itemHighlights;
+    }
+
+    public void DespawnAllitemHighlights()
+    {
+        var itemHighlights = GetCurrentItemHighlights();
+        foreach(PooledObject obj in itemHighlights)
+            DespawnItemHighlight(obj);
+    }
+
     public PooledObject SpawnItemHighlight(Vector3 worldPos, Vector2 offset)
     {
         var item = GetPooledObject(PoolObjectType.ITEM_HIGHLIGHT);
@@ -105,6 +119,18 @@ public class PoolManager : MonoBehaviour
         rt.anchoredPosition = screenPoint - GameManager.Instance.currTutCanvas.GetComponent<RectTransform>().sizeDelta / 2f; 
         rt.anchoredPosition += offset;
         rt.GetComponent<ItemHighlight>().Oscillate();
+        return item;
+    }
+
+    public PooledObject SpawnItemHighlight(Vector2 localPos, Vector2 offset)
+    {
+        var item = GetPooledObject(PoolObjectType.ITEM_HIGHLIGHT);
+        var rt = item.GetComponent<RectTransform>();
+        rt.SetParent(GameManager.Instance.currTutCanvas.itemHighlightPanel, false);
+        rt.localPosition = localPos;
+        rt.localPosition += new Vector3(offset.x, offset.y, 0);
+        rt.GetComponent<ItemHighlight>().Oscillate();
+        Debug.Log("Spawn item highlight");
         return item;
     }
 

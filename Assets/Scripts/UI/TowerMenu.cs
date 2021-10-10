@@ -263,6 +263,15 @@ public class TowerMenu : MonoBehaviour
             }     
         }
     }
+  
+    private void OnHighlightItem(HighlightedItem item)
+    {
+        if (item == HighlightedItem.ABA_UNIT_BTN)
+        {
+            var worldPos = Camera.main.ScreenToWorldPoint(spawnUnitButton.transform.position);
+            Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,130));  
+        }
+    }
 
     private void OnEnable()
     {
@@ -271,6 +280,7 @@ public class TowerMenu : MonoBehaviour
         EventManager.Structures.onStructureGainHealth += OnStructureGainHealth;
         EventManager.Structures.onStructureLoseHealth += OnStructureLoseHealth;
         EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
+        EventManager.Tutorials.onHighlightItem += OnHighlightItem;
     }
 
     private void OnDisable()
@@ -279,7 +289,8 @@ public class TowerMenu : MonoBehaviour
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
         EventManager.Structures.onStructureGainHealth -= OnStructureGainHealth;
         EventManager.Structures.onStructureLoseHealth -= OnStructureLoseHealth;
-        EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
+        EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;        
+        EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
     }
 }
 }

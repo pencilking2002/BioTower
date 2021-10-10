@@ -268,9 +268,13 @@ public class GameplayUI : MonoBehaviour
     {
         if (item == HighlightedItem.ABA_TOWER_BTN)
         {
-            var rt = AbaTowerButton.GetComponent<RectTransform>();
-            Vector2 localPos = new Vector2(rt.localPosition.x, rt.localPosition.y);
-            Util.poolManager.SpawnItemHighlight(localPos, new Vector2(0,150));
+            var worldPos = Camera.main.ScreenToWorldPoint(AbaTowerButton.transform.position);
+            Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,150));  
+        }
+        else if (item == HighlightedItem.ENERGY)
+        {
+            var worldPos = Camera.main.ScreenToWorldPoint(currencyContainer.transform.position);
+            Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,150)); 
         }
     }
 

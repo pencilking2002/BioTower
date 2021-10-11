@@ -159,9 +159,12 @@ public class Structure : MonoBehaviour
         if (structure == null || GameManager.Instance == null)
             return;
     
-        if (structureType == StructureType.DNA_BASE && !Util.upgradeSettings.enablePlayerTowerHealing)
+        if (IsPlayerBase() && !Util.upgradeSettings.enablePlayerTowerHealing)
             return;
 
+        if (IsMiniChloroTower())
+            return;
+            
  //       Debug.Log($"Select {structure.gameObject.name}. This structure: {gameObject.name}. Same structure: {structure == this}");
 
         if (structure == this)
@@ -209,6 +212,11 @@ public class Structure : MonoBehaviour
     public bool IsBarrier()
     {
         return structureType == StructureType.ROAD_BARRIER;
+    }
+
+    public bool IsPlayerBase()
+    {
+        return structureType == StructureType.DNA_BASE;
     }
 
     public int GetNumUnits()

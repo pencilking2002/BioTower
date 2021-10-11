@@ -34,7 +34,6 @@ public class  BootController : MonoBehaviour
 
     private void Awake()
     {
-
         CacheStates();
         if (levelToLoadInstantly != -1)
         {
@@ -43,11 +42,11 @@ public class  BootController : MonoBehaviour
         }
     }
 
-    public void LoadFirstScene()
-    {
-        BootController.isBootLoaded = true;
-        SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
-    }
+    // public void LoadFirstScene()
+    // {
+    //     BootController.isBootLoaded = true;
+    //     SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
+    // }
 
     private void Start()
     {
@@ -67,6 +66,12 @@ public class  BootController : MonoBehaviour
         {
             charStates.Add(state.gameState, state);
         }
+    }
+
+    public void SetGameState()
+    {
+        gameState = GameState.GAME;
+        GameManager.Instance.gameStates.SetGameState();
     } 
     
 }

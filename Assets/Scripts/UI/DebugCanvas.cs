@@ -38,7 +38,7 @@ public class DebugCanvas : MonoBehaviour
 
         currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
 
-        if (GameManager.Instance.gameStates.IsGameState() && GameManager.Instance.currTutCanvas != null)
+        if (GameManager.Instance != null && GameManager.Instance.gameStates.IsGameState() && GameManager.Instance.currTutCanvas != null)
         {
             tutorialText.text = $"Tut State: {GameManager.Instance.currTutCanvas.tutState}";
             tutIndexText.text = $"Tut Index: {GameManager.Instance.currTutCanvas.currTutorialIndex}";

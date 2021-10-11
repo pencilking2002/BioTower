@@ -4777,6 +4777,7 @@ MonoBehaviour:
   innerMenuPanel: {fileID: 1824991743}
   targetYOffset: 1100
   animDuration: 1.5
+  canvas: {fileID: 562835646}
   title_01: {fileID: 1946148744}
   title_02: {fileID: 1328992399}
   tapCTA: {fileID: 321511678}

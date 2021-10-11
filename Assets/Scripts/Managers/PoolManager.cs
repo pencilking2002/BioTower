@@ -57,7 +57,7 @@ public class PoolManager : MonoBehaviour
             pooledObject = CreatePrefab(objectType);
             //pooledObject.isActive = true;
         }
-        Debug.Log("Get object from pool");
+        //Debug.Log("Get object from pool");
         return pooledObject;
     }
 

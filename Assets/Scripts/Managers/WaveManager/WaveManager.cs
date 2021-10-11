@@ -112,14 +112,14 @@ public class WaveManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.Units.onEnemyReachedDestination += OnEnemyReachedDestination;
-        EventManager.Game.onLevelAwake += OnLevelStart;
+        EventManager.Game.onLevelStart += OnLevelStart;
         EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
     }
 
     private void OnDisable()
     {
         EventManager.Units.onEnemyReachedDestination -= OnEnemyReachedDestination;
-        EventManager.Game.onLevelAwake -= OnLevelStart;
+        EventManager.Game.onLevelStart -= OnLevelStart;
         EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
     }
 

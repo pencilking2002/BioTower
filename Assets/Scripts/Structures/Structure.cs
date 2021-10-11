@@ -1,29 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
 using UnityEngine.UI;
 using BioTower.Units;
+using Sirenix.OdinInspector;
 
 namespace BioTower.Structures
 {
 
 public enum StructureState
 {
-    NONE,
-    ACTIVE,
+    NONE, ACTIVE,
     DESTROYED
 }
 
 public enum StructureType
 {
-    ABA_TOWER,
-    DNA_BASE,
-    NONE,
-    PPC2_TOWER,
-    CHLOROPLAST,
-    MITOCHONDRIA,
-    ROAD_BARRIER
+    ABA_TOWER, DNA_BASE,
+    NONE, PPC2_TOWER,
+    CHLOROPLAST, MITOCHONDRIA,
+    ROAD_BARRIER, MINI_CHLOROPLAST_TOWER
 }
 
 public class Structure : MonoBehaviour
@@ -31,12 +27,11 @@ public class Structure : MonoBehaviour
     [SerializeField] protected StructureSocket socket;
     public StructureType structureType;
     [SerializeField] public bool hasHealth;
-    [EnableIf("hasHealth")] public bool isAlive = true;
-    [EnableIf("hasHealth")] [Range(0,100)] [SerializeField] protected int maxHealth;
-    [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
-    [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
+    [ShowIf("hasHealth")] public bool isAlive = true;
+    [ShowIf("hasHealth")] [Range(0,100)] [SerializeField] protected int maxHealth;
+    [ShowIf("hasHealth")] [SerializeField] protected int currHealth;
+    [ShowIf("hasHealth")] [SerializeField] protected Slider healthSlider;
     [SerializeField] protected GameObject spriteOutline;
-    //[SerializeField] StructureState structureState;
     public SpriteRenderer sr;
     [HideInInspector] public float lastDeclineTime;
     private Vector3 initScale;
@@ -51,17 +46,10 @@ public class Structure : MonoBehaviour
         lastDeclineTime = Time.time;
     }
 
-    // public virtual void Start()
-    // {
-        
-    // }
-
     public virtual void Init(StructureSocket socket)
     {
         initScale = transform.localScale;
-       
         currHealth = maxHealth;
-        //structureState = StructureState.ACTIVE;
 
         if (hasHealth)
         {
@@ -71,19 +59,17 @@ public class Structure : MonoBehaviour
 
         EventManager.Structures.onStructureCreated?.Invoke(this);
 
-        if (structureType != StructureType.ROAD_BARRIER)
+        if (!IsBarrier() && !IsMiniChloroTower())
         {
             GameManager.Instance.tapManager.selectedStructure = this;
             GameManager.Instance.tapManager.hasSelectedStructure = true;
             this.socket = socket;
         }
-        
     }
 
-    public virtual void OnUpdate()
-    {
-        
-    }
+    public virtual void OnUpdate() { }
+    public virtual int GetCurrHealth() { return currHealth; }
+    public virtual int GetMaxHealth() { return maxHealth; }
 
     protected Unit GetClosestUnit(BasicEnemy enemy)
     {
@@ -153,9 +139,6 @@ public class Structure : MonoBehaviour
         });
     }
 
-    public virtual int GetCurrHealth() { return currHealth; }
-    public virtual int GetMaxHealth() { return maxHealth; }
-
     public virtual void KillStructure()
     {
         isAlive = false;
@@ -168,15 +151,8 @@ public class Structure : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void OnTapStructure(Vector3 screenPoint)
-    {
-        
-    }
-
-    public virtual void SpawnUnits(int numUnits)
-    {
-
-    }
+    public virtual void OnTapStructure(Vector3 screenPoint) { }
+    public virtual void SpawnUnits(int numUnits) { }
 
     public virtual void OnStructureSelected(Structure structure)
     {
@@ -224,13 +200,21 @@ public class Structure : MonoBehaviour
     {
         return structureType == StructureType.CHLOROPLAST;
     }
+    
+    public bool IsMiniChloroTower()
+    {
+        return structureType == StructureType.MINI_CHLOROPLAST_TOWER;
+    }
 
+    public bool IsBarrier()
+    {
+        return structureType == StructureType.ROAD_BARRIER;
+    }
 
     public int GetNumUnits()
     {
         return units.Count;
     }
-
 
     public virtual void OnStructureCreated(Structure structure)
     {
@@ -249,10 +233,7 @@ public class Structure : MonoBehaviour
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
     }
 
-    private void OnDestroy()
-    {
-        isAlive = false;
-    }
+    private void OnDestroy() { isAlive = false; }
 }
 }
 

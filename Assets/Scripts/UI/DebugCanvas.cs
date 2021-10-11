@@ -20,7 +20,10 @@ public class DebugCanvas : MonoBehaviour
     [SerializeField] private Text placementStateText;
     [SerializeField] private Text tutorialText;
     [SerializeField] private Text tutIndexText;
-  
+    
+    [Header("Sliders")]
+    public Slider sfxSlider;
+    public Slider musicSlider;
 
     private void Awake()
     {

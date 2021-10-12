@@ -6,12 +6,11 @@ namespace BioTower
 {
 public class StartMenuCanvas : MonoBehaviour
 {
-    
     public CanvasGroup menuPanel;
     [SerializeField] private RectTransform innerMenuPanel;
     [SerializeField] private float targetYOffset = 50;
     [SerializeField] private float animDuration = 1.0f;
-    private Canvas canvas;
+    public Canvas canvas;
 
 
     [Header("Title Sequence")]
@@ -24,7 +23,6 @@ public class StartMenuCanvas : MonoBehaviour
 
     private void Awake()
     {
-        canvas = GetComponent<Canvas>();
         tapCTA.alpha = 0;
         AnimateTitle(title_01, 1f);
         AnimateTitle(title_02, 1, 0.6f);
@@ -39,9 +37,6 @@ public class StartMenuCanvas : MonoBehaviour
     {
         if (title == null)
             return;
-
-        
- 
 
         Vector3 oldScale = title.transform.localScale;
         title.transform.localScale = oldScale * 5;

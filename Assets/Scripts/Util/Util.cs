@@ -105,6 +105,16 @@ public class Util : MonoBehaviour
 
         while (visibleCount <= totalVisibleCharacters)
         {
+            // Exit out of the letter revealing early
+            if (LetterRevealState.cancelLetterReveal)
+            {
+                visibleCount = totalVisibleCharacters;
+                textComponent.maxVisibleCharacters = visibleCount;
+                onComplete?.Invoke();
+                LetterRevealState.cancelLetterReveal = false;
+                yield return null;
+            }
+
             textComponent.maxVisibleCharacters = visibleCount; // How many characters should TextMeshPro display?
             visibleCount += 1;
             EventManager.UI.onLetterReveal?.Invoke();

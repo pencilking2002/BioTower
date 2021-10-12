@@ -5,21 +5,23 @@ using NaughtyAttributes;
 
 namespace BioTower.Structures
 {
-public class ChloroplastTower : Structure
+public class MiniChloroplastTower : Structure
 {
-    [SerializeField] private GameObject lightFragmentPrefab;    
     [SerializeField] private CircleCollider2D maxInfluenceCollider;
     [SerializeField] private CircleCollider2D minInfluenceCollider;
-    [SerializeField] private BoxCollider2D lightFragmentAvoidanceCollider;
     [SerializeField] private float shootDuration = 1.0f;
-    [SerializeField] private float shootInterval = 5;
+    [SerializeField] private float shootInterval = 3;
     private float lastShotTime;
 
     public override void Awake()
     {
         base.Awake();
-        shootInterval = Util.upgradeSettings.chloroShootInterval_float.GetFloat();
         lastShotTime = Time.time;
+    }
+
+    private void Start()
+    {
+        base.Init(null);
     }
 
     public override void OnUpdate()
@@ -28,6 +30,7 @@ public class ChloroplastTower : Structure
         {
             ShootFragment();
             lastShotTime = Time.time;
+            Debug.Log("Shoot");
         }
     }
 
@@ -37,7 +40,6 @@ public class ChloroplastTower : Structure
         return obj.gameObject;
     }
 
-   
 
     [Button("Shoot Fragment")]
     private void ShootFragment(bool avoidFragmentCollider=true)
@@ -63,6 +65,12 @@ public class ChloroplastTower : Structure
         seq.append(LeanTween.moveY(fragment, endPos.y, 0.1f));
     }
 
+    public Vector2 GetPointWithinInfluence(bool avoidFragmentCollider)
+    {
+        Vector2 randomPoint = GetRandomPoint();
+        return randomPoint;
+    }
+
     private Vector2 GetRandomPoint()
     {
         return Util.GetPointWithinInfluence(
@@ -70,45 +78,6 @@ public class ChloroplastTower : Structure
             minInfluenceCollider.radius, 
             maxInfluenceCollider.radius
         );
-    }
-
-    public Vector2 GetPointWithinInfluence(bool avoidFragmentCollider)
-    {
-        Vector2 randomPoint;
-
-        if (avoidFragmentCollider)
-        {
-            do randomPoint = GetRandomPoint();
-            while (lightFragmentAvoidanceCollider.OverlapPoint(randomPoint));
-        }
-        else
-        {
-            randomPoint = GetRandomPoint();
-        }
-
-        return randomPoint;
-    }
-
-   
-
-    public override void KillStructure()
-    {
-        for (int i=0; i<10; i++)
-        {
-            ShootFragment(false);
-        }
-
-        sr.gameObject.SetActive(false);
-        isAlive = false;
-        GameManager.Instance.CreateTowerExplosion(transform.position);
-
-        LeanTween.delayedCall(2.0f, () => {
-            EventManager.Structures.onStructureDestroyed?.Invoke(this);
-            if (socket != null)
-                socket.SetHasStructure(false);
-            
-            Destroy(gameObject);
-        });
     }
 }
 }

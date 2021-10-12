@@ -22,6 +22,7 @@ public class StructureSocket : MonoBehaviour
     [SerializeField] private float glowAnimDuration = 0.5f;
     private Color defaultColor;
 
+
     private void Awake()
     {
         defaultColor = glowingSprite.color;
@@ -81,16 +82,26 @@ public class StructureSocket : MonoBehaviour
         glowingSprite.color = defaultColor;
     }
 
+    private void OnHighlightItem(HighlightedItem item)
+    {
+        if (item == HighlightedItem.SOCKET)
+        {
+            Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.Structures.onStartPlacementState += OnStartPlacementState;
         EventManager.Structures.onSetNonePlacementState += OnSetNonePlacementState;
+        EventManager.Tutorials.onHighlightItem += OnHighlightItem;
     }
 
     private void OnDisable()
     {
         EventManager.Structures.onStartPlacementState -= OnStartPlacementState;
         EventManager.Structures.onSetNonePlacementState -= OnSetNonePlacementState;
+        EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
     }
 }
 }

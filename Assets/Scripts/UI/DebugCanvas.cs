@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using PolyNav;
 using BioTower.Structures;
 using System;
+using UnityEngine.Audio;
 
 namespace BioTower.UI
 {
@@ -14,12 +15,17 @@ public class DebugCanvas : MonoBehaviour
     [SerializeField] private RectTransform panel;
     [SerializeField] private GameObject enemyPrefab;
 
-
     [Header("Text")]
     [SerializeField] private Text currWaveText;
     [SerializeField] private Text placementStateText;
-  
-
+    [SerializeField] private Text tutorialText;
+    [SerializeField] private Text tutIndexText;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioMixer mixer;
+    public Slider sfxSlider;
+    public Slider musicSlider;
+       
     private void Awake()
     {
         panel.gameObject.SetActive(enableOnAwake);
@@ -35,6 +41,24 @@ public class DebugCanvas : MonoBehaviour
         }
 
         currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameStates.IsGameState() && GameManager.Instance.currTutCanvas != null)
+        {
+            tutorialText.text = $"Tut State: {GameManager.Instance.currTutCanvas.tutState}";
+            tutIndexText.text = $"Tut Index: {GameManager.Instance.currTutCanvas.currTutorialIndex}";
+        }
+    }
+
+    public void SetFSXVolume()
+    {
+        var val = 20.0f * Mathf.Log10(sfxSlider.value);
+        mixer.SetFloat("SfxVolume", val);
+    }
+    
+    public void SetMusicVolume()
+    {
+        var val = 20.0f * Mathf.Log10(musicSlider.value);
+        mixer.SetFloat("MusicVolume", val);
     }
 
     public void SpawnEnemy()

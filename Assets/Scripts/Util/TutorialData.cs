@@ -7,17 +7,20 @@ namespace BioTower
 {
 public enum RequiredAction
 {
-    TAP_ANYWHERE,
-    TAP_ABA_TOWER_BUTTON,
-    PLACE_ABA_TOWER,
-    TOWER_SELECTED,
+    TAP_ANYWHERE, TAP_ABA_TOWER_BUTTON,
+    PLACE_ABA_TOWER, TOWER_SELECTED,
     SPAWN_ABA_UNIT
 }
 
 public enum TransitionType
 {
-    SLIDE_IN,
-    BLINK
+    SLIDE_IN, BLINK
+}
+
+public enum HighlightedItem
+{
+    NONE, ABA_TOWER_BTN, 
+    ABA_UNIT_BTN, SOCKET, ENERGY,
 }
 
 [CreateAssetMenu(menuName ="BioTower/TutorialData", fileName ="TutorialData")]
@@ -28,7 +31,16 @@ public class TutorialData : ScriptableObject
     public RequiredAction requiredAction;
     public TransitionType transition;
     [Range(0,5)] public float delay;
+    public HighlightedItem highlightedItem;
     public bool hasArrows;
     [ShowIf("hasArrows")] public Vector2[] arrowCoords;
+    
+    public bool IsTapAnywhereRequiredAction() { return requiredAction == RequiredAction.TAP_ANYWHERE; }
+    public bool IsTapAbaButtonRequiredAction() { return requiredAction == RequiredAction.TAP_ABA_TOWER_BUTTON; }
+    public bool IsPlaceAbaTowerRequiredAction() { return requiredAction == RequiredAction.PLACE_ABA_TOWER; }
+    public bool IsTowerSelectedRequiredAction() { return requiredAction == RequiredAction.TOWER_SELECTED; }
+    public bool IsSpawnAbaUnitRequiredAction() { return requiredAction == RequiredAction.SPAWN_ABA_UNIT; }
+
+
 }
 }

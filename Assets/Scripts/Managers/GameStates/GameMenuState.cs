@@ -12,8 +12,8 @@ public class GameMenuState : BootStateBase
         if (!isInitialized)
         {
             isInitialized = true;
-            
             controller.levelSelectMenu.canvas.enabled = false; 
+            controller.startMenuCanvas.canvas.enabled = false;
 
             var seq = LeanTween.sequence();
             seq.append(2.0f);

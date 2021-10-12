@@ -66,6 +66,7 @@ public class GameplayUI : MonoBehaviour
 
     // BUTTON METHODS -------------------------------------------------------------------------------
     
+
     public void OnPressAbaTowerButton()
     {
         if (!Util.towerManager.HasAvailableSockets())
@@ -74,14 +75,12 @@ public class GameplayUI : MonoBehaviour
             return;
         }   
 
-        // Make sure you can't press the button if there's currently a tutorial displayed that's
-        // not relevant to the button
-        if (TutorialCanvas.tutorialInProgress)
+        if (!InputController.canPressButtons)
         {
-            var requiredAction = GameManager.Instance.currTutCanvas.currTutorial.requiredAction;
-            if (requiredAction != RequiredAction.TAP_ABA_TOWER_BUTTON)
-                return;
+            Util.HandleInvalidButtonPress(AbaTowerButton);
+            return;
         }
+
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.ABA_TOWER];
         if (!canBuildTower)
             return;
@@ -89,6 +88,7 @@ public class GameplayUI : MonoBehaviour
         if (GameManager.Instance.econManager.CanBuyTower(StructureType.ABA_TOWER))
         {
             HandleButtonPress(AbaTowerButton, StructureType.ABA_TOWER);
+            //Debug.Log("ABA Button press");
         }
         else
         {
@@ -264,12 +264,27 @@ public class GameplayUI : MonoBehaviour
         mitoTowerButton.gameObject.SetActive(mitoTowerUnlocked);
     }
 
+    private void OnHighlightItem(HighlightedItem item)
+    {
+        if (item == HighlightedItem.ABA_TOWER_BTN)
+        {
+            var worldPos = Camera.main.ScreenToWorldPoint(AbaTowerButton.transform.position);
+            Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,150));  
+        }
+        else if (item == HighlightedItem.ENERGY)
+        {
+            var worldPos = Camera.main.ScreenToWorldPoint(currencyContainer.transform.position);
+            Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,150)); 
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onLevelStart += OnLevelStart;
         EventManager.Game.onSpendCurrency += OnSpendCurrency;
         EventManager.Game.onGainCurrency += OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted += OnStructureCooldownStarted;
+        EventManager.Tutorials.onHighlightItem += OnHighlightItem;
     }
 
     private void OnDisable()
@@ -278,6 +293,7 @@ public class GameplayUI : MonoBehaviour
         EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         EventManager.Game.onGainCurrency -= OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted -= OnStructureCooldownStarted;
+        EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
     }
 }
 }

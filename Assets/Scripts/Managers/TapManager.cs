@@ -51,6 +51,7 @@ public class TapManager : MonoBehaviour
         else if (Util.upgradeSettings.numFragmentsPickedUpOnTap > 1)
         {
             var radius = Util.gameSettings.multipleLightFragmentPickupRadius;
+            
             Collider2D [] colliders = Physics2D.OverlapCircleAll(hitInfo.point, radius, tappableLayerMask);
             if(colliders.Length > 0)
             {

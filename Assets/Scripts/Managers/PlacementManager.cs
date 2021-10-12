@@ -69,41 +69,50 @@ public class PlacementManager : MonoBehaviour
 
         if (IsPlacingState())
         {
-            if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))
+            var collider = DoRaycast(screenPos);
+            if (collider != null)
             {
-                PlaceTower(screenPos);
-                //TapStructure(screenPos);
+                var socket = GetSocket(collider);
+
+                // Socket is empty and can accept structure
+                if (!socket.HasStructure() && socket.CanAcceptStructure(structureToPlace))
+                {
+                    if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))
+                    {
+                        PlaceTower(screenPos, socket);
+                        GameManager.Instance.econManager.BuyTower(structureToPlace);
+                    }
+                }
             }
+            SetNoneState();
         }
     }
-
-    private void PlaceTower(Vector3 screenPos)
+    private Collider2D DoRaycast(Vector3 screenPos)
     {
         Ray ray = Camera.main.ScreenPointToRay(screenPos);
         RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, socketLayerMask);
-        //Debug.Log(hitInfo.collider.gameObject.name);
-        if (hitInfo.collider != null)
-        {
-            var socket = hitInfo.collider.transform.parent.GetComponent<StructureSocket>();
-            if (!socket.HasStructure() && socket.CanAcceptStructure(structureToPlace))
-            {
-                socket.SetHasStructure(true);
-                var tower = CreateStructure(structureToPlace);
-                tower.transform.position = hitInfo.collider.transform.position + placementOffset;
-                var structure = tower.GetComponent<Structure>();
-                structure.Init(socket);
-                GameManager.Instance.econManager.BuyTower(structureToPlace);
-                SetNoneState();
-            }
-        }
+        return hitInfo.collider; 
     }
 
-   
+    private StructureSocket GetSocket(Collider2D collider)
+    {
+        var socket = collider.transform.parent.GetComponent<StructureSocket>();
+        return socket;
+    }
+
+    private void PlaceTower(Vector3 screenPos, StructureSocket socket)
+    {
+        socket.SetHasStructure(true);
+        var tower = CreateStructure(structureToPlace);
+        tower.transform.position = socket.transform.position + placementOffset;
+        var structure = tower.GetComponent<Structure>();
+        structure.Init(socket);
+    }
+
     private void OnStartPlacementState(StructureType structureType)
     {
         var tower = CreateStructure(structureType);
     }
-
 
     public void SetNoneState() 
     { 
@@ -111,6 +120,7 @@ public class PlacementManager : MonoBehaviour
         structureToPlace = StructureType.NONE; 
         EventManager.Structures.onSetNonePlacementState?.Invoke();
     }
+
     public void SetPlacingState(StructureType structureType) 
     { 
         placementState = PlacementState.PLACING;
@@ -125,7 +135,6 @@ public class PlacementManager : MonoBehaviour
     {
         EventManager.UI.onPressTowerButton += OnPressTowerButton;
         EventManager.Input.onTouchBegan += OnTouchBegan;
-
     }
 
     private void OnDisable()

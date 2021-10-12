@@ -37,14 +37,10 @@ public class LevelInfo : MonoBehaviour
     {
         var saveData = GameManager.Instance.saveManager.Load();
         if (levelType == LevelType.LEVEL_01)
-        {
             InitializeFirstLevel(ref saveData);
-        }
         else
-        {
-           InitializeLevel(ref saveData);
-        }
-
+            InitializeLevel(ref saveData);
+        
         GameManager.Instance.saveManager.Save(saveData);
         EventManager.Game.onLevelStart?.Invoke(levelType);
     }
@@ -56,12 +52,10 @@ public class LevelInfo : MonoBehaviour
     /// <returns></returns>
     private void InitializeFirstLevel(ref GameData saveData)
     {
-        //saveData = new GameData();
         var defaultSettings = Util.gameSettings.defaultSettings;
         var upgradeSettings = Util.gameSettings.upgradeSettings;
         Util.gameSettings.SetUpgradeSettingsToDefault();
         saveData.SetDefaultSettings(defaultSettings);
-        Debug.Log("Init first lvl. energy: " + upgradeSettings.energy);
         GameManager.Instance.econManager.Init(Util.gameSettings.startingEnergy);
     }
 
@@ -76,12 +70,6 @@ public class LevelInfo : MonoBehaviour
         saveData.settings.enableTowerHealthDecline = true;
         Util.gameSettings.SetUpgradeSettingsBasedOnGameData(saveData);
         GameManager.Instance.econManager.Init(Util.gameSettings.upgradeSettings.energy);
-
-        //var settings = GameManager.Instance.gameSettings;
-        //settings.enableTowerHealthDecline = true;
-        //settings.energy = saveData.energy;
-        //settings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
-        //settings.abaUnitMaxHealth = saveData.abaTowerSettings.abaUnitMaxHealth;
     }
 
     public bool IsFirstLevel()

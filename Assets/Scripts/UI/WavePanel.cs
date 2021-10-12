@@ -19,6 +19,9 @@ public class WavePanel : MonoBehaviour
 
     public void DisplayWaveTitle(int waveIndex)
     {
+        if (LevelInfo.current.IsFirstLevel())
+            return;
+            
         waveTitle.text = $"WAVE {waveIndex+1}";
         panel.gameObject.SetActive(true);
         waveTitle.gameObject.SetActive(true);

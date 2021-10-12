@@ -17,6 +17,7 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] private Button healTowerButton;
     [SerializeField] private Button healTowerFullWidthButton;
     [SerializeField] private Button spawnUnitButton;
+    [SerializeField] private Button spawnUnitFullWidth;
     [SerializeField] private Button spawnLightParticleButton;
     //[SerializeField] private float scaleAnimDuration = 0.1f;
     [SerializeField] private Text currTowerText;
@@ -46,6 +47,7 @@ public class TowerMenu : MonoBehaviour
         SetPrice(healTowerButton);
         SetPrice(healTowerFullWidthButton);
         SetPrice(spawnUnitButton);
+        SetPrice(spawnUnitFullWidth);
         SetPrice(spawnLightParticleButton);
     }
 
@@ -191,8 +193,9 @@ public class TowerMenu : MonoBehaviour
         spawnLightParticleButton.gameObject.SetActive(displayLightDropButton);
         currTowerText.text = structure.structureType.ToString().Replace('_', ' ');
         towerPanel.gameObject.SetActive(true);
-        healTowerButton.gameObject.SetActive(displaySpawnUnitButton || displayLightDropButton);
-        healTowerFullWidthButton.gameObject.SetActive(!displaySpawnUnitButton && !displayLightDropButton);
+        healTowerButton.gameObject.SetActive((displaySpawnUnitButton || displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
+        healTowerFullWidthButton.gameObject.SetActive((!displaySpawnUnitButton && !displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
+        spawnUnitFullWidth.gameObject.SetActive(LevelInfo.current.IsFirstLevel());
         UpdateTowerHealthBar(structure);
         towerIcon.sprite = iconMap[structure.structureType];
     }

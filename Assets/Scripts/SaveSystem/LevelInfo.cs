@@ -83,5 +83,10 @@ public class LevelInfo : MonoBehaviour
         //settings.abaUnitSpawnLimit = saveData.abaUnitSpawnLimit;
         //settings.abaUnitMaxHealth = saveData.abaTowerSettings.abaUnitMaxHealth;
     }
+
+    public bool IsFirstLevel()
+    {
+        return levelType == LevelType.LEVEL_01;
+    }
 }
 }

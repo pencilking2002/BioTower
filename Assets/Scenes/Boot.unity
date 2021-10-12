@@ -569,7 +569,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 479419785}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -4598,8 +4598,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 301873650}
-  - {fileID: 585913398}
   - {fileID: 75373756}
+  - {fileID: 585913398}
   - {fileID: 1229839120}
   m_Father: {fileID: 851248620}
   m_RootOrder: 3
@@ -5511,7 +5511,7 @@ RectTransform:
   - {fileID: 53414744}
   - {fileID: 997423992}
   m_Father: {fileID: 479419785}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -5562,13 +5562,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 226128679}
   m_HandleRect: {fileID: 526117750}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1539190886}
+        m_TargetAssemblyTypeName: BioTower.UI.DebugCanvas, ScriptsAssembly
+        m_MethodName: SetFSXVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &595866263
 GameObject:
   m_ObjectHideFlags: 0
@@ -11726,13 +11738,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 673472207}
   m_HandleRect: {fileID: 1945058565}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1539190886}
+        m_TargetAssemblyTypeName: BioTower.UI.DebugCanvas, ScriptsAssembly
+        m_MethodName: SetMusicVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1231328136
 GameObject:
   m_ObjectHideFlags: 0
@@ -14632,6 +14656,7 @@ MonoBehaviour:
   placementStateText: {fileID: 419233549}
   tutorialText: {fileID: 983496136}
   tutIndexText: {fileID: 2019533672}
+  mixer: {fileID: 24100000, guid: 09e3968fbce7d5d48879f373a9d4ab5e, type: 2}
   sfxSlider: {fileID: 585913399}
   musicSlider: {fileID: 1229839121}
 --- !u!114 &1539190887

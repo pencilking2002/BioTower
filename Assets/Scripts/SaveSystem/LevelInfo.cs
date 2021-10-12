@@ -25,8 +25,8 @@ public class LevelInfo : MonoBehaviour
     public WinCondition winCondition;
     public LoseCondition loseCondition;
     public LevelType levelType;
-    public int numEnemiesToDestroy;
-    public int numEnemiesDestroyed;
+    [ShowIf("winCondition", WinCondition.KILL_ENEMIES)] public int numEnemiesToDestroy;
+    [ShowIf("winCondition", WinCondition.KILL_ENEMIES)] public int numEnemiesDestroyed;
 
     private void Awake()
     {

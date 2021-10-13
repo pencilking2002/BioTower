@@ -40,6 +40,7 @@ public class TowerMenu : MonoBehaviour
         iconMap.Add(StructureType.CHLOROPLAST, chloroplastTower);
         iconMap.Add(StructureType.DNA_BASE, playerTower);
         iconMap.Add(StructureType.MITOCHONDRIA, mitoTower);
+        iconMap.Add(StructureType.MINI_CHLOROPLAST_TOWER, mitoTower);
     }
 
     private void Start()

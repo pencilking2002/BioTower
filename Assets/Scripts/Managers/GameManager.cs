@@ -27,9 +27,10 @@ public class GameManager : MonoBehaviour
     public DNABase playerBase;
     [SerializeField] private List<BasicEnemy> enemyList = new List<BasicEnemy>();
     private GameObject enemyContainer;  
-
+    
 
     [Header("References")]
+    public Camera cam;
     public ObjectShake objectShake;
     public UnitManager unitManager;
     public TutorialCanvas currTutCanvas => 

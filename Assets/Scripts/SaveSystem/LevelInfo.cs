@@ -32,7 +32,6 @@ public class LevelInfo : MonoBehaviour
     private void Awake()
     {
         EventManager.Game.onLevelAwake?.Invoke(levelType);
-        Camera.main.orthographicSize = cameraSize;
     }
 
     private void Start()
@@ -45,6 +44,17 @@ public class LevelInfo : MonoBehaviour
         
         GameManager.Instance.saveManager.Save(saveData);
         EventManager.Game.onLevelStart?.Invoke(levelType);
+
+        AnimateCamera();
+    }
+
+    private void AnimateCamera()
+    {
+        var cam = GameManager.Instance.cam;
+        cam.orthographicSize = cameraSize + 0.3f;
+        LeanTween.value(gameObject, cam.orthographicSize, cameraSize, 1.0f).setOnUpdate((float val) => {
+            cam.orthographicSize = val;
+        }).setEaseOutQuad();
     }
 
     /// <summary>

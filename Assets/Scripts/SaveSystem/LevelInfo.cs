@@ -27,10 +27,12 @@ public class LevelInfo : MonoBehaviour
     public LevelType levelType;
     [ShowIf("winCondition", WinCondition.KILL_ENEMIES)] public int numEnemiesToDestroy;
     [ShowIf("winCondition", WinCondition.KILL_ENEMIES)] public int numEnemiesDestroyed;
+    public float cameraSize = 6.0f;
 
     private void Awake()
     {
         EventManager.Game.onLevelAwake?.Invoke(levelType);
+        Camera.main.orthographicSize = cameraSize;
     }
 
     private void Start()

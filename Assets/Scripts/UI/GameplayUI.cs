@@ -132,7 +132,7 @@ public class GameplayUI : MonoBehaviour
         if (!canBuildTower)
             return;
 
-        if (GameManager.Instance.econManager.CanBuyTower(StructureType.PPC2_TOWER))
+        if (GameManager.Instance.econManager.CanBuyTower(StructureType.CHLOROPLAST))
         {
             HandleButtonPress(chloroplastTowerButton, StructureType.CHLOROPLAST);
         }

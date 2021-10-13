@@ -26,6 +26,31 @@ public class AudioManager : MonoBehaviour
         musicSource.Play(); 
     }
 
+    private void PlayMusicCrossFade(AudioClip clip, float crossFadeDuration, bool loop=true) 
+    { 
+        if (musicSource.clip != null)
+        {
+            var currVol = musicSource.volume;
+            var seq = LeanTween.sequence();
+        
+            seq.append(LeanTween.value(gameObject, currVol, 0, crossFadeDuration)
+                .setOnUpdate((float val) => { musicSource.volume = val; }));
+
+            seq.append(gameObject, () => {
+                musicSource.clip = clip;
+                musicSource.loop = loop;
+                musicSource.Play(); 
+            });
+
+            seq.append(LeanTween.value(gameObject, 0, currVol, crossFadeDuration)
+                .setOnUpdate((float val) => { musicSource.volume = val; }));   
+        }
+        else
+        {
+            PlayMusic(clip, loop);
+        }
+    }
+
     private void PlaySoundAtLocation(AudioClip clip, Vector3 location, float vol)
     {
         AudioSource.PlayClipAtPoint(clip, location, vol);
@@ -47,7 +72,7 @@ public class AudioManager : MonoBehaviour
         switch(gameState)
         {
             case GameState.GAME:
-                PlayMusic(data.levelTrack);
+                PlayMusicCrossFade(data.levelTrack, 0.5f);
                 break;
             case GameState.GAME_OVER_LOSE:
                 PlayMusic(data.gameOverLose, false);
@@ -56,7 +81,7 @@ public class AudioManager : MonoBehaviour
                 PlayMusic(data.gameOverWin, false);
                 break;
             case GameState.START_MENU:
-                PlayMusic(data.mainMenuTrack);
+                PlayMusicCrossFade(data.mainMenuTrack, 0.5f);
                 break;
         }
     }

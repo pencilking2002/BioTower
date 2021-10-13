@@ -269,9 +269,9 @@ public class TowerMenu : MonoBehaviour
   
     private void OnHighlightItem(HighlightedItem item)
     {
-        if (item == HighlightedItem.ABA_UNIT_BTN)
+        if (LevelInfo.current.IsFirstLevel() && item == HighlightedItem.ABA_UNIT_BTN)
         {
-            var worldPos = Camera.main.ScreenToWorldPoint(spawnUnitButton.transform.position);
+            var worldPos = Camera.main.ScreenToWorldPoint(spawnUnitFullWidth.transform.position);
             Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,130));  
         }
     }

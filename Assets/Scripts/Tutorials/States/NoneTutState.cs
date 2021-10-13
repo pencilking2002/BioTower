@@ -32,7 +32,8 @@ public class NoneTutState : TutStateBase
         }
         else if (tutCanvas.canvas.enabled)
         {
-            tutCanvas.canvas.enabled = false;
+            //tutCanvas.canvas.enabled = false;
+            tutCanvas.tutPanel.gameObject.SetActive(false);
         }
 
         return tutState;

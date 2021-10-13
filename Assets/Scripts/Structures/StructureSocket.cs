@@ -50,6 +50,10 @@ public class StructureSocket : MonoBehaviour
             LeanTween.value(gameObject, currColor, glowColor, glowAnimDuration).setOnUpdate((Color col) => {
                 glowingSprite.color = col;
             }).setLoopPingPong(-1);
+
+            LeanTween.delayedCall(0.1f, () => {
+                var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
+            });
         }
         else if (isDefault)
         {
@@ -58,10 +62,13 @@ public class StructureSocket : MonoBehaviour
             LeanTween.value(gameObject, currColor, glowColor, glowAnimDuration).setOnUpdate((Color col) => {
                 glowingSprite.color = col;
             }).setLoopPingPong(-1);
+
+            LeanTween.delayedCall(0.1f, () => {
+                var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
+            });
         }
-        LeanTween.delayedCall(0.1f, () => {
-            var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
-        });
+
+        
     }
 
     public bool CanAcceptStructure(StructureType structureType)

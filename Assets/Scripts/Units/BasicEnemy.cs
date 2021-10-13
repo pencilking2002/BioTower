@@ -67,11 +67,9 @@ public class BasicEnemy : Unit
     public override void StopMoving()
     {
         agent.Stop();
-        //Debug.Log("Stop Moving");
         isEngagedInCombat = true;
         anim.SetBool("Walk", false);
         anim.SetBool("Attack", true);
-        //sr.color = stoppedColor;
     }
 
     public void SetDestination(Waypoint waypoint)
@@ -225,8 +223,11 @@ public class BasicEnemy : Unit
     private void OnGameStateInit(GameState gameState)
     {
         if (gameState == GameState.GAME_OVER_LOSE || gameState == GameState.GAME_OVER_WIN)
-            StopMoving();
-
+        {
+            agent.Stop();
+            anim.SetBool("Walk", false);
+            anim.SetBool("Attack", false);
+        }
     }
 
     private void OnEnable()
@@ -234,7 +235,7 @@ public class BasicEnemy : Unit
         //EventManager.Game.onLevelLoaded_02 += LevelLoaded;
         agent.OnDestinationReached += DestinationReached;
         EventManager.Game.onTogglePaths += OnTogglePaths;
-        EventManager.Game.onGameStateInit += OnGameStateInit;
+        EventManager.Game.onGameStateInit += OnGameStateInit;        
     }
 
     private void OnDisable()

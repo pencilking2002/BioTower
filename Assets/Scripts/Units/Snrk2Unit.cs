@@ -135,10 +135,25 @@ public class Snrk2Unit : Unit
         }
     }
 
+    public override void StopMoving()
+    {
+        agent.Stop();
+        anim.SetBool("Walk", false);
+    }
+
     private void OnStructureDestroyed(Structure structure)
     {
         if (structure == tower)
             KillUnit();
+    }
+
+    private void OnGameStateInit(GameState gameState)
+    {
+        if (gameState == GameState.GAME_OVER_LOSE || gameState == GameState.GAME_OVER_WIN)
+        {
+            agent.Stop();
+            anim.SetBool("Walk", false);
+        }
     }
 
     private void OnEnable()
@@ -147,6 +162,7 @@ public class Snrk2Unit : Unit
         agent.OnDestinationInvalid += OnDestinationReached; // Used for when the destination is inside an obstacle
         EventManager.Game.onCrystalDestroyed += OnCrystalDestroyed;
         EventManager.Structures.onStructureDestroyed += OnStructureDestroyed;
+        EventManager.Game.onGameStateInit += OnGameStateInit;        
     }
 
     private void OnDisable()
@@ -155,6 +171,7 @@ public class Snrk2Unit : Unit
         agent.OnDestinationInvalid -= OnDestinationReached;
         EventManager.Game.onCrystalDestroyed -= OnCrystalDestroyed;
         EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
+        EventManager.Game.onGameStateInit -= OnGameStateInit;
     }
 }
 }

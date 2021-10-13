@@ -115,6 +115,9 @@ public class AbaUnit : Unit
 
     private void OnDestinationReached()
     {
+        if (GameManager.Instance.gameStates.gameState != GameState.GAME)
+            return;
+            
         if (IsRoamingState())
         {
             SetNewDestination();
@@ -131,17 +134,29 @@ public class AbaUnit : Unit
         SetDestroyedState();
         EventManager.Units.onUnitDestroyed?.Invoke(this);
     }
+
+    private void OnGameStateInit(GameState gameState)
+    {
+        if (gameState == GameState.GAME_OVER_LOSE || gameState == GameState.GAME_OVER_WIN)
+        {
+            agent.Stop();
+            anim.SetBool("Walk", false);
+            anim.SetBool("Attack", false);
+        }
+    }
     
     private void OnEnable()
     {
         agent.OnDestinationReached += OnDestinationReached;
         agent.OnDestinationInvalid += OnDestinationReached; // Used for when the destination is inside am obstacle
+        EventManager.Game.onGameStateInit += OnGameStateInit;
     }
 
     private void OnDisable()
     {
         agent.OnDestinationReached -= OnDestinationReached;
         agent.OnDestinationInvalid -= OnDestinationReached;
+        EventManager.Game.onGameStateInit -= OnGameStateInit;
     }
 }
 }

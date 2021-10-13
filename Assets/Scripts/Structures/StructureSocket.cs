@@ -33,6 +33,8 @@ public class StructureSocket : MonoBehaviour
         EventManager.Structures.onSocketStart?.Invoke(this);
     }
 
+    //private static int numTimes = 0;
+
     private void OnStartPlacementState(StructureType structureType)
     {
         if (hasStructure)
@@ -57,6 +59,9 @@ public class StructureSocket : MonoBehaviour
                 glowingSprite.color = col;
             }).setLoopPingPong(-1);
         }
+        LeanTween.delayedCall(0.1f, () => {
+            var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
+        });
     }
 
     public bool CanAcceptStructure(StructureType structureType)
@@ -80,14 +85,15 @@ public class StructureSocket : MonoBehaviour
     {
         LeanTween.cancel(gameObject);
         glowingSprite.color = defaultColor;
+        Util.poolManager.DespawnAllitemHighlights();
     }
 
     private void OnHighlightItem(HighlightedItem item)
     {
-        if (item == HighlightedItem.SOCKET)
-        {
-            Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
-        }
+        // if (item == HighlightedItem.SOCKET)
+        // {
+        //     Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
+        // }
     }
 
     private void OnEnable()

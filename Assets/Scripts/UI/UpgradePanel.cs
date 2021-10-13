@@ -16,17 +16,23 @@ public class UpgradePanel : MonoBehaviour
     [SerializeField] private UpgradeButton unlockUpgradeButton;
     [SerializeField] private UpgradeButton[] upgradeButtons;
     [SerializeField] private Color defaultButtonColor;
-    public Image panel;
+    public RectTransform panel;
     public Image infoPanel;
     public Image itemImage;
     public Button chooseUpgradeButton;
     public Text upgradeDescription;
 
 
+    private void Awake()
+    {
+        panel.gameObject.SetActive(false);
+    }
+
     private void AnimateUpgradePanel(bool slideIn, Action onComplete=null)
     {
         if (slideIn)
         {
+            panel.gameObject.SetActive(true);
             float initLocalPosY = panel.transform.localPosition.y;
             panel.transform.localPosition = new Vector3(0, -500, 0);
             LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f)
@@ -128,6 +134,7 @@ public class UpgradePanel : MonoBehaviour
         var data = upgradeData.GetUpgradeTextData(upgradeType);
         upgradeDescription.text = data.descrptionText;
         itemImage.sprite = data.sprite;
+        EventManager.UI.onTapButton?.Invoke(true);
     }
 
     public void OnPressUpgradeButton02()
@@ -140,6 +147,7 @@ public class UpgradePanel : MonoBehaviour
         var data = upgradeData.GetUpgradeTextData(upgradeType);
         upgradeDescription.text = data.descrptionText;
         itemImage.sprite = data.sprite;
+        EventManager.UI.onTapButton?.Invoke(true);
     }
 
     public void OnPressUpgradeButton03()
@@ -152,6 +160,7 @@ public class UpgradePanel : MonoBehaviour
         var data = upgradeData.GetUpgradeTextData(upgradeType);
         upgradeDescription.text = data.descrptionText;
         itemImage.sprite = data.sprite;
+        EventManager.UI.onTapButton?.Invoke(true);
     }
 
     public void OnPressPurchaseUpgradeButton()
@@ -186,9 +195,11 @@ public class UpgradePanel : MonoBehaviour
         gameData.settings.currLevel = ++currLevel;
         GameManager.Instance.saveManager.Save(gameData);
         BootController.levelToLoadInstantly = gameData.settings.currLevel;
+        EventManager.UI.onTapButton?.Invoke(true);
 
-        
-        SceneManager.LoadScene(0);
+        LeanTween.delayedCall(1.0f, () => {
+            SceneManager.LoadScene(0);
+        });
     }
 }
 }

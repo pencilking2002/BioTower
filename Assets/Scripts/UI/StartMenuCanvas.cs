@@ -17,12 +17,17 @@ public class StartMenuCanvas : MonoBehaviour
     [SerializeField] private CanvasGroup title_01;
     [SerializeField] private CanvasGroup title_02;
     [SerializeField] private CanvasGroup tapCTA;
+    [SerializeField] private CanvasGroup crackPanel_01;
+    [SerializeField] private CanvasGroup crackPanel_02;
     public static bool titleAnimCompleted = false;
 
     private int numTimesTitleDropped;
 
     private void Awake()
     {
+        crackPanel_01.alpha = 0;
+        crackPanel_02.alpha = 0;
+
         tapCTA.alpha = 0;
         AnimateTitle(title_01, 1f);
         AnimateTitle(title_02, 1, 0.6f);
@@ -52,6 +57,25 @@ public class StartMenuCanvas : MonoBehaviour
         seq.append(() => {
             numTimesTitleDropped++;
             EventManager.UI.onTitleAnimCompleted?.Invoke(numTimesTitleDropped);
+
+            if (numTimesTitleDropped == 1)
+            {
+                LeanTween.value(gameObject, 0, 0.9f, 0.2f).setOnUpdate((float val) => {
+                    crackPanel_01.alpha = val;
+                });
+                var targetScale = crackPanel_01.transform.localScale;
+                targetScale.x *= 1.2f;
+                LeanTween.scale(crackPanel_01.gameObject, targetScale, 0.05f);
+            }
+            else
+            {
+                var targetScale = crackPanel_02.transform.localScale;
+                targetScale.x *= 1.2f;
+                LeanTween.scale(crackPanel_02.gameObject, targetScale, 0.05f);
+                LeanTween.value(gameObject, 0, 0.9f, 0.2f).setOnUpdate((float val) => {
+                    crackPanel_02.alpha = val;
+                });
+            }
         });
     }
 

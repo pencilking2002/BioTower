@@ -52,9 +52,9 @@ public class LevelInfo : MonoBehaviour
     {
         var cam = GameManager.Instance.cam;
         cam.orthographicSize = cameraSize + 0.3f;
-        LeanTween.value(gameObject, cam.orthographicSize, cameraSize, 1.0f).setOnUpdate((float val) => {
+        LeanTween.value(gameObject, cam.orthographicSize, cameraSize, 2.0f).setOnUpdate((float val) => {
             cam.orthographicSize = val;
-        }).setEaseOutQuad();
+        }).setEaseOutExpo();
     }
 
     /// <summary>

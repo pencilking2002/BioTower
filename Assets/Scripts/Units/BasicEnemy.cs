@@ -14,6 +14,7 @@ public class BasicEnemy : Unit
     [Header("References")]
     [SerializeField] private GameObject crystalPrefab;
     [SerializeField] private Collider2D triggerCollider;
+    [SerializeField] private SpriteRenderer muscleIcon;
 
     
     [Header("Enemy state")]
@@ -145,9 +146,19 @@ public class BasicEnemy : Unit
             SpawnCrystal();
             triggerCollider.enabled = false;
             return isAlive;
-            //DestroyImmediate(gameObject);
-            //base.KillUnit();
         }
+    }
+
+    private void AnimateMuscleIcon()
+    {
+        muscleIcon.gameObject.SetActive(true);
+        var targetScale = muscleIcon.transform.localScale;
+        muscleIcon.transform.localScale = Vector3.zero;
+        LeanTween.scale(muscleIcon.gameObject, targetScale, 0.25f).setEaseOutElastic();
+
+        LeanTween.delayedCall(gameObject, 1.0f, () => {
+            LeanTween.scale(muscleIcon.gameObject, Vector3.zero, 0.25f);
+        });
     }
 
     private void PickupCrystal(Collider2D col)
@@ -163,6 +174,8 @@ public class BasicEnemy : Unit
         LeanTween.scale(sr.gameObject, oldScale * 1.2f, 0.25f);
         sr.color = hasCrystalTintColor;
         EventManager.Units.onEnemyPickedUpCrystal?.Invoke();
+
+        AnimateMuscleIcon();
         // TODO: make enemy stronger after picking up crystal
 
     }
@@ -232,7 +245,6 @@ public class BasicEnemy : Unit
 
     private void OnEnable()
     {
-        //EventManager.Game.onLevelLoaded_02 += LevelLoaded;
         agent.OnDestinationReached += DestinationReached;
         EventManager.Game.onTogglePaths += OnTogglePaths;
         EventManager.Game.onGameStateInit += OnGameStateInit;        
@@ -240,7 +252,6 @@ public class BasicEnemy : Unit
 
     private void OnDisable()
     {
-        //EventManager.Game.onLevelLoaded_02 -= LevelLoaded;
         agent.OnDestinationReached -= DestinationReached;
         EventManager.Game.onTogglePaths -= OnTogglePaths;
         EventManager.Game.onGameStateInit -= OnGameStateInit;

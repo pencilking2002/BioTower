@@ -57,7 +57,7 @@ public class TowerMenu : MonoBehaviour
         Text text = button.transform.Find("PriceText").GetComponent<Text>();
         if (button == healTowerButton || button == healTowerFullWidthButton)
             text.text = Util.gameSettings.upgradeSettings.healTowerCost.ToString();
-        else if (button == spawnUnitButton)
+        else if (button == spawnUnitButton || button == spawnUnitFullWidth)
             text.text = Util.gameSettings.upgradeSettings.abaUnitCost.ToString();
          else if (button == spawnLightParticleButton)
             text.text = Util.gameSettings.spawnLightDropCost.ToString();
@@ -83,6 +83,11 @@ public class TowerMenu : MonoBehaviour
                     if (!abaTower.IsBelowSpawnLimit())
                     {
                         SetButtonMaxText(spawnUnitButton);
+                    }
+                    else
+                    {
+                        if (LevelInfo.current.IsFirstLevel())
+                            spawnUnitFullWidth.transform.parent.Find("Glow").GetComponent<Image>().enabled = false;
                     }
 
                     EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
@@ -161,8 +166,8 @@ public class TowerMenu : MonoBehaviour
             return;
             
         //Debug.Log($"Tap {tower.structureType}");
-        bool displaySpawnUnitButton = structure.structureType == StructureType.ABA_TOWER || 
-                                    (structure.structureType == StructureType.PPC2_TOWER && Util.upgradeSettings.snrk2UnitUnlocked);
+        bool displaySpawnUnitButton = structure.IsAbaTower() || 
+                                    (structure.IsPPC2Tower() && Util.upgradeSettings.snrk2UnitUnlocked);
                                     
         bool displayLightDropButton = structure.structureType == StructureType.MITOCHONDRIA;
 
@@ -273,7 +278,12 @@ public class TowerMenu : MonoBehaviour
         if (LevelInfo.current.IsFirstLevel() && item == HighlightedItem.ABA_UNIT_BTN)
         {
             var worldPos = Camera.main.ScreenToWorldPoint(spawnUnitFullWidth.transform.position);
-            Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,130));  
+            Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,130)); 
+            spawnUnitFullWidth.transform.parent.Find("Glow").GetComponent<Image>().enabled = true; 
+        }
+        else
+        {
+
         }
     }
 

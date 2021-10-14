@@ -20,7 +20,7 @@ public class UpgradePanel : MonoBehaviour
     public Image infoPanel;
     public Image itemImage;
     public Button chooseUpgradeButton;
-    public Text upgradeDescription;
+    public TextMeshProUGUI upgradeDescription;
 
 
     private void Awake()

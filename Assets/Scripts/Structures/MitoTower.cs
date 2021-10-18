@@ -18,7 +18,7 @@ public class MitoTower : Structure
     [Header("Cooldown")]
     public bool isCoolingDown;
     public float spawnLightFragCooldown = 3;
-    private float cooldownStartTime;
+    [HideInInspector] public float cooldownStartTime;
 
     public override void Awake()
     {

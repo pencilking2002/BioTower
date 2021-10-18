@@ -19,7 +19,7 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] private Button spawnUnitButton;
     [SerializeField] private Button spawnUnitFullWidth;
     [SerializeField] private Button spawnLightParticleButton;
-    //[SerializeField] private float scaleAnimDuration = 0.1f;
+    private Image spawnLightDropCooldownImage;
     [SerializeField] private Text currTowerText;
 
     
@@ -34,6 +34,7 @@ public class TowerMenu : MonoBehaviour
 
     private void Awake()
     {
+        spawnLightDropCooldownImage = spawnLightParticleButton.transform.Find("Cooldown").GetComponent<Image>();
         towerPanel.gameObject.SetActive(false);
         iconMap.Add(StructureType.ABA_TOWER, abaTower);
         iconMap.Add(StructureType.PPC2_TOWER, pp2cTower);
@@ -50,6 +51,34 @@ public class TowerMenu : MonoBehaviour
         SetPrice(spawnUnitButton);
         SetPrice(spawnUnitFullWidth);
         SetPrice(spawnLightParticleButton);
+    }
+
+    private void Update()
+    {
+        if (!Util.gameStates.IsGameState())
+            return;
+
+        HandleMitoTowerCooldownDisplay();
+    }
+
+    private void HandleMitoTowerCooldownDisplay()
+    {
+        if (Util.tapManager.selectedStructure.IsMitoTower())
+        {
+            var tower = (MitoTower) Util.tapManager.selectedStructure;
+
+            if (tower.isCoolingDown)
+            {
+                var totalTime = tower.spawnLightFragCooldown;
+                var timeLeft = Time.time - tower.cooldownStartTime;
+                var percentage = 1-(timeLeft/totalTime);
+                spawnLightDropCooldownImage.fillAmount = percentage;
+            }
+            else
+            {
+                spawnLightDropCooldownImage.fillAmount = 0;
+            }
+        }
     }
 
     private void SetPrice(Button button)

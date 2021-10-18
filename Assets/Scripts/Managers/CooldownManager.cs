@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
 using System;
+using UnityEngine.UI;
 
 namespace BioTower
 {
@@ -11,6 +12,8 @@ public class CooldownManager : MonoBehaviour
     public float structureSpawnCooldown = 5.0f;
     private float lastStructureSpawnedTime;
     public static Dictionary<StructureType,bool> structureCooldownMap = new Dictionary<StructureType, bool>();
+    
+    //public float mitoLightFragCooldown = 3;
 
     private void Start()
     {
@@ -35,14 +38,27 @@ public class CooldownManager : MonoBehaviour
         }); 
     }
 
+    // private void OnTapLightDropButton(Button button)
+    // {
+    //     button.interactable = false;
+    //     var cooldownImage = button.transform.Find("Cooldown").GetComponent<Image>();
+    //     LeanTween.value(gameObject, 1, 0, mitoLightFragCooldown).setOnUpdate((float val) => {
+    //         cooldownImage.fillAmount = val;
+    //     })
+    //     .setOnComplete(() => {
+    //         button.interactable = true;
+    //     });
+    // }
     private void OnEnable()
     {
         EventManager.Structures.onStructureCreated += OnStructureCreated;
+        //EventManager.UI.onTapLightDropButton += OnTapLightDropButton;
     }
 
     private void OnDisable()
     {
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
+        //EventManager.UI.onTapLightDropButton -= OnTapLightDropButton;
     }
 }
 }

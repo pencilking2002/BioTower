@@ -203,6 +203,11 @@ public class Structure : MonoBehaviour
     {
         return structureType == StructureType.CHLOROPLAST;
     }
+
+    public bool IsMitoTower()
+    {
+        return structureType == StructureType.MITOCHONDRIA;
+    }
     
     public bool IsMiniChloroTower()
     {

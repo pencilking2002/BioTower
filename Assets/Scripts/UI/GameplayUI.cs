@@ -157,7 +157,7 @@ public class GameplayUI : MonoBehaviour
 
         if (GameManager.Instance.econManager.CanBuyTower(StructureType.MITOCHONDRIA))
         {
-            HandleButtonPress(chloroplastTowerButton, StructureType.MITOCHONDRIA);
+            HandleButtonPress(mitoTowerButton, StructureType.MITOCHONDRIA);
         }
         else
         {

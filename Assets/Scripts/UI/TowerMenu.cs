@@ -147,10 +147,15 @@ public class TowerMenu : MonoBehaviour
     {
         if (Util.econManager.CanBuyLightFragment())
         {
-            var selectedTower = GameManager.Instance.tapManager.selectedStructure;
-            var mitoTower = (MitoTower) selectedTower;
-            mitoTower.ShootFragment();
-            Util.econManager.BuyLightFragment();
+            if (spawnLightParticleButton.IsInteractable())
+            {
+                var selectedTower = GameManager.Instance.tapManager.selectedStructure;
+                var mitoTower = (MitoTower) selectedTower;
+                mitoTower.ShootFragment();
+                Util.econManager.BuyLightFragment();
+                EventManager.UI.onTapLightDropButton?.Invoke(mitoTower);
+                spawnLightParticleButton.interactable = false;
+            }
         }
         else
         {
@@ -162,7 +167,7 @@ public class TowerMenu : MonoBehaviour
 
     public void OnStructureSelected(Structure structure)
     {
-        if (structure.structureType == StructureType.ROAD_BARRIER)
+        if (structure.IsBarrier() || structure.IsMiniChloroTower())
             return;
             
         //Debug.Log($"Tap {tower.structureType}");
@@ -174,7 +179,7 @@ public class TowerMenu : MonoBehaviour
         spawnUnitButton.gameObject.SetActive(displaySpawnUnitButton);
         var spawnUnitText = spawnUnitButton.transform.Find("Text").GetComponent<Text>();
 
-        if (structure.structureType == StructureType.ABA_TOWER)
+        if (structure.IsAbaTower())
         {
             //spawnUnitText.text = "ABA\nUnit";
             var abaTower = (ABATower) structure;
@@ -183,17 +188,18 @@ public class TowerMenu : MonoBehaviour
             else
                 SetButtonMaxText(spawnUnitButton);
         }
-        else if (structure.structureType == StructureType.PPC2_TOWER)
+        else if (structure.IsPPC2Tower())
         {
             var ppc2Tower = (PPC2Tower) structure;
             if (ppc2Tower.IsBelowSpawnLimit())
-             SetButtonTextDefault(spawnUnitButton, "SNRK2\nUnit");
+                SetButtonTextDefault(spawnUnitButton, "SNRK2\nUnit");
             else
                 SetButtonMaxText(spawnUnitButton);
-
-            //spawnUnitText.text = "SNRK2\nUnit";
-
-            // TODO: Create spawn limit logic for ppc2
+        }
+        else if (structure.IsMitoTower())
+        {
+            var tower = (MitoTower) structure;
+            spawnLightParticleButton.interactable = !tower.isCoolingDown;
         }
 
         spawnLightParticleButton.gameObject.SetActive(displayLightDropButton);
@@ -287,6 +293,20 @@ public class TowerMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// If mito tower is selected, update the spawn light drops button
+    /// </summary>
+    /// <param name="structure"></param>
+    private void OnSpawnLightDropCooldownComplete(Structure structure)
+    {
+        var selectedStructure = GameManager.Instance.tapManager.selectedStructure;
+        if (selectedStructure == structure && structure.IsMitoTower())
+        {
+            //var tower = (MitoTower) selectedStructure;
+            spawnLightParticleButton.interactable = true;
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.Structures.onStructureSelected += OnStructureSelected;
@@ -295,6 +315,7 @@ public class TowerMenu : MonoBehaviour
         EventManager.Structures.onStructureLoseHealth += OnStructureLoseHealth;
         EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
         EventManager.Tutorials.onHighlightItem += OnHighlightItem;
+        EventManager.UI.onSpawnLightDropCooldownComplete += OnSpawnLightDropCooldownComplete;
     }
 
     private void OnDisable()
@@ -305,6 +326,7 @@ public class TowerMenu : MonoBehaviour
         EventManager.Structures.onStructureLoseHealth -= OnStructureLoseHealth;
         EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;        
         EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
+        EventManager.UI.onSpawnLightDropCooldownComplete -= OnSpawnLightDropCooldownComplete;
     }
 }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using UnityEngine.UI;
 
 namespace BioTower.Structures
 {
@@ -13,6 +14,11 @@ public class MitoTower : Structure
     [SerializeField] private float shootDuration = 1.0f;
     [SerializeField] private float shootInterval = 5;
     private float lastShotTime;
+
+    [Header("Cooldown")]
+    public bool isCoolingDown;
+    public float spawnLightFragCooldown = 3;
+    private float cooldownStartTime;
 
     public override void Awake()
     {
@@ -30,13 +36,16 @@ public class MitoTower : Structure
         return fragment;
     }
 
-    private void Update()
+    public override void OnUpdate()
     {
-        // if (Time.time > lastShotTime + shootInterval)
-        // {
-        //     ShootFragment();
-        //     lastShotTime = Time.time;
-        // }
+        if (isCoolingDown)
+        {
+            if (Time.time > cooldownStartTime + spawnLightFragCooldown)
+            {
+                isCoolingDown = false;
+                EventManager.UI.onSpawnLightDropCooldownComplete?.Invoke(this);
+            }
+        }
     }
 
     [Button("Shoot Fragment")]
@@ -74,6 +83,27 @@ public class MitoTower : Structure
                 minInfluenceCollider.radius, 
                 maxInfluenceCollider.radius
             );
+    }
+
+    private void OnTapLightDropButton(MitoTower tower)
+    {
+        if (tower != this)
+            return;
+        
+        isCoolingDown = true;
+        cooldownStartTime = Time.time;
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        EventManager.UI.onTapLightDropButton += OnTapLightDropButton;
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        EventManager.UI.onTapLightDropButton -= OnTapLightDropButton;
     }
 }
 }

@@ -5,6 +5,7 @@ using System;
 using BioTower.Structures;
 using BioTower.Units;
 using BioTower.SaveData;
+using UnityEngine.UI;
 
 namespace BioTower
 {
@@ -72,6 +73,8 @@ public class EventManager : MonoBehaviour
         public static Action onTapLevelSelectButton;
         public static Action<UnitType> onTapSpawnUnitButton;
         public static Action<bool> onTapButton;     // Is button press valid
+        public static Action<MitoTower> onTapLightDropButton;
+        public static Action<Structure> onSpawnLightDropCooldownComplete;
         public static Action onPressLevelSelectButton;
         public static Action onLetterReveal;
         public static Action<int> onTitleAnimCompleted;

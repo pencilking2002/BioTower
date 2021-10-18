@@ -716,11 +716,10 @@ MonoBehaviour:
   structureType: 0
   hasHealth: 1
   isAlive: 1
-  maxHealth: 20
+  maxHealth: 2
   currHealth: 0
   healthSlider: {fileID: 4120694177487789927}
   spriteOutline: {fileID: 1967604699690797267}
-  structureState: 0
   sr: {fileID: 1985713823300775996}
   lastDeclineTime: 0
   initSpriteScale: {x: 0, y: 0, z: 0}

@@ -16,7 +16,15 @@ public class AudioManager : MonoBehaviour
     private void PlaySound(AudioClip clip) 
     {
         if (clip != null) 
+        {
+            if (sfxSource == null)
+            {
+                sfxSource = this.transform.Find("sfxSource").GetComponent<AudioSource>();
+                //Debug.Log("sfx audio course is null");
+            }
+
             sfxSource.PlayOneShot(clip); 
+        }
     }
 
     private void PlayMusic(AudioClip clip, bool loop=true) 

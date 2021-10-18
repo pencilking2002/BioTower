@@ -11,6 +11,7 @@ public class EndedState : WaveState
         if (!isInitialized)
         {
             isInitialized = true;
+            var numWaves = waveManager.waveSettings.waves.Length;
             EventManager.Game.onWaveStateInit?.Invoke(waveState);
         }
     }

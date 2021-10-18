@@ -75,7 +75,7 @@ public class PlacementManager : MonoBehaviour
                 var socket = GetSocket(collider);
 
                 // Socket is empty and can accept structure
-                if (!socket.HasStructure() && socket.CanAcceptStructure(structureToPlace))
+                if (!socket.HasStructure() /*&& socket.CanAcceptStructure(structureToPlace)*/)
                 {
                     if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))
                     {

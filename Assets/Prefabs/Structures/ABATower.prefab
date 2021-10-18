@@ -716,7 +716,7 @@ MonoBehaviour:
   structureType: 0
   hasHealth: 1
   isAlive: 1
-  maxHealth: 2
+  maxHealth: 15
   currHealth: 0
   healthSlider: {fileID: 4120694177487789927}
   spriteOutline: {fileID: 1967604699690797267}

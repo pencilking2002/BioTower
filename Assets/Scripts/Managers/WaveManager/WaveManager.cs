@@ -12,8 +12,8 @@ public class WaveManager : MonoBehaviour
     public LevelSettings waveSettings => LevelInfo.current.waveSettings;
     [SerializeField] private WaveMode waveMode;
     public int currWave;
-    [HideInInspector] public bool wavesInitialized;
-    [HideInInspector] public bool wavesHaveCompleted;
+    public bool wavesInitialized;
+    public bool wavesHaveCompleted;
 
     private NotStartedState notStartedState;
     private DelayState delayState;
@@ -94,11 +94,17 @@ public class WaveManager : MonoBehaviour
         if (levelType == LevelType.LEVEL_01)
             return;
 
+        currWave = 0;
+        wavesInitialized = true;
+        wavesHaveCompleted = false;
+
         // Initialize waves
         for (int i=0; i<waveSettings.waves.Length; i++)
             waveSettings.waves[i].Init(i);
         
-        wavesInitialized = true;
+       
+        
+        Debug.Log($"waves initialized for {levelType}");
     }
 
     private void OnTutorialEnd(TutorialData data)
@@ -110,11 +116,18 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    private void OnWavesCompleted()
+    {
+        wavesInitialized = false;
+        currWave = 0;
+    }
+
     private void OnEnable()
     {
         EventManager.Units.onEnemyReachedDestination += OnEnemyReachedDestination;
         EventManager.Game.onLevelStart += OnLevelStart;
         EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
+        EventManager.Game.onWavesCompleted += OnWavesCompleted;
     }
 
     private void OnDisable()
@@ -122,6 +135,7 @@ public class WaveManager : MonoBehaviour
         EventManager.Units.onEnemyReachedDestination -= OnEnemyReachedDestination;
         EventManager.Game.onLevelStart -= OnLevelStart;
         EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
+        EventManager.Game.onWavesCompleted += OnWavesCompleted;
     }
 
 }

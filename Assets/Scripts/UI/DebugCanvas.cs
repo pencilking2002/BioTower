@@ -63,8 +63,6 @@ public class DebugCanvas : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        // var enemyGO = Instantiate(enemyPrefab);
-        // enemyGO.transform.position = GameObject.FindGameObjectWithTag(Constants.enemyTestSpawnSpot).transform.position;
         var enemy = Util.waveManager.SpawnEnemy(new Vector2(0.4f, 0.7f));
         enemy.transform.position = GameObject.FindGameObjectWithTag(Constants.enemyTestSpawnSpot).transform.position;
     }

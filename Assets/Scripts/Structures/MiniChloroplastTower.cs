@@ -30,7 +30,7 @@ public class MiniChloroplastTower : Structure
         {
             ShootFragment();
             lastShotTime = Time.time;
-            Debug.Log("Shoot");
+            //Debug.Log("Shoot");
         }
     }
 

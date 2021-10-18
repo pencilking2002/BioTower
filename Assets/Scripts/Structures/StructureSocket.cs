@@ -9,7 +9,7 @@ namespace BioTower
 public enum SocketType
 {
     DEFAULT,
-    SPECIAL
+    //SPECIAL
 }
 
 [SelectionBase]
@@ -40,11 +40,24 @@ public class StructureSocket : MonoBehaviour
         if (hasStructure)
             return;
 
-        bool isSpecial = socketType == SocketType.SPECIAL && (structureType == StructureType.CHLOROPLAST || structureType == StructureType.MITOCHONDRIA);
-        bool isDefault = socketType == SocketType.DEFAULT && (structureType != StructureType.CHLOROPLAST && structureType != StructureType.MITOCHONDRIA);
+        //bool isSpecial = socketType == SocketType.SPECIAL && (structureType == StructureType.CHLOROPLAST || structureType == StructureType.MITOCHONDRIA);
+        //bool isDefault = socketType == SocketType.DEFAULT && (structureType != StructureType.CHLOROPLAST && structureType != StructureType.MITOCHONDRIA);
 
-        if (isSpecial)
-        {
+        // if (isSpecial)
+        // {
+        //     var currColor = glowingSprite.color;
+        //     LeanTween.cancel(gameObject);
+        //     LeanTween.value(gameObject, currColor, glowColor, glowAnimDuration).setOnUpdate((Color col) => {
+        //         glowingSprite.color = col;
+        //     }).setLoopPingPong(-1);
+
+        //     LeanTween.delayedCall(0.1f, () => {
+        //         var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
+        //     });
+        // }
+        //else if (isDefault)
+        //if (isDefault)
+        //{
             var currColor = glowingSprite.color;
             LeanTween.cancel(gameObject);
             LeanTween.value(gameObject, currColor, glowColor, glowAnimDuration).setOnUpdate((Color col) => {
@@ -54,29 +67,16 @@ public class StructureSocket : MonoBehaviour
             LeanTween.delayedCall(0.1f, () => {
                 var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
             });
-        }
-        else if (isDefault)
-        {
-            var currColor = glowingSprite.color;
-            LeanTween.cancel(gameObject);
-            LeanTween.value(gameObject, currColor, glowColor, glowAnimDuration).setOnUpdate((Color col) => {
-                glowingSprite.color = col;
-            }).setLoopPingPong(-1);
-
-            LeanTween.delayedCall(0.1f, () => {
-                var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
-            });
-        }
-
-        
+        //}
     }
 
-    public bool CanAcceptStructure(StructureType structureType)
-    {
-        bool isSpecial = socketType == SocketType.SPECIAL && (structureType == StructureType.CHLOROPLAST || structureType == StructureType.MITOCHONDRIA);
-        bool isDefault = socketType == SocketType.DEFAULT && (structureType != StructureType.CHLOROPLAST && structureType != StructureType.MITOCHONDRIA);
-        return isSpecial || isDefault;
-    }
+    // public bool CanAcceptStructure(StructureType structureType)
+    // {
+    //     //bool isSpecial = socketType == SocketType.SPECIAL && (structureType == StructureType.CHLOROPLAST || structureType == StructureType.MITOCHONDRIA);
+    //     bool isDefault = socketType == SocketType.DEFAULT && (structureType != StructureType.CHLOROPLAST && structureType != StructureType.MITOCHONDRIA);
+    //     //return isSpecial || isDefault;
+    //     return isDefault;
+    // }
 
     public void SetHasStructure(bool hasStructure)
     {

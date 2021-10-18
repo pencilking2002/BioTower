@@ -35,7 +35,7 @@ public class WaveManager : MonoBehaviour
         waveStateMap.Add(WaveMode.ENDED, endedState); 
     }
 
-    public void SpawnEnemy(Vector2 minMaxSpeed)
+    public BasicEnemy SpawnEnemy(Vector2 minMaxSpeed)
     {
         // Initialize enemy
         var enemyGO = Instantiate(enemyPrefab);
@@ -51,6 +51,7 @@ public class WaveManager : MonoBehaviour
         GameManager.Instance.RegisterEnemy(enemy);
         enemy.SetSpeed(minMaxSpeed);
         enemy.StartMoving(enemy.GetNextWaypoint());
+        return enemy;
     }
 
     private void Update()

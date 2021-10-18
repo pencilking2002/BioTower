@@ -22,6 +22,7 @@ public class Util : MonoBehaviour
     public static StructureManager towerManager => GameManager.Instance.structureManager;
     public static TapManager tapManager => GameManager.Instance.tapManager;
     public static GameStates gameStates => GameManager.Instance.gameStates;
+    public static WaveManager waveManager => GameManager.Instance.waveManager;
     public LayerMask enemyLayerMask;
     
     public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)

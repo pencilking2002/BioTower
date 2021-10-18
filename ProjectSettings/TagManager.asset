@@ -12,6 +12,7 @@ TagManager:
   - BootController
   - TutorialCanvas
   - LightFragment
+  - EnemyTestSpawnSpot
   layers:
   - Default
   - TransparentFX

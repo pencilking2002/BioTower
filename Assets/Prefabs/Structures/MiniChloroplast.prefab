@@ -62,7 +62,7 @@ MonoBehaviour:
   maxInfluenceCollider: {fileID: 698594724809693232}
   minInfluenceCollider: {fileID: 698594724665910072}
   shootDuration: 1
-  shootInterval: 4
+  shootInterval: 5
 --- !u!1 &698594723753930955
 GameObject:
   m_ObjectHideFlags: 0

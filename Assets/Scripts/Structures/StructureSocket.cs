@@ -6,17 +6,10 @@ using BioTower.Structures;
 namespace BioTower
 {
 
-public enum SocketType
-{
-    DEFAULT,
-    //SPECIAL
-}
-
 [SelectionBase]
 public class StructureSocket : MonoBehaviour
 {
     [SerializeField] private bool hasStructure;
-    [SerializeField] private SocketType socketType;
     [SerializeField] private SpriteRenderer glowingSprite;
     [SerializeField] private Color glowColor;
     [SerializeField] private float glowAnimDuration = 0.5f;
@@ -29,6 +22,13 @@ public class StructureSocket : MonoBehaviour
         var duration = UnityEngine.Random.Range(0.5f, 1.0f);
         var scale = glowingSprite.transform.localScale;
         var additionalScale = UnityEngine.Random.Range(0.0f, 0.2f);
+
+        var color = glowingSprite.color;
+        color.r += UnityEngine.Random.Range(0.0f, 0.1f);
+        color.g += UnityEngine.Random.Range(0.0f, 0.1f);
+        color.b += UnityEngine.Random.Range(0.0f, 0.1f);
+
+        glowingSprite.color = color;
         glowingSprite.transform.localScale = Vector3.zero;
         LeanTween.delayedCall(gameObject, 1+delay, () => {
             defaultColor = glowingSprite.color;
@@ -40,8 +40,6 @@ public class StructureSocket : MonoBehaviour
     {
         EventManager.Structures.onSocketStart?.Invoke(this);
     }
-
-    //private static int numTimes = 0;
 
     private void OnStartPlacementState(StructureType structureType)
     {

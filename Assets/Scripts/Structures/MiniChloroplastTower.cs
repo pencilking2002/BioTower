@@ -30,7 +30,6 @@ public class MiniChloroplastTower : Structure
         {
             ShootFragment();
             lastShotTime = Time.time + UnityEngine.Random.Range(0.0f, 1.0f);
-            //Debug.Log("Shoot");
         }
     }
 
@@ -45,7 +44,9 @@ public class MiniChloroplastTower : Structure
     private void ShootFragment(bool avoidFragmentCollider=true)
     {
         var scale = sr.transform.localScale;
-        LeanTween.scale(sr.gameObject, scale*1.2f, 0.05f).setLoopPingPong(1);
+        var seq = LeanTween.sequence();
+        seq.append(LeanTween.scale(sr.gameObject, scale*1.2f, 0.1f));
+        seq.append(LeanTween.scale(sr.gameObject, scale, 0.4f).setEaseOutElastic());
      
 
         var fragment = CreateFragment();
@@ -54,9 +55,9 @@ public class MiniChloroplastTower : Structure
         Vector3 controlPoint = startPos + (endPos-startPos) * 0.5f + Vector3.up;
         fragment.transform.position = startPos;
 
-        var seq = LeanTween.sequence();
+        var seq2 = LeanTween.sequence();
 
-        seq.append(
+        seq2.append(
             LeanTween.value(gameObject, 0,1, shootDuration)
             .setOnUpdate((float val) => {
                 Vector2 targetPos = Util.Bezier2(startPos, controlPoint, endPos, val);
@@ -65,8 +66,9 @@ public class MiniChloroplastTower : Structure
             .setEaseInSine()
         );
 
-        seq.append(LeanTween.moveY(fragment, endPos.y + 0.06f, 0.1f));
-        seq.append(LeanTween.moveY(fragment, endPos.y, 0.1f));
+        seq2.append(LeanTween.moveY(fragment, endPos.y + 0.06f, 0.1f));
+        seq2.append(LeanTween.moveY(fragment, endPos.y, 0.1f));
+        EventManager.Structures.onLightDropped?.Invoke();
     }
 
     public Vector2 GetPointWithinInfluence(bool avoidFragmentCollider)

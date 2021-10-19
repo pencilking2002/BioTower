@@ -16,7 +16,7 @@ public class MiniChloroplastTower : Structure
     public override void Awake()
     {
         base.Awake();
-        lastShotTime = Time.time;
+        lastShotTime = Time.time + UnityEngine.Random.Range(0,0.3f);
     }
 
     private void Start()
@@ -29,7 +29,7 @@ public class MiniChloroplastTower : Structure
         if (Time.time > lastShotTime + shootInterval)
         {
             ShootFragment();
-            lastShotTime = Time.time;
+            lastShotTime = Time.time + UnityEngine.Random.Range(0.0f, 1.0f);
             //Debug.Log("Shoot");
         }
     }
@@ -44,6 +44,10 @@ public class MiniChloroplastTower : Structure
     [Button("Shoot Fragment")]
     private void ShootFragment(bool avoidFragmentCollider=true)
     {
+        var scale = sr.transform.localScale;
+        LeanTween.scale(sr.gameObject, scale*1.2f, 0.05f).setLoopPingPong(1);
+     
+
         var fragment = CreateFragment();
         Vector3 startPos = transform.position;
         Vector3 endPos = GetPointWithinInfluence(avoidFragmentCollider);

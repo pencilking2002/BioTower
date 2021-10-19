@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_04
   m_EditorClassIdentifier: 
-  text: 'ABA towers start out with one <b><color=#406109>ABA unit</color></b>. Let''s
-    create another! Tap the button to create a new ABA unit. '
+  text: ABA towers start out with one <b><color=#4C7900>ABA UNIT</color></b>. Tap
+    the button to create another one!
   portraitIndex: 1
   requiredAction: 4
   transition: 1

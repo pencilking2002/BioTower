@@ -25,7 +25,15 @@ public class StructureSocket : MonoBehaviour
 
     private void Awake()
     {
-        defaultColor = glowingSprite.color;
+        var delay = UnityEngine.Random.Range(0.0f, 1.0f);
+        var duration = UnityEngine.Random.Range(0.5f, 1.0f);
+        var scale = glowingSprite.transform.localScale;
+        var additionalScale = UnityEngine.Random.Range(0.0f, 0.2f);
+        glowingSprite.transform.localScale = Vector3.zero;
+        LeanTween.delayedCall(gameObject, 1+delay, () => {
+            defaultColor = glowingSprite.color;
+            LeanTween.scale(glowingSprite.gameObject, scale * (1 + additionalScale), duration).setEaseOutElastic();
+        });
     }
 
     private void Start()
@@ -40,43 +48,16 @@ public class StructureSocket : MonoBehaviour
         if (hasStructure)
             return;
 
-        //bool isSpecial = socketType == SocketType.SPECIAL && (structureType == StructureType.CHLOROPLAST || structureType == StructureType.MITOCHONDRIA);
-        //bool isDefault = socketType == SocketType.DEFAULT && (structureType != StructureType.CHLOROPLAST && structureType != StructureType.MITOCHONDRIA);
+        var currColor = glowingSprite.color;
+        LeanTween.cancel(gameObject);
+        LeanTween.value(gameObject, currColor, glowColor, glowAnimDuration).setOnUpdate((Color col) => {
+            glowingSprite.color = col;
+        }).setLoopPingPong(-1);
 
-        // if (isSpecial)
-        // {
-        //     var currColor = glowingSprite.color;
-        //     LeanTween.cancel(gameObject);
-        //     LeanTween.value(gameObject, currColor, glowColor, glowAnimDuration).setOnUpdate((Color col) => {
-        //         glowingSprite.color = col;
-        //     }).setLoopPingPong(-1);
-
-        //     LeanTween.delayedCall(0.1f, () => {
-        //         var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
-        //     });
-        // }
-        //else if (isDefault)
-        //if (isDefault)
-        //{
-            var currColor = glowingSprite.color;
-            LeanTween.cancel(gameObject);
-            LeanTween.value(gameObject, currColor, glowColor, glowAnimDuration).setOnUpdate((Color col) => {
-                glowingSprite.color = col;
-            }).setLoopPingPong(-1);
-
-            LeanTween.delayedCall(0.1f, () => {
-                var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
-            });
-        //}
+        LeanTween.delayedCall(0.1f, () => {
+            var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0,100));
+        });
     }
-
-    // public bool CanAcceptStructure(StructureType structureType)
-    // {
-    //     //bool isSpecial = socketType == SocketType.SPECIAL && (structureType == StructureType.CHLOROPLAST || structureType == StructureType.MITOCHONDRIA);
-    //     bool isDefault = socketType == SocketType.DEFAULT && (structureType != StructureType.CHLOROPLAST && structureType != StructureType.MITOCHONDRIA);
-    //     //return isSpecial || isDefault;
-    //     return isDefault;
-    // }
 
     public void SetHasStructure(bool hasStructure)
     {

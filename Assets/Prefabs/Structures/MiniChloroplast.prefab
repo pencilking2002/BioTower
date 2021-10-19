@@ -62,7 +62,7 @@ MonoBehaviour:
   maxInfluenceCollider: {fileID: 698594724809693232}
   minInfluenceCollider: {fileID: 698594724665910072}
   shootDuration: 1
-  shootInterval: 2
+  shootInterval: 4
 --- !u!1 &698594723753930955
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,8 +170,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698594723923698423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: 0.112, y: -0.546, z: 0}
+  m_LocalScale: {x: 0.18157399, y: 0.18157399, z: 0.18157399}
   m_Children:
   - {fileID: 698594724330610936}
   m_Father: {fileID: 698594723716587134}
@@ -217,7 +217,7 @@ SpriteRenderer:
   m_SortingLayerID: 1053425993
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c9852b5d8f194e442b7de9d7830a446e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 17f6b6f50a5715f489124d67abbf71a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

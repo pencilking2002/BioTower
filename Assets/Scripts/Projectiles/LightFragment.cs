@@ -16,11 +16,19 @@ public class LightFragment : MonoBehaviour
         GameManager.Instance.CreateLightExplosion(transform.position);
         hasBeenPickedUp = true;
         EventManager.Structures.onLightPickedUp?.Invoke();
-        LeanTween.scale(gameObject, Vector3.zero, 0.1f)
-            .setOnComplete(() => {
-                GetComponent<PooledObject>().SendToPool();
-                hasBeenPickedUp = false;
-            });
+
+        var scale = transform.localScale;
+
+        var seq = LeanTween.sequence();
+
+        seq.append(LeanTween.scale(gameObject, scale * 3f, 0.1f));
+
+        seq.append(LeanTween.scale(gameObject, Vector3.zero, 0.1f));
+
+        seq.append(gameObject, () => {
+            GetComponent<PooledObject>().SendToPool();
+            hasBeenPickedUp = false;
+        });
     }
 }
 }

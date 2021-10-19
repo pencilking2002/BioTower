@@ -12,7 +12,7 @@ public class MissionController : MonoBehaviour
     [SerializeField] private GameObject missionPanel;
     [SerializeField] private TextMeshProUGUI missionText;
     [SerializeField] private TextMeshProUGUI missionDirectiveText;
-
+    [SerializeField] private Color importantColor;
     private void Awake()
     {
         missionText.text = "";
@@ -39,6 +39,15 @@ public class MissionController : MonoBehaviour
 
     private void OnLevelStarted(LevelType levelType)
     {
+        if (!LevelInfo.current.IsFirstLevel())
+        {
+            LeanTween.delayedCall(gameObject, 1.0f, () => {
+                var col = ColorUtility.ToHtmlStringRGB(importantColor);
+                string missionText = $"Survive {Util.waveManager.waveSettings.waves.Length} waves";
+                string directiveText = $"Current Wave: <color=#{col}>{Util.waveManager.currWave+1}</color>";
+                DisplayMissionText(missionText, directiveText);
+            });
+        }
     }
 
     private void OnTutorialEnd(TutorialData data)
@@ -50,8 +59,9 @@ public class MissionController : MonoBehaviour
         if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
         {
             LeanTween.delayedCall(gameObject, 1.0f, () => {
+                var col = ColorUtility.ToHtmlStringRGB(importantColor);
                 string missionText = $"Defeat {levelInfo.numEnemiesToDestroy} enemies";
-                string directiveText = $"Enemies Defeated: <color=red>0</color>";
+                string directiveText = $"Enemies Defeated: <color=#{col}>0</color>";
                 DisplayMissionText(missionText, directiveText);
             });
         }

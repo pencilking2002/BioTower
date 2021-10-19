@@ -15,11 +15,14 @@ public class DebugCanvas : MonoBehaviour
     [SerializeField] private RectTransform panel;
     [SerializeField] private GameObject enemyPrefab;
 
+
     [Header("Text")]
     [SerializeField] private Text currWaveText;
     [SerializeField] private Text placementStateText;
     [SerializeField] private Text tutorialText;
     [SerializeField] private Text tutIndexText;
+    [SerializeField] private Text tutInProgressText;
+
     
     [Header("Audio")]
     [SerializeField] private AudioMixer mixer;
@@ -34,7 +37,6 @@ public class DebugCanvas : MonoBehaviour
     
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.D))
         {
             panel.gameObject.SetActive(!panel.gameObject.activeInHierarchy);
@@ -46,6 +48,7 @@ public class DebugCanvas : MonoBehaviour
         {
             tutorialText.text = $"Tut State: {GameManager.Instance.currTutCanvas.tutState}";
             tutIndexText.text = $"Tut Index: {GameManager.Instance.currTutCanvas.currTutorialIndex}";
+            tutInProgressText.text = $"Tut in progress: {TutorialCanvas.tutorialInProgress}";
         }
     }
 

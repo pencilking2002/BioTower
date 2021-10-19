@@ -15,7 +15,7 @@ public class LetterRevealState : TutStateBase
         if (!isInitialized)
         {
             isInitialized = true;
-
+            TutorialCanvas.tutorialInProgress = true;
             InputController.canPressButtons = false;
             InputController.canSpawnTowers = false;
 

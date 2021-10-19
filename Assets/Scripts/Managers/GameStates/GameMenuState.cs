@@ -16,15 +16,13 @@ public class GameMenuState : BootStateBase
             controller.startMenuCanvas.canvas.enabled = false;
 
             var seq = LeanTween.sequence();
+            controller.gameplayUI.gameUIPanel.alpha = 0;
             seq.append(2.0f);
             seq.append(() => { 
                 controller.gameCanvas.canvas.enabled = true;
                 controller.gameCanvas.canvasGroup.alpha = 1;
                 controller.gameCanvas.gameOverPanel.gameObject.SetActive(false);
-
-                controller.gameplayUI.gameUIPanel.alpha = 0;
                 controller.gameplayUI.gameUIPanel.gameObject.SetActive(true);
-
                 controller.upgradePanel.Hide();
                 //controller.towerMenu.towerPanel.gameObject.SetActive(true);
             });
@@ -32,23 +30,23 @@ public class GameMenuState : BootStateBase
             seq.append(() => {
                 // Don't display the menu at the beginning of the level if we're in the beginning of the level
                 // and doing a tutorial
-                var tutCanvas = GameManager.Instance.currTutCanvas;
-                if (tutCanvas.hasTutorials)
-                {
-                    var requiredAction = tutCanvas.currTutorial.requiredAction;
-                    if ((TutorialCanvas.tutorialInProgress && requiredAction != RequiredAction.TAP_ABA_TOWER_BUTTON))
-                    {
+                //var tutCanvas = GameManager.Instance.currTutCanvas;
+                // if (Util.tutCanvas.hasTutorials)
+                // {
+                //     var requiredAction = Util.tutCanvas.currTutorial.requiredAction;
+                //     if ((TutorialCanvas.tutorialInProgress && requiredAction != RequiredAction.TAP_ABA_TOWER_BUTTON))
+                //     {
 
-                    }
-                    else
-                    {
-                        LeanTween.alphaCanvas(controller.gameplayUI.gameUIPanel, 1.0f, 0.5f);
-                    }
-                }
-                else
-                {
-                    LeanTween.alphaCanvas(controller.gameplayUI.gameUIPanel, 1.0f, 0.5f);
-                }
+                //     }
+                //     else
+                //     {
+                //         LeanTween.alphaCanvas(controller.gameplayUI.gameUIPanel, 1.0f, 0.5f);
+                //     }
+                // }
+                // else
+                // {
+                LeanTween.alphaCanvas(controller.gameplayUI.gameUIPanel, 1.0f, 0.5f);
+                // }
                 
             });
 

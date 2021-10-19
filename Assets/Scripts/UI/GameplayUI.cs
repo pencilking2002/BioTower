@@ -88,13 +88,18 @@ public class GameplayUI : MonoBehaviour
         if (GameManager.Instance.econManager.CanBuyTower(StructureType.ABA_TOWER))
         {
             HandleButtonPress(AbaTowerButton, StructureType.ABA_TOWER);
-            //Debug.Log("ABA Button press");
+            if (LevelInfo.current.IsFirstLevel())
+            {
+                Util.HideGlowUI(AbaTowerButton.transform);    
+            }
         }
         else
         {
             Util.HandleInvalidButtonPress(AbaTowerButton);
             GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
         }
+
+ 
     }
 
     public void OnPressPPC2TowerButton()
@@ -278,6 +283,14 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
+    private void OnTutorialEnd(TutorialData data)
+    {
+        if (LevelInfo.current.IsFirstLevel())
+        {
+            Util.DisplayGlowUI(AbaTowerButton.transform);
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onLevelStart += OnLevelStart;
@@ -285,6 +298,7 @@ public class GameplayUI : MonoBehaviour
         EventManager.Game.onGainCurrency += OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted += OnStructureCooldownStarted;
         EventManager.Tutorials.onHighlightItem += OnHighlightItem;
+        EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
     }
 
     private void OnDisable()
@@ -294,6 +308,7 @@ public class GameplayUI : MonoBehaviour
         EventManager.Game.onGainCurrency -= OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted -= OnStructureCooldownStarted;
         EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
+        EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
     }
 }
 }

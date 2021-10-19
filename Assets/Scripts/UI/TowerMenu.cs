@@ -94,10 +94,20 @@ public class TowerMenu : MonoBehaviour
 
     public void OnPressSpawnUnitButton()
     {
+
+        if (TutorialCanvas.tutorialInProgress)
+        {
+            if (Util.tutCanvas.tutState != TutState.WAITING_BUTTON_TAP)
+            {
+                Util.HandleInvalidButtonPress(spawnUnitFullWidth, Util.ButtonColorMode.DEFAULT);
+                return;
+            }
+        }
+        
         var selectedStructure = GameManager.Instance.tapManager.selectedStructure;
 
         UnitType unitType = UnitType.ABA;
-        if (selectedStructure.structureType == StructureType.ABA_TOWER)
+        if (selectedStructure.IsAbaTower())
         {
             unitType = UnitType.ABA;
             if (GameManager.Instance.econManager.CanBuyUnit(unitType))
@@ -116,7 +126,7 @@ public class TowerMenu : MonoBehaviour
                     else
                     {
                         if (LevelInfo.current.IsFirstLevel())
-                            spawnUnitFullWidth.transform.parent.Find("Glow").GetComponent<Image>().enabled = false;
+                            Util.HideGlowUI(spawnUnitFullWidth.transform);
                     }
 
                     EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
@@ -130,7 +140,7 @@ public class TowerMenu : MonoBehaviour
                 GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
             }
         }
-        else if (selectedStructure.structureType == StructureType.PPC2_TOWER)
+        else if (selectedStructure.IsPPC2Tower())
         {
             PPC2Tower ppc2Tower = (PPC2Tower) selectedStructure;
 
@@ -156,7 +166,9 @@ public class TowerMenu : MonoBehaviour
 
     public void OnPressHealTowerButton()
     {
-        if (GameManager.Instance.econManager.CanBuyTowerHeal())
+        var tower = Util.tapManager.selectedStructure;
+
+        if (GameManager.Instance.econManager.CanBuyTowerHeal() && !tower.IsMaxHealth())
         {
             var healAmount = Util.gameSettings.healTowerAmount;
             GameManager.Instance.tapManager.selectedStructure.GainHealth(healAmount);
@@ -314,7 +326,7 @@ public class TowerMenu : MonoBehaviour
         {
             var worldPos = Camera.main.ScreenToWorldPoint(spawnUnitFullWidth.transform.position);
             Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,130)); 
-            spawnUnitFullWidth.transform.parent.Find("Glow").GetComponent<Image>().enabled = true; 
+            Util.DisplayGlowUI(spawnUnitFullWidth.transform);
         }
         else
         {

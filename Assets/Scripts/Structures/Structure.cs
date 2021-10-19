@@ -71,6 +71,8 @@ public class Structure : MonoBehaviour
     public virtual int GetCurrHealth() { return currHealth; }
     public virtual int GetMaxHealth() { return maxHealth; }
 
+    public virtual bool IsMaxHealth() { return currHealth == maxHealth; }
+
     protected Unit GetClosestUnit(BasicEnemy enemy)
     {
         float furthestDistance = Mathf.Infinity;

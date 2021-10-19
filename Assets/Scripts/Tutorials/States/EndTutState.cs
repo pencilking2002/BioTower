@@ -12,7 +12,7 @@ public class EndTutState : TutStateBase
         if (!isInitialized)
         {
             isInitialized = true;
-            
+            TutorialCanvas.tutorialInProgress = false;
             InputController.canPressButtons = true;
             InputController.canSpawnTowers = true;
             

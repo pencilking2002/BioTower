@@ -23,6 +23,7 @@ public class Util : MonoBehaviour
     public static TapManager tapManager => GameManager.Instance.tapManager;
     public static GameStates gameStates => GameManager.Instance.gameStates;
     public static WaveManager waveManager => GameManager.Instance.waveManager;
+    public static TutorialCanvas tutCanvas => GameManager.Instance.currTutCanvas;
     public LayerMask enemyLayerMask;
     
     public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)
@@ -131,15 +132,14 @@ public class Util : MonoBehaviour
         }
     }
 
-    public static void DisplayCooldownForLightDropButton(Button button, MitoTower tower)
+    public static void DisplayGlowUI(Transform uiElement)
     {
-        // LeanTween.cancel(tower.gameObject);
-        // var totalTime = tower.spawnLightFragCooldown;
-        // var timeLeft = Time.time - tower.cooldownStartTime;
-        // var percentage = totalTime/timeLeft;
-
-        //LeanTween.value(tower.gameObject, percentage, 0)
+        uiElement.parent.Find("Glow").GetComponent<Image>().enabled = true;
     }
 
+    public static void HideGlowUI(Transform uiElement)
+    {
+        uiElement.parent.Find("Glow").GetComponent<Image>().enabled = false;
+    }
 }
 }

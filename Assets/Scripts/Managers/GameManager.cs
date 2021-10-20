@@ -210,14 +210,13 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            
-            if (transform.parent != null)
-                DontDestroyOnLoad(gameObject.transform.parent.gameObject);
-            else
-                DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(transform.parent.gameObject);
         }
         else
+        {
             Destroy(gameObject);
+            Destroy(this);
+        }
     }
 }
 }

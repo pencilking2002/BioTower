@@ -34,6 +34,17 @@ public class WaveManager : MonoBehaviour
         waveStateMap.Add(WaveMode.IN_PROGRESS, inProgressState); 
         waveStateMap.Add(WaveMode.ENDED, endedState); 
     }
+    
+    private void InitializeWaves()
+    {
+        currWave = 0;
+        wavesInitialized = true;
+        wavesHaveCompleted = false;
+
+        // Initialize waves
+        for (int i=0; i<waveSettings.waves.Length; i++)
+            waveSettings.waves[i].Init(i);
+    }
 
     public BasicEnemy SpawnEnemy(Vector2 minMaxSpeed)
     {
@@ -85,7 +96,9 @@ public class WaveManager : MonoBehaviour
         // Vary speed
         var minMaxSpeed = waveSettings.waves[currWave].minMaxSpeed;
         enemy.SetSpeed(minMaxSpeed, 0.5f);
-    }
+    }   
+
+    
 
     private void OnLevelStart(LevelType levelType)
     {
@@ -94,16 +107,7 @@ public class WaveManager : MonoBehaviour
         if (levelType == LevelType.LEVEL_01)
             return;
 
-        currWave = 0;
-        wavesInitialized = true;
-        wavesHaveCompleted = false;
-
-        // Initialize waves
-        for (int i=0; i<waveSettings.waves.Length; i++)
-            waveSettings.waves[i].Init(i);
-        
-       
-        
+        InitializeWaves();
         Debug.Log($"waves initialized for {levelType}");
     }
 
@@ -112,7 +116,7 @@ public class WaveManager : MonoBehaviour
         if (LevelInfo.current.levelType == LevelType.LEVEL_01 && 
             GameManager.Instance.currTutCanvas.IsLastTutorial(data))
         {
-            wavesInitialized = true;    
+            InitializeWaves(); 
         }
     }
 
@@ -135,7 +139,7 @@ public class WaveManager : MonoBehaviour
         EventManager.Units.onEnemyReachedDestination -= OnEnemyReachedDestination;
         EventManager.Game.onLevelStart -= OnLevelStart;
         EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
-        EventManager.Game.onWavesCompleted += OnWavesCompleted;
+        EventManager.Game.onWavesCompleted -= OnWavesCompleted;
     }
 
 }

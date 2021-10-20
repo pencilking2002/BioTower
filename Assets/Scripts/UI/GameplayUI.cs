@@ -20,7 +20,7 @@ public class GameplayUI : MonoBehaviour
     public GameObject currencyContainer;
     [SerializeField] private TextMeshProUGUI playerCurrencyText;
     public Dictionary<StructureType,Button> towerButtonMap = new Dictionary<StructureType, Button>();
-
+    private Vector3 initPos;
 
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class GameplayUI : MonoBehaviour
         towerButtonMap.Add(StructureType.PPC2_TOWER, Pp2cTowerButton);
         towerButtonMap.Add(StructureType.CHLOROPLAST, chloroplastTowerButton);
         towerButtonMap.Add(StructureType.MITOCHONDRIA, mitoTowerButton);
+        initPos = gameUIPanel.transform.position;
     }
 
     private void Start()
@@ -38,6 +39,29 @@ public class GameplayUI : MonoBehaviour
         SetTowerPrice(StructureType.MITOCHONDRIA);
     }
 
+    private void OnLevelStart(LevelType levelType)
+    {
+        bool ppc2TowerUnlocked = Util.upgradeSettings.ppc2TowerUnlocked;
+        Pp2cTowerButton.gameObject.SetActive(ppc2TowerUnlocked);
+
+        bool chloroTowerUnlocked = Util.upgradeSettings.chloroTowerUnlocked;
+        chloroplastTowerButton.gameObject.SetActive(chloroTowerUnlocked);
+
+        bool mitoTowerUnlocked = Util.upgradeSettings.mitoTowerUnlocked;
+        mitoTowerButton.gameObject.SetActive(mitoTowerUnlocked);
+
+        SlideInPanel(2.0f);
+    }
+
+    private void SlideInPanel(float delay)
+    { 
+        var startPos = initPos;
+        startPos.y -= 120;
+        gameUIPanel.transform.position = startPos;
+        LeanTween.delayedCall(gameObject, delay, () => {
+            LeanTween.move(gameUIPanel.gameObject, initPos, 0.5f).setEaseOutQuint();
+        });
+    }
     public StructureType GetSelectedButtonType()
     {
         foreach(KeyValuePair<StructureType, Button> btn in towerButtonMap)
@@ -250,24 +274,7 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
-    private void OnLevelStart(LevelType levelType)
-    {
-        // if (levelType == LevelType.LEVEL_01)
-        // {
-        //     Pp2cTowerButton.gameObject.SetActive(false);
-        //     chloroplastTowerButton.gameObject.SetActive(false);
-        //     mitoTowerButton.gameObject.SetActive(false);
-        //     //Debug.Log("Level Awake")
-        // }
-        bool ppc2TowerUnlocked = Util.upgradeSettings.ppc2TowerUnlocked;
-        Pp2cTowerButton.gameObject.SetActive(ppc2TowerUnlocked);
 
-        bool chloroTowerUnlocked = Util.upgradeSettings.chloroTowerUnlocked;
-        chloroplastTowerButton.gameObject.SetActive(chloroTowerUnlocked);
-
-        bool mitoTowerUnlocked = Util.upgradeSettings.mitoTowerUnlocked;
-        mitoTowerButton.gameObject.SetActive(mitoTowerUnlocked);
-    }
 
     private void OnHighlightItem(HighlightedItem item)
     {

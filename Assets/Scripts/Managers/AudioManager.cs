@@ -20,9 +20,7 @@ public class AudioManager : MonoBehaviour
             if (sfxSource == null)
             {
                 sfxSource = this.transform.Find("sfxSource").GetComponent<AudioSource>();
-                //Debug.Log("sfx audio course is null");
             }
-
             sfxSource.PlayOneShot(clip); 
         }
     }
@@ -232,12 +230,13 @@ public class AudioManager : MonoBehaviour
         EventManager.Game.onSnrk2UnitReachedBase -= OnSnrk2UnitReachedBase;
         EventManager.Units.onCrystalPickedUp -= OnCrystalPickedUp;
         EventManager.Units.onEnemyPickedUpCrystal -= OnEnemyPickupCrystal;
-        EventManager.Units.onUnitTakeDamage += OnUnitTakeDamage;
+        EventManager.Units.onUnitTakeDamage -= OnUnitTakeDamage;
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
         EventManager.Structures.onStructureGainHealth -= OnStructureGainHealth;
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
         EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
         EventManager.Structures.onLightDropped -= OnLightDropped;
+        EventManager.Structures.onLightPickedUp -= OnLightPickedUp;
         EventManager.UI.onTapButton -= OnTapButton;
         EventManager.UI.onPressLevelSelectButton -= OnPressLevelSelectButton;
         EventManager.Tutorials.onTutChatStart -= OnTutChatStart;

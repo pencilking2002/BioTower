@@ -11,43 +11,40 @@ public class MissionController : MonoBehaviour
 {
     [SerializeField] private GameObject missionPanel;
     [SerializeField] private TextMeshProUGUI missionText;
-    [SerializeField] private TextMeshProUGUI missionDirectiveText;
     [SerializeField] private Color importantColor;
+    private string htmlColor;
+    private Vector3 initPos;
+
     private void Awake()
     {
         missionText.text = "";
-        missionDirectiveText.text = "";
+        initPos = missionPanel.transform.position;
+        htmlColor = ColorUtility.ToHtmlStringRGB(importantColor);
     }
-
-    private void DisplayMissionText(string inputMissionText, string inputMissionDirectiveText=null)
-    {
-        var currScale = missionPanel.transform.localScale;
-        missionPanel.transform.localScale = Vector3.zero;
-        LeanTween.scale(missionPanel.gameObject, currScale, 0.5f).setEaseOutElastic();
-        missionText.text = inputMissionText;
-
-        if (!string.IsNullOrEmpty(inputMissionDirectiveText))
-        {
-            LeanTween.delayedCall(gameObject, 1.0f, () => {
-                var cg = missionDirectiveText.GetComponent<CanvasGroup>();
-                cg.alpha = 0;
-                LeanTween.alphaCanvas(cg, 1.0f, 1.0f);
-                missionDirectiveText.text = inputMissionDirectiveText;
-            });
-        }
-    }
-
+    
     private void OnLevelStarted(LevelType levelType)
     {
         if (!LevelInfo.current.IsFirstLevel())
         {
-            LeanTween.delayedCall(gameObject, 1.0f, () => {
-                var col = ColorUtility.ToHtmlStringRGB(importantColor);
-                string missionText = $"Survive {Util.waveManager.waveSettings.waves.Length} waves";
-                string directiveText = $"Current Wave: <color=#{col}>{Util.waveManager.currWave+1}</color>";
-                DisplayMissionText(missionText, directiveText);
-            });
+            string missionText = $"Waves Survived <color=#{htmlColor}>0/{Util.waveManager.waveSettings.waves.Length}</color>";
+            SlideInPanel(missionText, 2.0f);
         }
+        else
+        {
+            missionPanel.SetActive(false);
+        }
+    }
+
+    private void SlideInPanel(string inputMissionText, float delay)
+    {
+        var startPos = initPos;
+        startPos.y += 120;
+        missionPanel.transform.position = startPos;
+        LeanTween.delayedCall(gameObject, delay, () => {
+            missionPanel.SetActive(true);
+            LeanTween.move(missionPanel.gameObject, initPos, 0.5f).setEaseOutQuint();
+            missionText.text = inputMissionText;
+        });
     }
 
     private void OnTutorialEnd(TutorialData data)
@@ -58,12 +55,8 @@ public class MissionController : MonoBehaviour
 
         if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
         {
-            LeanTween.delayedCall(gameObject, 1.0f, () => {
-                var col = ColorUtility.ToHtmlStringRGB(importantColor);
-                string missionText = $"Defeat {levelInfo.numEnemiesToDestroy} enemies";
-                string directiveText = $"Enemies Defeated: <color=#{col}>0</color>";
-                DisplayMissionText(missionText, directiveText);
-            });
+            string text = $"Enemies defeated <color=#{htmlColor}>0/{levelInfo.numEnemiesToDestroy}</color>";
+            SlideInPanel(text, 1.0f);
         }
     }
 
@@ -75,8 +68,9 @@ public class MissionController : MonoBehaviour
         if (LevelInfo.current.IsFirstLevel())
         {
             var scale = Vector3.one;
-            LeanTween.scale(missionDirectiveText.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
-            missionDirectiveText.text = $"Enemies Defeated: <color=green>{LevelInfo.current.numEnemiesDestroyed}</color>";
+            LeanTween.scale(missionText.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
+            string text = $"Enemies defeated <color=#{htmlColor}>{LevelInfo.current.numEnemiesDestroyed}/{LevelInfo.current.numEnemiesToDestroy}</color>";
+            missionText.text = text;
         }
     }
 

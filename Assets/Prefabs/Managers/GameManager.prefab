@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tappableLayerMask:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 135168
   structureLayerMask:
     serializedVersion: 2
     m_Bits: 16384

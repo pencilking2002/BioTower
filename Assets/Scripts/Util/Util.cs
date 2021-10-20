@@ -25,7 +25,8 @@ public class Util : MonoBehaviour
     public static WaveManager waveManager => GameManager.Instance.waveManager;
     public static TutorialCanvas tutCanvas => GameManager.Instance.currTutCanvas;
     public LayerMask enemyLayerMask;
-    
+    public static int structureSocketLayer = 12;
+
     public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)
     {
         var oldScale = sr.transform.localScale;

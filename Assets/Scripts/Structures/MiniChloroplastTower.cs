@@ -44,10 +44,15 @@ public class MiniChloroplastTower : Structure
     private void ShootFragment(bool avoidFragmentCollider=true)
     {
         var scale = sr.transform.localScale;
+        var wideScale = scale;
+        wideScale.x *= 1.5f;
+        var tallScale = scale;
+        tallScale.y *= 2f;
+
         var seq = LeanTween.sequence();
-        seq.append(LeanTween.scale(sr.gameObject, scale*1.2f, 0.1f));
-        seq.append(LeanTween.scale(sr.gameObject, scale, 0.4f).setEaseOutElastic());
-     
+        seq.append(LeanTween.scale(sr.gameObject, wideScale, 0.1f));
+        seq.append(LeanTween.scale(sr.gameObject, tallScale, 0.1f));
+        seq.append(LeanTween.scale(sr.gameObject, scale, 0.1f));
 
         var fragment = CreateFragment();
         Vector3 startPos = transform.position;

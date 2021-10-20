@@ -10,30 +10,50 @@ namespace BioTower
 public class StructureSocket : MonoBehaviour
 {
     [SerializeField] private bool hasStructure;
-    [SerializeField] private SpriteRenderer glowingSprite;
+    [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color glowColor;
     [SerializeField] private float glowAnimDuration = 0.5f;
     private Color defaultColor;
-
+    private Vector3 initScale;
+    private bool isAnimatingIn = true;
 
     private void Awake()
     {
         var delay = UnityEngine.Random.Range(0.0f, 1.0f);
         var duration = UnityEngine.Random.Range(0.5f, 1.0f);
-        var scale = glowingSprite.transform.localScale;
+        var scale = sr.transform.localScale;
         var additionalScale = UnityEngine.Random.Range(0.0f, 0.2f);
 
-        var color = glowingSprite.color;
+        var color = sr.color;
         color.r += UnityEngine.Random.Range(0.0f, 0.1f);
         color.g += UnityEngine.Random.Range(0.0f, 0.1f);
         color.b += UnityEngine.Random.Range(0.0f, 0.1f);
 
-        glowingSprite.color = color;
-        glowingSprite.transform.localScale = Vector3.zero;
-        LeanTween.delayedCall(gameObject, 1+delay, () => {
-            defaultColor = glowingSprite.color;
-            LeanTween.scale(glowingSprite.gameObject, scale * (1 + additionalScale), duration).setEaseOutElastic();
+        sr.color = color;
+        sr.transform.localScale = Vector3.zero;
+        defaultColor = sr.color;
+
+        // Do a scaling animation and record the scale
+        var seq = LeanTween.sequence();
+        seq.append(1+delay);
+        seq.append(LeanTween.scale(sr.gameObject, scale * (1 + additionalScale), duration).setEaseOutElastic());
+        seq.append(sr.gameObject, () => { 
+            initScale = sr.transform.localScale;
+            isAnimatingIn = false; 
         });
+    }
+
+    public void OnTap()
+    {
+        if (!hasStructure && !isAnimatingIn)
+        {
+            LeanTween.cancel(sr.gameObject);
+            sr.transform.localScale = initScale;
+            float randScale = UnityEngine.Random.Range(1.2f, 1.4f);
+            var seq = LeanTween.sequence();
+            seq.append(LeanTween.scale(sr.gameObject, initScale * randScale, 0.1f));
+            seq.append(LeanTween.scale(sr.gameObject, initScale, 0.5f).setEaseOutElastic());
+        }
     }
 
     private void Start()
@@ -46,10 +66,10 @@ public class StructureSocket : MonoBehaviour
         if (hasStructure)
             return;
 
-        var currColor = glowingSprite.color;
+        var currColor = sr.color;
         LeanTween.cancel(gameObject);
         LeanTween.value(gameObject, currColor, glowColor, glowAnimDuration).setOnUpdate((Color col) => {
-            glowingSprite.color = col;
+            sr.color = col;
         }).setLoopPingPong(-1);
 
         LeanTween.delayedCall(0.1f, () => {
@@ -70,7 +90,7 @@ public class StructureSocket : MonoBehaviour
     private void OnSetNonePlacementState()
     {
         LeanTween.cancel(gameObject);
-        glowingSprite.color = defaultColor;
+        sr.color = defaultColor;
         Util.poolManager.DespawnAllitemHighlights();
     }
 

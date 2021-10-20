@@ -21,6 +21,7 @@ public class TapManager : MonoBehaviour
         {
             //TapCrystal(hitInfo);
             TapLightFragment(hitInfo);
+            TapStructureSocket(hitInfo);
             
         }
         TapStructure(screenPos);
@@ -68,6 +69,15 @@ public class TapManager : MonoBehaviour
                         });
                 }
             }
+        }
+    }
+
+    private void TapStructureSocket(RaycastHit2D hitInfo)
+    {
+        if (hitInfo.collider.gameObject.layer == Util.structureSocketLayer)
+        {
+            var socket = hitInfo.collider.transform.parent.GetComponent<StructureSocket>();
+            socket.OnTap();
         }
     }
 

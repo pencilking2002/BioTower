@@ -49,9 +49,14 @@ public class StructureSocket : MonoBehaviour
         {
             LeanTween.cancel(sr.gameObject);
             sr.transform.localScale = initScale;
-            float randScale = UnityEngine.Random.Range(1.2f, 1.4f);
+            float randScaleX = UnityEngine.Random.Range(1.4f, 1.6f);
+            float randScaleY = UnityEngine.Random.Range(1.2f, 1.4f);
+            var newScale = initScale;
+            newScale.x *= randScaleX;
+            newScale.y *= randScaleY;
+
             var seq = LeanTween.sequence();
-            seq.append(LeanTween.scale(sr.gameObject, initScale * randScale, 0.1f));
+            seq.append(LeanTween.scale(sr.gameObject, newScale, 0.1f));
             seq.append(LeanTween.scale(sr.gameObject, initScale, 0.5f).setEaseOutElastic());
         }
     }

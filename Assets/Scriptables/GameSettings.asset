@@ -33,7 +33,7 @@ MonoBehaviour:
     abaUnitMaxHealth: 10
     ppc2TowerDamage: 5
     snrkUnitMaxHealth: 5
-    snrk2UnitUnlocked: 1
+    snrk2UnitUnlocked: 0
     snrk2UnitSpeed_float: 1000
     crystalSnrk2Value: 20
     healTowerCost: 5
@@ -65,22 +65,22 @@ MonoBehaviour:
     mitoTowerMaxHealth: 10
     numFragmentsPickedUpOnTap: 1
   upgradeSettings:
-    currLevel: 2
+    currLevel: 1
     lightFragmentValue: 5
-    energy: 34
+    energy: 100
     abaUnitDamage: 5
     abaUnitMaxSpeed_float: 550
-    abaUnitCost: 3
+    abaUnitCost: 5
     abaUnitMaxHealth: 10
     ppc2TowerDamage: 5
     snrkUnitMaxHealth: 5
-    snrk2UnitUnlocked: 1
+    snrk2UnitUnlocked: 0
     snrk2UnitSpeed_float: 1000
     crystalSnrk2Value: 20
     healTowerCost: 5
-    enableTowerHealthDecline: 1
+    enableTowerHealthDecline: 0
     playerTowerMaxhealth: 20
-    enablePlayerTowerHealing: 0
+    enablePlayerTowerHealing: 1
     abaTowerCost: 10
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2310

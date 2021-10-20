@@ -43,16 +43,7 @@ public class MiniChloroplastTower : Structure
     [Button("Shoot Fragment")]
     private void ShootFragment(bool avoidFragmentCollider=true)
     {
-        var scale = sr.transform.localScale;
-        var wideScale = scale;
-        wideScale.x *= 1.5f;
-        var tallScale = scale;
-        tallScale.y *= 2f;
-
-        var seq = LeanTween.sequence();
-        seq.append(LeanTween.scale(sr.gameObject, wideScale, 0.1f));
-        seq.append(LeanTween.scale(sr.gameObject, tallScale, 0.1f));
-        seq.append(LeanTween.scale(sr.gameObject, scale, 0.1f));
+        DoSquishyAnimation();
 
         var fragment = CreateFragment();
         Vector3 startPos = transform.position;
@@ -74,6 +65,20 @@ public class MiniChloroplastTower : Structure
         seq2.append(LeanTween.moveY(fragment, endPos.y + 0.06f, 0.1f));
         seq2.append(LeanTween.moveY(fragment, endPos.y, 0.1f));
         EventManager.Structures.onLightDropped?.Invoke();
+    }
+
+    private void DoSquishyAnimation()
+    {
+        var scale = sr.transform.localScale;
+        var wideScale = scale;
+        wideScale.x *= 1.5f;
+        var tallScale = scale;
+        tallScale.y *= 2f;
+
+        var seq = LeanTween.sequence();
+        seq.append(LeanTween.scale(sr.gameObject, wideScale, 0.2f));
+        seq.append(LeanTween.scale(sr.gameObject, tallScale, 0.1f));
+        seq.append(LeanTween.scale(sr.gameObject, scale, 0.2f));
     }
 
     public Vector2 GetPointWithinInfluence(bool avoidFragmentCollider)

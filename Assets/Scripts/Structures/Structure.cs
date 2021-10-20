@@ -34,21 +34,21 @@ public class Structure : MonoBehaviour
     [SerializeField] protected GameObject spriteOutline;
     public SpriteRenderer sr;
     [HideInInspector] public float lastDeclineTime;
-    private Vector3 initScale;
-    public Vector3 initSpriteScale;
     [SerializeField] protected GameObject influenceVisuals;
     public List<Unit> units;
     public TowerAlert towerAlert;
+    private Vector3 initSpriteScale;
+    private Vector3 initSpritePos;
 
     public virtual void Awake()
     {
         initSpriteScale = sr.transform.localScale;
+        initSpritePos = sr.transform.position;
         lastDeclineTime = Time.time;
     }
 
     public virtual void Init(StructureSocket socket)
     {
-        initScale = transform.localScale;
         currHealth = maxHealth;
 
         if (hasHealth)
@@ -160,9 +160,6 @@ public class Structure : MonoBehaviour
     {
         if (structure == null || GameManager.Instance == null)
             return;
-    
-        if (IsPlayerBase() && !Util.upgradeSettings.enablePlayerTowerHealing)
-            return;
 
         if (IsMiniChloroTower())
             return;
@@ -177,9 +174,7 @@ public class Structure : MonoBehaviour
             if (influenceVisuals != null)
                 influenceVisuals.SetActive(true);
 
-            LeanTween.cancel(gameObject);
-            transform.localScale = initScale;
-            LeanTween.scale(gameObject, initScale * 1.1f, 0.1f).setLoopPingPong(1);
+            DoSquishyAnimation(initSpriteScale, initSpriteScale);
         }
         else
         {
@@ -189,6 +184,21 @@ public class Structure : MonoBehaviour
             if (influenceVisuals != null)
                 influenceVisuals.SetActive(false);
         }
+    }
+
+    private void DoSquishyAnimation(Vector3 startingScale, Vector3 targetScale)
+    {
+        LeanTween.cancel(sr.gameObject);
+        sr.transform.localScale = startingScale;
+        float randScaleX = UnityEngine.Random.Range(1.2f, 1.4f);
+        float randScaleY = UnityEngine.Random.Range(1.3f, 1.5f);
+        var newScale = targetScale;
+        newScale.x *= randScaleX;
+        newScale.y *= randScaleY;
+
+        var seq = LeanTween.sequence();
+        seq.append(LeanTween.scale(sr.gameObject, newScale, 0.1f));
+        seq.append(LeanTween.scale(sr.gameObject, targetScale, 0.2f));
     }
 
     public bool IsAbaTower()
@@ -233,7 +243,7 @@ public class Structure : MonoBehaviour
 
     public virtual void OnStructureCreated(Structure structure)
     {
-        OnStructureSelected(structure);
+        //OnStructureSelected(structure);
     }
     
     public virtual void OnEnable()

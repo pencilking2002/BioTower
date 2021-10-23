@@ -96,6 +96,7 @@ public class EventManager : MonoBehaviour
         public static Action onTutTextPopUp;
         public static Action onTutChatStart;
         public static Action<HighlightedItem> onHighlightItem;
+        public static Action<string, Vector2, float> onAnimateText;
     }
 }
 }

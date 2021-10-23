@@ -17,9 +17,8 @@ public class WordAnimation : MonoBehaviour
         textMesh = GetComponent<TMP_Text>();
     }
 
-    public void ShakeWord(string inputWord)
+    public void ShakeWord(string inputWord, Vector3 speed, float amplitude)
     {
-
         TMP_WordInfo[] wordArr = textMesh.textInfo.wordInfo;
         textMesh.ForceMeshUpdate();
         mesh = textMesh.mesh;
@@ -34,26 +33,22 @@ public class WordAnimation : MonoBehaviour
                 
                 if (string.Equals(word.GetWord().ToLower(), inputWord.ToLower()))
                 {
-                    Shake(word);
+                    Shake(word, speed, amplitude);
                     return;
                 }
             }
-            catch(Exception e)
-            {
-                
-            }
-            
+            catch(Exception e) {}
         }
     }
 
-    private void Shake(TMP_WordInfo word)
+    private void Shake(TMP_WordInfo word, Vector2 speed, float amplitude)
     {
         //Debug.Log($"Found word: {inputWord}");
-        LeanTween.value(gameObject, 0,1, 5).setOnUpdate((float val) =>
+        LeanTween.value(gameObject, 0,1, 200000).setOnUpdate((float val) =>
         {
             for (int c=word.firstCharacterIndex; c<=word.lastCharacterIndex; c++)
             {
-                Vector3 offset = Wobble(Time.time+c, new Vector2(100,10), 0.1f);
+                Vector3 offset = Wobble(Time.time+c, new Vector2(speed.x, speed.y), amplitude);
                 int index = word.textComponent.textInfo.characterInfo[c].vertexIndex;
                 vertices[index] += offset;
                 vertices[index + 1] += offset;
@@ -65,8 +60,24 @@ public class WordAnimation : MonoBehaviour
         });
     }
 
-    Vector2 Wobble(float time, Vector2 speed, float amplitude) {
+    Vector2 Wobble(float time, Vector2 speed, float amplitude) 
+    {
         return new Vector2(amplitude * Mathf.Sin(time*speed.x), amplitude * Mathf.Cos(time*speed.y));
+    }
+
+    private void OnAnimateText(string text, Vector2 speed, float amplitude)
+    {
+        ShakeWord(text, speed, amplitude);
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Tutorials.onAnimateText += OnAnimateText;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Tutorials.onAnimateText -= OnAnimateText;
     }
 }
 }

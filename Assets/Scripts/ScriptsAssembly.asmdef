@@ -1,5 +1,6 @@
 {
     "name": "ScriptsAssembly",
+    "rootNamespace": "BioTower",
     "references": [
         "GUID:776d03a35f1b52c4a9aed9f56d7b4229",
         "GUID:05ee0e765d9882d418ce29fbcd9a4d01",

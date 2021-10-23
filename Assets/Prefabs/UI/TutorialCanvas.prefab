@@ -716,6 +716,7 @@ MonoBehaviour:
   revealDuration: 0.01
   canvas: {fileID: 7979799145711278710}
   initTutPanelLocalPos: {x: 0, y: 0, z: 0}
+  tutTextWordAnim: {fileID: 0}
 --- !u!114 &7979799145711278667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,6 +821,7 @@ GameObject:
   - component: {fileID: 7979799146040914502}
   - component: {fileID: 7979799146040914503}
   - component: {fileID: 7979799146040914500}
+  - component: {fileID: 7433298692514558715}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -944,6 +946,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7433298692514558715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979799146040914501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c4de633b1ef224dad53418f8a8b6d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7979799146140481000
 GameObject:
   m_ObjectHideFlags: 0

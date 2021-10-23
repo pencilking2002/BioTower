@@ -16,7 +16,8 @@ public class WaitingButtonTutState : TutStateBase
             
             InputController.canPressButtons = true;
             InputController.canSpawnTowers = false;
-
+            tutCanvas.tutTextWordAnim.ShakeWord("drought");
+            tutCanvas.tutTextWordAnim.ShakeWord("defense");
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
         }
     }

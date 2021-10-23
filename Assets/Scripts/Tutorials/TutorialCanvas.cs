@@ -37,11 +37,13 @@ public class TutorialCanvas : MonoBehaviour
     public TutorialData currTutorial => tutorials[currTutorialIndex];
     [HideInInspector] public Canvas canvas;
     [HideInInspector] public Vector3 initTutPanelLocalPos;
+    [HideInInspector] public WordAnimation tutTextWordAnim;
     private Dictionary<TutState, TutStateBase> charStates = new Dictionary<TutState, TutStateBase>();
 
     private void Awake()
     {
         canvas = GetComponent<Canvas>();
+        tutTextWordAnim = tutText.GetComponent<WordAnimation>();
         CacheStates();
     }
 

@@ -116,9 +116,16 @@ public class PlacementManager : MonoBehaviour
 
     public void SetNoneState() 
     { 
-        placementState = PlacementState.NONE;
-        structureToPlace = StructureType.NONE; 
-        EventManager.Structures.onSetNonePlacementState?.Invoke();
+        if (TutorialCanvas.tutorialInProgress && Util.tutCanvas.IsWaitingTapState() || Util.tutCanvas.IsWaitingButtonTapState())
+        {
+
+        }
+        else
+        {
+            placementState = PlacementState.NONE;
+            structureToPlace = StructureType.NONE; 
+            EventManager.Structures.onSetNonePlacementState?.Invoke();
+        }
     }
 
     public void SetPlacingState(StructureType structureType) 

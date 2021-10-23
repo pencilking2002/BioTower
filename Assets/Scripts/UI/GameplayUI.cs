@@ -96,12 +96,14 @@ public class GameplayUI : MonoBehaviour
         if (!Util.towerManager.HasAvailableSockets())
         {
             Util.HandleInvalidButtonPress(AbaTowerButton);
+            Debug.Log("No available sockets");
             return;
         }   
 
         if (!InputController.canPressButtons)
         {
             Util.HandleInvalidButtonPress(AbaTowerButton);
+            Debug.Log("can't press buttons");
             return;
         }
 
@@ -298,6 +300,11 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
+    private void OnSetNonePlacementState()
+    {
+        DeselectCurrentButton();
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onLevelStart += OnLevelStart;
@@ -306,6 +313,7 @@ public class GameplayUI : MonoBehaviour
         EventManager.Structures.onStructureCooldownStarted += OnStructureCooldownStarted;
         EventManager.Tutorials.onHighlightItem += OnHighlightItem;
         EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
+        EventManager.Structures.onSetNonePlacementState += OnSetNonePlacementState;
     }
 
     private void OnDisable()
@@ -316,6 +324,7 @@ public class GameplayUI : MonoBehaviour
         EventManager.Structures.onStructureCooldownStarted -= OnStructureCooldownStarted;
         EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
         EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
+        EventManager.Structures.onSetNonePlacementState -= OnSetNonePlacementState;
     }
 }
 }

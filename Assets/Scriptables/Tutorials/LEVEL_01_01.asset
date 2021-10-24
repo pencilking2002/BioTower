@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: LEVEL_01_01
   m_EditorClassIdentifier: 
   text: Oh hello! Welcome to <b><color=#4C7900>DROUGHT DEFENSE</color></b>!
+  animatedWords:
+  - word: drought
+    speed: {x: 100, y: 10}
+    amplitude: 0.2
+  - word: defense
+    speed: {x: 100, y: 10}
+    amplitude: 0.2
   portraitIndex: 0
   requiredAction: 0
   transition: 0

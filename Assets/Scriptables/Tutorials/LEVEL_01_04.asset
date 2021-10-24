@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: ABA towers start out with one <b><color=#4C7900>ABA UNIT</color></b>. Tap
     the button to create another one!
+  animatedWords:
+  - word: aba
+    speed: {x: 100, y: 10}
+    amplitude: 0.2
+  - word: unit
+    speed: {x: 100, y: 10}
+    amplitude: 0.2
   portraitIndex: 1
   requiredAction: 4
   transition: 1

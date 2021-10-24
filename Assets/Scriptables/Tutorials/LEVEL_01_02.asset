@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Let's create an <b><color=#4C7900>ABA TOWER</color></b>. Tap on the button
     below...
+  animatedWords:
+  - word: aba
+    speed: {x: 100, y: 10}
+    amplitude: 0.2
+  - word: tower
+    speed: {x: 100, y: 10}
+    amplitude: 0.2
   portraitIndex: 1
   requiredAction: 1
   transition: 1

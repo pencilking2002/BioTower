@@ -16,11 +16,11 @@ public class WaitingButtonTutState : TutStateBase
             
             InputController.canPressButtons = true;
             InputController.canSpawnTowers = false;
-            // tutCanvas.tutTextWordAnim.ShakeWord("drought");
-            // tutCanvas.tutTextWordAnim.ShakeWord("defense");
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
-            EventManager.Tutorials.onAnimateText?.Invoke("drought", new Vector2(100,10), 0.2f);
-            EventManager.Tutorials.onAnimateText?.Invoke("defense", new Vector2(100,10), 0.2f);
+
+            var animatedWords = tutCanvas.currTutorial.animatedWords;
+            foreach(AnimatedWord word in animatedWords)
+                EventManager.Tutorials.onAnimateText?.Invoke(word.word, word.speed, word.amplitude);
         }
     }
 

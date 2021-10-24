@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Now tap on one of those <b><color=#4C7900>SOCKETS</color></b> to place the
     tower.
+  animatedWords:
+  - word: sockets
+    speed: {x: 100, y: 10}
+    amplitude: 0.2
   portraitIndex: 2
   requiredAction: 2
   transition: 1

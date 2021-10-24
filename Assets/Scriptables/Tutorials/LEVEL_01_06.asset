@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Creating towers and units takes <b><color=#4C7900>ENERGY</color></b>. ABA
     towers cost 10 energy. It ain't FREE!
+  animatedWords:
+  - word: energy
+    speed: {x: 100, y: 10}
+    amplitude: 0.2
   portraitIndex: 1
   requiredAction: 0
   transition: 1

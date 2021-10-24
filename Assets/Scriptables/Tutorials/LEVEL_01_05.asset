@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Good! ABA units walk around ABA towers, looking for <b><color=#912B0F>ENEMIES</color></b>
     to fight
+  animatedWords:
+  - word: enemies
+    speed: {x: 200, y: 20}
+    amplitude: 0.3
   portraitIndex: 3
   requiredAction: 0
   transition: 1

@@ -12,6 +12,8 @@ public class WordAnimation : MonoBehaviour
     Mesh mesh;
     Vector3[] vertices;
 
+    [SerializeField] private bool isAnimating;
+
     private void Awake()
     {
         textMesh = GetComponent<TMP_Text>();
@@ -28,9 +30,7 @@ public class WordAnimation : MonoBehaviour
         {
             try
             {
-                var word = wordArr[w];
-                //Debug.Log($"word: {word.GetWord().ToLower()}");
-                
+                var word = wordArr[w];                
                 if (string.Equals(word.GetWord().ToLower(), inputWord.ToLower()))
                 {
                     Shake(word, speed, amplitude);
@@ -67,17 +67,34 @@ public class WordAnimation : MonoBehaviour
 
     private void OnAnimateText(string text, Vector2 speed, float amplitude)
     {
+        isAnimating = true;
         ShakeWord(text, speed, amplitude);
+    }
+
+    private void OnTutStateInit(TutState tutState)
+    {
+        if (tutState != TutState.LETTER_REVEAL)
+            return;
+        
+        if (!isAnimating)
+            return;
+
+        isAnimating = false;
+        LeanTween.cancel(gameObject);
+        mesh.vertices = vertices;
+        textMesh.canvasRenderer.SetMesh(mesh);
     }
 
     private void OnEnable()
     {
         EventManager.Tutorials.onAnimateText += OnAnimateText;
+        EventManager.Tutorials.onTutStateInit += OnTutStateInit;
     }
 
     private void OnDisable()
     {
         EventManager.Tutorials.onAnimateText -= OnAnimateText;
+        EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
     }
 }
 }

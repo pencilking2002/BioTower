@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 namespace BioTower
 {
@@ -27,7 +28,8 @@ public enum HighlightedItem
 public class TutorialData : ScriptableObject
 {
     [Multiline(10)] public string text;
-    [Range(0,3)]public int portraitIndex;
+    public AnimatedWord[] animatedWords;
+    [Range(0,3)] public int portraitIndex;
     public RequiredAction requiredAction;
     public TransitionType transition;
     [Range(0,5)] public float delay;
@@ -41,6 +43,13 @@ public class TutorialData : ScriptableObject
     public bool IsTowerSelectedRequiredAction() { return requiredAction == RequiredAction.TOWER_SELECTED; }
     public bool IsSpawnAbaUnitRequiredAction() { return requiredAction == RequiredAction.SPAWN_ABA_UNIT; }
 
+}
 
+[Serializable]
+public class AnimatedWord
+{
+    public string word;
+    public Vector2 speed = new Vector2(100,10);
+    public float amplitude = 0.2f;
 }
 }

@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Keep an eye on your energy. If you use it all up, its <b><color=#912B0F>GAME
     OVER!</color></b>
+  animatedWords:
+  - word: game
+    speed: {x: 200, y: 20}
+    amplitude: 0.3
+  - word: over
+    speed: {x: 100, y: 10}
+    amplitude: 0.3
   portraitIndex: 0
   requiredAction: 0
   transition: 1

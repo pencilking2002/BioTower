@@ -16,10 +16,10 @@ MonoBehaviour:
   animatedWords:
   - word: drought
     speed: {x: 100, y: 10}
-    amplitude: 0.2
+    amplitude: 0.01
   - word: defense
     speed: {x: 100, y: 10}
-    amplitude: 0.2
+    amplitude: 0.01
   portraitIndex: 0
   requiredAction: 0
   transition: 0

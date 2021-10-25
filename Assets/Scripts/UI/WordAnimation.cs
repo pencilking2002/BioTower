@@ -10,6 +10,8 @@ public class WordAnimation : MonoBehaviour
 {
     private TMP_Text textMesh;
     Mesh mesh;
+    Mesh initMesh;
+    Vector3[] initVertices;
     Vector3[] vertices;
 
     [SerializeField] private bool isAnimating;
@@ -21,10 +23,13 @@ public class WordAnimation : MonoBehaviour
 
     public void ShakeWord(string inputWord, Vector3 speed, float amplitude)
     {
+        isAnimating = true;
         TMP_WordInfo[] wordArr = textMesh.textInfo.wordInfo;
         textMesh.ForceMeshUpdate();
         mesh = textMesh.mesh;
+        initMesh = mesh;
         vertices = mesh.vertices;
+        initVertices = vertices;
 
         for(int w=0; w<wordArr.Length; w++)
         {
@@ -67,34 +72,35 @@ public class WordAnimation : MonoBehaviour
 
     private void OnAnimateText(string text, Vector2 speed, float amplitude)
     {
-        isAnimating = true;
         ShakeWord(text, speed, amplitude);
     }
 
-    private void OnTutStateInit(TutState tutState)
+    private void OnTouchBegan(Vector3 pos)
     {
-        if (tutState != TutState.LETTER_REVEAL)
-            return;
-        
-        if (!isAnimating)
-            return;
+        var tutState = GameManager.Instance.currTutCanvas.tutState;
 
-        isAnimating = false;
-        LeanTween.cancel(gameObject);
-        mesh.vertices = vertices;
-        textMesh.canvasRenderer.SetMesh(mesh);
+        if (isAnimating)
+        { 
+           
+            isAnimating = false;
+            LeanTween.cancel(gameObject);
+            initMesh.vertices = initVertices;
+            textMesh.canvasRenderer.SetMesh(initMesh);
+             textMesh.ForceMeshUpdate();
+        }
     }
 
     private void OnEnable()
     {
         EventManager.Tutorials.onAnimateText += OnAnimateText;
-        EventManager.Tutorials.onTutStateInit += OnTutStateInit;
+        EventManager.Input.onTouchBegan += OnTouchBegan;
+
     }
 
     private void OnDisable()
     {
         EventManager.Tutorials.onAnimateText -= OnAnimateText;
-        EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
+        EventManager.Input.onTouchBegan -= OnTouchBegan;
     }
 }
 }

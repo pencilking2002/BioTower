@@ -17,15 +17,12 @@ MonoBehaviour:
   animatedWords:
   - word: game
     speed: {x: 200, y: 20}
-    amplitude: 0.05
+    amplitude: 0.08
   - word: over
     speed: {x: 200, y: 20}
-    amplitude: 0.05
+    amplitude: 0.08
   portraitIndex: 0
   requiredAction: 0
   transition: 1
   delay: 0
   highlightedItem: 0
-  hasArrows: 1
-  arrowCoords:
-  - {x: -220, y: -210}

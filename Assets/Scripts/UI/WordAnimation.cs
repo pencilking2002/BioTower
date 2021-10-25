@@ -66,10 +66,16 @@ public class WordAnimation : MonoBehaviour
                 vertices[index + 2] += offset;
                 vertices[index + 3] += offset;
             }
-            if (mesh.vertices.Length == mesh.triangles.Length * 3)
+
+            int num = mesh.vertices.Length / 2;
+            if (mesh.vertices.Length == mesh.triangles.Length - num)
             {
                 mesh.vertices = vertices;
                 textMesh.canvasRenderer.SetMesh(mesh);
+            }
+            else
+            {
+                Debug.Log($"verts: {mesh.vertices.Length}. tris: {mesh.triangles.Length}");
             }
         });
     }
@@ -90,11 +96,11 @@ public class WordAnimation : MonoBehaviour
 
         if (isAnimating)
         { 
-           
             isAnimating = false;
             LeanTween.cancel(gameObject);
 
-            if (initMesh.vertices.Length == initMesh.triangles.Length * 3)
+            int num = initMesh.vertices.Length / 2;
+            if (initMesh.vertices.Length == initMesh.triangles.Length - num)
             {
                 initMesh.vertices = initVertices;
                 textMesh.canvasRenderer.SetMesh(initMesh);

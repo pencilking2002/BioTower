@@ -280,6 +280,7 @@ public class GameplayUI : MonoBehaviour
 
     private void OnHighlightItem(HighlightedItem item)
     {
+        
         if (item == HighlightedItem.ABA_TOWER_BTN)
         {
             var worldPos = Camera.main.ScreenToWorldPoint(AbaTowerButton.transform.position);
@@ -287,9 +288,13 @@ public class GameplayUI : MonoBehaviour
         }
         else if (item == HighlightedItem.ENERGY)
         {
-            var worldPos = Camera.main.ScreenToWorldPoint(currencyContainer.transform.position);
-            Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,150)); 
+            //var worldPos = Camera.main.ScreenToWorldPoint(currencyContainer.transform.position);
+            //Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,150));
+            currencyContainer.transform.Find("Glow").GetComponent<Image>().enabled = true; 
         }
+
+        if (item != HighlightedItem.ENERGY)
+            currencyContainer.transform.Find("Glow").GetComponent<Image>().enabled = false; 
     }
 
     private void OnTutorialEnd(TutorialData data)

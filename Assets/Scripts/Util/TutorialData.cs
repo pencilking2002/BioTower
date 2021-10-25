@@ -24,6 +24,12 @@ public enum HighlightedItem
     ABA_UNIT_BTN, SOCKET, ENERGY,
 }
 
+public enum HighlightType
+{
+    ARROW,
+    GLOW
+}
+
 [CreateAssetMenu(menuName ="BioTower/TutorialData", fileName ="TutorialData")]
 public class TutorialData : ScriptableObject
 {
@@ -34,6 +40,7 @@ public class TutorialData : ScriptableObject
     public TransitionType transition;
     [Range(0,5)] public float delay;
     public HighlightedItem highlightedItem;
+    public HighlightType highlightType;
     
     public bool IsTapAnywhereRequiredAction() { return requiredAction == RequiredAction.TAP_ANYWHERE; }
     public bool IsTapAbaButtonRequiredAction() { return requiredAction == RequiredAction.TAP_ABA_TOWER_BUTTON; }

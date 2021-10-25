@@ -26,6 +26,4 @@ MonoBehaviour:
   transition: 1
   delay: 0
   highlightedItem: 1
-  hasArrows: 1
-  arrowCoords:
-  - {x: -100, y: -170}
+  highlightType: 1

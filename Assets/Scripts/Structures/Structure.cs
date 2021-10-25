@@ -85,7 +85,9 @@ public class Structure : MonoBehaviour
         var scale = initSpriteScale;
         scale.x *= 2f;
         scale.y *= 0.5f;
-        seq.append(socket.Jiggle);
+        if (socket != null)
+            seq.append(socket.Jiggle);
+
         seq.append(LeanTween.scale(sr.gameObject, scale, 0.1f));
         seq.append(LeanTween.scale(sr.gameObject, initSpriteScale, 0.25f).setEaseOutExpo());
         

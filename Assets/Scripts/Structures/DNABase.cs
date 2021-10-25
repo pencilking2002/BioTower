@@ -86,6 +86,7 @@ public class DNABase : Structure
             });
         }
         TakeDamage(1);
+        Debug.Log("cancel");
     }
 
     public override void OnEnable()

@@ -17,7 +17,7 @@ MonoBehaviour:
   animatedWords:
   - word: energy
     speed: {x: 100, y: 10}
-    amplitude: 0.2
+    amplitude: 0.03
   portraitIndex: 1
   requiredAction: 0
   transition: 1

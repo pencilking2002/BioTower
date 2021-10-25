@@ -17,10 +17,10 @@ MonoBehaviour:
   animatedWords:
   - word: game
     speed: {x: 200, y: 20}
-    amplitude: 0.3
+    amplitude: 0.05
   - word: over
-    speed: {x: 100, y: 10}
-    amplitude: 0.3
+    speed: {x: 200, y: 20}
+    amplitude: 0.05
   portraitIndex: 0
   requiredAction: 0
   transition: 1

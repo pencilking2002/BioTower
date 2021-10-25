@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_04
   m_EditorClassIdentifier: 
-  text: ABA towers start out with one <b><color=#4C7900>ABA UNIT</color></b>. Tap
+  text: These towers start out with one <b><color=#4C7900>ABA UNIT</color></b>. Tap
     the button to create another one!
   animatedWords:
   - word: aba
     speed: {x: 100, y: 10}
-    amplitude: 0.2
+    amplitude: 0.03
   - word: unit
     speed: {x: 100, y: 10}
-    amplitude: 0.2
+    amplitude: 0.03
   portraitIndex: 1
   requiredAction: 4
   transition: 1

@@ -17,7 +17,7 @@ MonoBehaviour:
   animatedWords:
   - word: enemies
     speed: {x: 200, y: 20}
-    amplitude: 0.3
+    amplitude: 0.05
   portraitIndex: 3
   requiredAction: 0
   transition: 1

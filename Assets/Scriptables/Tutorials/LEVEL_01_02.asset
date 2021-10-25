@@ -17,10 +17,10 @@ MonoBehaviour:
   animatedWords:
   - word: aba
     speed: {x: 100, y: 10}
-    amplitude: 0.2
+    amplitude: 0.03
   - word: tower
     speed: {x: 100, y: 10}
-    amplitude: 0.2
+    amplitude: 0.03
   portraitIndex: 1
   requiredAction: 1
   transition: 1

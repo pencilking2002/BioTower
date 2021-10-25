@@ -34,8 +34,6 @@ public class TutorialData : ScriptableObject
     public TransitionType transition;
     [Range(0,5)] public float delay;
     public HighlightedItem highlightedItem;
-    public bool hasArrows;
-    [ShowIf("hasArrows")] public Vector2[] arrowCoords;
     
     public bool IsTapAnywhereRequiredAction() { return requiredAction == RequiredAction.TAP_ANYWHERE; }
     public bool IsTapAbaButtonRequiredAction() { return requiredAction == RequiredAction.TAP_ABA_TOWER_BUTTON; }

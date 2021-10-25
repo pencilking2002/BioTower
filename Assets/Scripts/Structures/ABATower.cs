@@ -28,7 +28,7 @@ public class ABATower : Structure
     public override void Awake()
     {
         base.Awake();
-        Util.ScaleUpSprite(sr, 1.1f);
+        //Util.ScaleUpSprite(sr, 1.1f);
     }
 
     private void Start()

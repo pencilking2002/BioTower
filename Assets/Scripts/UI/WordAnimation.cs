@@ -51,6 +51,12 @@ public class WordAnimation : MonoBehaviour
         //Debug.Log($"Found word: {inputWord}");
         LeanTween.value(gameObject, 0,1, 200000).setOnUpdate((float val) =>
         {
+            if (!isAnimating)
+            {
+                LeanTween.cancel(gameObject);
+                return;
+            }
+
             for (int c=word.firstCharacterIndex; c<=word.lastCharacterIndex; c++)
             {
                 Vector3 offset = Wobble(Time.time+c, new Vector2(speed.x, speed.y), amplitude);
@@ -60,8 +66,11 @@ public class WordAnimation : MonoBehaviour
                 vertices[index + 2] += offset;
                 vertices[index + 3] += offset;
             }
-            mesh.vertices = vertices;
-            textMesh.canvasRenderer.SetMesh(mesh);
+            if (mesh.vertices.Length == mesh.triangles.Length * 3)
+            {
+                mesh.vertices = vertices;
+                textMesh.canvasRenderer.SetMesh(mesh);
+            }
         });
     }
 
@@ -84,9 +93,13 @@ public class WordAnimation : MonoBehaviour
            
             isAnimating = false;
             LeanTween.cancel(gameObject);
-            initMesh.vertices = initVertices;
-            textMesh.canvasRenderer.SetMesh(initMesh);
-             textMesh.ForceMeshUpdate();
+
+            if (initMesh.vertices.Length == initMesh.triangles.Length * 3)
+            {
+                initMesh.vertices = initVertices;
+                textMesh.canvasRenderer.SetMesh(initMesh);
+                textMesh.ForceMeshUpdate();
+            }
         }
     }
 

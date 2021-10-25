@@ -64,7 +64,32 @@ public class Structure : MonoBehaviour
             GameManager.Instance.tapManager.selectedStructure = this;
             GameManager.Instance.tapManager.hasSelectedStructure = true;
             this.socket = socket;
+            AnimateTowerDrop();
         }
+    }
+
+    public virtual void AnimateTowerDrop()
+    {
+        var initPos = sr.transform.localPosition;
+        var dropPosition = initPos + new Vector3(0, 25, 0);
+        sr.transform.localPosition = dropPosition;
+
+        var seq = LeanTween.sequence();
+        
+        seq.append(() => { 
+            LeanTween.moveLocal(sr.gameObject, initPos, 0.3f);
+            LeanTween.scale(sr.gameObject, initSpriteScale + new Vector3(0, 0.5f, 0), 0.3f);
+        });
+
+        seq.append(0.31f);
+        var scale = initSpriteScale;
+        scale.x *= 2f;
+        scale.y *= 0.5f;
+        seq.append(socket.Jiggle);
+        seq.append(LeanTween.scale(sr.gameObject, scale, 0.1f));
+        seq.append(LeanTween.scale(sr.gameObject, initSpriteScale, 0.25f).setEaseOutExpo());
+        
+
     }
 
     public virtual void OnUpdate() { }
@@ -186,9 +211,11 @@ public class Structure : MonoBehaviour
         }
     }
 
-    private void DoSquishyAnimation(Vector3 startingScale, Vector3 targetScale)
+    private void DoSquishyAnimation(Vector3 startingScale, Vector3 targetScale, bool cancelAnim=true)
     {
-        LeanTween.cancel(sr.gameObject);
+        if (cancelAnim)
+            LeanTween.cancel(sr.gameObject);
+
         sr.transform.localScale = startingScale;
         float randScaleX = UnityEngine.Random.Range(1.2f, 1.4f);
         float randScaleY = UnityEngine.Random.Range(1.3f, 1.5f);
@@ -199,6 +226,7 @@ public class Structure : MonoBehaviour
         var seq = LeanTween.sequence();
         seq.append(LeanTween.scale(sr.gameObject, newScale, 0.1f));
         seq.append(LeanTween.scale(sr.gameObject, targetScale, 0.2f));
+        //Debug.Log("Do squishy anim");
     }
 
     public bool IsAbaTower()
@@ -244,6 +272,7 @@ public class Structure : MonoBehaviour
     public virtual void OnStructureCreated(Structure structure)
     {
         //OnStructureSelected(structure);
+        Debug.Log($"{structureType} created");
     }
     
     public virtual void OnEnable()

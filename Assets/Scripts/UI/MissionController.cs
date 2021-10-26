@@ -74,11 +74,24 @@ public class MissionController : MonoBehaviour
         }
     }
 
+    private void OnWaveStateInit(WaveMode waveState)
+    {
+        if (waveState != WaveMode.ENDED)
+            return;
+        
+        var scale = Vector3.one;
+        LeanTween.scale(missionPanel.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
+        string text = $"Waves Survived <color=#{htmlColor}>{Util.waveManager.currWave+1}/{Util.waveManager.waveSettings.waves.Length}</color>";
+        missionText.text = text;
+
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onLevelStart += OnLevelStarted;
         EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
         EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
+        EventManager.Game.onWaveStateInit += OnWaveStateInit;
     }
 
     private void OnDisable()
@@ -86,6 +99,7 @@ public class MissionController : MonoBehaviour
         EventManager.Game.onLevelStart -= OnLevelStarted;
         EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;        
         EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
+        EventManager.Game.onWaveStateInit -= OnWaveStateInit;
     }
 }
 }

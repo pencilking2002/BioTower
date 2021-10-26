@@ -12,6 +12,9 @@ public class WaitingTutState : TutStateBase
         if (!isInitialized)
         {
             isInitialized = true;
+            StopCoroutine(GameManager.Instance.util.RevealCharacters(null, 0, null));
+            tutCanvas.tutText.text = tutCanvas.currTutorial.text;
+            tutCanvas.tutText.ForceMeshUpdate();
             
             InputController.canPressButtons = false;
             InputController.canSpawnTowers = true;

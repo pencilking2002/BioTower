@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_05
   m_EditorClassIdentifier: 
-  text: Now tap on one of those <b><color=#4C7900>SOCKETS</color></b> to place the
-    ABA tower.
+  text: Now tap one of those <b><color=#4C7900>SOCKETS</color></b> to place the ABA
+    tower.
   animatedWords:
   - word: sockets
     speed: {x: 100, y: 10}

@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
 
 namespace BioTower
 {
 public class LetterRevealState : TutStateBase
 {
-    public static bool cancelLetterReveal;
+    [ShowInInspector] public static bool cancelLetterReveal;
     private bool isTutAnimating;
 
     public override void Init (TutState tutState)
@@ -15,6 +16,7 @@ public class LetterRevealState : TutStateBase
         if (!isInitialized)
         {
             isInitialized = true;
+            cancelLetterReveal = false;
             TutorialCanvas.tutorialInProgress = true;
             InputController.canPressButtons = false;
             InputController.canSpawnTowers = false;
@@ -91,6 +93,7 @@ public class LetterRevealState : TutStateBase
         LeanTween.scale(tutCanvas.tutText.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1).setOnComplete(() => {
             isTutAnimating = false;
             tutCanvas.tutText.text = tutCanvas.currTutorial.text;
+            tutCanvas.tutText.ForceMeshUpdate();
             GameManager.Instance.util.TextReveal(tutCanvas.tutText, tutCanvas.revealDuration, SetWaitingState);
             
             // if (currTutorial.hasArrows)

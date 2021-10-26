@@ -65,6 +65,12 @@ public class WordAnimation : MonoBehaviour
                 vertices[index + 1] += offset;
                 vertices[index + 2] += offset;
                 vertices[index + 3] += offset;
+                
+                if (!isAnimating)
+                {
+                    LeanTween.cancel(gameObject);
+                    return;
+                }
             }
 
             int num = mesh.vertices.Length / 2;
@@ -73,10 +79,10 @@ public class WordAnimation : MonoBehaviour
                 mesh.vertices = vertices;
                 textMesh.canvasRenderer.SetMesh(mesh);
             }
-            else
-            {
-                Debug.Log($"verts: {mesh.vertices.Length}. tris: {mesh.triangles.Length}");
-            }
+            // else
+            // {
+            //     Debug.Log($"verts: {mesh.vertices.Length}. tris: {mesh.triangles.Length}");
+            // }
         });
     }
 
@@ -104,6 +110,7 @@ public class WordAnimation : MonoBehaviour
             {
                 initMesh.vertices = initVertices;
                 textMesh.canvasRenderer.SetMesh(initMesh);
+                Util.tutCanvas.tutText.text = Util.tutCanvas.currTutorial.text;
                 textMesh.ForceMeshUpdate();
             }
         }

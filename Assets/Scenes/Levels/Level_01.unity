@@ -6927,5 +6927,69 @@ PrefabInstance:
       propertyPath: hasTutorials
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: revealDuration
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 757af6f71ab88264488525446d9a97a7,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: d907e17b58428d8479a7920aaf338431,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6d01152145f5d324aaf11be18a74fef1,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: e73acbd2d3d94be409472583dc89fecb,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 857a287ceede8db4196213af630cf9d7,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 756db3d29bbc6f741894b8a7a30deb41,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e307f9d74ddcde4c9323bb3b4d987e7,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7909bfd702c717f48bd095a4cde9ba72,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 60fbf8cd44bf28149a9a1e7fc9fd5d68,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e802ef285f00cfa4faa2c57ebe4460ab, type: 3}

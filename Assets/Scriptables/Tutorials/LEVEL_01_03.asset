@@ -12,16 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_03
   m_EditorClassIdentifier: 
-  text: I need some help studying how plants defend themselves from drying out. Lets
-    do this!
+  text: I need some help studying how plants defend themselves from drying out. LETS
+    DO THIS!
   animatedWords:
-  - word: drought
-    speed: {x: 100, y: 10}
-    amplitude: 0.02
-  - word: defense
-    speed: {x: 100, y: 10}
-    amplitude: 0.02
-  portraitIndex: 0
+  - word: lets
+    speed: {x: 200, y: 20}
+    amplitude: 0.2
+  - word: do
+    speed: {x: 200, y: 20}
+    amplitude: 0.2
+  - word: this
+    speed: {x: 200, y: 20}
+    amplitude: 0.2
+  - word: '!'
+    speed: {x: 200, y: 20}
+    amplitude: 0.2
+  portraitIndex: 3
   requiredAction: 0
   transition: 0
   delay: 0.01

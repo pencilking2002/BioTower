@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
-  m_Name: LEVEL_01_06a
+  m_Name: LEVEL_01_09
   m_EditorClassIdentifier: 
-  text: These towers start out with one <b><color=#4C7900>ABA UNIT</color></b>. Tap
-    the button to create another one!
+  text: Keep an eye on your energy. If you use it all up, its <b><color=#912B0F>GAME
+    OVER!</color></b>
   animatedWords:
-  - word: aba
-    speed: {x: 100, y: 10}
-    amplitude: 0.03
-  - word: unit
-    speed: {x: 100, y: 10}
-    amplitude: 0.03
-  portraitIndex: 1
-  requiredAction: 4
+  - word: game
+    speed: {x: 200, y: 20}
+    amplitude: 0.08
+  - word: over
+    speed: {x: 200, y: 20}
+    amplitude: 0.08
+  portraitIndex: 2
+  requiredAction: 0
   transition: 1
-  delay: 0.01
-  highlightedItem: 2
+  delay: 0
+  highlightedItem: 0
   highlightType: 0

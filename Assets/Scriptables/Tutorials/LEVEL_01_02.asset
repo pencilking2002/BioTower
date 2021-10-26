@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_02
   m_EditorClassIdentifier: 
-  text: 'You must be my new assistant! My name is Dr. Esmeralda Goofyplants, pHd. '
+  text: 'You must be my new assistant! The name''s Dr. Esmeralda Goofyplants, pHd. '
   animatedWords:
   - word: drought
     speed: {x: 100, y: 10}
@@ -20,7 +20,7 @@ MonoBehaviour:
   - word: defense
     speed: {x: 100, y: 10}
     amplitude: 0.02
-  portraitIndex: 0
+  portraitIndex: 2
   requiredAction: 0
   transition: 0
   delay: 0.01

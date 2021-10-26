@@ -101,32 +101,43 @@ public class Util : MonoBehaviour
         EventManager.Tutorials.onTutChatStart?.Invoke();
     }
 
-    private IEnumerator RevealCharacters(TMP_Text textComponent, float revealDuration, Action onComplete=null)
+    public IEnumerator RevealCharacters(TMP_Text textComponent, float revealDuration, Action onComplete=null)
     {
         textComponent.ForceMeshUpdate();
+        int visibleCount = 0;
         TMP_TextInfo textInfo = textComponent.textInfo;
         int totalVisibleCharacters = textInfo.characterCount; // Get # of Visible Character in text object
-        int visibleCount = 0;
+
+        if (LetterRevealState.cancelLetterReveal)
+        {
+            visibleCount = totalVisibleCharacters;
+            textComponent.maxVisibleCharacters = visibleCount;
+            onComplete?.Invoke();
+            yield return null;
+        }
 
         while (visibleCount <= totalVisibleCharacters)
         {
             // Exit out of the letter revealing early
             if (LetterRevealState.cancelLetterReveal)
             {
+                textComponent.ForceMeshUpdate();
                 visibleCount = totalVisibleCharacters;
                 textComponent.maxVisibleCharacters = visibleCount;
                 onComplete?.Invoke();
-                LetterRevealState.cancelLetterReveal = false;
                 yield return null;
             }
 
-            textComponent.maxVisibleCharacters = visibleCount; // How many characters should TextMeshPro display?
-            visibleCount += 1;
-            EventManager.UI.onLetterReveal?.Invoke();
-            yield return new WaitForSeconds(revealDuration);
+            if (!LetterRevealState.cancelLetterReveal)
+            {
+                textComponent.maxVisibleCharacters = visibleCount; // How many characters should TextMeshPro display?
+                visibleCount += 1;
+                EventManager.UI.onLetterReveal?.Invoke();
+                yield return new WaitForSeconds(revealDuration);
+            }
         }
 
-        if (visibleCount >= totalVisibleCharacters)
+        if (visibleCount >= totalVisibleCharacters && !LetterRevealState.cancelLetterReveal)
         {
             onComplete?.Invoke();
             yield return null;

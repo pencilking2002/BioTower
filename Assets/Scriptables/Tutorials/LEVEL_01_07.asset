@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
-  m_Name: LEVEL_01_08a
+  m_Name: LEVEL_01_07
   m_EditorClassIdentifier: 
-  text: Creating towers and units takes <b><color=#4C7900>ENERGY</color></b>. ABA
-    towers cost 10 energy. It ain't FREE!
+  text: Good! ABA units walk around ABA towers, looking for <b><color=#912B0F>CRYSTAL
+    ENEMIES</color></b> to fight
   animatedWords:
-  - word: energy
-    speed: {x: 100, y: 10}
-    amplitude: 0.03
-  portraitIndex: 1
+  - word: enemies
+    speed: {x: 200, y: 20}
+    amplitude: 0.08
+  portraitIndex: 3
   requiredAction: 0
   transition: 1
   delay: 0.01
-  highlightedItem: 4
+  highlightedItem: 0
   highlightType: 0

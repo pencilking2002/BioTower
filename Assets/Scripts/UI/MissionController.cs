@@ -68,7 +68,7 @@ public class MissionController : MonoBehaviour
         if (LevelInfo.current.IsFirstLevel())
         {
             var scale = Vector3.one;
-            LeanTween.scale(missionText.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
+            LeanTween.scale(missionPanel.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
             string text = $"Enemies defeated <color=#{htmlColor}>{LevelInfo.current.numEnemiesDestroyed}/{LevelInfo.current.numEnemiesToDestroy}</color>";
             missionText.text = text;
         }

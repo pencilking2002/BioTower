@@ -13,14 +13,18 @@ public class WaitingButtonTutState : TutStateBase
         if (!isInitialized)
         {
             isInitialized = true;
+            StopCoroutine(GameManager.Instance.util.RevealCharacters(null, 0, null));
+            tutCanvas.tutText.text = tutCanvas.currTutorial.text;
+            tutCanvas.tutText.ForceMeshUpdate();
             
             InputController.canPressButtons = true;
             InputController.canSpawnTowers = false;
-            EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
-
+        
             var animatedWords = tutCanvas.currTutorial.animatedWords;
             foreach(AnimatedWord word in animatedWords)
                 EventManager.Tutorials.onAnimateText?.Invoke(word.word, word.speed, word.amplitude);
+            
+            EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
         }
     }
 
@@ -87,7 +91,7 @@ public class WaitingButtonTutState : TutStateBase
     private void OnDisable()
     {
         EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
-        EventManager.UI.onPressTowerButton += OnPressTowerButton;
+        EventManager.UI.onPressTowerButton -= OnPressTowerButton;
         EventManager.UI.onTapSpawnUnitButton -= OnTapSpawnUnitButton;
     }
 }

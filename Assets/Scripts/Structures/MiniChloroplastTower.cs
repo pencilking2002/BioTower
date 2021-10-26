@@ -5,6 +5,7 @@ using NaughtyAttributes;
 
 namespace BioTower.Structures
 {
+[SelectionBase]
 public class MiniChloroplastTower : Structure
 {
     [SerializeField] private CircleCollider2D maxInfluenceCollider;

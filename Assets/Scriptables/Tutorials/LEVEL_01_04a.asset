@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_04a
   m_EditorClassIdentifier: 
-  text: To start off, let's create an <b><color=#4C7900>ABA TOWER</color></b>. Tap
-    on the button below...
+  text: To start off, create an <b><color=#4C7900>ABA TOWER</color></b>. Tap on the
+    button below...
   animatedWords:
   - word: aba
     speed: {x: 100, y: 10}

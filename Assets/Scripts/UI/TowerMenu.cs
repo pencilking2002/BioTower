@@ -20,7 +20,7 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] private Button spawnUnitFullWidth;
     [SerializeField] private Button spawnLightParticleButton;
     private Image spawnLightDropCooldownImage;
-    [SerializeField] private Text currTowerText;
+    [SerializeField] private TextMeshProUGUI currTowerText;
 
     
     [Header("Tower Icons")]

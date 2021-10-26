@@ -110,9 +110,15 @@ public class SaveSystem : MonoBehaviour
     }
 
     [Button("Reset Save")]
-    public void ResetQuests()
+    public void ResetSave()
     {
         var gameData = new GameData();
+
+        if (Application.isPlaying)
+        {
+            Util.gameSettings.defaultSettings = gameData.settings;
+            Util.gameSettings.upgradeSettings = gameData.settings;
+        }
         //gameData.currLevel = 0;
         Save(gameData); 
     }

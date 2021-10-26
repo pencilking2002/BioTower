@@ -14,21 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingLevel: 1
   startingEnergy: 120
+  spawnLightDropCost: 1
+  multipleLightFragmentPickupRadius: 2
   basicEnemyDamage: 5
+  enemyPlayerBaseDamage: 3
   enemyUnitMaxHealth: 10
   snark2UnitCost: 3
   randomHealChance: 0.1
   randomHealAmount: 2
   healTowerAmount: 2
   declineDamage: 1
-  spawnLightDropCost: 1
-  multipleLightFragmentPickupRadius: 2
   defaultSettings:
     currLevel: 1
     lightFragmentValue: 5
     energy: 80
     abaUnitDamage: 5
-    abaUnitMaxSpeed_float: 550
+    abaUnitMaxSpeed_float: 500
     abaUnitCost: 5
     abaUnitMaxHealth: 10
     ppc2TowerDamage: 5
@@ -39,13 +40,13 @@ MonoBehaviour:
     healTowerCost: 5
     enableTowerHealthDecline: 0
     playerTowerMaxhealth: 20
-    enablePlayerTowerHealing: 1
+    enablePlayerTowerHealing: 0
     abaTowerCost: 10
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2310
     abaMapScale_float: 2310
     abaInfluenceShapeScale_float: 1000
-    enableAbaTowerRandomHeal: 1
+    enableAbaTowerRandomHeal: 0
     ppc2TowerUnlocked: 0
     ppc2TowerCost: 40
     ppc2MaxInfluenceRadius_float: 2280
@@ -67,9 +68,9 @@ MonoBehaviour:
   upgradeSettings:
     currLevel: 1
     lightFragmentValue: 5
-    energy: 100
+    energy: 80
     abaUnitDamage: 5
-    abaUnitMaxSpeed_float: 550
+    abaUnitMaxSpeed_float: 500
     abaUnitCost: 5
     abaUnitMaxHealth: 10
     ppc2TowerDamage: 5
@@ -78,15 +79,15 @@ MonoBehaviour:
     snrk2UnitSpeed_float: 1000
     crystalSnrk2Value: 20
     healTowerCost: 5
-    enableTowerHealthDecline: 0
+    enableTowerHealthDecline: 1
     playerTowerMaxhealth: 20
-    enablePlayerTowerHealing: 1
+    enablePlayerTowerHealing: 0
     abaTowerCost: 10
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2310
     abaMapScale_float: 2310
     abaInfluenceShapeScale_float: 1000
-    enableAbaTowerRandomHeal: 1
+    enableAbaTowerRandomHeal: 0
     ppc2TowerUnlocked: 0
     ppc2TowerCost: 40
     ppc2MaxInfluenceRadius_float: 2280

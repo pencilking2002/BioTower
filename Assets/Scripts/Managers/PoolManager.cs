@@ -16,14 +16,15 @@ public class PoolManager : MonoBehaviour
 {
     [SerializeField] private GameObject lightFragPrefab;
     [SerializeField] private GameObject itemHighlightPrefab;
-    [SerializeField] private Vector2 offscreenLocation;
-    [SerializeField] private int numObjectsToCreateOnAwake = 10;
+    [SerializeField] private int numLightFragmentsToCreate = 10;
+    [SerializeField] private int numArrowsToCreate = 4;
     public List<PooledObject> pooledObjects;
+    private Vector2 offscreenLocation = new Vector2(100000, 100000);
 
     private void Awake()
     {
-        CreateObjectsOnAwake(PoolObjectType.LIGHT_FRAGMENT, numObjectsToCreateOnAwake);
-        CreateObjectsOnAwake(PoolObjectType.ITEM_HIGHLIGHT, 4);
+        CreateObjectsOnAwake(PoolObjectType.LIGHT_FRAGMENT, numLightFragmentsToCreate);
+        CreateObjectsOnAwake(PoolObjectType.ITEM_HIGHLIGHT, numArrowsToCreate);
     }
 
     private void CreateObjectsOnAwake(PoolObjectType objectType, int numObjects)

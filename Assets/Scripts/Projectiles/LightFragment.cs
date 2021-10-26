@@ -26,6 +26,7 @@ public class LightFragment : MonoBehaviour
         seq.append(LeanTween.scale(gameObject, Vector3.zero, 0.1f));
 
         seq.append(gameObject, () => {
+            transform.localScale = scale;
             GetComponent<PooledObject>().SendToPool();
             hasBeenPickedUp = false;
         });

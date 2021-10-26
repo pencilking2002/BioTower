@@ -10,25 +10,32 @@ namespace BioTower
 [CreateAssetMenu(fileName="GameSettings", menuName="GameSettings")]
 public class GameSettings : ScriptableObject
 {
+    [Header("Misc")]
     public int startingLevel = 1;
     public int startingEnergy = 80;
+    public int spawnLightDropCost = 1;
+    public float multipleLightFragmentPickupRadius = 2;    
+
+
+    [Header("Units")]
     public int basicEnemyDamage = 5;        // N/A
+    public int enemyPlayerBaseDamage = 3;   // How much do enemies damage the player base
     public int enemyUnitMaxHealth = 10;     // N/A
     public int snark2UnitCost = 3;          // N/A
+
+
+    [Header("Towers")]
     [Range(0,1)] public float randomHealChance = 0.1f;
     public int randomHealAmount = 2;
     public int healTowerAmount = 2;
     public int declineDamage = 1;
-    public int spawnLightDropCost = 1;
-    public float multipleLightFragmentPickupRadius = 2;        
+ 
 
     [Space(10)]
     public Params defaultSettings;
     public Params upgradeSettings;
 
    
-
-
     private Dictionary<UpgradeType, Action> _upgradeLogicMap;
 
     public Dictionary<UpgradeType, Action> upgradeLogicMap

@@ -230,6 +230,7 @@ public class GameplayUI : MonoBehaviour
 
     private void PingPongScaleCurrencyUI(float targetScale)
     {
+        LeanTween.cancel(playerCurrencyText.gameObject);
         var oldScale = playerCurrencyText.transform.localScale;
         LeanTween.scale(playerCurrencyText.gameObject, oldScale * targetScale, 0.1f).setLoopPingPong(1);
     }
@@ -242,6 +243,7 @@ public class GameplayUI : MonoBehaviour
     private void OnGainCurrency(int numGained, int currTotal)
     {
         //Debug.Log($"Currency gained");
+         PingPongScaleCurrencyUI(1.2f);
     }
 
     private void OnStructureCooldownStarted(StructureType structureType, float cooldown)

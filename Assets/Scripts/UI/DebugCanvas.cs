@@ -127,8 +127,10 @@ public class DebugCanvas : MonoBehaviour
     public void UnlockAllLevels()
     {
         var buttons = Util.bootController.levelSelectMenu.GetButtons();
+        //Util.upgradeSettings = Util.gameSettings;
+
         Util.upgradeSettings.currLevel = buttons.Length;
-        Util.saveManager.LoadAndSave();;
+        Util.saveManager.LoadAndSave();
 
         foreach(var btn in buttons)
             btn.Unlock();

@@ -85,7 +85,7 @@ public class DNABase : Structure
                 sr.color = col;
             });
         }
-        TakeDamage(1);
+        TakeDamage(Util.gameSettings.enemyPlayerBaseDamage);
         Debug.Log("cancel");
     }
 

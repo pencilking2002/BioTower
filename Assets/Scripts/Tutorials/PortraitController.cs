@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace BioTower
+{
 public class PortraitController : MonoBehaviour
 {
     [SerializeField] private Image portrait;
@@ -10,6 +12,10 @@ public class PortraitController : MonoBehaviour
 
     public void SetPortrait(int i)
     {
-        portrait.sprite = portraits[i];
+        if (i < portraits.Length)
+            portrait.sprite = portraits[i];
+        else
+            Debug.LogError($"The portrait index {i} is too high for {Util.tutCanvas.currTutorial.name}");
     }
+}
 }

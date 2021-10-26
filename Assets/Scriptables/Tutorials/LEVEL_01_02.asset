@@ -12,18 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_02
   m_EditorClassIdentifier: 
-  text: Let's create an <b><color=#4C7900>ABA TOWER</color></b>. Tap on the button
-    below...
+  text: 'You must be my new assistant! My name is Dr. Esmeralda Goofyplants, pHd. '
   animatedWords:
-  - word: aba
+  - word: drought
     speed: {x: 100, y: 10}
-    amplitude: 0.03
-  - word: tower
+    amplitude: 0.02
+  - word: defense
     speed: {x: 100, y: 10}
-    amplitude: 0.03
-  portraitIndex: 1
-  requiredAction: 1
-  transition: 1
-  delay: 0
-  highlightedItem: 1
-  highlightType: 1
+    amplitude: 0.02
+  portraitIndex: 0
+  requiredAction: 0
+  transition: 0
+  delay: 0.01
+  highlightedItem: 0
+  highlightType: 0

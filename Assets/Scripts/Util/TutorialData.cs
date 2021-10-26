@@ -35,7 +35,7 @@ public class TutorialData : ScriptableObject
 {
     [Multiline(10)] public string text;
     public AnimatedWord[] animatedWords;
-    [Range(0,3)] public int portraitIndex;
+    public int portraitIndex;
     public RequiredAction requiredAction;
     public TransitionType transition;
     [Range(0,5)] public float delay;

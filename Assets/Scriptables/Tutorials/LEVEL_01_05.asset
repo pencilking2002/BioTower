@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_05
   m_EditorClassIdentifier: 
-  text: Good! ABA units walk around ABA towers, looking for <b><color=#912B0F>ENEMIES</color></b>
-    to fight
+  text: Now tap on one of those <b><color=#4C7900>SOCKETS</color></b> to place the
+    ABA tower.
   animatedWords:
-  - word: enemies
-    speed: {x: 200, y: 20}
-    amplitude: 0.08
-  portraitIndex: 3
-  requiredAction: 0
+  - word: sockets
+    speed: {x: 100, y: 10}
+    amplitude: 0.03
+  portraitIndex: 2
+  requiredAction: 2
   transition: 1
-  delay: 0
-  highlightedItem: 0
+  delay: 0.01
+  highlightedItem: 3
+  highlightType: 0

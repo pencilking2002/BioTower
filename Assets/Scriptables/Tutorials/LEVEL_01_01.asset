@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_01
   m_EditorClassIdentifier: 
-  text: Oh hello! Welcome to <b><color=#4C7900>DROUGHT DEFENSE</color></b>!
+  text: hello! Welcome to <b><color=#4C7900>DROUGHT DEFENSE</color></b>!
   animatedWords:
   - word: drought
     speed: {x: 100, y: 10}
@@ -25,5 +25,4 @@ MonoBehaviour:
   transition: 0
   delay: 2
   highlightedItem: 0
-  hasArrows: 0
-  arrowCoords: []
+  highlightType: 0

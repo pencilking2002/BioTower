@@ -25,9 +25,9 @@ public class WaveState : MonoBehaviour
 
     }
 
-    public virtual WaveMode OnUpdate(Wave wave)
+    public virtual WaveMode OnUpdate(WaveMode waveState)
     {
-        return wave.state;
+        return waveState;
     }
 }
 }

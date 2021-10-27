@@ -274,7 +274,7 @@ public class Structure : MonoBehaviour
     public virtual void OnStructureCreated(Structure structure)
     {
         //OnStructureSelected(structure);
-        Debug.Log($"{structureType} created");
+        //Debug.Log($"{structureType} created");
     }
     
     public virtual void OnEnable()

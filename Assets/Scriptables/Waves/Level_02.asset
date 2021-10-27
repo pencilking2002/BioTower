@@ -13,30 +13,30 @@ MonoBehaviour:
   m_Name: Level_02
   m_EditorClassIdentifier: 
   waves:
-  - state: 2
-    waveIndex: 0
-    startDelay: 0
-    numEnemiesPerWave: 10
+  - waveIndex: 0
+    startDelay: 2
+    isEndless: 0
+    numEnemiesPerWave: 4
     spawnInterval: 4
     minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 11.672143
-    lastSpawn: 31.807007
-    numSpawns: 6
-  - state: 0
-    waveIndex: 1
+    timeStarted: 4.2404838
+    lastSpawn: 18.272951
+    numSpawns: 4
+  - waveIndex: 1
     startDelay: 4
-    numEnemiesPerWave: 10
+    isEndless: 0
+    numEnemiesPerWave: 4
     spawnInterval: 4
     minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 0
-    lastSpawn: 0
-    numSpawns: 0
-  - state: 0
-    waveIndex: 2
+    timeStarted: 18.297104
+    lastSpawn: 34.32301
+    numSpawns: 4
+  - waveIndex: 2
     startDelay: 4
-    numEnemiesPerWave: 10
+    isEndless: 0
+    numEnemiesPerWave: 4
     spawnInterval: 4
     minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 0
-    lastSpawn: 0
-    numSpawns: 0
+    timeStarted: 34.353054
+    lastSpawn: 42.37242
+    numSpawns: 2

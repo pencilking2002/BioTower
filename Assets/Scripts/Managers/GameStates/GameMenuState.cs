@@ -14,6 +14,7 @@ public class GameMenuState : BootStateBase
             isInitialized = true;
             controller.levelSelectMenu.canvas.enabled = false; 
             controller.startMenuCanvas.canvas.enabled = false;
+            //controller.wavePanel.panel.gameObject.SetActive(true);
 
             var seq = LeanTween.sequence();
             controller.gameCanvas.canvasGroup.alpha = 1;

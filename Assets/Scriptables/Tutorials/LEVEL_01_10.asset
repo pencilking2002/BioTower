@@ -12,19 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_10
   m_EditorClassIdentifier: 
-  text: Time for our first experiment! I'm sending in salties for you to fight off.
-    I'M GOING TO LUNCH!
+  text: Time for our first experiment! I'm sending in salties for you to fight. Time
+    for lunch...GOOD LUCK!
   animatedWords:
-  - word: i'm
+  - word: good
     speed: {x: 200, y: 20}
     amplitude: 0.2
-  - word: going
-    speed: {x: 200, y: 20}
-    amplitude: 0.2
-  - word: to
-    speed: {x: 200, y: 20}
-    amplitude: 0.2
-  - word: lunch
+  - word: luck
     speed: {x: 200, y: 20}
     amplitude: 0.2
   - word: '!'

@@ -11,7 +11,15 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     public LevelSettings waveSettings => LevelInfo.current.waveSettings;
     [SerializeField] private WaveMode waveMode;
-    public int currWave;
+    //public int currWave => waveSettings.wa
+    public Wave currWave
+    {
+        get
+        {
+            return waveSettings.waves[currWaveIndex];
+        }
+    }
+    public int currWaveIndex;
     public bool wavesInitialized;
     public bool wavesHaveCompleted;
 
@@ -34,10 +42,11 @@ public class WaveManager : MonoBehaviour
         waveStateMap.Add(WaveMode.IN_PROGRESS, inProgressState); 
         waveStateMap.Add(WaveMode.ENDED, endedState); 
     }
+
     
     private void InitializeWaves()
     {
-        currWave = 0;
+        currWaveIndex = 0;
         wavesInitialized = true;
         wavesHaveCompleted = false;
 
@@ -76,9 +85,9 @@ public class WaveManager : MonoBehaviour
         if (wavesHaveCompleted)
             return;
 
-        var wave = waveSettings.waves[currWave];
-        waveMode = waveStateMap[waveMode].OnUpdate(wave);
-        wave.state = waveMode;
+        //var wave = waveSettings.waves[currWave];
+        waveMode = waveStateMap[waveMode].OnUpdate(waveMode);
+        //wave.state = waveMode;
     }
 
     public void SetEndedState()
@@ -94,7 +103,7 @@ public class WaveManager : MonoBehaviour
     private void OnEnemyReachedDestination(BasicEnemy enemy)
     {
         // Vary speed
-        var minMaxSpeed = waveSettings.waves[currWave].minMaxSpeed;
+        var minMaxSpeed = currWave.minMaxSpeed;
         enemy.SetSpeed(minMaxSpeed, 0.5f);
     }   
 
@@ -108,7 +117,7 @@ public class WaveManager : MonoBehaviour
             return;
 
         InitializeWaves();
-        Debug.Log($"waves initialized for {levelType}");
+        //Debug.Log($"waves initialized for {levelType}");
     }
 
     private void OnTutorialEnd(TutorialData data)
@@ -123,7 +132,7 @@ public class WaveManager : MonoBehaviour
     private void OnWavesCompleted()
     {
         wavesInitialized = false;
-        currWave = 0;
+        currWaveIndex = 0;
     }
 
     private void OnEnable()

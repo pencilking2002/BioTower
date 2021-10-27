@@ -22,9 +22,7 @@ public class LetterRevealState : TutStateBase
             InputController.canSpawnTowers = false;
 
             tutCanvas.currTutorialIndex++;
-                
             SetupCtaText();
-
             tutCanvas.portraitController.SetPortrait(tutCanvas.currTutorial.portraitIndex);
             
             // Animate the tutorial panel
@@ -42,10 +40,6 @@ public class LetterRevealState : TutStateBase
     public override TutState OnUpdate(TutState tutState)
     {
         Init(tutState);
-
-        // if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
-        //     tutState = TutState.END;
-    
         return tutState;
     }
 
@@ -80,9 +74,6 @@ public class LetterRevealState : TutStateBase
             isTutAnimating = false;
             tutCanvas.tutText.text = tutCanvas.currTutorial.text;
             GameManager.Instance.util.TextReveal(tutCanvas.tutText, tutCanvas.revealDuration, SetWaitingState);
-
-        //     if (currTutorial.hasArrows)
-        //         arrowController.DisplayArrows(currTutorial.arrowCoords);
         });
     }
 
@@ -94,10 +85,7 @@ public class LetterRevealState : TutStateBase
             isTutAnimating = false;
             tutCanvas.tutText.text = tutCanvas.currTutorial.text;
             tutCanvas.tutText.ForceMeshUpdate();
-            GameManager.Instance.util.TextReveal(tutCanvas.tutText, tutCanvas.revealDuration, SetWaitingState);
-            
-            // if (currTutorial.hasArrows)
-            //     arrowController.DisplayArrows(currTutorial.arrowCoords);                    
+            GameManager.Instance.util.TextReveal(tutCanvas.tutText, tutCanvas.revealDuration, SetWaitingState);                   
         });
     }
 
@@ -140,7 +128,6 @@ public class LetterRevealState : TutStateBase
             return;
 
         cancelLetterReveal = true;
-
         LeanTween.delayedCall(1.0f, SetWaitingState);
     }
 

@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
     {
         enemy.StopMoving();
         enemyList.Remove(enemy);
-        Debug.Log("Unregister enemy");
+        //Debug.Log("Unregister enemy");
     }
 
     public void RegisterPlayerBase(DNABase playerbase)

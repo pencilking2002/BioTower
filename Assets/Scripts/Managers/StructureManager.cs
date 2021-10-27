@@ -95,7 +95,7 @@ public class StructureManager : MonoBehaviour
             return;
 
         structureList.Add(structure);
-        Debug.Log("Structure created ev recieved");
+        //Debug.Log("Structure created ev recieved");
     }
 
     private void OnStructureDestroyed(Structure structure)

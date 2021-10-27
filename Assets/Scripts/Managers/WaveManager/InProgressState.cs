@@ -9,16 +9,16 @@ public class InProgressState : WaveState
         if (!isInitialized)
         {
             isInitialized = true;
-            GameManager.Instance.bootController.wavePanel.DisplayWaveTitle(waveManager.currWave);
+            //GameManager.Instance.bootController.wavePanel.DisplayWaveTitle(waveManager.currWave);
             EventManager.Game.onWaveStateInit?.Invoke(waveState);
-            Debug.Log("In Progress wave state init");
+            Debug.Log("In Progress wave state init: " + waveManager.currWaveIndex);
         }
     }
 
-    public override WaveMode OnUpdate(Wave wave)
+    public override WaveMode OnUpdate(WaveMode waveState)
     {
         Init();
-
+        var wave = waveManager.currWave;
         if (Time.time > wave.lastSpawn + wave.spawnInterval || wave.numSpawns == 0)
         {
             waveManager.SpawnEnemy(wave.minMaxSpeed);
@@ -28,12 +28,9 @@ public class InProgressState : WaveState
 
         if ((wave.numSpawns >= wave.numEnemiesPerWave && !wave.isEndless))
         {
-            return WaveMode.ENDED;   
+            waveState = WaveMode.ENDED;   
         }
-        else
-        {
-            return wave.state;
-        }
+        return waveState;
     }
 
     private void OnGameOver(bool isWin)

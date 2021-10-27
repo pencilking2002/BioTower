@@ -18,7 +18,7 @@ public class EconomyManager : MonoBehaviour
         playerCurrency = currency;
         //playerCurrency = Util.gameSettings.upgradeSettings.energy;
         EventManager.Game.onGainCurrency?.Invoke(currency, playerCurrency);
-        Debug.Log("Init economy");
+        //Debug.Log("Init economy");
     }
 
     public bool HasEnoughCurrency(int num)

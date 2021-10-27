@@ -15,17 +15,19 @@ public class DelayState : WaveState
         }
     }
 
-    public override WaveMode OnUpdate(Wave wave)
+    public override WaveMode OnUpdate(WaveMode waveState)
     {
         Init();
         
+        var wave = waveManager.currWave;
         if (Time.time > wave.timeStarted + wave.startDelay)
         {
+            Debug.Log("Start in progress state");
             return WaveMode.IN_PROGRESS;
         }
         else
         {
-            return wave.state;
+            return waveState;
         }
     }
 

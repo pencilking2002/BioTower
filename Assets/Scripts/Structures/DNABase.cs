@@ -86,7 +86,7 @@ public class DNABase : Structure
             });
         }
         TakeDamage(Util.gameSettings.enemyPlayerBaseDamage);
-        Debug.Log("cancel");
+        //Debug.Log("cancel");
     }
 
     public override void OnEnable()

@@ -15,10 +15,10 @@ public class NotStartedState : WaveState
         }
     }
 
-    public override WaveMode OnUpdate(Wave wave)
+    public override WaveMode OnUpdate(WaveMode waveState)
     {
         Init();
-        wave.timeStarted = Time.time;
+        waveManager.currWave.timeStarted = Time.time;
         return WaveMode.DELAY;
     }
 

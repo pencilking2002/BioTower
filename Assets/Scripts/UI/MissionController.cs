@@ -14,11 +14,13 @@ public class MissionController : MonoBehaviour
     [SerializeField] private Color importantColor;
     private string htmlColor;
     private Vector3 initPos;
+    private bool isDisplayed;
 
     private void Awake()
     {
         missionText.text = "";
         initPos = missionPanel.transform.position;
+        missionPanel.transform.position = initPos + new Vector3(0,120,0);
         htmlColor = ColorUtility.ToHtmlStringRGB(importantColor);
     }
     
@@ -26,8 +28,8 @@ public class MissionController : MonoBehaviour
     {
         if (!LevelInfo.current.IsFirstLevel())
         {
-            string missionText = $"Waves Survived <color=#{htmlColor}>0/{Util.waveManager.waveSettings.waves.Length}</color>";
-            SlideInPanel(missionText, 2.0f);
+            // string missionText = $"Wave <color=#{htmlColor}>1/{Util.waveManager.waveSettings.waves.Length}</color>";
+            // SlideInPanel(missionText, 2.0f);
         }
         else
         {
@@ -37,6 +39,11 @@ public class MissionController : MonoBehaviour
 
     private void SlideInPanel(string inputMissionText, float delay)
     {
+        if (isDisplayed)
+            return;
+
+        //Debug.Log("Slide in");
+        isDisplayed = true;
         var startPos = initPos;
         startPos.y += 120;
         missionPanel.transform.position = startPos;
@@ -76,13 +83,14 @@ public class MissionController : MonoBehaviour
 
     private void OnWaveStateInit(WaveMode waveState)
     {
-        if (waveState != WaveMode.ENDED)
+        if (waveState != WaveMode.IN_PROGRESS)
             return;
         
-        var scale = Vector3.one;
-        LeanTween.scale(missionPanel.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
-        string text = $"Waves Survived <color=#{htmlColor}>{Util.waveManager.currWave+1}/{Util.waveManager.waveSettings.waves.Length}</color>";
+        //var scale = Vector3.one;
+        //LeanTween.scale(missionPanel.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
+        string text = $"Wave <color=#{htmlColor}>{Util.waveManager.currWaveIndex+1}/{Util.waveManager.waveSettings.waves.Length}</color>";
         missionText.text = text;
+        SlideInPanel(text, 1.5f);
 
     }
 

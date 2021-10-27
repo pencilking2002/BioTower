@@ -16,13 +16,16 @@ public class EndedState : WaveState
         }
     }
 
-    public override WaveMode OnUpdate(Wave wave)
+    public override WaveMode OnUpdate(WaveMode waveState)
     {
         Init();
-
-        if (waveManager.currWave < waveManager.waveSettings.waves.Length-1)
+        var wave = waveManager.currWave;
+        if (waveManager.currWaveIndex < waveManager.waveSettings.waves.Length-1)
         {
-            waveManager.currWave++;
+            ++waveManager.currWaveIndex;
+            waveState = WaveMode.NOT_STARTED;
+            //waveManager.waveSettings.waves[waveManager.currWave].state = WaveMode.NOT_STARTED;
+            Debug.Log("new wave: " + waveManager.currWave);
         }
         else
         {
@@ -30,7 +33,7 @@ public class EndedState : WaveState
             EventManager.Game.onWavesCompleted?.Invoke();
         }
 
-        return wave.state;
+        return waveState;
     }
 
     private void OnWaveStateInit(WaveMode waveState)

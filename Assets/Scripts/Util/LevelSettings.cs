@@ -15,7 +15,7 @@ public class LevelSettings : ScriptableObject
 [Serializable]
 public class Wave
 {
-    public WaveMode state;
+    //public WaveMode state;
     public int waveIndex;
     public float startDelay;
     public bool isEndless;
@@ -33,7 +33,7 @@ public class Wave
 
     public void Init(int waveIndex)
     {
-        state = WaveMode.NOT_STARTED;
+        //state = WaveMode.NOT_STARTED;
         lastSpawn = 0;
         timeStarted = 0;
         numSpawns = 0;

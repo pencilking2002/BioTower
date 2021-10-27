@@ -163,14 +163,42 @@ public class PlacementManager : MonoBehaviour
         else if (data.highlightedItem == HighlightedItem.MINI_CHLORO)
         {
             var structuresContainer = GameObject.FindGameObjectWithTag(Constants.structuresContainer);
-            if (structuresContainer != null)
+            if (structuresContainer == null)
+                return;
+
+            var miniChloros = structuresContainer.GetComponentsInChildren<MiniChloroplastTower>(true);
+            bool activateChloros = data.highlightType == HighlightType.NONE;
+            bool highlightChloros = data.highlightType == HighlightType.ARROW;
+
+            if (activateChloros)
             {
-                var miniChloros = structuresContainer.GetComponentsInChildren<MiniChloroplastTower>(true);
-               
                 foreach(MiniChloroplastTower tower in miniChloros)
+                {
                     tower.gameObject.SetActive(true); 
-                
+                }    
             }
+            else if (highlightChloros)
+            {
+                foreach(MiniChloroplastTower tower in miniChloros)
+                {
+                    LeanTween.delayedCall(gameObject, 0.1f, () => {
+                        Util.poolManager.SpawnItemHighlight(tower.transform.position, new Vector2(0,100));
+                    });
+                }
+            }
+        }
+    }
+
+    private void OnLightPickedUp()
+    {
+        if (Util.tutCanvas.hasTutorials && TutorialCanvas.tutorialInProgress)
+        {
+            var currTut = Util.tutCanvas.currTutorial;
+            if (currTut.highlightedItem == HighlightedItem.MINI_CHLORO && 
+                currTut.highlightType == HighlightType.ARROW)
+                {
+                    
+                }
         }
     }
 
@@ -179,6 +207,7 @@ public class PlacementManager : MonoBehaviour
         EventManager.UI.onPressTowerButton += OnPressTowerButton;
         EventManager.Input.onTouchBegan += OnTouchBegan;
         EventManager.Tutorials.onTutorialStart += OnTutorialStart;
+        EventManager.Structures.onLightPickedUp += OnLightPickedUp;
     }
 
     private void OnDisable()
@@ -186,6 +215,7 @@ public class PlacementManager : MonoBehaviour
         EventManager.UI.onPressTowerButton -= OnPressTowerButton;
         EventManager.Input.onTouchBegan -= OnTouchBegan;
         EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
+        EventManager.Structures.onLightPickedUp -= OnLightPickedUp;
     }
 
 }

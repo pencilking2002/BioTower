@@ -72,13 +72,34 @@ public class WaitingTutState : TutStateBase
         if (tutState != this.tutState)
             isInitialized = false;
     }
-
+    private void OnLightPickedUp()
+    {
+        if (Util.tutCanvas.hasTutorials && TutorialCanvas.tutorialInProgress)
+        {
+            var currTut = Util.tutCanvas.currTutorial;
+            var isValid = currTut.highlightedItem == HighlightedItem.MINI_CHLORO && currTut.highlightType == HighlightType.ARROW;
+            if (isValid)
+            {
+                if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+                {
+                    tutCanvas.SetEndTutState();
+                }
+                else
+                {
+                    tutCanvas.SetLetterRevealState();
+                }
+    
+                Util.poolManager.DespawnAllitemHighlights();
+            }
+        }
+    }
     
     private void OnEnable()
     {
         EventManager.Structures.onStructureCreated += OnStructureCreated;
         EventManager.Tutorials.onTutStateInit += OnTutStateInit;
         EventManager.Input.onTouchBegan += OnTouchBegan;
+        EventManager.Structures.onLightPickedUp += OnLightPickedUp;
     }
 
     private void OnDisable()
@@ -86,6 +107,7 @@ public class WaitingTutState : TutStateBase
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
         EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
         EventManager.Input.onTouchBegan -= OnTouchBegan;
+        EventManager.Structures.onLightPickedUp -= OnLightPickedUp;
     }
 }
 }

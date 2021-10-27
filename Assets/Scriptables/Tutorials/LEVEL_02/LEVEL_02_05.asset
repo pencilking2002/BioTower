@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: LEVEL_02_05
   m_EditorClassIdentifier: 
   text: Speaking of cost, to help you maintain your energy level, here are some some
-    mini-chloroplast towers
+    mini-chloroplast towers.
   animatedWords: []
   portraitIndex: 3
   requiredAction: 0
   transition: 0
   delay: 0
   highlightedItem: 6
-  highlightType: 0
+  highlightType: 2

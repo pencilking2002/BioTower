@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_02_06
   m_EditorClassIdentifier: 
-  text: Speaking of cost, to help you maintain your energy level, here are some some
-    mini-chloroplast towers
+  text: Tap on the light fragments they create to increase your energy. The more
+    the better!
   animatedWords: []
   portraitIndex: 3
-  requiredAction: 0
+  requiredAction: 5
   transition: 0
   delay: 0
   highlightedItem: 6

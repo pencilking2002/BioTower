@@ -29,7 +29,8 @@ public enum HighlightedItem
 public enum HighlightType
 {
     ARROW,
-    GLOW
+    GLOW,
+    NONE
 }
 
 [CreateAssetMenu(menuName ="BioTower/TutorialData", fileName ="TutorialData")]

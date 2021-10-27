@@ -17,12 +17,19 @@ public class MiniChloroplastTower : Structure
     public override void Awake()
     {
         base.Awake();
-        lastShotTime = Time.time + UnityEngine.Random.Range(0,0.3f);
+        lastShotTime = Time.time + UnityEngine.Random.Range(0.5f,1.5f);
     }
 
     private void Start()
     {
         base.Init(null);
+        var initScale = sr.transform.localScale;
+        sr.transform.localScale = Vector3.zero;
+        var seq = LeanTween.sequence();
+
+        seq.append(UnityEngine.Random.Range(0.0f,1.0f));
+        seq.append(LeanTween.scale(sr.gameObject, initScale * 2, 0.25f));
+        seq.append(LeanTween.scale(sr.gameObject, initScale, 0.25f).setEaseOutBack());
     }
 
     public override void OnUpdate()

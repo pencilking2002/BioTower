@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: LEVEL_02_07
   m_EditorClassIdentifier: 
   text: Great job! Well I'm off to dinner. DON'T DIE!
-  animatedWords: []
+  animatedWords:
+  - word: don't
+    speed: {x: 200, y: 20}
+    amplitude: 0.1
+  - word: die
+    speed: {x: 200, y: 20}
+    amplitude: 0.1
   portraitIndex: 4
   requiredAction: 0
   transition: 0

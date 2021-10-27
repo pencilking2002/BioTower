@@ -85,13 +85,12 @@ public class WaveManager : MonoBehaviour
         if (wavesHaveCompleted)
             return;
 
-        //var wave = waveSettings.waves[currWave];
         waveMode = waveStateMap[waveMode].OnUpdate(waveMode);
-        //wave.state = waveMode;
     }
 
     public void SetEndedState()
     {
+        wavesInitialized = false;
         waveMode = WaveMode.ENDED;
     }
 

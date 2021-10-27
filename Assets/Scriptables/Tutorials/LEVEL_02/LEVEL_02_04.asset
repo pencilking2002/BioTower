@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
-  m_Name: LEVEL_02_03
+  m_Name: LEVEL_02_04
   m_EditorClassIdentifier: 
-  text: First off I am plopping a DNA tower down. Isn't she BEAUTIFUL?!
+  text: My salties are going to attack this tower. Your job is to defend it AT ALL
+    COSTS!
   animatedWords: []
   portraitIndex: 3
   requiredAction: 0
   transition: 0
   delay: 0
-  highlightedItem: 5
+  highlightedItem: 0
   highlightType: 0

@@ -10,7 +10,7 @@ public enum RequiredAction
 {
     TAP_ANYWHERE, TAP_ABA_TOWER_BUTTON,
     PLACE_ABA_TOWER, TOWER_SELECTED,
-    SPAWN_ABA_UNIT
+    SPAWN_ABA_UNIT, TAP_LIGHT_DROP
 }
 
 public enum TransitionType
@@ -21,7 +21,9 @@ public enum TransitionType
 public enum HighlightedItem
 {
     NONE, ABA_TOWER_BTN, 
-    ABA_UNIT_BTN, SOCKET, ENERGY, DNA_BASE
+    ABA_UNIT_BTN, SOCKET, 
+    ENERGY, DNA_BASE,
+    MINI_CHLORO
 }
 
 public enum HighlightType

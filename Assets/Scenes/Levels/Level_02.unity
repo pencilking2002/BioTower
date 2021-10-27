@@ -2703,7 +2703,7 @@ PrefabInstance:
     - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
         type: 3}
       propertyPath: tutorials.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
         type: 3}
@@ -2727,7 +2727,13 @@ PrefabInstance:
         type: 3}
       propertyPath: tutorials.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 756db3d29bbc6f741894b8a7a30deb41,
+      objectReference: {fileID: 11400000, guid: e90842c8d60d0f649a12ac753df69f06,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6fd541be75268074ca75ab092189fad2,
         type: 2}
     - target: {fileID: 7979799146040914501, guid: e802ef285f00cfa4faa2c57ebe4460ab,
         type: 3}
@@ -4114,7 +4120,7 @@ GameObject:
   - component: {fileID: 1157090425}
   m_Layer: 0
   m_Name: ------- STRUCTURES  -------
-  m_TagString: Untagged
+  m_TagString: StructuresContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7269,12 +7275,12 @@ PrefabInstance:
     - target: {fileID: 6049871321232111090, guid: eab750347f60720478005afd44282137,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.34
+      value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: 6049871321232111090, guid: eab750347f60720478005afd44282137,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.38
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 6049871321232111090, guid: eab750347f60720478005afd44282137,
         type: 3}

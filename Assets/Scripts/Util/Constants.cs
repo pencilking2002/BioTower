@@ -16,6 +16,7 @@ public class Constants
     public static string projectilesContainer = "ProjectilesContainer";
     public static string levelInfo = "LevelInfo";
     public static string tutorialCanvas = "TutorialCanvas";
+    public static string structuresContainer = "StructuresContainer";
     
     // Scenes
     public static string boot = "Boot";

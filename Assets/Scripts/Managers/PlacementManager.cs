@@ -148,9 +148,29 @@ public class PlacementManager : MonoBehaviour
     {
         if (data.highlightedItem == HighlightedItem.DNA_BASE)
         {
-            LeanTween.delayedCall(gameObject, 2.0f, () => {
-                PlaceTower(StructureType.DNA_BASE, new Vector3(7.3f,-2.4f,0), null);
+            LeanTween.delayedCall(gameObject, 1.5f, () => {
+                var structuresContainer = GameObject.FindGameObjectWithTag(Constants.structuresContainer);
+                if (structuresContainer != null)
+                {
+                    var dnaBase = structuresContainer.GetComponentInChildren<DNABase>(true);
+                    if (dnaBase != null)
+                    {
+                        dnaBase.gameObject.SetActive(true);
+                    }
+                }
             });
+        }
+        else if (data.highlightedItem == HighlightedItem.MINI_CHLORO)
+        {
+            var structuresContainer = GameObject.FindGameObjectWithTag(Constants.structuresContainer);
+            if (structuresContainer != null)
+            {
+                var miniChloros = structuresContainer.GetComponentsInChildren<MiniChloroplastTower>(true);
+               
+                foreach(MiniChloroplastTower tower in miniChloros)
+                    tower.gameObject.SetActive(true); 
+                
+            }
         }
     }
 

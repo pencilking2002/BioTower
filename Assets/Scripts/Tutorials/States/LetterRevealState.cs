@@ -132,8 +132,8 @@ public class LetterRevealState : TutStateBase
         if (isTutAnimating)
             return;
 
-        cancelLetterReveal = true;
-        LeanTween.delayedCall(1.0f, SetWaitingState);
+        // cancelLetterReveal = true;
+        // LeanTween.delayedCall(1.0f, SetWaitingState);
     }
 
     private void OnEnable()

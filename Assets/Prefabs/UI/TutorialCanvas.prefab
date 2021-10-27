@@ -713,7 +713,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e307f9d74ddcde4c9323bb3b4d987e7, type: 2}
   - {fileID: 11400000, guid: 7909bfd702c717f48bd095a4cde9ba72, type: 2}
   slideInOffset: 300
-  revealDuration: 0.01
+  revealDuration: 0.005
   canvas: {fileID: 7979799145711278710}
   initTutPanelLocalPos: {x: 0, y: 0, z: 0}
   tutTextWordAnim: {fileID: 0}

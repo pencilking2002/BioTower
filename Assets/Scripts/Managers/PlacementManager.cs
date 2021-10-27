@@ -181,8 +181,8 @@ public class PlacementManager : MonoBehaviour
             {
                 foreach(MiniChloroplastTower tower in miniChloros)
                 {
-                    LeanTween.delayedCall(gameObject, 0.1f, () => {
-                        Util.poolManager.SpawnItemHighlight(tower.transform.position, new Vector2(0,100));
+                    LeanTween.delayedCall(gameObject, 1.0f, () => {
+                        Util.poolManager.SpawnItemHighlight(tower.transform.position, new Vector2(0,120));
                     });
                 }
             }

@@ -6934,11 +6934,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
         type: 3}
-      propertyPath: revealDuration
-      value: 0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
-        type: 3}
       propertyPath: tutorials.Array.size
       value: 10
       objectReference: {fileID: 0}

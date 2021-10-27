@@ -18,6 +18,8 @@ public class LightFragment : MonoBehaviour
         EventManager.Structures.onLightPickedUp?.Invoke();
 
         var scale = transform.localScale;
+        
+        Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.2f, 0.02f);
 
         var seq = LeanTween.sequence();
 

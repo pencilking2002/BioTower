@@ -21,8 +21,8 @@ MonoBehaviour:
     speed: {x: 200, y: 20}
     amplitude: 0.1
   portraitIndex: 4
-  requiredAction: 0
+  requiredAction: 5
   transition: 0
   delay: 0
-  highlightedItem: 0
-  highlightType: 2
+  highlightedItem: 6
+  highlightType: 0

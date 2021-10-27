@@ -32,6 +32,7 @@ public class AbaUnit : Unit
 
     public override void Start()
     {
+        Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.2f, 0.02f);
         base.Start();
         Util.ScaleUpSprite(sr, 1.1f);
         SetRoamingState();

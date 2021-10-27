@@ -37,7 +37,7 @@ public class WaitingTutState : TutStateBase
         if (!isInitialized)
             return;
         
-        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial) && !tutCanvas.currTutorial.IsTapLightDropRequiredAction())
         {
             tutCanvas.SetEndTutState();
             return;
@@ -76,7 +76,7 @@ public class WaitingTutState : TutStateBase
     {
         if (!isInitialized)
             return;
-            
+
         if (Util.tutCanvas.hasTutorials && TutorialCanvas.tutorialInProgress)
         {
             var currTut = Util.tutCanvas.currTutorial;

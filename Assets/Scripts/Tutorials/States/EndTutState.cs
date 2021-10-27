@@ -16,13 +16,12 @@ public class EndTutState : TutStateBase
             InputController.canPressButtons = true;
             InputController.canSpawnTowers = true;
             
-            tutCanvas.hasTutorials = false;
             var seq = LeanTween.sequence();
             seq.append(LeanTween.moveLocalY(tutCanvas.tutPanel.gameObject, tutCanvas.initTutPanelLocalPos.y+tutCanvas.slideInOffset, 0.25f).setEaseOutCubic());
             seq.append(() => {
                 EventManager.Tutorials.onTutorialEnd?.Invoke(tutCanvas.currTutorial);
+                tutCanvas.hasTutorials = false;
             });
-
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
         }
     }

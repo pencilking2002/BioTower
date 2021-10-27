@@ -74,6 +74,9 @@ public class WaitingTutState : TutStateBase
     }
     private void OnLightPickedUp()
     {
+        if (!isInitialized)
+            return;
+            
         if (Util.tutCanvas.hasTutorials && TutorialCanvas.tutorialInProgress)
         {
             var currTut = Util.tutCanvas.currTutorial;
@@ -82,11 +85,13 @@ public class WaitingTutState : TutStateBase
             {
                 if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
                 {
+                    Debug.Log("last tut");
                     tutCanvas.SetEndTutState();
                 }
                 else
                 {
                     tutCanvas.SetLetterRevealState();
+                    Debug.Log("Go to text reveal");
                 }
     
                 Util.poolManager.DespawnAllitemHighlights();

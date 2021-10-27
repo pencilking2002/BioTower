@@ -189,25 +189,11 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
-    private void OnLightPickedUp()
-    {
-        if (Util.tutCanvas.hasTutorials && TutorialCanvas.tutorialInProgress)
-        {
-            var currTut = Util.tutCanvas.currTutorial;
-            if (currTut.highlightedItem == HighlightedItem.MINI_CHLORO && 
-                currTut.highlightType == HighlightType.ARROW)
-                {
-                    
-                }
-        }
-    }
-
     private void OnEnable()
     {
         EventManager.UI.onPressTowerButton += OnPressTowerButton;
         EventManager.Input.onTouchBegan += OnTouchBegan;
         EventManager.Tutorials.onTutorialStart += OnTutorialStart;
-        EventManager.Structures.onLightPickedUp += OnLightPickedUp;
     }
 
     private void OnDisable()
@@ -215,7 +201,6 @@ public class PlacementManager : MonoBehaviour
         EventManager.UI.onPressTowerButton -= OnPressTowerButton;
         EventManager.Input.onTouchBegan -= OnTouchBegan;
         EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
-        EventManager.Structures.onLightPickedUp -= OnLightPickedUp;
     }
 
 }

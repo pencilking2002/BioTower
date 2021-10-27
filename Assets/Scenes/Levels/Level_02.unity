@@ -2703,7 +2703,7 @@ PrefabInstance:
     - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
         type: 3}
       propertyPath: tutorials.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
         type: 3}
@@ -2740,6 +2740,12 @@ PrefabInstance:
       propertyPath: tutorials.Array.data[5]
       value: 
       objectReference: {fileID: 11400000, guid: fc01e98e15b9a56458c887f8776d30cf,
+        type: 2}
+    - target: {fileID: 7979799145711278709, guid: e802ef285f00cfa4faa2c57ebe4460ab,
+        type: 3}
+      propertyPath: tutorials.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: d1d22ffdc67fea241a2e89846ee4dfa5,
         type: 2}
     - target: {fileID: 7979799146040914501, guid: e802ef285f00cfa4faa2c57ebe4460ab,
         type: 3}

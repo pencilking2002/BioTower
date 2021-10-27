@@ -27,7 +27,7 @@ public class TutorialCanvas : MonoBehaviour
     public bool hasTutorials;
     [ShowIf("hasTutorials")] public TutState tutState;
     [ShowIf("hasTutorials")]public int currTutorialIndex = -1;
-    [ShowIf("hasTutorials")][SerializeField] private TutorialData[] tutorials;
+    [ShowIf("hasTutorials")]public TutorialData[] tutorials;
     
 
     [Header("Tut Animation")]

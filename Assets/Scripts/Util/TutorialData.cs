@@ -50,6 +50,7 @@ public class TutorialData : ScriptableObject
     public bool IsPlaceAbaTowerRequiredAction() { return requiredAction == RequiredAction.PLACE_ABA_TOWER; }
     public bool IsTowerSelectedRequiredAction() { return requiredAction == RequiredAction.TOWER_SELECTED; }
     public bool IsSpawnAbaUnitRequiredAction() { return requiredAction == RequiredAction.SPAWN_ABA_UNIT; }
+    public bool IsTapLightDropRequiredAction() { return requiredAction == RequiredAction.TAP_LIGHT_DROP; }
 
 }
 

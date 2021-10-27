@@ -33,7 +33,7 @@ public class LetterRevealState : TutStateBase
 
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
             EventManager.Tutorials.onTutorialStart?.Invoke(tutCanvas.currTutorial);
-            
+
             Util.poolManager.DespawnAllitemHighlights();
             EventManager.Tutorials.onHighlightItem?.Invoke(tutCanvas.currTutorial.highlightedItem);
         }
@@ -95,15 +95,18 @@ public class LetterRevealState : TutStateBase
     {
         if (!isInitialized)
             return;
+        
+        var currTut = tutCanvas.currTutorial;
 
         bool gotoWaitState = 
-            tutCanvas.currTutorial.IsTapAnywhereRequiredAction() ||
-            tutCanvas.currTutorial.IsPlaceAbaTowerRequiredAction() ||
-            tutCanvas.currTutorial.IsTowerSelectedRequiredAction();
+            currTut.IsTapAnywhereRequiredAction() ||
+            currTut.IsPlaceAbaTowerRequiredAction() ||
+            currTut.IsTowerSelectedRequiredAction() ||
+            currTut.IsTapLightDropRequiredAction();
         
         bool gotoWaitButtonState = 
-            tutCanvas.currTutorial.IsTapAbaButtonRequiredAction() ||
-            tutCanvas.currTutorial.IsSpawnAbaUnitRequiredAction();
+            currTut.IsTapAbaButtonRequiredAction() ||
+            currTut.IsSpawnAbaUnitRequiredAction();
 
         if (gotoWaitState)
         {

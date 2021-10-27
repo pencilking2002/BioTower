@@ -27,6 +27,7 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private GameObject ppc2TowerPrefab;
     [SerializeField] private GameObject chloroplastTowerPrefab;
     [SerializeField] private GameObject mitoTowerPrefab;
+    [SerializeField] private GameObject dnaBasePrefab;
 
 
     private void Awake()
@@ -50,6 +51,9 @@ public class PlacementManager : MonoBehaviour
                 break;
             case StructureType.MITOCHONDRIA:
                 tower = Instantiate(mitoTowerPrefab);
+                break;
+            case StructureType.DNA_BASE:
+                tower = Instantiate(dnaBasePrefab);
                 break;
         }
 
@@ -79,7 +83,7 @@ public class PlacementManager : MonoBehaviour
                 {
                     if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))
                     {
-                        PlaceTower(screenPos, socket);
+                        PlaceTower(structureToPlace, socket.transform.position, socket);
                         GameManager.Instance.econManager.BuyTower(structureToPlace);
                     }
                 }
@@ -100,11 +104,13 @@ public class PlacementManager : MonoBehaviour
         return socket;
     }
 
-    private void PlaceTower(Vector3 screenPos, StructureSocket socket)
+    private void PlaceTower(StructureType structureType, Vector3 worldPosition, StructureSocket socket)
     {
-        socket.SetHasStructure(true);
-        var tower = CreateStructure(structureToPlace);
-        tower.transform.position = socket.transform.position + placementOffset;
+        if (socket != null)
+            socket.SetHasStructure(true);
+
+        var tower = CreateStructure(structureType);
+        tower.transform.position = worldPosition + placementOffset;
         var structure = tower.GetComponent<Structure>();
         structure.Init(socket);
     }
@@ -138,16 +144,28 @@ public class PlacementManager : MonoBehaviour
     public bool IsNoneState() { return placementState == PlacementState.NONE; }
     public bool IsPlacingState() { return placementState == PlacementState.PLACING; }
 
+    private void OnTutorialStart(TutorialData data)
+    {
+        if (data.highlightedItem == HighlightedItem.DNA_BASE)
+        {
+            LeanTween.delayedCall(gameObject, 2.0f, () => {
+                PlaceTower(StructureType.DNA_BASE, new Vector3(7.3f,-2.4f,0), null);
+            });
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.UI.onPressTowerButton += OnPressTowerButton;
         EventManager.Input.onTouchBegan += OnTouchBegan;
+        EventManager.Tutorials.onTutorialStart += OnTutorialStart;
     }
 
     private void OnDisable()
     {
         EventManager.UI.onPressTowerButton -= OnPressTowerButton;
         EventManager.Input.onTouchBegan -= OnTouchBegan;
+        EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
     }
 
 }

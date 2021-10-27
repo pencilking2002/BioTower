@@ -32,6 +32,8 @@ public class LetterRevealState : TutStateBase
                 Blink();
 
             EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
+            EventManager.Tutorials.onTutorialStart?.Invoke(tutCanvas.currTutorial);
+            
             Util.poolManager.DespawnAllitemHighlights();
             EventManager.Tutorials.onHighlightItem?.Invoke(tutCanvas.currTutorial.highlightedItem);
         }

@@ -88,5 +88,10 @@ public class LevelInfo : MonoBehaviour
     {
         return levelType == LevelType.LEVEL_01;
     }
+
+    public bool HasTutorials()
+    {
+        return Util.tutCanvas.hasTutorials;
+    }
 }
 }

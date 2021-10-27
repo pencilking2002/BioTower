@@ -63,7 +63,7 @@ public class TowerMenu : MonoBehaviour
 
     private void HandleMitoTowerCooldownDisplay()
     {
-        if (Util.tapManager.selectedStructure.IsMitoTower())
+        if (Util.tapManager.hasSelectedStructure && Util.tapManager.selectedStructure.IsMitoTower())
         {
             var tower = (MitoTower) Util.tapManager.selectedStructure;
 

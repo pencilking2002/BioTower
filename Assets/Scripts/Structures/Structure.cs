@@ -38,12 +38,12 @@ public class Structure : MonoBehaviour
     public List<Unit> units;
     public TowerAlert towerAlert;
     private Vector3 initSpriteScale;
-    private Vector3 initSpritePos;
+    private Vector3 initLocalSpritePos;
 
     public virtual void Awake()
     {
         initSpriteScale = sr.transform.localScale;
-        initSpritePos = sr.transform.position;
+        initLocalSpritePos = sr.transform.localPosition;
         lastDeclineTime = Time.time;
     }
 
@@ -70,7 +70,7 @@ public class Structure : MonoBehaviour
 
     public virtual void AnimateTowerDrop()
     {
-        var initPos = sr.transform.localPosition;
+        var initPos = initLocalSpritePos;
         var dropPosition = initPos + new Vector3(0, 25, 0);
         sr.transform.localPosition = dropPosition;
 

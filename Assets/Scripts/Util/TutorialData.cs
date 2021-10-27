@@ -21,7 +21,7 @@ public enum TransitionType
 public enum HighlightedItem
 {
     NONE, ABA_TOWER_BTN, 
-    ABA_UNIT_BTN, SOCKET, ENERGY,
+    ABA_UNIT_BTN, SOCKET, ENERGY, DNA_BASE
 }
 
 public enum HighlightType

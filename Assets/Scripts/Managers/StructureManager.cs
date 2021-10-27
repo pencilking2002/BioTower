@@ -115,6 +115,8 @@ public class StructureManager : MonoBehaviour
         socketList.Clear();
     }
 
+ 
+
     private void OnEnable()
     {
         EventManager.Structures.onStructureCreated += OnStructureCreated;

@@ -244,8 +244,8 @@ MonoBehaviour:
     type: 3}
   itemHighlightPrefab: {fileID: 5307764098546666582, guid: b1e95b5c585453e41a205c9293a5ed22,
     type: 3}
-  offscreenLocation: {x: 10000, y: 10000}
-  numObjectsToCreateOnAwake: 10
+  numLightFragmentsToCreate: 10
+  numArrowsToCreate: 4
   pooledObjects: []
 --- !u!1 &523966223168948012
 GameObject:
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 2780707828294620590, guid: f469209cfd1273840b4db49e40188b90,
     type: 3}
   waveMode: 0
-  currWave: 0
+  currWaveIndex: 0
   wavesInitialized: 0
   wavesHaveCompleted: 0
 --- !u!114 &7337853098062410269
@@ -1218,6 +1218,8 @@ MonoBehaviour:
   chloroplastTowerPrefab: {fileID: 6556679146768111441, guid: fc5fd20b60860bf48aa895745a23fa0b,
     type: 3}
   mitoTowerPrefab: {fileID: 1729478695543941044, guid: 81ed3f6665b4b62459cc30997ae88516,
+    type: 3}
+  dnaBasePrefab: {fileID: 6049871321232111088, guid: eab750347f60720478005afd44282137,
     type: 3}
 --- !u!1 &7102263763943850465
 GameObject:

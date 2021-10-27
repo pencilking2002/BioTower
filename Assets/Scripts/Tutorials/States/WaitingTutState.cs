@@ -52,7 +52,7 @@ public class WaitingTutState : TutStateBase
         if (!isInitialized)
             return;
 
-        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+        if (!structure.IsPlayerBase() && tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
         {
             tutCanvas.SetEndTutState();
             return;

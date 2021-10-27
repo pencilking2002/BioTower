@@ -57,8 +57,8 @@ public class MissionController : MonoBehaviour
     private void OnTutorialEnd(TutorialData data)
     {
         var levelInfo = LevelInfo.current;
-        if (!levelInfo.IsFirstLevel())
-            return;
+        // if (!levelInfo.IsFirstLevel())
+        //     return;
 
         if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
         {

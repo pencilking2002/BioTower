@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     
 
     [Header("References")]
-    public Camera cam;
+    public CamController cam;
     public ObjectShake objectShake;
     public UnitManager unitManager;
     public TutorialCanvas currTutCanvas => 

@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: LEVEL_02_03
   m_EditorClassIdentifier: 
   text: First off I am plopping a DNA tower down. Isn't she BEAUTIFUL?!
-  animatedWords: []
+  animatedWords:
+  - word: beautiful
+    speed: {x: 100, y: 10}
+    amplitude: 0.1
+  - word: ?!
+    speed: {x: 100, y: 10}
+    amplitude: 0.1
   portraitIndex: 3
   requiredAction: 0
   transition: 0

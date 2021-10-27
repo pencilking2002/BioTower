@@ -14,7 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Non of my previous assistants have made it this far. LET THE EXPERIMENTS
     CONTINUE!
-  animatedWords: []
+  animatedWords:
+  - word: let
+    speed: {x: 200, y: 20}
+    amplitude: 0.1
+  - word: the
+    speed: {x: 200, y: 20}
+    amplitude: 0.1
+  - word: experiments
+    speed: {x: 200, y: 20}
+    amplitude: 0.1
+  - word: continue
+    speed: {x: 200, y: 20}
+    amplitude: 0.1
+  - word: '!'
+    speed: {x: 200, y: 20}
+    amplitude: 0.1
   portraitIndex: 3
   requiredAction: 0
   transition: 0

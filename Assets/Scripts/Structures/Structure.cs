@@ -89,9 +89,10 @@ public class Structure : MonoBehaviour
             seq.append(socket.Jiggle);
 
         seq.append(LeanTween.scale(sr.gameObject, scale, 0.1f));
+        seq.append(() => {
+            Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.4f, 0.1f);
+        });
         seq.append(LeanTween.scale(sr.gameObject, initSpriteScale, 0.25f).setEaseOutExpo());
-        
-
     }
 
     public virtual void OnUpdate() { }

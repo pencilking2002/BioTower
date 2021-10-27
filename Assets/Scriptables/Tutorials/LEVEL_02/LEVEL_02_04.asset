@@ -14,7 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: My salties are going to attack this tower. Your job is to defend it AT ALL
     COSTS!
-  animatedWords: []
+  animatedWords:
+  - word: at
+    speed: {x: 100, y: 10}
+    amplitude: 0.1
+  - word: all
+    speed: {x: 100, y: 10}
+    amplitude: 0.1
+  - word: costs
+    speed: {x: 100, y: 10}
+    amplitude: 0.1
   portraitIndex: 3
   requiredAction: 0
   transition: 0

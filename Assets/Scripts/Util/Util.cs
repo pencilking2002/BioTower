@@ -24,6 +24,7 @@ public class Util : MonoBehaviour
     public static GameStates gameStates => GameManager.Instance.gameStates;
     public static WaveManager waveManager => GameManager.Instance.waveManager;
     public static TutorialCanvas tutCanvas => GameManager.Instance.currTutCanvas;
+    public static ObjectShake objectShake => GameManager.Instance.objectShake;
     public LayerMask enemyLayerMask;
     public static int structureSocketLayer = 12;
 

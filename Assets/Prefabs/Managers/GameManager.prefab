@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fc6ae8a0519724582d2be0baa85649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
 --- !u!114 &743548315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +536,7 @@ MonoBehaviour:
   levelMap: {fileID: 0}
   playerBase: {fileID: 0}
   enemyList: []
-  cam: {fileID: 743548313}
+  cam: {fileID: 743548316}
   objectShake: {fileID: 3710814913142046533}
   unitManager: {fileID: 8293232854449710708}
   util: {fileID: 6811510881634626579}

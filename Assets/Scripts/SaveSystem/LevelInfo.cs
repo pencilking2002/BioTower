@@ -50,7 +50,7 @@ public class LevelInfo : MonoBehaviour
 
     private void AnimateCamera()
     {
-        var cam = GameManager.Instance.cam;
+        var cam = GameManager.Instance.cam.cam;
         cam.orthographicSize = cameraSize + 0.3f;
         LeanTween.value(gameObject, cam.orthographicSize, cameraSize, 2.0f).setOnUpdate((float val) => {
             cam.orthographicSize = val;

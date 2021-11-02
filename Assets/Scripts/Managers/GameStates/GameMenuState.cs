@@ -20,10 +20,10 @@ public class GameMenuState : BootStateBase
             seq.append(1.0f);
             seq.append(() => { 
                 controller.gameCanvas.canvas.enabled = true;
-                controller.gameplayUI.gameUIPanel.gameObject.SetActive(true);
+                controller.gameplayUI.panel.gameObject.SetActive(true);
                 controller.upgradePanel.Hide();
             });
-            seq.append(LeanTween.alphaCanvas(controller.gameplayUI.gameUIPanel, 1.0f, 0.5f));
+            seq.append(LeanTween.alphaCanvas(controller.gameplayUI.panel, 1.0f, 0.5f));
 
             EventManager.Game.onGameStateInit?.Invoke(gameState);
         }
@@ -45,7 +45,7 @@ public class GameMenuState : BootStateBase
     {
         if (tut.requiredAction == RequiredAction.TAP_ABA_TOWER_BUTTON)
         {
-            LeanTween.alphaCanvas(controller.gameplayUI.gameUIPanel, 1.0f, 0.5f);
+            LeanTween.alphaCanvas(controller.gameplayUI.panel, 1.0f, 0.5f);
         }
     }
 

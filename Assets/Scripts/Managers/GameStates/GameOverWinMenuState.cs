@@ -12,7 +12,7 @@ public class GameOverWinMenuState : BootStateBase
         if (!isInitialized)
         {
             isInitialized = true;
-            controller.gameplayUI.gameUIPanel.gameObject.SetActive(false);
+            controller.gameplayUI.panel.gameObject.SetActive(false);
             Util.saveManager.LoadAndSave();
 
             EventManager.Game.onGameStateInit?.Invoke(gameState);

@@ -11,7 +11,7 @@ namespace BioTower.UI
 {
 public class GameplayUI : MonoBehaviour
 {
-    public CanvasGroup gameUIPanel;
+    public CanvasGroup panel;
     [SerializeField] private Button AbaTowerButton;
     [SerializeField] private Button Pp2cTowerButton;
     [SerializeField] private Button chloroplastTowerButton;
@@ -28,7 +28,7 @@ public class GameplayUI : MonoBehaviour
         towerButtonMap.Add(StructureType.PPC2_TOWER, Pp2cTowerButton);
         towerButtonMap.Add(StructureType.CHLOROPLAST, chloroplastTowerButton);
         towerButtonMap.Add(StructureType.MITOCHONDRIA, mitoTowerButton);
-        initPos = gameUIPanel.transform.position;
+        initPos = panel.transform.position;
     }
 
     private void Start()
@@ -57,9 +57,9 @@ public class GameplayUI : MonoBehaviour
     { 
         var startPos = initPos;
         startPos.y -= 120;
-        gameUIPanel.transform.position = startPos;
+        panel.transform.position = startPos;
         LeanTween.delayedCall(gameObject, delay, () => {
-            LeanTween.move(gameUIPanel.gameObject, initPos, 0.5f).setEaseOutQuint();
+            LeanTween.move(panel.gameObject, initPos, 0.5f).setEaseOutQuint();
         });
     }
     public StructureType GetSelectedButtonType()

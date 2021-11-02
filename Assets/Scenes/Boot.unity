@@ -299,13 +299,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18853570}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1726303750}
   - {fileID: 477641055}
-  m_Father: {fileID: 240495435}
+  m_Father: {fileID: 1896959465}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 806458802}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: OnPressMitoButton
         m_Mode: 1
@@ -2710,8 +2710,9 @@ GameObject:
   - component: {fileID: 240495437}
   - component: {fileID: 240495436}
   - component: {fileID: 240495439}
+  - component: {fileID: 240495440}
   m_Layer: 0
-  m_Name: GameUI
+  m_Name: GameplayUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2728,11 +2729,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1615208674}
-  - {fileID: 1953271445}
-  - {fileID: 1897445566}
-  - {fileID: 412561100}
-  - {fileID: 18853571}
+  - {fileID: 1896959465}
   m_Father: {fileID: 806458800}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2806,6 +2803,26 @@ MonoBehaviour:
   m_EffectColor: {r: 0.31282002, g: 0.3301887, b: 0, a: 1}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
+--- !u!114 &240495440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240495434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5baf43d541bb0449c5009ed0a43314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 1896959466}
+  AbaTowerButton: {fileID: 1380382192}
+  Pp2cTowerButton: {fileID: 1897445563}
+  chloroplastTowerButton: {fileID: 412561101}
+  mitoTowerButton: {fileID: 18853572}
+  currSelectedBtn: {fileID: 0}
+  currencyContainer: {fileID: 1615208673}
+  playerCurrencyText: {fileID: 1432127226}
 --- !u!1 &248275835
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,13 +4092,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412561099}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1742108421}
   - {fileID: 1396503787}
-  m_Father: {fileID: 240495435}
+  m_Father: {fileID: 1896959465}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -4133,7 +4150,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 806458802}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: OnPressChloroplastButton
         m_Mode: 1
@@ -8774,7 +8791,6 @@ GameObject:
   - component: {fileID: 806458805}
   - component: {fileID: 806458804}
   - component: {fileID: 806458803}
-  - component: {fileID: 806458802}
   - component: {fileID: 806458801}
   - component: {fileID: 806458809}
   - component: {fileID: 806458808}
@@ -8841,26 +8857,6 @@ MonoBehaviour:
   chloroplastTower: {fileID: 21300000, guid: 5edd2bafd1ad1dd4b8a49399b8f44046, type: 3}
   mitoTower: {fileID: 390241442674666848, guid: d1d5dd001f254cd4588797edf25463db,
     type: 3}
---- !u!114 &806458802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 806458799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd5baf43d541bb0449c5009ed0a43314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameUIPanel: {fileID: 240495436}
-  AbaTowerButton: {fileID: 1380382192}
-  Pp2cTowerButton: {fileID: 1897445563}
-  chloroplastTowerButton: {fileID: 412561101}
-  mitoTowerButton: {fileID: 18853572}
-  currSelectedBtn: {fileID: 0}
-  currencyContainer: {fileID: 1615208673}
-  playerCurrencyText: {fileID: 1432127226}
 --- !u!114 &806458803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9391,7 +9387,7 @@ MonoBehaviour:
   wavePanel: {fileID: 806458809}
   gameCanvas: {fileID: 806458803}
   startMenuCanvas: {fileID: 562835643}
-  gameplayUI: {fileID: 806458802}
+  gameplayUI: {fileID: 240495440}
   upgradePanel: {fileID: 806458808}
   towerMenu: {fileID: 806458801}
   levelSelectMenu: {fileID: 798997476}
@@ -14889,7 +14885,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 806458802}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: OnPressAbaTowerButton
         m_Mode: 1
@@ -16790,7 +16786,7 @@ RectTransform:
   - {fileID: 498375644}
   - {fileID: 39430354}
   - {fileID: 1432127228}
-  m_Father: {fileID: 240495435}
+  m_Father: {fileID: 1896959465}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -18589,6 +18585,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896915185}
   m_CullTransparentMesh: 0
+--- !u!1 &1896959464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1896959465}
+  - component: {fileID: 1896959468}
+  - component: {fileID: 1896959467}
+  - component: {fileID: 1896959466}
+  m_Layer: 0
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1896959465
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896959464}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1615208674}
+  - {fileID: 1953271445}
+  - {fileID: 1897445566}
+  - {fileID: 412561100}
+  - {fileID: 18853571}
+  m_Father: {fileID: 240495435}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1896959466
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896959464}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1896959467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896959464}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1896959468
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896959464}
+  m_CullTransparentMesh: 1
 --- !u!1 &1897445562
 GameObject:
   m_ObjectHideFlags: 0
@@ -18652,7 +18741,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 806458802}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: OnPressPPC2TowerButton
         m_Mode: 1
@@ -18710,13 +18799,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897445562}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1223497679}
   - {fileID: 1365515319}
-  m_Father: {fileID: 240495435}
+  m_Father: {fileID: 1896959465}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -19810,13 +19899,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953271441}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1999669738}
   - {fileID: 1380382195}
-  m_Father: {fileID: 240495435}
+  m_Father: {fileID: 1896959465}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}

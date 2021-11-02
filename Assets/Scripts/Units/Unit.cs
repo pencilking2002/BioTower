@@ -20,7 +20,7 @@ public class Unit : MonoBehaviour
 {
     public UnitType unitType;
     public PolyNavAgent agent;
-    public Structure tower;
+    [HideInInspector] public Structure tower;
     [SerializeField] private bool hasHealth;
     //[EnableIf("hasHealth")] [Range(0,100)] [SerializeField] private int maxHealth;
     [EnableIf("hasHealth")] [SerializeField] protected int currHealth;

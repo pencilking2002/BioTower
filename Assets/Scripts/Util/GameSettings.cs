@@ -20,6 +20,7 @@ public class GameSettings : ScriptableObject
     [Header("Units")]
     public int basicEnemyDamage = 5;        // N/A
     public int enemyPlayerBaseDamage = 3;   // How much do enemies damage the player base
+    public int enemyUpgradedDamage = 4;
     public int enemyUnitMaxHealth = 10;     // N/A
     public int snark2UnitCost = 3;          // N/A
 

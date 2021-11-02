@@ -231,6 +231,7 @@ public class GameplayUI : MonoBehaviour
     private void PingPongScaleCurrencyUI(float targetScale)
     {
         LeanTween.cancel(playerCurrencyText.gameObject);
+        playerCurrencyText.transform.localScale = Vector3.one;
         var oldScale = playerCurrencyText.transform.localScale;
         LeanTween.scale(playerCurrencyText.gameObject, oldScale * targetScale, 0.1f).setLoopPingPong(1);
     }

@@ -72,7 +72,7 @@ public class DNABase : Structure
         return ((float) currHealth/ (float) maxHealth) * 100;
     }
 
-    private void OnBaseReached()
+    private void OnBaseReached(BasicEnemy enemy)
     {
         if (currHealth > 0)
         {
@@ -85,7 +85,11 @@ public class DNABase : Structure
                 sr.color = col;
             });
         }
-        TakeDamage(Util.gameSettings.enemyPlayerBaseDamage);
+        var damage = enemy.hasCrystal ? 
+            Util.gameSettings.enemyUpgradedDamage : 
+            Util.gameSettings.enemyPlayerBaseDamage;
+
+        TakeDamage(damage);
         //Debug.Log("cancel");
     }
 

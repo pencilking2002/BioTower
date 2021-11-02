@@ -11,10 +11,14 @@ namespace BioTower.Units
 [SelectionBase]
 public class BasicEnemy : Unit
 {
+
     [Header("References")]
     [SerializeField] private GameObject crystalPrefab;
     [SerializeField] private Collider2D triggerCollider;
     [SerializeField] private SpriteRenderer muscleIcon;
+    [SerializeField] private SpriteRenderer upgradedSprite;
+    [SerializeField] private SpriteRenderer currentSR;
+    [SerializeField] private Animator currentAnim;
 
     
     [Header("Enemy state")]
@@ -30,9 +34,13 @@ public class BasicEnemy : Unit
     [SerializeField] private Waypoint nextWaypoint;
 
 
+
     public override void Start()
     {
         base.Start();
+        //currentSR = sr;
+        //currentAnim = anim;
+        Debug.Log("Set current anim");
         GameManager.Instance.RegisterEnemy(this);
     }
 
@@ -69,8 +77,8 @@ public class BasicEnemy : Unit
     {
         agent.Stop();
         isEngagedInCombat = true;
-        anim.SetBool("Walk", false);
-        anim.SetBool("Attack", true);
+        currentAnim.SetBool("Walk", false);
+        currentAnim.SetBool("Attack", true);
     }
 
     public void SetDestination(Waypoint waypoint)
@@ -85,19 +93,14 @@ public class BasicEnemy : Unit
 
     public override void StartMoving(Waypoint waypoint, float delay=0)
     {
-        anim.SetBool("Walk", true);
-        anim.SetBool("Attack", false);
+        currentAnim.SetBool("Walk", true);
+        currentAnim.SetBool("Attack", false);
         combatFoe = null;
         LeanTween.delayedCall(delay, () => {
             SetDestination(waypoint);
             isEngagedInCombat = false;
         });
     }
-
-    // private void LevelLoaded()
-    // {
-    //     GameManager.Instance.RegisterEnemy(this);
-    // }
 
     private void DestinationReached()
     {
@@ -112,8 +115,8 @@ public class BasicEnemy : Unit
         else if (currWaypoint.isEndpoint)
         {
 //            Debug.Log("Base reached");
-            EventManager.Units.onEnemyBaseReached?.Invoke();
-            Destroy(gameObject);
+            EventManager.Units.onEnemyBaseReached?.Invoke(this);
+            KillUnit();
         }
         else
         {
@@ -170,9 +173,13 @@ public class BasicEnemy : Unit
 
         crystal.DestroyObject();
         hasCrystal = true;
-        var oldScale = sr.transform.localScale;
-        LeanTween.scale(sr.gameObject, oldScale * 1.2f, 0.25f);
-        sr.color = hasCrystalTintColor;
+        sr.enabled = false;
+        sr.GetComponent<Animator>().enabled = false;
+        sr = upgradedSprite;
+        upgradedSprite.gameObject.SetActive(true);
+        currentSR = upgradedSprite;
+        currentAnim = upgradedSprite.GetComponent<Animator>();      
+
         EventManager.Units.onEnemyPickedUpCrystal?.Invoke();
 
         AnimateMuscleIcon();
@@ -238,8 +245,8 @@ public class BasicEnemy : Unit
         if (gameState == GameState.GAME_OVER_LOSE || gameState == GameState.GAME_OVER_WIN)
         {
             agent.Stop();
-            anim.SetBool("Walk", false);
-            anim.SetBool("Attack", false);
+            currentAnim.SetBool("Walk", false);
+            currentAnim.SetBool("Attack", false);
         }
     }
 

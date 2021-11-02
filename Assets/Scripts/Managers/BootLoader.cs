@@ -11,19 +11,15 @@ public class BootLoader : MonoBehaviour
     {
         if (!BootController.isBootLoaded)
         {
-             //SceneManager.LoadScene(0);
             SceneManager.LoadScene(0, LoadSceneMode.Additive);
             BootController.isBootLoaded = true;
         }
-        // else
-        // {
-            //BootController.isBootLoaded = false;
-        //}
     }
 
     private void Start()
     {
-        Util.bootController.SetGameState();
+        if (Util.bootController != null)
+            Util.bootController.SetGameState();
     }
 }
 }

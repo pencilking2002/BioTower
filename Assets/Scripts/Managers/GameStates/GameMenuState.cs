@@ -14,14 +14,12 @@ public class GameMenuState : BootStateBase
             isInitialized = true;
             controller.levelSelectMenu.canvas.enabled = false; 
             controller.startMenuCanvas.canvas.enabled = false;
-            //controller.wavePanel.panel.gameObject.SetActive(true);
 
             var seq = LeanTween.sequence();
             controller.gameCanvas.canvasGroup.alpha = 1;
             seq.append(1.0f);
             seq.append(() => { 
                 controller.gameCanvas.canvas.enabled = true;
-                controller.gameCanvas.gameOverPanel.gameObject.SetActive(false);
                 controller.gameplayUI.gameUIPanel.gameObject.SetActive(true);
                 controller.upgradePanel.Hide();
             });

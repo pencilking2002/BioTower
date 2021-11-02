@@ -6,6 +6,8 @@ using PolyNav;
 using BioTower.Structures;
 using System;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+
 
 namespace BioTower.UI
 {
@@ -42,7 +44,6 @@ public class DebugCanvas : MonoBehaviour
             panel.gameObject.SetActive(!panel.gameObject.activeInHierarchy);
         }
 
-
         if (GameManager.Instance != null && GameManager.Instance.gameStates.IsGameState() && GameManager.Instance.currTutCanvas != null)
         {
             currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
@@ -72,7 +73,7 @@ public class DebugCanvas : MonoBehaviour
 
     public void ReloadLevel()
     {
-        GameManager.Instance.LoadLevel(0);
+       Util.ReloadLevel();
     }
 
     private void OnStartPlacementState(StructureType structureType)

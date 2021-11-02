@@ -17,7 +17,7 @@ public class StructureSocket : MonoBehaviour
     private Vector3 initScale;
     private bool isAnimatingIn = true;
 
-    private void Awake()
+    private void Start()
     {
         var delay = UnityEngine.Random.Range(0.0f, 1.0f);
         var duration = UnityEngine.Random.Range(0.5f, 1.0f);
@@ -41,6 +41,11 @@ public class StructureSocket : MonoBehaviour
             initScale = sr.transform.localScale;
             isAnimatingIn = false; 
         });
+    // }
+    
+    // private void Start()
+    // {
+        EventManager.Structures.onSocketStart?.Invoke(this);
     }
 
     public void OnTap()
@@ -66,10 +71,7 @@ public class StructureSocket : MonoBehaviour
         seq.append(LeanTween.scale(sr.gameObject, initScale, 0.5f).setEaseOutElastic());
     }
 
-    private void Start()
-    {
-        EventManager.Structures.onSocketStart?.Invoke(this);
-    }
+    
 
     private void OnStartPlacementState(StructureType structureType)
     {

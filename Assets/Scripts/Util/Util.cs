@@ -6,6 +6,7 @@ using System;
 using UnityEngine.UI;
 using BioTower.SaveData;
 using BioTower.Structures;
+using UnityEngine.SceneManagement;
 
 namespace BioTower
 {
@@ -153,6 +154,13 @@ public class Util : MonoBehaviour
     public static void HideGlowUI(Transform uiElement)
     {
         uiElement.parent.Find("Glow").GetComponent<Image>().enabled = false;
+    }
+
+    public static void ReloadLevel()
+    {
+        BootController.isBootLoaded = false;
+        GameManager.Instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+
     }
 }
 }

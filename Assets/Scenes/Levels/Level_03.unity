@@ -2188,11 +2188,11 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   m_LocalAABB:
-    m_Center: {x: -1.9898994, y: -0.990839, z: 0}
-    m_Extent: {x: 3.139271, y: 1.8753269, z: 0}
+    m_Center: {x: -1.9797525, y: -1.0124607, z: 0}
+    m_Extent: {x: 3.211835, y: 1.8969486, z: 0}
 --- !u!1 &573574330
 GameObject:
   m_ObjectHideFlags: 0
@@ -3866,11 +3866,11 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   m_LocalAABB:
-    m_Center: {x: 3.0697598, y: 3.0483756, z: 0}
-    m_Extent: {x: 6.4314375, y: 3.4933114, z: 0}
+    m_Center: {x: 3.1103892, y: 3.0177715, z: 0}
+    m_Extent: {x: 6.483801, y: 3.5283332, z: 0}
 --- !u!4 &1030627857
 Transform:
   m_ObjectHideFlags: 0
@@ -4133,11 +4133,11 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   m_LocalAABB:
-    m_Center: {x: 3.7715497, y: -3.4729285, z: 0}
-    m_Extent: {x: 7.8791, y: 5.288362, z: 0}
+    m_Center: {x: 3.8314338, y: -3.4404879, z: 0}
+    m_Extent: {x: 7.9125023, y: 5.3224506, z: 0}
 --- !u!1 &1102808128
 GameObject:
   m_ObjectHideFlags: 0
@@ -4433,11 +4433,11 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   m_LocalAABB:
-    m_Center: {x: -8.332111, y: 2.388021, z: 0}
-    m_Extent: {x: 6.8353806, y: 4.4136333, z: 0}
+    m_Center: {x: -8.3143635, y: 2.3910096, z: 0}
+    m_Extent: {x: 6.910642, y: 4.4243903, z: 0}
 --- !u!1 &1157090424
 GameObject:
   m_ObjectHideFlags: 0
@@ -6731,11 +6731,11 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
+  - {fileID: 21300000, guid: 9efb833f33db8214780ea71874bc630e, type: 3}
   m_LocalAABB:
-    m_Center: {x: -8.647896, y: -2.5723944, z: 0}
-    m_Extent: {x: 6.1666512, y: 5.841523, z: 0}
+    m_Center: {x: -8.676823, y: -2.5567226, z: 0}
+    m_Extent: {x: 6.195577, y: 5.8903246, z: 0}
 --- !u!1 &1847354360
 GameObject:
   m_ObjectHideFlags: 0
@@ -7095,6 +7095,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ChloroplastStructureSocket (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055105025033388381, guid: 8e424562ac6738e40b4e9699f6009817,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e424562ac6738e40b4e9699f6009817, type: 3}
@@ -8904,6 +8909,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ChloroplastStructureSocket (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055105025033388381, guid: 8e424562ac6738e40b4e9699f6009817,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e424562ac6738e40b4e9699f6009817, type: 3}

@@ -24,7 +24,7 @@ public class Util : MonoBehaviour
     public static TapManager tapManager => GameManager.Instance.tapManager;
     public static GameStates gameStates => GameManager.Instance.gameStates;
     public static WaveManager waveManager => GameManager.Instance.waveManager;
-    public static TutorialCanvas tutCanvas => GameManager.Instance.currTutCanvas;
+    public static TutorialCanvas tutCanvas;
     public static ObjectShake objectShake => GameManager.Instance.objectShake;
     public LayerMask enemyLayerMask;
     public static int structureSocketLayer = 12;
@@ -159,7 +159,7 @@ public class Util : MonoBehaviour
     public static void ReloadLevel()
     {
         BootController.isBootLoaded = false;
-        GameManager.Instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.LoadLevel(Util.upgradeSettings.currLevel);
 
     }
 }

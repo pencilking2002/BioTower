@@ -44,11 +44,11 @@ public class DebugCanvas : MonoBehaviour
             panel.gameObject.SetActive(!panel.gameObject.activeInHierarchy);
         }
 
-        if (GameManager.Instance != null && GameManager.Instance.gameStates.IsGameState() && GameManager.Instance.currTutCanvas != null)
+        if (GameManager.Instance != null && GameManager.Instance.gameStates.IsGameState() && Util.tutCanvas != null)
         {
             currWaveText.text = "Curr Wave: " + GameManager.Instance.waveManager.currWave;
-            tutorialText.text = $"Tut State: {GameManager.Instance.currTutCanvas.tutState}";
-            tutIndexText.text = $"Tut Index: {GameManager.Instance.currTutCanvas.currTutorialIndex}";
+            tutorialText.text = $"Tut State: {Util.tutCanvas.tutState}";
+            tutIndexText.text = $"Tut Index: {Util.tutCanvas.currTutorialIndex}";
             tutInProgressText.text = $"Tut in progress: {TutorialCanvas.tutorialInProgress}";
         }
     }

@@ -78,10 +78,10 @@ public class AudioManager : MonoBehaviour
         switch(gameState)
         {
             case GameState.GAME:
-                PlayMusicCrossFade(data.levelTrack, 0.5f);
+                PlayMusicCrossFade(data.levelTrack_01, 0.5f);
                 break;
             case GameState.GAME_OVER_LOSE:
-                PlayMusic(data.gameOverLose, false);
+                PlayMusic(data.gameOverLose, true);
                 break;
             case GameState.GAME_OVER_WIN:
                 PlayMusic(data.gameOverWin, false);

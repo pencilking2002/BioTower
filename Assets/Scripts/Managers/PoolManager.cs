@@ -99,7 +99,7 @@ public class PoolManager : MonoBehaviour
 
     private PooledObject[] GetCurrentItemHighlights()
     {
-        var panel = GameManager.Instance.currTutCanvas.itemHighlightPanel;
+        var panel = Util.tutCanvas.itemHighlightPanel;
         var itemHighlights = panel.GetComponentsInChildren<PooledObject>();
         return itemHighlights;
     }
@@ -115,9 +115,9 @@ public class PoolManager : MonoBehaviour
     {
         var item = GetPooledObject(PoolObjectType.ITEM_HIGHLIGHT);
         var rt = item.GetComponent<RectTransform>();
-        rt.SetParent(GameManager.Instance.currTutCanvas.itemHighlightPanel, false);
+        rt.SetParent(Util.tutCanvas.itemHighlightPanel, false);
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPos);
-        rt.anchoredPosition = screenPoint - GameManager.Instance.currTutCanvas.GetComponent<RectTransform>().sizeDelta / 2f; 
+        rt.anchoredPosition = screenPoint - Util.tutCanvas.GetComponent<RectTransform>().sizeDelta / 2f; 
         rt.anchoredPosition += offset;
         rt.GetComponent<ItemHighlight>().Oscillate();
         return item;

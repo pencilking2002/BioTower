@@ -98,7 +98,7 @@ public class WordAnimation : MonoBehaviour
 
     private void OnTouchBegan(Vector3 pos)
     {
-        var tutState = GameManager.Instance.currTutCanvas.tutState;
+        var tutState = Util.tutCanvas.tutState;
 
         if (isAnimating)
         { 

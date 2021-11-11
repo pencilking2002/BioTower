@@ -33,8 +33,7 @@ public class GameManager : MonoBehaviour
     public CamController cam;
     public ObjectShake objectShake;
     public UnitManager unitManager;
-    public TutorialCanvas currTutCanvas => 
-        GameObject.FindGameObjectWithTag(Constants.tutorialCanvas).GetComponent<TutorialCanvas>();
+    //public TutorialCanvas currTutCanvas;
     public Util util;
     public WaveManager waveManager;
     public PlacementManager placementManager;

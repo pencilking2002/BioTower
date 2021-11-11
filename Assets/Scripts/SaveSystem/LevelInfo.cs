@@ -20,7 +20,7 @@ public enum LevelType
 
 public class LevelInfo : MonoBehaviour
 {    
-    public static LevelInfo current => GameObject.FindGameObjectWithTag(Constants.levelInfo).GetComponent<LevelInfo>();
+    public static LevelInfo current;
     public LevelSettings waveSettings;    
     public WinCondition winCondition;
     public LoseCondition loseCondition;
@@ -31,6 +31,7 @@ public class LevelInfo : MonoBehaviour
 
     private void Awake()
     {
+        current = this;
         EventManager.Game.onLevelAwake?.Invoke(levelType);
     }
 

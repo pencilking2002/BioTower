@@ -9,7 +9,8 @@ namespace BioTower
 public class AudioData : ScriptableObject
 {
     //[TabGroup("Music")] public AudioClip newWave;
-    [TabGroup("Music")] public AudioClip levelTrack;
+    [TabGroup("Music")] public AudioClip levelTrack_01;
+    [TabGroup("Music")] public AudioClip levelTrack_02;
     [TabGroup("Music")] public AudioClip gameOverLose;
     [TabGroup("Music")] public AudioClip gameOverWin;
     [TabGroup("Music")] public AudioClip mainMenuTrack;

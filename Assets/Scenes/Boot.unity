@@ -357,8 +357,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 240495440}
+        m_TargetAssemblyTypeName: BioTower.UI.GameplayUI, ScriptsAssembly
         m_MethodName: OnPressMitoButton
         m_Mode: 1
         m_Arguments:
@@ -4150,8 +4150,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 240495440}
+        m_TargetAssemblyTypeName: BioTower.UI.GameplayUI, ScriptsAssembly
         m_MethodName: OnPressChloroplastButton
         m_Mode: 1
         m_Arguments:
@@ -8446,7 +8446,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &795482430
@@ -14885,8 +14885,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 240495440}
+        m_TargetAssemblyTypeName: BioTower.UI.GameplayUI, ScriptsAssembly
         m_MethodName: OnPressAbaTowerButton
         m_Mode: 1
         m_Arguments:
@@ -18741,8 +18741,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 240495440}
+        m_TargetAssemblyTypeName: BioTower.UI.GameplayUI, ScriptsAssembly
         m_MethodName: OnPressPPC2TowerButton
         m_Mode: 1
         m_Arguments:

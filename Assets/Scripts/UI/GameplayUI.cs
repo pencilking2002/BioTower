@@ -93,23 +93,28 @@ public class GameplayUI : MonoBehaviour
 
     public void OnPressAbaTowerButton()
     {
+        Debug.Log("Try to press ABA tower btn");
+
         if (!Util.towerManager.HasAvailableSockets())
         {
             Util.HandleInvalidButtonPress(AbaTowerButton);
-            Debug.Log("No available sockets");
+            //Debug.Log("No available sockets");
             return;
         }   
 
         if (!InputController.canPressButtons)
         {
             Util.HandleInvalidButtonPress(AbaTowerButton);
-            Debug.Log("can't press buttons");
+            //Debug.Log("can't press buttons");
             return;
         }
 
         bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.ABA_TOWER];
         if (!canBuildTower)
+        {
+            //Debug.Log("can't press buttons");
             return;
+        }
         
         if (GameManager.Instance.econManager.CanBuyTower(StructureType.ABA_TOWER))
         {
@@ -123,6 +128,7 @@ public class GameplayUI : MonoBehaviour
         {
             Util.HandleInvalidButtonPress(AbaTowerButton);
             GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
+           // Debug.Log("can't buy tower");
         }
 
  

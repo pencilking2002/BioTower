@@ -121,10 +121,10 @@ public class WaveManager : MonoBehaviour
         int index = Array.IndexOf(Util.tutCanvas.tutorials, data);
         //Debug.Log($"Is last tut: {data.name}. Tut index: {index}. Total tuts: {Util.tutCanvas.tutorials.Length}");
         Debug.Log($"Has tuts: {LevelInfo.current.HasTutorials()}");
-        Debug.Log($"Is last tut: {GameManager.Instance.currTutCanvas.IsLastTutorial(data)}");
+        Debug.Log($"Is last tut: {Util.tutCanvas.IsLastTutorial(data)}");
 
         if (LevelInfo.current.HasTutorials() && 
-            GameManager.Instance.currTutCanvas.IsLastTutorial(data))
+            Util.tutCanvas.IsLastTutorial(data))
         {
             Debug.Log("init waves");
             InitializeWaves(); 

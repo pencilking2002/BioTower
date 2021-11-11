@@ -42,6 +42,7 @@ public class TutorialCanvas : MonoBehaviour
 
     private void Awake()
     {
+        Util.tutCanvas = this;
         canvas = GetComponent<Canvas>();
         tutTextWordAnim = tutText.GetComponent<WordAnimation>();
         CacheStates();

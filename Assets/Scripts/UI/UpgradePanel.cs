@@ -7,6 +7,7 @@ using BioTower.SaveData;
 using UnityEngine.SceneManagement;
 using System;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 
 namespace BioTower
 {
@@ -35,10 +36,17 @@ public class UpgradePanel : MonoBehaviour
             panel.gameObject.SetActive(true);
             float initLocalPosY = panel.transform.localPosition.y;
             panel.transform.localPosition = new Vector3(0, -500, 0);
-            LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f)
-            .setEaseOutBack()
-            .setOnComplete(onComplete);
-            infoPanel.gameObject.SetActive(false);
+
+            var seq = LeanTween.sequence();
+
+            seq.append(LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f).setEaseOutBack());
+
+            seq.append(() => {
+                EventSystem.current.SetSelectedGameObject(upgradeButtons[0].gameObject, null);  
+                OnPressUpgradeButton01(false);
+            });
+
+            seq.append (gameObject, onComplete);
         }
         else
         {
@@ -91,6 +99,7 @@ public class UpgradePanel : MonoBehaviour
 
             for (int i=0; i<upgradeButtons.Length; i++)
                 upgradeButtons[i].gameObject.SetActive(false);
+            
         }
         else
         {
@@ -109,6 +118,7 @@ public class UpgradePanel : MonoBehaviour
                 btn.SetIcon(data.sprite);
                 btn.gameObject.SetActive(true);
             }
+
         }
     }
 
@@ -124,7 +134,7 @@ public class UpgradePanel : MonoBehaviour
         itemImage.sprite = data.sprite;
     }
 
-    public void OnPressUpgradeButton01()
+    public void OnPressUpgradeButton01(bool useSound=true)
     {
         infoPanel.gameObject.SetActive(true);
         selectedButton = upgradeButtons[0];
@@ -134,7 +144,9 @@ public class UpgradePanel : MonoBehaviour
         var data = upgradeData.GetUpgradeTextData(upgradeType);
         upgradeDescription.text = data.descrptionText;
         itemImage.sprite = data.sprite;
-        EventManager.UI.onTapButton?.Invoke(true);
+        
+        if(useSound)
+            EventManager.UI.onTapButton?.Invoke(true);
     }
 
     public void OnPressUpgradeButton02()

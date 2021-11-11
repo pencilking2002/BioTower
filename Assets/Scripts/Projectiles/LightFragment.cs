@@ -7,6 +7,13 @@ namespace BioTower
 public class LightFragment : MonoBehaviour
 {
     public bool hasBeenPickedUp;
+    private PooledObject pooledObject;
+
+    private void Awake()
+    {    
+        pooledObject = GetComponent<PooledObject>(); 
+
+    }
 
     public void DestroyObject()
     {
@@ -29,9 +36,25 @@ public class LightFragment : MonoBehaviour
 
         seq.append(gameObject, () => {
             transform.localScale = scale;
-            GetComponent<PooledObject>().SendToPool();
+            pooledObject.SendToPool();
             hasBeenPickedUp = false;
         });
+    }
+
+    private void OnGameOver(bool isWin)
+    {
+        if (transform.parent == null)
+            DestroyObject();
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Game.onGameOver += OnGameOver;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Game.onGameOver -= OnGameOver;
     }
 }
 }

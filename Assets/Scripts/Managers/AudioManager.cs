@@ -77,9 +77,10 @@ public class AudioManager : MonoBehaviour
     {
         switch(gameState)
         {
-            case GameState.GAME:
-                PlayMusicCrossFade(data.levelTrack_01, 0.5f);
-                break;
+            // case GameState.GAME:
+            //     if (!LevelInfo.current.HasTutorials())
+            //         PlayMusicCrossFade(data.levelTrack_01, 0.5f);
+            //     break;
             case GameState.GAME_OVER_LOSE:
                 PlayMusic(data.gameOverLose, true);
                 break;
@@ -197,6 +198,19 @@ public class AudioManager : MonoBehaviour
             PlaySound(data.energyGone);
     }
 
+    private void OnLevelStart(LevelType levelType)
+    {
+        if (LevelInfo.current.HasTutorials())
+            PlayMusicCrossFade(data.goofyPlantsTrack, 0.5f);
+        else
+            PlayMusicCrossFade(data.levelTrack_01, 0.5f);
+    }
+
+    private void OnTutorialEnd(TutorialData tutorialData)
+    {
+        PlayMusicCrossFade(data.levelTrack_01, 0.5f);
+    }
+
     private void OnEnable()
     {
         EventManager.Game.onGameStateInit += OnGameStateInit;
@@ -219,6 +233,8 @@ public class AudioManager : MonoBehaviour
         EventManager.UI.onTitleAnimCompleted += OnTitleAnimCompleted;
         EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
         EventManager.Game.onSpendCurrency += OnSpendCurrency;
+        EventManager.Game.onLevelStart += OnLevelStart;
+        EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
     }
 
     private void OnDisable()
@@ -243,6 +259,8 @@ public class AudioManager : MonoBehaviour
         EventManager.UI.onTitleAnimCompleted -= OnTitleAnimCompleted;
         EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
         EventManager.Game.onSpendCurrency -= OnSpendCurrency;
+        EventManager.Game.onLevelStart -= OnLevelStart;
+        EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
     }
 }
 }

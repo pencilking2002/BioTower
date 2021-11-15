@@ -14,6 +14,7 @@ public class AudioData : ScriptableObject
     [TabGroup("Music")] public AudioClip gameOverLose;
     [TabGroup("Music")] public AudioClip gameOverWin;
     [TabGroup("Music")] public AudioClip mainMenuTrack;
+    [TabGroup("Music")] public AudioClip goofyPlantsTrack;
 
     //[TabGroup("Music")] public AudioClip titleScreenTrack;
    

@@ -102,6 +102,9 @@ public class AbaUnit : Unit
 
     public override void SetNewDestination()
     {
+        if (agent == null)
+            return;
+            
         agent.enabled = true;
         if (agent == null)
             return;

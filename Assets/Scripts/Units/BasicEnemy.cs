@@ -75,6 +75,9 @@ public class BasicEnemy : Unit
     
     public override void StopMoving()
     {
+        if (agent == null)
+            return;
+            
         agent.Stop();
         isEngagedInCombat = true;
         currentAnim.SetBool("Walk", false);

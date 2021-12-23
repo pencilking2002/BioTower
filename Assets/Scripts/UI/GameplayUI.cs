@@ -50,18 +50,31 @@ public class GameplayUI : MonoBehaviour
         bool mitoTowerUnlocked = Util.upgradeSettings.mitoTowerUnlocked;
         mitoTowerButton.gameObject.SetActive(mitoTowerUnlocked);
 
-        SlideInPanel(2.0f);
+        if (LevelInfo.current.IsFirstLevel())
+        {
+            PositionPanelOffScreen();
+        }
+        else 
+        {
+            PositionPanelOffScreen();
+            SlideInPanel(2.0f);
+        }
+    }
+
+    private void PositionPanelOffScreen()
+    {
+        var startPos = initPos;
+        startPos.y -= 120;
+        panel.transform.position = startPos;
     }
 
     private void SlideInPanel(float delay)
     { 
-        var startPos = initPos;
-        startPos.y -= 120;
-        panel.transform.position = startPos;
         LeanTween.delayedCall(gameObject, delay, () => {
             LeanTween.move(panel.gameObject, initPos, 0.5f).setEaseOutQuint();
         });
     }
+
     public StructureType GetSelectedButtonType()
     {
         foreach(KeyValuePair<StructureType, Button> btn in towerButtonMap)
@@ -285,15 +298,28 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
+    private void OnSetNonePlacementState()
+    {
+        DeselectCurrentButton();
+    }
 
+    private void OnTutorialStart(TutorialData data)
+    {
+        if (LevelInfo.current.IsFirstLevel() && data.IsTapAbaButtonRequiredAction())
+        {
+            Debug.Log("tap aba btn tut");
+            SlideInPanel(0);
+        }
+    }
 
     private void OnHighlightItem(HighlightedItem item)
     {
-        
         if (item == HighlightedItem.ABA_TOWER_BTN)
         {
-            var worldPos = Camera.main.ScreenToWorldPoint(AbaTowerButton.transform.position);
-            Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,150));  
+            LeanTween.delayedCall(0.5f, () => {
+                var worldPos = Camera.main.ScreenToWorldPoint(AbaTowerButton.transform.position);
+                Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,150));  
+            });
         }
         else if (item == HighlightedItem.ENERGY)
         {
@@ -314,30 +340,27 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
-    private void OnSetNonePlacementState()
-    {
-        DeselectCurrentButton();
-    }
-
     private void OnEnable()
     {
+        EventManager.Tutorials.onTutorialStart += OnTutorialStart;
+        EventManager.Tutorials.onHighlightItem += OnHighlightItem;
+        EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
         EventManager.Game.onLevelStart += OnLevelStart;
         EventManager.Game.onSpendCurrency += OnSpendCurrency;
         EventManager.Game.onGainCurrency += OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted += OnStructureCooldownStarted;
-        EventManager.Tutorials.onHighlightItem += OnHighlightItem;
-        EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
         EventManager.Structures.onSetNonePlacementState += OnSetNonePlacementState;
     }
 
     private void OnDisable()
     {
+        EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
+        EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
+        EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
         EventManager.Game.onLevelStart -= OnLevelStart;
         EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         EventManager.Game.onGainCurrency -= OnGainCurrency;
         EventManager.Structures.onStructureCooldownStarted -= OnStructureCooldownStarted;
-        EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
-        EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
         EventManager.Structures.onSetNonePlacementState -= OnSetNonePlacementState;
     }
 }

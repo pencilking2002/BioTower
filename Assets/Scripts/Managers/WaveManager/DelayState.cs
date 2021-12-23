@@ -22,7 +22,7 @@ public class DelayState : WaveState
         var wave = waveManager.currWave;
         if (Time.time > wave.timeStarted + wave.startDelay)
         {
-            Debug.Log("Start in progress state");
+            //Debug.Log("Start in progress state");
             return WaveMode.IN_PROGRESS;
         }
         else

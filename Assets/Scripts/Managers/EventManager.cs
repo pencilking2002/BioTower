@@ -20,7 +20,7 @@ public class EventManager : MonoBehaviour
 
         public static Action<int, int> onSpendCurrency; // num spent, curr total
         public static Action<int, int> onGainCurrency;  // num gained, curr total
-        public static Action onTogglePaths; 
+        //public static Action onTogglePaths; 
         public static Action<GameState> onGameStateInit;
         public static Action<WaveMode> onWaveStateInit;
         public static Action onLightFragmentTapped;

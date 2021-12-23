@@ -66,8 +66,17 @@ public class GameOverLogic : MonoBehaviour
         }
     }
 
+    private void OnGameStateInit(GameState gameState)
+    {
+        if (gameState == GameState.GAME_OVER_WIN || gameState == GameState.GAME_OVER_LOSE)
+        {
+            Time.timeScale = 0;
+        }
+    }
+
     private void OnEnable()
     {
+        EventManager.Game.onGameStateInit += OnGameStateInit;
         EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
         EventManager.Game.onWavesCompleted += OnWavesCompleted;
         EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
@@ -76,6 +85,7 @@ public class GameOverLogic : MonoBehaviour
 
     private void OnDisable()
     {
+        EventManager.Game.onGameStateInit += OnGameStateInit;
         EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
         EventManager.Game.onWavesCompleted -= OnWavesCompleted;
         EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;

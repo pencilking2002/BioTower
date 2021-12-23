@@ -18,7 +18,7 @@ public class Waypoint : MonoBehaviour
     public Waypoint nextWaypoint;
     [ShowIf("isFork")]
     public Waypoint nextWaypoint_02;
-    public Waypoint prevWaypoint;
+    //public Waypoint prevWaypoint;
     public bool isFork => waypointType == WaypointType.FORK;
     public bool isSpawnPoint => waypointType == WaypointType.SPAWN_POINT;
     public bool isEndpoint => waypointType == WaypointType.END_POINT;

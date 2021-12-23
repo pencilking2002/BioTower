@@ -22,13 +22,13 @@ public class LevelMap : MonoBehaviour
     private void OnEnable()
     {
         EventManager.Game.onLevelLoaded_01 += LevelLoaded;
-        EventManager.Game.onTogglePaths += OnTogglePaths;
+        //EventManager.Game.onTogglePaths += OnTogglePaths;
     }
 
     private void OnDisable()
     {
         EventManager.Game.onLevelLoaded_01 -= LevelLoaded;
-        EventManager.Game.onTogglePaths -= OnTogglePaths;
+        //EventManager.Game.onTogglePaths -= OnTogglePaths;
     }
 }
 }

@@ -106,7 +106,7 @@ public class GameplayUI : MonoBehaviour
 
     public void OnPressAbaTowerButton()
     {
-        Debug.Log("Try to press ABA tower btn");
+        //Debug.Log("Try to press ABA tower btn");
 
         if (!Util.towerManager.HasAvailableSockets())
         {

@@ -25,7 +25,7 @@ public class EndedState : WaveState
             ++waveManager.currWaveIndex;
             waveState = WaveMode.NOT_STARTED;
             //waveManager.waveSettings.waves[waveManager.currWave].state = WaveMode.NOT_STARTED;
-            Debug.Log("new wave: " + waveManager.currWave);
+            //Debug.Log("new wave: " + waveManager.currWave);
         }
         else
         {

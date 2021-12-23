@@ -10,8 +10,8 @@ namespace BioTower.Level
 [ExecuteAlways]
 public class WaypointManager : MonoBehaviour
 {
-    private Waypoint[] waypoints;
-    private Waypoint[] spawnPoints;
+    [SerializeField] private Waypoint[] waypoints;
+    [SerializeField] private Waypoint[] spawnPoints;
 
     private void Awake()
     {
@@ -70,7 +70,7 @@ public class WaypointManager : MonoBehaviour
             Undo.CollapseUndoOperations(undoGroupIndex);
 
             waypoint_01.nextWaypoint = waypoint_02;
-            waypoint_02.prevWaypoint = waypoint_01;
+            //waypoint_02.prevWaypoint = waypoint_01;
         }
         else if (selectedObjects.Count == 3)
         {
@@ -90,8 +90,8 @@ public class WaypointManager : MonoBehaviour
             waypoint_03.nextWaypoint = waypoint_02;
             waypoint_03.nextWaypoint_02 = waypoint_01;
 
-            waypoint_01.prevWaypoint = waypoint_03;
-            waypoint_02.prevWaypoint = waypoint_03;
+            //waypoint_01.prevWaypoint = waypoint_03;
+            //waypoint_02.prevWaypoint = waypoint_03;
         }
     }
 

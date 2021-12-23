@@ -11,7 +11,7 @@ public class InProgressState : WaveState
             isInitialized = true;
             //GameManager.Instance.bootController.wavePanel.DisplayWaveTitle(waveManager.currWave);
             EventManager.Game.onWaveStateInit?.Invoke(waveState);
-            Debug.Log("In Progress wave state init: " + waveManager.currWaveIndex);
+            //Debug.Log("In Progress wave state init: " + waveManager.currWaveIndex);
         }
     }
 

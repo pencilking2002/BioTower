@@ -73,6 +73,16 @@ public class AudioManager : MonoBehaviour
         Destroy(go, clip.length);
     }
 
+    // GAME ----------------------------------------------
+
+    private void OnLevelStart(LevelType levelType)
+    {
+        if (LevelInfo.current.HasTutorials())
+            PlayMusicCrossFade(data.goofyPlantsTrack, 0.5f);
+        else
+            PlayMusicCrossFade(data.levelTrack_01, 0.5f);
+    }
+
     private void OnGameStateInit(GameState gameState)
     {
         switch(gameState)
@@ -90,18 +100,43 @@ public class AudioManager : MonoBehaviour
             case GameState.START_MENU:
                 PlayMusicCrossFade(data.mainMenuTrack, 0.5f);
                 break;
+            case GameState.LEVEL_SELECT:
+                Debug.Log("level select");
+                if (!musicSource.isPlaying)
+                    PlayMusicCrossFade(data.mainMenuTrack, 0.5f);
+                break;
         }
     }
 
-    private void OnBaseTakeDamage()
+    private void OnSpendCurrency(int num, int playerCurrency)
     {
-        PlaySound(data.enemyBaseAttacked);
+        if (playerCurrency == 0)
+            PlaySound(data.energyGone);
     }
+
+    private void OnSnrk2UnitReachedBase(Snrk2Unit unit)
+    {
+        PlaySound(data.crystalDeposited);
+    }
+
+    // TUTORIAL ---------------------------------------------
 
     private void OnTutTextPopUp()
     {
         PlaySound(data.textPopUp);
     }
+
+    private void OnTutChatStart()
+    {
+        PlaySound(data.tutChat);
+    }
+
+    private void OnTutorialEnd(TutorialData tutorialData)
+    {
+        PlayMusicCrossFade(data.levelTrack_01, 0.5f);
+    }
+
+    // UNITS ---------------------------------------------
 
     private void OnUnitSpawned(Unit unit)
     {
@@ -109,11 +144,6 @@ public class AudioManager : MonoBehaviour
         {
             PlaySound(data.abaSpawned);
         }
-    }
-
-    private void OnSnrk2UnitReachedBase(Snrk2Unit unit)
-    {
-        PlaySound(data.crystalDeposited);
     }
 
     private void OnCrystalPickedUp(Snrk2Unit unit)
@@ -124,6 +154,24 @@ public class AudioManager : MonoBehaviour
     private void OnEnemyPickupCrystal()
     {
         PlaySound(data.enemyCrystalPickedUp);
+    }
+
+    private void OnUnitTakeDamage(UnitType unitType)
+    {
+        var randIndex = UnityEngine.Random.Range(0, data.takeDamage.Length-1);
+        PlaySound(data.takeDamage[randIndex]);
+    }
+
+    private void OnUnitDestroyed(Unit unit)
+    {
+        PlaySound(data.explode);
+    }
+
+    // STRUCTURES ---------------------------------------------
+
+    private void OnBaseTakeDamage()
+    {
+        PlaySound(data.enemyBaseAttacked);
     }
 
     private void OnStructureCreated(Structure tower)
@@ -156,6 +204,8 @@ public class AudioManager : MonoBehaviour
         PlaySound(data.lightPickedUp);
     }
 
+    // UI ---------------------------------------------
+
     private void OnTapButton(bool isValid)
     {
         var clip = isValid ? data.btnSelected : data.invalidBtnSelected;
@@ -167,18 +217,6 @@ public class AudioManager : MonoBehaviour
         PlaySound(data.levelSelect);
     }
 
-    private void OnUnitTakeDamage(UnitType unitType)
-    {
-        var randIndex = UnityEngine.Random.Range(0, data.takeDamage.Length-1);
-        //Debug.Log($"randIndex: {randIndex}. arr length: {data.takeDamage.Length}");
-        PlaySound(data.takeDamage[randIndex]);
-    }
-
-    private void OnTutChatStart()
-    {
-        PlaySound(data.tutChat);
-    }
-
     private void OnTitleAnimCompleted(int numTimes)
     {
         if (numTimes == 1)
@@ -187,80 +225,65 @@ public class AudioManager : MonoBehaviour
             PlaySoundWithPitch(data.titleDrop, 0.7f);
     }
 
-    private void OnUnitDestroyed(Unit unit)
-    {
-        PlaySound(data.explode);
-    }
-
-    private void OnSpendCurrency(int num, int playerCurrency)
-    {
-        if (playerCurrency == 0)
-            PlaySound(data.energyGone);
-    }
-
-    private void OnLevelStart(LevelType levelType)
-    {
-        if (LevelInfo.current.HasTutorials())
-            PlayMusicCrossFade(data.goofyPlantsTrack, 0.5f);
-        else
-            PlayMusicCrossFade(data.levelTrack_01, 0.5f);
-    }
-
-    private void OnTutorialEnd(TutorialData tutorialData)
-    {
-        PlayMusicCrossFade(data.levelTrack_01, 0.5f);
-    }
 
     private void OnEnable()
     {
+        EventManager.Game.onLevelStart += OnLevelStart;
         EventManager.Game.onGameStateInit += OnGameStateInit;
-        EventManager.Structures.onBaseTakeDamage += OnBaseTakeDamage;
-        EventManager.Tutorials.onTutTextPopUp += OnTutTextPopUp;
-        EventManager.Units.onUnitSpawned += OnUnitSpawned;
+        EventManager.Game.onSpendCurrency += OnSpendCurrency;
         EventManager.Game.onSnrk2UnitReachedBase += OnSnrk2UnitReachedBase;
+
+        EventManager.Tutorials.onTutChatStart += OnTutChatStart;
+        EventManager.Tutorials.onTutTextPopUp += OnTutTextPopUp;
+        EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
+
+        EventManager.Units.onUnitSpawned += OnUnitSpawned;
         EventManager.Units.onCrystalPickedUp += OnCrystalPickedUp;
         EventManager.Units.onEnemyPickedUpCrystal += OnEnemyPickupCrystal;
         EventManager.Units.onUnitTakeDamage += OnUnitTakeDamage;
+        EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
+
+        EventManager.Structures.onBaseTakeDamage += OnBaseTakeDamage;
         EventManager.Structures.onStructureCreated += OnStructureCreated;
         EventManager.Structures.onStructureGainHealth += OnStructureGainHealth;
         EventManager.Structures.onStructureSelected += OnStructureSelected;
         EventManager.Structures.onStructureDestroyed += OnStructureDestroyed;
-        EventManager.Structures.onLightDropped += OnLightDropped;
         EventManager.Structures.onLightPickedUp += OnLightPickedUp;
+        EventManager.Structures.onLightDropped += OnLightDropped;
+
         EventManager.UI.onTapButton += OnTapButton;
         EventManager.UI.onPressLevelSelectButton += OnPressLevelSelectButton;
-        EventManager.Tutorials.onTutChatStart += OnTutChatStart;
         EventManager.UI.onTitleAnimCompleted += OnTitleAnimCompleted;
-        EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
-        EventManager.Game.onSpendCurrency += OnSpendCurrency;
-        EventManager.Game.onLevelStart += OnLevelStart;
-        EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
     }
 
     private void OnDisable()
     {
+        EventManager.Game.onLevelStart -= OnLevelStart;
         EventManager.Game.onGameStateInit -= OnGameStateInit;
-        EventManager.Structures.onBaseTakeDamage -= OnBaseTakeDamage;
-        EventManager.Tutorials.onTutTextPopUp -= OnTutTextPopUp;
-        EventManager.Units.onUnitSpawned -= OnUnitSpawned;
+        EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         EventManager.Game.onSnrk2UnitReachedBase -= OnSnrk2UnitReachedBase;
+
+        EventManager.Tutorials.onTutChatStart -= OnTutChatStart;
+        EventManager.Tutorials.onTutTextPopUp -= OnTutTextPopUp;
+        EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
+
+        EventManager.Units.onUnitSpawned -= OnUnitSpawned;
         EventManager.Units.onCrystalPickedUp -= OnCrystalPickedUp;
         EventManager.Units.onEnemyPickedUpCrystal -= OnEnemyPickupCrystal;
         EventManager.Units.onUnitTakeDamage -= OnUnitTakeDamage;
+        EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
+
+        EventManager.Structures.onBaseTakeDamage -= OnBaseTakeDamage;
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
         EventManager.Structures.onStructureGainHealth -= OnStructureGainHealth;
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
         EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
-        EventManager.Structures.onLightDropped -= OnLightDropped;
         EventManager.Structures.onLightPickedUp -= OnLightPickedUp;
+        EventManager.Structures.onLightDropped -= OnLightDropped;
+
         EventManager.UI.onTapButton -= OnTapButton;
         EventManager.UI.onPressLevelSelectButton -= OnPressLevelSelectButton;
-        EventManager.Tutorials.onTutChatStart -= OnTutChatStart;
         EventManager.UI.onTitleAnimCompleted -= OnTitleAnimCompleted;
-        EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
-        EventManager.Game.onSpendCurrency -= OnSpendCurrency;
-        EventManager.Game.onLevelStart -= OnLevelStart;
-        EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
     }
 }
 }

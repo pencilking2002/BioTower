@@ -32,7 +32,7 @@ public class BasicEnemy : Unit
     [Header("Waypoint movement")]
     [SerializeField] private Waypoint currWaypoint; 
     [SerializeField] private Waypoint nextWaypoint;
-
+    [SerializeField] private Transform nextDestination;
 
 
     public override void Start()
@@ -40,7 +40,7 @@ public class BasicEnemy : Unit
         base.Start();
         //currentSR = sr;
         //currentAnim = anim;
-        Debug.Log("Set current anim");
+        //Debug.Log("Set current anim");
         GameManager.Instance.RegisterEnemy(this);
     }
 
@@ -89,9 +89,11 @@ public class BasicEnemy : Unit
         if (agent == null)
             return;
             
-        var randomPoint = UnityEngine.Random.insideUnitSphere * 0.5f;
+        var randomPoint = UnityEngine.Random.insideUnitSphere * 0.25f;
         randomPoint.z = 0;
         agent.SetDestination(waypoint.transform.position + randomPoint);
+        //agent.SetDestination(waypoint.transform.position);
+        nextDestination = waypoint.transform;
     }
 
     public override void StartMoving(Waypoint waypoint, float delay=0)
@@ -103,32 +105,6 @@ public class BasicEnemy : Unit
             SetDestination(waypoint);
             isEngagedInCombat = false;
         });
-    }
-
-    private void DestinationReached()
-    {
-        SetCurrWaypoint(nextWaypoint);
-        
-        if (currWaypoint.isFork)
-        {
-            var nextPoint = currWaypoint.ChooseNextWaypoint();
-            SetNextWaypoint(nextPoint);
-            SetDestination(nextPoint);
-        }
-        else if (currWaypoint.isEndpoint)
-        {
-//            Debug.Log("Base reached");
-            EventManager.Units.onEnemyBaseReached?.Invoke(this);
-            KillUnit();
-        }
-        else
-        {
-            var nextPoint = currWaypoint.nextWaypoint;
-            SetNextWaypoint(nextPoint);
-            SetDestination(nextPoint);
-        }
-        
-        EventManager.Units.onEnemyReachedDestination?.Invoke(this);
     }
 
     private void SpawnCrystal()
@@ -235,13 +211,41 @@ public class BasicEnemy : Unit
             UnregisterWithTower(col);
     }
 
-    private void OnTogglePaths()
+    private void DestinationReached()
     {
-        LeanTween.delayedCall(0.1f, () => {
-            Vector3 targetPos = GameManager.Instance.playerBase.transform.position;
-            agent.SetDestination(targetPos);
-        });
+        SetCurrWaypoint(nextWaypoint);
+        
+        if (currWaypoint.isFork)
+        {
+            var nextPoint = currWaypoint.ChooseNextWaypoint();
+            SetNextWaypoint(nextPoint);
+            SetDestination(nextPoint);
+        }
+        else if (currWaypoint.isEndpoint)
+        {
+//            Debug.Log("Base reached");
+            EventManager.Units.onEnemyBaseReached?.Invoke(this);
+            KillUnit();
+        }
+        else
+        {
+            var nextPoint = currWaypoint.nextWaypoint;
+            SetNextWaypoint(nextPoint);
+            SetDestination(nextPoint);
+        }
+        Debug.Log($"{gameObject.name} reached {currWaypoint.gameObject.name}");
+        
+        EventManager.Units.onEnemyReachedDestination?.Invoke(this);
     }
+
+    // private void OnTogglePaths()
+    // {
+    //     LeanTween.delayedCall(0.1f, () => {
+    //         Vector3 targetPos = GameManager.Instance.playerBase.transform.position;
+    //         agent.SetDestination(targetPos);
+    //     });
+    //     Debug.Log("ENEMY TOGGLE PATHS");
+    // }
 
     private void OnGameStateInit(GameState gameState)
     {
@@ -257,14 +261,15 @@ public class BasicEnemy : Unit
     private void OnEnable()
     {
         agent.OnDestinationReached += DestinationReached;
-        EventManager.Game.onTogglePaths += OnTogglePaths;
+        //EventManager.Game.onTogglePaths += OnTogglePaths;
         EventManager.Game.onGameStateInit += OnGameStateInit;        
     }
 
     private void OnDisable()
     {
+        Debug.Log("ENEMY DISABLE");
         agent.OnDestinationReached -= DestinationReached;
-        EventManager.Game.onTogglePaths -= OnTogglePaths;
+        //EventManager.Game.onTogglePaths -= OnTogglePaths;
         EventManager.Game.onGameStateInit -= OnGameStateInit;
     }
 

@@ -353,10 +353,11 @@ public class TowerMenu : MonoBehaviour
         if (LevelInfo.current.IsFirstLevel())
         {
             // If its the tutorial right after the unit spawn tut
-            if (Util.tutCanvas.currTutorialIndex == 6)
+            if (Util.tutCanvas.currTutorialIndex >= 6)
             {
                 spawnUnitFullWidth.interactable = false;
                 spawnUnitButton.gameObject.SetActive(false);
+                Debug.Log("disable unit spawn button");
             }
         }
     }
@@ -367,6 +368,7 @@ public class TowerMenu : MonoBehaviour
         {
             spawnUnitFullWidth.interactable = true;
             spawnUnitButton.gameObject.SetActive(true);
+            Debug.Log("Enable unit spawn button");
         }
     }
 

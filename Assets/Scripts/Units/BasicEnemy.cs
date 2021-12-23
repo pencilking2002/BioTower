@@ -250,6 +250,7 @@ public class BasicEnemy : Unit
             agent.Stop();
             currentAnim.SetBool("Walk", false);
             currentAnim.SetBool("Attack", false);
+            currentAnim.speed = 0;
         }
     }
 

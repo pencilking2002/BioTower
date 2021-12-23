@@ -28,6 +28,7 @@ public class ABATower : Structure
     public override void Awake()
     {
         base.Awake();
+        map.GenerateMap(true);
         //Util.ScaleUpSprite(sr, 1.1f);
     }
 

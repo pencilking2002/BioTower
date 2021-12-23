@@ -91,9 +91,10 @@ public class BasicEnemy : Unit
             
         var randomPoint = UnityEngine.Random.insideUnitSphere * 0.25f;
         randomPoint.z = 0;
-        agent.SetDestination(waypoint.transform.position + randomPoint);
-        //agent.SetDestination(waypoint.transform.position);
+        //agent.SetDestination(waypoint.transform.position + randomPoint);
+        agent.SetDestination(waypoint.transform.position);
         nextDestination = waypoint.transform;
+        Debug.Log($"{gameObject.name} Set destination to {nextDestination}");
     }
 
     public override void StartMoving(Waypoint waypoint, float delay=0)
@@ -233,7 +234,7 @@ public class BasicEnemy : Unit
             SetNextWaypoint(nextPoint);
             SetDestination(nextPoint);
         }
-        Debug.Log($"{gameObject.name} reached {currWaypoint.gameObject.name}");
+        //Debug.Log($"{gameObject.name} reached {currWaypoint.gameObject.name}");
         
         EventManager.Units.onEnemyReachedDestination?.Invoke(this);
     }

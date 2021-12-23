@@ -25,6 +25,7 @@ public class UnitManager : MonoBehaviour
         
         HandleUnitFacingDirections();
         HandleSnrk2CrystalChecking();
+        HandleEnemyUnitDestinationChecks();
     }
 
     private void HandleUnitFacingDirections()
@@ -59,6 +60,29 @@ public class UnitManager : MonoBehaviour
                 var snrk2 = (Snrk2Unit) unit;
                 if (snrk2.IsRoamingState())
                     snrk2.CheckForCrystals();
+            }
+        }
+    }
+
+    private void HandleEnemyUnitDestinationChecks()
+    {
+        for (int i=0; i<units.Count; i++)
+        {
+            Unit unit = units[i];
+            if (unit.unitType == UnitType.BASIC_ENEMY)
+            {
+                var enemy = (BasicEnemy) unit;
+                if (enemy.GetNextWaypoint() != null)
+                {
+                    var agentDestination = enemy.agent.primeGoal;
+                    var waypointPosition = enemy.GetNextWaypoint().transform.position;
+                    if (Vector3.Distance(agentDestination, waypointPosition) > 0.2f)
+                    {
+                        Debug.Log(enemy.gameObject.name + " is off destination");
+                        enemy.agent.SetDestination(waypointPosition);
+                        enemy.agent.primeGoal = waypointPosition;
+                    }
+                }
             }
         }
     }

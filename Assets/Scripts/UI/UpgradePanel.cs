@@ -38,8 +38,10 @@ public class UpgradePanel : MonoBehaviour
             panel.transform.localPosition = new Vector3(0, -500, 0);
 
             var seq = LeanTween.sequence();
-
-            seq.append(LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f).setEaseOutBack());
+            seq.append(LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f)
+                .setEaseOutBack()
+                .setIgnoreTimeScale(true)
+            );
 
             seq.append(() => {
                 EventSystem.current.SetSelectedGameObject(upgradeButtons[0].gameObject, null);  
@@ -53,7 +55,8 @@ public class UpgradePanel : MonoBehaviour
             float targetLocalPosY = -500;
             LeanTween.moveLocalY(panel.gameObject, targetLocalPosY, 0.25f)
             .setEaseOutBack()
-            .setOnComplete(onComplete);
+            .setOnComplete(onComplete)
+            .setIgnoreTimeScale(true);
         }
     }
 
@@ -211,7 +214,7 @@ public class UpgradePanel : MonoBehaviour
 
         LeanTween.delayedCall(1.0f, () => {
             SceneManager.LoadScene(0);
-        });
+        }).setIgnoreTimeScale(true);
     }
 }
 }

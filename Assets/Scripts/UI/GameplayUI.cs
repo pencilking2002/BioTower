@@ -281,7 +281,11 @@ public class GameplayUI : MonoBehaviour
             cooldownImage.fillAmount = val;
         })
         .setOnComplete(() => {
-            button.interactable = true;
+            // Don't make button interactable if its the first level and there's currently tutorials playing
+            if (LevelInfo.current.IsFirstLevel() && Util.tutCanvas.hasTutorials)
+                button.interactable = false;
+            else
+                button.interactable = true;
         });
 
         HandleButtonColor(button);
@@ -305,10 +309,10 @@ public class GameplayUI : MonoBehaviour
 
     private void OnTutorialStart(TutorialData data)
     {
-        if (LevelInfo.current.IsFirstLevel() && data.IsTapAbaButtonRequiredAction())
+        if (LevelInfo.current.IsFirstLevel() )
         {
-            Debug.Log("tap aba btn tut");
-            SlideInPanel(0);
+            if (data.IsTapAbaButtonRequiredAction())
+                SlideInPanel(0);
         }
     }
 
@@ -337,6 +341,9 @@ public class GameplayUI : MonoBehaviour
         if (LevelInfo.current.IsFirstLevel())
         {
             Util.DisplayGlowUI(AbaTowerButton.transform);
+            AbaTowerButton.interactable = true;
+            //Util.tutCanvas.hasTutorials && Util.tutCanvas.currTutorial.IsSpawnAbaUnitRequiredAction())
+
         }
     }
 

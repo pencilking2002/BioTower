@@ -348,25 +348,51 @@ public class TowerMenu : MonoBehaviour
         }
     }
 
+    private void OnTutorialStart(TutorialData data)
+    {
+        if (LevelInfo.current.IsFirstLevel())
+        {
+            // If its the tutorial right after the unit spawn tut
+            if (Util.tutCanvas.currTutorialIndex == 6)
+            {
+                spawnUnitFullWidth.interactable = false;
+                spawnUnitButton.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void OnTutorialEnd(TutorialData data)
+    {
+        if (LevelInfo.current.IsFirstLevel())
+        {
+            spawnUnitFullWidth.interactable = true;
+            spawnUnitButton.gameObject.SetActive(true);
+        }
+    }
+
     private void OnEnable()
     {
+        EventManager.Tutorials.onTutorialStart += OnTutorialStart;
+        EventManager.Tutorials.onHighlightItem += OnHighlightItem;
+        EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
         EventManager.Structures.onStructureSelected += OnStructureSelected;
         EventManager.Structures.onStructureCreated += OnStructureCreated;
         EventManager.Structures.onStructureGainHealth += OnStructureGainHealth;
         EventManager.Structures.onStructureLoseHealth += OnStructureLoseHealth;
         EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
-        EventManager.Tutorials.onHighlightItem += OnHighlightItem;
         EventManager.UI.onSpawnLightDropCooldownComplete += OnSpawnLightDropCooldownComplete;
     }
 
     private void OnDisable()
     {
+        EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
+        EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
+        EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
         EventManager.Structures.onStructureSelected -= OnStructureSelected;
         EventManager.Structures.onStructureCreated -= OnStructureCreated;
         EventManager.Structures.onStructureGainHealth -= OnStructureGainHealth;
         EventManager.Structures.onStructureLoseHealth -= OnStructureLoseHealth;
         EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;        
-        EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
         EventManager.UI.onSpawnLightDropCooldownComplete -= OnSpawnLightDropCooldownComplete;
     }
 }

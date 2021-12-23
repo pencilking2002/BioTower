@@ -217,7 +217,9 @@ public class TowerMenu : MonoBehaviour
                                     
         bool displayLightDropButton = structure.structureType == StructureType.MITOCHONDRIA;
 
-        spawnUnitButton.gameObject.SetActive(displaySpawnUnitButton);
+        if (!LevelInfo.current.IsFirstLevel() && !Util.tutCanvas.hasTutorials)
+            spawnUnitButton.gameObject.SetActive(displaySpawnUnitButton);
+            
         var spawnUnitText = spawnUnitButton.transform.Find("Text").GetComponent<Text>();
 
         if (structure.IsAbaTower())
@@ -357,7 +359,7 @@ public class TowerMenu : MonoBehaviour
             {
                 spawnUnitFullWidth.interactable = false;
                 spawnUnitButton.gameObject.SetActive(false);
-                Debug.Log("disable unit spawn button");
+                //Debug.Log("disable unit spawn button");
             }
         }
     }
@@ -368,7 +370,7 @@ public class TowerMenu : MonoBehaviour
         {
             spawnUnitFullWidth.interactable = true;
             spawnUnitButton.gameObject.SetActive(true);
-            Debug.Log("Enable unit spawn button");
+            //Debug.Log("Enable unit spawn button");
         }
     }
 

@@ -36,6 +36,8 @@ namespace BioTower
         {
             if (musicSource.clip != null)
             {
+                Debug.Log("Play");
+
                 var currVol = musicSource.volume;
                 var seq = LeanTween.sequence();
 
@@ -104,7 +106,10 @@ namespace BioTower
                 case GameState.LEVEL_SELECT:
                     Debug.Log("level select");
                     if (!musicSource.isPlaying)
+                    {
+                        Debug.Log("Play cross fade in level select state");
                         PlayMusicCrossFade(data.mainMenuTrack, 0.5f);
+                    }
                     break;
             }
         }

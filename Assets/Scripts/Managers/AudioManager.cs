@@ -105,11 +105,14 @@ namespace BioTower
                     break;
                 case GameState.LEVEL_SELECT:
                     Debug.Log("level select");
-                    if (!musicSource.isPlaying)
+                    if (musicSource.isPlaying)
                     {
-                        Debug.Log("Play cross fade in level select state");
-                        PlayMusicCrossFade(data.mainMenuTrack, 0.5f);
+                        if (musicSource.clip != data.mainMenuTrack)
+                            PlayMusicCrossFade(data.mainMenuTrack, 0.5f);
                     }
+                    else
+                        PlayMusic(data.mainMenuTrack);
+
                     break;
             }
         }

@@ -38,9 +38,6 @@ namespace BioTower.Units
         public override void Start()
         {
             base.Start();
-            //currentSR = sr;
-            //currentAnim = anim;
-            //Debug.Log("Set current anim");
             GameManager.Instance.RegisterEnemy(this);
         }
 
@@ -83,6 +80,7 @@ namespace BioTower.Units
             isEngagedInCombat = true;
             currentAnim.SetBool("Walk", false);
             currentAnim.SetBool("Attack", true);
+            Debug.Log("Enemy stop moving");
         }
 
         public void SetDestination(Waypoint waypoint)
@@ -107,6 +105,7 @@ namespace BioTower.Units
             {
                 SetDestination(waypoint);
                 isEngagedInCombat = false;
+                Debug.Log("Enemy start moving");
             });
         }
 

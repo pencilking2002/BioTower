@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-
 namespace BioTower.UI
 {
     public class GameOverPanel : MonoBehaviour
     {
         public CanvasGroup panel;
+        public Image background;
         public TextMeshProUGUI gameOverText;
-        public Button upgradeButton;
-        public Button restartButton;
+        public RectTransform upgradeButton;
+        public RectTransform restartButton;
+        public Image goofyplantsWin;
+        public Image goofyplantsLose;
+        public AnimatedGlow upgradeButtonGlow;
 
         private void Awake()
         {
@@ -21,28 +24,27 @@ namespace BioTower.UI
         private void OnGameOver(bool isWin)
         {
             panel.gameObject.SetActive(true);
+            background.gameObject.SetActive(true);
+            gameOverText.text = isWin ? "YOU WIN!" : "GAME OVER";
 
-            if (isWin)
-            {
-                gameOverText.text = "YOU WIN!";
-                upgradeButton.gameObject.SetActive(true);
-                restartButton.gameObject.SetActive(false);
-            }
-            else
-            {
-                gameOverText.text = "GAME OVER";
-                upgradeButton.gameObject.SetActive(false);
-                restartButton.gameObject.SetActive(true);
-            }
+            upgradeButton.gameObject.SetActive(isWin);
+            restartButton.gameObject.SetActive(!isWin);
+
+            goofyplantsWin.gameObject.SetActive(isWin);
+            goofyplantsLose.gameObject.SetActive(!isWin);
+
+            upgradeButtonGlow.StartGlowing();
         }
 
         public void OnPressRestart()
         {
+            upgradeButtonGlow.StopGlowing();
             Util.ReloadLevel();
         }
 
         public void OnPressUpgrade()
         {
+            upgradeButtonGlow.StopGlowing();
             EventManager.UI.onPressUpgradeButton?.Invoke();
             EventManager.UI.onTapButton?.Invoke(true);
         }

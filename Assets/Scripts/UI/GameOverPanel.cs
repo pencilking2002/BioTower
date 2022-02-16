@@ -30,8 +30,16 @@ namespace BioTower.UI
             upgradeButton.gameObject.SetActive(isWin);
             restartButton.gameObject.SetActive(!isWin);
 
-            goofyplantsWin.gameObject.SetActive(isWin);
-            goofyplantsLose.gameObject.SetActive(!isWin);
+            if (isWin)
+            {
+                Display(goofyplantsWin);
+                Hide(goofyplantsLose);
+            }
+            else
+            {
+                Display(goofyplantsLose);
+                Hide(goofyplantsWin);
+            }
 
             upgradeButtonGlow.StartGlowing();
         }
@@ -40,6 +48,31 @@ namespace BioTower.UI
         {
             upgradeButtonGlow.StopGlowing();
             Util.ReloadLevel();
+        }
+
+        public void Display(Image image)
+        {
+            image.gameObject.SetActive(true);
+            var targetPos = image.transform.localPosition;
+            image.transform.localPosition = targetPos + Vector3.down * 200;
+            LeanTween.moveLocalY(image.gameObject, targetPos.y, 0.5f)
+            .setEaseOutCubic()
+            .setIgnoreTimeScale(true);
+
+            LeanTween.scaleY(image.gameObject, 1.1f, 0.25f)
+            .setLoopPingPong(1)
+            .setIgnoreTimeScale(true)
+            .setOnComplete(() =>
+            {
+                LeanTween.scaleY(image.gameObject, 1.02f, 2.0f)
+                .setIgnoreTimeScale(true)
+                .setLoopPingPong(-1);
+            });
+        }
+
+        public void Hide(Image image)
+        {
+            image.gameObject.SetActive(false);
         }
 
         public void OnPressUpgrade()

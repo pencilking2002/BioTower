@@ -189,34 +189,30 @@ namespace BioTower.Structures
         public virtual void OnTapStructure(Vector3 screenPoint) { }
         public virtual void SpawnUnits(int numUnits) { }
 
-        public virtual void OnStructureSelected(Structure structure)
+        private void SelectStructure()
         {
-            if (structure == null || GameManager.Instance == null)
+            if (GameManager.Instance == null)
                 return;
 
             if (IsMiniChloroTower())
                 return;
 
-            //       Debug.Log($"Select {structure.gameObject.name}. This structure: {gameObject.name}. Same structure: {structure == this}");
+            if (spriteOutline != null)
+                spriteOutline.SetActive(true);
 
-            if (structure == this)
-            {
-                if (spriteOutline != null)
-                    spriteOutline.SetActive(true);
+            if (influenceVisuals != null)
+                influenceVisuals.SetActive(true);
 
-                if (influenceVisuals != null)
-                    influenceVisuals.SetActive(true);
+            DoSquishyAnimation(initSpriteScale, initSpriteScale);
+        }
 
-                DoSquishyAnimation(initSpriteScale, initSpriteScale);
-            }
-            else
-            {
-                if (spriteOutline != null)
-                    spriteOutline.SetActive(false);
+        private void DeselectStructure()
+        {
+            if (spriteOutline != null)
+                spriteOutline.SetActive(false);
 
-                if (influenceVisuals != null)
-                    influenceVisuals.SetActive(false);
-            }
+            if (influenceVisuals != null)
+                influenceVisuals.SetActive(false);
         }
 
         private void DoSquishyAnimation(Vector3 startingScale, Vector3 targetScale, bool cancelAnim = true)
@@ -277,10 +273,20 @@ namespace BioTower.Structures
             return units.Count;
         }
 
+        public virtual void OnStructureSelected(Structure structure)
+        {
+            if (structure == this)
+                SelectStructure();
+            else
+                DeselectStructure();
+        }
+
         public virtual void OnStructureCreated(Structure structure)
         {
-            //OnStructureSelected(structure);
-            //Debug.Log($"{structureType} created");
+            if (structure == this)
+                SelectStructure();
+            else
+                DeselectStructure();
         }
 
         public virtual void OnEnable()

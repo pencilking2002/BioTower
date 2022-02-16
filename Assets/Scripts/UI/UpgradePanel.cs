@@ -13,6 +13,7 @@ namespace BioTower
 {
     public class UpgradePanel : MonoBehaviour
     {
+
         [ReadOnly] [SerializeField] private UpgradeButton selectedButton;
         [SerializeField] private UpgradeButton unlockUpgradeButton;
         [SerializeField] private UpgradeButton[] upgradeButtons;
@@ -23,6 +24,9 @@ namespace BioTower
         public Button chooseUpgradeButton;
         public TextMeshProUGUI upgradeDescription;
 
+        [Header("Sprites")]
+        [SerializeField] private Sprite selectedTabSprite;
+        [SerializeField] private Sprite deselectedTabSprite;
 
         private void Awake()
         {
@@ -135,10 +139,10 @@ namespace BioTower
             itemImage.sprite = data.sprite;
         }
 
-        public void OnPressUpgradeButton01(bool useSound = true)
+        private void SelectTab(UpgradeButton selectedButton, bool useSound = true)
         {
+            selectedButton.image.sprite = selectedTabSprite;
             infoPanel.gameObject.SetActive(true);
-            selectedButton = upgradeButtons[0];
 
             var upgradeType = selectedButton.GetUpgradeType();
             var upgradeData = GameManager.Instance.upgradeTextData;
@@ -150,30 +154,30 @@ namespace BioTower
                 EventManager.UI.onTapButton?.Invoke(true);
         }
 
+        private void DeselectTab(UpgradeButton button)
+        {
+            button.image.sprite = deselectedTabSprite;
+        }
+
+        public void OnPressUpgradeButton01(bool useSound = true)
+        {
+            SelectTab(upgradeButtons[0], useSound);
+            DeselectTab(upgradeButtons[1]);
+            DeselectTab(upgradeButtons[2]);
+        }
+
         public void OnPressUpgradeButton02()
         {
-            infoPanel.gameObject.SetActive(true);
-            selectedButton = upgradeButtons[1];
-
-            var upgradeType = selectedButton.GetUpgradeType();
-            var upgradeData = GameManager.Instance.upgradeTextData;
-            var data = upgradeData.GetUpgradeTextData(upgradeType);
-            upgradeDescription.text = data.descrptionText;
-            itemImage.sprite = data.sprite;
-            EventManager.UI.onTapButton?.Invoke(true);
+            DeselectTab(upgradeButtons[0]);
+            SelectTab(upgradeButtons[1]);
+            DeselectTab(upgradeButtons[2]);
         }
 
         public void OnPressUpgradeButton03()
         {
-            infoPanel.gameObject.SetActive(true);
-            selectedButton = upgradeButtons[2];
-
-            var upgradeType = selectedButton.GetUpgradeType();
-            var upgradeData = GameManager.Instance.upgradeTextData;
-            var data = upgradeData.GetUpgradeTextData(upgradeType);
-            upgradeDescription.text = data.descrptionText;
-            itemImage.sprite = data.sprite;
-            EventManager.UI.onTapButton?.Invoke(true);
+            DeselectTab(upgradeButtons[0]);
+            DeselectTab(upgradeButtons[1]);
+            SelectTab(upgradeButtons[2]);
         }
 
         public void OnPressPurchaseUpgradeButton()

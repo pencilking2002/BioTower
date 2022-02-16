@@ -6,30 +6,36 @@ using TMPro;
 
 namespace BioTower
 {
-public class UpgradeButton : MonoBehaviour
-{
-    [SerializeField] private UpgradeType upgradeType = UpgradeType.NONE;
-    [SerializeField] private Image icon;
-    [SerializeField] private TextMeshProUGUI text;
-
-    public void SetIcon(Sprite sprite)
+    public class UpgradeButton : MonoBehaviour
     {
-        icon.sprite = sprite;
-    }
+        [SerializeField] private UpgradeType upgradeType = UpgradeType.NONE;
+        [SerializeField] private Image icon;
+        public Image image;
+        [SerializeField] private TextMeshProUGUI text;
 
-    public void SetText(string str)
-    {
-        text.text = str;
-    }
+        private void Awake()
+        {
+            image = GetComponent<Image>();
+        }
 
-    public void SetUpgradeType(UpgradeType upgradeType)
-    {
-        this.upgradeType = upgradeType;
-    }
+        public void SetIcon(Sprite sprite)
+        {
+            icon.sprite = sprite;
+        }
 
-    public UpgradeType GetUpgradeType()
-    {
-        return upgradeType;
+        public void SetText(string str)
+        {
+            text.text = str;
+        }
+
+        public void SetUpgradeType(UpgradeType upgradeType)
+        {
+            this.upgradeType = upgradeType;
+        }
+
+        public UpgradeType GetUpgradeType()
+        {
+            return upgradeType;
+        }
     }
-}
 }

@@ -7,90 +7,90 @@ using BioTower.SaveData;
 
 namespace BioTower
 {
-public enum WinCondition
-{
-    SURVIVE_WAVES,
-    KILL_ENEMIES
-}
-
-public enum LoseCondition
-{
-    NONE,
-    BASE_DESTROYED
-}
-
-public class GameOverLogic : MonoBehaviour
-{
-    private void Awake()
+    public enum WinCondition
     {
-        
+        SURVIVE_WAVES,
+        KILL_ENEMIES
     }
 
-    private void OnBaseDestroyed()
+    public enum LoseCondition
     {
-        if (LevelInfo.current.loseCondition == LoseCondition.BASE_DESTROYED)
+        NONE,
+        BASE_DESTROYED
+    }
+
+    public class GameOverLogic : MonoBehaviour
+    {
+        private void Awake()
         {
-            EventManager.Game.onGameOver?.Invoke(false);
+
         }
-    }
 
-    private void OnUnitDestroyed(Unit unit)
-    {
-        if (unit.unitType != UnitType.BASIC_ENEMY)
-            return;
-            
-        var levelInfo = LevelInfo.current;
-        if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
+        private void OnBaseDestroyed()
         {
-            levelInfo.numEnemiesDestroyed++;   
-            if (levelInfo.numEnemiesDestroyed >= levelInfo.numEnemiesToDestroy)
+            if (LevelInfo.current.loseCondition == LoseCondition.BASE_DESTROYED)
             {
-                EventManager.Game.onGameOver(true);
+                EventManager.Game.onGameOver?.Invoke(false);
             }
         }
-    }
 
-    private void OnWavesCompleted()
-    {
-        if (LevelInfo.current.winCondition == WinCondition.SURVIVE_WAVES)
+        private void OnUnitDestroyed(Unit unit)
         {
-            EventManager.Game.onGameOver?.Invoke(true);
-        }
-    }
+            if (unit.unitType != UnitType.BASIC_ENEMY)
+                return;
 
-    private void OnSpendCurrency(int numSpent, int currPlayerCurrency)
-    {
-        if (currPlayerCurrency == 0)
+            var levelInfo = LevelInfo.current;
+            if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
+            {
+                levelInfo.numEnemiesDestroyed++;
+                if (levelInfo.numEnemiesDestroyed >= levelInfo.numEnemiesToDestroy)
+                {
+                    EventManager.Game.onGameOver(true);
+                }
+            }
+        }
+
+        private void OnWavesCompleted()
         {
-            EventManager.Game.onGameOver?.Invoke(false);
+            if (LevelInfo.current.winCondition == WinCondition.SURVIVE_WAVES)
+            {
+                EventManager.Game.onGameOver?.Invoke(true);
+            }
         }
-    }
 
-    private void OnGameStateInit(GameState gameState)
-    {
-        if (gameState == GameState.GAME_OVER_WIN || gameState == GameState.GAME_OVER_LOSE)
+        private void OnSpendCurrency(int numSpent, int currPlayerCurrency)
         {
-            Time.timeScale = 0;
+            if (currPlayerCurrency == 0)
+            {
+                EventManager.Game.onGameOver?.Invoke(false);
+            }
         }
-    }
 
-    private void OnEnable()
-    {
-        EventManager.Game.onGameStateInit += OnGameStateInit;
-        EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
-        EventManager.Game.onWavesCompleted += OnWavesCompleted;
-        EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
-        EventManager.Game.onSpendCurrency += OnSpendCurrency;
-    }
+        private void OnGameStateInit(GameState gameState)
+        {
+            if (gameState == GameState.GAME_OVER_WIN || gameState == GameState.GAME_OVER_LOSE)
+                Time.timeScale = 0;
+            else if (gameState == GameState.GAME)
+                Time.timeScale = 1;
+        }
 
-    private void OnDisable()
-    {
-        EventManager.Game.onGameStateInit += OnGameStateInit;
-        EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
-        EventManager.Game.onWavesCompleted -= OnWavesCompleted;
-        EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
-        EventManager.Game.onSpendCurrency -= OnSpendCurrency;
+        private void OnEnable()
+        {
+            EventManager.Game.onGameStateInit += OnGameStateInit;
+            EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
+            EventManager.Game.onWavesCompleted += OnWavesCompleted;
+            EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
+            EventManager.Game.onSpendCurrency += OnSpendCurrency;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Game.onGameStateInit -= OnGameStateInit;
+            EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
+            EventManager.Game.onWavesCompleted -= OnWavesCompleted;
+            EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
+            EventManager.Game.onSpendCurrency -= OnSpendCurrency;
+        }
+
     }
-    
-}
 }

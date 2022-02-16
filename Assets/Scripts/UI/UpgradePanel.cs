@@ -37,19 +37,15 @@ namespace BioTower
                 float initLocalPosY = panel.transform.localPosition.y;
                 panel.transform.localPosition = new Vector3(0, -500, 0);
 
-                var seq = LeanTween.sequence();
-                seq.append(LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f)
+                LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f)
                     .setEaseOutBack()
                     .setIgnoreTimeScale(true)
-                );
-
-                seq.append(() =>
-                {
-                    EventSystem.current.SetSelectedGameObject(upgradeButtons[0].gameObject, null);
-                    OnPressUpgradeButton01(false);
-                });
-
-                seq.append(gameObject, onComplete);
+                    .setOnComplete(() =>
+                    {
+                        EventSystem.current.SetSelectedGameObject(upgradeButtons[0].gameObject, null);
+                        OnPressUpgradeButton01(false);
+                        onComplete?.Invoke();
+                    });
             }
             else
             {
@@ -152,9 +148,6 @@ namespace BioTower
 
             if (useSound)
                 EventManager.UI.onTapButton?.Invoke(true);
-
-            if (!useSound)
-                Debug.Log("Automatically select upgrade button");
         }
 
         public void OnPressUpgradeButton02()

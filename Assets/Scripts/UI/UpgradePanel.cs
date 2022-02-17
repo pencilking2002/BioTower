@@ -144,23 +144,24 @@ namespace BioTower
             itemImage.sprite = data.sprite;
         }
 
-        private void SelectTab(UpgradeButton selectedButton, bool useSound = true)
+        private void SelectTab(UpgradeButton button, bool useSound = true)
         {
-            selectedButton.image.sprite = selectedTabSprite;
+            selectedButton = button;
+            button.image.sprite = selectedTabSprite;
             infoPanel.gameObject.SetActive(true);
 
-            var upgradeType = selectedButton.GetUpgradeType();
+            var upgradeType = button.GetUpgradeType();
             var upgradeData = GameManager.Instance.upgradeTextData;
             var data = upgradeData.GetUpgradeTextData(upgradeType);
             upgradeDescription.text = data.descrptionText;
             itemImage.sprite = data.sprite;
 
             int index = infoPanel.transform.GetSiblingIndex();
-            selectedButton.transform.SetSiblingIndex(++index);
+            button.transform.SetSiblingIndex(++index);
 
-            var pos = selectedButton.transform.localPosition;
+            var pos = button.transform.localPosition;
             pos.y = selectedPosY;
-            selectedButton.transform.localPosition = pos;
+            LeanTween.moveLocal(button.gameObject, pos, 0.15f).setIgnoreTimeScale(true).setEaseOutBack();
 
             if (useSound)
                 EventManager.UI.onTapButton?.Invoke(true);

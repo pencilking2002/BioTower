@@ -70,7 +70,7 @@ namespace BioTower
         {
             if (gameState == GameState.GAME_OVER_WIN || gameState == GameState.GAME_OVER_LOSE)
                 Time.timeScale = 0;
-            else if (gameState == GameState.GAME)
+            else if (gameState == GameState.GAME || gameState == GameState.LEVEL_SELECT)
                 Time.timeScale = 1;
         }
 

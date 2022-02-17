@@ -28,9 +28,14 @@ namespace BioTower
         [SerializeField] private Sprite selectedTabSprite;
         [SerializeField] private Sprite deselectedTabSprite;
 
+        private float selectedPosY;
+        private float deselectedPosY;
+
         private void Awake()
         {
             panel.gameObject.SetActive(false);
+            selectedPosY = upgradeButtons[0].transform.localPosition.y;
+            deselectedPosY = upgradeButtons[1].transform.localPosition.y;
         }
 
         private void AnimateUpgradePanel(bool slideIn, Action onComplete = null)
@@ -150,6 +155,13 @@ namespace BioTower
             upgradeDescription.text = data.descrptionText;
             itemImage.sprite = data.sprite;
 
+            int index = infoPanel.transform.GetSiblingIndex();
+            selectedButton.transform.SetSiblingIndex(++index);
+
+            var pos = selectedButton.transform.localPosition;
+            pos.y = selectedPosY;
+            selectedButton.transform.localPosition = pos;
+
             if (useSound)
                 EventManager.UI.onTapButton?.Invoke(true);
         }
@@ -157,6 +169,13 @@ namespace BioTower
         private void DeselectTab(UpgradeButton button)
         {
             button.image.sprite = deselectedTabSprite;
+
+            var pos = button.transform.localPosition;
+            pos.y = deselectedPosY;
+            button.transform.localPosition = pos;
+
+            int index = infoPanel.transform.GetSiblingIndex();
+            button.transform.SetSiblingIndex(--index);
         }
 
         public void OnPressUpgradeButton01(bool useSound = true)

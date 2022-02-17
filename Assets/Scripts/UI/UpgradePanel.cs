@@ -13,16 +13,27 @@ namespace BioTower
 {
     public class UpgradePanel : MonoBehaviour
     {
-
-        [ReadOnly] [SerializeField] private UpgradeButton selectedButton;
-        [SerializeField] private UpgradeButton unlockUpgradeButton;
         [SerializeField] private UpgradeButton[] upgradeButtons;
+        [ReadOnly] [SerializeField] private UpgradeButton selectedButton;
         [SerializeField] private Color defaultButtonColor;
+        [SerializeField] private UpgradeButton unlockUpgradeButton;
+        [SerializeField] private TextMeshProUGUI title;
+
+
+        [Header("Upgrade Panel")]
         public RectTransform panel;
         public Image infoPanel;
         public Image itemImage;
         public Button chooseUpgradeButton;
         public TextMeshProUGUI upgradeDescription;
+
+
+        [Header("Unlock Panel")]
+        public Image unlockInfoPanel;
+        public Image unlockItemImage;
+        public Button unlockButton;
+        public TextMeshProUGUI unlockDescription;
+
 
         [Header("Sprites")]
         [SerializeField] private Sprite selectedTabSprite;
@@ -45,14 +56,25 @@ namespace BioTower
                 panel.gameObject.SetActive(true);
                 float initLocalPosY = panel.transform.localPosition.y;
                 panel.transform.localPosition = new Vector3(0, -500, 0);
+                var upgrades = GetUpgradesForCurrentLevel();
+
+                DisplayInfoPanel(upgrades.isUnlock);
 
                 LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f)
                     .setEaseOutBack()
                     .setIgnoreTimeScale(true)
                     .setOnComplete(() =>
                     {
-                        EventSystem.current.SetSelectedGameObject(upgradeButtons[0].gameObject, null);
-                        OnPressUpgradeButton01(false);
+                        if (upgrades.isUnlock)
+                        {
+                            EventSystem.current.SetSelectedGameObject(unlockUpgradeButton.gameObject, null);
+                            OnPressUnlockUpgradeButton();
+                        }
+                        else
+                        {
+                            EventSystem.current.SetSelectedGameObject(upgradeButtons[0].gameObject, null);
+                            OnPressUpgradeButton01(false);
+                        }
                         onComplete?.Invoke();
                     });
             }
@@ -77,6 +99,23 @@ namespace BioTower
             }
         }
 
+        private void DisplayInfoPanel(bool isUnlock)
+        {
+            if (isUnlock)
+            {
+                title.text = "NEW TOWER UNLOCKED";
+                infoPanel.gameObject.SetActive(false);
+                foreach (var btn in upgradeButtons)
+                    btn.gameObject.SetActive(false);
+                unlockInfoPanel.gameObject.SetActive(true);
+            }
+            else
+            {
+                title.text = "CHOOSE AN UPGRADE";
+                unlockInfoPanel.gameObject.SetActive(false);
+            }
+        }
+
         public void Hide(bool isAnimated = false)
         {
             if (isAnimated)
@@ -88,14 +127,18 @@ namespace BioTower
             }
         }
 
-        private void SetupUpdgradeButtons()
+        private Upgrade GetUpgradesForCurrentLevel()
         {
             var currLevel = LevelInfo.current.levelType;
-
-            // Get the upgrades for this level
             var upgradeTree = GameManager.Instance.upgradeTree;
-            var upgradeTextData = GameManager.Instance.upgradeTextData;
             var upgrades = upgradeTree.GetUpgradesForLevel(currLevel);
+            return upgrades;
+        }
+
+        private void SetupUpdgradeButtons()
+        {
+            var upgradeTextData = GameManager.Instance.upgradeTextData;
+            var upgrades = GetUpgradesForCurrentLevel();
             UpgradeData data = null;
 
             unlockUpgradeButton.gameObject.SetActive(upgrades.isUnlock);
@@ -134,14 +177,15 @@ namespace BioTower
 
         public void OnPressUnlockUpgradeButton()
         {
-            infoPanel.gameObject.SetActive(true);
+            unlockInfoPanel.gameObject.SetActive(true);
             selectedButton = unlockUpgradeButton;
 
             var upgradeType = selectedButton.GetUpgradeType();
             var upgradeData = GameManager.Instance.upgradeTextData;
             var data = upgradeData.GetUpgradeTextData(upgradeType);
-            upgradeDescription.text = data.descrptionText;
-            itemImage.sprite = data.sprite;
+
+            unlockDescription.text = data.descrptionText;
+            unlockItemImage.sprite = data.sprite;
         }
 
         private void SelectTab(UpgradeButton button, bool useSound = true)

@@ -22,6 +22,7 @@ namespace BioTower
 
         [Header("Upgrade Panel")]
         public RectTransform panel;
+        public RectTransform upgradePanelContainer;     // Used for toggling upgrade/unlock panels
         public Image infoPanel;
         public Image itemImage;
         public Button chooseUpgradeButton;
@@ -104,14 +105,13 @@ namespace BioTower
             if (isUnlock)
             {
                 title.text = "NEW TOWER UNLOCKED";
-                infoPanel.gameObject.SetActive(false);
-                foreach (var btn in upgradeButtons)
-                    btn.gameObject.SetActive(false);
+                upgradePanelContainer.gameObject.SetActive(false);
                 unlockInfoPanel.gameObject.SetActive(true);
             }
             else
             {
                 title.text = "CHOOSE AN UPGRADE";
+                upgradePanelContainer.gameObject.SetActive(true);
                 unlockInfoPanel.gameObject.SetActive(false);
             }
         }

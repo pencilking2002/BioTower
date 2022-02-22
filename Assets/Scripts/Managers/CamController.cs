@@ -4,30 +4,30 @@ using UnityEngine;
 
 namespace BioTower
 {
-public class CamController : MonoBehaviour
-{
-    [HideInInspector]public Camera cam;
-
-    private void Awake()
+    public class CamController : MonoBehaviour
     {
-        cam = GetComponent<Camera>();
-    }
-    // /[SerializeField] ObjectShake objectShake;
+        [HideInInspector] public Camera cam;
+        [SerializeField] ObjectShake objectShake;
 
-    // private void OnTitleAnimCompleted()
-    // {
-    //     objectShake.Shake(gameObject, 0.25f, 10.0f);
-    // }
+        private void Awake()
+        {
+            cam = GetComponent<Camera>();
+        }
 
-    private void OnEnable()
-    {
-        //EventManager.Game.onTitleAnimCompleted += OnTitleAnimCompleted;
-    }
+        private void OnGameOver(bool isWin)
+        {
+            LeanTween.cancel(objectShake.gameObject);
+        }
 
-    private void OnDisable()
-    {
-        // /EventManager.Game.onTitleAnimCompleted -= OnTitleAnimCompleted;
+        private void OnEnable()
+        {
+            EventManager.Game.onGameOver += OnGameOver;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Game.onGameOver -= OnGameOver;
+        }
+
     }
-    
-}
 }

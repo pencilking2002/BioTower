@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  objectShake: {fileID: 743548315}
 --- !u!114 &743548315
 MonoBehaviour:
   m_ObjectHideFlags: 0

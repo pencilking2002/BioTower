@@ -47,6 +47,7 @@ namespace BioTower.UI
         public void OnPressRestart()
         {
             upgradeButtonGlow.StopGlowing();
+            LevelSelectMenu.levelUnlocked = -1;
             Util.ReloadLevel();
         }
 
@@ -80,6 +81,7 @@ namespace BioTower.UI
             upgradeButtonGlow.StopGlowing();
             EventManager.UI.onPressUpgradeButton?.Invoke();
             EventManager.UI.onTapButton?.Invoke(true);
+            LevelSelectMenu.levelUnlocked = (int)LevelInfo.current.levelType;
         }
 
         private void OnEnable()

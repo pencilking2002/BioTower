@@ -36,16 +36,13 @@ namespace BioTower
             // Do a scaling animation and record the scale
             var seq = LeanTween.sequence();
             seq.append(1 + delay);
+            seq.append(() => { EventManager.Structures.onSocketPop?.Invoke(this); });
             seq.append(LeanTween.scale(sr.gameObject, scale * (1 + additionalScale), duration).setEaseOutElastic());
             seq.append(sr.gameObject, () =>
             {
                 initScale = sr.transform.localScale;
                 isAnimatingIn = false;
             });
-            // }
-
-            // private void Start()
-            // {
             EventManager.Structures.onSocketStart?.Invoke(this);
         }
 

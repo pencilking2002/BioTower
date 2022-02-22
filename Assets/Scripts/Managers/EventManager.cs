@@ -50,6 +50,7 @@ namespace BioTower
             public static Action<BasicEnemy, Structure> onEnemyEnterTowerInfluence;
             public static Action<BasicEnemy, Structure> onEnemyExitTowerInfluence;
             public static Action<StructureSocket> onSocketStart;
+            public static Action<StructureSocket> onSocketPop;
             public static Action<StructureSocket> onTapFreeStructureSocket;
 
         }

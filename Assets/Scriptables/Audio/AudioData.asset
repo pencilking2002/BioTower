@@ -38,6 +38,9 @@ MonoBehaviour:
   towerDeath: {fileID: 8300000, guid: e941f7e1e41398243a03011fa38ba41c, type: 3}
   lightDropped: {fileID: 8300000, guid: 157b7014e447a9441a658da54ff2af57, type: 3}
   lightPickedUp: {fileID: 8300000, guid: efc79fc872fbace40be74c2042ef45ac, type: 3}
+  structureSocketPopUp: {fileID: 8300000, guid: 9df384ad7e6018d4281d4800b657f227,
+    type: 3}
+  structureSocketTap: {fileID: 8300000, guid: 9ba1153cff9e0274ca061ced74b448f3, type: 3}
   mitoBtnTapped: {fileID: 8300000, guid: e1f9a9fdfd82772428a7e37417d2bff2, type: 3}
   textPopUp: {fileID: 8300000, guid: 4ee4a1a0c7bea3c469d32a64971af265, type: 3}
   btnSelected: {fileID: 8300000, guid: 82a2298801b46b642ac9e2698ab5f1d5, type: 3}

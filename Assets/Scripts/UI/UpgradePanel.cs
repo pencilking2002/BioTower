@@ -200,8 +200,9 @@ namespace BioTower
             upgradeDescription.text = data.descrptionText;
             itemImage.sprite = data.sprite;
 
-            int index = infoPanel.transform.GetSiblingIndex();
-            button.transform.SetSiblingIndex(++index);
+            //int index = infoPanel.transform.GetSiblingIndex();
+            button.transform.SetAsLastSibling();
+            itemImage.transform.SetAsLastSibling();
 
             var pos = button.transform.localPosition;
             pos.y = selectedPosY;

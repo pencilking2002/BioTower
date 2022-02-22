@@ -213,6 +213,17 @@ namespace BioTower
             PlaySound(data.lightPickedUp);
         }
 
+        private void OnSocketPop(StructureSocket socket)
+        {
+            PlaySound(data.structureSocketPopUp);
+        }
+
+        private void OnTapFreeStructureSocket(StructureSocket socket)
+        {
+            if (!GameManager.Instance.placementManager.IsPlacingState())
+                PlaySound(data.structureSocketTap);
+        }
+
         // UI ---------------------------------------------
 
         private void OnTapButton(bool isValid)
@@ -262,6 +273,8 @@ namespace BioTower
             EventManager.Structures.onStructureDestroyed += OnStructureDestroyed;
             EventManager.Structures.onLightPickedUp += OnLightPickedUp;
             EventManager.Structures.onLightDropped += OnLightDropped;
+            EventManager.Structures.onSocketPop += OnSocketPop;
+            EventManager.Structures.onTapFreeStructureSocket += OnTapFreeStructureSocket;
 
             EventManager.UI.onTapButton += OnTapButton;
             EventManager.UI.onPressLevelSelectButton += OnPressLevelSelectButton;
@@ -292,6 +305,8 @@ namespace BioTower
             EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
             EventManager.Structures.onLightPickedUp -= OnLightPickedUp;
             EventManager.Structures.onLightDropped -= OnLightDropped;
+            EventManager.Structures.onSocketPop -= OnSocketPop;
+            EventManager.Structures.onTapFreeStructureSocket -= OnTapFreeStructureSocket;
 
             EventManager.UI.onTapButton -= OnTapButton;
             EventManager.UI.onPressLevelSelectButton -= OnPressLevelSelectButton;

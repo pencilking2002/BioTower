@@ -81,7 +81,16 @@ namespace BioTower.UI
             upgradeButtonGlow.StopGlowing();
             EventManager.UI.onPressUpgradeButton?.Invoke();
             EventManager.UI.onTapButton?.Invoke(true);
-            LevelSelectMenu.levelUnlocked = (int)LevelInfo.current.levelType;
+
+            var gameData = Util.saveManager.Load();
+            var chosenUpgrades = gameData.chosenUpgrades;
+            var numUpgrades = chosenUpgrades.Count;
+            var currentLevel = (int)LevelInfo.current.levelType;
+
+            //Debug.Log("numUpgrades: " + numUpgrades + ". Current Level: " + currentLevel);
+
+            if (numUpgrades != currentLevel)
+                LevelSelectMenu.levelUnlocked = currentLevel;
         }
 
         private void OnEnable()

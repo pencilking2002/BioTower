@@ -41,7 +41,7 @@ namespace BioTower.UI
                 if (i < currLevel)
                 {
                     if (i == levelUnlocked)
-                        btn.Unlock(1);
+                        btn.Unlock(0.25f);
                     else
                         btn.Unlock();
                 }

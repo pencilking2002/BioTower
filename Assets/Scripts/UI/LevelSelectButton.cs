@@ -60,29 +60,28 @@ namespace BioTower.UI
             else
             {
                 lockIcon.gameObject.SetActive(true);
-                btnText.gameObject.SetActive(true);
+                btnText.gameObject.SetActive(false);
 
-                var lockScale = lockIcon.transform.localScale;
-                var textScale = btnText.transform.localScale;
-                btnText.transform.localScale = Vector3.zero;
+                var buttonScale = this.transform.localScale;
                 btnText.text = (transform.GetSiblingIndex() + 1).ToString("D2");
 
-                Util.objectShake.Shake(lockIcon.gameObject, delay, 1);
 
                 LeanTween.delayedCall(delay, () =>
                 {
                     var seq = LeanTween.sequence();
 
-                    seq.append(LeanTween.scale(lockIcon.gameObject, lockScale * 2f, 0.1f));
-                    seq.append(LeanTween.scale(lockIcon.gameObject, Vector3.zero, 0.25f));
-                    seq.append(LeanTween.scale(btnText.gameObject, textScale * 2f, 0.1f));
-                    seq.append(LeanTween.scale(btnText.gameObject, textScale, 0.25f));
+                    seq.append(LeanTween.scale(gameObject, buttonScale * 1.5f, 0.1f));
+                    seq.append(() =>
+                    {
+                        lockIcon.gameObject.SetActive(false);
+                        btnText.gameObject.SetActive(true);
+                    });
+                    seq.append(LeanTween.scale(gameObject, buttonScale, 0.25f));
 
                     seq.append(() =>
                     {
                         lockIcon.gameObject.SetActive(false);
                         isUnlocked = true;
-                        //Debug.Log("Delayed unlock");
                     });
 
                 });

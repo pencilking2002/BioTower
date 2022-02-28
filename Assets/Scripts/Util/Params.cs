@@ -36,22 +36,17 @@ namespace BioTower
         [TabGroup("Towers")] public bool enablePlayerTowerHealing = false;      // Done
 
 
-
         [Header("ABA Tower")]
         [TabGroup("Towers")] [Range(0, 100)] public int abaTowerCost = 10;       // Done
         [TabGroup("Towers")] public int abaUnitSpawnLimit = 3;                 // Done
-        [TabGroup("Towers")] public int abaMaxInfluenceRadius_float = 2310;    // Done
-                                                                               //[TabGroup("Towers")] public int abaMapScale_float = 2310;              // Done
-                                                                               //[TabGroup("Towers")] public int abaInfluenceShapeScale_float = 1000;  // Done
+        [TabGroup("Towers")] public int abaMaxInfluenceRadius_float = 2600;    // Done
         [TabGroup("Towers")] public bool enableAbaTowerRandomHeal = false;     // Done
 
 
         [Header("PPC2 Tower")]
         [TabGroup("Towers")] public bool ppc2TowerUnlocked = false;             // Done
         [TabGroup("Towers")] public int ppc2TowerCost = 40;                     // Done
-        [TabGroup("Towers")] public int ppc2MaxInfluenceRadius_float = 2280;    // Done
-        //[TabGroup("Towers")] public int ppc2InfluenceShapeScale_float = 1000;  // Done
-        //[TabGroup("Towers")] public int ppc2MapScale_float = 2310;              // Done
+        [TabGroup("Towers")] public int ppc2MaxInfluenceRadius_float = 2400;    // Done
         [TabGroup("Towers")] public int ppc2shootInterval_float = 1000;             // Done
         [TabGroup("Towers")] public int ppc2ExplosionColliderScale_float = 1271;   // Done
         [TabGroup("Towers")] public int ppc2ExplosionSpriteScale_float = 622;       // Done

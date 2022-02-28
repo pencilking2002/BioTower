@@ -163,8 +163,6 @@ namespace BioTower
         public void UpgradePPC2TowerInfluence()
         {
             upgradeSettings.ppc2MaxInfluenceRadius_float = 3000;
-            upgradeSettings.ppc2MapScale_float = 3000;
-            upgradeSettings.ppc2InfluenceShapeScale_float = 1500;
         }
 
         public void UpgradePpc2FireRate() { upgradeSettings.ppc2shootInterval_float = 700; }

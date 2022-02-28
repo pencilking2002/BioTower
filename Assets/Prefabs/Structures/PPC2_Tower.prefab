@@ -81,9 +81,24 @@ MonoBehaviour:
   blendMode: 1
   scaleMode: 0
   color: {r: 1, g: 1, b: 1, a: 1}
+  detailLevel: 2
+  renderQueue: -1
   zTest: 4
   zOffsetFactor: 0
   zOffsetUnits: 0
+  stencilComp: 8
+  stencilOpPass: 0
+  stencilRefID: 0
+  stencilReadMask: 255
+  stencilWriteMask: 255
+  points:
+  - {x: 2.3453455, y: 1.1769335}
+  - {x: 2.4289834, y: 1.5025523}
+  - {x: 2.350634, y: 1.8217545}
+  - {x: 2.1311061, y: 2.0867186}
+  - {x: 0.16112179, y: 1.5104947}
+  - {x: 2.1299477, y: 0.9075875}
+  triangulation: 1
   fill:
     type: 0
     space: 0
@@ -94,15 +109,6 @@ MonoBehaviour:
     radialOrigin: {x: 1.79, y: 1.39, z: -0.28}
     radialRadius: 1.38
   useFill: 1
-  points:
-  - {x: 2.3453455, y: 1.1769335}
-  - {x: 2.4289834, y: 1.5025523}
-  - {x: 2.350634, y: 1.8217545}
-  - {x: 2.1311061, y: 2.0867186}
-  - {x: 0.16112179, y: 1.5104947}
-  - {x: 2.1299477, y: 0.9075875}
-  meshOutOfDate: 0
-  triangulation: 1
 --- !u!33 &977686005
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -214,7 +220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5612656915635731074
 Transform:
   m_ObjectHideFlags: 0
@@ -245,9 +251,16 @@ MonoBehaviour:
   blendMode: 1
   scaleMode: 0
   color: {r: 0.8100441, g: 1, b: 0.5990566, a: 1}
+  detailLevel: 2
+  renderQueue: -1
   zTest: 4
   zOffsetFactor: 0
   zOffsetUnits: 0
+  stencilComp: 8
+  stencilOpPass: 0
+  stencilRefID: 0
+  stencilReadMask: 255
+  stencilWriteMask: 255
   type: 2
   colorMode: 0
   colorOuterStart: {r: 1, g: 1, b: 1, a: 1}
@@ -269,8 +282,9 @@ MonoBehaviour:
     space: -2
     snap: 1
     size: 24
-    offset: 0
     spacing: 0.14285715
+    offset: 0
+    shapeModifier: 1
 --- !u!33 &7617391618309771663
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -278,7 +292,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257720723236912239}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 43100795730674332, guid: a3d1f56cebf202c448b6fb479f61a9dc, type: 2}
 --- !u!23 &8240453049143329117
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -286,7 +300,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257720723236912239}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -438,7 +452,7 @@ MonoBehaviour:
   spriteOutline: {fileID: 5252619385424526550}
   sr: {fileID: 2173016658403112799}
   lastDeclineTime: 0
-  influenceVisuals: {fileID: 1257720723236912239}
+  influenceVisuals: {fileID: 8452815590060665276}
   units: []
   towerAlert: {fileID: 0}
   discRotateSpeed: 2

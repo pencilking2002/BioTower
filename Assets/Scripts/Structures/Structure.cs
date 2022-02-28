@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using BioTower.Units;
 using Sirenix.OdinInspector;
+using Shapes;
 
 namespace BioTower.Structures
 {
@@ -34,7 +35,7 @@ namespace BioTower.Structures
         [SerializeField] protected GameObject spriteOutline;
         public SpriteRenderer sr;
         [HideInInspector] public float lastDeclineTime;
-        [SerializeField] protected GameObject influenceVisuals;
+        [SerializeField] protected Disc influenceVisuals;
         public List<Unit> units;
         public TowerAlert towerAlert;
         private Vector3 initSpriteScale;
@@ -201,7 +202,7 @@ namespace BioTower.Structures
                 spriteOutline.SetActive(true);
 
             if (influenceVisuals != null)
-                influenceVisuals.SetActive(true);
+                influenceVisuals.gameObject.SetActive(true);
 
             DoSquishyAnimation(initSpriteScale, initSpriteScale);
         }
@@ -212,7 +213,7 @@ namespace BioTower.Structures
                 spriteOutline.SetActive(false);
 
             if (influenceVisuals != null)
-                influenceVisuals.SetActive(false);
+                influenceVisuals.gameObject.SetActive(false);
         }
 
         private void DoSquishyAnimation(Vector3 startingScale, Vector3 targetScale, bool cancelAnim = true)

@@ -11,12 +11,10 @@ namespace BioTower.Structures
     {
         [SerializeField] private float discRotateSpeed = 2;
         [SerializeField] private int numUnitsToSpawn = 4;
-        //[SerializeField] private List<AbaUnit> abaUnits;
         [SerializeField] private List<BasicEnemy> enemiesWithinInfluence;
 
 
         [Header("References")]
-        //[SerializeField] private Disc influenceDisc;
         [SerializeField] private GameObject abaUnitPrefab;
         public PolyNav2D map;
         [SerializeField] private Transform unitsContainer;
@@ -28,23 +26,20 @@ namespace BioTower.Structures
         {
             base.Awake();
             map.GenerateMap(true);
-            //Util.ScaleUpSprite(sr, 1.1f);
         }
 
         private void Start()
         {
             influenceVisuals.gameObject.SetActive(true);
-            // Set upgrade settings
-            maxInfluenceAreaCollider.radius = Util.upgradeSettings.abaMaxInfluenceRadius_float.GetFloat();
-            map.transform.localScale = Vector3.one * Util.upgradeSettings.abaMapScale_float.GetFloat();
-            influenceVisuals.transform.localScale = Vector3.one * Util.upgradeSettings.abaInfluenceShapeScale_float.GetFloat();
+            var radius = Util.upgradeSettings.abaMaxInfluenceRadius_float.GetFloat();
+            influenceVisuals.Radius = radius;
+            maxInfluenceAreaCollider.radius = radius;
+            map.transform.localScale = Vector3.one * radius;
 
             map.GenerateMap();      // NOTE: Seems like this needs to be called in order for the map to be initialized correctly after instantiation 
             var unitsContainer = transform.Find("Units");
 
-            //targetPositions = new Vector3[numUnitsToSpawn];
             SpawnUnits(numUnitsToSpawn);
-
         }
 
         public override void Init(StructureSocket socket)

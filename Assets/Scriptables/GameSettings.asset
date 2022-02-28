@@ -18,6 +18,7 @@ MonoBehaviour:
   multipleLightFragmentPickupRadius: 2
   basicEnemyDamage: 5
   enemyPlayerBaseDamage: 3
+  enemyUpgradedDamage: 4
   enemyUnitMaxHealth: 10
   snark2UnitCost: 3
   randomHealChance: 0.1
@@ -43,8 +44,8 @@ MonoBehaviour:
     enablePlayerTowerHealing: 0
     abaTowerCost: 10
     abaUnitSpawnLimit: 3
-    abaMaxInfluenceRadius_float: 2310
-    abaMapScale_float: 2310
+    abaMaxInfluenceRadius_float: 2600
+    abaMapScale_float: 2600
     abaInfluenceShapeScale_float: 1000
     enableAbaTowerRandomHeal: 0
     ppc2TowerUnlocked: 0
@@ -68,7 +69,7 @@ MonoBehaviour:
   upgradeSettings:
     currLevel: 1
     lightFragmentValue: 5
-    energy: 80
+    energy: 110
     abaUnitDamage: 5
     abaUnitMaxSpeed_float: 500
     abaUnitCost: 5
@@ -79,7 +80,7 @@ MonoBehaviour:
     snrk2UnitSpeed_float: 1000
     crystalSnrk2Value: 20
     healTowerCost: 5
-    enableTowerHealthDecline: 1
+    enableTowerHealthDecline: 0
     playerTowerMaxhealth: 20
     enablePlayerTowerHealing: 0
     abaTowerCost: 10

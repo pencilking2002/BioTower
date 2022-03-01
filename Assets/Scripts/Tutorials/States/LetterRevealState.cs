@@ -6,146 +6,150 @@ using Sirenix.OdinInspector;
 
 namespace BioTower
 {
-public class LetterRevealState : TutStateBase
-{
-    [ShowInInspector] public static bool cancelLetterReveal;
-    private bool isTutAnimating;
-
-    public override void Init (TutState tutState)
+    public class LetterRevealState : TutStateBase
     {
-        if (!isInitialized)
+        [ShowInInspector] public static bool cancelLetterReveal;
+        private bool isTutAnimating;
+
+        public override void Init(TutState tutState)
         {
-            isInitialized = true;
-            cancelLetterReveal = false;
-            TutorialCanvas.tutorialInProgress = true;
-            InputController.canPressButtons = false;
-            InputController.canSpawnTowers = false;
+            if (!isInitialized)
+            {
+                isInitialized = true;
+                cancelLetterReveal = false;
+                TutorialCanvas.tutorialInProgress = true;
+                InputController.canPressButtons = false;
+                InputController.canSpawnTowers = false;
 
-            tutCanvas.currTutorialIndex++;
-            SetupCtaText();
-            tutCanvas.portraitController.SetPortrait(tutCanvas.currTutorial.portraitIndex);
-            
-            // Animate the tutorial panel
-            if (tutCanvas.currTutorial.transition == TransitionType.SLIDE_IN)
-                SlideIn();
-            else if (tutCanvas.currTutorial.transition == TransitionType.BLINK)
-                Blink();
+                tutCanvas.currTutorialIndex++;
+                SetupCtaText();
+                tutCanvas.portraitController.SetPortrait(tutCanvas.currTutorial.portraitIndex);
 
-            EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
-            EventManager.Tutorials.onTutorialStart?.Invoke(tutCanvas.currTutorial);
+                // Animate the tutorial panel
+                if (tutCanvas.currTutorial.transition == TransitionType.SLIDE_IN)
+                    SlideIn();
+                else if (tutCanvas.currTutorial.transition == TransitionType.BLINK)
+                    Blink();
 
-            Util.poolManager.DespawnAllitemHighlights();
-            EventManager.Tutorials.onHighlightItem?.Invoke(tutCanvas.currTutorial.highlightedItem);
+                EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
+                EventManager.Tutorials.onTutorialStart?.Invoke(tutCanvas.currTutorial);
+
+                Util.poolManager.DespawnAllitemHighlights();
+                EventManager.Tutorials.onHighlightItem?.Invoke(tutCanvas.currTutorial.highlightedItem);
+            }
         }
-    }
 
-    public override TutState OnUpdate(TutState tutState)
-    {
-        Init(tutState);
-        return tutState;
-    }
-
-    private void SetupCtaText()
-    {
-        LeanTween.cancel(tutCanvas.ctaText.gameObject);
-        tutCanvas.ctaText.alpha = 0;
-
-        if (tutCanvas.currTutorial.requiredAction == RequiredAction.TAP_ANYWHERE)
+        public override TutState OnUpdate(TutState tutState)
         {
-            var text = tutCanvas.ctaText.GetComponent<TextMeshProUGUI>();
-            if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
-                text.text = "DONE";
-            else
-                text.text = "NEXT";
+            Init(tutState);
+            return tutState;
+        }
 
-            LeanTween.delayedCall(tutCanvas.ctaText.gameObject, 1.0f, () => {
-                LeanTween.alphaCanvas(tutCanvas.ctaText, 1, 0.5f).setLoopPingPong(-1);
+        private void SetupCtaText()
+        {
+            LeanTween.cancel(tutCanvas.ctaText.gameObject);
+            tutCanvas.ctaText.alpha = 0;
+
+            if (tutCanvas.currTutorial.requiredAction == RequiredAction.TAP_ANYWHERE)
+            {
+                var text = tutCanvas.ctaText.GetComponent<TextMeshProUGUI>();
+                if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+                    text.text = "DONE";
+                else
+                    text.text = "NEXT";
+
+                LeanTween.delayedCall(tutCanvas.ctaText.gameObject, 1.0f, () =>
+                {
+                    LeanTween.alphaCanvas(tutCanvas.ctaText, 1, 0.5f).setLoopPingPong(-1);
+                });
+            }
+        }
+
+        private void SlideIn()
+        {
+            isTutAnimating = true;
+            tutCanvas.tutText.text = "";
+            var seq = LeanTween.sequence();
+            seq.append(tutCanvas.currTutorial.delay);
+            seq.append(() => { EventManager.Tutorials.onTutTextPopUp?.Invoke(); });
+            seq.append(LeanTween.moveLocalY(tutCanvas.tutPanel.gameObject, tutCanvas.initTutPanelLocalPos.y, 0.25f).setEaseOutCubic());
+            seq.append(() =>
+            {
+                isTutAnimating = false;
+                tutCanvas.tutText.text = tutCanvas.currTutorial.text;
+                GameManager.Instance.util.TextReveal(tutCanvas.tutText, tutCanvas.revealDuration, SetWaitingState);
+                tutCanvas.skipButton.gameObject.SetActive(true);
             });
         }
-    }
 
-    private void SlideIn()
-    {
-        isTutAnimating = true;
-        tutCanvas.tutText.text = "";
-        var seq = LeanTween.sequence();
-        seq.append(tutCanvas.currTutorial.delay);
-        seq.append(() => { EventManager.Tutorials.onTutTextPopUp?.Invoke(); });
-        seq.append(LeanTween.moveLocalY(tutCanvas.tutPanel.gameObject, tutCanvas.initTutPanelLocalPos.y, 0.25f).setEaseOutCubic());
-        seq.append(() => {
-            isTutAnimating = false;
-            tutCanvas.tutText.text = tutCanvas.currTutorial.text;
-            GameManager.Instance.util.TextReveal(tutCanvas.tutText, tutCanvas.revealDuration, SetWaitingState);
-        });
-    }
-
-    private void Blink()
-    {
-        isTutAnimating = true;
-        EventManager.Tutorials.onTutTextPopUp?.Invoke();
-        LeanTween.scale(tutCanvas.tutText.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1).setOnComplete(() => {
-            isTutAnimating = false;
-            tutCanvas.tutText.text = tutCanvas.currTutorial.text;
-            tutCanvas.tutText.ForceMeshUpdate();
-            GameManager.Instance.util.TextReveal(tutCanvas.tutText, tutCanvas.revealDuration, SetWaitingState);                   
-        });
-    }
-
-    private void SetWaitingState()
-    {
-        if (!isInitialized)
-            return;
-        
-        var currTut = tutCanvas.currTutorial;
-
-        bool gotoWaitState = 
-            currTut.IsTapAnywhereRequiredAction() ||
-            currTut.IsPlaceAbaTowerRequiredAction() ||
-            currTut.IsTowerSelectedRequiredAction() ||
-            currTut.IsTapLightDropRequiredAction();
-        
-        bool gotoWaitButtonState = 
-            currTut.IsTapAbaButtonRequiredAction() ||
-            currTut.IsSpawnAbaUnitRequiredAction();
-
-        if (gotoWaitState)
+        private void Blink()
         {
-            tutCanvas.SetWaitingTapState();
+            isTutAnimating = true;
+            EventManager.Tutorials.onTutTextPopUp?.Invoke();
+            LeanTween.scale(tutCanvas.tutText.gameObject, Vector3.one * 1.1f, 0.05f).setLoopPingPong(1).setOnComplete(() =>
+            {
+                isTutAnimating = false;
+                tutCanvas.tutText.text = tutCanvas.currTutorial.text;
+                tutCanvas.tutText.ForceMeshUpdate();
+                GameManager.Instance.util.TextReveal(tutCanvas.tutText, tutCanvas.revealDuration, SetWaitingState);
+            });
         }
-        else if (gotoWaitButtonState)
+
+        private void SetWaitingState()
         {
-            tutCanvas.SetWaitingButtonTapState();
+            if (!isInitialized)
+                return;
+
+            var currTut = tutCanvas.currTutorial;
+
+            bool gotoWaitState =
+                currTut.IsTapAnywhereRequiredAction() ||
+                currTut.IsPlaceAbaTowerRequiredAction() ||
+                currTut.IsTowerSelectedRequiredAction() ||
+                currTut.IsTapLightDropRequiredAction();
+
+            bool gotoWaitButtonState =
+                currTut.IsTapAbaButtonRequiredAction() ||
+                currTut.IsSpawnAbaUnitRequiredAction();
+
+            if (gotoWaitState)
+            {
+                tutCanvas.SetWaitingTapState();
+            }
+            else if (gotoWaitButtonState)
+            {
+                tutCanvas.SetWaitingButtonTapState();
+            }
+        }
+
+        public override void OnTutStateInit(TutState tutState)
+        {
+            if (tutState != this.tutState)
+                isInitialized = false;
+        }
+
+        private void OnTouchBegan(Vector3 pos)
+        {
+            if (!isInitialized)
+                return;
+
+            if (isTutAnimating)
+                return;
+
+            // cancelLetterReveal = true;
+            // LeanTween.delayedCall(1.0f, SetWaitingState);
+        }
+
+        private void OnEnable()
+        {
+            EventManager.Tutorials.onTutStateInit += OnTutStateInit;
+            EventManager.Input.onTouchBegan += OnTouchBegan;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
+            EventManager.Input.onTouchBegan -= OnTouchBegan;
         }
     }
-
-    public override void OnTutStateInit(TutState tutState)
-    {
-        if (tutState != this.tutState)
-            isInitialized = false;
-    }
-
-    private void OnTouchBegan(Vector3 pos)
-    {
-        if (!isInitialized)
-            return;
-        
-        if (isTutAnimating)
-            return;
-
-        // cancelLetterReveal = true;
-        // LeanTween.delayedCall(1.0f, SetWaitingState);
-    }
-
-    private void OnEnable()
-    {
-        EventManager.Tutorials.onTutStateInit += OnTutStateInit;
-        EventManager.Input.onTouchBegan += OnTouchBegan;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
-        EventManager.Input.onTouchBegan -= OnTouchBegan;
-    }
-}
 }

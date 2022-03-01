@@ -18,7 +18,7 @@ namespace BioTower
         public PortraitController portraitController;
         public TextMeshProUGUI tutText;
         public CanvasGroup ctaText;
-        [SerializeField] private Button skipButton;
+        public Button skipButton;
 
 
         [Header("Tut State")]
@@ -44,7 +44,9 @@ namespace BioTower
             Util.tutCanvas = this;
             canvas = GetComponent<Canvas>();
             tutTextWordAnim = tutText.GetComponent<WordAnimation>();
+            skipButton.gameObject.SetActive(false);
             CacheStates();
+            Debug.Log("Deactivate skip button");
         }
 
         public bool IsLastTutorial(TutorialData data)

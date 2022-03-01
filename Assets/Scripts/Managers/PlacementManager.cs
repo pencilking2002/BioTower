@@ -167,16 +167,16 @@ namespace BioTower
                         tower.gameObject.SetActive(true);
                     }
                 }
-                else if (highlightChloros)
-                {
-                    foreach (MiniChloroplastTower tower in miniChloros)
-                    {
-                        LeanTween.delayedCall(gameObject, 1.0f, () =>
-                        {
-                            Util.poolManager.SpawnItemHighlight(tower.transform.position, new Vector2(0, 120));
-                        });
-                    }
-                }
+                // else if (highlightChloros)
+                // {
+                //     foreach (MiniChloroplastTower tower in miniChloros)
+                //     {
+                //         LeanTween.delayedCall(gameObject, 1.0f, () =>
+                //         {
+                //             Util.poolManager.SpawnItemHighlight(tower.transform.position, new Vector2(0, 120));
+                //         });
+                //     }
+                // }
             }
             else
             {

@@ -984,6 +984,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 756db3d29bbc6f741894b8a7a30deb41, type: 2}
   - {fileID: 11400000, guid: 0e307f9d74ddcde4c9323bb3b4d987e7, type: 2}
   - {fileID: 11400000, guid: 7909bfd702c717f48bd095a4cde9ba72, type: 2}
+  skipTutorials: 0
   slideInOffset: 300
   revealDuration: 0.005
   canvas: {fileID: 7979799145711278710}
@@ -1350,6 +1351,7 @@ GameObject:
   - component: {fileID: 6541448010109720040}
   - component: {fileID: 6525625724790392094}
   - component: {fileID: 6505488341961151577}
+  - component: {fileID: 9169913698515555167}
   m_Layer: 0
   m_Name: SkipButton
   m_TagString: Untagged
@@ -1473,6 +1475,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!225 &9169913698515555167
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8063843321874099792}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8920742775130715419
 GameObject:
   m_ObjectHideFlags: 0

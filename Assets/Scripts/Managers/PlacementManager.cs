@@ -134,30 +134,29 @@ namespace BioTower
         public bool IsNoneState() { return placementState == PlacementState.NONE; }
         public bool IsPlacingState() { return placementState == PlacementState.PLACING; }
 
-        private void OnTutorialStart(TutorialData data)
+        private void ActivateDnaBase()
         {
-            if (data.highlightedItem == HighlightedItem.DNA_BASE)
+            var structuresContainer = GameObject.FindGameObjectWithTag(Constants.structuresContainer);
+            if (structuresContainer != null)
             {
-                LeanTween.delayedCall(gameObject, 1.5f, () =>
+                var dnaBase = structuresContainer.GetComponentInChildren<DNABase>(true);
+                if (dnaBase != null)
                 {
-                    var structuresContainer = GameObject.FindGameObjectWithTag(Constants.structuresContainer);
-                    if (structuresContainer != null)
-                    {
-                        var dnaBase = structuresContainer.GetComponentInChildren<DNABase>(true);
-                        if (dnaBase != null)
-                        {
-                            dnaBase.gameObject.SetActive(true);
-                        }
-                    }
-                });
+                    dnaBase.gameObject.SetActive(true);
+                }
             }
-            else if (data.highlightedItem == HighlightedItem.MINI_CHLORO)
-            {
-                var structuresContainer = GameObject.FindGameObjectWithTag(Constants.structuresContainer);
-                if (structuresContainer == null)
-                    return;
+        }
 
-                var miniChloros = structuresContainer.GetComponentsInChildren<MiniChloroplastTower>(true);
+        private void ActivateMiniChloro(TutorialData data = null)
+        {
+            var structuresContainer = GameObject.FindGameObjectWithTag(Constants.structuresContainer);
+            if (structuresContainer == null)
+                return;
+
+            var miniChloros = structuresContainer.GetComponentsInChildren<MiniChloroplastTower>(true);
+
+            if (data != null)
+            {
                 bool activateChloros = data.highlightType == HighlightType.NONE;
                 bool highlightChloros = data.highlightType == HighlightType.ARROW;
 
@@ -179,6 +178,37 @@ namespace BioTower
                     }
                 }
             }
+            else
+            {
+                foreach (MiniChloroplastTower tower in miniChloros)
+                {
+                    tower.gameObject.SetActive(true);
+                }
+            }
+        }
+
+        private void OnTutorialStart(TutorialData data)
+        {
+            if (data.highlightedItem == HighlightedItem.DNA_BASE)
+            {
+                LeanTween.delayedCall(gameObject, 1.5f, () =>
+                {
+                    ActivateDnaBase();
+                });
+            }
+            else if (data.highlightedItem == HighlightedItem.MINI_CHLORO)
+            {
+                ActivateMiniChloro(data);
+            }
+        }
+
+        private void OnSkipTutorials()
+        {
+            if (GameManager.Instance.playerBase == null)
+                ActivateDnaBase();
+
+            if (LevelInfo.current.levelType == LevelType.LEVEL_02)
+                ActivateMiniChloro();
         }
 
         private void OnEnable()
@@ -186,6 +216,7 @@ namespace BioTower
             EventManager.UI.onPressTowerButton += OnPressTowerButton;
             EventManager.Structures.onTapFreeStructureSocket += OnTapStructureSocket;
             EventManager.Tutorials.onTutorialStart += OnTutorialStart;
+            EventManager.Tutorials.onSkipTutorials += OnSkipTutorials;
         }
 
         private void OnDisable()
@@ -193,6 +224,7 @@ namespace BioTower
             EventManager.UI.onPressTowerButton -= OnPressTowerButton;
             EventManager.Structures.onTapFreeStructureSocket -= OnTapStructureSocket;
             EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
+            EventManager.Tutorials.onSkipTutorials -= OnSkipTutorials;
         }
 
     }

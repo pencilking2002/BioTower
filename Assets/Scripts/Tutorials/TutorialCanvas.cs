@@ -26,6 +26,7 @@ namespace BioTower
         [ShowIf("hasTutorials")] public TutState tutState;
         [ShowIf("hasTutorials")] public int currTutorialIndex = -1;
         [ShowIf("hasTutorials")] public TutorialData[] tutorials;
+        [ShowIf("hasTutorials")] public bool skipTutorials;
 
 
         [Header("Tut Animation")]
@@ -64,7 +65,18 @@ namespace BioTower
         public void OnPressSkipTutButton()
         {
             if (!IsEndTutState())
+            {
                 SetEndTutState();
+                skipTutorials = true;
+                var cg = skipButton.GetComponent<CanvasGroup>();
+                LeanTween.alphaCanvas(cg, 0, 1.0f)
+                .setOnComplete(() =>
+                {
+                    skipButton.gameObject.SetActive(false);
+                });
+
+                EventManager.Tutorials.onSkipTutorials?.Invoke();
+            }
         }
 
         private void Update()

@@ -8,7 +8,6 @@ using Shapes;
 
 namespace BioTower.Structures
 {
-
     public enum StructureState
     {
         NONE, ACTIVE,
@@ -29,9 +28,9 @@ namespace BioTower.Structures
         public StructureType structureType;
         [SerializeField] public bool hasHealth;
         [ShowIf("hasHealth")] public bool isAlive = true;
-        [ShowIf("hasHealth")] [Range(0, 100)] [SerializeField] protected int maxHealth;
-        [ShowIf("hasHealth")] [SerializeField] protected int currHealth;
-        [ShowIf("hasHealth")] [SerializeField] protected Slider healthSlider;
+        [ShowIf("hasHealth")][Range(0, 100)][SerializeField] protected int maxHealth;
+        [ShowIf("hasHealth")][SerializeField] protected int currHealth;
+        [ShowIf("hasHealth")][SerializeField] protected Slider healthSlider;
         [SerializeField] protected GameObject spriteOutline;
         public SpriteRenderer sr;
         [HideInInspector] public float lastDeclineTime;

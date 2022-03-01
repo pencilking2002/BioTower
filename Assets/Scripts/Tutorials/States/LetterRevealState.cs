@@ -36,6 +36,7 @@ namespace BioTower
 
                 Util.poolManager.DespawnAllitemHighlights();
                 EventManager.Tutorials.onHighlightItem?.Invoke(tutCanvas.currTutorial.highlightedItem);
+                Debug.Log("Highlight item");
             }
         }
 

@@ -322,6 +322,9 @@ namespace BioTower.UI
 
         private void OnHighlightItem(HighlightedItem item)
         {
+            if (Util.tutCanvas.skipTutorials)
+                return;
+
             if (item == HighlightedItem.ABA_TOWER_BTN)
             {
                 LeanTween.delayedCall(0.5f, () =>
@@ -332,8 +335,6 @@ namespace BioTower.UI
             }
             else if (item == HighlightedItem.ENERGY)
             {
-                //var worldPos = Camera.main.ScreenToWorldPoint(currencyContainer.transform.position);
-                //Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0,150));
                 currencyContainer.transform.Find("Glow").GetComponent<Image>().enabled = true;
             }
 
@@ -347,8 +348,6 @@ namespace BioTower.UI
             {
                 Util.DisplayGlowUI(AbaTowerButton.transform);
                 AbaTowerButton.interactable = true;
-                //Util.tutCanvas.hasTutorials && Util.tutCanvas.currTutorial.IsSpawnAbaUnitRequiredAction())
-
             }
         }
 

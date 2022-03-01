@@ -23,10 +23,10 @@ namespace BioTower
 
         [Header("Tut State")]
         public bool hasTutorials;
-        [ShowIf("hasTutorials")] public TutState tutState;
+        public TutState tutState;
+        public bool skipTutorials;
         [ShowIf("hasTutorials")] public int currTutorialIndex = -1;
         [ShowIf("hasTutorials")] public TutorialData[] tutorials;
-        [ShowIf("hasTutorials")] public bool skipTutorials;
 
 
         [Header("Tut Animation")]

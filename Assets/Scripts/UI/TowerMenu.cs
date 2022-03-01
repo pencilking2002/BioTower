@@ -325,6 +325,9 @@ namespace BioTower
 
         private void OnHighlightItem(HighlightedItem item)
         {
+            if (Util.tutCanvas.skipTutorials)
+                return;
+
             if (LevelInfo.current.IsFirstLevel() && item == HighlightedItem.ABA_UNIT_BTN)
             {
                 var worldPos = Camera.main.ScreenToWorldPoint(spawnUnitFullWidth.transform.position);

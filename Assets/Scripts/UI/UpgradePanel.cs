@@ -14,7 +14,7 @@ namespace BioTower
     public class UpgradePanel : MonoBehaviour
     {
         [SerializeField] private UpgradeButton[] upgradeButtons;
-        [ReadOnly] [SerializeField] private UpgradeButton selectedButton;
+        [ReadOnly][SerializeField] private UpgradeButton selectedButton;
         [SerializeField] private Color defaultButtonColor;
         [SerializeField] private UpgradeButton unlockUpgradeButton;
         [SerializeField] private TextMeshProUGUI title;
@@ -83,7 +83,7 @@ namespace BioTower
             {
                 float targetLocalPosY = -500;
                 LeanTween.moveLocalY(panel.gameObject, targetLocalPosY, 0.25f)
-                .setEaseOutBack()
+                .setEaseInBack()
                 .setOnComplete(onComplete)
                 .setIgnoreTimeScale(true);
             }
@@ -279,9 +279,15 @@ namespace BioTower
             BootController.levelToLoadInstantly = gameData.settings.currLevel;
             EventManager.UI.onTapButton?.Invoke(true);
 
-            LeanTween.delayedCall(1.0f, () =>
+
+            LeanTween.delayedCall(0.2f, () =>
             {
-                SceneManager.LoadScene(0);
+                Hide(true);
+                LeanTween.delayedCall(1.0f, () =>
+                {
+                    SceneManager.LoadScene(0);
+                }).setIgnoreTimeScale(true);
+
             }).setIgnoreTimeScale(true);
         }
     }

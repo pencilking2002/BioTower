@@ -279,7 +279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -24.155, y: -0.000034332275}
+  m_AnchoredPosition: {x: -24.15503, y: -0.000034332275}
   m_SizeDelta: {x: -48.31, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6090174500911540231
@@ -975,6 +975,7 @@ MonoBehaviour:
   skipButton: {fileID: 6505488341961151577}
   hasTutorials: 1
   tutState: 0
+  skipTutorials: 0
   currTutorialIndex: -1
   tutorials:
   - {fileID: 11400000, guid: e3a9e18da10368747993dfd098172c10, type: 2}
@@ -984,7 +985,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 756db3d29bbc6f741894b8a7a30deb41, type: 2}
   - {fileID: 11400000, guid: 0e307f9d74ddcde4c9323bb3b4d987e7, type: 2}
   - {fileID: 11400000, guid: 7909bfd702c717f48bd095a4cde9ba72, type: 2}
-  skipTutorials: 0
   slideInOffset: 300
   revealDuration: 0.005
   canvas: {fileID: 7979799145711278710}
@@ -1375,9 +1375,9 @@ RectTransform:
   m_Father: {fileID: 7979799145711278665}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -105, y: 72}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 90.7, y: 53.8}
   m_SizeDelta: {x: 163.0564, y: 95.2442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6541448010109720040

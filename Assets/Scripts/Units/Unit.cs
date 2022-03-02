@@ -13,7 +13,8 @@ namespace BioTower.Units
     {
         ABA,
         BASIC_ENEMY,
-        SNRK2
+        SNRK2,
+        MID_ENEMY
     }
 
     public class Unit : MonoBehaviour

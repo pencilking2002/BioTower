@@ -6,12 +6,12 @@ namespace BioTower.Units
 {
     public class CombatManager : MonoBehaviour
     {
-        [Range(0, 100)] [SerializeField] private float abaWinChance = 50;
+        [Range(0, 100)][SerializeField] private float abaWinChance = 50;
         //[Range(0, 100)][SerializeField] private float enemyCrystalWinChanceBoost = 10;
         //private AbaUnit abaUnit;
         //private BasicEnemy enemy;
 
-        private void OnStartCombat(Unit unit, BasicEnemy enemy)
+        private void OnStartCombat(Unit unit, EnemyUnit enemy)
         {
             if (enemy.isEngagedInCombat || enemy.combatFoe != null)
                 return;
@@ -25,7 +25,7 @@ namespace BioTower.Units
             Debug.Log("On Start combat");
         }
 
-        private void DoCombatRound(Unit unit, BasicEnemy enemy, float delay = 0)
+        private void DoCombatRound(Unit unit, EnemyUnit enemy, float delay = 0)
         {
             LeanTween.delayedCall(delay, () =>
             {

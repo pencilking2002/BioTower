@@ -104,7 +104,7 @@ namespace BioTower.Structures
 
         public virtual bool IsMaxHealth() { return currHealth == maxHealth; }
 
-        protected Unit GetClosestUnit(BasicEnemy enemy)
+        protected Unit GetClosestUnit(EnemyUnit enemy)
         {
             float furthestDistance = Mathf.Infinity;
             Unit closestUnit = null;

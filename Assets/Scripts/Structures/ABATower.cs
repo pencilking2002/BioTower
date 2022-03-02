@@ -11,7 +11,7 @@ namespace BioTower.Structures
     {
         [SerializeField] private float discRotateSpeed = 2;
         [SerializeField] private int numUnitsToSpawn = 4;
-        [SerializeField] private List<BasicEnemy> enemiesWithinInfluence;
+        [SerializeField] private List<EnemyUnit> enemiesWithinInfluence;
 
 
         [Header("References")]
@@ -140,7 +140,7 @@ namespace BioTower.Structures
             Gizmos.DrawSphere(maxInfluenceAreaCollider.transform.position, maxRadius);
         }
 
-        public void RegisterEnemy(BasicEnemy enemy)
+        public void RegisterEnemy(EnemyUnit enemy)
         {
             if (!HasEnemy(enemy))
             {
@@ -167,7 +167,7 @@ namespace BioTower.Structures
             }
         }
 
-        public bool HasEnemy(BasicEnemy enemy)
+        public bool HasEnemy(EnemyUnit enemy)
         {
             return enemiesWithinInfluence.Contains(enemy);
         }
@@ -177,7 +177,7 @@ namespace BioTower.Structures
             return units.Count < GameManager.Instance.upgradeSettings.abaUnitSpawnLimit;
         }
 
-        public void UnregisterEnemy(BasicEnemy enemy)
+        public void UnregisterEnemy(EnemyUnit enemy)
         {
             if (enemiesWithinInfluence.Contains(enemy))
             {

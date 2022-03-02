@@ -72,7 +72,7 @@ namespace BioTower.Structures
             return ((float)currHealth / (float)maxHealth) * 100;
         }
 
-        private void OnBaseReached(BasicEnemy enemy)
+        private void OnBaseReached(EnemyUnit enemy)
         {
             if (currHealth > 0)
             {

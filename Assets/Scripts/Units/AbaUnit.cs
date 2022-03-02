@@ -18,7 +18,7 @@ namespace BioTower.Units
         public AbaUnitState abaUnitState;
 
         [Header("Combat enemy state")]
-        public BasicEnemy targetEnemy;
+        public EnemyUnit targetEnemy;
 
         [Header("References")]
         public Rigidbody rb;

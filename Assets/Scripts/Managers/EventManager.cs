@@ -47,8 +47,8 @@ namespace BioTower
             public static Action<Structure> onStructureLoseHealth;
             public static Action onLightDropped;
             public static Action onLightPickedUp;
-            public static Action<BasicEnemy, Structure> onEnemyEnterTowerInfluence;
-            public static Action<BasicEnemy, Structure> onEnemyExitTowerInfluence;
+            public static Action<EnemyUnit, Structure> onEnemyEnterTowerInfluence;
+            public static Action<EnemyUnit, Structure> onEnemyExitTowerInfluence;
             public static Action<StructureSocket> onSocketStart;
             public static Action<StructureSocket> onSocketPop;
             public static Action<StructureSocket> onTapFreeStructureSocket;
@@ -57,9 +57,9 @@ namespace BioTower
 
         public class Units
         {
-            public static Action<Unit, BasicEnemy> onStartCombat;
-            public static Action<BasicEnemy> onEnemyBaseReached;
-            public static Action<BasicEnemy> onEnemyReachedDestination;
+            public static Action<Unit, EnemyUnit> onStartCombat;
+            public static Action<EnemyUnit> onEnemyBaseReached;
+            public static Action<EnemyUnit> onEnemyReachedDestination;
             public static Action<Unit> onUnitSpawned;
             public static Action<Unit> onUnitDestroyed;
             public static Action<Snrk2Unit> onCrystalPickedUp;

@@ -99,7 +99,7 @@ namespace BioTower
             waveMode = WaveMode.NOT_STARTED;
         }
 
-        private void OnEnemyReachedDestination(BasicEnemy enemy)
+        private void OnEnemyReachedDestination(EnemyUnit enemy)
         {
             // Vary speed
             var minMaxSpeed = currWave.minMaxSpeed;

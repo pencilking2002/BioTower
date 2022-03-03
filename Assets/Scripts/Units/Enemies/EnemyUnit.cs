@@ -8,26 +8,34 @@ namespace BioTower.Units
     {
         [Header("References")]
         [SerializeField] protected GameObject crystalPrefab;
-        [SerializeField] protected Collider2D triggerCollider;
+        protected Collider2D triggerCollider;
         [SerializeField] protected SpriteRenderer muscleIcon;
         [SerializeField] protected SpriteRenderer upgradedSprite;
-        [SerializeField] protected SpriteRenderer currentSR;
-        [SerializeField] protected Animator currentAnim;
+        protected SpriteRenderer currentSR;
+        protected Animator currentAnim;
 
 
-        [Header("Waypoint movement")]
-        [SerializeField] protected Waypoint currWaypoint;
-        [SerializeField] protected Waypoint nextWaypoint;
-        [SerializeField] protected Transform nextDestination;
+        //[Header("Waypoint movement")]
+        protected Waypoint currWaypoint;
+        protected Waypoint nextWaypoint;
+        protected Transform nextDestination;
 
 
         [Header("Enemy state")]
         [SerializeField] protected Color stoppedColor;
-        public bool hasCrystal;
         public Color hasCrystalTintColor;
-        private bool isRegistered;
-        public bool isEngagedInCombat;
-        public Unit combatFoe;
+        [HideInInspector] public bool hasCrystal;
+        [HideInInspector] private bool isRegistered;
+        [HideInInspector] public bool isEngagedInCombat;
+        [HideInInspector] public Unit combatFoe;
+
+        protected void Init()
+        {
+            base.Start();
+            triggerCollider = GetComponentInChildren<Collider2D>();
+            currentAnim = anim;
+            GameManager.Instance.RegisterEnemy(this);
+        }
 
         protected void RegisterWithTower(Collider2D col)
         {
@@ -125,6 +133,9 @@ namespace BioTower.Units
 
         public override void StartMoving(Waypoint waypoint, float delay = 0)
         {
+            if (currentAnim == null)
+                currentAnim = anim;
+
             currentAnim.SetBool("Walk", true);
             currentAnim.SetBool("Attack", false);
             combatFoe = null;

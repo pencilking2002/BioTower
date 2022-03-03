@@ -3,12 +3,11 @@
 namespace BioTower.Units
 {
     [SelectionBase]
-    public class BasicEnemy : EnemyUnit
+    public class MidEnemy : EnemyUnit
     {
         public override void Start()
         {
-            base.Start();
-            GameManager.Instance.RegisterEnemy(this);
+            Init();
         }
 
         private void OnTriggerEnter2D(Collider2D col)

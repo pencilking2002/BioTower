@@ -23,8 +23,9 @@ namespace BioTower.Units
         [Header("References")]
         public Rigidbody rb;
 
-        private void Awake()
+        public override void Awake()
         {
+            base.Awake();
             abaUnitState = AbaUnitState.ROAMING;
         }
 

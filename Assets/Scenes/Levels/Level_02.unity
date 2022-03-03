@@ -1702,7 +1702,6 @@ MonoBehaviour:
   waypointType: 2
   nextWaypoint: {fileID: 2098102981}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 0}
 --- !u!1 &406347631
 GameObject:
   m_ObjectHideFlags: 0
@@ -5385,7 +5384,6 @@ MonoBehaviour:
   waypointType: 3
   nextWaypoint: {fileID: 0}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 2122271853}
 --- !u!1 &1691048903
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,6 +6374,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e7dc254b1017c40a0b6f98405530a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 401890083}
+  - {fileID: 2098102981}
+  - {fileID: 2122271853}
+  - {fileID: 1671119414}
+  spawnPoints:
+  - {fileID: 401890083}
 --- !u!1 &2072456951
 GameObject:
   m_ObjectHideFlags: 0
@@ -6504,7 +6509,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 2122271853}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 401890083}
 --- !u!1 &2122271851
 GameObject:
   m_ObjectHideFlags: 0
@@ -6551,7 +6555,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 1671119414}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 2098102981}
 --- !u!1 &2141976459
 GameObject:
   m_ObjectHideFlags: 0

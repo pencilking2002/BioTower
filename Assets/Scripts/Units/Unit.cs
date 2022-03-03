@@ -20,15 +20,21 @@ namespace BioTower.Units
     public class Unit : MonoBehaviour
     {
         public UnitType unitType;
-        public PolyNavAgent agent;
+        [HideInInspector] public PolyNavAgent agent;
         [HideInInspector] public Structure tower;
         [SerializeField] private bool hasHealth;
         [EnableIf("hasHealth")][SerializeField] protected int currHealth;
         [EnableIf("hasHealth")][SerializeField] protected Slider healthSlider;
-        [SerializeField] protected Animator anim;
-
-        public SpriteRenderer sr;
+        [HideInInspector] protected Animator anim;
+        [HideInInspector] public SpriteRenderer sr;
         public bool isAlive;
+
+        public virtual void Awake()
+        {
+            agent = GetComponent<PolyNavAgent>();
+            anim = GetComponentInChildren<Animator>();
+            sr = anim.GetComponent<SpriteRenderer>();
+        }
 
         public virtual void Start()
         {

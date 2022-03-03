@@ -150,7 +150,7 @@ namespace BioTower
         /// sets player base as the target
         /// </summary>
         /// <param name="enemy"></param>
-        public void RegisterEnemy(BasicEnemy enemy)
+        public void RegisterEnemy(EnemyUnit enemy)
         {
             if (enemyList.Contains(enemy) || playerBase == null)
                 return;

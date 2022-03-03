@@ -21,7 +21,7 @@ namespace BioTower
     public class LevelInfo : MonoBehaviour
     {
         public static LevelInfo current;
-        public LevelSettings waveSettings;
+        public WaveSettings waveSettings;
         public WinCondition winCondition;
         public LoseCondition loseCondition;
         public LevelType levelType;

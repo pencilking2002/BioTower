@@ -7,11 +7,11 @@ namespace BioTower.Units
     public class EnemyUnit : Unit
     {
         [Header("References")]
-        [SerializeField] protected GameObject crystalPrefab;
+        //[SerializeField] protected GameObject crystalPrefab;
         protected Collider2D triggerCollider;
         [SerializeField] protected SpriteRenderer muscleIcon;
-        [SerializeField] protected SpriteRenderer upgradedSprite;
-        protected SpriteRenderer currentSR;
+        // [SerializeField] protected SpriteRenderer upgradedSprite;
+        // protected SpriteRenderer currentSR;
         protected Animator currentAnim;
 
 
@@ -22,10 +22,10 @@ namespace BioTower.Units
 
 
         [Header("Enemy state")]
-        [SerializeField] protected Color stoppedColor;
-        public Color hasCrystalTintColor;
+        // [SerializeField] protected Color stoppedColor;
+        // public Color hasCrystalTintColor;
         [HideInInspector] public bool hasCrystal;
-        [HideInInspector] private bool isRegistered;
+        //[HideInInspector] private bool isRegistered;
         [HideInInspector] public bool isEngagedInCombat;
         [HideInInspector] public Unit combatFoe;
 
@@ -172,28 +172,28 @@ namespace BioTower.Units
             //Debug.Log($"{gameObject.name} Set destination to {nextDestination}");
         }
 
-        protected void PickupCrystal(Collider2D col)
-        {
-            var crystal = col.transform.parent.GetComponent<EnemyCrystal>();
+        // protected void PickupCrystal(Collider2D col)
+        // {
+        //     var crystal = col.transform.parent.GetComponent<EnemyCrystal>();
 
-            if (crystal.hasBeenPickedUp)
-                return;
+        //     if (crystal.hasBeenPickedUp)
+        //         return;
 
-            crystal.DestroyObject();
-            hasCrystal = true;
-            sr.enabled = false;
-            sr.GetComponent<Animator>().enabled = false;
-            sr = upgradedSprite;
-            upgradedSprite.gameObject.SetActive(true);
-            currentSR = upgradedSprite;
-            currentAnim = upgradedSprite.GetComponent<Animator>();
+        //     crystal.DestroyObject();
+        //     hasCrystal = true;
+        //     sr.enabled = false;
+        //     sr.GetComponent<Animator>().enabled = false;
+        //     sr = upgradedSprite;
+        //     upgradedSprite.gameObject.SetActive(true);
+        //     currentSR = upgradedSprite;
+        //     currentAnim = upgradedSprite.GetComponent<Animator>();
 
-            EventManager.Units.onEnemyPickedUpCrystal?.Invoke();
+        //     EventManager.Units.onEnemyPickedUpCrystal?.Invoke();
 
-            AnimateMuscleIcon();
-            // TODO: make enemy stronger after picking up crystal
+        //     AnimateMuscleIcon();
+        //     // TODO: make enemy stronger after picking up crystal
 
-        }
+        // }
 
         protected void AnimateMuscleIcon()
         {
@@ -208,15 +208,15 @@ namespace BioTower.Units
             });
         }
 
-        protected void SpawnCrystal()
-        {
-            var crystalGO = Instantiate(crystalPrefab);
-            crystalGO.transform.position = transform.position;
+        // protected void SpawnCrystal()
+        // {
+        //     var crystalGO = Instantiate(crystalPrefab);
+        //     crystalGO.transform.position = transform.position;
 
-            Vector3 defautlScale = crystalGO.transform.localScale;
-            crystalGO.transform.localScale = Vector3.zero;
-            LeanTween.scale(crystalGO, defautlScale, 0.1f);
-        }
+        //     Vector3 defautlScale = crystalGO.transform.localScale;
+        //     crystalGO.transform.localScale = Vector3.zero;
+        //     LeanTween.scale(crystalGO, defautlScale, 0.1f);
+        // }
 
         public override bool TakeDamage(int amount)
         {
@@ -226,7 +226,7 @@ namespace BioTower.Units
             }
             else
             {
-                SpawnCrystal();
+                //SpawnCrystal();
                 triggerCollider.enabled = false;
                 return isAlive;
             }

@@ -2,58 +2,56 @@
 
 namespace BioTower
 {
-public class InProgressState : WaveState
-{
-    public override void Init()
+    public class InProgressState : WaveState
     {
-        if (!isInitialized)
+        public override void Init()
         {
-            isInitialized = true;
-            //GameManager.Instance.bootController.wavePanel.DisplayWaveTitle(waveManager.currWave);
-            EventManager.Game.onWaveStateInit?.Invoke(waveState);
-            //Debug.Log("In Progress wave state init: " + waveManager.currWaveIndex);
-        }
-    }
-
-    public override WaveMode OnUpdate(WaveMode waveState)
-    {
-        Init();
-        var wave = waveManager.currWave;
-        if (Time.time > wave.lastSpawn + wave.spawnInterval || wave.numSpawns == 0)
-        {
-            waveManager.SpawnEnemy(wave.minMaxSpeed);
-            wave.lastSpawn = Time.time;
-            wave.numSpawns++;
+            if (!isInitialized)
+            {
+                isInitialized = true;
+                EventManager.Game.onWaveStateInit?.Invoke(waveState);
+            }
         }
 
-        if ((wave.numSpawns >= wave.numEnemiesPerWave && !wave.isEndless))
+        public override WaveMode OnUpdate(WaveMode waveState)
         {
-            waveState = WaveMode.ENDED;   
+            Init();
+            var wave = waveManager.currWave;
+            if (Time.time > wave.lastSpawn + wave.spawnInterval || wave.numSpawns == 0)
+            {
+                waveManager.SpawnEnemy(wave.minMaxSpeed, wave.enemyType);
+                wave.lastSpawn = Time.time;
+                wave.numSpawns++;
+            }
+
+            if ((wave.numSpawns >= wave.numEnemiesPerWave && !wave.isEndless))
+            {
+                waveState = WaveMode.ENDED;
+            }
+            return waveState;
         }
-        return waveState;
-    }
 
-    private void OnGameOver(bool isWin)
-    {
-        waveManager.SetEndedState();
-    }
+        private void OnGameOver(bool isWin)
+        {
+            waveManager.SetEndedState();
+        }
 
-    private void OnWaveStateInit(WaveMode waveState)
-    {
-        if (this.waveState != waveState)
-            isInitialized = false;
-    }
+        private void OnWaveStateInit(WaveMode waveState)
+        {
+            if (this.waveState != waveState)
+                isInitialized = false;
+        }
 
-    private void OnEnable()
-    {
-        EventManager.Game.onWaveStateInit += OnWaveStateInit;
-        EventManager.Game.onGameOver += OnGameOver;
-    }
+        private void OnEnable()
+        {
+            EventManager.Game.onWaveStateInit += OnWaveStateInit;
+            EventManager.Game.onGameOver += OnGameOver;
+        }
 
-    private void OnDisable()
-    {
-        EventManager.Game.onWaveStateInit -= OnWaveStateInit;
-        EventManager.Game.onGameOver -= OnGameOver;
+        private void OnDisable()
+        {
+            EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Game.onGameOver -= OnGameOver;
+        }
     }
-}
 }

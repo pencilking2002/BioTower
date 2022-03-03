@@ -12,8 +12,8 @@ namespace BioTower.Units
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.layer == 13)
-                PickupCrystal(col);
+            // if (col.gameObject.layer == 13)
+            //     PickupCrystal(col);
 
             if (col.gameObject.layer == 19)
                 RegisterWithTower(col);

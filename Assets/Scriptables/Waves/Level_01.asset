@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level_01
   m_EditorClassIdentifier: 
   waves:
-  - state: 2
+  - enemyType: 1
     waveIndex: 0
     startDelay: 0
     isEndless: 1

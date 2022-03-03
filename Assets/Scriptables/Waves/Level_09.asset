@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level_09
   m_EditorClassIdentifier: 
   waves:
-  - state: 2
+  - enemyType: 4
     waveIndex: 0
     startDelay: 0
     isEndless: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
     timeStarted: 11.672143
     lastSpawn: 31.807007
     numSpawns: 6
-  - state: 0
+  - enemyType: 4
     waveIndex: 1
     startDelay: 4
     isEndless: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
     timeStarted: 0
     lastSpawn: 0
     numSpawns: 0
-  - state: 0
+  - enemyType: 4
     waveIndex: 2
     startDelay: 4
     isEndless: 0

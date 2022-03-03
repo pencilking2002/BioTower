@@ -12,8 +12,10 @@ namespace BioTower
         [SerializeField] private GameObject midEnemyPrefab;
         [SerializeField] private GameObject advancedEnemyPrefab;
 
-        public LevelSettings waveSettings => LevelInfo.current.waveSettings;
+        public WaveSettings waveSettings => LevelInfo.current.waveSettings;
         [SerializeField] private WaveMode waveMode;
+        private Dictionary<UnitType, GameObject> enemyDict = new Dictionary<UnitType, GameObject>();
+
         public Wave currWave
         {
             get
@@ -21,6 +23,7 @@ namespace BioTower
                 return waveSettings.waves[currWaveIndex];
             }
         }
+
         public int currWaveIndex;
         public bool wavesInitialized;
         public bool wavesHaveCompleted;
@@ -31,6 +34,13 @@ namespace BioTower
         private EndedState endedState;
 
         private Dictionary<WaveMode, WaveState> waveStateMap = new Dictionary<WaveMode, WaveState>();
+
+        private void Awake()
+        {
+            enemyDict.Add(UnitType.BASIC_ENEMY, basicEnemyPrefab);
+            enemyDict.Add(UnitType.MID_ENEMY, midEnemyPrefab);
+            enemyDict.Add(UnitType.ADVANCED_ENEMY, advancedEnemyPrefab);
+        }
 
         private void Start()
         {
@@ -57,10 +67,13 @@ namespace BioTower
                 waveSettings.waves[i].Init(i);
         }
 
-        public BasicEnemy SpawnEnemy(Vector2 minMaxSpeed)
+        public GameObject GetEnemyPrefab(UnitType unitType) { return enemyDict[unitType]; }
+
+        public BasicEnemy SpawnEnemy(Vector2 minMaxSpeed, UnitType enemyType)
         {
             // Initialize enemy
-            var enemyGO = Instantiate(basicEnemyPrefab);
+            var enemyPrefab = GetEnemyPrefab(enemyType);
+            var enemyGO = Instantiate(enemyPrefab);
             var enemy = enemyGO.GetComponent<BasicEnemy>();
 
             // Set the enemy's positioning

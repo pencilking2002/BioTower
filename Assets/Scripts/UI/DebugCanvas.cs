@@ -67,7 +67,7 @@ namespace BioTower.UI
 
         public void SpawnEnemy()
         {
-            var enemy = Util.waveManager.SpawnEnemy(new Vector2(0.4f, 0.7f));
+            var enemy = Util.waveManager.SpawnEnemy(new Vector2(0.4f, 0.7f), Units.UnitType.BASIC_ENEMY);
             enemy.transform.position = GameObject.FindGameObjectWithTag(Constants.enemyTestSpawnSpot).transform.position;
         }
 

@@ -337,9 +337,8 @@ MonoBehaviour:
   agent: {fileID: 6947603464991609268}
   tower: {fileID: 0}
   hasHealth: 1
-  currHealth: 0
+  currHealth: 10
   healthSlider: {fileID: 4252980273722639801}
-  anim: {fileID: 8631358351254125852}
   sr: {fileID: 5115481712484187246}
   isAlive: 0
   abaUnitState: 0

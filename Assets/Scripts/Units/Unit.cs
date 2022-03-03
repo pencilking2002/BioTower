@@ -39,7 +39,7 @@ namespace BioTower.Units
         {
             if (hasHealth)
             {
-                currHealth = Util.gameSettings.GetMaxUnitHealth(unitType);
+                //currHealth = Util.gameSettings.GetMaxUnitHealth(unitType);
                 healthSlider.maxValue = currHealth;
                 healthSlider.value = currHealth;
                 healthSlider.gameObject.SetActive(true);
@@ -78,18 +78,13 @@ namespace BioTower.Units
             if (hasHealth)
             {
                 currHealth -= amount;
-                currHealth = Mathf.Clamp(currHealth, 0, Util.gameSettings.GetMaxUnitHealth(unitType));
+                currHealth = Mathf.Clamp(currHealth, 0, 100);
                 healthSlider.value = currHealth;
 
-                //            Debug.Log("Enemy take damage. health: " + currHealth);
                 if (currHealth == 0)
-                {
                     KillUnit();
-                }
                 else
-                {
                     EventManager.Units.onUnitTakeDamage?.Invoke(unitType);
-                }
             }
             else
             {

@@ -84,19 +84,19 @@ namespace BioTower
                 return _upgradeLogicMap;
             }
         }
-        public int GetMaxUnitHealth(UnitType unitType)
-        {
-            switch (unitType)
-            {
-                case UnitType.ABA:
-                    return upgradeSettings.abaUnitMaxHealth;
-                case UnitType.BASIC_ENEMY:
-                    return enemyUnitMaxHealth;
-                case UnitType.SNRK2:
-                    return upgradeSettings.snrkUnitMaxHealth;
-            }
-            return 0;
-        }
+        // public int GetMaxUnitHealth(UnitType unitType)
+        // {
+        //     switch (unitType)
+        //     {
+        //         case UnitType.ABA:
+        //             return upgradeSettings.abaUnitMaxHealth;
+        //         case UnitType.BASIC_ENEMY:
+        //             return enemyUnitMaxHealth;
+        //         case UnitType.SNRK2:
+        //             return upgradeSettings.snrkUnitMaxHealth;
+        //     }
+        //     return 0;
+        // }
 
         public int GetUnitCost(UnitType unitType)
         {

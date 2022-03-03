@@ -372,16 +372,11 @@ MonoBehaviour:
   agent: {fileID: 1693819623499035305}
   tower: {fileID: 0}
   hasHealth: 1
-  currHealth: 0
+  currHealth: 10
   healthSlider: {fileID: 6791148490757314943}
   sr: {fileID: 0}
   isAlive: 0
-  crystalPrefab: {fileID: 7511931919741912127, guid: 860a79906c90b98489d792877fb6902a,
-    type: 3}
   muscleIcon: {fileID: 5121136217015276256}
-  upgradedSprite: {fileID: 162576860024680866}
-  stoppedColor: {r: 0.8113208, g: 0.5778747, b: 0.5778747, a: 1}
-  hasCrystalTintColor: {r: 0.7470297, g: 0.48998755, b: 0.8584906, a: 1}
   hasCrystal: 0
   isEngagedInCombat: 0
   combatFoe: {fileID: 0}

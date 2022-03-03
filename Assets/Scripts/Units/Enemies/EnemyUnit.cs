@@ -7,25 +7,18 @@ namespace BioTower.Units
     public class EnemyUnit : Unit
     {
         [Header("References")]
-        //[SerializeField] protected GameObject crystalPrefab;
         protected Collider2D triggerCollider;
         [SerializeField] protected SpriteRenderer muscleIcon;
-        // [SerializeField] protected SpriteRenderer upgradedSprite;
-        // protected SpriteRenderer currentSR;
         protected Animator currentAnim;
 
 
-        //[Header("Waypoint movement")]
         protected Waypoint currWaypoint;
         protected Waypoint nextWaypoint;
         protected Transform nextDestination;
 
 
         [Header("Enemy state")]
-        // [SerializeField] protected Color stoppedColor;
-        // public Color hasCrystalTintColor;
         [HideInInspector] public bool hasCrystal;
-        //[HideInInspector] private bool isRegistered;
         [HideInInspector] public bool isEngagedInCombat;
         [HideInInspector] public Unit combatFoe;
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using NaughtyAttributes;
 using BioTower.Level;
 using UnityEngine.UI;
@@ -14,7 +12,8 @@ namespace BioTower.Units
         ABA,
         BASIC_ENEMY,
         SNRK2,
-        MID_ENEMY
+        MID_ENEMY,
+        ADVANCED_ENEMY
     }
 
     public class Unit : MonoBehaviour
@@ -23,8 +22,8 @@ namespace BioTower.Units
         [HideInInspector] public PolyNavAgent agent;
         [HideInInspector] public Structure tower;
         [SerializeField] private bool hasHealth;
-        [EnableIf("hasHealth")][SerializeField] protected int currHealth;
-        [EnableIf("hasHealth")][SerializeField] protected Slider healthSlider;
+        [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
+        [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
         [HideInInspector] protected Animator anim;
         [HideInInspector] public SpriteRenderer sr;
         public bool isAlive;

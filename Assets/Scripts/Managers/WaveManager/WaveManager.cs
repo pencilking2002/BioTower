@@ -8,10 +8,12 @@ namespace BioTower
 {
     public class WaveManager : MonoBehaviour
     {
-        [SerializeField] private GameObject enemyPrefab;
+        [SerializeField] private GameObject basicEnemyPrefab;
+        [SerializeField] private GameObject midEnemyPrefab;
+        [SerializeField] private GameObject advancedEnemyPrefab;
+
         public LevelSettings waveSettings => LevelInfo.current.waveSettings;
         [SerializeField] private WaveMode waveMode;
-        //public int currWave => waveSettings.wa
         public Wave currWave
         {
             get
@@ -58,7 +60,7 @@ namespace BioTower
         public BasicEnemy SpawnEnemy(Vector2 minMaxSpeed)
         {
             // Initialize enemy
-            var enemyGO = Instantiate(enemyPrefab);
+            var enemyGO = Instantiate(basicEnemyPrefab);
             var enemy = enemyGO.GetComponent<BasicEnemy>();
 
             // Set the enemy's positioning

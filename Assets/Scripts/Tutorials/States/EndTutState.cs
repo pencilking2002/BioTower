@@ -5,54 +5,57 @@ using BioTower.Structures;
 
 namespace BioTower
 {
-public class EndTutState : TutStateBase
-{
-    public override void Init (TutState tutState)
+    public class EndTutState : TutStateBase
     {
-        if (!isInitialized)
+        public override void Init(TutState tutState)
         {
-            isInitialized = true;
-            TutorialCanvas.tutorialInProgress = false;
-            InputController.canPressButtons = true;
-            InputController.canSpawnTowers = true;
-            
-            var seq = LeanTween.sequence();
-            seq.append(LeanTween.moveLocalY(tutCanvas.tutPanel.gameObject, tutCanvas.initTutPanelLocalPos.y+tutCanvas.slideInOffset, 0.25f).setEaseOutCubic());
-            seq.append(() => {
-                EventManager.Tutorials.onTutorialEnd?.Invoke(tutCanvas.currTutorial);
-                tutCanvas.hasTutorials = false;
-            });
-            EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
+            if (!isInitialized)
+            {
+                isInitialized = true;
+                TutorialCanvas.tutorialInProgress = false;
+                InputController.canPressButtons = true;
+                InputController.canSpawnTowers = true;
+
+                var seq = LeanTween.sequence();
+                seq.append(LeanTween.moveLocalY(tutCanvas.tutPanel.gameObject, tutCanvas.initTutPanelLocalPos.y + tutCanvas.slideInOffset, 0.25f).setEaseOutCubic());
+                seq.append(() =>
+                {
+                    EventManager.Tutorials.onTutorialEnd?.Invoke(tutCanvas.currTutorial);
+                    tutCanvas.hasTutorials = false;
+                });
+
+                tutCanvas.HideSkipButton();
+                EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
+            }
+        }
+
+        public override TutState OnUpdate(TutState tutState)
+        {
+            Init(tutState);
+            return tutState;
+        }
+
+        private void OnTouchBegan(Vector3 pos)
+        {
+            if (!isInitialized)
+                return;
+        }
+
+        public override void OnTutStateInit(TutState tutState)
+        {
+            if (tutState != this.tutState)
+                isInitialized = false;
+        }
+
+
+        private void OnEnable()
+        {
+            EventManager.Tutorials.onTutStateInit += OnTutStateInit;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
         }
     }
-
-    public override TutState OnUpdate(TutState tutState)
-    {
-        Init(tutState);
-        return tutState;
-    }
-
-    private void OnTouchBegan(Vector3 pos)
-    {
-        if (!isInitialized)
-            return;
-    }
-
-    public override void OnTutStateInit(TutState tutState)
-    {
-        if (tutState != this.tutState)
-            isInitialized = false;
-    }
-
-    
-    private void OnEnable()
-    {
-        EventManager.Tutorials.onTutStateInit += OnTutStateInit;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
-    }
-}
 }

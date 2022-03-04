@@ -64,19 +64,23 @@ namespace BioTower
             }
         }
 
+        public void HideSkipButton()
+        {
+            var cg = skipButton.GetComponent<CanvasGroup>();
+            LeanTween.alphaCanvas(cg, 0, 1.0f)
+            .setOnComplete(() =>
+            {
+                skipButton.gameObject.SetActive(false);
+            });
+        }
+
         public void OnPressSkipTutButton()
         {
             if (!IsEndTutState())
             {
                 SetEndTutState();
                 skipTutorials = true;
-                var cg = skipButton.GetComponent<CanvasGroup>();
-                LeanTween.alphaCanvas(cg, 0, 1.0f)
-                .setOnComplete(() =>
-                {
-                    skipButton.gameObject.SetActive(false);
-                });
-
+                HideSkipButton();
                 EventManager.Tutorials.onSkipTutorials?.Invoke();
             }
         }

@@ -78,25 +78,10 @@ namespace BioTower
 
                     _upgradeLogicMap.Add(UpgradeType.PLAYER_TOWER_HEALTH, UpgradePlayerTowerHealth);
                     _upgradeLogicMap.Add(UpgradeType.PLAYER_TOWER_HEAL, UpgradePlayerTowerHealing);
-
-
                 }
                 return _upgradeLogicMap;
             }
         }
-        // public int GetMaxUnitHealth(UnitType unitType)
-        // {
-        //     switch (unitType)
-        //     {
-        //         case UnitType.ABA:
-        //             return upgradeSettings.abaUnitMaxHealth;
-        //         case UnitType.BASIC_ENEMY:
-        //             return enemyUnitMaxHealth;
-        //         case UnitType.SNRK2:
-        //             return upgradeSettings.snrkUnitMaxHealth;
-        //     }
-        //     return 0;
-        // }
 
         public int GetUnitCost(UnitType unitType)
         {
@@ -145,8 +130,6 @@ namespace BioTower
         public void UpgradeAbaTowerInfluence()
         {
             upgradeSettings.abaMaxInfluenceRadius_float = 3000;
-            //upgradeSettings.abaMapScale_float = 3000;
-            // upgradeSettings.abaInfluenceShapeScale_float = 1500;
         }
 
         // ABA Tower upgrades -----------------------------------------------
@@ -175,6 +158,7 @@ namespace BioTower
         public void UpgradePpc2TowerDamage() { upgradeSettings.ppc2TowerDamage = 10; }
         public void UpgradePpc2TowerRandomHeal() { upgradeSettings.ppc2TowerDamage = 10; }
 
+
         // Mito Tower upgrades -----------------------------------------------
         public void UnlockMitoTower() { upgradeSettings.mitoTowerUnlocked = true; }
         public void UpgradeMitoEnergy() { upgradeSettings.lightFragmentValue = 10; }
@@ -189,11 +173,13 @@ namespace BioTower
         public void UpgradeChloroLightTap() { upgradeSettings.numFragmentsPickedUpOnTap = 3; }
         public void UpgradeChloroTowerRandomHeal() { upgradeSettings.enableChloroTowerRandomHeal = true; }
 
+
         // Snrk2 
         public void UnlockSnrk2Unit() { upgradeSettings.snrk2UnitUnlocked = true; }
         public void UpgradeSnrk2UnitSpeed() { upgradeSettings.snrk2UnitSpeed_float = 1500; }
         public void UpgradeSnk2UnitHealth() { upgradeSettings.snrkUnitMaxHealth = 10; }
         public void UpgradeSnrk2CrystalValue() { upgradeSettings.crystalSnrk2Value = 30; }
+
 
         // Player tower
         public void UpgradePlayerTowerHealth() { upgradeSettings.playerTowerMaxhealth = 30; }

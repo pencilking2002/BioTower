@@ -30,8 +30,7 @@ namespace BioTower.Structures
 
             maxHealth = Util.upgradeSettings.playerTowerMaxhealth;
             currHealth = maxHealth;
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = maxHealth;
+            healthBar.Init(currHealth);
             GameManager.Instance.RegisterPlayerBase(this);
         }
 
@@ -44,7 +43,7 @@ namespace BioTower.Structures
             if (hasHealth && isAlive)
             {
                 currHealth -= numDamage;
-                healthSlider.value = currHealth;
+                healthBar.SetHealth(currHealth);
 
                 var healthPercentage = GetHealthPercentage();
                 //            Debug.Log("Health percentage: " + healthPercentage);

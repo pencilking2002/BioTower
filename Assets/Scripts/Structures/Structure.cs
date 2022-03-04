@@ -30,7 +30,7 @@ namespace BioTower.Structures
         [ShowIf("hasHealth")] public bool isAlive = true;
         [ShowIf("hasHealth")][Range(0, 100)][SerializeField] protected int maxHealth;
         [ShowIf("hasHealth")][SerializeField] protected int currHealth;
-        [ShowIf("hasHealth")][SerializeField] protected Slider healthSlider;
+        protected HealthBar healthBar;
         [SerializeField] protected GameObject spriteOutline;
         public SpriteRenderer sr;
         [HideInInspector] public float lastDeclineTime;
@@ -42,6 +42,7 @@ namespace BioTower.Structures
 
         public virtual void Awake()
         {
+            healthBar = GetComponentInChildren<HealthBar>();
             initSpriteScale = sr.transform.localScale;
             initLocalSpritePos = sr.transform.localPosition;
             lastDeclineTime = Time.time;
@@ -53,8 +54,7 @@ namespace BioTower.Structures
 
             if (hasHealth)
             {
-                healthSlider.maxValue = maxHealth;
-                healthSlider.value = currHealth;
+                healthBar.Init(currHealth);
             }
 
             EventManager.Structures.onStructureCreated?.Invoke(this);
@@ -130,12 +130,13 @@ namespace BioTower.Structures
 
                 currHealth -= numDamage;
                 currHealth = Mathf.Clamp(currHealth, 0, maxHealth);
+                healthBar.SetHealth(currHealth);
+                // LeanTween.value(gameObject, healthBar.value, currHealth, 0.25f)
+                // .setOnUpdate((float val) =>
+                // {
+                //     healthBar.value = val;
+                // });
 
-                LeanTween.value(gameObject, healthSlider.value, currHealth, 0.25f)
-                .setOnUpdate((float val) =>
-                {
-                    healthSlider.value = val;
-                });
                 EventManager.Structures.onStructureLoseHealth?.Invoke(this);
 
                 if (currHealth == 0)
@@ -149,7 +150,7 @@ namespace BioTower.Structures
         {
             currHealth += numHealth;
             currHealth = Mathf.Clamp(currHealth, 0, maxHealth);
-            healthSlider.value = currHealth;
+            healthBar.SetHealth(currHealth);
             DoHealthVisual(Color.green);
             EventManager.Structures.onStructureGainHealth?.Invoke(this);
         }

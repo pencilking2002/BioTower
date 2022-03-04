@@ -76,7 +76,7 @@ namespace BioTower.Units
             anim.SetBool("Attack", false);
             GameManager.Instance.unitManager.Unregister(this);
             Deregister();
-            healthSlider.gameObject.SetActive(false);
+            healthBar.gameObject.SetActive(false);
 
             // after 5 sec, make unit scale down and destroy it
             LeanTween.delayedCall(gameObject, 5, () =>

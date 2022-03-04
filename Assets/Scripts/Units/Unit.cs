@@ -22,8 +22,8 @@ namespace BioTower.Units
         [HideInInspector] public PolyNavAgent agent;
         [HideInInspector] public Structure tower;
         [SerializeField] private bool hasHealth;
-        [EnableIf("hasHealth")] [SerializeField] protected int currHealth;
-        [EnableIf("hasHealth")] [SerializeField] protected Slider healthSlider;
+        [EnableIf("hasHealth")][SerializeField] protected int currHealth;
+        protected HealthBar healthBar;
         [HideInInspector] protected Animator anim;
         [HideInInspector] public SpriteRenderer sr;
         public bool isAlive;
@@ -33,21 +33,20 @@ namespace BioTower.Units
             agent = GetComponent<PolyNavAgent>();
             anim = GetComponentInChildren<Animator>();
             sr = anim.GetComponent<SpriteRenderer>();
+            healthBar = GetComponentInChildren<HealthBar>();
         }
 
         public virtual void Start()
         {
             if (hasHealth)
             {
-                //currHealth = Util.gameSettings.GetMaxUnitHealth(unitType);
-                healthSlider.maxValue = currHealth;
-                healthSlider.value = currHealth;
-                healthSlider.gameObject.SetActive(true);
+                healthBar.Init(currHealth);
+                healthBar.gameObject.SetActive(true);
             }
             else
             {
-                if (healthSlider != null)
-                    healthSlider.gameObject.SetActive(false);
+                if (healthBar != null)
+                    healthBar.gameObject.SetActive(false);
             }
             isAlive = true;
 
@@ -79,7 +78,7 @@ namespace BioTower.Units
             {
                 currHealth -= amount;
                 currHealth = Mathf.Clamp(currHealth, 0, 100);
-                healthSlider.value = currHealth;
+                healthBar.SetHealth(currHealth);
 
                 if (currHealth == 0)
                     KillUnit();

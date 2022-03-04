@@ -59,9 +59,7 @@ namespace BioTower
         {
             var states = GetComponentsInChildren<TutStateBase>();
             foreach (TutStateBase state in states)
-            {
                 charStates.Add(state.tutState, state);
-            }
         }
 
         public void HideSkipButton()

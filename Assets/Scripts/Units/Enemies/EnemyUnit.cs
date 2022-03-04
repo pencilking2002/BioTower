@@ -149,7 +149,6 @@ namespace BioTower.Units
             isEngagedInCombat = true;
             currentAnim.SetBool("Walk", false);
             currentAnim.SetBool("Attack", true);
-            //Debug.Log("Enemy stop moving");
         }
 
         public void SetDestination(Waypoint waypoint)
@@ -159,34 +158,9 @@ namespace BioTower.Units
 
             var randomPoint = UnityEngine.Random.insideUnitSphere * 0.25f;
             randomPoint.z = 0;
-            //agent.SetDestination(waypoint.transform.position + randomPoint);
             agent.SetDestination(waypoint.transform.position);
             nextDestination = waypoint.transform;
-            //Debug.Log($"{gameObject.name} Set destination to {nextDestination}");
         }
-
-        // protected void PickupCrystal(Collider2D col)
-        // {
-        //     var crystal = col.transform.parent.GetComponent<EnemyCrystal>();
-
-        //     if (crystal.hasBeenPickedUp)
-        //         return;
-
-        //     crystal.DestroyObject();
-        //     hasCrystal = true;
-        //     sr.enabled = false;
-        //     sr.GetComponent<Animator>().enabled = false;
-        //     sr = upgradedSprite;
-        //     upgradedSprite.gameObject.SetActive(true);
-        //     currentSR = upgradedSprite;
-        //     currentAnim = upgradedSprite.GetComponent<Animator>();
-
-        //     EventManager.Units.onEnemyPickedUpCrystal?.Invoke();
-
-        //     AnimateMuscleIcon();
-        //     // TODO: make enemy stronger after picking up crystal
-
-        // }
 
         protected void AnimateMuscleIcon()
         {
@@ -201,16 +175,6 @@ namespace BioTower.Units
             });
         }
 
-        // protected void SpawnCrystal()
-        // {
-        //     var crystalGO = Instantiate(crystalPrefab);
-        //     crystalGO.transform.position = transform.position;
-
-        //     Vector3 defautlScale = crystalGO.transform.localScale;
-        //     crystalGO.transform.localScale = Vector3.zero;
-        //     LeanTween.scale(crystalGO, defautlScale, 0.1f);
-        // }
-
         public override bool TakeDamage(int amount)
         {
             if (base.TakeDamage(amount))
@@ -219,7 +183,6 @@ namespace BioTower.Units
             }
             else
             {
-                //SpawnCrystal();
                 triggerCollider.enabled = false;
                 return isAlive;
             }

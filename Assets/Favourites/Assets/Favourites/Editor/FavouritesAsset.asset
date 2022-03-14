@@ -53,6 +53,8 @@ MonoBehaviour:
     obj: {fileID: 3537200308005081436, guid: a2f4a25943c2695439b10245a9dd7b86, type: 3}
   - categoryId: 0
     obj: {fileID: 3874530591340406512, guid: 1bf57c9cf37bb4149a047568fd704a40, type: 3}
+  - categoryId: 0
+    obj: {fileID: 2362424358013007125, guid: 942b1f15018f57d43aedc30fc224fdea, type: 3}
   categories:
   - id: 0
     name: Prefabs

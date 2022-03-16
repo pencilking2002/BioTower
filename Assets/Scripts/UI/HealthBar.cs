@@ -1,23 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Sirenix.OdinInspector;
 
-namespace BioTower
+namespace BioTower.UI
 {
     public class HealthBar : MonoBehaviour
     {
         [SerializeField] private GameObject barPrefab;
-        [SerializeField] private RectTransform healthPanel;
-        [SerializeField] private Vector2 padding = new Vector2(0.5f, 0);
+        [SerializeField] private Vector2 padding = new Vector2(0.1f, 0.1f);
         private int health;
         private RectTransform canvasRT;
         private void Awake()
         {
             canvasRT = GetComponent<RectTransform>();
-            Init(5);
-            //Debug.Break();
         }
 
         public void Init(int health)
@@ -29,15 +22,24 @@ namespace BioTower
             float initialPosition = (-halfCanvas + halfCanvas * scale.x);
             float offsetX = initialPosition;
             float barSize = (halfCanvas * scale.x) * 2;
+
+            // Process padding to work with Unity's UI coord system
+            padding = new Vector2(padding.x / 2, padding.y);
+            padding = -padding;
+
             for (int i = 0; i < health; i++)
             {
                 var go = Instantiate(barPrefab);
                 go.name = $"{go.name}_{i}";
-                go.transform.SetParent(healthPanel);
-                var rt = (RectTransform)go.transform;
+                go.transform.SetParent(transform);
+                var bar = go.GetComponent<Bar>();
+                //var rt = (RectTransform)go.transform;
                 go.transform.localPosition = new Vector2(offsetX, 0);
-                rt.sizeDelta = Vector3.zero;
-                rt.localScale = scale;
+                bar.rt.sizeDelta = Vector3.zero;
+                //var child = (RectTransform)rt.GetChild(0);
+                bar.innerRT.sizeDelta = padding;
+                //child.sizeDelta = Vector2.zero;
+                bar.rt.localScale = scale;
                 offsetX += barSize;
             }
         }
@@ -48,8 +50,8 @@ namespace BioTower
             if (this.health <= 0)
                 return;
 
-            for (int i = 0; i < healthPanel.childCount; i++)
-                healthPanel.GetChild(i).gameObject.SetActive(i < health - 1);
+            for (int i = 0; i < transform.childCount; i++)
+                transform.GetChild(i).gameObject.SetActive(i < health - 1);
 
         }
     }

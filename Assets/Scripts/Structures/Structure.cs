@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using BioTower.Units;
 using Sirenix.OdinInspector;
 using Shapes;
+using BioTower.UI;
 
 namespace BioTower.Structures
 {

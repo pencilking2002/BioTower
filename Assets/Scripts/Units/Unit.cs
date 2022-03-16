@@ -4,6 +4,7 @@ using BioTower.Level;
 using UnityEngine.UI;
 using PolyNav;
 using BioTower.Structures;
+using BioTower.UI;
 
 namespace BioTower.Units
 {

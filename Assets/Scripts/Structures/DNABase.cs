@@ -30,7 +30,7 @@ namespace BioTower.Structures
 
             maxHealth = Util.upgradeSettings.playerTowerMaxhealth;
             currHealth = maxHealth;
-            healthBar.Init(currHealth);
+            //healthBar.Init(currHealth);
             GameManager.Instance.RegisterPlayerBase(this);
         }
 

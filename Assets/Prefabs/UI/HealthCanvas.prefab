@@ -58,7 +58,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1578752529
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &100242646383548561
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &9042855057557580819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
     type: 3}
   padding: {x: 0.5, y: 0.05}
   barColor: {r: 0.48786455, g: 0.9433962, b: 0.38625845, a: 1}
-  deactivatedBarColor: {r: 0.14902747, g: 0.3018868, b: 0.115058735, a: 1}
+  deactivatedBarColor: {r: 0.2251335, g: 0.4528302, b: 0.17258811, a: 1}
   bgColor: {r: 0, g: 0.122641504, b: 0.042657904, a: 1}
   bars: []
 --- !u!1 &8188198329913991046
@@ -194,4 +194,4 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 500
+  m_PixelsPerUnitMultiplier: 1000

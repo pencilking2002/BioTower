@@ -424,17 +424,12 @@ PrefabInstance:
     - target: {fileID: 6002709627637634169, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.1344
+      value: 0.0813
       objectReference: {fileID: 0}
     - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}
       propertyPath: padding.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
-        type: 3}
-      propertyPath: barColor.r
-      value: 0.92156863
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}
@@ -489,7 +484,7 @@ PrefabInstance:
     - target: {fileID: 7388316509089996653, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1.9347
+      value: 1.0661
       objectReference: {fileID: 0}
     - target: {fileID: 7388316509089996653, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}

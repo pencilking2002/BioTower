@@ -546,6 +546,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: bgColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: bgColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: bgColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: barColor.b
+      value: 0.42830187
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: barColor.g
+      value: 0.46613485
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: barColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: deactivatedBarColor.b
+      value: 0.15758276
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: deactivatedBarColor.g
+      value: 0.17198972
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305830641320017010, guid: 942b1f15018f57d43aedc30fc224fdea,
+        type: 3}
+      propertyPath: deactivatedBarColor.r
+      value: 0.3679245
+      objectReference: {fileID: 0}
     - target: {fileID: 7388316509089996653, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}
       propertyPath: m_Pivot.x
@@ -584,7 +629,7 @@ PrefabInstance:
     - target: {fileID: 7388316509089996653, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.9829
+      value: 1.0121
       objectReference: {fileID: 0}
     - target: {fileID: 7388316509089996653, guid: 942b1f15018f57d43aedc30fc224fdea,
         type: 3}

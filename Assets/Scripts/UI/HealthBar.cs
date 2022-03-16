@@ -1,21 +1,30 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BioTower.UI
 {
     public class HealthBar : MonoBehaviour
     {
         [SerializeField] private GameObject barPrefab;
+        [HideInInspector] private Image healthBarBG;
         [SerializeField] private Vector2 padding = new Vector2(0.1f, 0.1f);
         private int health;
+        [SerializeField] private Color barColor;
+        [SerializeField] private Color deactivatedBarColor;
+        [SerializeField] private Color bgColor;
+        [SerializeField] private Bar[] bars;
         private RectTransform canvasRT;
         private void Awake()
         {
             canvasRT = GetComponent<RectTransform>();
+            healthBarBG = transform.GetChild(0).GetComponent<Image>();
         }
 
         public void Init(int health)
         {
+            bars = new Bar[health];
             this.health = health;
+
             Vector2 scale = new Vector2(1.0f / health, 1);
             float halfCanvas = canvasRT.sizeDelta.x / 2;
 
@@ -27,19 +36,22 @@ namespace BioTower.UI
             padding = new Vector2(padding.x / 2, padding.y);
             padding = -padding;
 
+            healthBarBG.color = bgColor;
+
             for (int i = 0; i < health; i++)
             {
                 var go = Instantiate(barPrefab);
                 go.name = $"{go.name}_{i}";
                 go.transform.SetParent(transform);
-                var bar = go.GetComponent<Bar>();
-                //var rt = (RectTransform)go.transform;
                 go.transform.localPosition = new Vector2(offsetX, 0);
+
+                var bar = go.GetComponent<Bar>();
                 bar.rt.sizeDelta = Vector3.zero;
-                //var child = (RectTransform)rt.GetChild(0);
                 bar.innerRT.sizeDelta = padding;
-                //child.sizeDelta = Vector2.zero;
                 bar.rt.localScale = scale;
+                bar.SetColor(barColor);
+                bars[i] = bar;
+
                 offsetX += barSize;
             }
         }
@@ -50,8 +62,11 @@ namespace BioTower.UI
             if (this.health <= 0)
                 return;
 
-            for (int i = 0; i < transform.childCount; i++)
-                transform.GetChild(i).gameObject.SetActive(i < health - 1);
+            for (int i = 0; i < bars.Length; i++)
+            {
+                Color color = i < health - 1 ? barColor : deactivatedBarColor;
+                bars[i].SetColor(color);
+            }
 
         }
     }

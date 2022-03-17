@@ -101,12 +101,22 @@ namespace BioTower.Structures
                 unitSpawnTrail.emitting = true;
                 unitSpawnTrail.transform.localPosition = Vector2.zero;
                 var seq = LeanTween.sequence();
-                seq.append(LeanTween.move(unitSpawnTrail.gameObject, unit.GetComponentInChildren<Collider2D>().transform.position, 0.1f));
+                //seq.append(LeanTween.move(unitSpawnTrail.gameObject, unit.transform.position, 0.1f));
+                LTSpline ltSpline = new LTSpline(
+                    new Vector3[] {
+                        new Vector3(UnityEngine.Random.Range(0,1), UnityEngine.Random.Range(0,1), 0f),
+                        transform.position,
+                        unit.transform.position,
+                        new Vector3(UnityEngine.Random.Range(0,1), UnityEngine.Random.Range(0,1), 0f)
+                    });
+                seq.append(LeanTween.moveSpline(unitSpawnTrail.gameObject, ltSpline, 0.1f));
+
                 seq.append(LeanTween.scale(unit.gameObject, scale * 2, 0.1f));
                 seq.append(LeanTween.scale(unit.gameObject, scale, 0.25f));
                 seq.append(() =>
                 {
                     AddUnit(unit);
+                    //Debug.Break();
                     unitSpawnTrail.emitting = false;
                     unitSpawnTrail.transform.localPosition = Vector2.zero;
                 });

@@ -85,12 +85,11 @@ namespace BioTower.Structures
                     sr.color = col;
                 });
             }
-            var damage = enemy.hasCrystal ?
-                Util.gameSettings.enemyUpgradedDamage :
-                Util.gameSettings.enemyPlayerBaseDamage;
+
+            // TODO: Give diffrent enemy units different base damage
+            var damage = Util.gameSettings.enemyPlayerBaseDamage;
 
             TakeDamage(damage);
-            //Debug.Log("cancel");
         }
 
         public override void OnEnable()

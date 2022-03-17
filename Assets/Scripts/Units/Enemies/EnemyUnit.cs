@@ -17,11 +17,6 @@ namespace BioTower.Units
         protected Transform nextDestination;
 
 
-        [Header("Enemy state")]
-        [HideInInspector] public bool hasCrystal;
-        [HideInInspector] public bool isEngagedInCombat;
-        [HideInInspector] public Unit combatFoe;
-
         protected void Init()
         {
             base.Start();
@@ -59,6 +54,9 @@ namespace BioTower.Units
 
         public virtual void DestinationReached()
         {
+            if (!IsRoamingState())
+                return;
+
             SetCurrWaypoint(nextWaypoint);
 
             if (currWaypoint.isFork)
@@ -131,11 +129,11 @@ namespace BioTower.Units
 
             currentAnim.SetBool("Walk", true);
             currentAnim.SetBool("Attack", false);
-            combatFoe = null;
+            unitFoe = null;
             LeanTween.delayedCall(delay, () =>
             {
                 SetDestination(waypoint);
-                isEngagedInCombat = false;
+                SetRoamingState();
                 Debug.Log("Enemy start moving");
             });
         }
@@ -146,12 +144,11 @@ namespace BioTower.Units
                 return;
 
             agent.Stop();
-            isEngagedInCombat = true;
             currentAnim.SetBool("Walk", false);
             currentAnim.SetBool("Attack", true);
         }
 
-        public void SetDestination(Waypoint waypoint)
+        public override void SetDestination(Waypoint waypoint)
         {
             if (agent == null)
                 return;
@@ -160,6 +157,12 @@ namespace BioTower.Units
             randomPoint.z = 0;
             agent.SetDestination(waypoint.transform.position);
             nextDestination = waypoint.transform;
+        }
+
+        public override void SetDestination(Vector3 destination)
+        {
+            agent.SetDestination(destination);
+            //agent.primeGoal = destination;
         }
 
         protected void AnimateMuscleIcon()
@@ -186,6 +189,36 @@ namespace BioTower.Units
                 triggerCollider.enabled = false;
                 return isAlive;
             }
+        }
+        public override bool IsRoamingState()
+        {
+            return base.IsRoamingState();
+        }
+
+        public override void SetRoamingState()
+        {
+            base.SetRoamingState();
+        }
+
+        public override bool IsChasingState()
+        {
+            return base.IsChasingState();
+        }
+
+        public override bool IsCombatState()
+        {
+            return base.IsCombatState();
+        }
+
+        public override void SetChasingState(Unit unit)
+        {
+            base.SetChasingState(unit);
+        }
+
+        public override void SetCombatState()
+        {
+            base.SetCombatState();
+            StopMoving();
         }
 
     }

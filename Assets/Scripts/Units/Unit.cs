@@ -10,16 +10,22 @@ namespace BioTower.Units
 {
     public enum UnitType
     {
-        ABA,
-        BASIC_ENEMY,
-        SNRK2,
-        MID_ENEMY,
+        ABA, BASIC_ENEMY,
+        SNRK2, MID_ENEMY,
         ADVANCED_ENEMY
+    }
+    public enum UnitState
+    {
+        ROAMING, COMBAT,
+        DESTROYED, CHASING_UNIT
     }
 
     public class Unit : MonoBehaviour
     {
         public UnitType unitType;
+        public UnitState unitState;
+        public Unit unitFoe;
+
         [HideInInspector] public PolyNavAgent agent;
         [HideInInspector] public Structure tower;
         [SerializeField] private bool hasHealth;
@@ -35,6 +41,8 @@ namespace BioTower.Units
             anim = GetComponentInChildren<Animator>();
             sr = anim.GetComponent<SpriteRenderer>();
             healthBar = GetComponentInChildren<HealthBar>();
+            unitState = UnitState.ROAMING;
+
         }
 
         public virtual void Start()
@@ -53,6 +61,7 @@ namespace BioTower.Units
 
             GameManager.Instance.unitManager.Register(this);
             EventManager.Units.onUnitSpawned?.Invoke(this);
+            SetRoamingState();
         }
 
         public ABATower GetAbaTower()
@@ -64,6 +73,11 @@ namespace BioTower.Units
         {
             return (PPC2Tower)tower;
         }
+        // public virtual void StartChasingUnit(Unit unitFoe)
+        // {
+        //     SetChasingState();
+        //     this.unitFoe = unitFoe;
+        // }
 
         public virtual void StopMoving() { }
         public virtual void StartMoving(Waypoint waypoint, float delay = 0) { }
@@ -93,20 +107,37 @@ namespace BioTower.Units
             return isAlive;
         }
 
-        public virtual void SetCombatState() { }
-        public virtual void SetRoamingState() { }
-        public virtual void SetDestroyedState() { }
-        public virtual void SetDestination(Vector3 targetDestination) { }
+        public bool IsEnemy()
+        {
+            bool isEnemy = unitType == UnitType.BASIC_ENEMY || unitType == UnitType.MID_ENEMY || unitType == UnitType.ADVANCED_ENEMY;
+            return isEnemy;
+        }
+
+        public virtual bool IsChasingState() { return unitState == UnitState.CHASING_UNIT; }
+        public virtual void SetChasingState(Unit unit)
+        {
+            unitState = UnitState.CHASING_UNIT;
+            unitFoe = unit;
+        }
+
+        public virtual bool IsRoamingState() { return unitState == UnitState.ROAMING; }
+        public virtual void SetCombatState() { unitState = UnitState.COMBAT; }
+        public virtual void SetRoamingState() { unitState = UnitState.ROAMING; }
+        public virtual void SetDestroyedState() { unitState = UnitState.DESTROYED; }
+        public virtual void SetDestination(Waypoint waypoint) { }
+        public virtual void SetDestination(Vector3 destination) { }
         public virtual void Deregister() { }
 
-        public virtual bool IsCombatState() { return false; }
+        public virtual bool IsCombatState() { return unitState == UnitState.COMBAT; }
         public virtual void KillUnit()
         {
+            Debug.Log("Kill unit");
             isAlive = false;
             EventManager.Units.onUnitDestroyed?.Invoke(this);
             GameManager.Instance.unitManager.Unregister(this);
             Destroy(gameObject);
         }
+
 
     }
 }

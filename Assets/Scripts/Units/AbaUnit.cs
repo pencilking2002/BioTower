@@ -3,22 +3,11 @@
 namespace BioTower.Units
 {
 
-    public enum AbaUnitState
-    {
-        ROAMING,
-        COMBAT,
-        CARRYING_ENEMY,
-        DESTROYED,
-        CHASING_ENEMY
-    }
+
 
     [SelectionBase]
     public class AbaUnit : Unit
     {
-        public AbaUnitState abaUnitState;
-
-        [Header("Combat enemy state")]
-        public EnemyUnit targetEnemy;
 
         [Header("References")]
         public Rigidbody rb;
@@ -26,7 +15,6 @@ namespace BioTower.Units
         public override void Awake()
         {
             base.Awake();
-            abaUnitState = AbaUnitState.ROAMING;
         }
 
         public override void Start()
@@ -34,7 +22,6 @@ namespace BioTower.Units
             Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.2f, 0.02f);
             base.Start();
             Util.ScaleUpSprite(sr, 1.1f);
-            SetRoamingState();
 
             var targetPos = GetAbaTower().GetEdgePointWithinInfluence();
             SetDestination(targetPos);
@@ -50,26 +37,36 @@ namespace BioTower.Units
             anim.SetBool("Walk", false);
         }
 
-        public bool IsRoamingState()
+        public override bool IsRoamingState()
         {
-            agent.enabled = true;
-            return abaUnitState == AbaUnitState.ROAMING;
+            return base.IsRoamingState();
         }
-        public bool IsCarryingEnemyState() { return abaUnitState == AbaUnitState.CARRYING_ENEMY; }
-        public override bool IsCombatState() { return abaUnitState == AbaUnitState.COMBAT; }
-        public bool IsDestroyedState() { return abaUnitState == AbaUnitState.DESTROYED; }
-        public bool IsChasingState() { return abaUnitState == AbaUnitState.CHASING_ENEMY; }
-        public override void SetRoamingState() { abaUnitState = AbaUnitState.ROAMING; }
-        public void SetCarryingEnemyState() { abaUnitState = AbaUnitState.CARRYING_ENEMY; }
+
+        public override void SetRoamingState()
+        {
+            base.SetRoamingState();
+        }
+
+        public override bool IsChasingState()
+        {
+            return base.IsChasingState();
+        }
+
+        public override bool IsCombatState()
+        {
+            return base.IsCombatState();
+        }
+
         public override void SetCombatState()
         {
-            abaUnitState = AbaUnitState.COMBAT;
+            base.SetCombatState();
+            StopMoving();
             anim.SetBool("Attack", true);
         }
 
         public override void SetDestroyedState()
         {
-            abaUnitState = AbaUnitState.DESTROYED;
+            base.SetDestroyedState();
             StopMoving();
             isAlive = false;
             anim.SetBool("Dead", true);
@@ -87,19 +84,20 @@ namespace BioTower.Units
                 });
             });
         }
-        public void SetChasingState() { abaUnitState = AbaUnitState.CHASING_ENEMY; }
 
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!IsCombatState() && other.gameObject.layer == 10 && isAlive)
+            if (IsChasingState() && other.gameObject.layer == 10 && isAlive)
             {
-                targetEnemy = other.transform.parent.GetComponent<BasicEnemy>();
+                unitFoe = other.transform.parent.GetComponent<EnemyUnit>();
 
-                if (targetEnemy.isEngagedInCombat)
+                if (!unitFoe.IsChasingState())
+                {
                     return;
+                }
 
-                EventManager.Units.onStartCombat?.Invoke(this, targetEnemy);
+                EventManager.Units.onStartCombat?.Invoke(this, unitFoe);
             }
         }
 
@@ -112,12 +110,9 @@ namespace BioTower.Units
             if (agent == null)
                 return;
 
-            //var newDestination = GetAbaTower().GetEdgePointWithinInfluence();
             agent.SetDestination(newDestination);
             anim.SetBool("Walk", true);
             anim.SetBool("Attack", false);
-            //        Debug.Log("Set destination");
-            //Debug.Log("AbaUnit: Set New Destination: " + newDestination);
         }
 
         private void OnDestinationReached()

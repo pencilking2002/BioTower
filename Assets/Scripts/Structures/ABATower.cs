@@ -63,21 +63,26 @@ namespace BioTower.Structures
         {
             for (int i = 0; i < units.Count; i++)
             {
-                AbaUnit unit = (AbaUnit)units[i];
-                if (unit.IsChasingState())
+                AbaUnit abaUnit = (AbaUnit)units[i];
+                EnemyUnit enemy = (EnemyUnit)abaUnit.unitFoe;
+
+                if (abaUnit.IsChasingState())
                 {
-                    if (unit.targetEnemy.isEngagedInCombat)
+                    if (enemy.IsCombatState())
                     {
-                        unit.SetRoamingState();
+                        abaUnit.SetRoamingState();
                         var targetPos = GetEdgePointWithinInfluence();
-                        unit.SetDestination(targetPos);
-                        unit.targetEnemy = null;
+                        abaUnit.SetDestination(targetPos);
+                        abaUnit.unitFoe = null;
                     }
-                    else
+                    else if (enemy.IsChasingState())
                     {
                         //unit.agent.SetDestination(unit.targetEnemy.transform.position);
-                        var enemyPos = unit.targetEnemy.transform.position;
-                        unit.SetDestination(enemyPos);
+                        var enemyPos = enemy.transform.position;
+                        var abaPos = abaUnit.transform.position;
+
+                        abaUnit.SetDestination(enemyPos);
+                        enemy.SetDestination(abaPos);
                     }
                 }
             }
@@ -171,23 +176,17 @@ namespace BioTower.Structures
             {
                 enemiesWithinInfluence.Add(enemy);
 
-                if (!enemy.isEngagedInCombat)
+                if (enemy.IsRoamingState())
                 {
-                    // Find a random aba Unit
-                    // var randIndex = UnityEngine.Random.Range(0, units.Count);
-                    // var unit = (AbaUnit) units[randIndex];
-                    var unit = GetClosestUnit(enemy);
-                    if (unit != null)
+                    var abaUnit = GetClosestUnit(enemy, out bool unitFound);
+
+                    if (unitFound && abaUnit.IsRoamingState())
                     {
-                        var abaUnit = (AbaUnit)unit;
-                        // Set them to follow the enemy
-                        abaUnit.SetChasingState();
-                        abaUnit.targetEnemy = enemy;
+                        enemy.SetChasingState(abaUnit);
+                        abaUnit.SetChasingState(enemy);
                     }
                 }
 
-                //Debug.Log(enemy.name);
-                //unit.SetNewDestination()
                 EventManager.Structures.onEnemyEnterTowerInfluence?.Invoke(enemy, this);
             }
         }
@@ -216,7 +215,7 @@ namespace BioTower.Structures
                         unit.SetRoamingState();
                         var targetPos = GetEdgePointWithinInfluence();
                         unit.SetDestination(targetPos);
-                        unit.targetEnemy = null;
+                        unit.unitFoe = null;
                     }
                 }
 

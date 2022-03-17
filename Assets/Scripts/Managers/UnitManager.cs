@@ -69,19 +69,24 @@ namespace BioTower.Units
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
-                if (unit.unitType == UnitType.BASIC_ENEMY)
+                if (unit.IsEnemy())
                 {
-                    var enemy = (BasicEnemy)unit;
-                    if (enemy.GetNextWaypoint() != null && !enemy.isEngagedInCombat)
+                    var enemy = (EnemyUnit)unit;
+                    if (enemy.IsRoamingState() && enemy.GetNextWaypoint() != null)
                     {
-                        var agentDestination = enemy.agent.primeGoal;
+                        var destination = enemy.agent.primeGoal;
                         var waypointPosition = enemy.GetNextWaypoint().transform.position;
-                        if (Vector3.Distance(agentDestination, waypointPosition) > 0.2f)
+                        if (Vector3.Distance(destination, waypointPosition) > 0.2f)
                         {
                             Debug.Log(enemy.gameObject.name + " is off destination");
-                            enemy.agent.SetDestination(waypointPosition);
-                            enemy.agent.primeGoal = waypointPosition;
+                            enemy.SetDestination(destination);
                         }
+                    }
+                    else if (enemy.IsChasingState())
+                    {
+                        var destination = enemy.unitFoe.transform.position;
+                        enemy.SetDestination(destination);
+                        //Debug.Log("Chase aba");
                     }
                 }
             }

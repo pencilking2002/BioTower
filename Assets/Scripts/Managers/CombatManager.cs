@@ -8,27 +8,25 @@ namespace BioTower.Units
     {
         [Range(0, 100)][SerializeField] private float abaWinChance = 50;
 
-        private void OnStartCombat(Unit unit, EnemyUnit enemy)
+        private void OnStartCombat(Unit unit, Unit enemy)
         {
-            if (enemy.isEngagedInCombat || enemy.combatFoe != null)
+            Debug.Log("On Start combat");
+            if (enemy.IsCombatState())
                 return;
 
-            enemy.StopMoving();
-            enemy.combatFoe = unit;
-            enemy.isEngagedInCombat = true;
-            unit.StopMoving();
+            enemy.SetCombatState();
+            //enemy.unitFoe = unit;
             unit.SetCombatState();
             DoCombatRound(unit, enemy, 1);
-            Debug.Log("On Start combat");
         }
 
-        private void DoCombatRound(Unit unit, EnemyUnit enemy, float delay = 0)
+        private void DoCombatRound(Unit unit, Unit enemy, float delay = 0)
         {
             LeanTween.delayedCall(delay, () =>
             {
-
+                var enemyUnit = (EnemyUnit)enemy;
                 // Make sure that the enemy is only fighting one aba at a time
-                if (enemy.combatFoe != unit)
+                if (enemy.unitFoe != unit)
                 {
                     unit.SetRoamingState();
                     var targetPos = unit.GetAbaTower().GetEdgePointWithinInfluence();
@@ -39,8 +37,8 @@ namespace BioTower.Units
                 float percentage = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
                 float winChance = abaWinChance;
 
-                if (enemy.hasCrystal)
-                    winChance -= 10;
+                // if (enemy.hasCrystal)
+                //     winChance -= 10;
 
                 bool isWin = winChance < percentage;
 
@@ -54,7 +52,7 @@ namespace BioTower.Units
                     if (enemy == null)
                         return;
 
-                    GameManager.Instance.UnregisterEnemy(enemy);
+                    GameManager.Instance.UnregisterEnemy((EnemyUnit)enemy);
                     bool isEnemyAlive = enemy.TakeDamage(Util.gameSettings.upgradeSettings.abaUnitDamage);
                     LeanTween.scale(enemy.gameObject, Vector3.one * 1.1f, 0.15f).setLoopPingPong(1);
 
@@ -84,7 +82,7 @@ namespace BioTower.Units
 
                     if (!unit.isAlive)
                     {
-                        enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
+                        enemy.StartMoving(enemyUnit.GetNextWaypoint(), 1.0f);
                         unit.KillUnit();
 
                         return;
@@ -97,7 +95,7 @@ namespace BioTower.Units
                     {
                         if (unit.unitType == UnitType.SNRK2)
                         {
-                            enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
+                            enemy.StartMoving(enemyUnit.GetNextWaypoint(), 1.0f);
                             unit.SetRoamingState();
                         }
                         else
@@ -107,7 +105,7 @@ namespace BioTower.Units
                     }
                     else
                     {
-                        enemy.StartMoving(enemy.GetNextWaypoint(), 1.0f);
+                        enemy.StartMoving(enemyUnit.GetNextWaypoint(), 1.0f);
                         unit.KillUnit();
                     }
 

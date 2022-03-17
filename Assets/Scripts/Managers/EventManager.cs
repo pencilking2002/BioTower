@@ -57,7 +57,7 @@ namespace BioTower
 
         public class Units
         {
-            public static Action<Unit, EnemyUnit> onStartCombat;
+            public static Action<Unit, Unit> onStartCombat;     // player unit, enemy unit
             public static Action<EnemyUnit> onEnemyBaseReached;
             public static Action<EnemyUnit> onEnemyReachedDestination;
             public static Action<Unit> onUnitSpawned;

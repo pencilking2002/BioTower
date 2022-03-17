@@ -36,9 +36,9 @@ namespace BioTower.Units
         {
             if (!IsCombatState() && other.gameObject.layer == 10)
             {
-                var targetEnemy = other.transform.parent.GetComponent<BasicEnemy>();
+                var targetEnemy = other.transform.parent.GetComponent<EnemyUnit>();
 
-                if (targetEnemy.isEngagedInCombat)
+                if (!targetEnemy.IsRoamingState())
                     return;
 
                 EventManager.Units.onStartCombat?.Invoke(this, targetEnemy);

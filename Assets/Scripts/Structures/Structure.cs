@@ -71,6 +71,13 @@ namespace BioTower.Structures
 
         public virtual void AnimateTowerDrop()
         {
+            var healthBarScale = healthBar.transform.localScale;
+            var healthBarScaleX = healthBarScale.x;
+            var healthBarScaleY = healthBarScale.y;
+            healthBarScale = Vector3.zero;
+
+            healthBar.transform.localScale = healthBarScale;
+
             var initPos = initLocalSpritePos;
             var dropPosition = initPos + new Vector3(0, 25, 0);
             sr.transform.localPosition = dropPosition;
@@ -97,6 +104,9 @@ namespace BioTower.Structures
                     Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.4f, 0.1f);
             });
             seq.append(LeanTween.scale(sr.gameObject, initSpriteScale, 0.25f).setEaseOutExpo());
+            seq.append(() => { LeanTween.scaleX(healthBar.gameObject, healthBarScaleX, 0.4f).setEaseOutElastic(); });
+            seq.append(() => { LeanTween.scaleY(healthBar.gameObject, healthBarScaleY, 0.7f).setEaseOutElastic(); });
+
         }
 
         public virtual void OnUpdate() { }

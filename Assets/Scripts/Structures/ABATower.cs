@@ -71,17 +71,21 @@ namespace BioTower.Structures
                     if (enemy.IsCombatState())
                     {
                         abaUnit.SetRoamingState();
-                        var targetPos = GetEdgePointWithinInfluence();
-                        abaUnit.SetDestination(targetPos);
                         abaUnit.unitFoe = null;
                     }
                     else if (enemy.IsChasingState())
                     {
-                        //unit.agent.SetDestination(unit.targetEnemy.transform.position);
-                        var enemyPos = enemy.transform.position;
-                        var abaPos = abaUnit.transform.position;
-                        abaUnit.SetDestination(enemyPos);
-                        enemy.SetDestination(abaPos);
+                        if (enemy.unitFoe == this)
+                        {
+                            var enemyPos = enemy.transform.position;
+                            var abaPos = abaUnit.transform.position;
+                            abaUnit.SetDestination(enemyPos);
+                            enemy.SetDestination(abaPos);
+                        }
+                        // else
+                        // {
+                        //     abaUnit.SetRoamingState();
+                        // }
                     }
                 }
                 else if (abaUnit.IsRoamingState())
@@ -90,7 +94,9 @@ namespace BioTower.Structures
 
                     if (isFound)
                     {
-                        roamingEnemy.SetChasingState(abaUnit);
+                        if (!roamingEnemy.IsChasingState())
+                            roamingEnemy.SetChasingState(abaUnit);
+
                         abaUnit.SetChasingState(roamingEnemy);
                     }
                 }
@@ -105,7 +111,7 @@ namespace BioTower.Structures
             for (int i = 0; i < enemiesWithinInfluence.Count; i++)
             {
                 var enemy = enemiesWithinInfluence[i];
-                if (enemy.IsRoamingState())
+                if (enemy.IsRoamingState() || (enemy.IsChasingState() && enemy.unitFoe == abaUnit))
                 {
                     float distance = Vector2.Distance(enemy.transform.position, abaUnit.transform.position);
                     if (distance < closestDistance)
@@ -137,7 +143,6 @@ namespace BioTower.Structures
                 unitSpawnTrail.emitting = true;
                 unitSpawnTrail.transform.localPosition = Vector2.zero;
                 var seq = LeanTween.sequence();
-                //seq.append(LeanTween.move(unitSpawnTrail.gameObject, unit.transform.position, 0.1f));
                 LTSpline ltSpline = new LTSpline(
                     new Vector3[] {
                         new Vector3(UnityEngine.Random.Range(0,1), UnityEngine.Random.Range(0,1), 0f),
@@ -238,17 +243,14 @@ namespace BioTower.Structures
             {
                 // Check if any units are following an enemy
 
-                for (int i = 0; i < units.Count; i++)
-                {
-                    AbaUnit unit = (AbaUnit)units[i];
-                    if (unit.IsChasingState())
-                    {
-                        unit.SetRoamingState();
-                        var targetPos = GetEdgePointWithinInfluence();
-                        unit.SetDestination(targetPos);
-                        unit.unitFoe = null;
-                    }
-                }
+                // for (int i = 0; i < units.Count; i++)
+                // {
+                //     AbaUnit unit = (AbaUnit)units[i];
+                //     if (unit.IsChasingState())
+                //     {
+                //         unit.SetRoamingState();
+                //     }
+                // }
 
                 // Set them back to roaming
                 enemiesWithinInfluence.Remove(enemy);

@@ -29,8 +29,6 @@ namespace BioTower.Units
                 if (enemy.unitFoe != unit)
                 {
                     unit.SetRoamingState();
-                    var targetPos = unit.GetAbaTower().GetEdgePointWithinInfluence();
-                    unit.SetDestination(targetPos);
                     return;
                 }
 
@@ -63,8 +61,6 @@ namespace BioTower.Units
                     else
                     {
                         unit.SetRoamingState();
-                        var targetPos = unit.GetAbaTower().GetEdgePointWithinInfluence();
-                        unit.SetDestination(targetPos);
                     }
                 }
 
@@ -75,8 +71,6 @@ namespace BioTower.Units
                     if (enemy == null)
                     {
                         unit.SetRoamingState();
-                        var targetPos = unit.GetAbaTower().GetEdgePointWithinInfluence();
-                        unit.SetDestination(targetPos);
                         return;
                     }
 

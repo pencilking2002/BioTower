@@ -44,12 +44,19 @@ namespace BioTower.Units
 
         public override void SetRoamingState()
         {
+            var targetPos = GetAbaTower().GetEdgePointWithinInfluence();
+            SetDestination(targetPos);
             base.SetRoamingState();
         }
 
         public override bool IsChasingState()
         {
             return base.IsChasingState();
+        }
+
+        public override void SetChasingState(Unit unit)
+        {
+            base.SetChasingState(unit);
         }
 
         public override bool IsCombatState()
@@ -102,12 +109,12 @@ namespace BioTower.Units
                 }
                 else if (IsRoamingState())
                 {
-                    if (enemy.IsRoamingState())
-                    {
-                        SetChasingState(enemy);
-                        enemy.SetChasingState(this);
-                        isMatch = true;
-                    }
+                    if (enemy.IsCombatState())
+                        return;
+
+                    SetChasingState(enemy);
+                    enemy.SetChasingState(this);
+                    isMatch = true;
                 }
 
                 if (isMatch)

@@ -123,11 +123,18 @@ namespace BioTower.Units
         {
             unitState = UnitState.CHASING_UNIT;
             unitFoe = unit;
+            SetDestination(unit.transform.position);
         }
 
         public virtual bool IsRoamingState() { return unitState == UnitState.ROAMING; }
         public virtual void SetCombatState() { unitState = UnitState.COMBAT; }
-        public virtual void SetRoamingState() { unitState = UnitState.ROAMING; }
+        public virtual void SetRoamingState()
+        {
+            unitState = UnitState.ROAMING;
+            unitFoe = null;
+            Debug.Log("Set roaming state");
+        }
+
         public virtual void SetDestroyedState() { unitState = UnitState.DESTROYED; }
         public virtual void SetDestination(Waypoint waypoint) { }
         public virtual void SetDestination(Vector3 destination) { }

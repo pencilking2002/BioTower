@@ -94,7 +94,22 @@ namespace BioTower.Structures
                 var unit = go.GetComponent<AbaUnit>();
                 unit.agent.map = map;
                 unit.tower = this;
-                AddUnit(unit);
+
+                var scale = unit.transform.localScale;
+                unit.transform.localScale = Vector3.zero;
+
+                unitSpawnTrail.emitting = true;
+                unitSpawnTrail.transform.localPosition = Vector2.zero;
+                var seq = LeanTween.sequence();
+                seq.append(LeanTween.move(unitSpawnTrail.gameObject, unit.GetComponentInChildren<Collider2D>().transform.position, 0.1f));
+                seq.append(LeanTween.scale(unit.gameObject, scale * 2, 0.1f));
+                seq.append(LeanTween.scale(unit.gameObject, scale, 0.25f));
+                seq.append(() =>
+                {
+                    AddUnit(unit);
+                    unitSpawnTrail.emitting = false;
+                    unitSpawnTrail.transform.localPosition = Vector2.zero;
+                });
             }
         }
 

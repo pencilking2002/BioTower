@@ -81,7 +81,7 @@ namespace BioTower.Units
             // after 5 sec, make unit scale down and destroy it
             LeanTween.delayedCall(gameObject, 5, () =>
             {
-                LeanTween.scale(gameObject, Vector3.zero, 0.5f).setOnComplete(() =>
+                LeanTween.scale(gameObject, Vector3.zero, 1.0f).setOnComplete(() =>
                 {
                     Destroy(gameObject);
                 });

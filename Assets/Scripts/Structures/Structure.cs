@@ -36,6 +36,7 @@ namespace BioTower.Structures
         public SpriteRenderer sr;
         [HideInInspector] public float lastDeclineTime;
         [SerializeField] protected Disc influenceVisuals;
+        [SerializeField] protected TrailRenderer unitSpawnTrail;
         public List<Unit> units;
         public TowerAlert towerAlert;
         private Vector3 initSpriteScale;
@@ -71,12 +72,9 @@ namespace BioTower.Structures
 
         public virtual void AnimateTowerDrop()
         {
-            var healthBarScale = healthBar.transform.localScale;
-            var healthBarScaleX = healthBarScale.x;
-            var healthBarScaleY = healthBarScale.y;
-            healthBarScale = Vector3.zero;
-
-            healthBar.transform.localScale = healthBarScale;
+            var healthBarScaleX = healthBar.transform.localScale.x;
+            var healthBarScaleY = healthBar.transform.localScale.y;
+            healthBar.transform.localScale = Vector3.zero;
 
             var initPos = initLocalSpritePos;
             var dropPosition = initPos + new Vector3(0, 25, 0);

@@ -80,12 +80,43 @@ namespace BioTower.Structures
                         //unit.agent.SetDestination(unit.targetEnemy.transform.position);
                         var enemyPos = enemy.transform.position;
                         var abaPos = abaUnit.transform.position;
-
                         abaUnit.SetDestination(enemyPos);
                         enemy.SetDestination(abaPos);
                     }
                 }
+                else if (abaUnit.IsRoamingState())
+                {
+                    var roamingEnemy = FindClosestRoamingEnemy(abaUnit, out bool isFound);
+
+                    if (isFound)
+                    {
+                        roamingEnemy.SetChasingState(abaUnit);
+                        abaUnit.SetChasingState(roamingEnemy);
+                    }
+                }
             }
+        }
+
+        private EnemyUnit FindClosestRoamingEnemy(Unit abaUnit, out bool isFound)
+        {
+            isFound = false;
+            EnemyUnit closestEnemy = null;
+            float closestDistance = Mathf.Infinity;
+            for (int i = 0; i < enemiesWithinInfluence.Count; i++)
+            {
+                var enemy = enemiesWithinInfluence[i];
+                if (enemy.IsRoamingState())
+                {
+                    float distance = Vector2.Distance(enemy.transform.position, abaUnit.transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestEnemy = enemy;
+                        isFound = true;
+                    }
+                }
+            }
+            return closestEnemy;
         }
 
         public override void SpawnUnits(int numUnits)

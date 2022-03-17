@@ -113,6 +113,11 @@ namespace BioTower.Units
             return isEnemy;
         }
 
+        public bool IsAba()
+        {
+            return unitType == UnitType.ABA;
+        }
+
         public virtual bool IsChasingState() { return unitState == UnitState.CHASING_UNIT; }
         public virtual void SetChasingState(Unit unit)
         {

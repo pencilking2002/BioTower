@@ -88,16 +88,30 @@ namespace BioTower.Units
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (IsChasingState() && other.gameObject.layer == 10 && isAlive)
+            if (other.gameObject.layer == 10 && isAlive)
             {
-                unitFoe = other.transform.parent.GetComponent<EnemyUnit>();
-
-                if (!unitFoe.IsChasingState())
+                var enemy = other.transform.parent.GetComponent<EnemyUnit>();
+                bool isMatch = false;
+                if (IsChasingState())
                 {
-                    return;
+                    if (unitFoe == enemy)
+                    {
+                        if (enemy.unitFoe == this)
+                            isMatch = true;
+                    }
+                }
+                else if (IsRoamingState())
+                {
+                    if (enemy.IsRoamingState())
+                    {
+                        SetChasingState(enemy);
+                        enemy.SetChasingState(this);
+                        isMatch = true;
+                    }
                 }
 
-                EventManager.Units.onStartCombat?.Invoke(this, unitFoe);
+                if (isMatch)
+                    EventManager.Units.onStartCombat?.Invoke(this, unitFoe);
             }
         }
 

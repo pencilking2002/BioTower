@@ -86,6 +86,8 @@ namespace BioTower.Units
                     {
                         var destination = enemy.unitFoe.transform.position;
                         enemy.SetDestination(destination);
+                        enemy.agent.primeGoal = destination;
+                        Debug.DrawLine(enemy.transform.position, enemy.unitFoe.transform.position, Color.black);
                         //Debug.Log("Chase aba");
                     }
                 }

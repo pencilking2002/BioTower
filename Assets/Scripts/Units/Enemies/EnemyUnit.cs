@@ -134,7 +134,7 @@ namespace BioTower.Units
             {
                 SetDestination(waypoint);
                 SetRoamingState();
-                Debug.Log("Enemy start moving");
+                //Debug.Log("Enemy start moving");
             });
         }
 
@@ -197,6 +197,7 @@ namespace BioTower.Units
 
         public override void SetRoamingState()
         {
+            agent.map = GameManager.Instance.levelMap.map;
             base.SetRoamingState();
         }
 
@@ -212,6 +213,11 @@ namespace BioTower.Units
 
         public override void SetChasingState(Unit unit)
         {
+            if (unit.IsAba())
+            {
+                var abaTower = (ABATower)unit.tower;
+                agent.map = abaTower.map;
+            }
             base.SetChasingState(unit);
         }
 

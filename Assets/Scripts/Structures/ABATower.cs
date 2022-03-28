@@ -134,6 +134,7 @@ namespace BioTower.Structures
 
                 go.transform.SetParent(unitsContainer);
                 var unit = go.GetComponent<AbaUnit>();
+                AddUnit(unit);
                 unit.agent.map = map;
                 unit.tower = this;
 
@@ -156,7 +157,6 @@ namespace BioTower.Structures
                 seq.append(LeanTween.scale(unit.gameObject, scale, 0.25f));
                 seq.append(() =>
                 {
-                    AddUnit(unit);
                     //Debug.Break();
                     unitSpawnTrail.emitting = false;
                     unitSpawnTrail.transform.localPosition = Vector2.zero;

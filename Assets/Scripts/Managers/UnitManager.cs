@@ -94,5 +94,21 @@ namespace BioTower.Units
             }
         }
 
+        private void OnGameOver(bool isWin)
+        {
+            units.Clear();
+        }
+
+        private void OnEnable()
+        {
+            EventManager.Game.onGameOver += OnGameOver;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Game.onGameOver -= OnGameOver;
+
+        }
+
     }
 }

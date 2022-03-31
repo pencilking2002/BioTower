@@ -10019,6 +10019,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1404310606}
     m_Modifications:
+    - target: {fileID: 2447111959487138361, guid: 1efa5580d925f4f41949a420af6456cf,
+        type: 3}
+      propertyPath: combatDistanceThreshold
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3163904365036822118, guid: 1efa5580d925f4f41949a420af6456cf,
         type: 3}
       propertyPath: m_Name

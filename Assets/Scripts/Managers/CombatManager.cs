@@ -8,6 +8,7 @@ namespace BioTower.Units
     public class CombatManager : MonoBehaviour
     {
         [Range(0, 100)][SerializeField] private float abaWinChance = 50;
+        [Range(0, 100)][SerializeField] private float snrk2WinChance = 0;
         [SerializeField] private float combatDistanceThreshold = 0.25f;
         private void Update()
         {
@@ -58,8 +59,62 @@ namespace BioTower.Units
                 {
                     unit.SetCombatState();
                     unit.unitFoe.SetCombatState();
+                    DoCombatRound(unit, unit.unitFoe, 1);
                 }
             }
+        }
+
+        private void DoCombatRound(Unit unit, Unit enemyUnit, float delay = 0)
+        {
+            LeanTween.delayedCall(delay, () =>
+            {
+                float percentage = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
+                float winChance = GetWinChance(unit);
+
+                bool isWin = winChance < percentage;
+
+                if (isWin)
+                {
+                    HandleUnitWin(unit, enemyUnit);
+                }
+                else
+                {
+                    HandleUnitWin(enemyUnit, unit);
+                }
+            });
+        }
+
+        private float GetWinChance(Unit unit)
+        {
+            float winChance = 0;
+            if (unit.IsAba())
+                winChance = abaWinChance;
+            else if (unit.IsSnrk2())
+                winChance = snrk2WinChance;
+
+            return winChance;
+        }
+
+        private void HandleUnitWin(Unit winningUnit, Unit losingUnit)
+        {
+            int damage = GetDamage(winningUnit);
+
+            bool isUnitAlive = losingUnit.TakeDamage(damage);
+            if (isUnitAlive)
+                DoCombatRound(winningUnit, losingUnit, 1);
+            else
+                winningUnit.SetRoamingState();
+        }
+
+        private int GetDamage(Unit unit)
+        {
+            int damage = 0;
+            if (unit.IsAba())
+                damage = Util.gameSettings.upgradeSettings.abaUnitDamage;
+            else if (unit.IsEnemy())
+                damage = Util.gameSettings.basicEnemyDamage;
+
+            return damage;
         }
     }
 }

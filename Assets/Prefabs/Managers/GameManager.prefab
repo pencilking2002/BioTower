@@ -512,14 +512,10 @@ MonoBehaviour:
     abaTowerCost: 10
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2310
-    abaMapScale_float: 2310
-    abaInfluenceShapeScale_float: 1000
     enableAbaTowerRandomHeal: 0
     ppc2TowerUnlocked: 0
     ppc2TowerCost: 40
     ppc2MaxInfluenceRadius_float: 2280
-    ppc2InfluenceShapeScale_float: 1000
-    ppc2MapScale_float: 2310
     ppc2shootInterval_float: 1000
     ppc2ExplosionColliderScale_float: 1271
     ppc2ExplosionSpriteScale_float: 622
@@ -1004,6 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abaWinChance: 50
+  combatDistanceThreshold: 0.5
 --- !u!1 &5581267419933132214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,8 +1099,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083211cbc03ae3a45bd737563b07c263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2780707828294620590, guid: f469209cfd1273840b4db49e40188b90,
-    type: 3}
+  basicEnemyPrefab: {fileID: 0}
+  midEnemyPrefab: {fileID: 0}
+  advancedEnemyPrefab: {fileID: 0}
   waveMode: 0
   currWaveIndex: 0
   wavesInitialized: 0

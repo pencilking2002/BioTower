@@ -30,7 +30,7 @@ namespace BioTower.Units
         [HideInInspector] public Structure tower;
         [SerializeField] private bool hasHealth;
         [EnableIf("hasHealth")][SerializeField] protected int currHealth;
-        protected HealthBar healthBar;
+        [SerializeField] protected HealthBar healthBar;
         [HideInInspector] protected Animator anim;
         [HideInInspector] public SpriteRenderer sr;
         public bool isAlive;
@@ -113,10 +113,8 @@ namespace BioTower.Units
             return isEnemy;
         }
 
-        public bool IsAba()
-        {
-            return unitType == UnitType.ABA;
-        }
+        public bool IsAba() { return unitType == UnitType.ABA; }
+        public bool IsSnrk2() { return unitType == UnitType.SNRK2; }
 
         public virtual bool IsChasingState() { return unitState == UnitState.CHASING_UNIT; }
         public virtual void SetChasingState(Unit unit)

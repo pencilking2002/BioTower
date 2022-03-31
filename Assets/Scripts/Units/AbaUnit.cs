@@ -95,31 +95,31 @@ namespace BioTower.Units
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.layer == 10 && isAlive)
-            {
-                var enemy = other.transform.parent.GetComponent<EnemyUnit>();
-                bool isMatch = false;
-                if (IsChasingState())
-                {
-                    if (unitFoe == enemy)
-                    {
-                        if (enemy.unitFoe == this)
-                            isMatch = true;
-                    }
-                }
-                else if (IsRoamingState())
-                {
-                    if (enemy.IsCombatState())
-                        return;
+            // if (other.gameObject.layer == 10 && isAlive)
+            // {
+            //     var enemy = other.transform.parent.GetComponent<EnemyUnit>();
+            //     bool isMatch = false;
+            //     if (IsChasingState())
+            //     {
+            //         if (unitFoe == enemy)
+            //         {
+            //             if (enemy.unitFoe == this)
+            //                 isMatch = true;
+            //         }
+            //     }
+            //     else if (IsRoamingState())
+            //     {
+            //         if (enemy.IsCombatState())
+            //             return;
 
-                    SetChasingState(enemy);
-                    enemy.SetChasingState(this);
-                    isMatch = true;
-                }
+            //         SetChasingState(enemy);
+            //         enemy.SetChasingState(this);
+            //         isMatch = true;
+            //     }
 
-                if (isMatch)
-                    EventManager.Units.onStartCombat?.Invoke(this, unitFoe);
-            }
+            //     if (isMatch)
+            //         EventManager.Units.onStartCombat?.Invoke(this, unitFoe);
+            // }
         }
 
         public override void SetDestination(Vector3 newDestination)

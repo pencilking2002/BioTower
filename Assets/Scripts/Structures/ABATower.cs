@@ -56,52 +56,52 @@ namespace BioTower.Structures
                 influenceVisuals.transform.eulerAngles += new Vector3(0, 0, discRotateSpeed * Time.deltaTime);
 
             towerAlert.OnUpdate(this);
-            ChaseEnemies();
+            //ChaseEnemies();
         }
 
-        private void ChaseEnemies()
-        {
-            for (int i = 0; i < units.Count; i++)
-            {
-                AbaUnit abaUnit = (AbaUnit)units[i];
-                EnemyUnit enemy = (EnemyUnit)abaUnit.unitFoe;
+        // private void ChaseEnemies()
+        // {
+        //     for (int i = 0; i < units.Count; i++)
+        //     {
+        //         AbaUnit abaUnit = (AbaUnit)units[i];
+        //         EnemyUnit enemy = (EnemyUnit)abaUnit.unitFoe;
 
-                if (abaUnit.IsChasingState())
-                {
-                    if (enemy.IsCombatState())
-                    {
-                        abaUnit.SetRoamingState();
-                        abaUnit.unitFoe = null;
-                    }
-                    else if (enemy.IsChasingState())
-                    {
-                        if (enemy.unitFoe == this)
-                        {
-                            var enemyPos = enemy.transform.position;
-                            var abaPos = abaUnit.transform.position;
-                            abaUnit.SetDestination(enemyPos);
-                            enemy.SetDestination(abaPos);
-                        }
-                        // else
-                        // {
-                        //     abaUnit.SetRoamingState();
-                        // }
-                    }
-                }
-                else if (abaUnit.IsRoamingState())
-                {
-                    var roamingEnemy = FindClosestRoamingEnemy(abaUnit, out bool isFound);
+        //         if (abaUnit.IsChasingState())
+        //         {
+        //             if (enemy.IsCombatState())
+        //             {
+        //                 abaUnit.SetRoamingState();
+        //                 abaUnit.unitFoe = null;
+        //             }
+        //             else if (enemy.IsChasingState())
+        //             {
+        //                 if (enemy.unitFoe == this)
+        //                 {
+        //                     var enemyPos = enemy.transform.position;
+        //                     var abaPos = abaUnit.transform.position;
+        //                     abaUnit.SetDestination(enemyPos);
+        //                     enemy.SetDestination(abaPos);
+        //                 }
+        //                 // else
+        //                 // {
+        //                 //     abaUnit.SetRoamingState();
+        //                 // }
+        //             }
+        //         }
+        //         else if (abaUnit.IsRoamingState())
+        //         {
+        //             var roamingEnemy = FindClosestRoamingEnemy(abaUnit, out bool isFound);
 
-                    if (isFound)
-                    {
-                        if (!roamingEnemy.IsChasingState())
-                            roamingEnemy.SetChasingState(abaUnit);
+        //             if (isFound)
+        //             {
+        //                 if (!roamingEnemy.IsChasingState())
+        //                     roamingEnemy.SetChasingState(abaUnit);
 
-                        abaUnit.SetChasingState(roamingEnemy);
-                    }
-                }
-            }
-        }
+        //                 abaUnit.SetChasingState(roamingEnemy);
+        //             }
+        //         }
+        //     }
+        // }
 
         private EnemyUnit FindClosestRoamingEnemy(Unit abaUnit, out bool isFound)
         {
@@ -134,7 +134,6 @@ namespace BioTower.Structures
 
                 go.transform.SetParent(unitsContainer);
                 var unit = go.GetComponent<AbaUnit>();
-                AddUnit(unit);
                 unit.agent.map = map;
                 unit.tower = this;
 
@@ -157,6 +156,7 @@ namespace BioTower.Structures
                 seq.append(LeanTween.scale(unit.gameObject, scale, 0.25f));
                 seq.append(() =>
                 {
+                    AddUnit(unit);
                     //Debug.Break();
                     unitSpawnTrail.emitting = false;
                     unitSpawnTrail.transform.localPosition = Vector2.zero;
@@ -212,18 +212,18 @@ namespace BioTower.Structures
             {
                 enemiesWithinInfluence.Add(enemy);
 
-                if (enemy.IsRoamingState())
-                {
-                    var abaUnit = GetClosestUnit(enemy, out bool unitFound);
+                // if (enemy.IsRoamingState())
+                // {
+                //     var abaUnit = GetClosestUnit(enemy, out bool unitFound);
 
-                    if (unitFound && abaUnit.IsRoamingState())
-                    {
-                        enemy.SetChasingState(abaUnit);
-                        abaUnit.SetChasingState(enemy);
-                    }
-                }
+                //     if (unitFound && abaUnit.IsRoamingState())
+                //     {
+                //         enemy.SetChasingState(abaUnit);
+                //         abaUnit.SetChasingState(enemy);
+                //     }
+                // }
 
-                EventManager.Structures.onEnemyEnterTowerInfluence?.Invoke(enemy, this);
+                //EventManager.Structures.onEnemyEnterTowerInfluence?.Invoke(enemy, this);
             }
         }
 
@@ -241,17 +241,6 @@ namespace BioTower.Structures
         {
             if (enemiesWithinInfluence.Contains(enemy))
             {
-                // Check if any units are following an enemy
-
-                // for (int i = 0; i < units.Count; i++)
-                // {
-                //     AbaUnit unit = (AbaUnit)units[i];
-                //     if (unit.IsChasingState())
-                //     {
-                //         unit.SetRoamingState();
-                //     }
-                // }
-
                 // Set them back to roaming
                 enemiesWithinInfluence.Remove(enemy);
                 EventManager.Structures.onEnemyExitTowerInfluence?.Invoke(enemy, this);

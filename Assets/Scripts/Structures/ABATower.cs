@@ -103,7 +103,7 @@ namespace BioTower.Structures
         //     }
         // }
 
-        private EnemyUnit FindClosestRoamingEnemy(Unit abaUnit, out bool isFound)
+        public EnemyUnit FindClosestRoamingEnemy(Unit abaUnit, out bool isFound)
         {
             isFound = false;
             EnemyUnit closestEnemy = null;
@@ -111,7 +111,7 @@ namespace BioTower.Structures
             for (int i = 0; i < enemiesWithinInfluence.Count; i++)
             {
                 var enemy = enemiesWithinInfluence[i];
-                if (enemy.IsRoamingState() || (enemy.IsChasingState() && enemy.unitFoe == abaUnit))
+                if (enemy.IsRoamingState())
                 {
                     float distance = Vector2.Distance(enemy.transform.position, abaUnit.transform.position);
                     if (distance < closestDistance)

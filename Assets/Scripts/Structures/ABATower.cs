@@ -142,6 +142,7 @@ namespace BioTower.Structures
 
                 unitSpawnTrail.emitting = true;
                 unitSpawnTrail.transform.localPosition = Vector2.zero;
+                AddUnit(unit);
                 var seq = LeanTween.sequence();
                 LTSpline ltSpline = new LTSpline(
                     new Vector3[] {
@@ -156,7 +157,6 @@ namespace BioTower.Structures
                 seq.append(LeanTween.scale(unit.gameObject, scale, 0.25f));
                 seq.append(() =>
                 {
-                    AddUnit(unit);
                     //Debug.Break();
                     unitSpawnTrail.emitting = false;
                     unitSpawnTrail.transform.localPosition = Vector2.zero;

@@ -198,6 +198,9 @@ namespace BioTower.Units
         public override void SetRoamingState()
         {
             agent.map = GameManager.Instance.levelMap.map;
+            agent.stoppingDistance = 1;
+            agent.slowingDistance = 1;
+            DestinationReached();
             base.SetRoamingState();
         }
 
@@ -218,6 +221,8 @@ namespace BioTower.Units
                 var abaTower = (ABATower)unit.tower;
                 agent.map = abaTower.map;
             }
+            agent.stoppingDistance = 0.1f;
+            agent.slowingDistance = 0.1f;
             base.SetChasingState(unit);
         }
 

@@ -1000,7 +1000,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abaWinChance: 50
-  combatDistanceThreshold: 0.5
+  snrk2WinChance: 0
+  combatDistanceThreshold: 0.75
 --- !u!1 &5581267419933132214
 GameObject:
   m_ObjectHideFlags: 0

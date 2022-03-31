@@ -154,16 +154,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitType: 1
+  unitState: 0
+  unitFoe: {fileID: 0}
   agent: {fileID: 663975515}
   tower: {fileID: 0}
   hasHealth: 1
   currHealth: 5
+  healthBar: {fileID: 0}
   sr: {fileID: 2780707826441001857}
   isAlive: 0
   muscleIcon: {fileID: 5805220977226339858}
-  hasCrystal: 0
-  isEngagedInCombat: 0
-  combatFoe: {fileID: 0}
 --- !u!114 &663975515
 MonoBehaviour:
   m_ObjectHideFlags: 0

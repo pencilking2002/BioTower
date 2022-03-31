@@ -72,23 +72,44 @@ namespace BioTower.Units
                 if (unit.IsEnemy())
                 {
                     var enemy = (EnemyUnit)unit;
-                    if (enemy.IsRoamingState() && enemy.GetNextWaypoint() != null)
+                    if (enemy.IsRoamingState())
                     {
-                        var destination = enemy.agent.primeGoal;
-                        var waypointPosition = enemy.GetNextWaypoint().transform.position;
-                        if (Vector3.Distance(destination, waypointPosition) > 0.2f)
+                        if (enemy.GetNextWaypoint() != null)
                         {
-                            Debug.Log(enemy.gameObject.name + " is off destination");
-                            enemy.SetDestination(destination);
+                            //var destination = enemy.agent.primeGoal;
+                            var waypointPosition = enemy.GetNextWaypoint().transform.position;
+                            if (Vector3.Distance(enemy.transform.position, waypointPosition) > 0.2f)
+                            {
+                                Debug.Log(enemy.gameObject.name + " is off destination");
+                                enemy.SetDestination(waypointPosition);
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("enemy does not have a waypoint to go to");
                         }
                     }
                     else if (enemy.IsChasingState())
                     {
-                        var destination = enemy.unitFoe.transform.position;
-                        enemy.SetDestination(destination);
-                        enemy.agent.primeGoal = destination;
-                        Debug.DrawLine(enemy.transform.position, enemy.unitFoe.transform.position, Color.black);
+                        if (!enemy.unitFoe || !enemy.unitFoe.isAlive || !enemy.unitFoe.IsChasingState() || enemy.unitFoe.unitFoe != enemy)
+                            enemy.SetRoamingState();
+                        else
+                        {
+                            var destination = enemy.unitFoe.transform.position;
+                            enemy.SetDestination(destination);
+                            enemy.agent.primeGoal = destination;
+                            Debug.DrawLine(enemy.transform.position, enemy.unitFoe.transform.position, Color.black);
+                        }
                         //Debug.Log("Chase aba");
+                    }
+                }
+                else if (unit.IsAba())
+                {
+                    if (unit.IsChasingState())
+                    {
+                        var destination = unit.unitFoe.transform.position;
+                        unit.SetDestination(destination);
+                        unit.agent.primeGoal = destination;
                     }
                 }
             }

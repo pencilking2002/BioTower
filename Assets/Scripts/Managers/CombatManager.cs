@@ -34,32 +34,32 @@ namespace BioTower.Units
 
         private void ProcessAbaUnit(Unit unit, ABATower tower)
         {
-            if (!unit.IsRoamingState())
-                return;
+            if (unit.IsRoamingState())
+            {
+                // Find the closest enemy who is not engaged
+                var enemy = tower.FindClosestRoamingEnemy(unit, out bool isFound);
 
-            // Find the closest enemy who is not engaged
-            var enemy = tower.FindClosestRoamingEnemy(unit, out bool isFound);
+                if (!isFound)
+                    return;
 
-            if (!isFound)
-                return;
-
-            unit.SetChasingState(enemy);
-            enemy.SetChasingState(unit);
+                unit.SetChasingState(enemy);
+                enemy.SetChasingState(unit);
+            }
         }
 
         private void SetUnitCombatStates(ABATower tower)
         {
             foreach (Unit unit in tower.units)
             {
-                if (!unit.IsChasingState())
-                    return;
-
-                float distance = Vector2.Distance(unit.transform.position, unit.unitFoe.transform.position);
-                if (distance < combatDistanceThreshold)
+                if (unit.IsChasingState())
                 {
-                    unit.SetCombatState();
-                    unit.unitFoe.SetCombatState();
-                    DoCombatRound(unit, unit.unitFoe, 1);
+                    float distance = Vector2.Distance(unit.transform.position, unit.unitFoe.transform.position);
+                    if (distance < combatDistanceThreshold)
+                    {
+                        unit.SetCombatState();
+                        unit.unitFoe.SetCombatState();
+                        DoCombatRound(unit, unit.unitFoe, 1);
+                    }
                 }
             }
         }

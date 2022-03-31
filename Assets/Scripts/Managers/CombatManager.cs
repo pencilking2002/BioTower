@@ -8,13 +8,8 @@ namespace BioTower.Units
     public class CombatManager : MonoBehaviour
     {
         [Range(0, 100)][SerializeField] private float abaWinChance = 50;
-
+        [SerializeField] private float combatDistanceThreshold = 0.25f;
         private void Update()
-        {
-            SetUnitChasingStates();
-        }
-
-        private void SetUnitChasingStates()
         {
             foreach (Structure tower in Util.structureManager.structureList)
             {
@@ -22,19 +17,47 @@ namespace BioTower.Units
                     continue;
 
                 var abaTower = (ABATower)tower;
-                foreach (Unit unit in tower.units)
+
+                SetUnitChasingStates(abaTower);
+                SetUnitCombatStates(abaTower);
+            }
+        }
+
+        private void SetUnitChasingStates(ABATower tower)
+        {
+            foreach (Unit unit in tower.units)
+            {
+                ProcessAbaUnit(unit, tower);
+            }
+        }
+
+        private void ProcessAbaUnit(Unit unit, ABATower tower)
+        {
+            if (!unit.IsRoamingState())
+                return;
+
+            // Find the closest enemy who is not engaged
+            var enemy = tower.FindClosestRoamingEnemy(unit, out bool isFound);
+
+            if (!isFound)
+                return;
+
+            unit.SetChasingState(enemy);
+            enemy.SetChasingState(unit);
+        }
+
+        private void SetUnitCombatStates(ABATower tower)
+        {
+            foreach (Unit unit in tower.units)
+            {
+                if (!unit.IsChasingState())
+                    return;
+
+                float distance = Vector2.Distance(unit.transform.position, unit.unitFoe.transform.position);
+                if (distance < combatDistanceThreshold)
                 {
-                    if (!unit.IsRoamingState())
-                        continue;
-
-                    // Find the closest enemy who is not engaged
-                    var enemy = abaTower.FindClosestRoamingEnemy(unit, out bool isFound);
-
-                    if (!isFound)
-                        continue;
-
-                    unit.SetChasingState(enemy);
-                    enemy.SetChasingState(unit);
+                    unit.SetCombatState();
+                    unit.unitFoe.SetCombatState();
                 }
             }
         }

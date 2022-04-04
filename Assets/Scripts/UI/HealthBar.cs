@@ -67,7 +67,7 @@ namespace BioTower.UI
                 var bar = bars[i];
                 if (bar)
                 {
-                    Color color = i < health - 1 ? barColor : deactivatedBarColor;
+                    Color color = i < health ? barColor : deactivatedBarColor;
                     bar.SetColor(color);
                 }
             }

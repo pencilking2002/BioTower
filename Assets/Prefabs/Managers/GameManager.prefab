@@ -339,6 +339,7 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 1024
+  hurtColor: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
 --- !u!1 &1717763038849214772
 GameObject:
   m_ObjectHideFlags: 0

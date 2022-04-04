@@ -72,7 +72,7 @@ namespace BioTower.Units
                 float winChance = GetWinChance(unit);
 
                 bool isWin = winChance > percentage;
-                Debug.Log($"UnitType: {unit.unitType}. IsWin: {isWin}. Win chance: {winChance}. Percentage: {percentage}");
+                //Debug.Log($"UnitType: {unit.unitType}. IsWin: {isWin}. Win chance: {winChance}. Percentage: {percentage}");
 
                 if (isWin)
                 {

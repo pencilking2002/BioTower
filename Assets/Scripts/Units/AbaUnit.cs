@@ -79,50 +79,23 @@ namespace BioTower.Units
             base.SetDestroyedState();
             StopMoving();
             isAlive = false;
-            anim.SetBool("Dead", true);
-            anim.SetBool("Attack", false);
+            // anim.SetBool("Dead", true);
+            // anim.SetBool("Attack", false);
             GameManager.Instance.unitManager.Unregister(this);
             Deregister();
             healthBar.gameObject.SetActive(false);
 
             // after 5 sec, make unit scale down and destroy it
-            LeanTween.delayedCall(gameObject, 5, () =>
-            {
-                LeanTween.scale(gameObject, Vector3.zero, 1.0f).setOnComplete(() =>
-                {
-                    Destroy(gameObject);
-                });
-            });
-        }
-
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            // if (other.gameObject.layer == 10 && isAlive)
+            // LeanTween.delayedCall(gameObject, 5, () =>
             // {
-            //     var enemy = other.transform.parent.GetComponent<EnemyUnit>();
-            //     bool isMatch = false;
-            //     if (IsChasingState())
+            //     LeanTween.scale(gameObject, Vector3.zero, 1.0f).setOnComplete(() =>
             //     {
-            //         if (unitFoe == enemy)
-            //         {
-            //             if (enemy.unitFoe == this)
-            //                 isMatch = true;
-            //         }
-            //     }
-            //     else if (IsRoamingState())
-            //     {
-            //         if (enemy.IsCombatState())
-            //             return;
+            if (explosion)
+                explosion.Play();
 
-            //         SetChasingState(enemy);
-            //         enemy.SetChasingState(this);
-            //         isMatch = true;
-            //     }
-
-            //     if (isMatch)
-            //         EventManager.Units.onStartCombat?.Invoke(this, unitFoe);
-            // }
+            Destroy(gameObject);
+            //});
+            //});
         }
 
         public override void SetDestination(Vector3 newDestination)

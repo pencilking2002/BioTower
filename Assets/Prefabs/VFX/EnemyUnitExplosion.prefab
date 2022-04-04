@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1856269924542256499}
   - component: {fileID: 1710466829217413434}
   - component: {fileID: 4079815559930875866}
-  - component: {fileID: 6919324679544252053}
+  - component: {fileID: 2873506921927081200}
   m_Layer: 0
-  m_Name: AbaUnitExplosion
+  m_Name: EnemyUnitExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4875,7 +4875,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &6919324679544252053
+--- !u!114 &2873506921927081200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -25,6 +25,7 @@ namespace BioTower.Units
         public UnitType unitType;
         public UnitState unitState;
         public Unit unitFoe;
+        public ParticleExplosion explosion;
 
         [HideInInspector] public PolyNavAgent agent;
         [HideInInspector] public Structure tower;
@@ -98,7 +99,17 @@ namespace BioTower.Units
                 if (currHealth == 0)
                     KillUnit();
                 else
+                {
+                    sr.color = GameManager.Instance.util.hurtColor;
+                    float duration = 0.1f;
+                    LeanTween.delayedCall(duration, () =>
+                    {
+                        if (sr) sr.color = Color.white;
+                    });
+                    var scale = sr.transform.localScale;
+                    LeanTween.scale(sr.gameObject, scale * 1.5f, duration).setLoopPingPong(1);
                     EventManager.Units.onUnitTakeDamage?.Invoke(unitType);
+                }
             }
             else
             {
@@ -142,6 +153,9 @@ namespace BioTower.Units
         public virtual void KillUnit()
         {
             //Debug.Log("Kill unit");
+            if (explosion)
+                explosion.Play();
+
             isAlive = false;
             EventManager.Units.onUnitDestroyed?.Invoke(this);
             GameManager.Instance.unitManager.Unregister(this);

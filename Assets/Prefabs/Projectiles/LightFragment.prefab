@@ -344,6 +344,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasBeenPickedUp: 0
+  trailPrefab: {fileID: 8384990196465828012, guid: ae036bf8815d7424580495949a16bb79,
+    type: 3}
 --- !u!114 &1210021131399595251
 MonoBehaviour:
   m_ObjectHideFlags: 0

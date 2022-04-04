@@ -5,127 +5,127 @@ using BioTower.Structures;
 
 namespace BioTower
 {
-public class TapManager : MonoBehaviour
-{
-    [SerializeField] private LayerMask tappableLayerMask;
-    [SerializeField] private LayerMask structureLayerMask;
-    public Structure selectedStructure;
-    public bool hasSelectedStructure;
-
-
-    private void OnTouchBegan(Vector3 screenPos)
+    public class TapManager : MonoBehaviour
     {
-        if (!GameManager.Instance.gameStates.IsGameState())
-            return;
+        [SerializeField] private LayerMask tappableLayerMask;
+        [SerializeField] private LayerMask structureLayerMask;
+        public Structure selectedStructure;
+        public bool hasSelectedStructure;
 
-        Ray ray = Camera.main.ScreenPointToRay(screenPos);
-        RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, tappableLayerMask);
-        if (hitInfo.collider != null)
+
+        private void OnTouchBegan(Vector3 screenPos)
         {
-            //TapCrystal(hitInfo);
-            TapLightFragment(hitInfo);
-            TapStructureSocket(hitInfo);
-            
-        }
-        TapStructure(screenPos);
-    }
+            if (!GameManager.Instance.gameStates.IsGameState())
+                return;
 
-    // private void TapCrystal(RaycastHit2D hitInfo)
-    // {
-    //     EnemyCrystal crystal = hitInfo.collider.transform.parent.GetComponent<EnemyCrystal>();
-    //     if (crystal != null)
-    //     {
-    //         crystal.DestroyObject();
-    //         EventManager.Game.onCrystalTapped?.Invoke();
-    //         //GameManager.Instance.econManager.GainCrystalMoney();
-    //     }
-    // }
-
-    private void TapLightFragment(RaycastHit2D hitInfo)
-    {
-        if (Util.upgradeSettings.numFragmentsPickedUpOnTap == 1)
-        {
-            LightFragment fragment = hitInfo.collider.transform.parent.GetComponent<LightFragment>();
-            if (fragment != null)
+            Ray ray = Camera.main.ScreenPointToRay(screenPos);
+            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, tappableLayerMask);
+            if (hitInfo.collider != null)
             {
-                fragment.DestroyObject();
-                EventManager.Game.onLightFragmentTapped?.Invoke();
+                //TapCrystal(hitInfo);
+                TapLightFragment(hitInfo);
+                TapStructureSocket(hitInfo);
+
             }
+            TapStructure(screenPos);
         }
-        else if (Util.upgradeSettings.numFragmentsPickedUpOnTap > 1)
+
+        // private void TapCrystal(RaycastHit2D hitInfo)
+        // {
+        //     EnemyCrystal crystal = hitInfo.collider.transform.parent.GetComponent<EnemyCrystal>();
+        //     if (crystal != null)
+        //     {
+        //         crystal.DestroyObject();
+        //         EventManager.Game.onCrystalTapped?.Invoke();
+        //         //GameManager.Instance.econManager.GainCrystalMoney();
+        //     }
+        // }
+
+        private void TapLightFragment(RaycastHit2D hitInfo)
         {
-            var radius = Util.gameSettings.multipleLightFragmentPickupRadius;
-            
-            Collider2D [] colliders = Physics2D.OverlapCircleAll(hitInfo.point, radius, tappableLayerMask);
-            if(colliders.Length > 0)
+            if (Util.upgradeSettings.numFragmentsPickedUpOnTap == 1)
             {
-                for (int i=0; i<colliders.Length; i++)
+                LightFragment fragment = hitInfo.collider.transform.parent.GetComponent<LightFragment>();
+                if (fragment != null)
                 {
-                    if (i > Util.upgradeSettings.numFragmentsPickedUpOnTap)
-                        continue;
-                    
-                    LightFragment fragment = colliders[i].transform.parent.GetComponent<LightFragment>();
-                    LeanTween.move(fragment.gameObject, hitInfo.point, 0.15f)
-                        .setOnComplete(() => {
-                            fragment.DestroyObject();
-                            EventManager.Game.onLightFragmentTapped?.Invoke();
-                        });
+                    fragment.DestroyObject();
+                }
+            }
+            else if (Util.upgradeSettings.numFragmentsPickedUpOnTap > 1)
+            {
+                var radius = Util.gameSettings.multipleLightFragmentPickupRadius;
+
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(hitInfo.point, radius, tappableLayerMask);
+                if (colliders.Length > 0)
+                {
+                    for (int i = 0; i < colliders.Length; i++)
+                    {
+                        if (i > Util.upgradeSettings.numFragmentsPickedUpOnTap)
+                            continue;
+
+                        LightFragment fragment = colliders[i].transform.parent.GetComponent<LightFragment>();
+                        LeanTween.move(fragment.gameObject, hitInfo.point, 0.15f)
+                            .setOnComplete(() =>
+                            {
+                                fragment.DestroyObject();
+                                EventManager.Game.onLightFragmentTapped?.Invoke();
+                            });
+                    }
                 }
             }
         }
-    }
 
-    private void TapStructureSocket(RaycastHit2D hitInfo)
-    {
-        if (hitInfo.collider.gameObject.layer == Util.structureSocketLayer)
+        private void TapStructureSocket(RaycastHit2D hitInfo)
         {
-            var socket = hitInfo.collider.transform.parent.GetComponent<StructureSocket>();
-            socket.OnTap();
-        }
-    }
-
-    private void TapStructure(Vector3 screenPos)
-    {
-        if (GameManager.Instance.placementManager.IsNoneState())
-        {
-            Ray ray = Camera.main.ScreenPointToRay(screenPos);
-            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
-
-            if (hitInfo.collider != null)
+            if (hitInfo.collider.gameObject.layer == Util.structureSocketLayer)
             {
-                var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
-                hasSelectedStructure = true;
-                selectedStructure = structure;
-                EventManager.Structures.onStructureSelected?.Invoke(structure);
+                var socket = hitInfo.collider.transform.parent.GetComponent<StructureSocket>();
+                socket.OnTap();
             }
         }
-        else
-        {
-            Ray ray = Camera.main.ScreenPointToRay(screenPos);
-            RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
 
-            if (hitInfo.collider != null)
+        private void TapStructure(Vector3 screenPos)
+        {
+            if (GameManager.Instance.placementManager.IsNoneState())
             {
-                var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
-                hasSelectedStructure = true;
-                selectedStructure = structure;
-                EventManager.Structures.onStructureSelected?.Invoke(structure);
-                GameManager.Instance.placementManager.SetPlacingState(selectedStructure.structureType);
+                Ray ray = Camera.main.ScreenPointToRay(screenPos);
+                RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
+
+                if (hitInfo.collider != null)
+                {
+                    var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
+                    hasSelectedStructure = true;
+                    selectedStructure = structure;
+                    EventManager.Structures.onStructureSelected?.Invoke(structure);
+                }
+            }
+            else
+            {
+                Ray ray = Camera.main.ScreenPointToRay(screenPos);
+                RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, structureLayerMask);
+
+                if (hitInfo.collider != null)
+                {
+                    var structure = hitInfo.collider.transform.parent.GetComponent<Structure>();
+                    hasSelectedStructure = true;
+                    selectedStructure = structure;
+                    EventManager.Structures.onStructureSelected?.Invoke(structure);
+                    GameManager.Instance.placementManager.SetPlacingState(selectedStructure.structureType);
+                }
             }
         }
+
+        private void OnEnable()
+        {
+
+            EventManager.Input.onTouchBegan += OnTouchBegan;
+
+        }
+
+        private void OnDisable()
+        {
+
+            EventManager.Input.onTouchBegan -= OnTouchBegan;
+        }
     }
-
-    private void OnEnable()
-    {
-
-        EventManager.Input.onTouchBegan += OnTouchBegan;
-
-    }
-
-    private void OnDisable()
-    {
-
-        EventManager.Input.onTouchBegan -= OnTouchBegan;
-    }
-}
 }

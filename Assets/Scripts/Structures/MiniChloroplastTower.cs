@@ -17,7 +17,8 @@ namespace BioTower.Structures
         public override void Awake()
         {
             base.Awake();
-            lastShotTime = Time.time + UnityEngine.Random.Range(0, 0.2f);
+            //lastShotTime = Time.time + UnityEngine.Random.Range(0, 0.2f);
+            lastShotTime = Time.time - shootInterval + (UnityEngine.Random.Range(0.5f, 1.0f));
         }
 
         private void Start()

@@ -165,11 +165,15 @@ namespace BioTower
             uiElement.parent.Find("Glow").GetComponent<Image>().enabled = false;
         }
 
+        public static Vector3 GetUIWorldPos(RectTransform rt)
+        {
+            return Camera.main.ScreenToWorldPoint(rt.position);
+        }
+
         public static void ReloadLevel()
         {
             BootController.isBootLoaded = false;
             GameManager.Instance.LoadLevel(Util.upgradeSettings.currLevel);
-
         }
     }
 }

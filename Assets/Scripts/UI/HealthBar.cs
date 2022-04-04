@@ -64,8 +64,12 @@ namespace BioTower.UI
 
             for (int i = 0; i < bars.Length; i++)
             {
-                Color color = i < health - 1 ? barColor : deactivatedBarColor;
-                bars[i].SetColor(color);
+                var bar = bars[i];
+                if (bar)
+                {
+                    Color color = i < health - 1 ? barColor : deactivatedBarColor;
+                    bar.SetColor(color);
+                }
             }
 
         }

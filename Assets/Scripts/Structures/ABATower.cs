@@ -157,9 +157,12 @@ namespace BioTower.Structures
                 seq.append(LeanTween.scale(unit.gameObject, scale, 0.25f));
                 seq.append(() =>
                 {
-                    //Debug.Break();
-                    unitSpawnTrail.emitting = false;
-                    unitSpawnTrail.transform.localPosition = Vector2.zero;
+                    if (unitSpawnTrail)
+                    {
+                        //Debug.Break();
+                        unitSpawnTrail.emitting = false;
+                        unitSpawnTrail.transform.localPosition = Vector2.zero;
+                    }
                 });
             }
         }

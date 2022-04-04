@@ -71,7 +71,8 @@ namespace BioTower.Units
                 float percentage = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
                 float winChance = GetWinChance(unit);
 
-                bool isWin = winChance < percentage;
+                bool isWin = winChance > percentage;
+                Debug.Log($"UnitType: {unit.unitType}. IsWin: {isWin}. Win chance: {winChance}. Percentage: {percentage}");
 
                 if (isWin)
                 {

@@ -58,13 +58,13 @@ namespace BioTower
             }
         }
 
-        private void OnSpendCurrency(int numSpent, int currPlayerCurrency)
-        {
-            if (currPlayerCurrency == 0)
-            {
-                EventManager.Game.onGameOver?.Invoke(false);
-            }
-        }
+        // private void OnSpendCurrency(int numSpent, int currPlayerCurrency)
+        // {
+        //     if (currPlayerCurrency == 0)
+        //     {
+        //         EventManager.Game.onGameOver?.Invoke(false);
+        //     }
+        // }
 
         private void OnGameStateInit(GameState gameState)
         {
@@ -80,7 +80,7 @@ namespace BioTower
             EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
             EventManager.Game.onWavesCompleted += OnWavesCompleted;
             EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
-            EventManager.Game.onSpendCurrency += OnSpendCurrency;
+            //EventManager.Game.onSpendCurrency += OnSpendCurrency;
         }
 
         private void OnDisable()
@@ -89,7 +89,7 @@ namespace BioTower
             EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
             EventManager.Game.onWavesCompleted -= OnWavesCompleted;
             EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
-            EventManager.Game.onSpendCurrency -= OnSpendCurrency;
+            //EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         }
 
     }

@@ -80,7 +80,7 @@ namespace BioTower.Units
                             var waypointPosition = enemy.GetNextWaypoint().transform.position;
                             if (Vector3.Distance(enemy.transform.position, waypointPosition) > 0.2f)
                             {
-                                Debug.Log(enemy.gameObject.name + " is off destination");
+                                //Debug.Log(enemy.gameObject.name + " is off destination");
                                 enemy.SetDestination(waypointPosition);
                             }
                         }

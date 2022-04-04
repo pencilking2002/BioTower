@@ -130,7 +130,7 @@ namespace BioTower.Units
         {
             unitState = UnitState.ROAMING;
             unitFoe = null;
-            Debug.Log("Set roaming state");
+            //Debug.Log("Set roaming state");
         }
 
         public virtual void SetDestroyedState() { unitState = UnitState.DESTROYED; }
@@ -141,7 +141,7 @@ namespace BioTower.Units
         public virtual bool IsCombatState() { return unitState == UnitState.COMBAT; }
         public virtual void KillUnit()
         {
-            Debug.Log("Kill unit");
+            //Debug.Log("Kill unit");
             isAlive = false;
             EventManager.Units.onUnitDestroyed?.Invoke(this);
             GameManager.Instance.unitManager.Unregister(this);

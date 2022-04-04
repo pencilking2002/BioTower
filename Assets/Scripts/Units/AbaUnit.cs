@@ -32,6 +32,9 @@ namespace BioTower.Units
 
         public override void StopMoving()
         {
+            if (!agent)
+                return;
+
             agent.Stop();
             agent.enabled = false;
             anim.SetBool("Walk", false);

@@ -118,12 +118,15 @@ namespace BioTower.SaveData
         public void ResetSave()
         {
             var gameData = new GameData();
+            gameData.settings = Util.gameSettings.defaultSettings;
+            gameData.settings.currLevel = 1;
 
             if (Application.isPlaying)
             {
-                Util.gameSettings.defaultSettings = gameData.settings;
-                Util.gameSettings.upgradeSettings = gameData.settings;
+                //Util.gameSettings.defaultSettings = gameData.settings;
+                Util.gameSettings.upgradeSettings = Util.gameSettings.defaultSettings;
             }
+
             //gameData.currLevel = 0;
             Save(gameData);
         }

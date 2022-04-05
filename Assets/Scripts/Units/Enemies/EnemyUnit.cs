@@ -180,6 +180,9 @@ namespace BioTower.Units
 
         public override bool TakeDamage(int amount)
         {
+            if (!isAlive)
+                return false;
+
             if (base.TakeDamage(amount))
             {
                 return isAlive;

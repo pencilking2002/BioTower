@@ -107,9 +107,16 @@ namespace BioTower.Units
                 {
                     if (unit.IsChasingState())
                     {
-                        var destination = unit.unitFoe.transform.position;
-                        unit.SetDestination(destination);
-                        unit.agent.primeGoal = destination;
+                        if (!unit.unitFoe)
+                        {
+                            unit.SetRoamingState();
+                        }
+                        else
+                        {
+                            var destination = unit.unitFoe.transform.position;
+                            unit.SetDestination(destination);
+                            unit.agent.primeGoal = destination;
+                        }
                     }
                 }
             }

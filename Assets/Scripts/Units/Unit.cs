@@ -163,7 +163,9 @@ namespace BioTower.Units
 
             EventManager.Units.onUnitDestroyed?.Invoke(this);
             GameManager.Instance.unitManager.Unregister(this);
-            Destroy(gameObject);
+
+            if (gameObject)
+                Destroy(gameObject);
         }
 
 

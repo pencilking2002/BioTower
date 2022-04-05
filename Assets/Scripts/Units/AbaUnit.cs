@@ -76,7 +76,7 @@ namespace BioTower.Units
 
         public override void SetDestroyedState()
         {
-            if (!isAlive)
+            if (!isAlive || !gameObject)
                 return;
 
             isAlive = false;
@@ -84,7 +84,9 @@ namespace BioTower.Units
             StopMoving();
             GameManager.Instance.unitManager.Unregister(this);
             Deregister();
-            healthBar.gameObject.SetActive(false);
+
+            if (healthBar)
+                healthBar.gameObject.SetActive(false);
 
             if (explosion)
                 explosion.Play();

@@ -28,8 +28,8 @@ MonoBehaviour:
   defaultSettings:
     currLevel: 1
     lightFragmentValue: 5
-    energy: 80
-    abaUnitDamage: 2
+    energy: 120
+    abaUnitDamage: 5
     abaUnitMaxSpeed_float: 500
     abaUnitCost: 5
     abaUnitMaxHealth: 10
@@ -46,10 +46,10 @@ MonoBehaviour:
     abaMaxInfluenceRadius_float: 2600
     enableAbaTowerRandomHeal: 0
     ppc2TowerUnlocked: 0
-    ppc2TowerDamage: 4
+    ppc2TowerDamage: 2
     ppc2TowerCost: 40
     ppc2MaxInfluenceRadius_float: 2400
-    ppc2shootInterval_float: 1000
+    ppc2shootInterval_float: 2000
     ppc2ExplosionColliderScale_float: 1271
     ppc2ExplosionSpriteScale_float: 622
     ppc2UnitSpawnLimit: 2
@@ -66,7 +66,7 @@ MonoBehaviour:
     currLevel: 3
     lightFragmentValue: 5
     energy: 45
-    abaUnitDamage: 2
+    abaUnitDamage: 5
     abaUnitMaxSpeed_float: 500
     abaUnitCost: 5
     abaUnitMaxHealth: 10
@@ -80,10 +80,10 @@ MonoBehaviour:
     enablePlayerTowerHealing: 0
     abaTowerCost: 10
     abaUnitSpawnLimit: 3
-    abaMaxInfluenceRadius_float: 3000
+    abaMaxInfluenceRadius_float: 2600
     enableAbaTowerRandomHeal: 0
     ppc2TowerUnlocked: 1
-    ppc2TowerDamage: 4
+    ppc2TowerDamage: 2
     ppc2TowerCost: 40
     ppc2MaxInfluenceRadius_float: 2400
     ppc2shootInterval_float: 1000

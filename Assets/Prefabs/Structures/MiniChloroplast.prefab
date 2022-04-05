@@ -51,12 +51,11 @@ MonoBehaviour:
   isAlive: 1
   maxHealth: 10
   currHealth: 0
-  healthSlider: {fileID: 0}
   spriteOutline: {fileID: 0}
   sr: {fileID: 698594723923698417}
   lastDeclineTime: 0
-  initSpriteScale: {x: 0, y: 0, z: 0}
   influenceVisuals: {fileID: 0}
+  unitSpawnTrail: {fileID: 0}
   units: []
   towerAlert: {fileID: 0}
   maxInfluenceCollider: {fileID: 698594724809693232}
@@ -357,7 +356,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1.23
 --- !u!1 &698594724867224541
 GameObject:
   m_ObjectHideFlags: 0

@@ -163,6 +163,7 @@ namespace BioTower.UI
             ResetTowers();
             ResetAllLevels();
             ResetUpgrades();
+            Util.saveManager.ResetSave();
         }
 
         public void Gain100Energy()

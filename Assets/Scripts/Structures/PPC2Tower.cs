@@ -72,7 +72,7 @@ namespace BioTower.Structures
             Vector3 controlPoint = startPos + (endPos - startPos) * 0.5f + Vector3.up;
 
             // Get the enemy's move direction
-            BasicEnemy enemy = other.transform.parent.GetComponent<BasicEnemy>();
+            var enemy = other.transform.parent.GetComponent<EnemyUnit>();
             Vector2 enemyMoveDirection = enemy.agent.movingDirection.normalized;
             endPos += (Vector3)enemyMoveDirection * UnityEngine.Random.Range(0.1f, 0.5f);
 

@@ -5,35 +5,35 @@ using BioTower.Units;
 
 namespace BioTower
 {
-public class PPC2Projectile : MonoBehaviour
-{
-    [SerializeField] private GameObject explosiionPrefab;
-    [SerializeField] private CircleCollider2D influenceCollider;
-    [SerializeField] private SpriteRenderer glow;
-
-    private void Awake()
+    public class PPC2Projectile : MonoBehaviour
     {
-        influenceCollider.transform.localScale = 
-            Vector3.one * Util.upgradeSettings.ppc2ExplosionColliderScale_float.GetFloat();
-        
-        glow.transform.localScale = 
-            Vector3.one * Util.upgradeSettings.ppc2ExplosionSpriteScale_float.GetFloat();
-    }
-    
-    public void Explode()
-    {
-        float radius = influenceCollider.radius * influenceCollider.transform.localScale.x;
-        var enemyGO = Physics2D.OverlapCircle(transform.position, radius, GameManager.Instance.util.enemyLayerMask);
+        [SerializeField] private GameObject explosiionPrefab;
+        [SerializeField] private CircleCollider2D influenceCollider;
+        [SerializeField] private SpriteRenderer glow;
 
-        if (enemyGO != null)
+        private void Awake()
         {
-            var enemy = enemyGO.transform.parent.GetComponent<BasicEnemy>();
-            enemy.TakeDamage(Util.gameSettings.upgradeSettings.ppc2TowerDamage);
+            influenceCollider.transform.localScale =
+                Vector3.one * Util.upgradeSettings.ppc2ExplosionColliderScale_float.GetFloat();
+
+            glow.transform.localScale =
+                Vector3.one * Util.upgradeSettings.ppc2ExplosionSpriteScale_float.GetFloat();
         }
 
-        var explosion = Instantiate(explosiionPrefab);
-        explosion.transform.position = transform.position;
-        Destroy(gameObject);
+        public void Explode()
+        {
+            float radius = influenceCollider.radius * influenceCollider.transform.localScale.x;
+            var enemyGO = Physics2D.OverlapCircle(transform.position, radius, GameManager.Instance.util.enemyLayerMask);
+
+            if (enemyGO != null)
+            {
+                var enemy = enemyGO.transform.parent.GetComponent<EnemyUnit>();
+                enemy.TakeDamage(Util.gameSettings.upgradeSettings.ppc2TowerDamage);
+            }
+
+            var explosion = Instantiate(explosiionPrefab);
+            explosion.transform.position = transform.position;
+            Destroy(gameObject);
+        }
     }
-}
 }

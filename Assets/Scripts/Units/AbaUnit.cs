@@ -76,26 +76,20 @@ namespace BioTower.Units
 
         public override void SetDestroyedState()
         {
+            if (!isAlive)
+                return;
+
+            isAlive = false;
             base.SetDestroyedState();
             StopMoving();
-            isAlive = false;
-            // anim.SetBool("Dead", true);
-            // anim.SetBool("Attack", false);
             GameManager.Instance.unitManager.Unregister(this);
             Deregister();
             healthBar.gameObject.SetActive(false);
 
-            // after 5 sec, make unit scale down and destroy it
-            // LeanTween.delayedCall(gameObject, 5, () =>
-            // {
-            //     LeanTween.scale(gameObject, Vector3.zero, 1.0f).setOnComplete(() =>
-            //     {
             if (explosion)
                 explosion.Play();
 
             Destroy(gameObject);
-            //});
-            //});
         }
 
         public override void SetDestination(Vector3 newDestination)

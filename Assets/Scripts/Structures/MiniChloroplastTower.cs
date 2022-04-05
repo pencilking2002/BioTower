@@ -17,8 +17,6 @@ namespace BioTower.Structures
         public override void Awake()
         {
             base.Awake();
-            //lastShotTime = Time.time + UnityEngine.Random.Range(0, 0.2f);
-            lastShotTime = Time.time - shootInterval + (UnityEngine.Random.Range(0.5f, 1.0f));
         }
 
         private void Start()
@@ -26,11 +24,15 @@ namespace BioTower.Structures
             base.Init(null);
             var initScale = sr.transform.localScale;
             sr.transform.localScale = Vector3.zero;
+            LeanTween.cancel(sr.gameObject);
             var seq = LeanTween.sequence();
-
             seq.append(UnityEngine.Random.Range(0.0f, 1.0f));
             seq.append(LeanTween.scale(sr.gameObject, initScale * 2, 0.25f));
             seq.append(LeanTween.scale(sr.gameObject, initScale, 0.25f).setEaseOutBack());
+            seq.append(() =>
+            {
+                lastShotTime = Time.time - shootInterval + (UnityEngine.Random.Range(0.5f, 1.0f));
+            });
         }
 
         public override void OnUpdate()

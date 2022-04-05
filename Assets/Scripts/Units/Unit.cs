@@ -152,11 +152,15 @@ namespace BioTower.Units
         public virtual bool IsCombatState() { return unitState == UnitState.COMBAT; }
         public virtual void KillUnit()
         {
+            if (!isAlive)
+                return;
+
+            isAlive = false;
+
             //Debug.Log("Kill unit");
             if (explosion)
                 explosion.Play();
 
-            isAlive = false;
             EventManager.Units.onUnitDestroyed?.Invoke(this);
             GameManager.Instance.unitManager.Unregister(this);
             Destroy(gameObject);

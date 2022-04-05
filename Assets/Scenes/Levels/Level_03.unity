@@ -438,7 +438,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 443528747}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 1673011453}
 --- !u!1 &209418761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,7 +1448,6 @@ MonoBehaviour:
   waypointType: 3
   nextWaypoint: {fileID: 0}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 569136221}
 --- !u!1 &406347631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,7 +1644,6 @@ MonoBehaviour:
   waypointType: 2
   nextWaypoint: {fileID: 1898622595}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 0}
 --- !u!4 &420336635
 Transform:
   m_ObjectHideFlags: 0
@@ -1693,7 +1690,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 2122271853}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 940131497}
 --- !u!4 &443528748
 Transform:
   m_ObjectHideFlags: 0
@@ -1904,7 +1900,6 @@ MonoBehaviour:
   waypointType: 2
   nextWaypoint: {fileID: 2062420546}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 0}
 --- !u!4 &476456733
 Transform:
   m_ObjectHideFlags: 0
@@ -2190,7 +2185,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 401890083}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 2098102981}
 --- !u!1 &573574330
 GameObject:
   m_ObjectHideFlags: 0
@@ -3482,7 +3476,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 443528747}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 1389443107}
 --- !u!4 &940131498
 Transform:
   m_ObjectHideFlags: 0
@@ -4596,6 +4589,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 698594723923698416, guid: 210a9cc73a66922469212f8e60f7b8e7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 698594723923698416, guid: 210a9cc73a66922469212f8e60f7b8e7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.47
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 210a9cc73a66922469212f8e60f7b8e7, type: 3}
 --- !u!1 &1319486427
@@ -4794,7 +4797,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 940131497}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 0}
 --- !u!4 &1389443108
 Transform:
   m_ObjectHideFlags: 0
@@ -5537,7 +5539,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 200628387}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 1898622595}
 --- !u!1 &1691048903
 GameObject:
   m_ObjectHideFlags: 0
@@ -6231,7 +6232,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 2139243385}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 420336634}
 --- !u!4 &1898622596
 Transform:
   m_ObjectHideFlags: 0
@@ -6649,6 +6649,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e7dc254b1017c40a0b6f98405530a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 401890083}
+  - {fileID: 2098102981}
+  - {fileID: 2122271853}
+  - {fileID: 420336634}
+  - {fileID: 476456732}
+  - {fileID: 2062420546}
+  - {fileID: 1389443107}
+  - {fileID: 443528747}
+  - {fileID: 1898622595}
+  - {fileID: 1673011453}
+  - {fileID: 2139243385}
+  - {fileID: 200628387}
+  - {fileID: 940131497}
+  - {fileID: 569136221}
+  spawnPoints:
+  - {fileID: 420336634}
+  - {fileID: 476456732}
 --- !u!1 &2062420544
 GameObject:
   m_ObjectHideFlags: 0
@@ -6695,7 +6713,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 1389443107}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 476456732}
 --- !u!1 &2072456951
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,7 +6841,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 569136221}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 2122271853}
 --- !u!1 &2122271851
 GameObject:
   m_ObjectHideFlags: 0
@@ -6871,7 +6887,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 2098102981}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 443528747}
 --- !u!1 &2139243384
 GameObject:
   m_ObjectHideFlags: 0
@@ -6904,7 +6919,6 @@ MonoBehaviour:
   waypointType: 0
   nextWaypoint: {fileID: 1673011453}
   nextWaypoint_02: {fileID: 0}
-  prevWaypoint: {fileID: 1898622595}
 --- !u!4 &2139243386
 Transform:
   m_ObjectHideFlags: 0

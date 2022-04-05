@@ -20,6 +20,7 @@ namespace BioTower
         public static SaveSystem saveManager => GameManager.Instance.saveManager;
         public static BootController bootController => GameManager.Instance.bootController;
         public static PoolManager poolManager => GameManager.Instance.poolManager;
+        public static PlacementManager placementManager => GameManager.Instance.placementManager;
         public static StructureManager towerManager => GameManager.Instance.structureManager;
         public static TapManager tapManager => GameManager.Instance.tapManager;
         public static GameStates gameStates => GameManager.Instance.gameStates;

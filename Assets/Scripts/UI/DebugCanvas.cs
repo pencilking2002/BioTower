@@ -24,6 +24,7 @@ namespace BioTower.UI
         [SerializeField] private Text tutorialText;
         [SerializeField] private Text tutIndexText;
         [SerializeField] private Text tutInProgressText;
+        //[SerializeField] private Text placementText;
 
 
         [Header("Audio")]
@@ -50,6 +51,7 @@ namespace BioTower.UI
                 tutorialText.text = $"Tut State: {Util.tutCanvas.tutState}";
                 tutIndexText.text = $"Tut Index: {Util.tutCanvas.currTutorialIndex}";
                 tutInProgressText.text = $"Tut in progress: {TutorialCanvas.tutorialInProgress}";
+                placementStateText.text = $"placement state: " + Util.placementManager.GetState();
             }
         }
 

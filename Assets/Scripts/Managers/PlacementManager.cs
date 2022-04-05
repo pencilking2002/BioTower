@@ -79,7 +79,11 @@ namespace BioTower
                 PlaceTower(structureToPlace, socket.transform.position, socket);
                 GameManager.Instance.econManager.BuyTower(structureToPlace);
             }
-            SetNoneState();
+            LeanTween.delayedCall(0.5f, () =>
+            {
+                SetNoneState();
+            });
+
         }
         private Collider2D DoRaycast(Vector3 screenPos)
         {
@@ -133,7 +137,7 @@ namespace BioTower
 
         public bool IsNoneState() { return placementState == PlacementState.NONE; }
         public bool IsPlacingState() { return placementState == PlacementState.PLACING; }
-
+        public PlacementState GetState() { return placementState; }
         private void ActivateDnaBase()
         {
             var structuresContainer = GameObject.FindGameObjectWithTag(Constants.structuresContainer);

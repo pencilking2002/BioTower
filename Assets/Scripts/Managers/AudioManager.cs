@@ -220,8 +220,12 @@ namespace BioTower
 
         private void OnTapFreeStructureSocket(StructureSocket socket)
         {
-            if (!GameManager.Instance.placementManager.IsPlacingState())
+            var selectedButtonType = Util.bootController.gameplayUI.GetSelectedButtonType();
+
+            if (!Util.placementManager.IsPlacingState() && selectedButtonType == StructureType.NONE)
+            {
                 PlaySound(data.structureSocketTap);
+            }
         }
 
         // UI ---------------------------------------------

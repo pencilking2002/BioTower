@@ -69,12 +69,12 @@ namespace BioTower
 
         public GameObject GetEnemyPrefab(UnitType unitType) { return enemyDict[unitType]; }
 
-        public BasicEnemy SpawnEnemy(Vector2 minMaxSpeed, UnitType enemyType)
+        public EnemyUnit SpawnEnemy(Vector2 minMaxSpeed, UnitType enemyType)
         {
             // Initialize enemy
             var enemyPrefab = GetEnemyPrefab(enemyType);
             var enemyGO = Instantiate(enemyPrefab);
-            var enemy = enemyGO.GetComponent<BasicEnemy>();
+            var enemy = enemyGO.GetComponent<EnemyUnit>();
 
             // Set the enemy's positioning
             var spawnPoint = GameManager.Instance.GetWaypointManager().GetRandomSpawnPoint();

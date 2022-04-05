@@ -48,8 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasStructure: 0
-  socketType: 0
-  glowingSprite: {fileID: 1055105025558199585}
+  sr: {fileID: 0}
   glowColor: {r: 1, g: 1, b: 1, a: 1}
   glowAnimDuration: 0.5
 --- !u!1 &1055105025558199591

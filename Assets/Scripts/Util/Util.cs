@@ -76,18 +76,19 @@ namespace BioTower
             SELECTED
         }
 
-        public static void HandleInvalidButtonPress(Button button, ButtonColorMode colorMode = ButtonColorMode.SELECTED)
+        public static void HandleInvalidButtonPress(RectTransform button, ButtonColorMode colorMode = ButtonColorMode.SELECTED)
         {
             if (colorMode == ButtonColorMode.SELECTED)
             {
-                var colors = button.colors;
+                var btn = button.GetComponentInChildren<Button>();
+                var colors = btn.colors;
                 Color oldColor = colors.selectedColor;
                 colors.selectedColor = Color.red;
-                button.colors = colors;
+                btn.colors = colors;
                 LeanTween.delayedCall(0.15f, () =>
                 {
                     colors.selectedColor = oldColor;
-                    button.colors = colors;
+                    btn.colors = colors;
                 });
             }
             else

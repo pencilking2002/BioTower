@@ -12,15 +12,16 @@ namespace BioTower.UI
     public class GameplayUI : MonoBehaviour
     {
         public CanvasGroup panel;
-        [SerializeField] private Button AbaTowerButton;
-        [SerializeField] private Button Pp2cTowerButton;
-        [SerializeField] private Button chloroplastTowerButton;
-        [SerializeField] private Button mitoTowerButton;
-        [SerializeField] private Button currSelectedBtn;
+        [SerializeField] private RectTransform AbaTowerButton;
+        [SerializeField] private RectTransform Pp2cTowerButton;
+        [SerializeField] private RectTransform chloroplastTowerButton;
+        [SerializeField] private RectTransform mitoTowerButton;
+        [SerializeField] private RectTransform currSelectedBtn;
         public GameObject currencyContainer;
         [SerializeField] private TextMeshProUGUI playerCurrencyText;
-        public Dictionary<StructureType, Button> towerButtonMap = new Dictionary<StructureType, Button>();
+        public Dictionary<StructureType, RectTransform> towerButtonMap = new Dictionary<StructureType, RectTransform>();
         private Vector3 initPos;
+        private Vector3 initButtonLocalPos;
 
         private void Awake()
         {
@@ -72,13 +73,19 @@ namespace BioTower.UI
         {
             LeanTween.delayedCall(gameObject, delay, () =>
             {
-                LeanTween.move(panel.gameObject, initPos, 0.5f).setEaseOutQuint();
+                LeanTween.move(panel.gameObject, initPos, 0.5f)
+                .setEaseOutQuint()
+                .setOnComplete(() =>
+                {
+                    initButtonLocalPos = AbaTowerButton.transform.localPosition;
+                    Debug.Log("Set init local button pos: " + initButtonLocalPos);
+                });
             });
         }
 
         public StructureType GetSelectedButtonType()
         {
-            foreach (KeyValuePair<StructureType, Button> btn in towerButtonMap)
+            foreach (KeyValuePair<StructureType, RectTransform> btn in towerButtonMap)
             {
                 if (btn.Value == currSelectedBtn)
                     return btn.Key;
@@ -91,7 +98,17 @@ namespace BioTower.UI
         ///</Summary>
         private void SetTowerPrice(StructureType structureType)
         {
-            var text = towerButtonMap[structureType].transform.Find("Panel").Find("PriceText").GetComponent<Text>();
+            Text text = null;
+            if (structureType == StructureType.ABA_TOWER)
+            {
+                var btn = towerButtonMap[structureType].GetComponentInChildren<Button>();
+                text = btn.transform.Find("Panel").Find("PriceText").GetComponent<Text>();
+            }
+            else
+            {
+                text = towerButtonMap[structureType].transform.Find("Panel").Find("PriceText").GetComponent<Text>();
+            }
+
             int cost = Util.gameSettings.upgradeSettings.GetTowerCost(structureType);
             text.text = cost.ToString();
         }
@@ -135,7 +152,8 @@ namespace BioTower.UI
                 HandleButtonPress(AbaTowerButton, StructureType.ABA_TOWER);
                 if (LevelInfo.current.IsFirstLevel())
                 {
-                    Util.HideGlowUI(AbaTowerButton.transform);
+                    var btn = AbaTowerButton.GetComponentInChildren<Button>();
+                    Util.HideGlowUI(btn.transform);
                 }
             }
             else
@@ -217,7 +235,7 @@ namespace BioTower.UI
             }
         }
 
-        private void HandleButtonPress(Button button, StructureType structureType)
+        private void HandleButtonPress(RectTransform button, StructureType structureType)
         {
             AnimateButton(button);
             currSelectedBtn = button;
@@ -225,16 +243,21 @@ namespace BioTower.UI
             EventManager.UI.onTapButton?.Invoke(true);
         }
 
-        private void AnimateButton(Button button)
+        private void AnimateButton(RectTransform button)
         {
             if (button == currSelectedBtn)
                 return;
 
-            var initPos = button.transform.localPosition;
+            //var initPos = button.transform.localPosition;
+            //var selectedButtonTargetPos = initButtonLocalPos.y;
             if (currSelectedBtn != null)
-                LeanTween.moveLocalY(currSelectedBtn.gameObject, initPos.y, 0.1f);
+            {
+                LeanTween.cancel(currSelectedBtn.gameObject);
+                LeanTween.moveLocalY(currSelectedBtn.gameObject, initButtonLocalPos.y, 0.1f);
+            }
 
-            LeanTween.moveLocalY(button.gameObject, initPos.y + 20, 0.1f);
+            LeanTween.cancel(button.gameObject);
+            LeanTween.moveLocalY(button.gameObject, initButtonLocalPos.y + 20, 0.1f);
 
         }
 
@@ -276,9 +299,9 @@ namespace BioTower.UI
             DeselectCurrentButton();
 
             var button = towerButtonMap[structureType];
-
-            button.interactable = false;
-            var cooldownImage = button.transform.Find("Cooldown").GetComponent<Image>();
+            var btn = button.GetComponentInChildren<Button>();
+            btn.interactable = false;
+            var cooldownImage = btn.transform.Find("Cooldown").GetComponent<Image>();
             LeanTween.value(gameObject, 1, 0, cooldown).setOnUpdate((float val) =>
             {
                 cooldownImage.fillAmount = val;
@@ -287,12 +310,12 @@ namespace BioTower.UI
             {
                 // Don't make button interactable if its the first level and there's currently tutorials playing
                 if (LevelInfo.current.IsFirstLevel() && Util.tutCanvas.hasTutorials)
-                    button.interactable = false;
+                    btn.interactable = false;
                 else
-                    button.interactable = true;
+                    btn.interactable = true;
             });
 
-            HandleButtonColor(button);
+            HandleButtonColor(btn);
         }
 
 
@@ -301,8 +324,10 @@ namespace BioTower.UI
             // Deselect current button
             if (currSelectedBtn != null)
             {
-                LeanTween.moveLocalY(currSelectedBtn.gameObject, currSelectedBtn.transform.localPosition.y - 20, 0.1f);
+                LeanTween.cancel(currSelectedBtn.gameObject);
+                LeanTween.moveLocalY(currSelectedBtn.gameObject, initButtonLocalPos.y, 0.1f);
                 currSelectedBtn = null;
+                Debug.Log("Deselect button");
             }
         }
 
@@ -346,8 +371,9 @@ namespace BioTower.UI
         {
             if (LevelInfo.current.IsFirstLevel())
             {
-                Util.DisplayGlowUI(AbaTowerButton.transform);
-                AbaTowerButton.interactable = true;
+                var btn = AbaTowerButton.GetComponentInChildren<Button>();
+                Util.DisplayGlowUI(btn.transform);
+                AbaTowerButton.GetComponentInChildren<Button>().interactable = true;
             }
         }
 

@@ -99,7 +99,8 @@ namespace BioTower
             {
                 if (Util.tutCanvas.tutState != TutState.WAITING_BUTTON_TAP)
                 {
-                    Util.HandleInvalidButtonPress(spawnUnitFullWidth, Util.ButtonColorMode.DEFAULT);
+                    var rt = spawnUnitFullWidth.GetComponent<RectTransform>();
+                    Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
                     return;
                 }
             }
@@ -135,7 +136,8 @@ namespace BioTower
                 }
                 else
                 {
-                    Util.HandleInvalidButtonPress(spawnUnitButton, Util.ButtonColorMode.DEFAULT);
+                    var rt = spawnUnitButton.GetComponent<RectTransform>();
+                    Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
                     var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
                     GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
                 }
@@ -156,7 +158,8 @@ namespace BioTower
                     }
                     else
                     {
-                        Util.HandleInvalidButtonPress(spawnUnitButton, Util.ButtonColorMode.DEFAULT);
+                        var rt = spawnUnitButton.GetComponent<RectTransform>();
+                        Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
                         var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
                         GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
                     }
@@ -178,7 +181,8 @@ namespace BioTower
             }
             else
             {
-                Util.HandleInvalidButtonPress(healTowerButton, Util.ButtonColorMode.DEFAULT);
+                var rt = healTowerButton.GetComponent<RectTransform>();
+                Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
                 var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
                 GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
             }
@@ -200,7 +204,8 @@ namespace BioTower
             }
             else
             {
-                Util.HandleInvalidButtonPress(spawnLightParticleButton, Util.ButtonColorMode.DEFAULT);
+                var rt = spawnLightParticleButton.GetComponent<RectTransform>();
+                Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
                 var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
                 GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
             }

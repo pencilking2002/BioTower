@@ -25,7 +25,8 @@ namespace BioTower.Structures
 
     public class Structure : MonoBehaviour
     {
-        [SerializeField] protected StructureSocket socket;
+        [ReadOnly][SerializeField] protected StructureSocket socket;
+        [SerializeField] protected GameObject towerDestroyedEffect;
         public StructureType structureType;
         [SerializeField] public bool hasHealth;
         [ShowIf("hasHealth")] public bool isAlive = true;
@@ -98,7 +99,9 @@ namespace BioTower.Structures
             seq.append(LeanTween.scale(sr.gameObject, scale, 0.1f));
             seq.append(() =>
             {
-                if (!LevelInfo.current.IsFirstLevel())
+                bool isFirstLevelAndIsPlayerBase = LevelInfo.current.IsFirstLevel() && IsPlayerBase();
+
+                if (!isFirstLevelAndIsPlayerBase)
                     Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.4f, 0.1f);
             });
             seq.append(LeanTween.scale(sr.gameObject, initSpriteScale, 0.25f).setEaseOutExpo());
@@ -285,6 +288,14 @@ namespace BioTower.Structures
             return units.Count;
         }
 
+        private void OnPressDestroyTowerBtn(Structure structure)
+        {
+            if (structure != this)
+                return;
+
+            KillStructure();
+        }
+
         public virtual void OnStructureSelected(Structure structure)
         {
             if (structure == this)
@@ -303,12 +314,14 @@ namespace BioTower.Structures
 
         public virtual void OnEnable()
         {
+            EventManager.UI.onPressTowerDestroyedBtn += OnPressDestroyTowerBtn;
             EventManager.Structures.onStructureSelected += OnStructureSelected;
             EventManager.Structures.onStructureCreated += OnStructureCreated;
         }
 
         public virtual void OnDisable()
         {
+            EventManager.UI.onPressTowerDestroyedBtn -= OnPressDestroyTowerBtn;
             EventManager.Structures.onStructureSelected -= OnStructureSelected;
             EventManager.Structures.onStructureCreated -= OnStructureCreated;
         }

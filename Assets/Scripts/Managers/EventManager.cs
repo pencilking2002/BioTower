@@ -80,6 +80,7 @@ namespace BioTower
             public static Action onPressLevelSelectButton;
             public static Action onLetterReveal;
             public static Action<int> onTitleAnimCompleted;
+            public static Action<Structure> onPressTowerDestroyedBtn;
 
         }
 

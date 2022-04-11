@@ -18,6 +18,7 @@ namespace BioTower
         [SerializeField] private Button healTowerFullWidthButton;
         [SerializeField] private Button spawnUnitButton;
         [SerializeField] private Button spawnUnitFullWidth;
+        [SerializeField] private Button destroyTowerButton;
         [SerializeField] private Button spawnLightParticleButton;
         private Image spawnLightDropCooldownImage;
         [SerializeField] private TextMeshProUGUI currTowerText;
@@ -32,10 +33,17 @@ namespace BioTower
         [SerializeField] private Sprite mitoTower;
         private Dictionary<StructureType, Sprite> iconMap = new Dictionary<StructureType, Sprite>();
 
+        [Header("Tower Panel Transition")]
+
+        [SerializeField] private float fadeDuration = 0.1f;
+        private Vector3 initPos;
+        private bool isDisplayed = true;
+
         private void Awake()
         {
             spawnLightDropCooldownImage = spawnLightParticleButton.transform.Find("Cooldown").GetComponent<Image>();
-            towerPanel.gameObject.SetActive(false);
+            initPos = towerPanel.transform.position;
+            HidePanel(true);
             iconMap.Add(StructureType.ABA_TOWER, abaTower);
             iconMap.Add(StructureType.PPC2_TOWER, pp2cTower);
             iconMap.Add(StructureType.CHLOROPLAST, chloroplastTower);
@@ -53,12 +61,45 @@ namespace BioTower
             SetPrice(spawnLightParticleButton);
         }
 
+        private void ShowPanel(bool isInstant = false)
+        {
+            if (isDisplayed)
+                return;
+
+            isDisplayed = true;
+            towerPanel.gameObject.SetActive(true);
+            var duration = isInstant ? 0 : fadeDuration;
+            var scale = Vector3.one;
+            LeanTween.moveY(towerPanel.gameObject, initPos.y, duration).setEaseOutBack();
+        }
+
+        private void HidePanel(bool isInstant = false)
+        {
+            if (!isDisplayed)
+                return;
+
+            isDisplayed = false;
+            var duration = isInstant ? 0 : fadeDuration;
+            LeanTween.moveY(towerPanel.gameObject, initPos.y - 200, duration)
+            .setOnComplete(() => { towerPanel.gameObject.SetActive(false); }).setEaseInBack();
+        }
+
         private void Update()
         {
             if (!Util.gameStates.IsGameState())
                 return;
 
             HandleMitoTowerCooldownDisplay();
+        }
+
+        public void OnPressDestroyTowerBtn()
+        {
+            EventManager.UI.onPressTowerDestroyedBtn?.Invoke(Util.tapManager.selectedStructure);
+            LeanTween.delayedCall(gameObject, 0.1f, () =>
+            {
+                HidePanel();
+            });
+            Debug.Log("Destroy tower");
         }
 
         private void HandleMitoTowerCooldownDisplay()
@@ -252,7 +293,7 @@ namespace BioTower
 
             spawnLightParticleButton.gameObject.SetActive(displayLightDropButton);
             currTowerText.text = structure.structureType.ToString().Replace('_', ' ');
-            towerPanel.gameObject.SetActive(true);
+            ShowPanel();
             healTowerButton.gameObject.SetActive((displaySpawnUnitButton || displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
             healTowerFullWidthButton.gameObject.SetActive((!displaySpawnUnitButton && !displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
             spawnUnitFullWidth.gameObject.SetActive(LevelInfo.current.IsFirstLevel());
@@ -288,6 +329,14 @@ namespace BioTower
                     towerHealthbar.value = val;
                 });
                 healthText.text = $"{structure.GetCurrHealth()}/{structure.GetMaxHealth()}";
+            }
+        }
+
+        private void OnLevelStart(LevelType levelType)
+        {
+            if (levelType == LevelType.LEVEL_01)
+            {
+                destroyTowerButton.gameObject.SetActive(false);
             }
         }
 
@@ -385,11 +434,12 @@ namespace BioTower
 
         private void OnGameOver(bool isWin)
         {
-            towerPanel.gameObject.SetActive(false);
+            HidePanel();
         }
 
         private void OnEnable()
         {
+            EventManager.Game.onLevelStart += OnLevelStart;
             EventManager.Tutorials.onTutorialStart += OnTutorialStart;
             EventManager.Tutorials.onHighlightItem += OnHighlightItem;
             EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
@@ -404,6 +454,7 @@ namespace BioTower
 
         private void OnDisable()
         {
+            EventManager.Game.onLevelStart -= OnLevelStart;
             EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
             EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
             EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;

@@ -26,7 +26,6 @@ namespace BioTower.Structures
     public class Structure : MonoBehaviour
     {
         [ReadOnly][SerializeField] protected StructureSocket socket;
-        [SerializeField] protected GameObject towerDestroyedEffect;
         public StructureType structureType;
         [SerializeField] public bool hasHealth;
         [ShowIf("hasHealth")] public bool isAlive = true;
@@ -198,6 +197,8 @@ namespace BioTower.Structures
             if (socket != null)
                 socket.SetHasStructure(false);
 
+            Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.4f, 0.1f);
+
             Destroy(gameObject);
         }
 
@@ -321,7 +322,7 @@ namespace BioTower.Structures
 
         public virtual void OnDisable()
         {
-            EventManager.UI.onPressTowerDestroyedBtn -= OnPressDestroyTowerBtn;
+            EventManager.UI.onPressTowerDestroyedBtn = OnPressDestroyTowerBtn;
             EventManager.Structures.onStructureSelected -= OnStructureSelected;
             EventManager.Structures.onStructureCreated -= OnStructureCreated;
         }

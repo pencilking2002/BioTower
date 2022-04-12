@@ -195,7 +195,7 @@ namespace BioTower.Structures
             EventManager.Structures.onStructureDestroyed?.Invoke(this);
 
             if (socket != null)
-                socket.SetHasStructure(false);
+                socket.SetHasNone();
 
             Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.4f, 0.1f);
 

@@ -107,7 +107,7 @@ namespace BioTower.Structures
             {
                 EventManager.Structures.onStructureDestroyed?.Invoke(this);
                 if (socket != null)
-                    socket.SetHasStructure(false);
+                    socket.SetHasNone();
 
                 Destroy(gameObject);
             });

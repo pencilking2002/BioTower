@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
+using Sirenix.OdinInspector;
 
 namespace BioTower
 {
@@ -9,7 +10,9 @@ namespace BioTower
     [SelectionBase]
     public class StructureSocket : MonoBehaviour
     {
-        [SerializeField] private bool hasStructure;
+        [SerializeField] private ParticleSystem buildingParticles;
+        [ReadOnly][SerializeField] private bool isBuildingStructure;
+        [ReadOnly][SerializeField] private bool hasStructure;
         [SerializeField] private SpriteRenderer sr;
         [SerializeField] private Color glowColor;
         [SerializeField] private float glowAnimDuration = 0.5f;
@@ -48,8 +51,9 @@ namespace BioTower
 
         public void OnTap()
         {
-            if (!hasStructure && !isAnimatingIn)
+            if (HasNone() && !isAnimatingIn)
             {
+                //Debug.Log("Tap. HasNone: " + HasNone());
                 Jiggle();
                 EventManager.Structures.onTapFreeStructureSocket?.Invoke(this);
             }
@@ -90,14 +94,25 @@ namespace BioTower
             });
         }
 
-        public void SetHasStructure(bool hasStructure)
-        {
-            this.hasStructure = hasStructure;
-        }
-
         public bool HasStructure()
         {
             return hasStructure;
+        }
+
+        public bool HasNone() { return !this.hasStructure; }
+
+        public void SetHasNone()
+        {
+            this.hasStructure = false;
+            this.isBuildingStructure = false;
+        }
+
+        public void SetHasStructure()
+        {
+            LeanTween.cancel(sr.gameObject);
+            this.hasStructure = true;
+            this.isBuildingStructure = false;
+            buildingParticles.Stop();
         }
 
         private void OnSetNonePlacementState()
@@ -105,6 +120,16 @@ namespace BioTower
             LeanTween.cancel(gameObject);
             sr.color = defaultColor;
             Util.poolManager.DespawnAllitemHighlights();
+        }
+
+        public void SetIsBuildingStructure()
+        {
+            //LeanTween.cancel(sr.gameObject);
+            isBuildingStructure = true;
+            hasStructure = false;
+            buildingParticles.Play();
+            LeanTween.value(sr.gameObject, defaultColor, glowColor, 0.25f).setLoopPingPong(-1);
+
         }
 
         private void OnHighlightItem(HighlightedItem item)

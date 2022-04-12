@@ -76,13 +76,22 @@ namespace BioTower
 
             if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))
             {
-                PlaceTower(structureToPlace, socket.transform.position, socket);
-                GameManager.Instance.econManager.BuyTower(structureToPlace);
+                var towerType = structureToPlace;
+                var targetSocket = socket;
+
+                targetSocket.SetIsBuildingStructure();
+                LeanTween.delayedCall(gameObject, 2.0f, () =>
+                {
+                    PlaceTower(towerType, targetSocket.transform.position, targetSocket);
+                    GameManager.Instance.econManager.BuyTower(towerType);
+                });
             }
-            LeanTween.delayedCall(0.5f, () =>
-            {
-                SetNoneState();
-            });
+            //LeanTween.delayedCall(0.5f, () =>
+            //{
+            SetNoneState();
+            //});
+
+
 
         }
         private Collider2D DoRaycast(Vector3 screenPos)
@@ -101,7 +110,7 @@ namespace BioTower
         private void PlaceTower(StructureType structureType, Vector3 worldPosition, StructureSocket socket)
         {
             if (socket != null)
-                socket.SetHasStructure(true);
+                socket.SetHasStructure();
 
             var tower = CreateStructure(structureType);
             tower.transform.position = worldPosition + placementOffset;

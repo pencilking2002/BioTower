@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
 using Sirenix.OdinInspector;
+using BioTower.UI;
 
 namespace BioTower
 {
@@ -10,6 +11,7 @@ namespace BioTower
     [SelectionBase]
     public class StructureSocket : MonoBehaviour
     {
+        [SerializeField] private ProgressCanvas progressCanvas;
         [SerializeField] private ParticleSystem buildingParticles;
         [ReadOnly][SerializeField] private bool isBuildingStructure;
         [ReadOnly][SerializeField] private bool hasStructure;
@@ -47,6 +49,11 @@ namespace BioTower
                 isAnimatingIn = false;
             });
             EventManager.Structures.onSocketStart?.Invoke(this);
+        }
+
+        public void StartProgress(float duration)
+        {
+            progressCanvas.StartProgress(duration);
         }
 
         public void OnTap()

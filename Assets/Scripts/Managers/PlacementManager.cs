@@ -80,6 +80,7 @@ namespace BioTower
                 var targetSocket = socket;
 
                 targetSocket.SetIsBuildingStructure();
+                targetSocket.StartProgress(2.0f);
                 LeanTween.delayedCall(gameObject, 2.0f, () =>
                 {
                     PlaceTower(towerType, targetSocket.transform.position, targetSocket);

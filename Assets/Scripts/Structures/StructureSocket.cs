@@ -136,8 +136,9 @@ namespace BioTower
             hasStructure = false;
             buildingParticles.Play();
             LeanTween.value(sr.gameObject, defaultColor, glowColor, 0.25f).setLoopPingPong(-1);
-
         }
+
+        public bool IsBuildingStructure() { return this.isBuildingStructure; }
 
         private void OnHighlightItem(HighlightedItem item)
         {

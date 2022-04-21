@@ -74,26 +74,23 @@ namespace BioTower
             if (!IsPlacingState())
                 return;
 
+            if (socket.HasStructure() || socket.IsBuildingStructure())
+                return;
+
             if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))
             {
                 var towerType = structureToPlace;
                 var targetSocket = socket;
 
                 targetSocket.SetIsBuildingStructure();
-                targetSocket.StartProgress(2.0f);
-                LeanTween.delayedCall(gameObject, 2.0f, () =>
+                targetSocket.StartProgress(Util.gameSettings.towerConstructionDelay);
+                LeanTween.delayedCall(gameObject, Util.gameSettings.towerConstructionDelay, () =>
                 {
                     PlaceTower(towerType, targetSocket.transform.position, targetSocket);
                     GameManager.Instance.econManager.BuyTower(towerType);
                 });
             }
-            //LeanTween.delayedCall(0.5f, () =>
-            //{
             SetNoneState();
-            //});
-
-
-
         }
         private Collider2D DoRaycast(Vector3 screenPos)
         {

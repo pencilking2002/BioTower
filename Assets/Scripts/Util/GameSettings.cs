@@ -30,7 +30,7 @@ namespace BioTower
         public int randomHealAmount = 2;
         public int healTowerAmount = 2;
         public int declineDamage = 1;
-
+        public float towerConstructionDelay = 3;
 
         [Space(10)]
         public Params defaultSettings;

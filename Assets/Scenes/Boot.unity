@@ -9337,7 +9337,7 @@ MonoBehaviour:
   healTowerFullWidthButton: {fileID: 2050395146}
   spawnUnitButton: {fileID: 444732794}
   spawnUnitFullWidth: {fileID: 1943859029}
-  destroyTowerButton: {fileID: 0}
+  destroyTowerButton: {fileID: 175008214}
   spawnLightParticleButton: {fileID: 656353162}
   currTowerText: {fileID: 1938038589}
   towerIcon: {fileID: 595866265}

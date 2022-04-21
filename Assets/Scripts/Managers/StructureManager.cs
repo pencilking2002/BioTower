@@ -89,7 +89,7 @@ namespace BioTower.Structures
 
         }
 
-        private void OnStructureCreated(Structure structure)
+        private void OnStructureCreated(Structure structure, bool doSquishyAnim)
         {
             if (structure.structureType == StructureType.DNA_BASE)
                 return;

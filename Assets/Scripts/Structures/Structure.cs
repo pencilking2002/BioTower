@@ -59,8 +59,6 @@ namespace BioTower.Structures
                 healthBar.Init(currHealth);
             }
 
-            EventManager.Structures.onStructureCreated?.Invoke(this);
-
             if (!IsBarrier() && !IsMiniChloroTower())
             {
                 GameManager.Instance.tapManager.selectedStructure = this;
@@ -75,27 +73,44 @@ namespace BioTower.Structures
             var healthBarScaleX = healthBar.transform.localScale.x;
             var healthBarScaleY = healthBar.transform.localScale.y;
             healthBar.transform.localScale = Vector3.zero;
+            sr.transform.localScale = Vector3.zero;
+
 
             var initPos = initLocalSpritePos;
-            var dropPosition = initPos + new Vector3(0, 25, 0);
-            sr.transform.localPosition = dropPosition;
+            //var dropPosition = initPos + new Vector3(0, 25, 0);
+            //sr.transform.localPosition = dropPosition;
 
             var seq = LeanTween.sequence();
 
-            seq.append(() =>
-            {
-                LeanTween.moveLocal(sr.gameObject, initPos, 0.3f);
-                LeanTween.scale(sr.gameObject, initSpriteScale + new Vector3(0, 0.5f, 0), 0.3f);
-            });
+            // seq.append(() =>
+            // {
+            //     LeanTween.moveLocal(sr.gameObject, initPos, 0.3f);
+            //     LeanTween.scale(sr.gameObject, initSpriteScale + new Vector3(0, 0.5f, 0), 0.3f);
+            // });
 
-            seq.append(0.31f);
-            var scale = initSpriteScale;
-            scale.x *= 2f;
-            scale.y *= 0.5f;
-            if (socket != null)
-                seq.append(socket.Jiggle);
+            // seq.append(0.31f);
+            // var scale = initSpriteScale;
+            // scale.x *= 2f;
+            // scale.y *= 0.5f;
+            // if (socket != null)
+            //     seq.append(socket.Jiggle);
 
-            seq.append(LeanTween.scale(sr.gameObject, scale, 0.1f));
+            // seq.append(LeanTween.scale(sr.gameObject, scale, 0.1f));
+            // seq.append(() =>
+            // {
+            //     bool isFirstLevelAndIsPlayerBase = LevelInfo.current.IsFirstLevel() && IsPlayerBase();
+
+            //     if (!isFirstLevelAndIsPlayerBase)
+            //         Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.4f, 0.1f);
+            // });
+            // seq.append(LeanTween.scale(sr.gameObject, initSpriteScale, 0.25f).setEaseOutExpo());
+            // seq.append(() => { LeanTween.scaleX(healthBar.gameObject, healthBarScaleX, 0.4f).setEaseOutElastic(); });
+            // seq.append(() => { LeanTween.scaleY(healthBar.gameObject, healthBarScaleY, 0.7f).setEaseOutElastic(); });
+
+            //seq.append(LeanTween.scale(sr.gameObject, initSpriteScale, 0.25f).setEaseOutBack());
+
+            seq.append(LeanTween.scale(sr.gameObject, initSpriteScale, 0.25f).setEaseOutBack());
+
             seq.append(() =>
             {
                 bool isFirstLevelAndIsPlayerBase = LevelInfo.current.IsFirstLevel() && IsPlayerBase();
@@ -103,9 +118,14 @@ namespace BioTower.Structures
                 if (!isFirstLevelAndIsPlayerBase)
                     Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.4f, 0.1f);
             });
-            seq.append(LeanTween.scale(sr.gameObject, initSpriteScale, 0.25f).setEaseOutExpo());
+
             seq.append(() => { LeanTween.scaleX(healthBar.gameObject, healthBarScaleX, 0.4f).setEaseOutElastic(); });
             seq.append(() => { LeanTween.scaleY(healthBar.gameObject, healthBarScaleY, 0.7f).setEaseOutElastic(); });
+
+            seq.append(() =>
+            {
+                EventManager.Structures.onStructureCreated?.Invoke(this, false);
+            });
 
         }
 
@@ -175,6 +195,7 @@ namespace BioTower.Structures
 
             // Reset tower before applying tweens to it
             LeanTween.cancel(sr.gameObject);
+            Debug.Log("Do death visual");
             sr.transform.localScale = initSpriteScale;
             sr.color = Color.white;
 
@@ -205,7 +226,7 @@ namespace BioTower.Structures
         public virtual void OnTapStructure(Vector3 screenPoint) { }
         public virtual void SpawnUnits(int numUnits) { }
 
-        private void SelectStructure()
+        private void SelectStructure(bool doSquishyAnim)
         {
             if (GameManager.Instance == null)
                 return;
@@ -219,7 +240,8 @@ namespace BioTower.Structures
             if (influenceVisuals != null)
                 influenceVisuals.gameObject.SetActive(true);
 
-            DoSquishyAnimation(initSpriteScale, initSpriteScale);
+            if (doSquishyAnim)
+                DoSquishyAnimation(initSpriteScale, initSpriteScale);
         }
 
         private void DeselectStructure()
@@ -233,6 +255,8 @@ namespace BioTower.Structures
 
         private void DoSquishyAnimation(Vector3 startingScale, Vector3 targetScale, bool cancelAnim = true)
         {
+            Debug.Log("Do squishy animation");
+
             if (cancelAnim)
                 LeanTween.cancel(sr.gameObject);
 
@@ -300,15 +324,15 @@ namespace BioTower.Structures
         public virtual void OnStructureSelected(Structure structure)
         {
             if (structure == this)
-                SelectStructure();
+                SelectStructure(true);
             else
                 DeselectStructure();
         }
 
-        public virtual void OnStructureCreated(Structure structure)
+        public virtual void OnStructureCreated(Structure structure, bool doSquishyAnim)
         {
             if (structure == this)
-                SelectStructure();
+                SelectStructure(doSquishyAnim);
             else
                 DeselectStructure();
         }

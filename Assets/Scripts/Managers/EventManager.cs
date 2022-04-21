@@ -39,7 +39,7 @@ namespace BioTower
             public static Action onBaseDestroyed;
             public static Action<StructureType> onStartPlacementState;
             public static Action onSetNonePlacementState;
-            public static Action<Structure> onStructureCreated;
+            public static Action<Structure, bool> onStructureCreated;
             public static Action<Structure> onStructureDestroyed;
             public static Action<StructureType, float> onStructureCooldownStarted;
             public static Action<Structure> onStructureSelected;

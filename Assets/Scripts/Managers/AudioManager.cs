@@ -183,7 +183,7 @@ namespace BioTower
             PlaySound(data.enemyBaseAttacked);
         }
 
-        private void OnStructureCreated(Structure tower)
+        private void OnStructureCreated(Structure tower, bool doSquishyAnim)
         {
             if (tower.structureType != StructureType.DNA_BASE)
                 PlaySound(data.towerPlaced);

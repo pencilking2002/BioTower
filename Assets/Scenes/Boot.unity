@@ -10217,6 +10217,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4293659511487582202, guid: 1efa5580d925f4f41949a420af6456cf,
+        type: 3}
+      propertyPath: structureSpawnCooldown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5526649151822771978, guid: 1efa5580d925f4f41949a420af6456cf,
         type: 3}
       propertyPath: midEnemyPrefab

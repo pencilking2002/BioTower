@@ -81,6 +81,7 @@ namespace BioTower
             {
                 var towerType = structureToPlace;
                 var targetSocket = socket;
+                EventManager.Structures.onStructureCooldownStarted?.Invoke(towerType, Util.cooldownManager.structureSpawnCooldown);
 
                 targetSocket.SetIsBuildingStructure();
                 targetSocket.StartProgress(Util.gameSettings.towerConstructionDelay);

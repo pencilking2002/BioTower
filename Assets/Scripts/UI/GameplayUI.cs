@@ -124,26 +124,22 @@ namespace BioTower.UI
 
         public void OnPressAbaTowerButton()
         {
-            //Debug.Log("Try to press ABA tower btn");
 
             if (!Util.towerManager.HasAvailableSockets())
             {
                 Util.HandleInvalidButtonPress(AbaTowerButton);
-                //Debug.Log("No available sockets");
                 return;
             }
 
             if (!InputController.canPressButtons)
             {
                 Util.HandleInvalidButtonPress(AbaTowerButton);
-                //Debug.Log("can't press buttons");
                 return;
             }
 
             bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.ABA_TOWER];
             if (!canBuildTower)
             {
-                //Debug.Log("can't press buttons");
                 return;
             }
 

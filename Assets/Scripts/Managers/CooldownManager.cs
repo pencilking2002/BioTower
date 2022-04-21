@@ -32,7 +32,6 @@ namespace BioTower
         private void OnStructureCreated(Structure structure, bool doSquishyAnim)
         {
             structureCooldownMap[structure.structureType] = false;
-            EventManager.Structures.onStructureCooldownStarted?.Invoke(structure.structureType, structureSpawnCooldown);
             LeanTween.delayedCall(structureSpawnCooldown, () =>
             {
                 structureCooldownMap[structure.structureType] = true;

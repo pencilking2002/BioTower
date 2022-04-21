@@ -26,6 +26,7 @@ namespace BioTower
         public static GameStates gameStates => GameManager.Instance.gameStates;
         public static WaveManager waveManager => GameManager.Instance.waveManager;
         public static StructureManager structureManager => GameManager.Instance.structureManager;
+        public static CooldownManager cooldownManager => GameManager.Instance.cooldownManager;
         public static int structureSocketLayer = 12;
         public static TutorialCanvas tutCanvas;
         public static ObjectShake objectShake => GameManager.Instance.objectShake;

@@ -124,6 +124,8 @@ namespace BioTower.UI
 
         public void OnPressAbaTowerButton()
         {
+            if (DeselectIfAlreadySelected(StructureType.ABA_TOWER))
+                return;
 
             if (!Util.towerManager.HasAvailableSockets())
             {
@@ -142,6 +144,7 @@ namespace BioTower.UI
             {
                 return;
             }
+
 
             if (GameManager.Instance.econManager.CanBuyTower(StructureType.ABA_TOWER))
             {
@@ -164,6 +167,9 @@ namespace BioTower.UI
 
         public void OnPressPPC2TowerButton()
         {
+            if (DeselectIfAlreadySelected(StructureType.PPC2_TOWER))
+                return;
+
             if (!Util.towerManager.HasAvailableSockets())
             {
                 Util.HandleInvalidButtonPress(AbaTowerButton);
@@ -187,6 +193,9 @@ namespace BioTower.UI
 
         public void OnPressChloroplastButton()
         {
+            if (DeselectIfAlreadySelected(StructureType.CHLOROPLAST))
+                return;
+
             if (!Util.towerManager.HasAvailableSockets())
             {
                 Util.HandleInvalidButtonPress(AbaTowerButton);
@@ -210,6 +219,9 @@ namespace BioTower.UI
 
         public void OnPressMitoButton()
         {
+            if (DeselectIfAlreadySelected(StructureType.MITOCHONDRIA))
+                return;
+
             if (!Util.towerManager.HasAvailableSockets())
             {
                 Util.HandleInvalidButtonPress(AbaTowerButton);
@@ -268,6 +280,22 @@ namespace BioTower.UI
             });
         }
 
+        /// <summary>
+        /// Used to deselect a button if its already selected
+        /// </summary>
+        /// <param name="structureType"></param>
+        /// <returns></returns>
+        private bool DeselectIfAlreadySelected(StructureType structureType)
+        {
+            if (GetSelectedButtonType() == structureType)
+            {
+                DeselectCurrentButton();
+                Util.poolManager.DespawnAllitemHighlights();
+                return true;
+            }
+            return false;
+        }
+
         private void PingPongScaleCurrencyUI(float targetScale)
         {
             LeanTween.cancel(playerCurrencyText.gameObject);
@@ -323,7 +351,7 @@ namespace BioTower.UI
                 LeanTween.cancel(currSelectedBtn.gameObject);
                 LeanTween.moveLocalY(currSelectedBtn.gameObject, initButtonLocalPos.y, 0.1f);
                 currSelectedBtn = null;
-                Debug.Log("Deselect button");
+                //Debug.Log("Deselect button");
             }
         }
 

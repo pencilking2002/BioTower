@@ -97,7 +97,7 @@ namespace BioTower
 
             LeanTween.delayedCall(0.1f, () =>
             {
-                //var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0, 100));
+                var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0, 100));
             });
         }
 

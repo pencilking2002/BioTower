@@ -148,11 +148,27 @@ namespace BioTower
         private void ShowSunRay()
         {
             sunRay.enabled = true;
+            var color = sunRay.color;
+            var clearColor = color;
+            clearColor.a = 0;
+            LeanTween.value(sunRay.gameObject, clearColor, color, 0.3f).setOnUpdate((Color color) =>
+            {
+                sunRay.color = color;
+            });
         }
 
         private void HideSunRay()
         {
-            sunRay.enabled = false;
+            var color = sunRay.color;
+            var clearColor = color;
+            clearColor.a = 0;
+            LeanTween.value(sunRay.gameObject, color, clearColor, 0.5f).setOnUpdate((Color color) =>
+            {
+                sunRay.color = color;
+            }).setOnComplete(() =>
+            {
+                sunRay.enabled = false;
+            });
         }
 
         public bool IsBuildingStructure() { return this.isBuildingStructure; }

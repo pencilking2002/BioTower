@@ -18,8 +18,7 @@ MonoBehaviour:
     startDelay: 0
     isEndless: 1
     numEnemiesPerWave: 2000
-    spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 3.2020845
-    lastSpawn: 3.316719
-    numSpawns: 1
+    spawnInterval: 2
+    timeStarted: 18.858349
+    lastSpawn: 38.9621
+    numSpawns: 11

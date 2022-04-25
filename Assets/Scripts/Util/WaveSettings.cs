@@ -24,8 +24,8 @@ namespace BioTower
         public bool isEndless;
         [HideIf("isEndless")] public int numEnemiesPerWave;
         public int spawnInterval;
-        [MinMaxSlider(0, 1)]
-        public Vector2 minMaxSpeed = new Vector2(0.4f, 0.7f);
+        //[MinMaxSlider(0, 1)]
+        //public Vector2 minMaxSpeed = new Vector2(0.4f, 0.7f);
 
         [HideInInspector] public float timeStarted;
         [HideInInspector] public float lastSpawn;

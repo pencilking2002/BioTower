@@ -19,7 +19,7 @@ namespace BioTower
             var wave = waveManager.currWave;
             if (Time.time > wave.lastSpawn + wave.spawnInterval || wave.numSpawns == 0)
             {
-                waveManager.SpawnEnemy(wave.minMaxSpeed, wave.enemyType);
+                waveManager.SpawnEnemy(wave.enemyType);
                 wave.lastSpawn = Time.time;
                 wave.numSpawns++;
             }

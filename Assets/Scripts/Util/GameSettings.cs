@@ -23,6 +23,8 @@ namespace BioTower
         public int enemyUpgradedDamage = 4;
         public int enemyUnitMaxHealth = 10;     // N/A
         public int snark2UnitCost = 3;          // N/A
+        [Range(0, 100)] public float abaWinChance = 50;
+        [Range(0, 100)] public float snrk2WinChance = 0;
 
 
         [Header("Towers")]

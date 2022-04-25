@@ -1,11 +1,15 @@
 using UnityEngine;
 using BioTower.Level;
 using BioTower.Structures;
+using Sirenix.OdinInspector;
 
 namespace BioTower.Units
 {
     public class EnemyUnit : Unit
     {
+        [MinMaxSlider(0, 1)]
+        public Vector2 minMaxSpeed = new Vector2(0.4f, 0.7f);
+
         [Header("References")]
         protected Collider2D triggerCollider;
         [SerializeField] protected SpriteRenderer muscleIcon;
@@ -127,6 +131,7 @@ namespace BioTower.Units
             if (currentAnim == null)
                 currentAnim = anim;
 
+            SetSpeed(this.minMaxSpeed);
             currentAnim.SetBool("Walk", true);
             currentAnim.SetBool("Attack", false);
             unitFoe = null;

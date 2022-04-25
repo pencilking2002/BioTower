@@ -116,7 +116,7 @@ namespace BioTower.Structures
                 bool isFirstLevelAndIsPlayerBase = LevelInfo.current.IsFirstLevel() && IsPlayerBase();
 
                 if (!isFirstLevelAndIsPlayerBase)
-                    Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.4f, 0.1f);
+                    Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.3f, 0.05f);
             });
 
             seq.append(() => { LeanTween.scaleX(healthBar.gameObject, healthBarScaleX, 0.4f).setEaseOutElastic(); });

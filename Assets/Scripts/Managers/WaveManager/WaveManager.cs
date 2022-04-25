@@ -69,7 +69,7 @@ namespace BioTower
 
         public GameObject GetEnemyPrefab(UnitType unitType) { return enemyDict[unitType]; }
 
-        public EnemyUnit SpawnEnemy(Vector2 minMaxSpeed, UnitType enemyType)
+        public EnemyUnit SpawnEnemy(UnitType enemyType)
         {
             // Initialize enemy
             var enemyPrefab = GetEnemyPrefab(enemyType);
@@ -84,7 +84,7 @@ namespace BioTower
 
             // Setup enemy
             GameManager.Instance.RegisterEnemy(enemy);
-            enemy.SetSpeed(minMaxSpeed);
+            //enemy.SetSpeed(minMaxSpeed);
             enemy.StartMoving(enemy.GetNextWaypoint());
             return enemy;
         }
@@ -117,8 +117,7 @@ namespace BioTower
         private void OnEnemyReachedDestination(EnemyUnit enemy)
         {
             // Vary speed
-            var minMaxSpeed = currWave.minMaxSpeed;
-            enemy.SetSpeed(minMaxSpeed, 0.5f);
+            enemy.SetSpeed(enemy.minMaxSpeed, 0.5f);
         }
 
 

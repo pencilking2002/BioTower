@@ -11,8 +11,6 @@ namespace BioTower
     [SelectionBase]
     public class StructureSocket : MonoBehaviour
     {
-        [SerializeField] private ProgressCanvas progressCanvas;
-        [SerializeField] private ParticleSystem buildingParticles;
         [ReadOnly][SerializeField] private bool isBuildingStructure;
         [ReadOnly][SerializeField] private bool hasStructure;
         [SerializeField] private SpriteRenderer sr;
@@ -21,6 +19,13 @@ namespace BioTower
         private Color defaultColor;
         private Vector3 initScale;
         private bool isAnimatingIn = true;
+
+
+        [Header("References")]
+        [SerializeField] private ProgressCanvas progressCanvas;
+        [SerializeField] private ParticleSystem buildingParticles;
+        [SerializeField] private SpriteRenderer sunRay;
+
 
         private void Start()
         {
@@ -116,6 +121,7 @@ namespace BioTower
 
         public void SetHasStructure()
         {
+            HideSunRay();
             LeanTween.cancel(sr.gameObject);
             this.hasStructure = true;
             this.isBuildingStructure = false;
@@ -131,12 +137,22 @@ namespace BioTower
 
         public void SetIsBuildingStructure()
         {
-            //LeanTween.cancel(sr.gameObject);
+            ShowSunRay();
             isBuildingStructure = true;
             hasStructure = false;
             buildingParticles.Play();
             Util.poolManager.DespawnAllitemHighlights();
             LeanTween.value(sr.gameObject, defaultColor, glowColor, 0.25f).setLoopPingPong(-1);
+        }
+
+        private void ShowSunRay()
+        {
+            sunRay.enabled = true;
+        }
+
+        private void HideSunRay()
+        {
+            sunRay.enabled = false;
         }
 
         public bool IsBuildingStructure() { return this.isBuildingStructure; }

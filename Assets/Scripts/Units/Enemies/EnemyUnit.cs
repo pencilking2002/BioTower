@@ -7,7 +7,7 @@ namespace BioTower.Units
 {
     public class EnemyUnit : Unit
     {
-        [MinMaxSlider(0, 1)]
+        [MinMaxSlider(0, 5)]
         public Vector2 minMaxSpeed = new Vector2(0.4f, 0.7f);
 
         [Header("References")]

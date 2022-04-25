@@ -17,7 +17,7 @@ namespace BioTower
         [Header("ABA Units")]
         [TabGroup("Units")] public int abaUnitDamage = 5;           // Done
         [TabGroup("Units")] public int abaUnitMaxSpeed_float = 500; // Done
-        [TabGroup("Units")] public int abaUnitCost = 5;             // Done
+        [TabGroup("Units")] public int abaUnitCost = 3;             // Done
         [TabGroup("Units")] public int abaUnitMaxHealth = 10;       // Done
 
 

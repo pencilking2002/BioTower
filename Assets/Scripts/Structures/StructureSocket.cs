@@ -97,7 +97,7 @@ namespace BioTower
 
             LeanTween.delayedCall(0.1f, () =>
             {
-                var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0, 100));
+                //var item = Util.poolManager.SpawnItemHighlight(this.transform.position, new Vector2(0, 100));
             });
         }
 
@@ -135,6 +135,7 @@ namespace BioTower
             isBuildingStructure = true;
             hasStructure = false;
             buildingParticles.Play();
+            Util.poolManager.DespawnAllitemHighlights();
             LeanTween.value(sr.gameObject, defaultColor, glowColor, 0.25f).setLoopPingPong(-1);
         }
 

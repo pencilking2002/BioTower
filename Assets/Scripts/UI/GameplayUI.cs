@@ -124,7 +124,10 @@ namespace BioTower.UI
 
         public void OnPressAbaTowerButton()
         {
-            if (DeselectIfAlreadySelected(StructureType.ABA_TOWER))
+            // Prevent ABA tower button from being deselected if user is doing tutorial
+            bool isFirstLevel = LevelInfo.current.IsFirstLevel() && Util.tutCanvas.currTutorial.requiredAction == RequiredAction.PLACE_ABA_TOWER;
+
+            if (!isFirstLevel && DeselectIfAlreadySelected(StructureType.ABA_TOWER))
                 return;
 
             if (!Util.towerManager.HasAvailableSockets())

@@ -385,7 +385,7 @@ namespace BioTower
             if (LevelInfo.current.IsFirstLevel() && item == HighlightedItem.ABA_UNIT_BTN)
             {
                 var worldPos = Camera.main.ScreenToWorldPoint(spawnUnitFullWidth.transform.position);
-                Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0, 130));
+                Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0, 350));
                 Util.DisplayGlowUI(spawnUnitFullWidth.transform);
             }
             else

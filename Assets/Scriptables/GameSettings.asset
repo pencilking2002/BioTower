@@ -21,7 +21,7 @@ MonoBehaviour:
   enemyUpgradedDamage: 4
   enemyUnitMaxHealth: 10
   snark2UnitCost: 3
-  abaWinChance: 30
+  abaWinChance: 40
   snrk2WinChance: 0
   randomHealChance: 0.1
   randomHealAmount: 2

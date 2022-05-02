@@ -27,8 +27,8 @@ namespace BioTower.Structures
     {
         [ReadOnly][SerializeField] protected StructureSocket socket;
         public StructureType structureType;
+        public bool isAlive = true;
         [SerializeField] public bool hasHealth;
-        [ShowIf("hasHealth")] public bool isAlive = true;
         [ShowIf("hasHealth")][Range(0, 100)][SerializeField] protected int maxHealth;
         [ShowIf("hasHealth")][SerializeField] protected int currHealth;
         protected HealthBar healthBar;
@@ -255,7 +255,7 @@ namespace BioTower.Structures
 
         private void DoSquishyAnimation(Vector3 startingScale, Vector3 targetScale, bool cancelAnim = true)
         {
-            Debug.Log("Do squishy animation");
+            //Debug.Log("Do squishy animation");
 
             if (cancelAnim)
                 LeanTween.cancel(sr.gameObject);

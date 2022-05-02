@@ -40,6 +40,7 @@ namespace BioTower
             public static Action<StructureType> onStartPlacementState;
             public static Action onSetNonePlacementState;
             public static Action<Structure, bool> onStructureCreated;
+            public static Action<Structure> onStructureActivated;       // Used for activating structures that exist on the map at the beginning
             public static Action<Structure> onStructureDestroyed;
             public static Action<StructureType, float> onStructureCooldownStarted;
             public static Action<Structure> onStructureSelected;

@@ -18,10 +18,11 @@ namespace BioTower.Structures
             //(Structure structure in structureList)
             for (int i = 0; i < structureList.Count; i++)
             {
-                if (structureList[i] == null)
+                Structure structure = structureList[i];
+
+                if (structure == null)
                     continue;
 
-                Structure structure = structureList[i];
 
                 if (!structure.isAlive)
                     continue;
@@ -115,10 +116,17 @@ namespace BioTower.Structures
             socketList.Clear();
         }
 
-
+        private void OnStructureActivated(Structure tower)
+        {
+            if (tower.IsMiniChloroTower())
+            {
+                structureList.Add(tower);
+            }
+        }
 
         private void OnEnable()
         {
+            EventManager.Structures.onStructureActivated += OnStructureActivated;
             EventManager.Structures.onStructureCreated += OnStructureCreated;
             EventManager.Structures.onStructureDestroyed += OnStructureDestroyed;
             EventManager.Structures.onSocketStart += OnSocketStart;
@@ -127,6 +135,7 @@ namespace BioTower.Structures
 
         private void OnDisable()
         {
+            EventManager.Structures.onStructureActivated += OnStructureActivated;
             EventManager.Structures.onStructureCreated -= OnStructureCreated;
             EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
             EventManager.Structures.onSocketStart -= OnSocketStart;

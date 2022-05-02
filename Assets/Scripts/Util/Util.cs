@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using BioTower.SaveData;
 using BioTower.Structures;
 using UnityEngine.SceneManagement;
+using BioTower.Units;
 
 namespace BioTower
 {
@@ -27,6 +28,7 @@ namespace BioTower
         public static WaveManager waveManager => GameManager.Instance.waveManager;
         public static StructureManager structureManager => GameManager.Instance.structureManager;
         public static CooldownManager cooldownManager => GameManager.Instance.cooldownManager;
+        public static UnitManager unitManager => GameManager.Instance.unitManager;
         public static int structureSocketLayer = 12;
         public static TutorialCanvas tutCanvas;
         public static ObjectShake objectShake => GameManager.Instance.objectShake;

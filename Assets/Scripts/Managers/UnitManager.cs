@@ -122,6 +122,17 @@ namespace BioTower.Units
             }
         }
 
+        public int GetEnemyCount()
+        {
+            int numEnemies = 0;
+            for (int i = 0; i < units.Count; i++)
+            {
+                if (units[i].IsEnemy())
+                    numEnemies++;
+            }
+            return numEnemies;
+        }
+
         private void OnGameOver(bool isWin)
         {
             units.Clear();

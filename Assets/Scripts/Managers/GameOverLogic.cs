@@ -36,33 +36,30 @@ namespace BioTower
 
         private void OnUnitDestroyed(Unit unit)
         {
-            if (unit.unitType != UnitType.BASIC_ENEMY)
-                return;
-
             var levelInfo = LevelInfo.current;
-            if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
+            if (levelInfo.winCondition == WinCondition.SURVIVE_WAVES)
+            {
+                if (unit.IsEnemy() && Util.unitManager.GetEnemyCount() <= 1)
+                {
+                    EventManager.Game.onGameOver?.Invoke(true);
+                }
+            }
+
+            else if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
             {
                 levelInfo.numEnemiesDestroyed++;
                 if (levelInfo.numEnemiesDestroyed >= levelInfo.numEnemiesToDestroy)
                 {
-                    EventManager.Game.onGameOver(true);
+                    EventManager.Game.onGameOver?.Invoke(true);
                 }
             }
         }
 
-        private void OnWavesCompleted()
-        {
-            if (LevelInfo.current.winCondition == WinCondition.SURVIVE_WAVES)
-            {
-                EventManager.Game.onGameOver?.Invoke(true);
-            }
-        }
-
-        // private void OnSpendCurrency(int numSpent, int currPlayerCurrency)
+        // private void OnWavesCompleted()
         // {
-        //     if (currPlayerCurrency == 0)
+        //     if (LevelInfo.current.winCondition == WinCondition.SURVIVE_WAVES)
         //     {
-        //         EventManager.Game.onGameOver?.Invoke(false);
+        //         EventManager.Game.onGameOver?.Invoke(true);
         //     }
         // }
 
@@ -76,18 +73,20 @@ namespace BioTower
 
         private void OnEnable()
         {
+            EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
             EventManager.Game.onGameStateInit += OnGameStateInit;
             EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
-            EventManager.Game.onWavesCompleted += OnWavesCompleted;
+            //EventManager.Game.onWavesCompleted += OnWavesCompleted;
             EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
             //EventManager.Game.onSpendCurrency += OnSpendCurrency;
         }
 
         private void OnDisable()
         {
+            EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
             EventManager.Game.onGameStateInit -= OnGameStateInit;
             EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
-            EventManager.Game.onWavesCompleted -= OnWavesCompleted;
+            //EventManager.Game.onWavesCompleted -= OnWavesCompleted;
             EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
             //EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         }

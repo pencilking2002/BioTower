@@ -4,60 +4,58 @@ using UnityEngine;
 
 namespace BioTower
 {
-public class EndedState : WaveState
-{
-    public override void Init()
+    public class EndedState : WaveState
     {
-        if (!isInitialized)
+        public override void Init()
         {
-            isInitialized = true;
-            var numWaves = waveManager.waveSettings.waves.Length;
-            EventManager.Game.onWaveStateInit?.Invoke(waveState);
-        }
-    }
-
-    public override WaveMode OnUpdate(WaveMode waveState)
-    {
-        Init();
-        var wave = waveManager.currWave;
-        if (waveManager.currWaveIndex < waveManager.waveSettings.waves.Length-1)
-        {
-            ++waveManager.currWaveIndex;
-            waveState = WaveMode.NOT_STARTED;
-            //waveManager.waveSettings.waves[waveManager.currWave].state = WaveMode.NOT_STARTED;
-            //Debug.Log("new wave: " + waveManager.currWave);
-        }
-        else
-        {
-            waveManager.wavesHaveCompleted = true;
-            EventManager.Game.onWavesCompleted?.Invoke();
+            if (!isInitialized)
+            {
+                isInitialized = true;
+                var numWaves = waveManager.waveSettings.waves.Length;
+                EventManager.Game.onWaveStateInit?.Invoke(waveState);
+            }
         }
 
-        return waveState;
-    }
+        public override WaveMode OnUpdate(WaveMode waveState)
+        {
+            Init();
+            var wave = waveManager.currWave;
+            if (waveManager.currWaveIndex < waveManager.waveSettings.waves.Length - 1)
+            {
+                ++waveManager.currWaveIndex;
+                waveState = WaveMode.NOT_STARTED;
+            }
+            else
+            {
+                waveManager.wavesHaveCompleted = true;
+                EventManager.Game.onWavesCompleted?.Invoke();
+            }
 
-    private void OnWaveStateInit(WaveMode waveState)
-    {
-        if (this.waveState != waveState)
-            isInitialized = false;
-    }
+            return waveState;
+        }
 
-    private void OnLevelStart(LevelType levelType)
-    {
-        if (levelType != LevelType.NONE)
-            waveManager.SetNotStartedState();
-    }
+        private void OnWaveStateInit(WaveMode waveState)
+        {
+            if (this.waveState != waveState)
+                isInitialized = false;
+        }
 
-    private void OnEnable()
-    {
-        EventManager.Game.onWaveStateInit += OnWaveStateInit;
-        EventManager.Game.onLevelStart += OnLevelStart;
-    }
+        private void OnLevelStart(LevelType levelType)
+        {
+            if (levelType != LevelType.NONE)
+                waveManager.SetNotStartedState();
+        }
 
-    private void OnDisable()
-    {
-        EventManager.Game.onWaveStateInit -= OnWaveStateInit;
-        EventManager.Game.onLevelStart -= OnLevelStart;
+        private void OnEnable()
+        {
+            EventManager.Game.onWaveStateInit += OnWaveStateInit;
+            EventManager.Game.onLevelStart += OnLevelStart;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Game.onLevelStart -= OnLevelStart;
+        }
     }
-}
 }

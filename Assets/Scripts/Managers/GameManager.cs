@@ -93,9 +93,9 @@ namespace BioTower
             if (GameManager.Instance.gameStates.IsGameState())
             {
                 if (Input.GetKeyDown(KeyCode.W))
-                    EventManager.Game.onGameOver?.Invoke(true);
+                    EventManager.Game.onGameOver?.Invoke(true, 0);
                 else if (Input.GetKeyDown(KeyCode.L))
-                    EventManager.Game.onGameOver?.Invoke(false);
+                    EventManager.Game.onGameOver?.Invoke(false, 0);
 
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {

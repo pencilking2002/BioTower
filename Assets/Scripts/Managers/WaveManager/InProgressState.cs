@@ -31,7 +31,7 @@ namespace BioTower
             return waveState;
         }
 
-        private void OnGameOver(bool isWin)
+        private void OnGameOver(bool isWin, float delay)
         {
             waveManager.SetEndedState();
         }

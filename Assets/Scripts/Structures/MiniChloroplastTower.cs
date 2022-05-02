@@ -22,6 +22,7 @@ namespace BioTower.Structures
         private void Start()
         {
             base.Init(null);
+            lastShotTime = Time.time;
             var initScale = sr.transform.localScale;
             sr.transform.localScale = Vector3.zero;
             LeanTween.cancel(sr.gameObject);
@@ -36,9 +37,6 @@ namespace BioTower.Structures
             EventManager.Structures.onStructureActivated?.Invoke(this);
         }
 
-        private void OnEnable()
-        {
-        }
 
         public override void OnUpdate()
         {

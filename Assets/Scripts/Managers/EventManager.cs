@@ -13,7 +13,7 @@ namespace BioTower
     {
         public class Game
         {
-            public static Action<bool> onGameOver;
+            public static Action<bool, float> onGameOver;       // bool -> win/lose, float -> delay 
             public static Action onLevelLoaded_01;  // For registering the player base
             public static Action onLevelLoaded_02;  // for registering enemies
             public static Action onWavesCompleted;

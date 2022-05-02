@@ -18,6 +18,7 @@ namespace BioTower
 
 
         [Header("Units")]
+        public float abaCombatCooldown = 0.5f;
         public int basicEnemyDamage = 5;        // N/A
         public int enemyPlayerBaseDamage = 3;   // How much do enemies damage the player base
         public int enemyUpgradedDamage = 4;

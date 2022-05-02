@@ -19,16 +19,19 @@ namespace BioTower
         public override WaveMode OnUpdate(WaveMode waveState)
         {
             Init();
-            var wave = waveManager.currWave;
-            if (waveManager.currWaveIndex < waveManager.waveSettings.waves.Length - 1)
+            if (!waveManager.wavesHaveCompleted)
             {
-                ++waveManager.currWaveIndex;
-                waveState = WaveMode.NOT_STARTED;
-            }
-            else
-            {
-                waveManager.wavesHaveCompleted = true;
-                EventManager.Game.onWavesCompleted?.Invoke();
+                var wave = waveManager.currWave;
+                if (waveManager.currWaveIndex < waveManager.waveSettings.waves.Length - 1)
+                {
+                    ++waveManager.currWaveIndex;
+                    waveState = WaveMode.NOT_STARTED;
+                }
+                else
+                {
+                    //waveManager.wavesHaveCompleted = true;
+                    EventManager.Game.onWavesCompleted?.Invoke();
+                }
             }
 
             return waveState;

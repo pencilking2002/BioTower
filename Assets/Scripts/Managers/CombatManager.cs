@@ -34,6 +34,9 @@ namespace BioTower.Units
 
         private void ProcessAbaUnit(Unit unit, ABATower tower)
         {
+            if (unit.isInCooldown)
+                return;
+
             if (unit.IsRoamingState())
             {
                 // Find the closest enemy who is not engaged
@@ -51,6 +54,9 @@ namespace BioTower.Units
         {
             foreach (Unit unit in tower.units)
             {
+                if (unit.isInCooldown)
+                    continue;
+
                 if (unit.IsChasingState())
                 {
                     float distance = Vector2.Distance(unit.transform.position, unit.unitFoe.transform.position);
@@ -105,6 +111,12 @@ namespace BioTower.Units
                 DoCombatRound(winningUnit, losingUnit, 1);
             else
                 winningUnit.SetRoamingState();
+
+            if (winningUnit.IsAba())
+            {
+                var abaUnit = (AbaUnit)winningUnit;
+                abaUnit.StartCooldown();
+            }
         }
 
         private int GetDamage(Unit unit)

@@ -23,7 +23,6 @@ namespace BioTower.Structures
                 if (structure == null)
                     continue;
 
-
                 if (!structure.isAlive)
                     continue;
 
@@ -113,7 +112,7 @@ namespace BioTower.Structures
                 socketList.Add(socket);
         }
 
-        private void OnGameOver(bool isWin)
+        private void OnGameOver(bool isWin, float delay)
         {
             structureList.Clear();
             socketList.Clear();

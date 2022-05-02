@@ -90,10 +90,6 @@ namespace BioTower
         {
             switch (gameState)
             {
-                // case GameState.GAME:
-                //     if (!LevelInfo.current.HasTutorials())
-                //         PlayMusicCrossFade(data.levelTrack_01, 0.5f);
-                //     break;
                 case GameState.GAME_OVER_LOSE:
                     PlayMusic(data.gameOverLose, true);
                     break;

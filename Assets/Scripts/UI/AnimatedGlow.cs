@@ -13,17 +13,13 @@ namespace BioTower.UI
             LeanTween.scaleX(gameObject, scaleStrength.x, scaleDuration.x).setLoopPingPong(-1).setIgnoreTimeScale(true);
             LeanTween.scaleY(gameObject, scaleStrength.y, scaleDuration.y).setLoopPingPong(-1).setIgnoreTimeScale(true);
 
-            Debug.Log("Start glowing");
-
+            //Debug.Log("Start glowing");
         }
 
         public void StopGlowing()
         {
             LeanTween.cancel(gameObject);
-            Debug.Log("Stop glowing");
-
+            //Debug.Log("Stop glowing");
         }
-
-
     }
 }

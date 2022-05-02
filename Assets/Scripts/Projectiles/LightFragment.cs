@@ -84,7 +84,7 @@ namespace BioTower
             });
         }
 
-        private void OnGameOver(bool isWin)
+        private void OnGameOver(bool isWin, float delay)
         {
             if (transform.parent == null)
                 DestroyObject();

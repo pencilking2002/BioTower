@@ -35,6 +35,7 @@ namespace BioTower.Units
         [HideInInspector] protected Animator anim;
         [HideInInspector] public SpriteRenderer sr;
         public bool isAlive;
+        public bool isInCooldown;
 
         public virtual void Awake()
         {

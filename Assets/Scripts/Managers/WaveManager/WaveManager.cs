@@ -146,6 +146,7 @@ namespace BioTower
 
         private void OnWavesCompleted()
         {
+            wavesHaveCompleted = true;
             wavesInitialized = false;
             currWaveIndex = 0;
         }

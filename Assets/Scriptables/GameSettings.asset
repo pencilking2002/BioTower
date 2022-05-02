@@ -16,6 +16,7 @@ MonoBehaviour:
   startingEnergy: 120
   spawnLightDropCost: 1
   multipleLightFragmentPickupRadius: 2
+  abaCombatCooldown: 2
   basicEnemyDamage: 2
   enemyPlayerBaseDamage: 3
   enemyUpgradedDamage: 4
@@ -32,7 +33,7 @@ MonoBehaviour:
     currLevel: 1
     lightFragmentValue: 5
     energy: 120
-    abaUnitDamage: 5
+    abaUnitDamage: 2
     abaUnitMaxSpeed_float: 500
     abaUnitCost: 3
     abaUnitMaxHealth: 10
@@ -50,7 +51,7 @@ MonoBehaviour:
     enableAbaTowerRandomHeal: 0
     ppc2TowerUnlocked: 0
     ppc2TowerDamage: 2
-    ppc2TowerCost: 40
+    ppc2TowerCost: 60
     ppc2MaxInfluenceRadius_float: 2400
     ppc2shootInterval_float: 2000
     ppc2ExplosionColliderScale_float: 1271
@@ -68,8 +69,8 @@ MonoBehaviour:
   upgradeSettings:
     currLevel: 2
     lightFragmentValue: 5
-    energy: 80
-    abaUnitDamage: 5
+    energy: 14
+    abaUnitDamage: 2
     abaUnitMaxSpeed_float: 500
     abaUnitCost: 3
     abaUnitMaxHealth: 10
@@ -85,20 +86,20 @@ MonoBehaviour:
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2600
     enableAbaTowerRandomHeal: 0
-    ppc2TowerUnlocked: 0
+    ppc2TowerUnlocked: 1
     ppc2TowerDamage: 5
-    ppc2TowerCost: 40
+    ppc2TowerCost: 60
     ppc2MaxInfluenceRadius_float: 2400
     ppc2shootInterval_float: 1000
     ppc2ExplosionColliderScale_float: 1271
     ppc2ExplosionSpriteScale_float: 622
     ppc2UnitSpawnLimit: 2
-    chloroTowerUnlocked: 0
+    chloroTowerUnlocked: 1
     chloroplastTowerCost: 20
     chloroShootInterval_float: 5000
     enableChloroTowerRandomHeal: 0
     mitoTowerCost: 20
-    mitoTowerUnlocked: 0
+    mitoTowerUnlocked: 1
     mitoShootInterval_float: 2000
     mitoTowerMaxHealth: 10
     numFragmentsPickedUpOnTap: 1

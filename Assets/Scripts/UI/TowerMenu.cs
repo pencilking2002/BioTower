@@ -432,7 +432,7 @@ namespace BioTower
             }
         }
 
-        private void OnGameOver(bool isWin)
+        private void OnGameOver(bool isWin, float delay)
         {
             HidePanel();
         }

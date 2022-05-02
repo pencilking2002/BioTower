@@ -30,7 +30,7 @@ namespace BioTower
         {
             if (LevelInfo.current.loseCondition == LoseCondition.BASE_DESTROYED)
             {
-                EventManager.Game.onGameOver?.Invoke(false);
+                EventManager.Game.onGameOver?.Invoke(false, 0);
             }
         }
 
@@ -39,9 +39,13 @@ namespace BioTower
             var levelInfo = LevelInfo.current;
             if (levelInfo.winCondition == WinCondition.SURVIVE_WAVES)
             {
-                if (unit.IsEnemy() && Util.unitManager.GetEnemyCount() <= 1)
+                if (unit.IsEnemy() &&
+                    Util.unitManager.GetEnemyCount() <= 1 &&
+                    Util.waveManager.wavesHaveCompleted)
                 {
-                    EventManager.Game.onGameOver?.Invoke(true);
+
+                    EventManager.Game.onGameOver?.Invoke(true, 2.0f);
+                    Debug.Log("Game over. Num enemies left: " + Util.unitManager.GetEnemyCount());
                 }
             }
 
@@ -50,7 +54,7 @@ namespace BioTower
                 levelInfo.numEnemiesDestroyed++;
                 if (levelInfo.numEnemiesDestroyed >= levelInfo.numEnemiesToDestroy)
                 {
-                    EventManager.Game.onGameOver?.Invoke(true);
+                    EventManager.Game.onGameOver?.Invoke(true, 0);
                 }
             }
         }

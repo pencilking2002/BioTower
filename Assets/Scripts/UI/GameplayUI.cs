@@ -78,7 +78,7 @@ namespace BioTower.UI
                 .setOnComplete(() =>
                 {
                     initButtonLocalPos = AbaTowerButton.transform.localPosition;
-                    Debug.Log("Set init local button pos: " + initButtonLocalPos);
+                    //Debug.Log("Set init local button pos: " + initButtonLocalPos);
                 });
             });
         }

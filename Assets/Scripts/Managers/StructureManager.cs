@@ -27,6 +27,9 @@ namespace BioTower.Structures
                 if (!structure.isAlive)
                     continue;
 
+                if (!structure.gameObject.activeInHierarchy)
+                    continue;
+
                 DoHealthDeclineOrHeal(structure);
                 structure.OnUpdate();
             }
@@ -135,7 +138,7 @@ namespace BioTower.Structures
 
         private void OnDisable()
         {
-            EventManager.Structures.onStructureActivated += OnStructureActivated;
+            EventManager.Structures.onStructureActivated -= OnStructureActivated;
             EventManager.Structures.onStructureCreated -= OnStructureCreated;
             EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
             EventManager.Structures.onSocketStart -= OnSocketStart;

@@ -177,7 +177,6 @@ namespace BioTower
                     foreach (MiniChloroplastTower tower in miniChloros)
                     {
                         tower.gameObject.SetActive(true);
-                        EventManager.Structures.onStructureActivated?.Invoke(tower);
                     }
                 }
             }
@@ -186,7 +185,6 @@ namespace BioTower
                 foreach (MiniChloroplastTower tower in miniChloros)
                 {
                     tower.gameObject.SetActive(true);
-                    EventManager.Structures.onStructureActivated?.Invoke(tower);
                 }
             }
         }

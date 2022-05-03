@@ -82,7 +82,7 @@ namespace BioTower
                 var towerType = structureToPlace;
                 var targetSocket = socket;
                 EventManager.Structures.onStructureCooldownStarted?.Invoke(towerType, Util.cooldownManager.structureSpawnCooldown);
-
+                GameManager.Instance.econManager.BuyTower(towerType);
                 targetSocket.SetIsBuildingStructure();
                 targetSocket.StartProgress(Util.gameSettings.towerConstructionDelay);
                 LeanTween.delayedCall(gameObject, Util.gameSettings.towerConstructionDelay, () =>

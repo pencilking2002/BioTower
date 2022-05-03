@@ -51,10 +51,11 @@ namespace BioTower
 
             else if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
             {
+                Debug.Log("unit destroyed: " + unit.name);
                 levelInfo.numEnemiesDestroyed++;
                 if (levelInfo.numEnemiesDestroyed >= levelInfo.numEnemiesToDestroy)
                 {
-                    EventManager.Game.onGameOver?.Invoke(true, 0);
+                    EventManager.Game.onGameOver?.Invoke(true, 1.0f);
                 }
             }
         }
@@ -81,17 +82,17 @@ namespace BioTower
             EventManager.Game.onGameStateInit += OnGameStateInit;
             EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
             //EventManager.Game.onWavesCompleted += OnWavesCompleted;
-            EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
+            //EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
             //EventManager.Game.onSpendCurrency += OnSpendCurrency;
         }
 
         private void OnDisable()
         {
-            EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
+            EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
             EventManager.Game.onGameStateInit -= OnGameStateInit;
             EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
             //EventManager.Game.onWavesCompleted -= OnWavesCompleted;
-            EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
+            //EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
             //EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         }
 

@@ -154,7 +154,6 @@ namespace BioTower.UI
 
             if (GameManager.Instance.econManager.CanBuyTower(structureType))
             {
-                GameManager.Instance.econManager.BuyTower(structureType);
                 HandleButtonPress(AbaTowerButton, structureType);
                 if (LevelInfo.current.IsFirstLevel())
                 {
@@ -191,7 +190,6 @@ namespace BioTower.UI
 
             if (GameManager.Instance.econManager.CanBuyTower(structureType))
             {
-                GameManager.Instance.econManager.BuyTower(structureType);
                 HandleButtonPress(Pp2cTowerButton, structureType);
             }
             else
@@ -220,7 +218,6 @@ namespace BioTower.UI
 
             if (GameManager.Instance.econManager.CanBuyTower(structureType))
             {
-                GameManager.Instance.econManager.BuyTower(structureType);
                 HandleButtonPress(chloroplastTowerButton, structureType);
             }
             else
@@ -249,7 +246,6 @@ namespace BioTower.UI
 
             if (GameManager.Instance.econManager.CanBuyTower(structureType))
             {
-                GameManager.Instance.econManager.BuyTower(structureType);
                 HandleButtonPress(mitoTowerButton, structureType);
             }
             else

@@ -799,8 +799,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   socket: {fileID: 0}
   structureType: 0
-  hasHealth: 1
   isAlive: 1
+  hasHealth: 1
   maxHealth: 15
   currHealth: 0
   spriteOutline: {fileID: 1967604699690797267}
@@ -1694,6 +1694,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Alert
       objectReference: {fileID: 0}
+    - target: {fileID: 6305979854688185836, guid: 72a7a1369aa104248ba0aaca41ea7a93,
+        type: 3}
+      propertyPath: sr
+      value: 
+      objectReference: {fileID: 1985713823300775996}
+    - target: {fileID: 6305979854688185836, guid: 72a7a1369aa104248ba0aaca41ea7a93,
+        type: 3}
+      propertyPath: tower
+      value: 
+      objectReference: {fileID: 1985713824957409795}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72a7a1369aa104248ba0aaca41ea7a93, type: 3}
 --- !u!4 &7733430225653330097 stripped

@@ -6,38 +6,73 @@ using BioTower.Structures;
 
 namespace BioTower
 {
-public class TowerAlert : MonoBehaviour
-{
-    [SerializeField] private Animator anim;
-    private bool isAnimating;
-
-    public void OnUpdate(Structure tower)
+    public class TowerAlert : MonoBehaviour
     {
-        if (tower.structureType == StructureType.ABA_TOWER)
+        //[SerializeField] private Animator anim;
+        //private bool isAnimating;
+        [SerializeField] private SpriteRenderer sr;
+        [SerializeField] private Structure tower;
+        [SerializeField] Color weakColor;
+
+
+        public void OnUpdate()
         {
-            var numUnits = tower.units.Count;
-            if (numUnits < Util.upgradeSettings.abaUnitSpawnLimit && !isAnimating)
+            if (tower.structureType == StructureType.ABA_TOWER)
             {
-                StartAnimation();
+
+                if (tower.GetNumUnits() == 0)
+                    SetWeakColor();
+                else if (!LeanTween.isTweening(sr.gameObject))
+                    SetDefaultColor();
+                //         else 
+                //         //     var numUnits = tower.units.Count;
+                //         //     if (numUnits < Util.upgradeSettings.abaUnitSpawnLimit && !isAnimating)
+                //         //     {
+                //         //         StartAnimation();
+                //         //     }
+                //         //     else if (numUnits >= Util.upgradeSettings.abaUnitSpawnLimit && isAnimating)
+                //         //     {
+                //         //         StopAnimation();
+                //         //     }
             }
-            else if (numUnits >= Util.upgradeSettings.abaUnitSpawnLimit && isAnimating)
+        }
+        public void SetWeakColor()
+        {
+            sr.color = weakColor;
+        }
+
+        public void SetDefaultColor()
+        {
+            sr.color = Color.white;
+        }
+
+        private void OnUnitDestroyed(Unit unit)
+        {
+            if (unit.tower == tower)
             {
-                StopAnimation();
+                if (tower.GetNumUnits() <= 1)
+                    SetWeakColor();
             }
         }
 
-    }
+        private void OnUnitSpawned(Unit unit)
+        {
+            if (unit.tower == tower)
+            {
+                SetDefaultColor();
+            }
+        }
 
-    private void StartAnimation()
-    {
-        isAnimating = true;
-        anim.SetBool(Constants.isAnimating, true);
-    }
+        // private void OnEnable()
+        // {
+        //     EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
+        //     EventManager.Units.onUnitSpawned += OnUnitSpawned;
+        // }
 
-    private void StopAnimation()
-    {
-        isAnimating = false;
-        anim.SetBool(Constants.isAnimating, false);
+        // private void OnDisable()
+        // {
+        //     EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
+        //     EventManager.Units.onUnitSpawned -= OnUnitSpawned;
+        // }
     }
-}
 }

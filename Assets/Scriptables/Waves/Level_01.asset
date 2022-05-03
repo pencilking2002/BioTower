@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c11e21d6d6e2f4e9b4addd8d13c61e, type: 3}
   m_Name: Level_01
   m_EditorClassIdentifier: 
+  startingEnergy: 200
   waves:
   - enemyType: 1
     waveIndex: 0
     startDelay: 0
-    isEndless: 1
-    numEnemiesPerWave: 2000
+    isEndless: 0
+    numEnemiesPerWave: 10
     spawnInterval: 2
-    timeStarted: 18.858349
-    lastSpawn: 38.9621
-    numSpawns: 11
+    timeStarted: 6.8651123
+    lastSpawn: 44.995358
+    numSpawns: 20

@@ -91,6 +91,9 @@ namespace BioTower.Units
         /// <returns>whether the unit is alive after taking damage</returns>
         public virtual bool TakeDamage(int amount)
         {
+            if (!sr)
+                return false;
+
             if (hasHealth)
             {
                 currHealth -= amount;

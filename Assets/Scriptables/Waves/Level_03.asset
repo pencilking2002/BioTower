@@ -19,27 +19,24 @@ MonoBehaviour:
     isEndless: 0
     numEnemiesPerWave: 10
     spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 11.672143
-    lastSpawn: 31.807007
-    numSpawns: 6
+    timeStarted: 0
+    lastSpawn: 36.163086
+    numSpawns: 10
   - enemyType: 1
     waveIndex: 1
     startDelay: 4
     isEndless: 0
     numEnemiesPerWave: 10
     spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 0
-    lastSpawn: 0
-    numSpawns: 0
-  - enemyType: 4
+    timeStarted: 36.193104
+    lastSpawn: 44.22039
+    numSpawns: 2
+  - enemyType: 3
     waveIndex: 2
     startDelay: 4
     isEndless: 0
     numEnemiesPerWave: 10
     spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
     timeStarted: 0
     lastSpawn: 0
     numSpawns: 0

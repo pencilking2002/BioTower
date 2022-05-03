@@ -10,6 +10,7 @@ namespace BioTower
     [CreateAssetMenu(fileName = "WaveSettings", menuName = "WaveSettings")]
     public class WaveSettings : ScriptableObject
     {
+        public int startingEnergy = 100;
         public Wave[] waves;
     }
 

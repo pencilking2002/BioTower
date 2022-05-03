@@ -88,7 +88,6 @@ namespace BioTower
                 LeanTween.delayedCall(gameObject, Util.gameSettings.towerConstructionDelay, () =>
                 {
                     PlaceTower(towerType, targetSocket.transform.position, targetSocket);
-                    GameManager.Instance.econManager.BuyTower(towerType);
                 });
             }
             SetNoneState();

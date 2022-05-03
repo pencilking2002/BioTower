@@ -36,6 +36,7 @@ namespace BioTower
         //public TutorialCanvas currTutCanvas;
         public Util util;
         public WaveManager waveManager;
+        public ColorManager colorManager;
         public PlacementManager placementManager;
         public TapManager tapManager;
         public EconomyManager econManager;

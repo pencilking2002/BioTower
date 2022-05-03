@@ -26,6 +26,7 @@ namespace BioTower
         public static TapManager tapManager => GameManager.Instance.tapManager;
         public static GameStates gameStates => GameManager.Instance.gameStates;
         public static WaveManager waveManager => GameManager.Instance.waveManager;
+        public static ColorManager colorManager => GameManager.Instance.colorManager;
         public static StructureManager structureManager => GameManager.Instance.structureManager;
         public static CooldownManager cooldownManager => GameManager.Instance.cooldownManager;
         public static UnitManager unitManager => GameManager.Instance.unitManager;

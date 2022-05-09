@@ -30,6 +30,7 @@ namespace BioTower
 
 
         [Header("References")]
+        public BombPanel bombPanel;
         public CamController cam;
         public ObjectShake objectShake;
         public UnitManager unitManager;

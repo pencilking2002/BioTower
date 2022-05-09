@@ -9,8 +9,8 @@ namespace BioTower
 {
     public enum PlacementState
     {
-        NONE,
-        PLACING,
+        NONE, PLACING,
+        BOMB_PLACING
     }
 
     public class PlacementManager : MonoBehaviour
@@ -142,6 +142,13 @@ namespace BioTower
             EventManager.Structures.onStartPlacementState?.Invoke(structureType);
         }
 
+        public void SetBombPlacingState()
+        {
+            placementState = PlacementState.BOMB_PLACING;
+        }
+
+        public bool IsBombPlacingState() { return placementState == PlacementState.BOMB_PLACING; }
+
         public bool IsNoneState() { return placementState == PlacementState.NONE; }
         public bool IsPlacingState() { return placementState == PlacementState.PLACING; }
         public PlacementState GetState() { return placementState; }
@@ -212,12 +219,27 @@ namespace BioTower
                 ActivateMiniChloro();
         }
 
+        private void OnTouchBegan(Vector3 pos)
+        {
+            if (IsBombPlacingState())
+            {
+                var bombGO = Instantiate(Util.bombPanel.bombPrefab);
+                pos = Camera.main.ScreenToWorldPoint(pos);
+                pos.z = 0;
+                bombGO.transform.position = pos;
+                var bomb = bombGO.GetComponent<Bomb>();
+                bomb.Explode(1.0f);
+                SetNoneState();
+            }
+        }
+
         private void OnEnable()
         {
             EventManager.UI.onPressTowerButton += OnPressTowerButton;
             EventManager.Structures.onTapFreeStructureSocket += OnTapStructureSocket;
             EventManager.Tutorials.onTutorialStart += OnTutorialStart;
             EventManager.Tutorials.onSkipTutorials += OnSkipTutorials;
+            EventManager.Input.onTouchBegan += OnTouchBegan;
         }
 
         private void OnDisable()
@@ -226,6 +248,7 @@ namespace BioTower
             EventManager.Structures.onTapFreeStructureSocket -= OnTapStructureSocket;
             EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
             EventManager.Tutorials.onSkipTutorials -= OnSkipTutorials;
+            EventManager.Input.onTouchBegan -= OnTouchBegan;
         }
 
     }

@@ -52,7 +52,14 @@ namespace BioTower
                 }
             });
             seq.append(() => { sr.enabled = false; });
-            seq.append(() => { explosion.SetActive(true); });
+            seq.append(() =>
+            {
+                explosion.SetActive(true);
+                LeanTween.delayedCall(0.1f, () =>
+                {
+                    Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.4f, 0.1f);
+                });
+            });
             seq.append(1.0f);
             seq.append(() => { gameObject.SetActive(false); });
 

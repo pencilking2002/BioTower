@@ -34,9 +34,9 @@ namespace BioTower
 
             for (int i = 0; i < numBlinks; i++)
             {
-                seq.append(() => { sr.color = Color.white; });
+                seq.append(gameObject, () => { sr.color = Color.yellow; });
                 seq.append(blinkDuration);
-                seq.append(() => { sr.color = initColor; });
+                seq.append(gameObject, () => { sr.color = initColor; });
                 seq.append(blinkDuration);
             }
 
@@ -58,8 +58,9 @@ namespace BioTower
 
         }
 
-        private void OnTriggerEnter(Collider col)
+        private void OnTriggerEnter2D(Collider2D col)
         {
+            Debug.Log("Enter: " + col.name);
             if (col.gameObject.layer == Util.enemyLayer)
             {
                 Explode();

@@ -228,7 +228,13 @@ namespace BioTower
                 pos.z = 0;
                 bombGO.transform.position = pos;
                 var bomb = bombGO.GetComponent<Bomb>();
-                //bomb.Explode();
+
+                // Scale in the bomb
+                var scale = bombGO.transform.localScale;
+                bombGO.transform.localScale = Vector3.zero;
+                bombGO.LeanScale(scale, 0.5f).setEaseOutElastic();
+
+                EventManager.Structures.onPlaceBomb?.Invoke();
                 SetNoneState();
             }
         }

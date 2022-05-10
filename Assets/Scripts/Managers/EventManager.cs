@@ -53,6 +53,7 @@ namespace BioTower
             public static Action<StructureSocket> onSocketStart;
             public static Action<StructureSocket> onSocketPop;
             public static Action<StructureSocket> onTapFreeStructureSocket;
+            public static Action onPlaceBomb;
 
         }
 

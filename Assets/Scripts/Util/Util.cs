@@ -29,7 +29,7 @@ namespace BioTower
         public static ColorManager colorManager => GameManager.Instance.colorManager;
         public static StructureManager structureManager => GameManager.Instance.structureManager;
         public static CooldownManager cooldownManager => GameManager.Instance.cooldownManager;
-        public static BombPanel bombPanel => GameManager.Instance.bombPanel;
+        public static BombPanel bombPanel => GameManager.Instance.bootController.bombPanel;
         public static UnitManager unitManager => GameManager.Instance.unitManager;
         public static TutorialCanvas tutCanvas;
         public static ObjectShake objectShake => GameManager.Instance.objectShake;

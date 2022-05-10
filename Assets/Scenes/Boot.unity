@@ -6170,7 +6170,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -10200,6 +10200,7 @@ MonoBehaviour:
   sceneToLoad: 1
   wavePanel: {fileID: 806458809}
   gameCanvas: {fileID: 806458803}
+  bombPanel: {fileID: 1598645929}
   startMenuCanvas: {fileID: 562835643}
   gameplayUI: {fileID: 240495440}
   upgradePanel: {fileID: 806458808}
@@ -14914,7 +14915,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -18645,6 +18646,7 @@ MonoBehaviour:
     type: 3}
   progressImage: {fileID: 523693647}
   bombButton: {fileID: 1295054851}
+  bombIcon: {fileID: 860155718}
   bombText: {fileID: 1702130340}
   canPressBombButton: 0
 --- !u!1 &1615208673

@@ -28,7 +28,7 @@ namespace BioTower.UI
             {
                 progressDisc.AngRadiansEnd = val * Mathf.Deg2Rad;
             }));
-            seq.append(() =>
+            seq.append(gameObject, () =>
             {
                 gameObject.SetActive(false);
             });

@@ -36,6 +36,9 @@ namespace BioTower
 
         private void OnUnitDestroyed(Unit unit)
         {
+            if (!GameManager.Instance.gameStates.IsGameState())
+                return;
+
             var levelInfo = LevelInfo.current;
             if (levelInfo.winCondition == WinCondition.SURVIVE_WAVES)
             {

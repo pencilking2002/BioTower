@@ -13,6 +13,7 @@ namespace BioTower
         public GameObject bombPrefab;
         [SerializeField] private Image progressImage;
         [SerializeField] private Button bombButton;
+        [SerializeField] private Image bombIcon;
         [SerializeField] private TextMeshProUGUI bombText;
         [SerializeField] private bool canPressBombButton;
 
@@ -21,16 +22,15 @@ namespace BioTower
 
         private SpriteShapeRenderer[] roads;
         private Color initRoadColor;
-
+        private Color activeColor;
+        private Color inativeColor = Color.white;
         private void Awake()
         {
             onscreenPos = bombText.transform.position;
             bombText.transform.position += new Vector3(0, 200, 0);
             offscreenPos = bombText.transform.position;
-
-            var roadGO = GameObject.FindGameObjectWithTag(Constants.roads);
-            roads = roadGO.GetComponentsInChildren<SpriteShapeRenderer>();
-            initRoadColor = roads[0].color;
+            activeColor = bombIcon.color;
+            bombIcon.color = inativeColor;
         }
 
         public void OnPressBombButton()
@@ -42,7 +42,8 @@ namespace BioTower
             {
                 Util.placementManager.SetBombPlacingState();
                 canPressBombButton = false;
-                progressImage.fillAmount = 0;
+                //progressImage.fillAmount = 0;
+                //bombIcon.color = inativeColor;
                 SlideInBombText();
 
                 foreach (var road in roads)
@@ -79,9 +80,10 @@ namespace BioTower
             progress = Mathf.Clamp01(progress);
             progressImage.fillAmount = progress;
 
-            if (Mathf.Approximately(progress, 1.0f))
+            if (Mathf.Approximately(progress, 1.0f) && !canPressBombButton)
             {
                 canPressBombButton = true;
+                bombIcon.color = activeColor;
             }
         }
 
@@ -90,14 +92,28 @@ namespace BioTower
             if (!unit.IsEnemy())
                 return;
 
+            if (!bombButton.gameObject.activeInHierarchy)
+                return;
+
             IncreaseBombEnergy();
         }
 
         private void OnLevelStart(LevelType levelType)
         {
+            bool isLevelOneOrTwo = levelType == LevelType.LEVEL_01 || levelType == LevelType.LEVEL_02;
+            bombButton.gameObject.SetActive(!isLevelOneOrTwo);
+
+            if (isLevelOneOrTwo)
+                return;
+
+            var roadGO = GameObject.FindGameObjectWithTag(Constants.roads);
+            roads = roadGO.GetComponentsInChildren<SpriteShapeRenderer>();
+            initRoadColor = roads[0].color;
+
             bombText.transform.position = offscreenPos;
             canPressBombButton = false;
             progressImage.fillAmount = 0;
+            bombIcon.color = inativeColor;
         }
 
         private void OnPlaceBomb()
@@ -106,6 +122,9 @@ namespace BioTower
             LeanTween.cancel(gameObject);
             foreach (var road in roads)
                 road.color = initRoadColor;
+
+            bombIcon.color = inativeColor;
+            progressImage.fillAmount = 0;
         }
 
         private void OnEnable()

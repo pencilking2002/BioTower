@@ -56,7 +56,7 @@ namespace BioTower.UI
 
             if (Input.GetKeyDown(KeyCode.B))
             {
-                GameManager.Instance.bombPanel.IncreaseBombEnergy();
+                Util.bombPanel.IncreaseBombEnergy();
             }
         }
 

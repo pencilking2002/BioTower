@@ -31,11 +31,14 @@ namespace BioTower
         public static CooldownManager cooldownManager => GameManager.Instance.cooldownManager;
         public static BombPanel bombPanel => GameManager.Instance.bombPanel;
         public static UnitManager unitManager => GameManager.Instance.unitManager;
-        public static int structureSocketLayer = 12;
         public static TutorialCanvas tutCanvas;
         public static ObjectShake objectShake => GameManager.Instance.objectShake;
-        public LayerMask enemyLayerMask;
         public Color hurtColor;
+
+        // Layers -----------------------------------------------
+        public static int structureSocketLayer = 12;
+        public static int enemyLayer = 10;
+        public LayerMask enemyLayerMask;
 
         public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)
         {

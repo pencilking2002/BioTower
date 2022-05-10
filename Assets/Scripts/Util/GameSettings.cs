@@ -26,6 +26,7 @@ namespace BioTower
         public int snark2UnitCost = 3;          // N/A
         [Range(0, 100)] public float abaWinChance = 50;
         [Range(0, 100)] public float snrk2WinChance = 0;
+        [Range(0, 1)] public float enemyBombEnergy = 0.2f;
 
 
         [Header("Towers")]

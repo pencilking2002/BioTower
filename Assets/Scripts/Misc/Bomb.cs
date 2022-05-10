@@ -12,11 +12,35 @@ namespace BioTower
         [SerializeField] private CircleCollider2D radiusCollider;
         [SerializeField] private GameObject explosion;
         [SerializeField] private int damage;
+        [SerializeField] private float explosionDelay = 0.5f;
+        [SerializeField] private float totalBlinkDuration = 1.0f;
+        [SerializeField] private int numBlinks = 3;
+        private bool explosionStarted;
+
+
         [Button]
-        public void Explode(float delay = 0)
+        public void Explode()
         {
+            if (explosionStarted)
+                return;
+
+            explosionStarted = true;
+            float blinkDuration = totalBlinkDuration / numBlinks;
+            var initColor = sr.color;
+
             var seq = LeanTween.sequence();
-            seq.append(delay);
+
+            seq.append(explosionDelay);
+
+            for (int i = 0; i < numBlinks; i++)
+            {
+                seq.append(() => { sr.color = Color.white; });
+                seq.append(blinkDuration);
+                seq.append(() => { sr.color = initColor; });
+                seq.append(blinkDuration);
+            }
+
+            //seq.append(delay);
             seq.append(() =>
             {
                 var radius = radiusCollider.transform.lossyScale.x * 0.5f;
@@ -32,6 +56,14 @@ namespace BioTower
             seq.append(1.0f);
             seq.append(() => { gameObject.SetActive(false); });
 
+        }
+
+        private void OnTriggerEnter(Collider col)
+        {
+            if (col.gameObject.layer == Util.enemyLayer)
+            {
+                Explode();
+            }
         }
     }
 }

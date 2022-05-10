@@ -30,7 +30,6 @@ namespace BioTower.UI
             towerButtonMap.Add(StructureType.PPC2_TOWER, Pp2cTowerButton);
             towerButtonMap.Add(StructureType.CHLOROPLAST, chloroplastTowerButton);
             towerButtonMap.Add(StructureType.MITOCHONDRIA, mitoTowerButton);
-            initPos = panel.transform.position;
         }
 
         private void Start()
@@ -65,8 +64,9 @@ namespace BioTower.UI
 
         private void PositionPanelOffScreen()
         {
+            initPos = panel.transform.position;
             var startPos = initPos;
-            startPos.y -= 120;
+            startPos.y -= 200;
             panel.transform.position = startPos;
         }
 
@@ -79,7 +79,7 @@ namespace BioTower.UI
                 .setOnComplete(() =>
                 {
                     initButtonLocalPos = AbaTowerButton.transform.localPosition;
-                    //Debug.Log("Set init local button pos: " + initButtonLocalPos);
+                    Debug.Log("Set init local button pos: " + initButtonLocalPos);
                 });
             });
         }

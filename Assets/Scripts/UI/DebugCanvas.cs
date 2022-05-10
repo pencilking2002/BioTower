@@ -53,6 +53,11 @@ namespace BioTower.UI
                 tutInProgressText.text = $"Tut in progress: {TutorialCanvas.tutorialInProgress}";
                 placementStateText.text = $"placement state: " + Util.placementManager.GetState();
             }
+
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                GameManager.Instance.bombPanel.IncreaseBombEnergy();
+            }
         }
 
         public void SetFSXVolume()

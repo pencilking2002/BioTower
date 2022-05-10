@@ -228,7 +228,7 @@ namespace BioTower
                 pos.z = 0;
                 bombGO.transform.position = pos;
                 var bomb = bombGO.GetComponent<Bomb>();
-                bomb.Explode(1.0f);
+                //bomb.Explode();
                 SetNoneState();
             }
         }

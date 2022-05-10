@@ -14,11 +14,12 @@ namespace BioTower
 
         [SerializeField] private Slider towerHealthbar;
         [SerializeField] private TextMeshProUGUI healthText;
-        [SerializeField] private Button healTowerButton;
-        [SerializeField] private Button healTowerFullWidthButton;
+        //[SerializeField] private Button healTowerButton;
+        //[SerializeField] private Button healTowerFullWidthButton;
         [SerializeField] private Button spawnUnitButton;
         [SerializeField] private Button spawnUnitFullWidth;
         [SerializeField] private Button destroyTowerButton;
+        [SerializeField] private Button destroyFullWidthButton;
         [SerializeField] private Button spawnLightParticleButton;
         private Image spawnLightDropCooldownImage;
         [SerializeField] private TextMeshProUGUI currTowerText;
@@ -54,8 +55,8 @@ namespace BioTower
 
         private void Start()
         {
-            SetPrice(healTowerButton);
-            SetPrice(healTowerFullWidthButton);
+            //SetPrice(healTowerButton);
+            //SetPrice(healTowerFullWidthButton);
             SetPrice(spawnUnitButton);
             SetPrice(spawnUnitFullWidth);
             SetPrice(spawnLightParticleButton);
@@ -125,9 +126,9 @@ namespace BioTower
         private void SetPrice(Button button)
         {
             Text text = button.transform.Find("PriceText").GetComponent<Text>();
-            if (button == healTowerButton || button == healTowerFullWidthButton)
-                text.text = Util.gameSettings.upgradeSettings.healTowerCost.ToString();
-            else if (button == spawnUnitButton || button == spawnUnitFullWidth)
+            // if (button == healTowerButton || button == healTowerFullWidthButton)
+            //     text.text = Util.gameSettings.upgradeSettings.healTowerCost.ToString();
+            if (button == spawnUnitButton || button == spawnUnitFullWidth)
                 text.text = Util.gameSettings.upgradeSettings.abaUnitCost.ToString();
             else if (button == spawnLightParticleButton)
                 text.text = Util.gameSettings.spawnLightDropCost.ToString();
@@ -208,26 +209,26 @@ namespace BioTower
             }
         }
 
-        public void OnPressHealTowerButton()
-        {
-            var tower = Util.tapManager.selectedStructure;
+        // public void OnPressHealTowerButton()
+        // {
+        //     var tower = Util.tapManager.selectedStructure;
 
-            if (GameManager.Instance.econManager.CanBuyTowerHeal() && !tower.IsMaxHealth())
-            {
-                var healAmount = Util.gameSettings.healTowerAmount;
-                GameManager.Instance.tapManager.selectedStructure.GainHealth(healAmount);
-                GameManager.Instance.econManager.BuyTowerHeal();
-                var selectedTower = GameManager.Instance.tapManager.selectedStructure;
-                EventManager.UI.onTapButton?.Invoke(true);
-            }
-            else
-            {
-                var rt = healTowerButton.GetComponent<RectTransform>();
-                Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
-                var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
-                GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
-            }
-        }
+        //     if (GameManager.Instance.econManager.CanBuyTowerHeal() && !tower.IsMaxHealth())
+        //     {
+        //         var healAmount = Util.gameSettings.healTowerAmount;
+        //         GameManager.Instance.tapManager.selectedStructure.GainHealth(healAmount);
+        //         GameManager.Instance.econManager.BuyTowerHeal();
+        //         var selectedTower = GameManager.Instance.tapManager.selectedStructure;
+        //         EventManager.UI.onTapButton?.Invoke(true);
+        //     }
+        //     else
+        //     {
+        //         var rt = healTowerButton.GetComponent<RectTransform>();
+        //         Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
+        //         var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
+        //         GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
+        //     }
+        // }
 
         public void OnPressLightDropButton()
         {
@@ -294,8 +295,12 @@ namespace BioTower
             spawnLightParticleButton.gameObject.SetActive(displayLightDropButton);
             currTowerText.text = structure.structureType.ToString().Replace('_', ' ');
             ShowPanel();
-            healTowerButton.gameObject.SetActive((displaySpawnUnitButton || displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
-            healTowerFullWidthButton.gameObject.SetActive((!displaySpawnUnitButton && !displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
+            //healTowerButton.gameObject.SetActive((displaySpawnUnitButton || displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
+            //healTowerFullWidthButton.gameObject.SetActive((!displaySpawnUnitButton && !displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
+
+            destroyTowerButton.gameObject.SetActive((displaySpawnUnitButton || displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
+            destroyFullWidthButton.gameObject.SetActive((!displaySpawnUnitButton && !displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
+
             spawnUnitFullWidth.gameObject.SetActive(LevelInfo.current.IsFirstLevel());
             UpdateTowerHealthBar(structure);
             towerIcon.sprite = iconMap[structure.structureType];

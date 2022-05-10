@@ -28,6 +28,9 @@ namespace BioTower
 
         private void OnBaseDestroyed()
         {
+            if (!GameManager.Instance.gameStates.IsGameState())
+                return;
+
             if (LevelInfo.current.loseCondition == LoseCondition.BASE_DESTROYED)
             {
                 EventManager.Game.onGameOver?.Invoke(false, 0);
@@ -63,14 +66,6 @@ namespace BioTower
             }
         }
 
-        // private void OnWavesCompleted()
-        // {
-        //     if (LevelInfo.current.winCondition == WinCondition.SURVIVE_WAVES)
-        //     {
-        //         EventManager.Game.onGameOver?.Invoke(true);
-        //     }
-        // }
-
         private void OnGameStateInit(GameState gameState)
         {
             if (gameState == GameState.GAME_OVER_WIN || gameState == GameState.GAME_OVER_LOSE)
@@ -84,9 +79,6 @@ namespace BioTower
             EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
             EventManager.Game.onGameStateInit += OnGameStateInit;
             EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
-            //EventManager.Game.onWavesCompleted += OnWavesCompleted;
-            //EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
-            //EventManager.Game.onSpendCurrency += OnSpendCurrency;
         }
 
         private void OnDisable()
@@ -94,9 +86,6 @@ namespace BioTower
             EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
             EventManager.Game.onGameStateInit -= OnGameStateInit;
             EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
-            //EventManager.Game.onWavesCompleted -= OnWavesCompleted;
-            //EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
-            //EventManager.Game.onSpendCurrency -= OnSpendCurrency;
         }
 
     }

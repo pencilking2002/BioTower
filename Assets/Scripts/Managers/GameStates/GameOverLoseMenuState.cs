@@ -13,8 +13,8 @@ namespace BioTower
             {
                 isInitialized = true;
                 controller.gameplayUI.panel.gameObject.SetActive(false);
-                Util.saveManager.LoadAndSave();
                 EventManager.Game.onGameStateInit?.Invoke(gameState);
+                Util.saveManager.LoadAndSave();
             }
         }
 

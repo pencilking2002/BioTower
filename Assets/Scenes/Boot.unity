@@ -10430,6 +10430,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3874530591340406512, guid: 1bf57c9cf37bb4149a047568fd704a40,
         type: 3}
+    - target: {fileID: 6811510881634626579, guid: 1efa5580d925f4f41949a420af6456cf,
+        type: 3}
+      propertyPath: obstaclesLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1efa5580d925f4f41949a420af6456cf, type: 3}
 --- !u!4 &853607172 stripped

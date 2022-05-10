@@ -221,22 +221,27 @@ namespace BioTower
 
         private void OnTouchBegan(Vector3 pos)
         {
-            if (IsBombPlacingState())
-            {
-                var bombGO = Instantiate(Util.bombPanel.bombPrefab);
-                pos = Camera.main.ScreenToWorldPoint(pos);
-                pos.z = 0;
-                bombGO.transform.position = pos;
-                var bomb = bombGO.GetComponent<Bomb>();
+            if (!IsBombPlacingState())
+                return;
 
-                // Scale in the bomb
-                var scale = bombGO.transform.localScale;
-                bombGO.transform.localScale = Vector3.zero;
-                bombGO.LeanScale(scale, 0.5f).setEaseOutElastic();
+            pos = Camera.main.ScreenToWorldPoint(pos);
+            pos.z = 0;
 
-                EventManager.Structures.onPlaceBomb?.Invoke();
-                SetNoneState();
-            }
+            var colliders = Physics2D.OverlapCircleAll(pos, 0.25f, GameManager.Instance.util.obstaclesLayerMask);
+            if (colliders.Length != 0)
+                return;
+
+            var bombGO = Instantiate(Util.bombPanel.bombPrefab);
+            bombGO.transform.position = pos;
+            var bomb = bombGO.GetComponent<Bomb>();
+
+            // Scale in the bomb
+            var scale = bombGO.transform.localScale;
+            bombGO.transform.localScale = Vector3.zero;
+            bombGO.LeanScale(scale, 0.5f).setEaseOutElastic();
+
+            EventManager.Structures.onPlaceBomb?.Invoke();
+            SetNoneState();
         }
 
         private void OnEnable()

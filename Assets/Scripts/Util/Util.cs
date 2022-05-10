@@ -38,6 +38,7 @@ namespace BioTower
         // Layers -----------------------------------------------
         public static int structureSocketLayer = 12;
         public static int enemyLayer = 10;
+        public LayerMask obstaclesLayerMask;
         public LayerMask enemyLayerMask;
 
         public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)

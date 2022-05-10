@@ -422,6 +422,11 @@ namespace BioTower.UI
                 SlideInPanel(1.0f);
         }
 
+        private void OnStructureSelected(Structure structure)
+        {
+            DeselectCurrentButton();
+        }
+
         private async void OnEnable()
         {
             EventManager.Tutorials.onTutorialStart += OnTutorialStart;
@@ -433,6 +438,7 @@ namespace BioTower.UI
             EventManager.Game.onGainCurrency += OnGainCurrency;
             EventManager.Structures.onStructureCooldownStarted += OnStructureCooldownStarted;
             EventManager.Structures.onSetNonePlacementState += OnSetNonePlacementState;
+            EventManager.Structures.onStructureSelected += OnStructureSelected;
         }
 
         private void OnDisable()
@@ -446,6 +452,7 @@ namespace BioTower.UI
             EventManager.Game.onGainCurrency -= OnGainCurrency;
             EventManager.Structures.onStructureCooldownStarted -= OnStructureCooldownStarted;
             EventManager.Structures.onSetNonePlacementState -= OnSetNonePlacementState;
+            EventManager.Structures.onStructureSelected -= OnStructureSelected;
         }
     }
 }

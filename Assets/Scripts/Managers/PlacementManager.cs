@@ -245,10 +245,17 @@ namespace BioTower
             SetNoneState();
         }
 
+        private void OnStructureSelected(Structure structure)
+        {
+            SetNoneState();
+            Util.poolManager.DespawnAllitemHighlights();
+        }
+
         private void OnEnable()
         {
             EventManager.UI.onPressTowerButton += OnPressTowerButton;
             EventManager.Structures.onTapFreeStructureSocket += OnTapStructureSocket;
+            EventManager.Structures.onStructureSelected += OnStructureSelected;
             EventManager.Tutorials.onTutorialStart += OnTutorialStart;
             EventManager.Tutorials.onSkipTutorials += OnSkipTutorials;
             EventManager.Input.onTouchBegan += OnTouchBegan;
@@ -258,6 +265,7 @@ namespace BioTower
         {
             EventManager.UI.onPressTowerButton -= OnPressTowerButton;
             EventManager.Structures.onTapFreeStructureSocket -= OnTapStructureSocket;
+            EventManager.Structures.onStructureSelected -= OnStructureSelected;
             EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
             EventManager.Tutorials.onSkipTutorials -= OnSkipTutorials;
             EventManager.Input.onTouchBegan -= OnTouchBegan;

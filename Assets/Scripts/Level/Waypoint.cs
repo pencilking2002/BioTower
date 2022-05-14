@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+using Sirenix.OdinInspector;
 
 namespace BioTower.Level
 {
@@ -16,6 +16,7 @@ namespace BioTower.Level
     {
         public WaypointType waypointType;
         public Waypoint nextWaypoint;
+
         [ShowIf("isFork")]
         public Waypoint nextWaypoint_02;
         //public Waypoint prevWaypoint;
@@ -25,8 +26,15 @@ namespace BioTower.Level
 
         public Waypoint ChooseNextWaypoint()
         {
-            int randIndex = UnityEngine.Random.Range(0, 2);
-            return randIndex == 0 ? nextWaypoint : nextWaypoint_02;
+            if (nextWaypoint_02)
+            {
+                int randIndex = UnityEngine.Random.Range(0, 2);
+                return randIndex == 0 ? nextWaypoint : nextWaypoint_02;
+            }
+            else
+            {
+                return nextWaypoint;
+            }
         }
 
         private Vector3 GetTangent(Vector3 normal)

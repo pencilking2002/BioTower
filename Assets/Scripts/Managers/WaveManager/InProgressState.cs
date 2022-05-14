@@ -9,6 +9,8 @@ namespace BioTower
             if (!isInitialized)
             {
                 isInitialized = true;
+                var wave = waveManager.currWave;
+                wave.lastSpawnIntervalRange = wave.CreateSpawnIntervalFromRange();
                 EventManager.Game.onWaveStateInit?.Invoke(waveState);
             }
         }
@@ -17,8 +19,9 @@ namespace BioTower
         {
             Init();
             var wave = waveManager.currWave;
-            if (Time.time > wave.lastSpawn + wave.spawnInterval || wave.numSpawns == 0)
+            if (Time.time > wave.lastSpawn + wave.lastSpawnIntervalRange || wave.numSpawns == 0)
             {
+                wave.lastSpawnIntervalRange = wave.CreateSpawnIntervalFromRange();
                 waveManager.SpawnEnemy(wave.enemyType);
                 wave.lastSpawn = Time.time;
                 wave.numSpawns++;

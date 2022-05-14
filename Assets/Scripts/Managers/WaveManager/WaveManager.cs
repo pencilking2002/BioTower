@@ -77,7 +77,7 @@ namespace BioTower
             var enemy = enemyGO.GetComponent<EnemyUnit>();
 
             // Set the enemy's positioning
-            var spawnPoint = GameManager.Instance.GetWaypointManager().GetRandomSpawnPoint();
+            var spawnPoint = GameManager.Instance.GetWaypointManager().GetSpawnPoint(currWave.waypointIndex);
             enemyGO.transform.position = spawnPoint.transform.position;
             enemy.SetCurrWaypoint(spawnPoint);
             enemy.SetNextWaypoint(spawnPoint.nextWaypoint);

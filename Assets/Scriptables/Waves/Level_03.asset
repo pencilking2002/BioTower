@@ -15,29 +15,32 @@ MonoBehaviour:
   startingEnergy: 100
   waves:
   - enemyType: 1
-    waveIndex: 0
-    startDelay: 0
     isEndless: 0
     numEnemiesPerWave: 10
-    spawnInterval: 4
+    startDelay: 4
+    waypointIndex: 1
+    spawnIntervalRange: {x: 1, y: 1.5}
     timeStarted: 0
-    lastSpawn: 36.143333
+    lastSpawn: 15.180912
     numSpawns: 10
+    lastSpawnIntervalRange: 1.3051295
   - enemyType: 3
-    waveIndex: 1
-    startDelay: 4
     isEndless: 0
     numEnemiesPerWave: 10
-    spawnInterval: 4
-    timeStarted: 36.159565
-    lastSpawn: 0
-    numSpawns: 0
-  - enemyType: 3
-    waveIndex: 2
     startDelay: 4
+    waypointIndex: 0
+    spawnIntervalRange: {x: 1.8, y: 2}
+    timeStarted: 15.1941395
+    lastSpawn: 19.201242
+    numSpawns: 1
+    lastSpawnIntervalRange: 1.9271262
+  - enemyType: 3
     isEndless: 0
     numEnemiesPerWave: 10
-    spawnInterval: 4
+    startDelay: 4
+    waypointIndex: 1
+    spawnIntervalRange: {x: 1.8, y: 2}
     timeStarted: 0
     lastSpawn: 0
     numSpawns: 0
+    lastSpawnIntervalRange: 0

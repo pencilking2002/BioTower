@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using BioTower.Units;
+using BioTower.Level;
 
 namespace BioTower
 {
@@ -69,6 +70,13 @@ namespace BioTower
 
         public GameObject GetEnemyPrefab(UnitType unitType) { return enemyDict[unitType]; }
 
+        private void GetSpawnPosition(out Vector3 spawnPos, out Waypoint spawnPoint)
+        {
+            spawnPoint = GameManager.Instance.GetWaypointManager().GetSpawnPoint(currWave.waypointIndex);
+            Vector2 offset = UnityEngine.Random.insideUnitCircle;
+            spawnPos = spawnPoint.transform.position + new Vector3(offset.x, offset.y, 0);
+        }
+
         public EnemyUnit SpawnEnemy(UnitType enemyType)
         {
             // Initialize enemy
@@ -76,9 +84,9 @@ namespace BioTower
             var enemyGO = Instantiate(enemyPrefab);
             var enemy = enemyGO.GetComponent<EnemyUnit>();
 
-            // Set the enemy's positioning
-            var spawnPoint = GameManager.Instance.GetWaypointManager().GetSpawnPoint(currWave.waypointIndex);
-            enemyGO.transform.position = spawnPoint.transform.position;
+            GetSpawnPosition(out Vector3 spawnPos, out Waypoint spawnPoint);
+            enemyGO.transform.position = spawnPos;
+
             enemy.SetCurrWaypoint(spawnPoint);
             enemy.SetNextWaypoint(spawnPoint.nextWaypoint);
 
@@ -86,6 +94,7 @@ namespace BioTower
             GameManager.Instance.RegisterEnemy(enemy);
             //enemy.SetSpeed(minMaxSpeed);
             enemy.StartMoving(enemy.GetNextWaypoint());
+            enemy.waveIndex = currWaveIndex;
             return enemy;
         }
 

@@ -19,6 +19,7 @@ namespace BioTower.Units
         protected Waypoint currWaypoint;
         protected Waypoint nextWaypoint;
         protected Transform nextDestination;
+        [HideInInspector] public int waveIndex;
 
 
         protected void Init()

@@ -23,8 +23,8 @@ namespace BioTower
         {
             Init();
             var wave = waveManager.currWave;
-            if ((Time.time > wave.lastSpawn + wave.lastSpawnIntervalRange ||
-                wave.numSpawns == 0) && wave.numSpawns < wave.numEnemiesPerWave)
+            if ((Time.time > wave.lastSpawn + wave.lastSpawnIntervalRange || wave.numSpawns == 0) &&
+                (wave.numSpawns < wave.numEnemiesPerWave || wave.isEndless))
             {
                 var numEnemiesToSpawn = GetNumSpawns(wave);
                 wave.lastSpawnIntervalRange = wave.CreateSpawnIntervalFromRange();

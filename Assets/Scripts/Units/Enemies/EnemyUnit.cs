@@ -20,6 +20,7 @@ namespace BioTower.Units
         protected Waypoint nextWaypoint;
         protected Transform nextDestination;
         [HideInInspector] public int waveIndex;
+        [HideInInspector] public bool baseReached;
 
 
         protected void Init()
@@ -72,6 +73,7 @@ namespace BioTower.Units
             }
             else if (currWaypoint.isEndpoint)
             {
+                baseReached = true;
                 EventManager.Units.onEnemyBaseReached?.Invoke(this);
                 KillUnit();
             }

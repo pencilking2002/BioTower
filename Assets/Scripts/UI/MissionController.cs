@@ -92,6 +92,10 @@ namespace BioTower
 
             if (LevelInfo.current.IsFirstLevel())
             {
+                var enemyUnit = (EnemyUnit)unit;
+                if (enemyUnit.baseReached)
+                    return;
+
                 var scale = Vector3.one;
                 LeanTween.scale(missionPanel.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
                 string text = $"Enemies defeated <color=#{htmlColor}>{LevelInfo.current.numEnemiesDestroyed}/{LevelInfo.current.numEnemiesToDestroy}</color>";

@@ -42,11 +42,13 @@ namespace BioTower
             if (!GameManager.Instance.gameStates.IsGameState())
                 return;
 
+            if (!unit.IsEnemy())
+                return;
+
             var levelInfo = LevelInfo.current;
             if (levelInfo.winCondition == WinCondition.SURVIVE_WAVES)
             {
-                if (unit.IsEnemy() &&
-                    Util.unitManager.GetEnemyCount() <= 1 &&
+                if (Util.unitManager.GetEnemyCount() <= 1 &&
                     Util.waveManager.wavesHaveCompleted)
                 {
 
@@ -57,6 +59,10 @@ namespace BioTower
 
             else if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
             {
+                var enemyUnit = (EnemyUnit)unit;
+                if (enemyUnit.baseReached)
+                    return;
+
                 Debug.Log("unit destroyed: " + unit.name);
                 levelInfo.numEnemiesDestroyed++;
                 if (levelInfo.numEnemiesDestroyed >= levelInfo.numEnemiesToDestroy)

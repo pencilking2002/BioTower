@@ -95,6 +95,9 @@ namespace BioTower.Units
 
         public void StartCooldown()
         {
+            if (!gameObject)
+                return;
+
             cooldownStartTime = Time.time;
             isInCooldown = true;
 

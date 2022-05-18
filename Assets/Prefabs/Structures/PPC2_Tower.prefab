@@ -466,7 +466,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8803778833483685385, guid: 303cd9eb9c7840e45b7f2b8b34236980,
     type: 3}
   shootDuration: 0.5
-  shootInterval: 2
+  shootInterval: 1.5
   maxInfluenceCollider: {fileID: 5201475884106978493}
   minInfluenceCollider: {fileID: 6667778854603118350}
   unitPrefab: {fileID: 8646917852740519504, guid: 7a297f7c9c2c15a4aa896e34dfc88309,

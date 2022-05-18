@@ -186,7 +186,7 @@ namespace BioTower.Units
 
         public override bool TakeDamage(int amount)
         {
-            if (!isAlive)
+            if (!isAlive || !triggerCollider)
                 return false;
 
             if (base.TakeDamage(amount))

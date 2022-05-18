@@ -168,7 +168,7 @@ namespace BioTower
             EventManager.Units.onEnemyReachedDestination += OnEnemyReachedDestination;
             EventManager.Game.onLevelStart += OnLevelStart;
             EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
-            EventManager.Game.onWavesCompleted += OnWavesCompleted;
+            EventManager.Wave.onWavesCompleted += OnWavesCompleted;
         }
 
         private void OnDisable()
@@ -176,7 +176,7 @@ namespace BioTower
             EventManager.Units.onEnemyReachedDestination -= OnEnemyReachedDestination;
             EventManager.Game.onLevelStart -= OnLevelStart;
             EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
-            EventManager.Game.onWavesCompleted -= OnWavesCompleted;
+            EventManager.Wave.onWavesCompleted -= OnWavesCompleted;
         }
 
     }

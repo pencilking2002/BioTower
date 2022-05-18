@@ -270,8 +270,8 @@ namespace BioTower
             EventManager.Game.onSpendCurrency += OnSpendCurrency;
             EventManager.Game.onSnrk2UnitReachedBase += OnSnrk2UnitReachedBase;
 
-            EventManager.Game.onWaveStateInit += OnWaveStateInit;
-            EventManager.Game.onWaveCountdownTick += OnWaveCountdownTick;
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
+            EventManager.Wave.onWaveCountdownTick += OnWaveCountdownTick;
 
             EventManager.Tutorials.onTutChatStart += OnTutChatStart;
             EventManager.Tutorials.onTutTextPopUp += OnTutTextPopUp;
@@ -305,8 +305,8 @@ namespace BioTower
             EventManager.Game.onSpendCurrency -= OnSpendCurrency;
             EventManager.Game.onSnrk2UnitReachedBase -= OnSnrk2UnitReachedBase;
 
-            EventManager.Game.onWaveStateInit -= OnWaveStateInit;
-            EventManager.Game.onWaveCountdownTick -= OnWaveCountdownTick;
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Wave.onWaveCountdownTick -= OnWaveCountdownTick;
 
             EventManager.Tutorials.onTutChatStart -= OnTutChatStart;
             EventManager.Tutorials.onTutTextPopUp -= OnTutTextPopUp;

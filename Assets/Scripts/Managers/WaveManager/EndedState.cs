@@ -12,7 +12,7 @@ namespace BioTower
             {
                 isInitialized = true;
                 var numWaves = waveManager.waveSettings.waves.Length;
-                EventManager.Game.onWaveStateInit?.Invoke(waveState);
+                EventManager.Wave.onWaveStateInit?.Invoke(waveState);
             }
         }
 
@@ -30,7 +30,7 @@ namespace BioTower
                 else
                 {
                     //waveManager.wavesHaveCompleted = true;
-                    EventManager.Game.onWavesCompleted?.Invoke();
+                    EventManager.Wave.onWavesCompleted?.Invoke();
                 }
             }
 
@@ -51,13 +51,13 @@ namespace BioTower
 
         private void OnEnable()
         {
-            EventManager.Game.onWaveStateInit += OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
             EventManager.Game.onLevelStart += OnLevelStart;
         }
 
         private void OnDisable()
         {
-            EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
             EventManager.Game.onLevelStart -= OnLevelStart;
         }
     }

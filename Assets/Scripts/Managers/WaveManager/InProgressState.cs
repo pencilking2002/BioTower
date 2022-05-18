@@ -12,7 +12,10 @@ namespace BioTower
                 isInitialized = true;
                 var wave = waveManager.currWave;
                 wave.lastSpawnIntervalRange = wave.CreateSpawnIntervalFromRange();
-                EventManager.Game.onWaveStateInit?.Invoke(waveState);
+                EventManager.Wave.onWaveStateInit?.Invoke(waveState);
+
+                var spawnPoint = GameManager.Instance.GetWaypointManager().GetSpawnPoint(waveManager.currWave.waypointIndex);
+                EventManager.Wave.onStopWaveWarning?.Invoke(spawnPoint);
             }
         }
 
@@ -79,14 +82,14 @@ namespace BioTower
 
         private void OnEnable()
         {
-            EventManager.Game.onWaveStateInit += OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
             EventManager.Game.onGameOver += OnGameOver;
             EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
         }
 
         private void OnDisable()
         {
-            EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
             EventManager.Game.onGameOver -= OnGameOver;
             EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
 

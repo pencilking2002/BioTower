@@ -23,6 +23,7 @@ namespace BioTower.Level
         public bool isFork => waypointType == WaypointType.FORK;
         public bool isSpawnPoint => waypointType == WaypointType.SPAWN_POINT;
         public bool isEndpoint => waypointType == WaypointType.END_POINT;
+        private WaveWarning waveWarning;
 
         public Waypoint ChooseNextWaypoint()
         {
@@ -45,6 +46,45 @@ namespace BioTower.Level
 
             tangent = t1.sqrMagnitude > t1.sqrMagnitude ? t1 : t2;
             return tangent;
+        }
+
+        private void OnDisplayWaveWarning(Waypoint waypoint)
+        {
+            if (waypoint == this && waypointType == WaypointType.SPAWN_POINT)
+            {
+                var pooledObj = Util.poolManager.GetPooledObject(PoolObjectType.WAVE_WARNING);
+                pooledObj.transform.position = this.transform.position;
+                pooledObj.transform.right = this.transform.right;
+                pooledObj.GetWaveWarning().Animate();
+                waveWarning = pooledObj.GetWaveWarning();
+            }
+        }
+
+        private void OnStopWaveWarning(Waypoint waypoint)
+        {
+            if (waypoint == this && waypointType == WaypointType.SPAWN_POINT)
+            {
+                if (waveWarning)
+                {
+                    waveWarning.FadeOut();
+                    LeanTween.delayedCall(gameObject, 0.5f, () =>
+                    {
+                        Util.poolManager.AddPooledObject(waveWarning.GetComponent<PooledObject>());
+                    });
+                }
+            }
+        }
+        private void OnEnable()
+        {
+            EventManager.Wave.onDisplayWaveWarning += OnDisplayWaveWarning;
+            EventManager.Wave.onStopWaveWarning += OnStopWaveWarning;
+
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Wave.onDisplayWaveWarning -= OnDisplayWaveWarning;
+            EventManager.Wave.onStopWaveWarning -= OnStopWaveWarning;
         }
 
         private void OnDrawGizmos()

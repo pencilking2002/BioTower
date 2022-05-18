@@ -33,10 +33,10 @@ namespace BioTower
                 float timeRemaining = timeOfStart - Time.time;
                 int newSeconds = (int)Mathf.Ceil(timeRemaining);
 
-                missionText.text = "WAVE starting in " + newSeconds;
+                missionText.text = $"WAVE starting in <color=#{htmlColor}>{newSeconds}</color>";
 
                 if (seconds != newSeconds)
-                    EventManager.Game.onWaveCountdownTick?.Invoke(newSeconds);
+                    EventManager.Wave.onWaveCountdownTick?.Invoke(newSeconds);
 
                 seconds = newSeconds;
             }
@@ -121,7 +121,7 @@ namespace BioTower
             EventManager.Game.onLevelStart += OnLevelStarted;
             EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
             EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
-            EventManager.Game.onWaveStateInit += OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
         }
 
         private void OnDisable()
@@ -129,7 +129,7 @@ namespace BioTower
             EventManager.Game.onLevelStart -= OnLevelStarted;
             EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
             EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
-            EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
         }
     }
 }

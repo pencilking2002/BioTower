@@ -6,6 +6,7 @@ using BioTower.Structures;
 using BioTower.Units;
 using BioTower.SaveData;
 using UnityEngine.UI;
+using BioTower.Level;
 
 namespace BioTower
 {
@@ -16,14 +17,11 @@ namespace BioTower
             public static Action<bool, float> onGameOver;       // bool -> win/lose, float -> delay 
             public static Action onLevelLoaded_01;  // For registering the player base
             public static Action onLevelLoaded_02;  // for registering enemies
-            public static Action onWavesCompleted;
 
             public static Action<int, int> onSpendCurrency; // num spent, curr total
             public static Action<int, int> onGainCurrency;  // num gained, curr total
                                                             //public static Action onTogglePaths; 
             public static Action<GameState> onGameStateInit;
-            public static Action<WaveMode> onWaveStateInit;
-            public static Action<int> onWaveCountdownTick;
             public static Action onLightFragmentTapped;
             public static Action onCrystalTapped;
             public static Action<EnemyCrystal> onCrystalCreated;
@@ -32,6 +30,15 @@ namespace BioTower
 
             public static Action<LevelType> onLevelAwake;
             public static Action<LevelType> onLevelStart;
+        }
+
+        public class Wave
+        {
+            public static Action<WaveMode> onWaveStateInit;
+            public static Action<int> onWaveCountdownTick;
+            public static Action<Waypoint> onDisplayWaveWarning;
+            public static Action<Waypoint> onStopWaveWarning;
+            public static Action onWavesCompleted;
         }
 
         public class Structures

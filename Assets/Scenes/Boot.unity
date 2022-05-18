@@ -10516,6 +10516,12 @@ PrefabInstance:
       propertyPath: obstaclesLayerMask.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 7383120475885022137, guid: 1efa5580d925f4f41949a420af6456cf,
+        type: 3}
+      propertyPath: waveWarningPrefab
+      value: 
+      objectReference: {fileID: 8563992621028510904, guid: 55ae1839d3d5ec64f9e70275c36f9c79,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1efa5580d925f4f41949a420af6456cf, type: 3}
 --- !u!4 &853607172 stripped

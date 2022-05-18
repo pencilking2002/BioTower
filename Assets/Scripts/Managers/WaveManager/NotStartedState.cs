@@ -19,7 +19,7 @@ namespace BioTower
                     waveManager.currWave.timeStarted = Time.time;
                 });
 
-                EventManager.Game.onWaveStateInit?.Invoke(waveState);
+                EventManager.Wave.onWaveStateInit?.Invoke(waveState);
             }
         }
 
@@ -44,12 +44,12 @@ namespace BioTower
 
         private void OnEnable()
         {
-            EventManager.Game.onWaveStateInit += OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
         }
 
         private void OnDisable()
         {
-            EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
         }
     }
 }

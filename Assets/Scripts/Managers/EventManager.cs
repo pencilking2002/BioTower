@@ -23,6 +23,7 @@ namespace BioTower
                                                             //public static Action onTogglePaths; 
             public static Action<GameState> onGameStateInit;
             public static Action<WaveMode> onWaveStateInit;
+            public static Action<int> onWaveCountdownTick;
             public static Action onLightFragmentTapped;
             public static Action onCrystalTapped;
             public static Action<EnemyCrystal> onCrystalCreated;

@@ -124,6 +124,20 @@ namespace BioTower
             PlaySound(data.crystalDeposited);
         }
 
+        // MISC ---------------------------------------------
+
+        private void OnWaveStateInit(WaveMode waveMode)
+        {
+            if (waveMode == WaveMode.IN_PROGRESS)
+                PlaySound(data.waveStarted);
+        }
+
+        private void OnWaveCountdownTick(int num)
+        {
+            if (num <= 3)
+                PlaySound(data.tick);
+        }
+
         // TUTORIAL ---------------------------------------------
 
         private void OnTutTextPopUp()
@@ -256,6 +270,9 @@ namespace BioTower
             EventManager.Game.onSpendCurrency += OnSpendCurrency;
             EventManager.Game.onSnrk2UnitReachedBase += OnSnrk2UnitReachedBase;
 
+            EventManager.Game.onWaveStateInit += OnWaveStateInit;
+            EventManager.Game.onWaveCountdownTick += OnWaveCountdownTick;
+
             EventManager.Tutorials.onTutChatStart += OnTutChatStart;
             EventManager.Tutorials.onTutTextPopUp += OnTutTextPopUp;
             EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
@@ -287,6 +304,9 @@ namespace BioTower
             EventManager.Game.onGameStateInit -= OnGameStateInit;
             EventManager.Game.onSpendCurrency -= OnSpendCurrency;
             EventManager.Game.onSnrk2UnitReachedBase -= OnSnrk2UnitReachedBase;
+
+            EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Game.onWaveCountdownTick -= OnWaveCountdownTick;
 
             EventManager.Tutorials.onTutChatStart -= OnTutChatStart;
             EventManager.Tutorials.onTutTextPopUp -= OnTutTextPopUp;

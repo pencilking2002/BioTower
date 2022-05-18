@@ -14,7 +14,7 @@ namespace BioTower
         [SerializeField] private GameObject advancedEnemyPrefab;
 
         public WaveSettings waveSettings => LevelInfo.current.waveSettings;
-        [SerializeField] private WaveMode waveMode;
+        public WaveMode waveMode;
         private Dictionary<UnitType, GameObject> enemyDict = new Dictionary<UnitType, GameObject>();
 
         public Wave currWave
@@ -57,15 +57,18 @@ namespace BioTower
         }
 
 
-        private void InitializeWaves()
+        private void InitializeWaves(float delay = 0)
         {
-            currWaveIndex = 0;
-            wavesInitialized = true;
-            wavesHaveCompleted = false;
+            LeanTween.delayedCall(gameObject, delay, () =>
+            {
+                currWaveIndex = 0;
+                wavesInitialized = true;
+                wavesHaveCompleted = false;
 
-            // Initialize waves
-            for (int i = 0; i < waveSettings.waves.Length; i++)
-                waveSettings.waves[i].Init(i);
+                // Initialize waves
+                for (int i = 0; i < waveSettings.waves.Length; i++)
+                    waveSettings.waves[i].Init(i);
+            });
         }
 
         public GameObject GetEnemyPrefab(UnitType unitType) { return enemyDict[unitType]; }
@@ -136,7 +139,7 @@ namespace BioTower
             if (LevelInfo.current.HasTutorials())
                 return;
 
-            InitializeWaves();
+            InitializeWaves(2);
         }
 
         private void OnTutorialEnd(TutorialData data)

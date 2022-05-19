@@ -71,7 +71,8 @@ namespace BioTower
             var upgradeSettings = Util.gameSettings.upgradeSettings;
             Util.gameSettings.SetUpgradeSettingsToDefault();
             saveData.SetDefaultSettings(defaultSettings);
-            GameManager.Instance.econManager.Init(Util.gameSettings.startingEnergy);
+            //GameManager.Instance.econManager.Init(Util.gameSettings.startingEnergy);
+            GameManager.Instance.econManager.Init(waveSettings.startingEnergy);
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace BioTower
         {
             saveData.settings.enableTowerHealthDecline = true;
             Util.gameSettings.SetUpgradeSettingsBasedOnGameData(saveData);
-            GameManager.Instance.econManager.Init(Util.gameSettings.upgradeSettings.energy);
+            GameManager.Instance.econManager.Init(waveSettings.startingEnergy);
         }
 
         public bool IsFirstLevel()

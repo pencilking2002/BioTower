@@ -14,7 +14,7 @@ namespace BioTower
             cam = GetComponent<Camera>();
         }
 
-        private void OnGameOver(bool isWin)
+        private void OnGameOver(bool isWin, float delay)
         {
             LeanTween.cancel(objectShake.gameObject);
         }

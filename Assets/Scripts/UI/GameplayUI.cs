@@ -6,6 +6,7 @@ using System;
 using BioTower.Structures;
 using BioTower.SaveData;
 using TMPro;
+using UnityEngine.EventSystems;
 
 namespace BioTower.UI
 {
@@ -29,7 +30,6 @@ namespace BioTower.UI
             towerButtonMap.Add(StructureType.PPC2_TOWER, Pp2cTowerButton);
             towerButtonMap.Add(StructureType.CHLOROPLAST, chloroplastTowerButton);
             towerButtonMap.Add(StructureType.MITOCHONDRIA, mitoTowerButton);
-            initPos = panel.transform.position;
         }
 
         private void Start()
@@ -64,8 +64,9 @@ namespace BioTower.UI
 
         private void PositionPanelOffScreen()
         {
+            initPos = panel.transform.position;
             var startPos = initPos;
-            startPos.y -= 120;
+            startPos.y -= 200;
             panel.transform.position = startPos;
         }
 
@@ -124,32 +125,36 @@ namespace BioTower.UI
 
         public void OnPressAbaTowerButton()
         {
-            //Debug.Log("Try to press ABA tower btn");
+            // Prevent ABA tower button from being deselected if user is doing tutorial in the first level
+            bool isFirstLevel = LevelInfo.current.IsFirstLevel() && Util.tutCanvas.currTutorial.requiredAction == RequiredAction.PLACE_ABA_TOWER;
+
+            var structureType = StructureType.ABA_TOWER;
+
+            if (!isFirstLevel && DeselectIfAlreadySelected(structureType))
+                return;
 
             if (!Util.towerManager.HasAvailableSockets())
             {
                 Util.HandleInvalidButtonPress(AbaTowerButton);
-                //Debug.Log("No available sockets");
                 return;
             }
 
             if (!InputController.canPressButtons)
             {
                 Util.HandleInvalidButtonPress(AbaTowerButton);
-                //Debug.Log("can't press buttons");
                 return;
             }
 
-            bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.ABA_TOWER];
+            bool canBuildTower = CooldownManager.structureCooldownMap[structureType];
             if (!canBuildTower)
             {
-                //Debug.Log("can't press buttons");
                 return;
             }
 
-            if (GameManager.Instance.econManager.CanBuyTower(StructureType.ABA_TOWER))
+
+            if (GameManager.Instance.econManager.CanBuyTower(structureType))
             {
-                HandleButtonPress(AbaTowerButton, StructureType.ABA_TOWER);
+                HandleButtonPress(AbaTowerButton, structureType);
                 if (LevelInfo.current.IsFirstLevel())
                 {
                     var btn = AbaTowerButton.GetComponentInChildren<Button>();
@@ -168,19 +173,24 @@ namespace BioTower.UI
 
         public void OnPressPPC2TowerButton()
         {
+            var structureType = StructureType.PPC2_TOWER;
+
+            if (DeselectIfAlreadySelected(structureType))
+                return;
+
             if (!Util.towerManager.HasAvailableSockets())
             {
-                Util.HandleInvalidButtonPress(AbaTowerButton);
+                Util.HandleInvalidButtonPress(Pp2cTowerButton);
                 return;
             }
 
-            bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.PPC2_TOWER];
+            bool canBuildTower = CooldownManager.structureCooldownMap[structureType];
             if (!canBuildTower)
                 return;
 
-            if (GameManager.Instance.econManager.CanBuyTower(StructureType.PPC2_TOWER))
+            if (GameManager.Instance.econManager.CanBuyTower(structureType))
             {
-                HandleButtonPress(Pp2cTowerButton, StructureType.PPC2_TOWER);
+                HandleButtonPress(Pp2cTowerButton, structureType);
             }
             else
             {
@@ -191,19 +201,24 @@ namespace BioTower.UI
 
         public void OnPressChloroplastButton()
         {
+            var structureType = StructureType.CHLOROPLAST;
+
+            if (DeselectIfAlreadySelected(structureType))
+                return;
+
             if (!Util.towerManager.HasAvailableSockets())
             {
-                Util.HandleInvalidButtonPress(AbaTowerButton);
+                Util.HandleInvalidButtonPress(chloroplastTowerButton);
                 return;
             }
 
-            bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.CHLOROPLAST];
+            bool canBuildTower = CooldownManager.structureCooldownMap[structureType];
             if (!canBuildTower)
                 return;
 
-            if (GameManager.Instance.econManager.CanBuyTower(StructureType.CHLOROPLAST))
+            if (GameManager.Instance.econManager.CanBuyTower(structureType))
             {
-                HandleButtonPress(chloroplastTowerButton, StructureType.CHLOROPLAST);
+                HandleButtonPress(chloroplastTowerButton, structureType);
             }
             else
             {
@@ -214,19 +229,24 @@ namespace BioTower.UI
 
         public void OnPressMitoButton()
         {
+            var structureType = StructureType.MITOCHONDRIA;
+
+            if (DeselectIfAlreadySelected(structureType))
+                return;
+
             if (!Util.towerManager.HasAvailableSockets())
             {
-                Util.HandleInvalidButtonPress(AbaTowerButton);
+                Util.HandleInvalidButtonPress(mitoTowerButton);
                 return;
             }
 
-            bool canBuildTower = CooldownManager.structureCooldownMap[StructureType.MITOCHONDRIA];
+            bool canBuildTower = CooldownManager.structureCooldownMap[structureType];
             if (!canBuildTower)
                 return;
 
-            if (GameManager.Instance.econManager.CanBuyTower(StructureType.MITOCHONDRIA))
+            if (GameManager.Instance.econManager.CanBuyTower(structureType))
             {
-                HandleButtonPress(mitoTowerButton, StructureType.MITOCHONDRIA);
+                HandleButtonPress(mitoTowerButton, structureType);
             }
             else
             {
@@ -261,15 +281,20 @@ namespace BioTower.UI
 
         }
 
-        private void HandleButtonColor(Button button)
+        /// <summary>
+        /// Used to deselect a button if its already selected
+        /// </summary>
+        /// <param name="structureType"></param>
+        /// <returns></returns>
+        private bool DeselectIfAlreadySelected(StructureType structureType)
         {
-            var image = button.transform.Find("Panel").GetComponent<Image>();
-            var oldColor = image.color;
-            image.color = Color.grey;
-            LeanTween.delayedCall(gameObject, GameManager.Instance.cooldownManager.structureSpawnCooldown, () =>
+            if (GetSelectedButtonType() == structureType)
             {
-                image.color = oldColor;
-            });
+                DeselectCurrentButton();
+                Util.poolManager.DespawnAllitemHighlights();
+                return true;
+            }
+            return false;
         }
 
         private void PingPongScaleCurrencyUI(float targetScale)
@@ -302,22 +327,34 @@ namespace BioTower.UI
             var btn = button.GetComponentInChildren<Button>();
             btn.interactable = false;
             var cooldownImage = btn.transform.Find("Cooldown").GetComponent<Image>();
-            LeanTween.value(gameObject, 1, 0, cooldown).setOnUpdate((float val) =>
-            {
-                cooldownImage.fillAmount = val;
-            })
-            .setOnComplete(() =>
-            {
-                // Don't make button interactable if its the first level and there's currently tutorials playing
-                if (LevelInfo.current.IsFirstLevel() && Util.tutCanvas.hasTutorials)
-                    btn.interactable = false;
-                else
-                    btn.interactable = true;
-            });
+            // LeanTween.value(gameObject, 1, 0, cooldown).setOnUpdate((float val) =>
+            // {
+            //     cooldownImage.fillAmount = val;
+            // })
+            // .setOnComplete(() =>
+            // {
+            // Don't make button interactable if its the first level and there's currently tutorials playing
+            if (LevelInfo.current.IsFirstLevel() && Util.tutCanvas.hasTutorials)
+                btn.interactable = false;
+            else
+                btn.interactable = true;
+            //});
 
-            HandleButtonColor(btn);
+            //HandleButtonColor(btn);
+            //btn.OnPointerUp(null);
+            //EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
         }
-
+        private void HandleButtonColor(Button button)
+        {
+            var image = button.transform.Find("Panel").GetComponent<Image>();
+            image.color = Color.white;
+            var oldColor = image.color;
+            image.color = Color.grey;
+            LeanTween.delayedCall(gameObject, GameManager.Instance.cooldownManager.structureSpawnCooldown, () =>
+            {
+                image.color = oldColor;
+            });
+        }
 
         private void DeselectCurrentButton()
         {
@@ -326,8 +363,10 @@ namespace BioTower.UI
             {
                 LeanTween.cancel(currSelectedBtn.gameObject);
                 LeanTween.moveLocalY(currSelectedBtn.gameObject, initButtonLocalPos.y, 0.1f);
+                var btn = currSelectedBtn.GetComponentInChildren<Button>();
+                //btn.OnPointerUp(new PointerEventData(EventSystem.current));
                 currSelectedBtn = null;
-                Debug.Log("Deselect button");
+                //Debug.Log("Deselect button");
             }
         }
 
@@ -383,6 +422,11 @@ namespace BioTower.UI
                 SlideInPanel(1.0f);
         }
 
+        private void OnStructureSelected(Structure structure)
+        {
+            DeselectCurrentButton();
+        }
+
         private async void OnEnable()
         {
             EventManager.Tutorials.onTutorialStart += OnTutorialStart;
@@ -394,6 +438,7 @@ namespace BioTower.UI
             EventManager.Game.onGainCurrency += OnGainCurrency;
             EventManager.Structures.onStructureCooldownStarted += OnStructureCooldownStarted;
             EventManager.Structures.onSetNonePlacementState += OnSetNonePlacementState;
+            EventManager.Structures.onStructureSelected += OnStructureSelected;
         }
 
         private void OnDisable()
@@ -407,6 +452,7 @@ namespace BioTower.UI
             EventManager.Game.onGainCurrency -= OnGainCurrency;
             EventManager.Structures.onStructureCooldownStarted -= OnStructureCooldownStarted;
             EventManager.Structures.onSetNonePlacementState -= OnSetNonePlacementState;
+            EventManager.Structures.onStructureSelected -= OnStructureSelected;
         }
     }
 }

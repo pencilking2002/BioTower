@@ -18,12 +18,15 @@ namespace BioTower.Structures
             //(Structure structure in structureList)
             for (int i = 0; i < structureList.Count; i++)
             {
-                if (structureList[i] == null)
-                    continue;
-
                 Structure structure = structureList[i];
 
+                if (structure == null)
+                    continue;
+
                 if (!structure.isAlive)
+                    continue;
+
+                if (!structure.gameObject.activeInHierarchy)
                     continue;
 
                 DoHealthDeclineOrHeal(structure);
@@ -89,7 +92,7 @@ namespace BioTower.Structures
 
         }
 
-        private void OnStructureCreated(Structure structure)
+        private void OnStructureCreated(Structure structure, bool doSquishyAnim)
         {
             if (structure.structureType == StructureType.DNA_BASE)
                 return;
@@ -109,28 +112,54 @@ namespace BioTower.Structures
                 socketList.Add(socket);
         }
 
-        private void OnGameOver(bool isWin)
+        private void OnGameOver(bool isWin, float delay)
         {
             structureList.Clear();
             socketList.Clear();
         }
 
+        private void OnStructureActivated(Structure tower)
+        {
+            if (tower.IsMiniChloroTower())
+            {
+                structureList.Add(tower);
+            }
+        }
 
+        private void OnWaveStateInit(WaveMode waveMode)
+        {
+            if (waveMode == WaveMode.ENDED && !Util.waveManager.currWave.IsFinalWave())
+            {
+                foreach (Structure tower in structureList)
+                {
+                    if (tower.IsMiniChloroTower())
+                    {
+                        var miniTower = (MiniChloroplastTower)tower;
+                        miniTower.ShootFragment(8);
+                        return;
+                    }
+                }
+            }
+        }
 
         private void OnEnable()
         {
+            EventManager.Structures.onStructureActivated += OnStructureActivated;
             EventManager.Structures.onStructureCreated += OnStructureCreated;
             EventManager.Structures.onStructureDestroyed += OnStructureDestroyed;
             EventManager.Structures.onSocketStart += OnSocketStart;
             EventManager.Game.onGameOver += OnGameOver;
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
         }
 
         private void OnDisable()
         {
+            EventManager.Structures.onStructureActivated -= OnStructureActivated;
             EventManager.Structures.onStructureCreated -= OnStructureCreated;
             EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
             EventManager.Structures.onSocketStart -= OnSocketStart;
             EventManager.Game.onGameOver -= OnGameOver;
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
         }
     }
 }

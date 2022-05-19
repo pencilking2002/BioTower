@@ -9,8 +9,8 @@ namespace BioTower
 {
     public enum PlacementState
     {
-        NONE,
-        PLACING,
+        NONE, PLACING,
+        BOMB_PLACING
     }
 
     public class PlacementManager : MonoBehaviour
@@ -74,16 +74,24 @@ namespace BioTower
             if (!IsPlacingState())
                 return;
 
+            if (socket.HasStructure() || socket.IsBuildingStructure())
+                return;
+
             if (GameManager.Instance.econManager.CanBuyTower(structureToPlace))
             {
-                PlaceTower(structureToPlace, socket.transform.position, socket);
-                GameManager.Instance.econManager.BuyTower(structureToPlace);
+                var towerType = structureToPlace;
+                var targetSocket = socket;
+                EventManager.Structures.onStructureCooldownStarted?.Invoke(towerType, Util.cooldownManager.structureSpawnCooldown);
+                GameManager.Instance.econManager.BuyTower(towerType);
+                targetSocket.SetIsBuildingStructure();
+                targetSocket.StartProgress(Util.gameSettings.towerConstructionDelay);
+                LeanTween.delayedCall(gameObject, Util.gameSettings.towerConstructionDelay, () =>
+                {
+                    if (targetSocket)
+                        PlaceTower(towerType, targetSocket.transform.position, targetSocket);
+                });
             }
-            LeanTween.delayedCall(0.5f, () =>
-            {
-                SetNoneState();
-            });
-
+            SetNoneState();
         }
         private Collider2D DoRaycast(Vector3 screenPos)
         {
@@ -101,7 +109,7 @@ namespace BioTower
         private void PlaceTower(StructureType structureType, Vector3 worldPosition, StructureSocket socket)
         {
             if (socket != null)
-                socket.SetHasStructure(true);
+                socket.SetHasStructure();
 
             var tower = CreateStructure(structureType);
             tower.transform.position = worldPosition + placementOffset;
@@ -134,6 +142,13 @@ namespace BioTower
             structureToPlace = structureType;
             EventManager.Structures.onStartPlacementState?.Invoke(structureType);
         }
+
+        public void SetBombPlacingState()
+        {
+            placementState = PlacementState.BOMB_PLACING;
+        }
+
+        public bool IsBombPlacingState() { return placementState == PlacementState.BOMB_PLACING; }
 
         public bool IsNoneState() { return placementState == PlacementState.NONE; }
         public bool IsPlacingState() { return placementState == PlacementState.PLACING; }
@@ -171,16 +186,6 @@ namespace BioTower
                         tower.gameObject.SetActive(true);
                     }
                 }
-                // else if (highlightChloros)
-                // {
-                //     foreach (MiniChloroplastTower tower in miniChloros)
-                //     {
-                //         LeanTween.delayedCall(gameObject, 1.0f, () =>
-                //         {
-                //             Util.poolManager.SpawnItemHighlight(tower.transform.position, new Vector2(0, 120));
-                //         });
-                //     }
-                // }
             }
             else
             {
@@ -215,20 +220,55 @@ namespace BioTower
                 ActivateMiniChloro();
         }
 
+        private void OnTouchBegan(Vector3 pos)
+        {
+            if (!IsBombPlacingState())
+                return;
+
+            pos = Camera.main.ScreenToWorldPoint(pos);
+            pos.z = 0;
+
+            var colliders = Physics2D.OverlapCircleAll(pos, 0.25f, GameManager.Instance.util.obstaclesLayerMask);
+            if (colliders.Length != 0)
+                return;
+
+            var bombGO = Instantiate(Util.bombPanel.bombPrefab);
+            bombGO.transform.position = pos;
+            var bomb = bombGO.GetComponent<Bomb>();
+
+            // Scale in the bomb
+            var scale = bombGO.transform.localScale;
+            bombGO.transform.localScale = Vector3.zero;
+            bombGO.LeanScale(scale, 0.5f).setEaseOutElastic();
+
+            EventManager.Structures.onPlaceBomb?.Invoke();
+            SetNoneState();
+        }
+
+        private void OnStructureSelected(Structure structure)
+        {
+            SetNoneState();
+            Util.poolManager.DespawnAllitemHighlights();
+        }
+
         private void OnEnable()
         {
             EventManager.UI.onPressTowerButton += OnPressTowerButton;
             EventManager.Structures.onTapFreeStructureSocket += OnTapStructureSocket;
+            EventManager.Structures.onStructureSelected += OnStructureSelected;
             EventManager.Tutorials.onTutorialStart += OnTutorialStart;
             EventManager.Tutorials.onSkipTutorials += OnSkipTutorials;
+            EventManager.Input.onTouchBegan += OnTouchBegan;
         }
 
         private void OnDisable()
         {
             EventManager.UI.onPressTowerButton -= OnPressTowerButton;
             EventManager.Structures.onTapFreeStructureSocket -= OnTapStructureSocket;
+            EventManager.Structures.onStructureSelected -= OnStructureSelected;
             EventManager.Tutorials.onTutorialStart -= OnTutorialStart;
             EventManager.Tutorials.onSkipTutorials -= OnSkipTutorials;
+            EventManager.Input.onTouchBegan -= OnTouchBegan;
         }
 
     }

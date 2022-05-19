@@ -4,38 +4,52 @@ using UnityEngine;
 
 namespace BioTower
 {
-public class NotStartedState : WaveState
-{
-    public override void Init()
+    public class NotStartedState : WaveState
     {
-        if (!isInitialized)
+        [SerializeField] private float delay = 2;
+        private bool isReadyToGotoDelayState;
+        public override void Init()
         {
-            isInitialized = true;
-            EventManager.Game.onWaveStateInit?.Invoke(waveState);
+            if (!isInitialized)
+            {
+                isInitialized = true;
+                LeanTween.delayedCall(gameObject, delay, () =>
+                {
+                    isReadyToGotoDelayState = true;
+                    waveManager.currWave.timeStarted = Time.time;
+                });
+
+                EventManager.Wave.onWaveStateInit?.Invoke(waveState);
+            }
+        }
+
+        public override WaveMode OnUpdate(WaveMode waveState)
+        {
+            Init();
+
+            if (isReadyToGotoDelayState)
+            {
+                isReadyToGotoDelayState = false;
+                waveState = WaveMode.DELAY;
+            }
+
+            return waveState;
+        }
+
+        private void OnWaveStateInit(WaveMode waveState)
+        {
+            if (this.waveState != waveState)
+                isInitialized = false;
+        }
+
+        private void OnEnable()
+        {
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
         }
     }
-
-    public override WaveMode OnUpdate(WaveMode waveState)
-    {
-        Init();
-        waveManager.currWave.timeStarted = Time.time;
-        return WaveMode.DELAY;
-    }
-
-    private void OnWaveStateInit(WaveMode waveState)
-    {
-        if (this.waveState != waveState)
-            isInitialized = false;
-    }
-
-    private void OnEnable()
-    {
-        EventManager.Game.onWaveStateInit += OnWaveStateInit;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.Game.onWaveStateInit -= OnWaveStateInit;
-    }
-}
 }

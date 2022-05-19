@@ -15,6 +15,7 @@ namespace BioTower
         private string htmlColor;
         private Vector3 initPos;
         private bool isDisplayed;
+        private int seconds;
 
         private void Awake()
         {
@@ -24,6 +25,25 @@ namespace BioTower
             htmlColor = ColorUtility.ToHtmlStringRGB(importantColor);
         }
 
+        private void Update()
+        {
+            if (Util.waveManager.waveMode == WaveMode.DELAY)
+            {
+                float timeOfStart = Util.waveManager.currWave.timeStarted + Util.waveManager.currWave.startDelay;
+                float timeRemaining = timeOfStart - Time.time;
+                int newSeconds = (int)Mathf.Ceil(timeRemaining);
+
+                if (Util.waveManager.currWave.IsFinalWave())
+                    missionText.text = $"Final wave starting in <color=#{htmlColor}>{newSeconds}</color>";
+                else
+                    missionText.text = $"Wave {Util.waveManager.currWaveIndex + 1} starting in <color=#{htmlColor}>{newSeconds}</color>";
+
+                if (seconds != newSeconds)
+                    EventManager.Wave.onWaveCountdownTick?.Invoke(newSeconds);
+
+                seconds = newSeconds;
+            }
+        }
         private void OnLevelStarted(LevelType levelType)
         {
             if (!LevelInfo.current.IsFirstLevel())
@@ -37,22 +57,22 @@ namespace BioTower
             }
         }
 
-        private void SlideInPanel(string inputMissionText, float delay)
+        private void DisplayPanel(string inputMissionText, float delay = 0)
         {
-            if (isDisplayed)
-                return;
+            missionText.text = inputMissionText;
 
-            //Debug.Log("Slide in");
-            isDisplayed = true;
-            var startPos = initPos;
-            startPos.y += 120;
-            missionPanel.transform.position = startPos;
-            LeanTween.delayedCall(gameObject, delay, () =>
+            if (!isDisplayed)
             {
-                missionPanel.SetActive(true);
-                LeanTween.move(missionPanel.gameObject, initPos, 0.5f).setEaseOutQuint();
-                missionText.text = inputMissionText;
-            });
+                isDisplayed = true;
+                var startPos = initPos;
+                startPos.y += 120;
+                missionPanel.transform.position = startPos;
+                LeanTween.delayedCall(gameObject, delay, () =>
+                {
+                    missionPanel.SetActive(true);
+                    LeanTween.move(missionPanel.gameObject, initPos, 0.5f).setEaseOutQuint();
+                });
+            }
         }
 
         private void OnTutorialEnd(TutorialData data)
@@ -64,7 +84,7 @@ namespace BioTower
             if (levelInfo.winCondition == WinCondition.KILL_ENEMIES)
             {
                 string text = $"Enemies defeated <color=#{htmlColor}>0/{levelInfo.numEnemiesToDestroy}</color>";
-                SlideInPanel(text, 1.0f);
+                DisplayPanel(text, 1.0f);
             }
         }
 
@@ -75,6 +95,10 @@ namespace BioTower
 
             if (LevelInfo.current.IsFirstLevel())
             {
+                var enemyUnit = (EnemyUnit)unit;
+                if (enemyUnit.baseReached)
+                    return;
+
                 var scale = Vector3.one;
                 LeanTween.scale(missionPanel.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
                 string text = $"Enemies defeated <color=#{htmlColor}>{LevelInfo.current.numEnemiesDestroyed}/{LevelInfo.current.numEnemiesToDestroy}</color>";
@@ -84,14 +108,23 @@ namespace BioTower
 
         private void OnWaveStateInit(WaveMode waveState)
         {
-            if (waveState != WaveMode.IN_PROGRESS)
-                return;
+            if (waveState == WaveMode.NOT_STARTED)
+            {
+                string message = Util.waveManager.currWaveIndex == 0 ? "GET READY!" : "WAVE DEFEATED!";
+                DisplayPanel(message);
+            }
 
-            //var scale = Vector3.one;
-            //LeanTween.scale(missionPanel.gameObject, scale * 1.2f, 0.2f).setLoopPingPong(1);
-            string text = $"Wave <color=#{htmlColor}>{Util.waveManager.currWaveIndex + 1}/{Util.waveManager.waveSettings.waves.Length}</color>";
-            missionText.text = text;
-            SlideInPanel(text, 1.5f);
+            else if (waveState == WaveMode.IN_PROGRESS)
+            {
+                string text = "GO!";
+                missionText.text = text;
+
+                LeanTween.delayedCall(gameObject, 1, () =>
+                {
+                    text = $"Wave <color=#{htmlColor}>{Util.waveManager.currWaveIndex + 1}/{Util.waveManager.waveSettings.waves.Length}</color>";
+                    missionText.text = text;
+                });
+            }
 
         }
 
@@ -100,7 +133,7 @@ namespace BioTower
             EventManager.Game.onLevelStart += OnLevelStarted;
             EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
             EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
-            EventManager.Game.onWaveStateInit += OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
         }
 
         private void OnDisable()
@@ -108,7 +141,7 @@ namespace BioTower
             EventManager.Game.onLevelStart -= OnLevelStarted;
             EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
             EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
-            EventManager.Game.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
         }
     }
 }

@@ -15,6 +15,9 @@ namespace BioTower
         [TabGroup("Music")] public AudioClip gameOverWin;
         [TabGroup("Music")] public AudioClip mainMenuTrack;
         [TabGroup("Music")] public AudioClip goofyPlantsTrack;
+        [TabGroup("Waves")] public AudioClip waveStarted;
+        [TabGroup("Waves")] public AudioClip tick;
+        [TabGroup("Waves")] public AudioClip waveDefeated;
 
         //[TabGroup("Music")] public AudioClip titleScreenTrack;
 

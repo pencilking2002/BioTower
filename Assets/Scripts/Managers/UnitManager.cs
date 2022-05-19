@@ -91,7 +91,11 @@ namespace BioTower.Units
                     }
                     else if (enemy.IsChasingState())
                     {
-                        if (!enemy.unitFoe || !enemy.unitFoe.isAlive || !enemy.unitFoe.IsChasingState() || enemy.unitFoe.unitFoe != enemy)
+                        if (!enemy.unitFoe ||
+                            !enemy.unitFoe.isAlive ||
+                            !enemy.unitFoe.IsChasingState() ||
+                             enemy.unitFoe.unitFoe != enemy ||
+                             enemy.unitFoe.isInCooldown)
                             enemy.SetRoamingState();
                         else
                         {
@@ -122,7 +126,18 @@ namespace BioTower.Units
             }
         }
 
-        private void OnGameOver(bool isWin)
+        public int GetEnemyCount()
+        {
+            int numEnemies = 0;
+            for (int i = 0; i < units.Count; i++)
+            {
+                if (units[i].IsEnemy())
+                    numEnemies++;
+            }
+            return numEnemies;
+        }
+
+        private void OnGameOver(bool isWin, float delay)
         {
             units.Clear();
         }

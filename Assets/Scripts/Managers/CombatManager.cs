@@ -7,8 +7,8 @@ namespace BioTower.Units
 {
     public class CombatManager : MonoBehaviour
     {
-        [Range(0, 100)][SerializeField] private float abaWinChance = 50;
-        [Range(0, 100)][SerializeField] private float snrk2WinChance = 0;
+        // [Range(0, 100)][SerializeField] private float abaWinChance = 50;
+        // [Range(0, 100)][SerializeField] private float snrk2WinChance = 0;
         [SerializeField] private float combatDistanceThreshold = 0.25f;
         private void Update()
         {
@@ -34,6 +34,9 @@ namespace BioTower.Units
 
         private void ProcessAbaUnit(Unit unit, ABATower tower)
         {
+            if (unit.isInCooldown)
+                return;
+
             if (unit.IsRoamingState())
             {
                 // Find the closest enemy who is not engaged
@@ -51,6 +54,9 @@ namespace BioTower.Units
         {
             foreach (Unit unit in tower.units)
             {
+                if (unit.isInCooldown)
+                    continue;
+
                 if (unit.IsChasingState())
                 {
                     float distance = Vector2.Distance(unit.transform.position, unit.unitFoe.transform.position);
@@ -89,9 +95,9 @@ namespace BioTower.Units
         {
             float winChance = 0;
             if (unit.IsAba())
-                winChance = abaWinChance;
+                winChance = Util.gameSettings.abaWinChance;
             else if (unit.IsSnrk2())
-                winChance = snrk2WinChance;
+                winChance = Util.gameSettings.snrk2WinChance;
 
             return winChance;
         }
@@ -105,6 +111,12 @@ namespace BioTower.Units
                 DoCombatRound(winningUnit, losingUnit, 1);
             else
                 winningUnit.SetRoamingState();
+
+            if (winningUnit.IsAba())
+            {
+                var abaUnit = (AbaUnit)winningUnit;
+                abaUnit.StartCooldown();
+            }
         }
 
         private int GetDamage(Unit unit)

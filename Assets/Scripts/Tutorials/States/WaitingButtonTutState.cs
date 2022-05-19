@@ -6,93 +6,118 @@ using BioTower.Units;
 
 namespace BioTower
 {
-public class WaitingButtonTutState : TutStateBase
-{
-    public override void Init (TutState tutState)
+    public class WaitingButtonTutState : TutStateBase
     {
-        if (!isInitialized)
+        public override void Init(TutState tutState)
         {
-            isInitialized = true;
-            StopCoroutine(GameManager.Instance.util.RevealCharacters(null, 0, null));
-            tutCanvas.tutText.text = tutCanvas.currTutorial.text;
-            tutCanvas.tutText.ForceMeshUpdate();
-            
-            InputController.canPressButtons = true;
-            InputController.canSpawnTowers = false;
-        
-            var animatedWords = tutCanvas.currTutorial.animatedWords;
-            foreach(AnimatedWord word in animatedWords)
-                EventManager.Tutorials.onAnimateText?.Invoke(word.word, word.speed, word.amplitude);
-            
-            EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
-        }
-    }
-
-    public override TutState OnUpdate(TutState tutState)
-    {
-        Init(tutState);
-        return tutState;
-    }
-
-    private void OnPressTowerButton(StructureType structureType)
-    {
-        if (!isInitialized)
-            return;
-
-        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
-        {
-            tutCanvas.SetEndTutState();
-            return;
-        }
-                
-        if (structureType == StructureType.ABA_TOWER)
-        {
-            if (tutCanvas.currTutorial.requiredAction == RequiredAction.TAP_ABA_TOWER_BUTTON)
+            if (!isInitialized)
             {
-                tutCanvas.SetLetterRevealState();
+                isInitialized = true;
+                StopCoroutine(GameManager.Instance.util.RevealCharacters(null, 0, null));
+                tutCanvas.tutText.text = tutCanvas.currTutorial.text;
+                tutCanvas.tutText.ForceMeshUpdate();
+
+                InputController.canPressButtons = true;
+                InputController.canSpawnTowers = false;
+
+                var animatedWords = tutCanvas.currTutorial.animatedWords;
+                foreach (AnimatedWord word in animatedWords)
+                    EventManager.Tutorials.onAnimateText?.Invoke(word.word, word.speed, word.amplitude);
+
+                EventManager.Tutorials.onTutStateInit?.Invoke(tutState);
             }
         }
-    }
 
-    private void OnTapSpawnUnitButton(UnitType unitType)
-    {
-        if (!isInitialized)
-            return;
-
-        if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+        public override TutState OnUpdate(TutState tutState)
         {
-            tutCanvas.SetEndTutState();
-            return;
+            Init(tutState);
+            return tutState;
         }
 
-        if (unitType == UnitType.ABA)
+        private void OnPressTowerButton(StructureType structureType)
         {
-            if (tutCanvas.currTutorial.IsSpawnAbaUnitRequiredAction())
+            if (!isInitialized)
+                return;
+
+            if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
             {
-                tutCanvas.SetLetterRevealState();
+                tutCanvas.SetEndTutState();
+                return;
+            }
+
+            if (structureType == StructureType.ABA_TOWER)
+            {
+                if (tutCanvas.currTutorial.requiredAction == RequiredAction.TAP_ABA_TOWER_BUTTON)
+                {
+                    tutCanvas.SetLetterRevealState();
+                }
             }
         }
-    }
+
+        // private void OnTapSpawnUnitButton(UnitType unitType)
+        // {
+        //     if (!isInitialized)
+        //         return;
+
+        //     if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+        //     {
+        //         tutCanvas.SetEndTutState();
+        //         return;
+        //     }
+
+        //     if (unitType == UnitType.ABA)
+        //     {
+        //         if (tutCanvas.currTutorial.IsSpawnAbaUnitRequiredAction())
+        //         {
+        //             tutCanvas.SetLetterRevealState();
+        //         }
+        //     }
+        // }
+
+        private void OnStructureSelected(Structure structure)
+        {
+            if (!isInitialized)
+                return;
+
+            LeanTween.delayedCall(0.1f, () =>
+            {
+                if (tutCanvas.IsLastTutorial(tutCanvas.currTutorial))
+                {
+                    tutCanvas.SetEndTutState();
+                    return;
+                }
+
+                if (structure.structureType == StructureType.ABA_TOWER)
+                {
+                    if (tutCanvas.currTutorial.IsSpawnAbaUnitRequiredAction())
+                    {
+                        tutCanvas.SetLetterRevealState();
+                    }
+                }
+            });
+        }
 
 
-    public override void OnTutStateInit(TutState tutState)
-    {
-        if (tutState != this.tutState)
-            isInitialized = false;
-    }
+        public override void OnTutStateInit(TutState tutState)
+        {
+            if (tutState != this.tutState)
+                isInitialized = false;
+        }
 
-    private void OnEnable()
-    {
-        EventManager.Tutorials.onTutStateInit += OnTutStateInit;
-        EventManager.UI.onPressTowerButton += OnPressTowerButton;
-        EventManager.UI.onTapSpawnUnitButton += OnTapSpawnUnitButton;
-    }
+        private void OnEnable()
+        {
+            EventManager.Tutorials.onTutStateInit += OnTutStateInit;
+            EventManager.UI.onPressTowerButton += OnPressTowerButton;
+            //EventManager.UI.onTapSpawnUnitButton += OnTapSpawnUnitButton;
+            EventManager.Structures.onStructureSelected += OnStructureSelected;
+        }
 
-    private void OnDisable()
-    {
-        EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
-        EventManager.UI.onPressTowerButton -= OnPressTowerButton;
-        EventManager.UI.onTapSpawnUnitButton -= OnTapSpawnUnitButton;
+        private void OnDisable()
+        {
+            EventManager.Tutorials.onTutStateInit -= OnTutStateInit;
+            EventManager.UI.onPressTowerButton -= OnPressTowerButton;
+            //EventManager.UI.onTapSpawnUnitButton -= OnTapSpawnUnitButton;
+            EventManager.Structures.onStructureSelected -= OnStructureSelected;
+        }
     }
-}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using BioTower.Units;
+using BioTower.Level;
 
 namespace BioTower
 {
@@ -13,7 +14,7 @@ namespace BioTower
         [SerializeField] private GameObject advancedEnemyPrefab;
 
         public WaveSettings waveSettings => LevelInfo.current.waveSettings;
-        [SerializeField] private WaveMode waveMode;
+        public WaveMode waveMode;
         private Dictionary<UnitType, GameObject> enemyDict = new Dictionary<UnitType, GameObject>();
 
         public Wave currWave
@@ -56,36 +57,47 @@ namespace BioTower
         }
 
 
-        private void InitializeWaves()
+        private void InitializeWaves(float delay = 0)
         {
-            currWaveIndex = 0;
-            wavesInitialized = true;
-            wavesHaveCompleted = false;
+            LeanTween.delayedCall(gameObject, delay, () =>
+            {
+                currWaveIndex = 0;
+                wavesInitialized = true;
+                wavesHaveCompleted = false;
 
-            // Initialize waves
-            for (int i = 0; i < waveSettings.waves.Length; i++)
-                waveSettings.waves[i].Init(i);
+                // Initialize waves
+                for (int i = 0; i < waveSettings.waves.Length; i++)
+                    waveSettings.waves[i].Init(i);
+            });
         }
 
         public GameObject GetEnemyPrefab(UnitType unitType) { return enemyDict[unitType]; }
 
-        public EnemyUnit SpawnEnemy(Vector2 minMaxSpeed, UnitType enemyType)
+        private void GetSpawnPosition(out Vector3 spawnPos, out Waypoint spawnPoint)
+        {
+            spawnPoint = GameManager.Instance.GetWaypointManager().GetSpawnPoint(currWave.waypointIndex);
+            Vector2 offset = UnityEngine.Random.insideUnitCircle;
+            spawnPos = spawnPoint.transform.position + new Vector3(offset.x, offset.y, 0);
+        }
+
+        public EnemyUnit SpawnEnemy(UnitType enemyType)
         {
             // Initialize enemy
             var enemyPrefab = GetEnemyPrefab(enemyType);
             var enemyGO = Instantiate(enemyPrefab);
             var enemy = enemyGO.GetComponent<EnemyUnit>();
 
-            // Set the enemy's positioning
-            var spawnPoint = GameManager.Instance.GetWaypointManager().GetRandomSpawnPoint();
-            enemyGO.transform.position = spawnPoint.transform.position;
+            GetSpawnPosition(out Vector3 spawnPos, out Waypoint spawnPoint);
+            enemyGO.transform.position = spawnPos;
+
             enemy.SetCurrWaypoint(spawnPoint);
             enemy.SetNextWaypoint(spawnPoint.nextWaypoint);
 
             // Setup enemy
             GameManager.Instance.RegisterEnemy(enemy);
-            enemy.SetSpeed(minMaxSpeed);
+            //enemy.SetSpeed(minMaxSpeed);
             enemy.StartMoving(enemy.GetNextWaypoint());
+            enemy.waveIndex = currWaveIndex;
             return enemy;
         }
 
@@ -103,6 +115,16 @@ namespace BioTower
             waveMode = waveStateMap[waveMode].OnUpdate(waveMode);
         }
 
+        public int GetWaveIndex(Wave wave)
+        {
+            for (int i = 0; i < waveSettings.waves.Length; i++)
+            {
+                if (wave == waveSettings.waves[i])
+                    return i;
+            }
+            return -1;
+        }
+
         public void SetEndedState()
         {
             wavesInitialized = false;
@@ -117,8 +139,7 @@ namespace BioTower
         private void OnEnemyReachedDestination(EnemyUnit enemy)
         {
             // Vary speed
-            var minMaxSpeed = currWave.minMaxSpeed;
-            enemy.SetSpeed(minMaxSpeed, 0.5f);
+            enemy.SetSpeed(enemy.minMaxSpeed, 0.5f);
         }
 
 
@@ -128,7 +149,7 @@ namespace BioTower
             if (LevelInfo.current.HasTutorials())
                 return;
 
-            InitializeWaves();
+            InitializeWaves(2);
         }
 
         private void OnTutorialEnd(TutorialData data)
@@ -147,6 +168,7 @@ namespace BioTower
 
         private void OnWavesCompleted()
         {
+            wavesHaveCompleted = true;
             wavesInitialized = false;
             currWaveIndex = 0;
         }
@@ -156,7 +178,7 @@ namespace BioTower
             EventManager.Units.onEnemyReachedDestination += OnEnemyReachedDestination;
             EventManager.Game.onLevelStart += OnLevelStart;
             EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
-            EventManager.Game.onWavesCompleted += OnWavesCompleted;
+            EventManager.Wave.onWavesCompleted += OnWavesCompleted;
         }
 
         private void OnDisable()
@@ -164,7 +186,7 @@ namespace BioTower
             EventManager.Units.onEnemyReachedDestination -= OnEnemyReachedDestination;
             EventManager.Game.onLevelStart -= OnLevelStart;
             EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
-            EventManager.Game.onWavesCompleted -= OnWavesCompleted;
+            EventManager.Wave.onWavesCompleted -= OnWavesCompleted;
         }
 
     }

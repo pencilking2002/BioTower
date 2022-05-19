@@ -12,14 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c11e21d6d6e2f4e9b4addd8d13c61e, type: 3}
   m_Name: Level_01
   m_EditorClassIdentifier: 
+  startingEnergy: 200
   waves:
   - enemyType: 1
-    waveIndex: 0
-    startDelay: 0
     isEndless: 1
-    numEnemiesPerWave: 2000
-    spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 3.2020845
-    lastSpawn: 3.316719
-    numSpawns: 1
+    numEnemiesPerWave: 10
+    startDelay: 5
+    waypointIndex: 0
+    spawnIntervalRange: {x: 2, y: 2.5}
+    enableMultipleSpawnsAtOnce: 0
+    maxNumSpawnsAtOnce: 0
+    timeStarted: 9.340093
+    lastSpawn: 55.88003
+    numSpawns: 19
+    lastSpawnIntervalRange: 2.4821599
+    allEnemiesDead: 1
+    numDead: 10

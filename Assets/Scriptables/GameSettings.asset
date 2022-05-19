@@ -16,22 +16,27 @@ MonoBehaviour:
   startingEnergy: 120
   spawnLightDropCost: 1
   multipleLightFragmentPickupRadius: 2
+  abaCombatCooldown: 2
   basicEnemyDamage: 2
   enemyPlayerBaseDamage: 3
   enemyUpgradedDamage: 4
   enemyUnitMaxHealth: 10
   snark2UnitCost: 3
+  abaWinChance: 40
+  snrk2WinChance: 0
+  enemyBombEnergy: 0.2
   randomHealChance: 0.1
   randomHealAmount: 2
   healTowerAmount: 2
   declineDamage: 1
+  towerConstructionDelay: 3
   defaultSettings:
     currLevel: 1
     lightFragmentValue: 5
     energy: 120
-    abaUnitDamage: 5
+    abaUnitDamage: 2
     abaUnitMaxSpeed_float: 500
-    abaUnitCost: 5
+    abaUnitCost: 3
     abaUnitMaxHealth: 10
     snrkUnitMaxHealth: 5
     snrk2UnitUnlocked: 0
@@ -41,13 +46,13 @@ MonoBehaviour:
     enableTowerHealthDecline: 0
     playerTowerMaxhealth: 20
     enablePlayerTowerHealing: 0
-    abaTowerCost: 10
+    abaTowerCost: 30
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2600
     enableAbaTowerRandomHeal: 0
     ppc2TowerUnlocked: 0
-    ppc2TowerDamage: 2
-    ppc2TowerCost: 40
+    ppc2TowerDamage: 5
+    ppc2TowerCost: 60
     ppc2MaxInfluenceRadius_float: 2400
     ppc2shootInterval_float: 2000
     ppc2ExplosionColliderScale_float: 1271
@@ -65,10 +70,10 @@ MonoBehaviour:
   upgradeSettings:
     currLevel: 3
     lightFragmentValue: 5
-    energy: 45
-    abaUnitDamage: 5
+    energy: 79
+    abaUnitDamage: 2
     abaUnitMaxSpeed_float: 500
-    abaUnitCost: 5
+    abaUnitCost: 3
     abaUnitMaxHealth: 10
     snrkUnitMaxHealth: 5
     snrk2UnitUnlocked: 0
@@ -78,15 +83,15 @@ MonoBehaviour:
     enableTowerHealthDecline: 1
     playerTowerMaxhealth: 20
     enablePlayerTowerHealing: 0
-    abaTowerCost: 10
+    abaTowerCost: 30
     abaUnitSpawnLimit: 3
     abaMaxInfluenceRadius_float: 2600
     enableAbaTowerRandomHeal: 0
     ppc2TowerUnlocked: 1
-    ppc2TowerDamage: 2
-    ppc2TowerCost: 40
+    ppc2TowerDamage: 5
+    ppc2TowerCost: 60
     ppc2MaxInfluenceRadius_float: 2400
-    ppc2shootInterval_float: 1000
+    ppc2shootInterval_float: 2000
     ppc2ExplosionColliderScale_float: 1271
     ppc2ExplosionSpriteScale_float: 622
     ppc2UnitSpawnLimit: 2

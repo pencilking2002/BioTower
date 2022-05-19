@@ -53,6 +53,11 @@ namespace BioTower.UI
                 tutInProgressText.text = $"Tut in progress: {TutorialCanvas.tutorialInProgress}";
                 placementStateText.text = $"placement state: " + Util.placementManager.GetState();
             }
+
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                Util.bombPanel.IncreaseBombEnergy();
+            }
         }
 
         public void SetFSXVolume()
@@ -69,7 +74,7 @@ namespace BioTower.UI
 
         public void SpawnEnemy()
         {
-            var enemy = Util.waveManager.SpawnEnemy(new Vector2(0.4f, 0.7f), Units.UnitType.BASIC_ENEMY);
+            var enemy = Util.waveManager.SpawnEnemy(Units.UnitType.BASIC_ENEMY);
             enemy.transform.position = GameObject.FindGameObjectWithTag(Constants.enemyTestSpawnSpot).transform.position;
         }
 

@@ -21,27 +21,30 @@ namespace BioTower.UI
             panel.gameObject.SetActive(false);
         }
 
-        private void OnGameOver(bool isWin)
+        private void OnGameOver(bool isWin, float delay)
         {
-            panel.gameObject.SetActive(true);
-            background.gameObject.SetActive(true);
-            gameOverText.text = isWin ? "YOU WIN!" : "GAME OVER";
-
-            upgradeButton.gameObject.SetActive(isWin);
-            restartButton.gameObject.SetActive(!isWin);
-
-            if (isWin)
+            LeanTween.delayedCall(gameObject, delay, () =>
             {
-                Display(goofyplantsWin);
-                Hide(goofyplantsLose);
-            }
-            else
-            {
-                Display(goofyplantsLose);
-                Hide(goofyplantsWin);
-            }
+                panel.gameObject.SetActive(true);
+                background.gameObject.SetActive(true);
+                gameOverText.text = isWin ? "YOU WIN!" : "GAME OVER";
 
-            upgradeButtonGlow.StartGlowing();
+                upgradeButton.gameObject.SetActive(isWin);
+                restartButton.gameObject.SetActive(!isWin);
+
+                if (isWin)
+                {
+                    Display(goofyplantsWin);
+                    Hide(goofyplantsLose);
+                }
+                else
+                {
+                    Display(goofyplantsLose);
+                    Hide(goofyplantsWin);
+                }
+
+                upgradeButtonGlow.StartGlowing();
+            }).setIgnoreTimeScale(true);
         }
 
         public void OnPressRestart()

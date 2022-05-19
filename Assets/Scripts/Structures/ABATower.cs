@@ -55,53 +55,8 @@ namespace BioTower.Structures
             if (influenceVisuals != null)
                 influenceVisuals.transform.eulerAngles += new Vector3(0, 0, discRotateSpeed * Time.deltaTime);
 
-            towerAlert.OnUpdate(this);
-            //ChaseEnemies();
+            towerAlert.OnUpdate();
         }
-
-        // private void ChaseEnemies()
-        // {
-        //     for (int i = 0; i < units.Count; i++)
-        //     {
-        //         AbaUnit abaUnit = (AbaUnit)units[i];
-        //         EnemyUnit enemy = (EnemyUnit)abaUnit.unitFoe;
-
-        //         if (abaUnit.IsChasingState())
-        //         {
-        //             if (enemy.IsCombatState())
-        //             {
-        //                 abaUnit.SetRoamingState();
-        //                 abaUnit.unitFoe = null;
-        //             }
-        //             else if (enemy.IsChasingState())
-        //             {
-        //                 if (enemy.unitFoe == this)
-        //                 {
-        //                     var enemyPos = enemy.transform.position;
-        //                     var abaPos = abaUnit.transform.position;
-        //                     abaUnit.SetDestination(enemyPos);
-        //                     enemy.SetDestination(abaPos);
-        //                 }
-        //                 // else
-        //                 // {
-        //                 //     abaUnit.SetRoamingState();
-        //                 // }
-        //             }
-        //         }
-        //         else if (abaUnit.IsRoamingState())
-        //         {
-        //             var roamingEnemy = FindClosestRoamingEnemy(abaUnit, out bool isFound);
-
-        //             if (isFound)
-        //             {
-        //                 if (!roamingEnemy.IsChasingState())
-        //                     roamingEnemy.SetChasingState(abaUnit);
-
-        //                 abaUnit.SetChasingState(roamingEnemy);
-        //             }
-        //         }
-        //     }
-        // }
 
         public EnemyUnit FindClosestRoamingEnemy(Unit abaUnit, out bool isFound)
         {
@@ -191,6 +146,36 @@ namespace BioTower.Structures
             Vector2 direction = (point - center).normalized;
             point = center + direction * maxInfluenceAreaCollider.radius;
             return point;
+        }
+
+        public override void OnStructureSelected(Structure structure)
+        {
+            if (TutorialCanvas.tutorialInProgress)
+            {
+                if (Util.tutCanvas.tutState != TutState.WAITING_BUTTON_TAP)
+                {
+                    Debug.Log("Tut state: " + Util.tutCanvas.tutState);
+                    return;
+                }
+            }
+
+            base.OnStructureSelected(structure);
+            if (structure == this)
+            {
+                Util.bootController.towerMenu.OnPressSpawnUnitButton();
+            }
+        }
+
+        public override void OnHighlightItem(HighlightedItem item)
+        {
+            if (Util.tutCanvas.skipTutorials)
+                return;
+
+            if (LevelInfo.current.IsFirstLevel() && item == HighlightedItem.ABA_UNIT_BTN)
+            {
+                var worldPos = sr.transform.position;
+                Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0, 250));
+            }
         }
 
         private void OnDrawGizmosSelected()

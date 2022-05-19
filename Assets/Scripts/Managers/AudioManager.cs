@@ -90,10 +90,6 @@ namespace BioTower
         {
             switch (gameState)
             {
-                // case GameState.GAME:
-                //     if (!LevelInfo.current.HasTutorials())
-                //         PlayMusicCrossFade(data.levelTrack_01, 0.5f);
-                //     break;
                 case GameState.GAME_OVER_LOSE:
                     PlayMusic(data.gameOverLose, true);
                     break;
@@ -126,6 +122,22 @@ namespace BioTower
         private void OnSnrk2UnitReachedBase(Snrk2Unit unit)
         {
             PlaySound(data.crystalDeposited);
+        }
+
+        // WAVES ---------------------------------------------
+
+        private void OnWaveStateInit(WaveMode waveMode)
+        {
+            if (waveMode == WaveMode.IN_PROGRESS)
+                PlaySound(data.waveStarted);
+            else if (waveMode == WaveMode.ENDED)
+                PlaySound(data.waveDefeated);
+        }
+
+        private void OnWaveCountdownTick(int num)
+        {
+            if (num <= 3)
+                PlaySound(data.tick);
         }
 
         // TUTORIAL ---------------------------------------------
@@ -183,7 +195,7 @@ namespace BioTower
             PlaySound(data.enemyBaseAttacked);
         }
 
-        private void OnStructureCreated(Structure tower)
+        private void OnStructureCreated(Structure tower, bool doSquishyAnim)
         {
             if (tower.structureType != StructureType.DNA_BASE)
                 PlaySound(data.towerPlaced);
@@ -260,6 +272,9 @@ namespace BioTower
             EventManager.Game.onSpendCurrency += OnSpendCurrency;
             EventManager.Game.onSnrk2UnitReachedBase += OnSnrk2UnitReachedBase;
 
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
+            EventManager.Wave.onWaveCountdownTick += OnWaveCountdownTick;
+
             EventManager.Tutorials.onTutChatStart += OnTutChatStart;
             EventManager.Tutorials.onTutTextPopUp += OnTutTextPopUp;
             EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
@@ -291,6 +306,9 @@ namespace BioTower
             EventManager.Game.onGameStateInit -= OnGameStateInit;
             EventManager.Game.onSpendCurrency -= OnSpendCurrency;
             EventManager.Game.onSnrk2UnitReachedBase -= OnSnrk2UnitReachedBase;
+
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Wave.onWaveCountdownTick -= OnWaveCountdownTick;
 
             EventManager.Tutorials.onTutChatStart -= OnTutChatStart;
             EventManager.Tutorials.onTutTextPopUp -= OnTutTextPopUp;

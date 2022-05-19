@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using BioTower.SaveData;
 using BioTower.Structures;
 using UnityEngine.SceneManagement;
+using BioTower.Units;
 
 namespace BioTower
 {
@@ -25,12 +26,20 @@ namespace BioTower
         public static TapManager tapManager => GameManager.Instance.tapManager;
         public static GameStates gameStates => GameManager.Instance.gameStates;
         public static WaveManager waveManager => GameManager.Instance.waveManager;
+        public static ColorManager colorManager => GameManager.Instance.colorManager;
         public static StructureManager structureManager => GameManager.Instance.structureManager;
-        public static int structureSocketLayer = 12;
+        public static CooldownManager cooldownManager => GameManager.Instance.cooldownManager;
+        public static BombPanel bombPanel => GameManager.Instance.bootController.bombPanel;
+        public static UnitManager unitManager => GameManager.Instance.unitManager;
         public static TutorialCanvas tutCanvas;
         public static ObjectShake objectShake => GameManager.Instance.objectShake;
-        public LayerMask enemyLayerMask;
         public Color hurtColor;
+
+        // Layers -----------------------------------------------
+        public static int structureSocketLayer = 12;
+        public static int enemyLayer = 10;
+        public LayerMask obstaclesLayerMask;
+        public LayerMask enemyLayerMask;
 
         public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)
         {

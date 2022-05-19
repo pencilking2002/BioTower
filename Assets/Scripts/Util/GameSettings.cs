@@ -18,11 +18,15 @@ namespace BioTower
 
 
         [Header("Units")]
+        public float abaCombatCooldown = 0.5f;
         public int basicEnemyDamage = 5;        // N/A
         public int enemyPlayerBaseDamage = 3;   // How much do enemies damage the player base
         public int enemyUpgradedDamage = 4;
         public int enemyUnitMaxHealth = 10;     // N/A
         public int snark2UnitCost = 3;          // N/A
+        [Range(0, 100)] public float abaWinChance = 50;
+        [Range(0, 100)] public float snrk2WinChance = 0;
+        [Range(0, 1)] public float enemyBombEnergy = 0.2f;
 
 
         [Header("Towers")]
@@ -30,7 +34,7 @@ namespace BioTower
         public int randomHealAmount = 2;
         public int healTowerAmount = 2;
         public int declineDamage = 1;
-
+        public float towerConstructionDelay = 3;
 
         [Space(10)]
         public Params defaultSettings;

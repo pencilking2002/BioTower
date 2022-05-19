@@ -1,11 +1,15 @@
 using UnityEngine;
 using BioTower.Level;
 using BioTower.Structures;
+using Sirenix.OdinInspector;
 
 namespace BioTower.Units
 {
     public class EnemyUnit : Unit
     {
+        [MinMaxSlider(0, 5, true)]
+        public Vector2 minMaxSpeed = new Vector2(0.4f, 0.7f);
+
         [Header("References")]
         protected Collider2D triggerCollider;
         [SerializeField] protected SpriteRenderer muscleIcon;
@@ -15,6 +19,8 @@ namespace BioTower.Units
         protected Waypoint currWaypoint;
         protected Waypoint nextWaypoint;
         protected Transform nextDestination;
+        [HideInInspector] public int waveIndex;
+        [HideInInspector] public bool baseReached;
 
 
         protected void Init()
@@ -67,6 +73,7 @@ namespace BioTower.Units
             }
             else if (currWaypoint.isEndpoint)
             {
+                baseReached = true;
                 EventManager.Units.onEnemyBaseReached?.Invoke(this);
                 KillUnit();
             }
@@ -127,6 +134,7 @@ namespace BioTower.Units
             if (currentAnim == null)
                 currentAnim = anim;
 
+            SetSpeed(this.minMaxSpeed);
             currentAnim.SetBool("Walk", true);
             currentAnim.SetBool("Attack", false);
             unitFoe = null;
@@ -180,7 +188,7 @@ namespace BioTower.Units
 
         public override bool TakeDamage(int amount)
         {
-            if (!isAlive)
+            if (!isAlive || !triggerCollider)
                 return false;
 
             if (base.TakeDamage(amount))
@@ -227,6 +235,7 @@ namespace BioTower.Units
             agent.stoppingDistance = 0.1f;
             agent.slowingDistance = 0.1f;
             base.SetChasingState(unit);
+            //Debug.Log("Set enemy chasing state. aba cooldown state: " + unit.isInCooldown);
         }
 
         public override void SetCombatState()

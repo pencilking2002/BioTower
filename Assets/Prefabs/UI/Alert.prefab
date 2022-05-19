@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f109774b521da8e43a91394559cb0934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 476463286593649643}
+  sr: {fileID: 0}
+  tower: {fileID: 0}
+  weakColor: {r: 0.6901961, g: 0.6901961, b: 0.6901961, a: 1}
 --- !u!95 &476463286593649643
 Animator:
   serializedVersion: 3
@@ -75,7 +77,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8942282353482659120}
   - component: {fileID: 422574958158595680}
-  - component: {fileID: 1326123198289267639}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -148,16 +149,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1326123198289267639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4183961813150794046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f109774b521da8e43a91394559cb0934, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}

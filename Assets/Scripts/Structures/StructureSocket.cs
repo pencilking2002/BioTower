@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
+using Sirenix.OdinInspector;
+using BioTower.UI;
 
 namespace BioTower
 {
@@ -9,13 +11,21 @@ namespace BioTower
     [SelectionBase]
     public class StructureSocket : MonoBehaviour
     {
-        [SerializeField] private bool hasStructure;
+        [ReadOnly][SerializeField] private bool isBuildingStructure;
+        [ReadOnly][SerializeField] private bool hasStructure;
         [SerializeField] private SpriteRenderer sr;
         [SerializeField] private Color glowColor;
         [SerializeField] private float glowAnimDuration = 0.5f;
         private Color defaultColor;
         private Vector3 initScale;
         private bool isAnimatingIn = true;
+
+
+        [Header("References")]
+        [SerializeField] private ProgressCanvas progressCanvas;
+        [SerializeField] private ParticleSystem buildingParticles;
+        [SerializeField] private SpriteRenderer sunRay;
+
 
         private void Start()
         {
@@ -46,10 +56,16 @@ namespace BioTower
             EventManager.Structures.onSocketStart?.Invoke(this);
         }
 
+        public void StartProgress(float duration)
+        {
+            progressCanvas.StartProgress(duration);
+        }
+
         public void OnTap()
         {
-            if (!hasStructure && !isAnimatingIn)
+            if (HasNone() && !isAnimatingIn)
             {
+                //Debug.Log("Tap. HasNone: " + HasNone());
                 Jiggle();
                 EventManager.Structures.onTapFreeStructureSocket?.Invoke(this);
             }
@@ -90,14 +106,26 @@ namespace BioTower
             });
         }
 
-        public void SetHasStructure(bool hasStructure)
-        {
-            this.hasStructure = hasStructure;
-        }
-
         public bool HasStructure()
         {
             return hasStructure;
+        }
+
+        public bool HasNone() { return !this.hasStructure; }
+
+        public void SetHasNone()
+        {
+            this.hasStructure = false;
+            this.isBuildingStructure = false;
+        }
+
+        public void SetHasStructure()
+        {
+            HideSunRay();
+            LeanTween.cancel(sr.gameObject);
+            this.hasStructure = true;
+            this.isBuildingStructure = false;
+            buildingParticles.Stop();
         }
 
         private void OnSetNonePlacementState()
@@ -106,6 +134,44 @@ namespace BioTower
             sr.color = defaultColor;
             Util.poolManager.DespawnAllitemHighlights();
         }
+
+        public void SetIsBuildingStructure()
+        {
+            ShowSunRay();
+            isBuildingStructure = true;
+            hasStructure = false;
+            buildingParticles.Play();
+            Util.poolManager.DespawnAllitemHighlights();
+            LeanTween.value(sr.gameObject, defaultColor, glowColor, 0.25f).setLoopPingPong(-1);
+        }
+
+        private void ShowSunRay()
+        {
+            sunRay.enabled = true;
+            var color = sunRay.color;
+            var clearColor = color;
+            clearColor.a = 0;
+            LeanTween.value(sunRay.gameObject, clearColor, color, 0.3f).setOnUpdate((Color color) =>
+            {
+                sunRay.color = color;
+            });
+        }
+
+        private void HideSunRay()
+        {
+            var color = sunRay.color;
+            var clearColor = color;
+            clearColor.a = 0;
+            LeanTween.value(sunRay.gameObject, color, clearColor, 0.5f).setOnUpdate((Color color) =>
+            {
+                sunRay.color = color;
+            }).setOnComplete(() =>
+            {
+                sunRay.enabled = false;
+            });
+        }
+
+        public bool IsBuildingStructure() { return this.isBuildingStructure; }
 
         private void OnHighlightItem(HighlightedItem item)
         {

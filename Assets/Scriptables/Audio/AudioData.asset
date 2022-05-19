@@ -18,6 +18,9 @@ MonoBehaviour:
   gameOverWin: {fileID: 8300000, guid: 1ba169fbe8ef44546a2728b59e7f7d36, type: 3}
   mainMenuTrack: {fileID: 8300000, guid: fd2efc4c9bccdaa459a5e5989bbd5402, type: 3}
   goofyPlantsTrack: {fileID: 8300000, guid: a015f11a0b8fbe14b8b974a4c759d640, type: 3}
+  waveStarted: {fileID: 8300000, guid: fef99503c73e9444f8b0f28013d037ec, type: 3}
+  tick: {fileID: 8300000, guid: 4eebc4da8cb04d04481a77c5679c60c3, type: 3}
+  waveDefeated: {fileID: 8300000, guid: e33d73fdca5baa8418b2ba11be9c7a01, type: 3}
   snrk2Spawned: {fileID: 8300000, guid: dfde925c8fc75bb40bfb4a205d631ae5, type: 3}
   enemyCrystalPickedUp: {fileID: 8300000, guid: 844682b347f46fb40b676dc9333d3b44,
     type: 3}

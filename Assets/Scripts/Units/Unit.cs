@@ -35,6 +35,7 @@ namespace BioTower.Units
         [HideInInspector] protected Animator anim;
         [HideInInspector] public SpriteRenderer sr;
         public bool isAlive;
+        public bool isInCooldown;
 
         public virtual void Awake()
         {
@@ -90,6 +91,9 @@ namespace BioTower.Units
         /// <returns>whether the unit is alive after taking damage</returns>
         public virtual bool TakeDamage(int amount)
         {
+            if (!sr)
+                return false;
+
             if (hasHealth)
             {
                 currHealth -= amount;

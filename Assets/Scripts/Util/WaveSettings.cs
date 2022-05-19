@@ -10,6 +10,7 @@ namespace BioTower
     [CreateAssetMenu(fileName = "WaveSettings", menuName = "WaveSettings")]
     public class WaveSettings : ScriptableObject
     {
+        public int startingEnergy = 100;
         public Wave[] waves;
     }
 
@@ -17,32 +18,49 @@ namespace BioTower
     [Serializable]
     public class Wave
     {
-        //public WaveMode state;
         public UnitType enemyType;
-        public int waveIndex;
-        public float startDelay;
         public bool isEndless;
         [HideIf("isEndless")] public int numEnemiesPerWave;
-        public int spawnInterval;
-        [MinMaxSlider(0, 1)]
-        public Vector2 minMaxSpeed = new Vector2(0.4f, 0.7f);
+        public float startDelay;
+        public int waypointIndex;
+        public Vector2 spawnIntervalRange = new Vector2(1, 1);
+        [BoxGroup("Multiple Spawns")] public bool enableMultipleSpawnsAtOnce;
+        [BoxGroup("Multiple Spawns")][ShowIf("enableMultipleSpawnsAtOnce")] public int maxNumSpawnsAtOnce;
 
         [HideInInspector] public float timeStarted;
         [HideInInspector] public float lastSpawn;
         [HideInInspector] public int numSpawns;
+        [HideInInspector] public float lastSpawnIntervalRange;
+        [HideInInspector] public bool allEnemiesDead;
+        [HideInInspector] public int numDead;
 
-        // Not supported in naughty attributes yet
-        public float waveDuration => (float)(startDelay + (numEnemiesPerWave * spawnInterval));
+        public float CreateSpawnIntervalFromRange()
+        {
+            return UnityEngine.Random.Range(spawnIntervalRange.x, spawnIntervalRange.y);
+        }
+
+        public void IncrementNumDead()
+        {
+            ++this.numDead;
+            if (this.numDead >= this.numEnemiesPerWave)
+                allEnemiesDead = true;
+        }
 
         public void Init(int waveIndex)
         {
-            //state = WaveMode.NOT_STARTED;
             lastSpawn = 0;
             timeStarted = 0;
             numSpawns = 0;
-            this.waveIndex = waveIndex;
+            numDead = 0;
+            allEnemiesDead = false;
         }
 
+        public bool IsFinalWave()
+        {
+            int numWaves = Util.waveManager.waveSettings.waves.Length;
+            int currWaveIndex = Util.waveManager.GetWaveIndex(this);
+            return currWaveIndex == numWaves - 1;
+        }
 
     }
 }

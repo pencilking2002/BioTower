@@ -17,7 +17,7 @@ namespace BioTower
         [Header("ABA Units")]
         [TabGroup("Units")] public int abaUnitDamage = 5;           // Done
         [TabGroup("Units")] public int abaUnitMaxSpeed_float = 500; // Done
-        [TabGroup("Units")] public int abaUnitCost = 5;             // Done
+        [TabGroup("Units")] public int abaUnitCost = 3;             // Done
         [TabGroup("Units")] public int abaUnitMaxHealth = 10;       // Done
 
 
@@ -36,7 +36,7 @@ namespace BioTower
 
 
         [Header("ABA Tower")]
-        [TabGroup("Towers")][Range(0, 100)] public int abaTowerCost = 10;       // Done
+        [TabGroup("Towers")][Range(0, 100)] public int abaTowerCost = 30;       // Done
         [TabGroup("Towers")] public int abaUnitSpawnLimit = 3;                 // Done
         [TabGroup("Towers")] public int abaMaxInfluenceRadius_float = 2600;    // Done
         [TabGroup("Towers")] public bool enableAbaTowerRandomHeal = false;     // Done
@@ -45,7 +45,7 @@ namespace BioTower
         [Header("PPC2 Tower")]
         [TabGroup("Towers")] public bool ppc2TowerUnlocked = false;             // Done
         [TabGroup("Towers")] public int ppc2TowerDamage = 5;         // Done
-        [TabGroup("Towers")] public int ppc2TowerCost = 40;                     // Done
+        [TabGroup("Towers")][Range(0, 100)] public int ppc2TowerCost = 60;                     // Done
         [TabGroup("Towers")] public int ppc2MaxInfluenceRadius_float = 2400;    // Done
         [TabGroup("Towers")] public int ppc2shootInterval_float = 1000;             // Done
         [TabGroup("Towers")] public int ppc2ExplosionColliderScale_float = 1271;   // Done

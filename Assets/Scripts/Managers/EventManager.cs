@@ -6,6 +6,7 @@ using BioTower.Structures;
 using BioTower.Units;
 using BioTower.SaveData;
 using UnityEngine.UI;
+using BioTower.Level;
 
 namespace BioTower
 {
@@ -13,16 +14,14 @@ namespace BioTower
     {
         public class Game
         {
-            public static Action<bool> onGameOver;
+            public static Action<bool, float> onGameOver;       // bool -> win/lose, float -> delay 
             public static Action onLevelLoaded_01;  // For registering the player base
             public static Action onLevelLoaded_02;  // for registering enemies
-            public static Action onWavesCompleted;
 
             public static Action<int, int> onSpendCurrency; // num spent, curr total
             public static Action<int, int> onGainCurrency;  // num gained, curr total
                                                             //public static Action onTogglePaths; 
             public static Action<GameState> onGameStateInit;
-            public static Action<WaveMode> onWaveStateInit;
             public static Action onLightFragmentTapped;
             public static Action onCrystalTapped;
             public static Action<EnemyCrystal> onCrystalCreated;
@@ -33,13 +32,23 @@ namespace BioTower
             public static Action<LevelType> onLevelStart;
         }
 
+        public class Wave
+        {
+            public static Action<WaveMode> onWaveStateInit;
+            public static Action<int> onWaveCountdownTick;
+            public static Action<Waypoint> onDisplayWaveWarning;
+            public static Action<Waypoint> onStopWaveWarning;
+            public static Action onWavesCompleted;
+        }
+
         public class Structures
         {
             public static Action onBaseTakeDamage;
             public static Action onBaseDestroyed;
             public static Action<StructureType> onStartPlacementState;
             public static Action onSetNonePlacementState;
-            public static Action<Structure> onStructureCreated;
+            public static Action<Structure, bool> onStructureCreated;
+            public static Action<Structure> onStructureActivated;       // Used for activating structures that exist on the map at the beginning
             public static Action<Structure> onStructureDestroyed;
             public static Action<StructureType, float> onStructureCooldownStarted;
             public static Action<Structure> onStructureSelected;
@@ -52,6 +61,7 @@ namespace BioTower
             public static Action<StructureSocket> onSocketStart;
             public static Action<StructureSocket> onSocketPop;
             public static Action<StructureSocket> onTapFreeStructureSocket;
+            public static Action onPlaceBomb;
 
         }
 
@@ -73,7 +83,7 @@ namespace BioTower
             public static Action<StructureType> onPressTowerButton;
             public static Action onPressUpgradeButton;
             public static Action onTapLevelSelectButton;
-            public static Action<UnitType> onTapSpawnUnitButton;
+            //public static Action<UnitType> onTapSpawnUnitButton;
             public static Action<bool> onTapButton;     // Is button press valid
             public static Action<MitoTower> onTapLightDropButton;
             public static Action<Structure> onSpawnLightDropCooldownComplete;

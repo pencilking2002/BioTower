@@ -165,6 +165,8 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   sr: {fileID: 2780707826441001857}
   isAlive: 0
+  isInCooldown: 0
+  minMaxSpeed: {x: 1, y: 1.2}
   muscleIcon: {fileID: 5805220977226339858}
 --- !u!114 &663975515
 MonoBehaviour:

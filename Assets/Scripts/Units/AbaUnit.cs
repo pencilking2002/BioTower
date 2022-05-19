@@ -2,15 +2,13 @@
 
 namespace BioTower.Units
 {
-
-
-
     [SelectionBase]
     public class AbaUnit : Unit
     {
 
         [Header("References")]
         public Rigidbody rb;
+        public float cooldownStartTime;
 
         public override void Awake()
         {
@@ -72,6 +70,7 @@ namespace BioTower.Units
             base.SetCombatState();
             StopMoving();
             anim.SetBool("Attack", true);
+            //Debug.Log("set aba combat state. is in cooldown: " + isInCooldown);
         }
 
         public override void SetDestroyedState()
@@ -92,6 +91,20 @@ namespace BioTower.Units
                 explosion.Play();
 
             Destroy(gameObject);
+        }
+
+        public void StartCooldown()
+        {
+            if (this == null)
+                return;
+
+            cooldownStartTime = Time.time;
+            isInCooldown = true;
+
+            LeanTween.delayedCall(gameObject, Util.gameSettings.abaCombatCooldown, () =>
+            {
+                isInCooldown = false;
+            });
         }
 
         public override void SetDestination(Vector3 newDestination)

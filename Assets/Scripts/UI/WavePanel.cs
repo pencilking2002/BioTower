@@ -28,16 +28,13 @@ namespace BioTower.UI
             panel.alpha = 1;
 
             var seq = LeanTween.sequence();
-            //seq.append(LeanTween.alphaCanvas(panel, 1, 1));
             panel.transform.localScale = Vector3.zero;
             seq.append(LeanTween.scale(panel.gameObject, Vector3.one, 0.25f).setEaseOutQuart());
             seq.append(displayDuration);
             seq.append(LeanTween.alphaCanvas(panel, 0, 0.5f));
 
-            //seq.append(LeanTween.alphaCanvas(panel, 0, 1.0f));
             seq.append(() =>
             {
-
                 if (!GameManager.Instance.gameStates.IsGameState())
                     return;
 

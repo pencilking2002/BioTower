@@ -116,9 +116,14 @@ namespace BioTower
 
             else if (waveState == WaveMode.IN_PROGRESS)
             {
-                string text = $"Wave <color=#{htmlColor}>{Util.waveManager.currWaveIndex + 1}/{Util.waveManager.waveSettings.waves.Length}</color>";
+                string text = "GO!";
                 missionText.text = text;
-                DisplayPanel(text, 1.5f);
+
+                LeanTween.delayedCall(gameObject, 1, () =>
+                {
+                    text = $"Wave <color=#{htmlColor}>{Util.waveManager.currWaveIndex + 1}/{Util.waveManager.waveSettings.waves.Length}</color>";
+                    missionText.text = text;
+                });
             }
 
         }

@@ -48,7 +48,8 @@ MonoBehaviour:
   ppc2TowerDataArr:
   - upgradeType: 7
     buttonText: PPC2 Tower Unlocked!
-    descrptionText: Shoots projectiles at nearby enemies
+    descrptionText: Shoots projectiles at nearby enemies. Stronger against slower
+      enemies
     sprite: {fileID: 21300000, guid: 12ca3f1e700eb474b822f77ec863b451, type: 3}
   - upgradeType: 8
     buttonText: AOE

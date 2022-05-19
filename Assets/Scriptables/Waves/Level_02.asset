@@ -15,29 +15,44 @@ MonoBehaviour:
   startingEnergy: 60
   waves:
   - enemyType: 1
-    waveIndex: 0
+    isEndless: 0
+    numEnemiesPerWave: 6
     startDelay: 2
-    isEndless: 0
-    numEnemiesPerWave: 6
-    spawnInterval: 2
-    timeStarted: 2.2672114
-    lastSpawn: 0
-    numSpawns: 0
+    waypointIndex: 0
+    spawnIntervalRange: {x: 1, y: 1}
+    enableMultipleSpawnsAtOnce: 0
+    maxNumSpawnsAtOnce: 0
+    timeStarted: 3.9579268
+    lastSpawn: 10.976295
+    numSpawns: 6
+    lastSpawnIntervalRange: 1
+    allEnemiesDead: 1
+    numDead: 6
   - enemyType: 1
-    waveIndex: 1
-    startDelay: 4
     isEndless: 0
-    numEnemiesPerWave: 6
-    spawnInterval: 2
-    timeStarted: 0
-    lastSpawn: 0
-    numSpawns: 0
+    numEnemiesPerWave: 4
+    startDelay: 4
+    waypointIndex: 0
+    spawnIntervalRange: {x: 1, y: 1}
+    enableMultipleSpawnsAtOnce: 0
+    maxNumSpawnsAtOnce: 0
+    timeStarted: 31.326576
+    lastSpawn: 38.347214
+    numSpawns: 4
+    lastSpawnIntervalRange: 1
+    allEnemiesDead: 1
+    numDead: 4
   - enemyType: 1
-    waveIndex: 2
-    startDelay: 4
     isEndless: 0
     numEnemiesPerWave: 6
-    spawnInterval: 1.5
-    timeStarted: 0
-    lastSpawn: 0
-    numSpawns: 0
+    startDelay: 4
+    waypointIndex: 0
+    spawnIntervalRange: {x: 1, y: 1}
+    enableMultipleSpawnsAtOnce: 0
+    maxNumSpawnsAtOnce: 0
+    timeStarted: 54.724197
+    lastSpawn: 63.74831
+    numSpawns: 6
+    lastSpawnIntervalRange: 1
+    allEnemiesDead: 1
+    numDead: 6

@@ -41,6 +41,7 @@ namespace BioTower.Structures
         public TowerAlert towerAlert;
         private Vector3 initSpriteScale;
         private Vector3 initLocalSpritePos;
+        //[HideInInspector] public bool isInteractable = true;
 
         public virtual void Awake()
         {
@@ -337,18 +338,27 @@ namespace BioTower.Structures
                 DeselectStructure();
         }
 
+        public virtual void OnHighlightItem(HighlightedItem item)
+        {
+
+        }
+
         public virtual void OnEnable()
         {
             EventManager.UI.onPressTowerDestroyedBtn += OnPressDestroyTowerBtn;
             EventManager.Structures.onStructureSelected += OnStructureSelected;
             EventManager.Structures.onStructureCreated += OnStructureCreated;
+            EventManager.Tutorials.onHighlightItem += OnHighlightItem;
+
         }
 
         public virtual void OnDisable()
         {
-            EventManager.UI.onPressTowerDestroyedBtn = OnPressDestroyTowerBtn;
+            EventManager.UI.onPressTowerDestroyedBtn -= OnPressDestroyTowerBtn;
             EventManager.Structures.onStructureSelected -= OnStructureSelected;
             EventManager.Structures.onStructureCreated -= OnStructureCreated;
+            EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
+
         }
 
         private void OnDestroy() { isAlive = false; }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c11e21d6d6e2f4e9b4addd8d13c61e, type: 3}
   m_Name: Level_02
   m_EditorClassIdentifier: 
-  startingEnergy: 60
+  startingEnergy: 40
   waves:
   - enemyType: 1
     isEndless: 0
@@ -22,12 +22,12 @@ MonoBehaviour:
     spawnIntervalRange: {x: 1, y: 1}
     enableMultipleSpawnsAtOnce: 0
     maxNumSpawnsAtOnce: 0
-    timeStarted: 6.878148
-    lastSpawn: 12.88568
-    numSpawns: 3
+    timeStarted: 9.564642
+    lastSpawn: 18.580929
+    numSpawns: 6
     lastSpawnIntervalRange: 1
-    allEnemiesDead: 0
-    numDead: 0
+    allEnemiesDead: 1
+    numDead: 6
   - enemyType: 1
     isEndless: 0
     numEnemiesPerWave: 4
@@ -36,12 +36,12 @@ MonoBehaviour:
     spawnIntervalRange: {x: 1, y: 1}
     enableMultipleSpawnsAtOnce: 0
     maxNumSpawnsAtOnce: 0
-    timeStarted: 0
-    lastSpawn: 0
-    numSpawns: 0
+    timeStarted: 34.22348
+    lastSpawn: 41.238663
+    numSpawns: 4
     lastSpawnIntervalRange: 1
-    allEnemiesDead: 0
-    numDead: 0
+    allEnemiesDead: 1
+    numDead: 4
   - enemyType: 1
     isEndless: 0
     numEnemiesPerWave: 6
@@ -50,9 +50,9 @@ MonoBehaviour:
     spawnIntervalRange: {x: 1, y: 1}
     enableMultipleSpawnsAtOnce: 0
     maxNumSpawnsAtOnce: 0
-    timeStarted: 0
-    lastSpawn: 0
-    numSpawns: 0
+    timeStarted: 64.646286
+    lastSpawn: 73.66356
+    numSpawns: 6
     lastSpawnIntervalRange: 1
-    allEnemiesDead: 0
-    numDead: 0
+    allEnemiesDead: 1
+    numDead: 6

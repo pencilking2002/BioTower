@@ -16,8 +16,8 @@ namespace BioTower
         [SerializeField] private TextMeshProUGUI healthText;
         //[SerializeField] private Button healTowerButton;
         //[SerializeField] private Button healTowerFullWidthButton;
-        [SerializeField] private Button spawnUnitButton;
-        [SerializeField] private Button spawnUnitFullWidth;
+        // [SerializeField] private Button spawnUnitButton;
+        // [SerializeField] private Button spawnUnitFullWidth;
         [SerializeField] private Button destroyTowerButton;
         [SerializeField] private Button destroyFullWidthButton;
         [SerializeField] private Button spawnLightParticleButton;
@@ -57,8 +57,8 @@ namespace BioTower
         {
             //SetPrice(healTowerButton);
             //SetPrice(healTowerFullWidthButton);
-            SetPrice(spawnUnitButton);
-            SetPrice(spawnUnitFullWidth);
+            // SetPrice(spawnUnitButton);
+            // SetPrice(spawnUnitFullWidth);
             SetPrice(spawnLightParticleButton);
         }
 
@@ -128,24 +128,23 @@ namespace BioTower
             Text text = button.transform.Find("PriceText").GetComponent<Text>();
             // if (button == healTowerButton || button == healTowerFullWidthButton)
             //     text.text = Util.gameSettings.upgradeSettings.healTowerCost.ToString();
-            if (button == spawnUnitButton || button == spawnUnitFullWidth)
-                text.text = Util.gameSettings.upgradeSettings.abaUnitCost.ToString();
-            else if (button == spawnLightParticleButton)
+            // if (button == spawnUnitButton || button == spawnUnitFullWidth)
+            //     text.text = Util.gameSettings.upgradeSettings.abaUnitCost.ToString();
+            if (button == spawnLightParticleButton)
                 text.text = Util.gameSettings.spawnLightDropCost.ToString();
         }
 
         public void OnPressSpawnUnitButton()
         {
-
-            if (TutorialCanvas.tutorialInProgress)
-            {
-                if (Util.tutCanvas.tutState != TutState.WAITING_BUTTON_TAP)
-                {
-                    var rt = spawnUnitFullWidth.GetComponent<RectTransform>();
-                    Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
-                    return;
-                }
-            }
+            // if (TutorialCanvas.tutorialInProgress)
+            // {
+            //     if (Util.tutCanvas.tutState != TutState.WAITING_BUTTON_TAP)
+            //     {
+            //         // var rt = spawnUnitFullWidth.GetComponent<RectTransform>();
+            //         // Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
+            //         return;
+            //     }
+            // }
 
             var selectedStructure = GameManager.Instance.tapManager.selectedStructure;
 
@@ -162,24 +161,24 @@ namespace BioTower
                         GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
 
                         // Inform user that you can't spawn any more aba units on this tower
-                        if (!abaTower.IsBelowSpawnLimit())
-                        {
-                            SetButtonMaxText(spawnUnitButton);
-                        }
-                        else
-                        {
-                            if (LevelInfo.current.IsFirstLevel())
-                                Util.HideGlowUI(spawnUnitFullWidth.transform);
-                        }
+                        // if (!abaTower.IsBelowSpawnLimit())
+                        // {
+                        //     SetButtonMaxText(spawnUnitButton);
+                        // }
+                        // else
+                        // {
+                        //     if (LevelInfo.current.IsFirstLevel())
+                        //         Util.HideGlowUI(spawnUnitFullWidth.transform);
+                        // }
 
-                        EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
-                        EventManager.UI.onTapButton?.Invoke(true);
+                        // EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
+                        // EventManager.UI.onTapButton?.Invoke(true);
                     }
                 }
                 else
                 {
-                    var rt = spawnUnitButton.GetComponent<RectTransform>();
-                    Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
+                    //var rt = spawnUnitButton.GetComponent<RectTransform>();
+                    //Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
                     var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
                     GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
                 }
@@ -195,13 +194,13 @@ namespace BioTower
                     {
                         GameManager.Instance.econManager.BuyUnit(unitType);
                         GameManager.Instance.tapManager.selectedStructure.SpawnUnits(1);
-                        EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
-                        EventManager.UI.onTapButton?.Invoke(true);
+                        //EventManager.UI.onTapSpawnUnitButton?.Invoke(unitType);
+                        //EventManager.UI.onTapButton?.Invoke(true);
                     }
                     else
                     {
-                        var rt = spawnUnitButton.GetComponent<RectTransform>();
-                        Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
+                        //var rt = spawnUnitButton.GetComponent<RectTransform>();
+                        //Util.HandleInvalidButtonPress(rt, Util.ButtonColorMode.DEFAULT);
                         var currencyContainer = GameManager.Instance.bootController.gameplayUI.currencyContainer;
                         GameManager.Instance.objectShake.ShakeHorizontal(currencyContainer, 0.15f, 5.0f);
                     }
@@ -264,27 +263,27 @@ namespace BioTower
 
             bool displayLightDropButton = structure.structureType == StructureType.MITOCHONDRIA;
 
-            if (!LevelInfo.current.IsFirstLevel() && !Util.tutCanvas.hasTutorials)
-                spawnUnitButton.gameObject.SetActive(displaySpawnUnitButton);
+            // if (!LevelInfo.current.IsFirstLevel() && !Util.tutCanvas.hasTutorials)
+            //     spawnUnitButton.gameObject.SetActive(displaySpawnUnitButton);
 
-            var spawnUnitText = spawnUnitButton.transform.Find("Text").GetComponent<Text>();
+            //var spawnUnitText = spawnUnitButton.transform.Find("Text").GetComponent<Text>();
 
             if (structure.IsAbaTower())
             {
                 //spawnUnitText.text = "ABA\nUnit";
-                var abaTower = (ABATower)structure;
-                if (abaTower.IsBelowSpawnLimit())
-                    SetButtonTextDefault(spawnUnitButton, "ABA\nUnit");
-                else
-                    SetButtonMaxText(spawnUnitButton);
+                // var abaTower = (ABATower)structure;
+                // if (abaTower.IsBelowSpawnLimit())
+                //     SetButtonTextDefault(spawnUnitButton, "ABA\nUnit");
+                // else
+                //     SetButtonMaxText(spawnUnitButton);
             }
             else if (structure.IsPPC2Tower())
             {
-                var ppc2Tower = (PPC2Tower)structure;
-                if (ppc2Tower.IsBelowSpawnLimit())
-                    SetButtonTextDefault(spawnUnitButton, "SNRK2\nUnit");
-                else
-                    SetButtonMaxText(spawnUnitButton);
+                // var ppc2Tower = (PPC2Tower)structure;
+                // if (ppc2Tower.IsBelowSpawnLimit())
+                //     SetButtonTextDefault(spawnUnitButton, "SNRK2\nUnit");
+                // else
+                //     SetButtonMaxText(spawnUnitButton);
             }
             else if (structure.IsMitoTower())
             {
@@ -301,7 +300,7 @@ namespace BioTower
             destroyTowerButton.gameObject.SetActive((displaySpawnUnitButton || displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
             destroyFullWidthButton.gameObject.SetActive((!displaySpawnUnitButton && !displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
 
-            spawnUnitFullWidth.gameObject.SetActive(LevelInfo.current.IsFirstLevel());
+            //spawnUnitFullWidth.gameObject.SetActive(LevelInfo.current.IsFirstLevel());
             UpdateTowerHealthBar(structure);
             towerIcon.sprite = iconMap[structure.structureType];
         }
@@ -365,21 +364,21 @@ namespace BioTower
 
         private void OnUnitDestroyed(Unit unit)
         {
-            if (!spawnUnitButton.gameObject.activeInHierarchy)
-                return;
+            // if (!spawnUnitButton.gameObject.activeInHierarchy)
+            //     return;
 
-            var selectedStructure = GameManager.Instance.tapManager.selectedStructure;
-            if (unit.tower == selectedStructure)
-            {
-                if (selectedStructure.IsAbaTower())
-                {
-                    SetButtonTextDefault(spawnUnitButton, "ABA\nUnit");
-                }
-                else if (selectedStructure.IsPPC2Tower())
-                {
-                    SetButtonTextDefault(spawnUnitButton, "SNRK2\nUnit");
-                }
-            }
+            // var selectedStructure = GameManager.Instance.tapManager.selectedStructure;
+            // if (unit.tower == selectedStructure)
+            // {
+            //     if (selectedStructure.IsAbaTower())
+            //     {
+            //         SetButtonTextDefault(spawnUnitButton, "ABA\nUnit");
+            //     }
+            //     else if (selectedStructure.IsPPC2Tower())
+            //     {
+            //         SetButtonTextDefault(spawnUnitButton, "SNRK2\nUnit");
+            //     }
+            // }
         }
 
         private void OnHighlightItem(HighlightedItem item)
@@ -389,13 +388,9 @@ namespace BioTower
 
             if (LevelInfo.current.IsFirstLevel() && item == HighlightedItem.ABA_UNIT_BTN)
             {
-                var worldPos = Camera.main.ScreenToWorldPoint(spawnUnitFullWidth.transform.position);
-                Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0, 350));
-                Util.DisplayGlowUI(spawnUnitFullWidth.transform);
-            }
-            else
-            {
-
+                // var worldPos = Camera.main.ScreenToWorldPoint(spawnUnitFullWidth.transform.position);
+                // Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0, 350));
+                // Util.DisplayGlowUI(spawnUnitFullWidth.transform);
             }
         }
 
@@ -420,8 +415,8 @@ namespace BioTower
                 // If its the tutorial right after the unit spawn tut
                 if (Util.tutCanvas.currTutorialIndex >= 6)
                 {
-                    spawnUnitFullWidth.interactable = false;
-                    spawnUnitButton.gameObject.SetActive(false);
+                    // spawnUnitFullWidth.interactable = false;
+                    // spawnUnitButton.gameObject.SetActive(false);
                     //Debug.Log("disable unit spawn button");
                 }
             }
@@ -431,8 +426,8 @@ namespace BioTower
         {
             if (LevelInfo.current.IsFirstLevel())
             {
-                spawnUnitFullWidth.interactable = true;
-                spawnUnitButton.gameObject.SetActive(true);
+                // spawnUnitFullWidth.interactable = true;
+                // spawnUnitButton.gameObject.SetActive(true);
                 //Debug.Log("Enable unit spawn button");
             }
         }

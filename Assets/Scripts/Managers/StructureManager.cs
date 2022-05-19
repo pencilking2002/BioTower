@@ -128,7 +128,7 @@ namespace BioTower.Structures
 
         private void OnWaveStateInit(WaveMode waveMode)
         {
-            if (waveMode == WaveMode.ENDED)
+            if (waveMode == WaveMode.ENDED && !Util.waveManager.currWave.IsFinalWave())
             {
                 foreach (Structure tower in structureList)
                 {

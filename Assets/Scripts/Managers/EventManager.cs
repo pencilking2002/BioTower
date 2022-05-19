@@ -83,7 +83,7 @@ namespace BioTower
             public static Action<StructureType> onPressTowerButton;
             public static Action onPressUpgradeButton;
             public static Action onTapLevelSelectButton;
-            public static Action<UnitType> onTapSpawnUnitButton;
+            //public static Action<UnitType> onTapSpawnUnitButton;
             public static Action<bool> onTapButton;     // Is button press valid
             public static Action<MitoTower> onTapLightDropButton;
             public static Action<Structure> onSpawnLightDropCooldownComplete;

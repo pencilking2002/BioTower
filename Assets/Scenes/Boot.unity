@@ -4939,7 +4939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &444732794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9587,8 +9587,6 @@ MonoBehaviour:
   towerPanel: {fileID: 289974585}
   towerHealthbar: {fileID: 2120964381}
   healthText: {fileID: 1862221594}
-  spawnUnitButton: {fileID: 444732794}
-  spawnUnitFullWidth: {fileID: 1943859029}
   destroyTowerButton: {fileID: 175008214}
   destroyFullWidthButton: {fileID: 1695876051}
   spawnLightParticleButton: {fileID: 656353162}
@@ -11261,7 +11259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &937621564
 RectTransform:
   m_ObjectHideFlags: 0

@@ -148,6 +148,36 @@ namespace BioTower.Structures
             return point;
         }
 
+        public override void OnStructureSelected(Structure structure)
+        {
+            if (TutorialCanvas.tutorialInProgress)
+            {
+                if (Util.tutCanvas.tutState != TutState.WAITING_BUTTON_TAP)
+                {
+                    Debug.Log("Tut state: " + Util.tutCanvas.tutState);
+                    return;
+                }
+            }
+
+            base.OnStructureSelected(structure);
+            if (structure == this)
+            {
+                Util.bootController.towerMenu.OnPressSpawnUnitButton();
+            }
+        }
+
+        public override void OnHighlightItem(HighlightedItem item)
+        {
+            if (Util.tutCanvas.skipTutorials)
+                return;
+
+            if (LevelInfo.current.IsFirstLevel() && item == HighlightedItem.ABA_UNIT_BTN)
+            {
+                var worldPos = sr.transform.position;
+                Util.poolManager.SpawnItemHighlight(worldPos, new Vector2(0, 250));
+            }
+        }
+
         private void OnDrawGizmosSelected()
         {
             var minRadius = minInfluenceAreaCollider.radius * minInfluenceAreaCollider.transform.lossyScale.x;

@@ -80,11 +80,25 @@ namespace BioTower
                 Time.timeScale = 1;
         }
 
+        private void OnWavesHaveCompleted()
+        {
+            if (!GameManager.Instance.gameStates.IsGameState())
+                return;
+
+            var levelInfo = LevelInfo.current;
+            if (levelInfo.winCondition == WinCondition.SURVIVE_WAVES)
+            {
+                EventManager.Game.onGameOver?.Invoke(true, 2.0f);
+            }
+
+        }
+
         private void OnEnable()
         {
             EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
             EventManager.Game.onGameStateInit += OnGameStateInit;
             EventManager.Structures.onBaseDestroyed += OnBaseDestroyed;
+            EventManager.Wave.onWavesCompleted += OnWavesHaveCompleted;
         }
 
         private void OnDisable()
@@ -92,6 +106,7 @@ namespace BioTower
             EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;
             EventManager.Game.onGameStateInit -= OnGameStateInit;
             EventManager.Structures.onBaseDestroyed -= OnBaseDestroyed;
+            EventManager.Wave.onWavesCompleted -= OnWavesHaveCompleted;
         }
 
     }

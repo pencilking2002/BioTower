@@ -115,6 +115,16 @@ namespace BioTower
             waveMode = waveStateMap[waveMode].OnUpdate(waveMode);
         }
 
+        public int GetWaveIndex(Wave wave)
+        {
+            for (int i = 0; i < waveSettings.waves.Length; i++)
+            {
+                if (wave == waveSettings.waves[i])
+                    return i;
+            }
+            return -1;
+        }
+
         public void SetEndedState()
         {
             wavesInitialized = false;

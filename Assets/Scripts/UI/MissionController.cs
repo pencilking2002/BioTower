@@ -33,7 +33,10 @@ namespace BioTower
                 float timeRemaining = timeOfStart - Time.time;
                 int newSeconds = (int)Mathf.Ceil(timeRemaining);
 
-                missionText.text = $"WAVE starting in <color=#{htmlColor}>{newSeconds}</color>";
+                if (Util.waveManager.currWave.IsFinalWave())
+                    missionText.text = $"Final wave starting in <color=#{htmlColor}>{newSeconds}</color>";
+                else
+                    missionText.text = $"Wave {Util.waveManager.currWaveIndex + 1} starting in <color=#{htmlColor}>{newSeconds}</color>";
 
                 if (seconds != newSeconds)
                     EventManager.Wave.onWaveCountdownTick?.Invoke(newSeconds);

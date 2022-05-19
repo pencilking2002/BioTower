@@ -55,6 +55,12 @@ namespace BioTower
             allEnemiesDead = false;
         }
 
+        public bool IsFinalWave()
+        {
+            int numWaves = Util.waveManager.waveSettings.waves.Length;
+            int currWaveIndex = Util.waveManager.GetWaveIndex(this);
+            return currWaveIndex == numWaves - 1;
+        }
 
     }
 }

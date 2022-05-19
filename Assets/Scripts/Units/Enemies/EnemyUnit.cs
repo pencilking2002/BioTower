@@ -235,7 +235,7 @@ namespace BioTower.Units
             agent.stoppingDistance = 0.1f;
             agent.slowingDistance = 0.1f;
             base.SetChasingState(unit);
-            Debug.Log("Set enemy chasing state. aba cooldown state: " + unit.isInCooldown);
+            //Debug.Log("Set enemy chasing state. aba cooldown state: " + unit.isInCooldown);
         }
 
         public override void SetCombatState()

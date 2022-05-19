@@ -126,6 +126,22 @@ namespace BioTower.Structures
             }
         }
 
+        private void OnWaveStateInit(WaveMode waveMode)
+        {
+            if (waveMode == WaveMode.ENDED)
+            {
+                foreach (Structure tower in structureList)
+                {
+                    if (tower.IsMiniChloroTower())
+                    {
+                        var miniTower = (MiniChloroplastTower)tower;
+                        miniTower.ShootFragment(8);
+                        return;
+                    }
+                }
+            }
+        }
+
         private void OnEnable()
         {
             EventManager.Structures.onStructureActivated += OnStructureActivated;
@@ -133,6 +149,7 @@ namespace BioTower.Structures
             EventManager.Structures.onStructureDestroyed += OnStructureDestroyed;
             EventManager.Structures.onSocketStart += OnSocketStart;
             EventManager.Game.onGameOver += OnGameOver;
+            EventManager.Wave.onWaveStateInit += OnWaveStateInit;
         }
 
         private void OnDisable()
@@ -142,6 +159,7 @@ namespace BioTower.Structures
             EventManager.Structures.onStructureDestroyed -= OnStructureDestroyed;
             EventManager.Structures.onSocketStart -= OnSocketStart;
             EventManager.Game.onGameOver -= OnGameOver;
+            EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
         }
     }
 }

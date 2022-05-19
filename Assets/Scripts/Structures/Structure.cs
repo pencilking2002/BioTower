@@ -195,7 +195,7 @@ namespace BioTower.Structures
 
             // Reset tower before applying tweens to it
             LeanTween.cancel(sr.gameObject);
-            Debug.Log("Do death visual");
+            // /Debug.Log("Do death visual");
             sr.transform.localScale = initSpriteScale;
             sr.color = Color.white;
 

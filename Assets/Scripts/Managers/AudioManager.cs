@@ -124,12 +124,14 @@ namespace BioTower
             PlaySound(data.crystalDeposited);
         }
 
-        // MISC ---------------------------------------------
+        // WAVES ---------------------------------------------
 
         private void OnWaveStateInit(WaveMode waveMode)
         {
             if (waveMode == WaveMode.IN_PROGRESS)
                 PlaySound(data.waveStarted);
+            else if (waveMode == WaveMode.ENDED)
+                PlaySound(data.waveDefeated);
         }
 
         private void OnWaveCountdownTick(int num)

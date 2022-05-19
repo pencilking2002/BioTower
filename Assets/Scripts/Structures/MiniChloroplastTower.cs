@@ -42,7 +42,7 @@ namespace BioTower.Structures
         {
             if (Time.time > lastShotTime + shootInterval)
             {
-                ShootFragment();
+                ShootFragment(1);
                 lastShotTime = Time.time + UnityEngine.Random.Range(0.0f, 1.0f);
             }
         }
@@ -55,40 +55,49 @@ namespace BioTower.Structures
 
 
         [Button("Shoot Fragment")]
-        private void ShootFragment(bool avoidFragmentCollider = true)
+        public void ShootFragment(int numFragments, bool avoidFragmentCollider = true)
         {
             DoSquishyAnimation();
 
-            var fragment = CreateFragment();
-            Vector3 startPos = transform.position;
-            Vector3 endPos = GetPointWithinInfluence(avoidFragmentCollider);
-            Vector3 controlPoint = startPos + (endPos - startPos) * 0.5f + Vector3.up;
-            fragment.transform.position = startPos;
 
-            var seq2 = LeanTween.sequence();
-
-            seq2.append(
-                LeanTween.value(gameObject, 0, 1, shootDuration)
-                .setOnUpdate((float val) =>
-                {
-                    Vector2 targetPos = Util.Bezier2(startPos, controlPoint, endPos, val);
-                    fragment.transform.position = targetPos;
-                })
-                .setEaseInSine()
-            );
-
-            seq2.append(LeanTween.moveY(fragment, endPos.y + 0.06f, 0.1f));
-            seq2.append(LeanTween.moveY(fragment, endPos.y, 0.1f));
-
-            seq2.append(() =>
+            for (int i = 0; i < numFragments; i++)
             {
-                if (Util.tutCanvas.hasTutorials && Util.tutCanvas.currTutorial.highlightedItem == HighlightedItem.MINI_CHLORO)
-                {
-                    Util.poolManager.SpawnItemHighlight(fragment.transform.position, new Vector2(0, 120));
-                }
-            });
+                Vector3 startPos = transform.position;
+                Vector3 endPos = GetPointWithinInfluence(avoidFragmentCollider);
+                Vector3 controlPoint = startPos + (endPos - startPos) * 0.5f + Vector3.up;
 
-            EventManager.Structures.onLightDropped?.Invoke();
+                var fragment = CreateFragment();
+                fragment.transform.position = startPos;
+                var seq = LeanTween.sequence();
+                seq.append(0.1f * i);
+
+                seq.append(() =>
+                {
+                    EventManager.Structures.onLightDropped?.Invoke();
+                });
+
+                seq.append(
+                    LeanTween.value(gameObject, 0, 1, shootDuration)
+                    .setOnUpdate((float val) =>
+                    {
+                        Vector2 targetPos = Util.Bezier2(startPos, controlPoint, endPos, val);
+                        fragment.transform.position = targetPos;
+                    })
+                    .setEaseInSine()
+                );
+
+                seq.append(LeanTween.moveY(fragment, endPos.y + 0.06f, 0.1f));
+                seq.append(LeanTween.moveY(fragment, endPos.y, 0.1f));
+
+                seq.append(() =>
+                {
+                    if (Util.tutCanvas.hasTutorials && Util.tutCanvas.currTutorial.highlightedItem == HighlightedItem.MINI_CHLORO)
+                    {
+                        Util.poolManager.SpawnItemHighlight(fragment.transform.position, new Vector2(0, 120));
+                    }
+                });
+
+            }
         }
 
         private void DoSquishyAnimation()

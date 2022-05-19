@@ -18,18 +18,21 @@ namespace BioTower.UI
             panel.gameObject.SetActive(false);
         }
 
-        public void DisplayWaveTitle(int waveIndex)
+        public void DisplayWaveTitle(string message)
         {
             if (LevelInfo.current.IsFirstLevel())
                 return;
 
-            waveTitle.text = $"WAVE {waveIndex + 1} STARTED!";
+            //     waveTitle.text = $"WAVE {waveIndex + 1} STARTED!";
+            // else
+            waveTitle.text = message;
+
             panel.gameObject.SetActive(true);
             panel.alpha = 1;
 
             var seq = LeanTween.sequence();
             panel.transform.localScale = Vector3.zero;
-            seq.append(LeanTween.scale(panel.gameObject, Vector3.one, 0.25f).setEaseOutQuart());
+            seq.append(LeanTween.scale(panel.gameObject, Vector3.one, 0.25f).setEaseOutBack());
             seq.append(displayDuration);
             seq.append(LeanTween.alphaCanvas(panel, 0, 0.5f));
 
@@ -46,7 +49,13 @@ namespace BioTower.UI
         {
             if (waveState == WaveMode.IN_PROGRESS)
             {
-                DisplayWaveTitle(Util.waveManager.currWaveIndex);
+                var message = $"WAVE {Util.waveManager.currWaveIndex + 1} STARTED";
+                DisplayWaveTitle(message);
+            }
+            else if (waveState == WaveMode.ENDED)
+            {
+                var message = $"WAVE {Util.waveManager.currWaveIndex + 1} DEFEATED!";
+                DisplayWaveTitle(message);
             }
         }
 

@@ -18,7 +18,7 @@ namespace BioTower
         public void FadeOut()
         {
             animator.Play("FadeOut");
-            Debug.Log("Play fade out");
+            //Debug.Log("Play fade out");
         }
     }
 }

@@ -70,7 +70,7 @@ namespace BioTower.Units
             base.SetCombatState();
             StopMoving();
             anim.SetBool("Attack", true);
-            Debug.Log("set aba combat state. is in cooldown: " + isInCooldown);
+            //Debug.Log("set aba combat state. is in cooldown: " + isInCooldown);
         }
 
         public override void SetDestroyedState()
@@ -95,7 +95,7 @@ namespace BioTower.Units
 
         public void StartCooldown()
         {
-            if (gameObject == null)
+            if (this == null)
                 return;
 
             cooldownStartTime = Time.time;

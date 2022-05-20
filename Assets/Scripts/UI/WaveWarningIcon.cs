@@ -152,14 +152,21 @@ namespace BioTower.UI
             }
         }
 
+        private void OnGameOver(bool isWin, float delay)
+        {
+            HideIcon();
+        }
+
         private void OnEnable()
         {
             EventManager.Wave.onWaveStateInit += OnWaveStateInit;
+            EventManager.Game.onGameOver += OnGameOver;
         }
 
         private void OnDisable()
         {
             EventManager.Wave.onWaveStateInit -= OnWaveStateInit;
+            EventManager.Game.onGameOver -= OnGameOver;
         }
     }
 }

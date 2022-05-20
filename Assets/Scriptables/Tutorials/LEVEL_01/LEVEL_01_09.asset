@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ed561078845c84780c729a1e66d1d8, type: 3}
   m_Name: LEVEL_01_09
   m_EditorClassIdentifier: 
-  text: Oh, by the way, Keep an eye on your energy. If you use it all up, its <b><color=#912B0F>GAME
-    OVER!</color></b>
+  text: Oh, by the way, Keep an eye on your energy. If you use it all up, you won't
+    be able to create towers!
   animatedWords:
   - word: game
     speed: {x: 200, y: 20}

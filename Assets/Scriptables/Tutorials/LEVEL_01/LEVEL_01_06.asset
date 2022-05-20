@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LEVEL_01_06
   m_EditorClassIdentifier: 
   text: These towers start out with one <b><color=#4C7900>ABA UNIT</color></b>. Tap
-    the tower  to create another one!
+    the tower to create another one!
   animatedWords:
   - word: aba
     speed: {x: 100, y: 10}

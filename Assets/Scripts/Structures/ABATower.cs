@@ -15,6 +15,7 @@ namespace BioTower.Structures
 
 
         [Header("References")]
+        [SerializeField] protected UnitCounterCanvas unitCounterCanvas;
         [SerializeField] private GameObject abaUnitPrefab;
         public PolyNav2D map;
         [SerializeField] private Transform unitsContainer;
@@ -56,6 +57,7 @@ namespace BioTower.Structures
                 influenceVisuals.transform.eulerAngles += new Vector3(0, 0, discRotateSpeed * Time.deltaTime);
 
             towerAlert.OnUpdate();
+            unitCounterCanvas.OnUpdate(units.Count);
         }
 
         public EnemyUnit FindClosestRoamingEnemy(Unit abaUnit, out bool isFound)

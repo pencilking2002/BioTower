@@ -146,6 +146,10 @@ namespace BioTower.UI
                 DisplayIcon(enemyType);
                 SetIconPosition();
             }
+            else if (waveMode == WaveMode.IN_PROGRESS)
+            {
+                HideIcon();
+            }
         }
 
         private void OnEnable()

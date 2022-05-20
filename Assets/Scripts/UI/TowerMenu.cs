@@ -18,6 +18,8 @@ namespace BioTower
         //[SerializeField] private Button healTowerFullWidthButton;
         // [SerializeField] private Button spawnUnitButton;
         // [SerializeField] private Button spawnUnitFullWidth;
+        [SerializeField] private RectTransform abaMessageContainer;
+        [SerializeField] private TextMeshProUGUI abaUnitPriceText;
         [SerializeField] private Button destroyTowerButton;
         [SerializeField] private Button destroyFullWidthButton;
         [SerializeField] private Button spawnLightParticleButton;
@@ -258,7 +260,7 @@ namespace BioTower
                 return;
 
             //Debug.Log($"Tap {tower.structureType}");
-            bool displaySpawnUnitButton = structure.IsAbaTower() ||
+            bool displaySpawnUnitButton = !structure.IsAbaTower() ||
                                         (structure.IsPPC2Tower() && Util.upgradeSettings.snrk2UnitUnlocked);
 
             bool displayLightDropButton = structure.structureType == StructureType.MITOCHONDRIA;
@@ -296,6 +298,8 @@ namespace BioTower
             ShowPanel();
             //healTowerButton.gameObject.SetActive((displaySpawnUnitButton || displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
             //healTowerFullWidthButton.gameObject.SetActive((!displaySpawnUnitButton && !displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
+
+            abaMessageContainer.gameObject.SetActive(structure.IsAbaTower());
 
             destroyTowerButton.gameObject.SetActive((displaySpawnUnitButton || displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
             destroyFullWidthButton.gameObject.SetActive((!displaySpawnUnitButton && !displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
@@ -342,6 +346,8 @@ namespace BioTower
             {
                 destroyTowerButton.gameObject.SetActive(false);
             }
+            abaUnitPriceText.text = Util.saveManager.Load().settings.abaUnitCost.ToString();
+
         }
 
         private void OnStructureCreated(Structure structure, bool doSquishyAnim)

@@ -19,21 +19,23 @@ namespace BioTower
         {
             if (tower.structureType == StructureType.ABA_TOWER)
             {
-
+                // if (TutorialCanvas.tutorialInProgress)
+                // {
+                //     if (Util.tutCanvas.tutState != TutState.WAITING_BUTTON_TAP &&
+                //         Util.tutCanvas.tutState != TutState.LETTER_REVEAL)
+                //     {
+                //         SetWeakColor();
+                //         //Debug.Log("set weak color");
+                //     }
+                //     else
+                //     {
+                //         SetDefaultColor();
+                //     }
+                // }
                 if (tower.GetNumUnits() == 0)
                     SetWeakColor();
                 else if (!LeanTween.isTweening(sr.gameObject))
                     SetDefaultColor();
-                //         else 
-                //         //     var numUnits = tower.units.Count;
-                //         //     if (numUnits < Util.upgradeSettings.abaUnitSpawnLimit && !isAnimating)
-                //         //     {
-                //         //         StartAnimation();
-                //         //     }
-                //         //     else if (numUnits >= Util.upgradeSettings.abaUnitSpawnLimit && isAnimating)
-                //         //     {
-                //         //         StopAnimation();
-                //         //     }
             }
         }
         public void SetWeakColor()

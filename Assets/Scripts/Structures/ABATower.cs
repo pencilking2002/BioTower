@@ -154,7 +154,7 @@ namespace BioTower.Structures
             {
                 if (Util.tutCanvas.tutState != TutState.WAITING_BUTTON_TAP)
                 {
-                    Debug.Log("Tut state: " + Util.tutCanvas.tutState);
+                    //Debug.Log("Tut state: " + Util.tutCanvas.tutState);
                     return;
                 }
             }
@@ -199,19 +199,6 @@ namespace BioTower.Structures
             if (!HasEnemy(enemy))
             {
                 enemiesWithinInfluence.Add(enemy);
-
-                // if (enemy.IsRoamingState())
-                // {
-                //     var abaUnit = GetClosestUnit(enemy, out bool unitFound);
-
-                //     if (unitFound && abaUnit.IsRoamingState())
-                //     {
-                //         enemy.SetChasingState(abaUnit);
-                //         abaUnit.SetChasingState(enemy);
-                //     }
-                // }
-
-                //EventManager.Structures.onEnemyEnterTowerInfluence?.Invoke(enemy, this);
             }
         }
 

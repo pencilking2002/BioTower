@@ -29,8 +29,12 @@ namespace BioTower.UI
         private Dictionary<ScreenEdge, Vector2> screenEdgeDict;
         private Dictionary<ScreenEdge, Image> arrowDict;
 
+        private Vector3 initScale;
+
+
         private void Awake()
         {
+            initScale = panel.localScale;
             rt = GetComponent<RectTransform>();
             enemyUnitDict = new Dictionary<UnitType, Image>() {
                 { UnitType.BASIC_ENEMY, basicEnemy},
@@ -120,22 +124,29 @@ namespace BioTower.UI
             rt.anchoredPosition = screenPoint - Util.tutCanvas.GetComponent<RectTransform>().sizeDelta / 2f;
         }
 
-        private void DisplayIcon(UnitType unitType)
-        {
-            panel.gameObject.SetActive(true);
-            foreach (KeyValuePair<UnitType, Image> item in enemyUnitDict)
-                item.Value.enabled = item.Key == unitType;
-        }
-
         private void DisplayArrow(ScreenEdge edge)
         {
             foreach (KeyValuePair<ScreenEdge, Image> item in arrowDict)
                 item.Value.enabled = item.Key == edge;
         }
 
+        private void DisplayIcon(UnitType unitType)
+        {
+            panel.gameObject.SetActive(true);
+
+            foreach (KeyValuePair<UnitType, Image> item in enemyUnitDict)
+                item.Value.enabled = item.Key == unitType;
+
+            panel.localScale = Vector3.zero;
+            LeanTween.scale(panel.gameObject, initScale, 0.25f).setEaseOutBack();
+        }
+
         private void HideIcon()
         {
-            panel.gameObject.SetActive(false);
+            LeanTween.scale(panel.gameObject, Vector3.zero, 0.25f).setEaseInBack().setOnComplete(() =>
+            {
+                panel.gameObject.SetActive(false);
+            });
         }
 
         private void OnWaveStateInit(WaveMode waveMode)

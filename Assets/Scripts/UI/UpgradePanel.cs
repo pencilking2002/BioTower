@@ -59,7 +59,7 @@ namespace BioTower
                 panel.transform.localPosition = new Vector3(0, -500, 0);
                 var upgrades = GetUpgradesForCurrentLevel();
 
-                DisplayInfoPanel(upgrades.isUnlock);
+                DisplayInfoPanel(upgrades);
 
                 LeanTween.moveLocalY(panel.gameObject, initLocalPosY, 0.25f)
                     .setEaseOutBack()
@@ -100,19 +100,31 @@ namespace BioTower
             }
         }
 
-        private void DisplayInfoPanel(bool isUnlock)
+        private void DisplayInfoPanel(Upgrade upgrades)
         {
-            if (isUnlock)
+            if (upgrades.isUnlock)
             {
                 title.text = "NEW TOWER UNLOCKED";
                 upgradePanelContainer.gameObject.SetActive(false);
                 unlockInfoPanel.gameObject.SetActive(true);
+
+                if (upgrades.hasDiagram)
+                {
+                    var diagram = Instantiate(upgrades.diagramPrefab);
+                    diagram.transform.SetParent(unlockInfoPanel.transform, false);
+                }
             }
             else
             {
                 title.text = "CHOOSE AN UPGRADE";
                 upgradePanelContainer.gameObject.SetActive(true);
                 unlockInfoPanel.gameObject.SetActive(false);
+
+                if (upgrades.hasDiagram)
+                {
+                    var diagram = Instantiate(upgrades.diagramPrefab);
+                    diagram.transform.SetParent(upgradePanelContainer.transform);
+                }
             }
         }
 

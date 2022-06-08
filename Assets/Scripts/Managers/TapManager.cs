@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BioTower.Structures;
+using UnityEngine.EventSystems;
 
 namespace BioTower
 {
@@ -18,16 +19,42 @@ namespace BioTower
             if (!GameManager.Instance.gameStates.IsGameState())
                 return;
 
+            bool didTapSomething = false;
             Ray ray = Camera.main.ScreenPointToRay(screenPos);
             RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, tappableLayerMask);
             if (hitInfo.collider != null)
             {
                 //TapCrystal(hitInfo);
+                didTapSomething = true;
                 TapLightFragment(hitInfo);
                 TapStructureSocket(hitInfo);
-
             }
-            TapStructure(screenPos);
+
+            bool didFindStructure = TapStructure(screenPos);
+            bool didHitUI = DidHitUI(screenPos);
+
+            if (didFindStructure || didHitUI)
+                didTapSomething = true;
+
+            if (!didTapSomething)
+                EventManager.Input.onTapNothing?.Invoke();
+        }
+
+        private bool DidHitUI(Vector3 screenPos)
+        {
+            PointerEventData pointerData = new PointerEventData(EventSystem.current);
+            pointerData.position = screenPos;
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+            if (results.Count > 0)
+            {
+                if (results[0].gameObject.layer == Util.uiLayer)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         // private void TapCrystal(RaycastHit2D hitInfo)
@@ -84,7 +111,7 @@ namespace BioTower
             }
         }
 
-        private void TapStructure(Vector3 screenPos)
+        private bool TapStructure(Vector3 screenPos)
         {
             if (GameManager.Instance.placementManager.IsNoneState())
             {
@@ -97,6 +124,7 @@ namespace BioTower
                     hasSelectedStructure = true;
                     selectedStructure = structure;
                     EventManager.Structures.onStructureSelected?.Invoke(structure);
+                    return true;
                 }
             }
             else
@@ -110,9 +138,11 @@ namespace BioTower
                     hasSelectedStructure = true;
                     selectedStructure = structure;
                     EventManager.Structures.onStructureSelected?.Invoke(structure);
+                    return true;
                     //GameManager.Instance.placementManager.SetPlacingState(selectedStructure.structureType);
                 }
             }
+            return false;
         }
 
         private void OnEnable()

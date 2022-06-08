@@ -32,6 +32,7 @@ namespace BioTower.Structures
         [ShowIf("hasHealth")][Range(0, 100)][SerializeField] protected int maxHealth;
         [ShowIf("hasHealth")][SerializeField] protected int currHealth;
         protected HealthBar healthBar;
+        [SerializeField] protected TowerPopUpCanvas towerCanvas;
         [SerializeField] protected GameObject spriteOutline;
         public SpriteRenderer sr;
         [HideInInspector] public float lastDeclineTime;
@@ -41,6 +42,8 @@ namespace BioTower.Structures
         public TowerAlert towerAlert;
         private Vector3 initSpriteScale;
         private Vector3 initLocalSpritePos;
+        private bool hasTowerCanvas;
+
         //[HideInInspector] public bool isInteractable = true;
 
         public virtual void Awake()
@@ -49,6 +52,8 @@ namespace BioTower.Structures
             initSpriteScale = sr.transform.localScale;
             initLocalSpritePos = sr.transform.localPosition;
             lastDeclineTime = Time.time;
+            if (towerCanvas)
+                hasTowerCanvas = true;
         }
 
         public virtual void Init(StructureSocket socket)
@@ -274,44 +279,24 @@ namespace BioTower.Structures
             //Debug.Log("Do squishy anim");
         }
 
-        public bool IsAbaTower()
-        {
-            return structureType == StructureType.ABA_TOWER;
-        }
+        public bool IsAbaTower() { return structureType == StructureType.ABA_TOWER; }
+        public bool IsPPC2Tower() { return structureType == StructureType.PPC2_TOWER; }
+        public bool IsChloroTower() { return structureType == StructureType.CHLOROPLAST; }
+        public bool IsMitoTower() { return structureType == StructureType.MITOCHONDRIA; }
+        public bool IsMiniChloroTower() { return structureType == StructureType.MINI_CHLOROPLAST_TOWER; }
+        public bool IsBarrier() { return structureType == StructureType.ROAD_BARRIER; }
+        public bool IsPlayerBase() { return structureType == StructureType.DNA_BASE; }
+        public int GetNumUnits() { return units.Count; }
 
-        public bool IsPPC2Tower()
+        private void DisplayMenu(bool show)
         {
-            return structureType == StructureType.PPC2_TOWER;
-        }
+            if (!hasTowerCanvas)
+                return;
 
-        public bool IsChloroTower()
-        {
-            return structureType == StructureType.CHLOROPLAST;
-        }
-
-        public bool IsMitoTower()
-        {
-            return structureType == StructureType.MITOCHONDRIA;
-        }
-
-        public bool IsMiniChloroTower()
-        {
-            return structureType == StructureType.MINI_CHLOROPLAST_TOWER;
-        }
-
-        public bool IsBarrier()
-        {
-            return structureType == StructureType.ROAD_BARRIER;
-        }
-
-        public bool IsPlayerBase()
-        {
-            return structureType == StructureType.DNA_BASE;
-        }
-
-        public int GetNumUnits()
-        {
-            return units.Count;
+            if (show)
+                towerCanvas.Display(0.25f);
+            else
+                towerCanvas.Hide(0.25f);
         }
 
         private void OnPressDestroyTowerBtn(Structure structure)
@@ -325,9 +310,15 @@ namespace BioTower.Structures
         public virtual void OnStructureSelected(Structure structure)
         {
             if (structure == this)
+            {
                 SelectStructure(true);
+                DisplayMenu(true);
+            }
             else
+            {
                 DeselectStructure();
+                DisplayMenu(false);
+            }
         }
 
         public virtual void OnStructureCreated(Structure structure, bool doSquishyAnim)
@@ -343,12 +334,24 @@ namespace BioTower.Structures
 
         }
 
+        private void OnTapNothing()
+        {
+            DisplayMenu(false);
+        }
+
+        private void OnTapFreeStructureSocket(StructureSocket socket)
+        {
+            DisplayMenu(false);
+        }
+
         public virtual void OnEnable()
         {
             EventManager.UI.onPressTowerDestroyedBtn += OnPressDestroyTowerBtn;
             EventManager.Structures.onStructureSelected += OnStructureSelected;
             EventManager.Structures.onStructureCreated += OnStructureCreated;
             EventManager.Tutorials.onHighlightItem += OnHighlightItem;
+            EventManager.Input.onTapNothing += OnTapNothing;
+            EventManager.Structures.onTapFreeStructureSocket += OnTapFreeStructureSocket;
 
         }
 
@@ -358,7 +361,8 @@ namespace BioTower.Structures
             EventManager.Structures.onStructureSelected -= OnStructureSelected;
             EventManager.Structures.onStructureCreated -= OnStructureCreated;
             EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
-
+            EventManager.Input.onTapNothing -= OnTapNothing;
+            EventManager.Structures.onTapFreeStructureSocket -= OnTapFreeStructureSocket;
         }
 
         private void OnDestroy() { isAlive = false; }

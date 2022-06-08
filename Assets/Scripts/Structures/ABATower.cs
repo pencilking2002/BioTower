@@ -164,7 +164,7 @@ namespace BioTower.Structures
             base.OnStructureSelected(structure);
             if (structure == this)
             {
-                Util.bootController.towerMenu.OnPressSpawnUnitButton();
+                //Util.bootController.towerMenu.OnPressSpawnUnitButton();
             }
         }
 

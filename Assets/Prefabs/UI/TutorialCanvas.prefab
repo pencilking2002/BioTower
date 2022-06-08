@@ -704,7 +704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7017637951828810478
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1745,13 +1745,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb49d5240d1c2647be625ad777bf472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasPopUp: 1
+  hasPopUp: 0
   container: {fileID: 7017637951828810478}
   panel: {fileID: 4459155229099022812}
   darkBG: {fileID: 7715613317041121340}
   slideInDuration: 0.25
   slideOutDuration: 0.25
-  isDislayed: 0
+  isDisplayed: 0
 --- !u!1 &7979799145981398067
 GameObject:
   m_ObjectHideFlags: 0

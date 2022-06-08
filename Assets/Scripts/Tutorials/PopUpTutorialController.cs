@@ -16,7 +16,7 @@ namespace BioTower
         [ShowIf("hasPopUp")][SerializeField] private float slideInDuration = 0.25f;
         [ShowIf("hasPopUp")][SerializeField] private float slideOutDuration = 0.25f;
 
-        public bool isDislayed;
+        [ReadOnly] public bool isDisplayed;
         private Vector3 onScreenPos;
         private Vector3 offscreenPos;
 
@@ -24,21 +24,22 @@ namespace BioTower
         {
             if (!hasPopUp)
                 return;
-            
-            container.gameObject.SetActive(hasPopUp);
+
+            container.gameObject.SetActive(false);
             onScreenPos = panel.transform.position;
-            offscreenPos = onScreenPos + new Vector3(0,900,0);
+            offscreenPos = onScreenPos + new Vector3(0, 900, 0);
 
             DisplayPanel(1);
         }
-        
-        public void DisplayPanel(float delay=0)
+
+        public void DisplayPanel(float delay = 0)
         {
             panel.transform.position = offscreenPos;
             darkBG.alpha = 0;
-            LeanTween.delayedCall(gameObject, delay, () => {
+            LeanTween.delayedCall(gameObject, delay, () =>
+            {
                 Time.timeScale = 0;
-                isDislayed = true;
+                isDisplayed = true;
                 container.gameObject.SetActive(true);
                 LeanTween.move(panel.gameObject, onScreenPos, slideInDuration).setEaseOutQuad().setIgnoreTimeScale(true);
                 LeanTween.alphaCanvas(darkBG, 1, slideInDuration).setIgnoreTimeScale(true);
@@ -47,9 +48,10 @@ namespace BioTower
 
         public void HidePanel()
         {
-            isDislayed = false;
+            isDisplayed = false;
             darkBG.alpha = 1;
-            LeanTween.move(panel.gameObject, offscreenPos, slideOutDuration).setOnComplete(() => {
+            LeanTween.move(panel.gameObject, offscreenPos, slideOutDuration).setOnComplete(() =>
+            {
                 Time.timeScale = 1;
                 container.gameObject.SetActive(false);
             }).setIgnoreTimeScale(true);

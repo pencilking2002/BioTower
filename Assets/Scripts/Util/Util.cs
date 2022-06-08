@@ -40,6 +40,7 @@ namespace BioTower
         public static int enemyLayer = 10;
         public LayerMask obstaclesLayerMask;
         public LayerMask enemyLayerMask;
+        public static int uiLayer = 5;
 
         public static void ScaleBounceSprite(SpriteRenderer sr, float scaleUpFactor)
         {

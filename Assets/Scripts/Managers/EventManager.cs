@@ -99,6 +99,7 @@ namespace BioTower
             public static Action<Vector3> onTouchBegan;     // screen position of the touch
             public static Action onTapStartMenu;
             public static Action onTap;
+            public static Action onTapNothing;
         }
 
         public class Tutorials

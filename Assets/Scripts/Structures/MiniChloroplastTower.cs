@@ -13,6 +13,7 @@ namespace BioTower.Structures
         [SerializeField] private float shootDuration = 1.0f;
         [SerializeField] private float shootInterval = 3;
         private float lastShotTime;
+        private Vector3 initScale;
 
         public override void Awake()
         {
@@ -23,7 +24,7 @@ namespace BioTower.Structures
         {
             base.Init(null);
             lastShotTime = Time.time;
-            var initScale = sr.transform.localScale;
+            initScale = sr.transform.localScale;
             sr.transform.localScale = Vector3.zero;
             LeanTween.cancel(sr.gameObject);
             var seq = LeanTween.sequence();
@@ -102,16 +103,17 @@ namespace BioTower.Structures
 
         private void DoSquishyAnimation()
         {
-            var scale = sr.transform.localScale;
-            var wideScale = scale;
+            var wideScale = initScale;
             wideScale.x *= 1.5f;
-            var tallScale = scale;
+            var tallScale = initScale;
             tallScale.y *= 2f;
 
+            sr.transform.localScale = initScale;
             var seq = LeanTween.sequence();
             seq.append(LeanTween.scale(sr.gameObject, wideScale, 0.2f));
             seq.append(LeanTween.scale(sr.gameObject, tallScale, 0.1f));
-            seq.append(LeanTween.scale(sr.gameObject, scale, 0.2f));
+            seq.append(LeanTween.scale(sr.gameObject, initScale, 0.2f));
+            seq.append(gameObject, () => { sr.transform.localScale = initScale; });
         }
 
         public Vector2 GetPointWithinInfluence(bool avoidFragmentCollider)

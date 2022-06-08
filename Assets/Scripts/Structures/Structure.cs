@@ -312,7 +312,12 @@ namespace BioTower.Structures
             if (structure == this)
             {
                 SelectStructure(true);
-                DisplayMenu(true);
+
+                if (hasTowerCanvas)
+                {
+                    bool isDisplayed = towerCanvas.isDisplayed;
+                    DisplayMenu(!isDisplayed);
+                }
             }
             else
             {
@@ -344,6 +349,11 @@ namespace BioTower.Structures
             DisplayMenu(false);
         }
 
+        private void OnGameOver(bool isWin, float delay)
+        {
+            DisplayMenu(false);
+        }
+
         public virtual void OnEnable()
         {
             EventManager.UI.onPressTowerDestroyedBtn += OnPressDestroyTowerBtn;
@@ -352,7 +362,7 @@ namespace BioTower.Structures
             EventManager.Tutorials.onHighlightItem += OnHighlightItem;
             EventManager.Input.onTapNothing += OnTapNothing;
             EventManager.Structures.onTapFreeStructureSocket += OnTapFreeStructureSocket;
-
+            EventManager.Game.onGameOver += OnGameOver;
         }
 
         public virtual void OnDisable()
@@ -363,6 +373,7 @@ namespace BioTower.Structures
             EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
             EventManager.Input.onTapNothing -= OnTapNothing;
             EventManager.Structures.onTapFreeStructureSocket -= OnTapFreeStructureSocket;
+            EventManager.Game.onGameOver -= OnGameOver;
         }
 
         private void OnDestroy() { isAlive = false; }

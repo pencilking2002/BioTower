@@ -350,13 +350,13 @@ namespace BioTower
 
         }
 
-        private void OnStructureCreated(Structure structure, bool doSquishyAnim)
-        {
-            if (structure.structureType == StructureType.DNA_BASE)
-                return;
+        // private void OnStructureCreated(Structure structure, bool doSquishyAnim)
+        // {
+        //     // if (structure.structureType == StructureType.DNA_BASE)
+        //     //     return;
 
-            OnStructureSelected(structure);
-        }
+        //     //OnStructureSelected(structure);
+        // }
 
         private void OnStructureGainHealth(Structure structure)
         {
@@ -450,7 +450,7 @@ namespace BioTower
             EventManager.Tutorials.onHighlightItem += OnHighlightItem;
             EventManager.Tutorials.onTutorialEnd += OnTutorialEnd;
             EventManager.Structures.onStructureSelected += OnStructureSelected;
-            EventManager.Structures.onStructureCreated += OnStructureCreated;
+            //EventManager.Structures.onStructureCreated += OnStructureCreated;
             EventManager.Structures.onStructureGainHealth += OnStructureGainHealth;
             EventManager.Structures.onStructureLoseHealth += OnStructureLoseHealth;
             EventManager.Units.onUnitDestroyed += OnUnitDestroyed;
@@ -465,7 +465,7 @@ namespace BioTower
             EventManager.Tutorials.onHighlightItem -= OnHighlightItem;
             EventManager.Tutorials.onTutorialEnd -= OnTutorialEnd;
             EventManager.Structures.onStructureSelected -= OnStructureSelected;
-            EventManager.Structures.onStructureCreated -= OnStructureCreated;
+            //EventManager.Structures.onStructureCreated -= OnStructureCreated;
             EventManager.Structures.onStructureGainHealth -= OnStructureGainHealth;
             EventManager.Structures.onStructureLoseHealth -= OnStructureLoseHealth;
             EventManager.Units.onUnitDestroyed -= OnUnitDestroyed;

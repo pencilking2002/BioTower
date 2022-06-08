@@ -329,7 +329,9 @@ namespace BioTower.Structures
         public virtual void OnStructureCreated(Structure structure, bool doSquishyAnim)
         {
             if (structure == this)
+            {
                 SelectStructure(doSquishyAnim);
+            }
             else
                 DeselectStructure();
         }

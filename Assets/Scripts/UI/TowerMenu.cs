@@ -295,7 +295,7 @@ namespace BioTower
 
             spawnLightParticleButton.gameObject.SetActive(displayLightDropButton);
             currTowerText.text = structure.structureType.ToString().Replace('_', ' ');
-            ShowPanel();
+            //ShowPanel();
             //healTowerButton.gameObject.SetActive((displaySpawnUnitButton || displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
             //healTowerFullWidthButton.gameObject.SetActive((!displaySpawnUnitButton && !displayLightDropButton) && !LevelInfo.current.IsFirstLevel());
 

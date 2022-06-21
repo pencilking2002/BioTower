@@ -12,34 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c11e21d6d6e2f4e9b4addd8d13c61e, type: 3}
   m_Name: Level_04
   m_EditorClassIdentifier: 
+  startingEnergy: 100
   waves:
-  - enemyType: 3
-    waveIndex: 0
-    startDelay: 0
+  - enemyType: 1
     isEndless: 0
     numEnemiesPerWave: 10
-    spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
-    timeStarted: 11.672143
-    lastSpawn: 31.807007
-    numSpawns: 6
+    startDelay: 8
+    waypointIndex: 0
+    spawnIntervalRange: {x: 1, y: 1}
+    enableMultipleSpawnsAtOnce: 1
+    maxNumSpawnsAtOnce: 2
+    timeStarted: 3.984195
+    lastSpawn: 0
+    numSpawns: 0
+    lastSpawnIntervalRange: 1
+    allEnemiesDead: 0
+    numDead: 0
   - enemyType: 3
-    waveIndex: 1
-    startDelay: 4
     isEndless: 0
-    numEnemiesPerWave: 10
-    spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
+    numEnemiesPerWave: 8
+    startDelay: 6
+    waypointIndex: 1
+    spawnIntervalRange: {x: 1, y: 1}
+    enableMultipleSpawnsAtOnce: 1
+    maxNumSpawnsAtOnce: 2
     timeStarted: 0
     lastSpawn: 0
     numSpawns: 0
+    lastSpawnIntervalRange: 1
+    allEnemiesDead: 0
+    numDead: 0
   - enemyType: 3
-    waveIndex: 2
-    startDelay: 4
     isEndless: 0
     numEnemiesPerWave: 10
-    spawnInterval: 4
-    minMaxSpeed: {x: 0.4, y: 0.7}
+    startDelay: 4
+    waypointIndex: 0
+    spawnIntervalRange: {x: 1, y: 1}
+    enableMultipleSpawnsAtOnce: 1
+    maxNumSpawnsAtOnce: 2
     timeStarted: 0
     lastSpawn: 0
     numSpawns: 0
+    lastSpawnIntervalRange: 1
+    allEnemiesDead: 0
+    numDead: 0

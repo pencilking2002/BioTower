@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+using Sirenix.OdinInspector;
 
 namespace BioTower.Structures
 {
@@ -54,8 +54,6 @@ namespace BioTower.Structures
             return obj.gameObject;
         }
 
-
-        [Button("Shoot Fragment")]
         public void ShootFragment(int numFragments, bool avoidFragmentCollider = true)
         {
             DoSquishyAnimation();

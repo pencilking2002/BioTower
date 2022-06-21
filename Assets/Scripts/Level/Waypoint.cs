@@ -15,11 +15,10 @@ namespace BioTower.Level
     public class Waypoint : MonoBehaviour
     {
         public WaypointType waypointType;
-        public Waypoint nextWaypoint;
+        [HideIf("isEndpoint")] public Waypoint nextWaypoint;
 
         [ShowIf("isFork")]
         public Waypoint nextWaypoint_02;
-        //public Waypoint prevWaypoint;
         public bool isFork => waypointType == WaypointType.FORK;
         public bool isSpawnPoint => waypointType == WaypointType.SPAWN_POINT;
         public bool isEndpoint => waypointType == WaypointType.END_POINT;
@@ -117,6 +116,8 @@ namespace BioTower.Level
                 Gizmos.color = Color.blue;
             else if (isEndpoint)
                 Gizmos.color = Color.green;
+            else if (isFork)
+                Gizmos.color = Color.yellow;
             else
                 Gizmos.color = Color.red;
 

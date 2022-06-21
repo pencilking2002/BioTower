@@ -41,6 +41,7 @@ namespace BioTower
             enemyDict.Add(UnitType.BASIC_ENEMY, basicEnemyPrefab);
             enemyDict.Add(UnitType.MID_ENEMY, midEnemyPrefab);
             enemyDict.Add(UnitType.ADVANCED_ENEMY, advancedEnemyPrefab);
+            Debug.Log("Wave manager Awake");
         }
 
         private void Start()

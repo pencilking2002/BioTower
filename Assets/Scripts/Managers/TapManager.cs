@@ -22,7 +22,7 @@ namespace BioTower
             bool didTapSomething = false;
             Ray ray = Camera.main.ScreenPointToRay(screenPos);
             RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, Vector2.zero, Mathf.Infinity, tappableLayerMask);
-            if (hitInfo.collider != null)
+            if (hitInfo != null && hitInfo.collider != null)
             {
                 //TapCrystal(hitInfo);
                 didTapSomething = true;

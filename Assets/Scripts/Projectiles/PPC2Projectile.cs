@@ -22,13 +22,19 @@ namespace BioTower
 
         public void Explode()
         {
-            float radius = influenceCollider.radius * influenceCollider.transform.localScale.x;
-            var enemyGO = Physics2D.OverlapCircle(transform.position, radius, GameManager.Instance.util.enemyLayerMask);
+            if (!influenceCollider)
+                return;
 
-            if (enemyGO != null)
+            float radius = influenceCollider.radius * influenceCollider.transform.localScale.x;
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, radius, GameManager.Instance.util.enemyLayerMask);
+
+            if (enemies.Length != 0)
             {
-                var enemy = enemyGO.transform.parent.GetComponent<EnemyUnit>();
-                enemy.TakeDamage(Util.gameSettings.upgradeSettings.ppc2TowerDamage);
+                foreach (Collider2D enemyCol in enemies)
+                {
+                    var enemy = enemyCol.transform.parent.GetComponent<EnemyUnit>();
+                    enemy.TakeDamage(Util.gameSettings.upgradeSettings.ppc2TowerDamage);
+                }
             }
 
             var explosion = Instantiate(explosiionPrefab);

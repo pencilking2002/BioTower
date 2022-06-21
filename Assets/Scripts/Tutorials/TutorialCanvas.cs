@@ -42,11 +42,16 @@ namespace BioTower
         private void Awake()
         {
             Util.tutCanvas = this;
+
+            if (!hasTutorials)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
             canvas = GetComponent<Canvas>();
             tutTextWordAnim = tutText.GetComponent<WordAnimation>();
             skipButton.gameObject.SetActive(false);
             CacheStates();
-            Debug.Log("Deactivate skip button");
         }
 
         public bool IsLastTutorial(TutorialData data)

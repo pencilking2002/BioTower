@@ -13,6 +13,7 @@ namespace BioTower
 
 
         [Header("Tut UI")]
+        public PopUpTutorialController popUpTut;
         public Transform tutPanel;
         public Transform itemHighlightPanel;
         public PortraitController portraitController;
@@ -45,7 +46,9 @@ namespace BioTower
 
             if (!hasTutorials)
             {
-                gameObject.SetActive(false);
+                tutPanel.gameObject.SetActive(!popUpTut.hasPopUp);
+                canvas.enabled = popUpTut.hasPopUp;
+                this.enabled = false;
                 return;
             }
             canvas = GetComponent<Canvas>();

@@ -48,10 +48,10 @@ namespace BioTower.Structures
             }
         }
 
-        private GameObject CreateFragment()
+        private LightFragment CreateFragment()
         {
             PooledObject obj = Util.poolManager.GetPooledObject(PoolObjectType.LIGHT_FRAGMENT);
-            return obj.gameObject;
+            return obj.GetComponent<LightFragment>();
         }
 
         public void ShootFragment(int numFragments, bool avoidFragmentCollider = true)
@@ -66,6 +66,8 @@ namespace BioTower.Structures
                 Vector3 controlPoint = startPos + (endPos - startPos) * 0.5f + Vector3.up;
 
                 var fragment = CreateFragment();
+                fragment.OnCreate();
+
                 fragment.transform.position = startPos;
                 var seq = LeanTween.sequence();
                 seq.append(0.1f * i);
@@ -85,8 +87,8 @@ namespace BioTower.Structures
                     .setEaseInSine()
                 );
 
-                seq.append(LeanTween.moveY(fragment, endPos.y + 0.06f, 0.1f));
-                seq.append(LeanTween.moveY(fragment, endPos.y, 0.1f));
+                seq.append(LeanTween.moveY(fragment.gameObject, endPos.y + 0.06f, 0.1f));
+                seq.append(LeanTween.moveY(fragment.gameObject, endPos.y, 0.1f));
 
                 seq.append(() =>
                 {

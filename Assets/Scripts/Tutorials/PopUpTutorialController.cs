@@ -7,7 +7,7 @@ namespace BioTower
 {
     public class PopUpTutorialController : MonoBehaviour
     {
-        [SerializeField] private bool hasPopUp;
+        public bool hasPopUp;
         [ShowIf("hasPopUp")][SerializeField] private RectTransform container;
         [ShowIf("hasPopUp")][SerializeField] private RectTransform panel;
         [ShowIf("hasPopUp")][SerializeField] private CanvasGroup darkBG;
@@ -23,8 +23,10 @@ namespace BioTower
         private void Awake()
         {
             if (!hasPopUp)
+            {
+                this.enabled = false;
                 return;
-
+            }
             container.gameObject.SetActive(false);
             onScreenPos = panel.transform.position;
             offscreenPos = onScreenPos + new Vector3(0, 900, 0);

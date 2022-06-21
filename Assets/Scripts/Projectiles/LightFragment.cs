@@ -9,6 +9,8 @@ namespace BioTower
         public bool hasBeenPickedUp;
         private PooledObject pooledObject;
         [SerializeField] private GameObject trailPrefab;
+        private Vector3 initScale = Vector3.one;
+
 
         private void Awake()
         {
@@ -16,36 +18,50 @@ namespace BioTower
 
         }
 
-        public void DestroyObject()
+        public void OnCreate()
         {
+            transform.localScale = initScale;
+        }
+
+        public void DestroyObject(bool isInstant = false)
+        {
+            if (isInstant)
+            {
+                LeanTween.cancel(gameObject);
+                transform.localScale = Vector3.zero;
+                hasBeenPickedUp = false;
+                pooledObject.SendToPool();
+                return;
+            }
+
             if (hasBeenPickedUp)
                 return;
 
-            GameManager.Instance.CreateLightExplosion(transform.position);
+            transform.localScale = initScale;
             hasBeenPickedUp = true;
-            EventManager.Structures.onLightPickedUp?.Invoke();
-
-            var scale = transform.localScale;
-
+            GameManager.Instance.CreateLightExplosion(transform.position);
             Util.objectShake.Shake(GameManager.Instance.cam.gameObject, 0.2f, 0.02f);
 
+            LeanTween.cancel(gameObject);
             var seq = LeanTween.sequence();
 
-            seq.append(LeanTween.scale(gameObject, scale * 3f, 0.1f));
+            seq.append(LeanTween.scale(gameObject, initScale * 3f, 0.1f));
 
             seq.append(LeanTween.scale(gameObject, Vector3.zero, 0.1f));
 
-            seq.append(() => { SendTrail(0.15f); });
+            seq.append(gameObject, () => { SendTrail(0.15f); });
 
             seq.append(0.15f);
 
             seq.append(gameObject, () =>
             {
-                EventManager.Game.onLightFragmentTapped?.Invoke();
-                transform.localScale = scale;
-                pooledObject.SendToPool();
+                transform.localScale = Vector3.zero;
                 hasBeenPickedUp = false;
+                pooledObject.SendToPool();
+                EventManager.Game.onLightFragmentTapped?.Invoke();
             });
+
+            EventManager.Structures.onLightPickedUp?.Invoke();
         }
 
         private void SendTrail(float duration)
@@ -86,18 +102,25 @@ namespace BioTower
 
         private void OnGameOver(bool isWin, float delay)
         {
-            if (transform.parent == null)
-                DestroyObject();
+            //if (transform.parent == null)
+            DestroyObject(true);
+        }
+
+        private void OnStartLevel(LevelType levelType)
+        {
+            DestroyObject(true);
         }
 
         private void OnEnable()
         {
             EventManager.Game.onGameOver += OnGameOver;
+            EventManager.Game.onLevelStart += OnStartLevel;
         }
 
         private void OnDisable()
         {
             EventManager.Game.onGameOver -= OnGameOver;
+            EventManager.Game.onLevelStart -= OnStartLevel;
         }
     }
 }

@@ -1691,6 +1691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28153817a94023c428da1e98dc7df254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popUpTut: {fileID: 7942055503472000732}
   tutPanel: {fileID: 7979799144854511358}
   itemHighlightPanel: {fileID: 7979799145018358848}
   portraitController: {fileID: 7979799145711278667}

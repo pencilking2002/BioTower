@@ -48,6 +48,8 @@ namespace BioTower
             EventManager.Game.onLevelStart?.Invoke(levelType);
 
             AnimateCamera();
+
+            Debug.Log("Level info start");
         }
 
         private void AnimateCamera()
